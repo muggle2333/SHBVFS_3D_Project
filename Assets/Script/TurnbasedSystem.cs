@@ -23,30 +23,23 @@ public class TurnbasedSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-          for(int i = 0; i < 999; i++)
-          {
-             RoundNumber++;
-             ControlPhase();
-             Invoke("Event2", 15);
-            if (IsPlayerDead)
-            {
-                break;
-            }
-            Invoke("MovePhase", 16);
-            Invoke("Event3", 32);
-            if (IsPlayerDead)
-            {
-                break;
-            }
-            Invoke("AttackPhase", 33);
-            Invoke("Event4", 38);
-            if (IsPlayerDead)
-            {
-                break;
-            }
-          }
-            
-        
+
+
+
+        StartCoroutine("TurnStart");
+
+
+
+
+        //Invoke("Event2", 15);
+        //Invoke("MovePhase", 16);
+        //Invoke("Event3", 32);
+        //Invoke("AttackPhase", 33);
+        //Invoke("Event4", 38);
+
+
+
+
 
     }
 
@@ -58,7 +51,22 @@ public class TurnbasedSystem : MonoBehaviour
             IsPlayerDead = true;
         }
          EndJudge();
+       
+    }
 
+    IEnumerator TurnStart()
+    {
+        RoundNumber++;
+        ControlPhase();
+        yield return new WaitForSecondsRealtime(ControlPhaseTime);
+        Event2();
+        MovePhase();
+        yield return new WaitForSecondsRealtime(MovingPhaseTime);
+        Event3();
+        AttackPhase();
+        yield return new WaitForSecondsRealtime(AttackPhaseTime);
+        Event4();
+        
     }
 
     void ControlPhase()
@@ -73,6 +81,7 @@ public class TurnbasedSystem : MonoBehaviour
         EventsMenu.SetActive(false);
         MoveMenu.SetActive(true);
         Debug.Log("MovePhase");
+       
     }
 
     void AttackPhase()
@@ -80,6 +89,7 @@ public class TurnbasedSystem : MonoBehaviour
         EventsMenu.SetActive(false);
         AttackMenu.SetActive(true);
         Debug.Log("AttackPhase");
+       
     }
 
     void Event1()
@@ -93,6 +103,7 @@ public class TurnbasedSystem : MonoBehaviour
         IsControlOvered=true;
         EventsMenu.SetActive(true);
         Debug.Log("Event2");
+       
     }
 
     void Event3()
@@ -100,13 +111,19 @@ public class TurnbasedSystem : MonoBehaviour
        MoveMenu.SetActive(false);
        EventsMenu.SetActive(true);
         Debug.Log("Event3");
+       
     }
 
     void Event4()
     {
+       // PlayerHD--;
         AttackMenu.SetActive(false);
         EventsMenu.SetActive(true);
+        //RoundNumber++;
         Debug.Log("Event4");
+        StartCoroutine("TurnStart");
+        
+       
     }
    
     void EndJudge()
