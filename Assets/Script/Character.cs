@@ -9,10 +9,6 @@ public class Character : MonoBehaviour
     public int AttackDamage;
     public int Defence;
     public int Range;
-    public int CurrentActionPoint;
-    public int ActionPointPerRound;
-    public int MaxActionPoint;
-    public int MaxCardCount;
 
     public Character AttackTarget;
 
