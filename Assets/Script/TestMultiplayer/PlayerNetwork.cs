@@ -43,11 +43,11 @@ public class PlayerNetwork : NetworkBehaviour
         base.OnNetworkSpawn();
         randomNum.OnValueChanged += (int previousValue, int newValue) =>
         {
-            //Debug.Log(OwnerClientId + " id:" + randomNum.Value);
+            //Debug.Log(OwnerClientId + " Id:" + randomNum.Value);
         };
         customData.OnValueChanged += (MyCustomData previousValue, MyCustomData newValue) =>
         {
-            Debug.Log(OwnerClientId + " id:" + newValue._int +" + "+newValue._bool+" + " +newValue.message);
+            Debug.Log(OwnerClientId + " Id:" + newValue._int +" + "+newValue._bool+" + " +newValue.message);
         };
 
     }
