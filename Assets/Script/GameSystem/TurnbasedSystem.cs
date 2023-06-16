@@ -46,10 +46,10 @@ public class TurnbasedSystem : MonoBehaviour
         {
             IsPlayerDead = true;
         }
-         EndJudge();
+        EndJudge();
         BackAlive();
        
-       if(TimerValue>0)
+        if(TimerValue>0)
         {
             TimerValue -= Time.deltaTime;
         }
@@ -119,15 +119,15 @@ public class TurnbasedSystem : MonoBehaviour
 
     void Event3()
     {
-       MoveMenu.SetActive(false);
-       EventsMenu.SetActive(true);
+        MoveMenu.SetActive(false);
+        EventsMenu.SetActive(true);
         Debug.Log("Event3");
        
     }
 
     void Event4()
     {
-       // PlayerHD--;
+        // PlayerHD--;
         AttackMenu.SetActive(false);
         EventsMenu.SetActive(true);
         //RoundNumber++;
@@ -144,7 +144,7 @@ public class TurnbasedSystem : MonoBehaviour
         if(IsPlayerDead)
         {
             Time.timeScale = 0;
-           EndMenu.SetActive(true);
+            EndMenu.SetActive(true);
         }
     }
 
