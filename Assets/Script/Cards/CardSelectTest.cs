@@ -2,36 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public float zoomSize;
     private int index;
-    //????
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log(1);
-        transform.localScale = new Vector3(zoomSize, zoomSize, zoomSize);
+        transform.DOScale(1.5f,0.25f);
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
+
+        transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
+        transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
     }
-    //????
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.localScale = Vector3.one;
+        transform.DOScale(1, 0.25f);
         transform.SetSiblingIndex(index);
+
+        transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0);
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.gameObject.GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
