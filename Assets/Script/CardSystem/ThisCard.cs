@@ -21,20 +21,23 @@ public class ThisCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thisCard[0] = CardDataBase.cardList[thisID];
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        id=thisCard[0].id;
-        cardName=thisCard[0].cardName;
-        cardDescription=thisCard[0].cardDescription;
+        thisCard[0] = CardDataBase.cardList[thisID];
+        id = thisCard[0].id;
+        cardName = thisCard[0].cardName;
+        cardDescription = thisCard[0].cardDescription;
 
         thisSprite = thisCard[0].thisImage;
 
         nameText.text = "" + cardName;
         descriptionText.text = "" + cardDescription;
+
+        
 
         thatImage.sprite = thisSprite;
     }
