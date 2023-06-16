@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private int index;
+    public GameObject Info;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.DOScale(1.5f,0.25f);
@@ -16,6 +18,8 @@ public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
         transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
+
+        Info.SetActive(true);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -24,6 +28,8 @@ public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
         transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0);
+
+        Info.SetActive(false);
     }
 
 
