@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a68a11223af6ae488a6aae1620975fe, type: 3}
+  m_Name: FA3
+  m_EditorClassIdentifier: 
+  Cardname: 
+  Description: 
+  Head: {fileID: 0}
+  Academies: {fileID: 0}
+  Damage: 0
+  LoseHp: 0
+  Defense: 0
+  Health: 0
+  VisionRange: 0
+  Cardtarget: 0
+  cardBuff: {fileID: 0}

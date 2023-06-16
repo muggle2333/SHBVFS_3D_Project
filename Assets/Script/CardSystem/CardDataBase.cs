@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class CardDataBase : MonoBehaviour
 {
-    public static List<Card> cardList = new List<Card>();
+    public static CardComponent[] basicCardList;
+    public static CardComponent[] BINGCardList;
+    public static CardComponent[] DAOCardList;
+    public static CardComponent[] FACardList;
+    public static CardComponent[] MOCardList;
+    public static CardComponent[] RUCardList;
+    public static CardComponent[] YICardList;
     private void Awake()
     {
-        cardList.Add(new Card(0, "HP + 1", "HP + 1",Resources.Load<Sprite>("0")));
-        cardList.Add(new Card(1, "Range + 1", "Range + 1", Resources.Load<Sprite>("1")));
-        cardList.Add(new Card(2, "Defence + 1", "Defence + 1", Resources.Load<Sprite>("2")));
-        cardList.Add(new Card(3, "Damage + 1", "Damage + 1", Resources.Load<Sprite>("3")));
-        
+        basicCardList = Resources.LoadAll<CardComponent>("Cards/BasicCards");
+        BINGCardList = Resources.LoadAll<CardComponent>("Cards/EventCards/BING");
+        DAOCardList = Resources.LoadAll<CardComponent>("Cards/EventCards/DAO");
+        FACardList = Resources.LoadAll<CardComponent>("Cards/EventCards/FA");
+        MOCardList = Resources.LoadAll<CardComponent>("Cards/EventCards/MO");
+        RUCardList = Resources.LoadAll<CardComponent>("Cards/EventCards/RU");
+        YICardList = Resources.LoadAll<CardComponent>("Cards/EventCards/YI");
     }
 }
