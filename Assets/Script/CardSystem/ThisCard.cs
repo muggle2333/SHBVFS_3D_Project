@@ -37,7 +37,6 @@ public class ThisCard : MonoBehaviour
         nameText.text = "" + cardName;
         descriptionText.text = "" + cardDescription;
 
-        
 
         thatImage.sprite = thisSprite;
     }

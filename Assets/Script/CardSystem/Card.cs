@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
 
-public class Card : MonoBehaviour
+public class Card
 {
     public int id;
     public string cardName;
@@ -21,6 +21,7 @@ public class Card : MonoBehaviour
         this.id = id;
         this.cardName = cardName;
         this.cardDescription = cardDescription;
+
         this.thisImage = thisImage;
     }
 }
