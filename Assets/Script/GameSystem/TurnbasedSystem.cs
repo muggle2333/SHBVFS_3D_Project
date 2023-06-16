@@ -14,6 +14,7 @@ public class TurnbasedSystem : MonoBehaviour
     public bool IsPlayerDead = false;
     public bool IsControlOvered = true;
     public bool IsEvent1Overed = true;
+    public bool IsBackAlive = false;
     public GameObject EndMenu;
     public GameObject ControlMenu;
     public GameObject MoveMenu;
@@ -46,6 +47,7 @@ public class TurnbasedSystem : MonoBehaviour
             IsPlayerDead = true;
         }
          EndJudge();
+        BackAlive();
        
        if(TimerValue>0)
         {
@@ -141,7 +143,19 @@ public class TurnbasedSystem : MonoBehaviour
         //Time.timeScale = 0;
         if(IsPlayerDead)
         {
+            Time.timeScale = 0;
            EndMenu.SetActive(true);
+        }
+    }
+
+    void BackAlive()
+    {
+        if(IsBackAlive)
+        {
+            EndMenu.SetActive(false);
+            Time.timeScale = 1;
+            IsBackAlive = false;
+            IsPlayerDead = false;
         }
     }
 

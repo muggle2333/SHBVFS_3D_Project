@@ -69,7 +69,8 @@ public class GridPlaceEditor : MonoBehaviour
         GameObject ground = Instantiate(mesh, grid.GetWorldPositionCenter(x, z)+new Vector3 (0,offsetY,0), Quaternion.identity);
         ground.name = mesh.name+"_" + x + "_" + z;
         ground.transform.SetParent(parent.transform, false);
-        ground.transform.Rotate(new Vector3(0, 30, 0));
+        int randomRotation = Random.Range(0, 6);
+        ground.transform.Rotate(new Vector3(0, 60f * randomRotation, 0));
         grid.gridArray[x, z].landTransform = ground.transform;
         grid.TriggerGridObjectChanged(x, z);
     }

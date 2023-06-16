@@ -6,7 +6,10 @@ public enum PlayerId
 {
     RedPlayer,
     BluePlayer,
+    None,
+    Both,
 }
+
 public class Player : Character
 {
     public PlayerId Id;
@@ -16,6 +19,17 @@ public class Player : Character
     public int MaxActionPoint;
     public int MaxCardCount;
 
+    Dictionary<Academy, List<GridObject>> OwendLandDic = new Dictionary<Academy, List<GridObject>>();
+
+    [System.Serializable]
+    public class OwnedLandTest
+    {
+        public Academy TestTacademy;
+        public List<GridObject> Testlist;
+    }
+
+   // [SerializeField]
+   // private OwnedLandTest ownedLandTest;
     void Start()
     {
         MaxHP = 3;
@@ -24,9 +38,14 @@ public class Player : Character
         Defence = 0;
         Range = 1;
         ActionPointPerRound = 3;
+
+        List<GridObject> yiLand;
+        OwendLandDic.TryGetValue(Academy.YI, out yiLand);
+        Debug.Log(yiLand.Count);
     }
     void Update()
     {
+
         MaxActionPoint = ActionPointPerRound * 2;
         MaxCardCount = HP;
         if (AttackTarget != null)
@@ -37,5 +56,6 @@ public class Player : Character
         {
             HP = MaxHP;
         }
+
     }
 }
