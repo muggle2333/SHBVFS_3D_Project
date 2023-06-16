@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1600381825591153950}
+  - component: {fileID: 8684177986467053559}
   m_Layer: 0
   m_Name: LandObject_Grass_Lake
   m_TagString: Untagged
@@ -30,8 +31,20 @@ Transform:
   m_Children:
   - {fileID: 7495829744211515528}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8684177986467053559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5777374955181796609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5196230493719566084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,8 +104,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3121524261140665654, guid: 193cbdd7cc5806c45bc1e787ec4cffde, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6057858835289671686}
   m_SourcePrefab: {fileID: 100100000, guid: 193cbdd7cc5806c45bc1e787ec4cffde, type: 3}
+--- !u!1 &7155474186708222514 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3121524261140665654, guid: 193cbdd7cc5806c45bc1e787ec4cffde, type: 3}
+  m_PrefabInstance: {fileID: 5196230493719566084}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &6057858835289671686
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155474186708222514}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2185983309138278462, guid: 0b04c3349eb1f9a4b9b4a98f4f40d72b, type: 3}
 --- !u!4 &7495829744211515528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2313215692054056844, guid: 193cbdd7cc5806c45bc1e787ec4cffde, type: 3}

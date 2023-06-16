@@ -78,6 +78,10 @@ public class Grid<TGridObject>
     {
         return GetWorldPosition(x, z) + new Vector3(cellSizeX, 0, cellSizeY) * 0.5f;
     }
+    public float GetGridDistance()
+    {
+        return Vector3.Distance(GetWorldPositionCenter(0, 0), GetWorldPositionCenter(0, 1)) + offset;
+    }
     public void GetXZ(Vector3 worldPosition, out int x, out int z)
     {
         int roughX = Mathf.FloorToInt(worldPosition.x / (cellSizeX + offset));

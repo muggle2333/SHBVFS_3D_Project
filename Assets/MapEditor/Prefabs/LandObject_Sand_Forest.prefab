@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858992382896473910}
+  - component: {fileID: 3149547482976684755}
   m_Layer: 0
   m_Name: LandObject_Sand_Forest
   m_TagString: Untagged
@@ -30,8 +31,20 @@ Transform:
   m_Children:
   - {fileID: 5970197318842614980}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3149547482976684755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5616877306582466345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6837785320949623608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,10 +104,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 537344516294702406, guid: 7f1c0db4a4ac6a542b41f31aff471e48, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5534828839203921141}
   m_SourcePrefab: {fileID: 100100000, guid: 7f1c0db4a4ac6a542b41f31aff471e48, type: 3}
 --- !u!4 &5970197318842614980 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 882379320122650620, guid: 7f1c0db4a4ac6a542b41f31aff471e48, type: 3}
   m_PrefabInstance: {fileID: 6837785320949623608}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6454140371372531326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 537344516294702406, guid: 7f1c0db4a4ac6a542b41f31aff471e48, type: 3}
+  m_PrefabInstance: {fileID: 6837785320949623608}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &5534828839203921141
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6454140371372531326}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2185983309138278462, guid: 0b04c3349eb1f9a4b9b4a98f4f40d72b, type: 3}

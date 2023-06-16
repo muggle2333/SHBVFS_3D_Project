@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public enum Academy
 {
+
+    Null,
     YI,
     DAO,
     MO,
@@ -40,13 +43,15 @@ public class GridObject
     public Transform landTransform;
     
     
-    private int x;
-    private int z;
+    public int x;
+    public int z;
 
 
     public GridObject()
     {
         this.landType = LandType.Plain;
+        owner = null;
+        landTransform = null;
         isHasBuilding = false;
         canBeOccupied = true;
     }
@@ -54,6 +59,8 @@ public class GridObject
     {
         this.x = x;
         this.z = z;
+        owner = null;
+        landTransform = null;
         this.landType = LandType.Plain;
         isHasBuilding = false;
         canBeOccupied = true;
@@ -63,6 +70,8 @@ public class GridObject
         this.grid = grid;
         this.x = x;
         this.z = z;
+        owner = null;
+        landTransform = null;
         this.landType = LandType.Plain;
         isHasBuilding = false;
         canBeOccupied = true;

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteractionComponent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector2 tmpVector;
 
-    // Update is called once per frame
-    void Update()
+
+    public void Move(Vector2 dirVector)
     {
-        
+        Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)dirVector.x, (int)dirVector.y);
+
+        if(Vector3.Distance(transform.position,dirPos)<= GridManager.Instance.gridDistance)
+        {
+            transform.position = dirPos;
+            tmpVector = dirVector;
+        }
     }
 }

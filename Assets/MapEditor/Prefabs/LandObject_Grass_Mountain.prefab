@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1828645334800502824}
+  - component: {fileID: -7926672693225899068}
   m_Layer: 0
   m_Name: LandObject_Grass_Mountain
   m_TagString: Untagged
@@ -30,8 +31,20 @@ Transform:
   m_Children:
   - {fileID: 1160167792420796161}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7926672693225899068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6879334320129370167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6596949122711202550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,10 +104,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4674591961198479181, guid: 9e9b0f73b1d8e4146852780b96891b93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5904068631502776047}
   m_SourcePrefab: {fileID: 100100000, guid: 9e9b0f73b1d8e4146852780b96891b93, type: 3}
 --- !u!4 &1160167792420796161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5446167187655073271, guid: 9e9b0f73b1d8e4146852780b96891b93, type: 3}
   m_PrefabInstance: {fileID: 6596949122711202550}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1968757866502778299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4674591961198479181, guid: 9e9b0f73b1d8e4146852780b96891b93, type: 3}
+  m_PrefabInstance: {fileID: 6596949122711202550}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &5904068631502776047
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968757866502778299}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2185983309138278462, guid: 0b04c3349eb1f9a4b9b4a98f4f40d72b, type: 3}
