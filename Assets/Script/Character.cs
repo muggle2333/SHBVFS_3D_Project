@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ public class Character : MonoBehaviour
     public int Defence;
     public int Range;
 
+    
+   
+
+
     public Character AttackTarget;
 
     public bool hasMoved = false; // 判断此回合是否移动过
@@ -17,6 +22,8 @@ public class Character : MonoBehaviour
     void Start()
     {
         
+
+
     }
     public void Attack()
     {
