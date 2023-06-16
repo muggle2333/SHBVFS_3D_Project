@@ -6,6 +6,8 @@ public enum PlayerId
 {
     RedPlayer,
     BluePlayer,
+    None,
+    Both,
 }
 
 public class Player : Character
