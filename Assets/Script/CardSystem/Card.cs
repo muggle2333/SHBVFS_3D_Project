@@ -2,26 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-[System.Serializable]
 
-public class Card
+public class Card:MonoBehaviour
 {
-    public int id;
-    public string cardName;
-    public string cardDescription;
+    public CardComponent card;
 
-    public Sprite thisImage;
-    public Card()
+    public Text Cardname;
+    public Text Description;
+
+    public Sprite Head;
+    public Sprite Academies;
+
+    public int Damage;
+    public int LoseHp;
+    public int Defense;
+    public int Health;
+    public int VisionRange;
+    public PlayerId Cardtarget;
+
+    public CardBuff cardBuff;
+
+
+    void Start()
     {
-
-    }
-
-    public Card(int id, string cardName, string cardDescription, Sprite thisImage)
-    {
-        this.id = id;
-        this.cardName = cardName;
-        this.cardDescription = cardDescription;
-
-        this.thisImage = thisImage;
+        
     }
 }

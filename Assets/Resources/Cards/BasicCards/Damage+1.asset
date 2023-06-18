@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Damage+1
   m_EditorClassIdentifier: 
   Cardname: Damage+1
-  Description: 
+  Description: Damage+1
   Head: {fileID: 0}
   Academies: {fileID: 0}
   Damage: 0

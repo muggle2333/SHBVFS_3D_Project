@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerDeck : MonoBehaviour
 {
+    //public List<List<CardComponent>> DeckList = new List<List<CardComponent>>();
+
     public List<CardComponent> basicCardDeck = new List<CardComponent>();
     public List<CardComponent> BINGCardDeck = new List<CardComponent>();
     public List<CardComponent> DAOCardDeck = new List<CardComponent>();
@@ -29,6 +31,8 @@ public class PlayerDeck : MonoBehaviour
         MOCardContainer.Add(null);
         RUCardContainer.Add(null);
         YICardContainer.Add(null);
+
+
         //Random.Range(0, CardDataBase.basicCardList.Length);
         for (int j = 0; j < CardDataBase.basicCardList.Length; j++)
         {
@@ -61,6 +65,9 @@ public class PlayerDeck : MonoBehaviour
         {
             YICardDeck.Add(CardDataBase.YICardList[j]);
         }
+
+
+
         Shuffle();
     }
 

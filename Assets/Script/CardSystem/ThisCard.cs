@@ -28,7 +28,7 @@ public class ThisCard : MonoBehaviour
     void Update()
     {
         //thisCard[0] = CardDataBase.basicCardList[thisID];
-        id = thisCard[0].id;
+        /*id = thisCard[0].id;
         cardName = thisCard[0].cardName;
         cardDescription = thisCard[0].cardDescription;
 
@@ -38,6 +38,6 @@ public class ThisCard : MonoBehaviour
         descriptionText.text = "" + cardDescription;
 
 
-        thatImage.sprite = thisSprite;
+        thatImage.sprite = thisSprite;*/
     }
 }
