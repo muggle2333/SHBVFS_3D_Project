@@ -4,9 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
-public enum Academy
+public enum AcademyType
 {
-
     Null,
     YI,
     DAO,
@@ -32,11 +31,12 @@ public enum MeshType
 public class GridObject
 {
     public LandType landType = LandType.Plain;
-    public Academy academy = Academy.YI;
+    public AcademyType academy = AcademyType.YI;
     public MeshType meshType = MeshType.Grass;
 
     public Player owner;
     public bool isHasBuilding = false;
+    public bool canBuild = true;
     public bool canBeOccupied = true;
 
     public Grid<GridObject> grid;
@@ -53,6 +53,7 @@ public class GridObject
         owner = null;
         landTransform = null;
         isHasBuilding = false;
+        canBuild = true;
         canBeOccupied = true;
     }
     public GridObject(int x, int z)
@@ -63,6 +64,7 @@ public class GridObject
         landTransform = null;
         this.landType = LandType.Plain;
         isHasBuilding = false;
+        canBuild = true;
         canBeOccupied = true;
     }
     public GridObject(Grid<GridObject> grid, int x, int z)
@@ -74,6 +76,7 @@ public class GridObject
         landTransform = null;
         this.landType = LandType.Plain;
         isHasBuilding = false;
+        canBuild = true;
         canBeOccupied = true;
     }
     //public void SetGridType()
@@ -127,12 +130,15 @@ public class GridObject
         if(this.landType == LandType.Plain)
         {
             canBeOccupied = true;
+            canBuild = true;
         }
         else
         {
             canBeOccupied = false;
+            canBuild = false;
         }
+
     }
 
-
+    
 }

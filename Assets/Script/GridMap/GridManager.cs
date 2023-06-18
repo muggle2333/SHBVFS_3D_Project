@@ -69,14 +69,14 @@ public class GridManager : MonoBehaviour
                 gridArray[x, z] = gridObjectList[x * gridSetting.length + z];
                 gridArray[x, z].grid = grid;
 
-                //Initialize the Land Academy
+                //Initialize the Land AcademyType
                 if (gridArray[x, z].landType == LandType.Plain)
                 {
-                    gridArray[x, z].academy = (Academy)Random.Range(1, 6);
+                    gridArray[x, z].academy = (AcademyType)Random.Range(1, 6);
                 }
                 else
                 {
-                    gridArray[x, z].academy = Academy.Null;
+                    gridArray[x, z].academy = AcademyType.Null;
                 }
             }
         }
@@ -85,12 +85,9 @@ public class GridManager : MonoBehaviour
         return grid;
     }
 
-    public void GetSelectedGridObject(Vector3 pointPos)
+    public GridObject GetSelectedGridObject(Vector3 pointPos)
     {
-        GridObject selecetedGridObject = grid.GetGridObject(pointPos);
-        Debug.Log(selecetedGridObject.academy);
-        GridObjectUI.Instance.UpdateGridObjectUIData(selecetedGridObject);
-        GridObjectUI.Instance.ShowGridObjectUI(true);
+       return grid.GetGridObject(pointPos);
     }
     public void SetAimGrid(int x, int z)
     {

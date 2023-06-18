@@ -19,12 +19,14 @@ public class Player : Character
     public int MaxActionPoint;
     public int MaxCardCount;
 
-    Dictionary<Academy, List<GridObject>> OwendLandDic = new Dictionary<Academy, List<GridObject>>();
+    public GridObject currentGrid;
+
+    Dictionary<AcademyType, List<GridObject>> OwendLandDic = new Dictionary<AcademyType, List<GridObject>>();
 
     [System.Serializable]
     public class OwnedLandTest
     {
-        public Academy TestTacademy;
+        public AcademyType TestTacademy;
         public List<GridObject> Testlist;
     }
 
@@ -40,8 +42,8 @@ public class Player : Character
         ActionPointPerRound = 3;
 
         List<GridObject> yiLand;
-        OwendLandDic.TryGetValue(Academy.YI, out yiLand);
-        Debug.Log(yiLand.Count);
+        OwendLandDic.TryGetValue(AcademyType.YI, out yiLand);
+        //Debug.Log(yiLand.Count);
     }
     void Update()
     {
