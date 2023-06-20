@@ -32,6 +32,7 @@ public class PlayerDeck : MonoBehaviour
         RUCardContainer.Add(null);
         YICardContainer.Add(null);
 
+        
 
         //Random.Range(0, CardDataBase.basicCardList.Length);
         for (int j = 0; j < CardDataBase.basicCardList.Length; j++)
