@@ -53,7 +53,7 @@ public class DrawCards : MonoBehaviour
         {
             if (BINGCardCount > PlayerDeck.BINGCardDeck.Count - 1)
             {
-                PlayerDeck.Shuffle();
+                PlayerDeck.ShuffleEventCard(0);
                 BINGCardCount = 0;
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
@@ -66,7 +66,7 @@ public class DrawCards : MonoBehaviour
         {
             if (DAOCardCount > PlayerDeck.DAOCardDeck.Count - 1)
             {
-                PlayerDeck.Shuffle();
+                PlayerDeck.ShuffleEventCard(1);
                 DAOCardCount = 0;
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
@@ -79,7 +79,7 @@ public class DrawCards : MonoBehaviour
         {
             if (FACardCount > PlayerDeck.FACardDeck.Count - 1)
             {
-                PlayerDeck.Shuffle();
+                PlayerDeck.ShuffleEventCard(2);
                 FACardCount = 0;
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
@@ -92,7 +92,7 @@ public class DrawCards : MonoBehaviour
         {
             if (MOCardCount > PlayerDeck.MOCardDeck.Count - 1)
             {
-                PlayerDeck.Shuffle();
+                PlayerDeck.ShuffleEventCard(3);
                 MOCardCount = 0;
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
@@ -105,7 +105,7 @@ public class DrawCards : MonoBehaviour
         {
             if (RUCardCount > PlayerDeck.RUCardDeck.Count - 1)
             {
-                PlayerDeck.Shuffle();
+                PlayerDeck.ShuffleEventCard(4);
                 RUCardCount = 0;
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
@@ -118,7 +118,7 @@ public class DrawCards : MonoBehaviour
         {
             if (YICardCount > PlayerDeck.YICardDeck.Count - 1)
             {
-                PlayerDeck.Shuffle();
+                PlayerDeck.ShuffleEventCard(5);
                 YICardCount = 0;
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();

@@ -66,10 +66,11 @@ public class PlayerDeck : MonoBehaviour
         {
             YICardDeck.Add(CardDataBase.YICardList[j]);
         }
-
-
-
         Shuffle();
+        for(int a = 0; a <= 5 ; a++)
+        {
+            ShuffleEventCard(a);
+        }
     }
 
     // Update is called once per frame
@@ -86,6 +87,69 @@ public class PlayerDeck : MonoBehaviour
             int randomIndex = Random.Range(0, basicCardDeck.Count);
             basicCardDeck[i] = basicCardDeck[randomIndex];
             basicCardDeck[randomIndex] = basicCardContainer[0];
+        }
+    }
+    public void ShuffleEventCard(int a)
+    {
+        if (a == 0)
+        {
+            for (int i = 0; i < BINGCardDeck.Count; i++)
+            {
+                BINGCardContainer[0] = BINGCardDeck[i];
+                int randomIndex = Random.Range(0, BINGCardDeck.Count);
+                BINGCardDeck[i] = BINGCardDeck[randomIndex];
+                BINGCardDeck[randomIndex] = BINGCardContainer[0];
+            }
+        }
+        else if(a == 1)
+        {
+            for (int i = 0; i < DAOCardDeck.Count; i++)
+            {
+                DAOCardContainer[0] = DAOCardDeck[i];
+                int randomIndex = Random.Range(0, DAOCardDeck.Count);
+                DAOCardDeck[i] = DAOCardDeck[randomIndex];
+                DAOCardDeck[randomIndex] = DAOCardContainer[0];
+            }
+        }
+        else if (a == 2)
+        {
+            for (int i = 0; i < FACardDeck.Count; i++)
+            {
+                FACardContainer[0] = FACardDeck[i];
+                int randomIndex = Random.Range(0, FACardDeck.Count);
+                FACardDeck[i] = FACardDeck[randomIndex];
+                FACardDeck[randomIndex] = FACardContainer[0];
+            }
+        }
+        else if (a == 3)
+        {
+            for (int i = 0; i < MOCardDeck.Count; i++)
+            {
+                MOCardContainer[0] = MOCardDeck[i];
+                int randomIndex = Random.Range(0, MOCardDeck.Count);
+                MOCardDeck[i] = MOCardDeck[randomIndex];
+                MOCardDeck[randomIndex] = MOCardContainer[0];
+            }
+        }
+        else if (a == 4)
+        {
+            for (int i = 0; i < RUCardDeck.Count; i++)
+            {
+                RUCardContainer[0] = RUCardDeck[i];
+                int randomIndex = Random.Range(0, RUCardDeck.Count);
+                RUCardDeck[i] = RUCardDeck[randomIndex];
+                RUCardDeck[randomIndex] = RUCardContainer[0];
+            }
+        }
+        else if (a == 5)
+        {
+            for (int i = 0; i < YICardDeck.Count; i++)
+            {
+                YICardContainer[0] = YICardDeck[i];
+                int randomIndex = Random.Range(0, YICardDeck.Count);
+                YICardDeck[i] = YICardDeck[randomIndex];
+                YICardDeck[randomIndex] = YICardContainer[0];
+            }
         }
     }
 }
