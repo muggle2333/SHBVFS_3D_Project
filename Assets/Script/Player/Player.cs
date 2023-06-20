@@ -21,7 +21,15 @@ public class Player : Character
 
     public GridObject currentGrid;
 
-    Dictionary<AcademyType, List<GridObject>> OwendLandDic = new Dictionary<AcademyType, List<GridObject>>();
+    public Dictionary<AcademyType, List<GridObject>> OwnedLandDic = new Dictionary<AcademyType, List<GridObject>>()
+/*    {
+        { AcademyType.Null,null },
+        { AcademyType.YI,null },
+        { AcademyType.DAO,null },
+        { AcademyType.MO,null },
+        { AcademyType.BING,null },
+        { AcademyType.RU,null },
+    }*/;
 
     [System.Serializable]
     public class OwnedLandTest
@@ -42,7 +50,7 @@ public class Player : Character
         ActionPointPerRound = 3;
 
         List<GridObject> yiLand;
-        OwendLandDic.TryGetValue(AcademyType.YI, out yiLand);
+        OwnedLandDic.TryGetValue(AcademyType.YI, out yiLand);
         //Debug.Log(yiLand.Count);
     }
     void Update()
@@ -59,5 +67,23 @@ public class Player : Character
             HP = MaxHP;
         }
 
+    }
+
+    public bool OccupyGrid(GridObject gridObject)
+    {
+        List<GridObject> gridList;
+        if(OwnedLandDic.TryGetValue(gridObject.academy,out gridList))
+        {
+            gridList.Add(gridObject);
+            OwnedLandDic[gridObject.academy] = gridList;
+        }
+        else
+        {
+            List<GridObject> gridListNew = new List<GridObject>();
+            gridListNew.Add(gridObject);
+            OwnedLandDic.Add(gridObject.academy, gridListNew);
+        }
+
+        return true;
     }
 }

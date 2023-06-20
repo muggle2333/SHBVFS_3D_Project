@@ -140,5 +140,10 @@ public class GridObject
 
     }
 
+    public void SetOwner(Player player)
+    {
+        owner= player;
+        Debug.Log(owner);
+    }
     
 }

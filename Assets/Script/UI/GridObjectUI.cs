@@ -34,19 +34,19 @@ public class GridObjectUI : MonoBehaviour
         moveBtn.onClick.AddListener(() =>
         {
             GameplayManager.Instance.MovePlayer(gridObject);
-            GameplayManager.Instance.UpdateGridAuthorityData(gridObject);
         });
         occupyBtn.onClick.AddListener(() =>
         {
-            GameplayManager.Instance.UpdateGridAuthorityData(gridObject);
+            GameplayManager.Instance.Occupy(gridObject);
+
         });
         gachaBtn.onClick.AddListener(() =>
         {
-            GameplayManager.Instance.UpdateGridAuthorityData(gridObject);
+            
         });
         buildBtn.onClick.AddListener(() =>
         {
-            GameplayManager.Instance.UpdateGridAuthorityData(gridObject);
+            
         });
 
     }
@@ -55,7 +55,10 @@ public class GridObjectUI : MonoBehaviour
     {
         this.gridObject = gridObject;
         academyText.text = gridObject.academy.ToString();
-        ownerText.text = null;
+        if(gridObject.owner!=null)
+        {
+            ownerText.text = gridObject.owner.ToString();
+        }
         landBuffText.text = null;
         buildingText.text = gridObject.isHasBuilding.ToString();
 

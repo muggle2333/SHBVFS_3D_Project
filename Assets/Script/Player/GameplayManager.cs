@@ -39,11 +39,18 @@ public class GameplayManager : MonoBehaviour
         player.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint.x, (int)playerStartPoint.y);
     }
 
-    public void MovePlayer(GridObject grid)
+    public void MovePlayer(GridObject gridObject)
     {
-        player.GetComponent<PlayerInteractionComponent>().Move(grid);
+        player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
+        UpdateGridAuthorityData(gridObject);
     }
 
+    public void Occupy(GridObject gridObject)
+    {
+        gridObject.SetOwner(player);
+        player.OccupyGrid(gridObject);
+
+    }
     public void ShowGirdObjectData(Vector3 pos)
     {
         GridObject selectedGridObject = GridManager.Instance.GetSelectedGridObject(pos);
@@ -80,19 +87,22 @@ public class GameplayManager : MonoBehaviour
     }
     public bool CheckOccupiable(Player player, GridObject gridObject)
     {
+        if (player.currentGrid != gridObject) return false;
         if(!gridObject.canBeOccupied) return false;
         if (gridObject.owner!=null && gridObject.owner == player) return false;
         return true;
     }
     public bool CheckBuildable(Player player, GridObject gridObject)
     {
-        if(gridObject.isHasBuilding) return false;
+        if (player.currentGrid != gridObject) return false;
+        if (gridObject.isHasBuilding) return false;
         if (gridObject.owner != null && gridObject.owner != player) return false;
         return true;
     }
 
     public bool CheckGachable(Player player, GridObject gridObject)
     {
+        if (player.currentGrid != gridObject) return false;
         if (!gridObject.isHasBuilding) return false;
         if (gridObject.owner != null && gridObject.owner != player) return false;
         return true;
