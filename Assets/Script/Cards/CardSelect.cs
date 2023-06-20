@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
 
-public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
+public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     private int index;
     public bool isSelected;
@@ -43,9 +43,8 @@ public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(isSelected) transform.DOLocalMoveY(formerY, duration);
-        else transform.DOLocalMoveY(targetY, duration);
-        isSelected = !isSelected;
+        if (isSelected) EndSelect();
+        else OnSelect();
     }
 
     void Start()
@@ -54,5 +53,15 @@ public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         isSelected = false;
     }
 
+    public void OnSelect()
+    {
+        transform.DOLocalMoveY(targetY, duration);
+        isSelected = true;
+    }
+    public void EndSelect()
+    {
+        transform.DOLocalMoveY(formerY, duration);
+        isSelected = false;
+    }
 
 }
