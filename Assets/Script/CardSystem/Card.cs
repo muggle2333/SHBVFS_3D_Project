@@ -25,6 +25,16 @@ public class Card:MonoBehaviour
 
     void Start()
     {
-        
+        Cardname.text = card.name;
+        Description.text = card.Description;
+        Head = card.Head;
+        Academies = card.Academies;
+        Damage = card.Damage;
+        LoseHp = card.LoseHp;
+        Defense = card.Defense;
+        Health = card.Health;
+        VisionRange = card.VisionRange;
+        Cardtarget = card.Cardtarget;
+        cardBuff = card.cardBuff;
     }
 }
