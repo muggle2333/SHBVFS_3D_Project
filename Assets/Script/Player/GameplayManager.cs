@@ -10,9 +10,9 @@ public struct PlayerInteractAuthority
     public bool canOccupy;
     public bool canGacha;
 }
-public class PlayerManager : MonoBehaviour
+public class GameplayManager : MonoBehaviour
 {
-    public static PlayerManager Instance;
+    public static GameplayManager Instance;
 
     [SerializeField] private Vector2 playerStartPoint;
     private Player player;
@@ -39,17 +39,21 @@ public class PlayerManager : MonoBehaviour
         player.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint.x, (int)playerStartPoint.y);
     }
 
-    public void MovePlayer(Vector2 dirPos)
+    public void MovePlayer(GridObject grid)
     {
-        player.GetComponent<PlayerInteractionComponent>().Move(dirPos);
+        player.GetComponent<PlayerInteractionComponent>().Move(grid);
     }
 
     public void ShowGirdObjectData(Vector3 pos)
     {
         GridObject selectedGridObject = GridManager.Instance.GetSelectedGridObject(pos);
         if (selectedGridObject == null) return;
-        GridObjectUI.Instance.UpdateGridObjectUIData(selectedGridObject, CheckPlayerInteractAuthority(selectedGridObject));
+        UpdateGridAuthorityData(selectedGridObject);
         GridObjectUI.Instance.ShowGridObjectUI(true);
+    }
+    public void UpdateGridAuthorityData(GridObject grid)
+    {
+        GridObjectUI.Instance.UpdateGridObjectUIData(grid, CheckPlayerInteractAuthority(grid));
     }
     public PlayerInteractAuthority CheckPlayerInteractAuthority(GridObject gridObject)
     {
@@ -63,6 +67,7 @@ public class PlayerManager : MonoBehaviour
 
     public bool CheckMoveable(Player player, GridObject gridObject)
     {
+        if (player.currentGrid == gridObject) return false;
         return CheckDistance(player, gridObject) <= player.Range;
     }
 

@@ -1,21 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerInteractionComponent : MonoBehaviour
 {
-    public Vector2 tmpVector;
 
 
-    public void Move(Vector2 dirVector)
+    public void Move(GridObject gridObject)
     {
-        Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)dirVector.x, (int)dirVector.y);
-
-        if(Vector3.Distance(transform.position,dirPos)<= GridManager.Instance.gridDistance)
-        {
-            transform.position = dirPos;
-            tmpVector = dirVector;
-        }
+        Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
+        transform.position = dirPos;
+        GetComponent<Player>().currentGrid = gridObject;
+      
     }
 }

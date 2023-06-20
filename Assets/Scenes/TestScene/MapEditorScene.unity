@@ -16636,6 +16636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 962322098}
   - component: {fileID: 962322099}
+  - component: {fileID: 962322100}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -16671,7 +16672,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6568540d0d0c57b41a68a9b8fcf1a06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tmpVector: {x: 0, y: 0}
+--- !u!114 &962322100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962322097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76fcab6691882ab4ba2b4db4823f640f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 0
+  MaxHP: 0
+  AttackDamage: 0
+  Defence: 0
+  Range: 0
+  AttackTarget: {fileID: 0}
+  hasMoved: 0
+  Id: 0
+  CurrentActionPoint: 0
+  ActionPointPerRound: 0
+  MaxActionPoint: 0
+  MaxCardCount: 0
 --- !u!1 &966694512
 GameObject:
   m_ObjectHideFlags: 0
