@@ -5,39 +5,54 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
 
-public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class CardSelectTest : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     private int index;
+    public bool isSelected;
+    public float targetY;
+    public float formerY;
+    public float duration;
     public GameObject Info;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.DOScale(1.5f,0.25f);
-        index = transform.GetSiblingIndex();
-        transform.SetAsLastSibling();
 
         transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
         transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
-
+        //index = transform.GetSiblingIndex();
+        //transform.SetAsLastSibling();
         Info.SetActive(true);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.DOScale(1, 0.25f);
-        transform.SetSiblingIndex(index);
-
         transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
         transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0);
-
+        //transform.SetSiblingIndex(index);
         Info.SetActive(false);
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        
+    }
 
-    // Start is called before the first frame update
+    public void OnPointerUp(PointerEventData eventData)
+    {
+
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(isSelected) transform.DOLocalMoveY(formerY, duration);
+        else transform.DOLocalMoveY(targetY, duration);
+        isSelected = !isSelected;
+    }
+
     void Start()
     {
         transform.gameObject.GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
+        isSelected = false;
     }
 
-    
+
 }
