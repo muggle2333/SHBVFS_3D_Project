@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DrawCards : MonoBehaviour
 {
     public PlayerDeck PlayerDeck;
     public GameObject cardPrefab;
     public GameObject Panel;
+    public Button DrawCardButton;
+    public GameObject DrawBasicCardAndEventCard;
+
     public Player player;
 
     public Card Card;
@@ -34,9 +38,34 @@ public class DrawCards : MonoBehaviour
             Debug.Log(player.currentGrid.academy);
         }
     }
+    public void DrawCard()
+    {
+        if (player.CurrentActionPoint < 1)
+        {
+            Debug.Log("NoActionPoint");
+        }
+        else
+        {
+            if (player.currentGrid.isHasBuilding == true)
+            {
+                DrawBasicCard();
+                DrawEventCard();
+                player.CurrentActionPoint--;
+            }
+            else
+            {
+                DrawBasicCardAndEventCard.SetActive(true);
+                DrawCardButton.interactable= false;
+                player.CurrentActionPoint--;
+            }
+        }
+    }
+
     public void DrawBasicCard()
     {
-        if(basicCardCount > PlayerDeck.basicCardDeck.Count-1)
+
+        DrawBasicCardAndEventCard.SetActive(false);
+        if (basicCardCount > PlayerDeck.basicCardDeck.Count-1)
         {
             PlayerDeck.Shuffle();
             basicCardCount = 0;
@@ -44,11 +73,14 @@ public class DrawCards : MonoBehaviour
         Card = Instantiate(cardPrefab,Panel.transform).GetComponent<Card>();
 
         Card.card = PlayerDeck.basicCardDeck[basicCardCount];
-        
+        DrawCardButton.interactable = true;
+
         basicCardCount++;
     }
     public void DrawEventCard()
     {
+        DrawCardButton.interactable = true;
+        DrawBasicCardAndEventCard.SetActive(false);
         if (player.currentGrid.academy == AcademyType.BING)
         {
             if (BINGCardCount > PlayerDeck.BINGCardDeck.Count - 1)
