@@ -42,11 +42,11 @@ public class GridObjectUI : MonoBehaviour
         });
         gachaBtn.onClick.AddListener(() =>
         {
-            
+            GameplayManager.Instance.Gacha(gridObject);
         });
         buildBtn.onClick.AddListener(() =>
         {
-            
+            GameplayManager.Instance.Build(gridObject);
         });
 
     }
@@ -57,13 +57,13 @@ public class GridObjectUI : MonoBehaviour
         academyText.text = gridObject.academy.ToString();
         if(gridObject.owner!=null)
         {
-            ownerText.text = gridObject.owner.ToString();
+            ownerText.text = gridObject.owner.Id.ToString();
         }
         landBuffText.text = null;
         buildingText.text = gridObject.isHasBuilding.ToString();
 
         //Set the interactive btn
-        occupyBtn.interactable = authority.canBuild;
+        occupyBtn.interactable = authority.canOccupy;
         gachaBtn.interactable = authority.canGacha;
         buildBtn.interactable = authority.canBuild;
         moveBtn.interactable = authority.canMove;

@@ -6,6 +6,8 @@ using System.IO;
 
 public class GridManager : MonoBehaviour
 {
+    [SerializeField] private GameObject buildingBlue;
+    [SerializeField] private Transform buildingContainer;
     public int levelIndex =1;
     public Grid<GridObject> grid;
     public GameObject gridUI;
@@ -97,5 +99,21 @@ public class GridManager : MonoBehaviour
     public void HideAimGrid()
     {
         gridUI.SetActive(false);
+    }
+
+    public GridObject ManageOwner(GridObject gridObject ,Player player)
+    {
+        gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
+        gridObject.SetOwner(player);
+        return gridObject;
+    }
+
+    public GridObject ManageBuilding(GridObject gridObject)
+    {
+        gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
+        GameObject building = Instantiate(buildingBlue);
+        building.transform.SetParent(buildingContainer);
+        gridObject.SetBuilding(building);
+        return gridObject;
     }
 }

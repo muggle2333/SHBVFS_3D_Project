@@ -47,10 +47,22 @@ public class GameplayManager : MonoBehaviour
 
     public void Occupy(GridObject gridObject)
     {
-        gridObject.SetOwner(player);
+        gridObject = GridManager.Instance.ManageOwner(gridObject, player);
         player.OccupyGrid(gridObject);
+        UpdateGridAuthorityData(gridObject);
+    }
+
+    public void Build(GridObject gridObject)
+    {
+        gridObject = GridManager.Instance.ManageBuilding(gridObject);
+        UpdateGridAuthorityData(gridObject);
+    }
+    
+    public void Gacha(GridObject gridObject)
+    {
 
     }
+
     public void ShowGirdObjectData(Vector3 pos)
     {
         GridObject selectedGridObject = GridManager.Instance.GetSelectedGridObject(pos);
@@ -58,9 +70,10 @@ public class GameplayManager : MonoBehaviour
         UpdateGridAuthorityData(selectedGridObject);
         GridObjectUI.Instance.ShowGridObjectUI(true);
     }
-    public void UpdateGridAuthorityData(GridObject grid)
+    public void UpdateGridAuthorityData(GridObject gridObject)
     {
-        GridObjectUI.Instance.UpdateGridObjectUIData(grid, CheckPlayerInteractAuthority(grid));
+        //gridObject = GridManager.Instance.grid.GetGridObject(gridObject.x, gridObject.z);
+        GridObjectUI.Instance.UpdateGridObjectUIData(gridObject, CheckPlayerInteractAuthority(gridObject));
     }
     public PlayerInteractAuthority CheckPlayerInteractAuthority(GridObject gridObject)
     {
@@ -81,22 +94,22 @@ public class GameplayManager : MonoBehaviour
     public int CheckDistance(Player player, GridObject gridObject)
     {
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter(gridObject.x, gridObject.z);
-        Debug.Log((int)Math.Ceiling(Vector3.Distance(player.gameObject.transform.position, dirPos) / GridManager.Instance.gridDistance));
         return (int)Math.Ceiling(Vector3.Distance(player.gameObject.transform.position, dirPos) / GridManager.Instance.gridDistance);
         
     }
+ 
     public bool CheckOccupiable(Player player, GridObject gridObject)
     {
         if (player.currentGrid != gridObject) return false;
         if(!gridObject.canBeOccupied) return false;
-        if (gridObject.owner!=null && gridObject.owner == player) return false;
+        if (gridObject.owner!=null && gridObject.owner== player) return false;
         return true;
     }
     public bool CheckBuildable(Player player, GridObject gridObject)
     {
         if (player.currentGrid != gridObject) return false;
         if (gridObject.isHasBuilding) return false;
-        if (gridObject.owner != null && gridObject.owner != player) return false;
+        if (gridObject.owner == null || gridObject.owner != player) return false;
         return true;
     }
 
@@ -104,7 +117,7 @@ public class GameplayManager : MonoBehaviour
     {
         if (player.currentGrid != gridObject) return false;
         if (!gridObject.isHasBuilding) return false;
-        if (gridObject.owner != null && gridObject.owner != player) return false;
+        if (gridObject.owner == null || gridObject.owner != null && gridObject.owner != player) return false;
         return true;
     }
 

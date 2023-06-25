@@ -71,7 +71,7 @@ public class GridPlaceEditor : MonoBehaviour
         ground.transform.SetParent(parent.transform, false);
         int randomRotation = Random.Range(0, 6);
         ground.transform.Rotate(new Vector3(0, 60f * randomRotation, 0));
-        grid.gridArray[x, z].landTransform = ground.transform;
+        //grid.gridArray[x, z].landTransform = ground.transform;
         grid.TriggerGridObjectChanged(x, z);
     }
     private static void AutoBoxCollider(GameObject grounds)

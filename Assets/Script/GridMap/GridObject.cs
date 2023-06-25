@@ -40,7 +40,7 @@ public class GridObject
     public bool canBeOccupied = true;
 
     public Grid<GridObject> grid;
-    public Transform landTransform;
+    public Transform landTransform; //place the building
     
     
     public int x;
@@ -143,7 +143,17 @@ public class GridObject
     public void SetOwner(Player player)
     {
         owner= player;
-        Debug.Log(owner);
+        grid.TriggerGridObjectChanged(x, z);
+        //Debug.Log(owner);
     }
     
+    public void SetBuilding(GameObject building)
+    {
+        isHasBuilding = true;
+        landTransform = building.transform;
+        int randomRotation = Random.Range(0, 6);
+        landTransform.transform.Rotate(new Vector3(0, 60f * randomRotation, 0));
+        landTransform.position = grid.GetWorldPositionCenter(x, z);
+        grid.TriggerGridObjectChanged(x, z);
+    }
 }
