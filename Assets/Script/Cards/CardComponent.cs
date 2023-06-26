@@ -16,7 +16,29 @@ public class CardComponent : ScriptableObject
     public int Defense;
     public int Health;
     public int VisionRange;
+    public int ActionPoint;
+    public int Attack;
+    public int GetCardsNumber;
+    public int FreeMoves;
+
     public PlayerId Cardtarget;
+
+    public AcademyType AcademyType;
     
-    public CardBuff cardBuff;
+    public CardBuff CardBuff;
+
+    public enum CardType
+    {
+        Basic,
+        Data,
+        Buff,
+        Function,
+        Nulll,
+    }
+
+    public enum CardLevel
+    {
+        Primary,
+        Top,
+    }
 }

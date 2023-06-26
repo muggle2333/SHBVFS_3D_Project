@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="CardBuff",menuName ="CardBuff")]
 public class CardBuff : ScriptableObject
 {
-    int actionPoint;
+   
 }
