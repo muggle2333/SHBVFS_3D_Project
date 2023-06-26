@@ -72,7 +72,7 @@ public class DrawCards : MonoBehaviour
         }
         Card = Instantiate(cardPrefab,Panel.transform).GetComponent<Card>();
 
-        Card.card = PlayerDeck.basicCardDeck[basicCardCount];
+        Card.cardSetting = PlayerDeck.basicCardDeck[basicCardCount];
         DrawCardButton.interactable = true;
 
         basicCardCount++;
@@ -90,7 +90,7 @@ public class DrawCards : MonoBehaviour
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
 
-            Card.card = PlayerDeck.BINGCardDeck[BINGCardCount];
+            Card.cardSetting = PlayerDeck.BINGCardDeck[BINGCardCount];
 
             BINGCardCount++;
         }
@@ -103,7 +103,7 @@ public class DrawCards : MonoBehaviour
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
 
-            Card.card = PlayerDeck.DAOCardDeck[DAOCardCount];
+            Card.cardSetting = PlayerDeck.DAOCardDeck[DAOCardCount];
 
             DAOCardCount++;
         }
@@ -116,7 +116,7 @@ public class DrawCards : MonoBehaviour
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
 
-            Card.card = PlayerDeck.FACardDeck[FACardCount];
+            Card.cardSetting = PlayerDeck.FACardDeck[FACardCount];
 
             FACardCount++;
         }
@@ -129,7 +129,7 @@ public class DrawCards : MonoBehaviour
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
 
-            Card.card = PlayerDeck.MOCardDeck[MOCardCount];
+            Card.cardSetting = PlayerDeck.MOCardDeck[MOCardCount];
 
             MOCardCount++;
         }
@@ -142,7 +142,7 @@ public class DrawCards : MonoBehaviour
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
 
-            Card.card = PlayerDeck.RUCardDeck[RUCardCount];
+            Card.cardSetting = PlayerDeck.RUCardDeck[RUCardCount];
 
             RUCardCount++;
         }
@@ -155,7 +155,7 @@ public class DrawCards : MonoBehaviour
             }
             Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
 
-            Card.card = PlayerDeck.YICardDeck[YICardCount];
+            Card.cardSetting = PlayerDeck.YICardDeck[YICardCount];
 
             YICardCount++;
         }

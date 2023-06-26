@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Camera))]
@@ -194,7 +195,10 @@ public class SelectController : MonoBehaviour
             {
 
                 TargetRenderer = hit.transform.GetComponent<Renderer>();
-                //if (TargetRenderer.gameObject.GetComponentInParent<GridObjectComponent>() == null) return;
+                if (TargetRenderer.gameObject.GetComponentInParent<Player>())
+                {
+                    GameplayManager.Instance.UpdateSelectPlayer(TargetRenderer.gameObject.GetComponentInParent<Player>());
+                }
                 if (lastTarget == null) lastTarget = TargetRenderer;
                 if (SelectionMode == SelMode.AndChildren)
                 {
@@ -215,6 +219,12 @@ public class SelectController : MonoBehaviour
             }
             else
             {
+                //如果点到ui
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
+                UIManager.Instance.ShowGridObjectUI(false);
                 TargetRenderer = null;
                 lastTarget = null;
                 if (Selected)

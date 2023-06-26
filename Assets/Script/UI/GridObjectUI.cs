@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class GridObjectUI : MonoBehaviour
 {
-    public static GridObjectUI Instance;
     [SerializeField] private GameObject container;
 
     [SerializeField] private Button moveBtn;
@@ -22,31 +21,22 @@ public class GridObjectUI : MonoBehaviour
     private GridObject gridObject;
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(Instance);
-        }
-        else
-        {
-            Instance = this;
-        }
-
         moveBtn.onClick.AddListener(() =>
         {
-            GameplayManager.Instance.MovePlayer(gridObject);
+            PlayerManager.Instance.MovePlayer(GameplayManager.Instance.player,gridObject);
         });
         occupyBtn.onClick.AddListener(() =>
         {
-            GameplayManager.Instance.Occupy(gridObject);
+            PlayerManager.Instance.Occupy(GameplayManager.Instance.player,gridObject);
 
         });
         gachaBtn.onClick.AddListener(() =>
         {
-            GameplayManager.Instance.Gacha(gridObject);
+            PlayerManager.Instance.Gacha(GameplayManager.Instance.player,gridObject);
         });
         buildBtn.onClick.AddListener(() =>
         {
-            GameplayManager.Instance.Build(gridObject);
+            PlayerManager.Instance.Build(GameplayManager.Instance.player,gridObject);
         });
 
     }

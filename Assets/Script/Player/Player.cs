@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +6,8 @@ public enum PlayerId
 {
     RedPlayer,
     BluePlayer,
-    None,
-    Both,
 }
+
 
 public class Player : Character
 {
@@ -31,6 +30,7 @@ public class Player : Character
         { AcademyType.RU,null },
     }*/;
 
+    public int[] academyOwnedPoint = new int[6];
     [System.Serializable]
     public class OwnedLandTest
     {
@@ -85,5 +85,30 @@ public class Player : Character
         }
 
         return true;
+    }
+
+    public int[] CountAcademyOwnedPoint()
+    {
+        int[] academyOwnedPoint = new int[6];
+        for (int i=0;i<6;i++)
+        {
+            List<GridObject> gridList;
+            OwnedLandDic.TryGetValue((AcademyType)(i+1), out gridList); //academy 第一个是 null
+            academyOwnedPoint[i] = gridList.Count;
+        }
+        return academyOwnedPoint;
+    }
+
+    public void ChangeAcademyOwnPoint(int[] academyPointEffect)
+    {
+        for(int i=0;i< academyOwnedPoint.Length;i++)
+        {
+            academyOwnedPoint[i] += academyPointEffect[i];
+        }
+    }
+
+    public void UpdatePlayerDate(int[] academyPointEffect, PlayerDataEffect playerDataEffect)
+    {
+        ChangeAcademyOwnPoint(academyPointEffect);
     }
 }

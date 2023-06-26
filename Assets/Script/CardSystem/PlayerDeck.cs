@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class PlayerDeck : MonoBehaviour
 {
-    //public List<List<CardComponent>> DeckList = new List<List<CardComponent>>();
+    //public List<List<CardSetting>> DeckList = new List<List<CardSetting>>();
 
-    public List<CardComponent> basicCardDeck = new List<CardComponent>();
-    public List<CardComponent> BINGCardDeck = new List<CardComponent>();
-    public List<CardComponent> DAOCardDeck = new List<CardComponent>();
-    public List<CardComponent> FACardDeck = new List<CardComponent>();
-    public List<CardComponent> MOCardDeck = new List<CardComponent>();
-    public List<CardComponent> RUCardDeck = new List<CardComponent>();
-    public List<CardComponent> YICardDeck = new List<CardComponent>();
+    public List<CardSetting> basicCardDeck = new List<CardSetting>();
+    public List<CardSetting> BINGCardDeck = new List<CardSetting>();
+    public List<CardSetting> DAOCardDeck = new List<CardSetting>();
+    public List<CardSetting> FACardDeck = new List<CardSetting>();
+    public List<CardSetting> MOCardDeck = new List<CardSetting>();
+    public List<CardSetting> RUCardDeck = new List<CardSetting>();
+    public List<CardSetting> YICardDeck = new List<CardSetting>();
 
-    private List<CardComponent> basicCardContainer = new List<CardComponent>();
-    private List<CardComponent> BINGCardContainer = new List<CardComponent>();
-    private List<CardComponent> DAOCardContainer = new List<CardComponent>();
-    private List<CardComponent> FACardContainer = new List<CardComponent>();
-    private List<CardComponent> MOCardContainer = new List<CardComponent>();
-    private List<CardComponent> RUCardContainer = new List<CardComponent>();
-    private List<CardComponent> YICardContainer = new List<CardComponent>();
+    private List<CardSetting> basicCardContainer = new List<CardSetting>();
+    private List<CardSetting> BINGCardContainer = new List<CardSetting>();
+    private List<CardSetting> DAOCardContainer = new List<CardSetting>();
+    private List<CardSetting> FACardContainer = new List<CardSetting>();
+    private List<CardSetting> MOCardContainer = new List<CardSetting>();
+    private List<CardSetting> RUCardContainer = new List<CardSetting>();
+    private List<CardSetting> YICardContainer = new List<CardSetting>();
     // Start is called before the first frame update
     void Start()
     {

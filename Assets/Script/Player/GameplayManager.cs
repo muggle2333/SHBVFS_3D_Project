@@ -1,21 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct PlayerInteractAuthority
-{
-    public bool canMove;
-    public bool canBuild;
-    public bool canOccupy;
-    public bool canGacha;
-}
 public class GameplayManager : MonoBehaviour
 {
     public static GameplayManager Instance;
 
-    [SerializeField] private Vector2 playerStartPoint;
-    private Player player;
+    [SerializeField] private Vector2 playerStartPointRed;
+    [SerializeField] private Vector2 playerStartPointBlue;
+    [SerializeField] private Transform playerBlue;
+    [SerializeField] private Transform playerRed;
+    public Player player;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,7 +21,7 @@ public class GameplayManager : MonoBehaviour
         {
             Instance = this;
         }
-        
+
     }
     private void Start()
     {
@@ -34,96 +29,28 @@ public class GameplayManager : MonoBehaviour
     }
     private void InitializePlayer()
     {
-        player = FindObjectOfType<Player>();
-        player.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint.x,(int)playerStartPoint.y);
-        player.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint.x, (int)playerStartPoint.y);
+        //player = FindObjectOfType<Player>();
+        playerRed.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointRed.x, (int)playerStartPointRed.y);
+        playerRed.GetComponent<Player>().currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
+        
+        playerBlue.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
+        playerBlue.GetComponent<Player>().currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
+        
+        player = playerRed.GetComponent<Player>();
+        UIManager.Instance.UpdatePlayerDataUI(player);
     }
 
-    public void MovePlayer(GridObject gridObject)
+    public void UpdateSelectPlayer(Player player)
     {
-        player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
-        UpdateGridAuthorityData(gridObject);
+        this.player = player;
+        UIManager.Instance.UpdatePlayerDataUI(this.player);
     }
-
-    public void Occupy(GridObject gridObject)
-    {
-        gridObject = GridManager.Instance.ManageOwner(gridObject, player);
-        player.OccupyGrid(gridObject);
-        UpdateGridAuthorityData(gridObject);
-    }
-
-    public void Build(GridObject gridObject)
-    {
-        gridObject = GridManager.Instance.ManageBuilding(gridObject);
-        UpdateGridAuthorityData(gridObject);
-    }
-    
-    public void Gacha(GridObject gridObject)
-    {
-
-    }
-
     public void ShowGirdObjectData(Vector3 pos)
     {
         GridObject selectedGridObject = GridManager.Instance.GetSelectedGridObject(pos);
         if (selectedGridObject == null) return;
-        UpdateGridAuthorityData(selectedGridObject);
-        GridObjectUI.Instance.ShowGridObjectUI(true);
-    }
-    public void UpdateGridAuthorityData(GridObject gridObject)
-    {
-        //gridObject = GridManager.Instance.grid.GetGridObject(gridObject.x, gridObject.z);
-        GridObjectUI.Instance.UpdateGridObjectUIData(gridObject, CheckPlayerInteractAuthority(gridObject));
-    }
-    public PlayerInteractAuthority CheckPlayerInteractAuthority(GridObject gridObject)
-    {
-        PlayerInteractAuthority authority = new PlayerInteractAuthority();
-        authority.canMove = CheckMoveable(player, gridObject);
-        authority.canOccupy = CheckOccupiable(player, gridObject);
-        authority.canBuild= CheckBuildable(player, gridObject);
-        authority.canGacha = CheckGachable(player, gridObject);
-        return authority;
-    }
+        UIManager.Instance.ShowGridObjectUI(true);
+        PlayerManager.Instance.UpdateGridAuthorityData(player, selectedGridObject);
 
-    public bool CheckMoveable(Player player, GridObject gridObject)
-    {
-        if (player.currentGrid == gridObject) return false;
-        return CheckDistance(player, gridObject) <= player.Range;
-    }
-
-    public int CheckDistance(Player player, GridObject gridObject)
-    {
-        Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter(gridObject.x, gridObject.z);
-        return (int)Math.Ceiling(Vector3.Distance(player.gameObject.transform.position, dirPos) / GridManager.Instance.gridDistance);
-        
-    }
- 
-    public bool CheckOccupiable(Player player, GridObject gridObject)
-    {
-        if (player.currentGrid != gridObject) return false;
-        if(!gridObject.canBeOccupied) return false;
-        if (gridObject.owner!=null && gridObject.owner== player) return false;
-        return true;
-    }
-    public bool CheckBuildable(Player player, GridObject gridObject)
-    {
-        if (player.currentGrid != gridObject) return false;
-        if (gridObject.isHasBuilding) return false;
-        if (gridObject.owner == null || gridObject.owner != player) return false;
-        return true;
-    }
-
-    public bool CheckGachable(Player player, GridObject gridObject)
-    {
-        if (player.currentGrid != gridObject) return false;
-        if (!gridObject.isHasBuilding) return false;
-        if (gridObject.owner == null || gridObject.owner != null && gridObject.owner != player) return false;
-        return true;
-    }
-
-
-    public int GetActionPointCost(Player player,GridObject currentGrid, GridObject targetGrid)
-    {
-        return 0;
     }
 }
