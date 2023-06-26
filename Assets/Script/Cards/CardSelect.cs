@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
@@ -13,6 +14,14 @@ public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public float formerY;
     public float duration;
     public GameObject Info;
+    void Start()
+    {
+        transform.gameObject.GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
+        isSelected = false;
+        targetY = 30;
+        formerY = 0;
+        duration = 0.25f;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -45,12 +54,6 @@ public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (isSelected) EndSelect();
         else OnSelect();
-    }
-
-    void Start()
-    {
-        transform.gameObject.GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
-        isSelected = false;
     }
 
     public void OnSelect()
