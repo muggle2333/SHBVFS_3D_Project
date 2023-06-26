@@ -59,6 +59,10 @@ public class GridObjectUI : MonoBehaviour
         {
             ownerText.text = gridObject.owner.Id.ToString();
         }
+        else
+        {
+            ownerText.text = "null";
+        }
         landBuffText.text = null;
         buildingText.text = gridObject.isHasBuilding.ToString();
 

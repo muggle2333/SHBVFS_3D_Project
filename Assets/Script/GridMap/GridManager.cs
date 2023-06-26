@@ -8,6 +8,10 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private GameObject buildingBlue;
     [SerializeField] private Transform buildingContainer;
+    
+    [SerializeField] private GameObject vfxGridHightlight;
+    [SerializeField] private Transform vfxContainer;
+
     public int levelIndex =1;
     public Grid<GridObject> grid;
     public GameObject gridUI;
@@ -104,7 +108,19 @@ public class GridManager : MonoBehaviour
     public GridObject ManageOwner(GridObject gridObject ,Player player)
     {
         gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
-        gridObject.SetOwner(player);
+        if(gridObject.vfxTransform == null)
+        {
+            GameObject vfx = Instantiate(vfxGridHightlight);
+            vfx.transform.position = grid.GetWorldPositionCenter(gridObject.x, gridObject.z);
+            vfx.transform.SetParent(vfxContainer);
+            gridObject.SetOwner(player, vfx.transform);
+        }
+        else
+        {
+            gridObject.SetOwner(player, null);
+        }
+        
+
         return gridObject;
     }
 

@@ -41,7 +41,7 @@ public class GridObject
 
     public Grid<GridObject> grid;
     public Transform landTransform; //place the building
-    
+    public Transform vfxTransform;
     
     public int x;
     public int z;
@@ -52,6 +52,7 @@ public class GridObject
         this.landType = LandType.Plain;
         owner = null;
         landTransform = null;
+        vfxTransform = null;
         isHasBuilding = false;
         canBuild = true;
         canBeOccupied = true;
@@ -62,6 +63,7 @@ public class GridObject
         this.z = z;
         owner = null;
         landTransform = null;
+        vfxTransform = null;
         this.landType = LandType.Plain;
         isHasBuilding = false;
         canBuild = true;
@@ -74,6 +76,7 @@ public class GridObject
         this.z = z;
         owner = null;
         landTransform = null;
+        vfxTransform = null;
         this.landType = LandType.Plain;
         isHasBuilding = false;
         canBuild = true;
@@ -140,13 +143,34 @@ public class GridObject
 
     }
 
-    public void SetOwner(Player player)
+    public void SetOwner(Player player,Transform vfx)
     {
+        if(vfx != null)
+        {
+            vfxTransform = vfx;
+        }
+        if (owner == player) return;
+        UpdateVfxColor(player);
         owner= player;
         grid.TriggerGridObjectChanged(x, z);
-        //Debug.Log(owner);
+
     }
-    
+  
+    public void UpdateVfxColor(Player player)
+    {
+        if(player==null)
+        {
+            vfxTransform.gameObject.SetActive(false);
+        }
+        else if(player.Id == PlayerId.RedPlayer)
+        {
+            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        }
+        else if(player.Id == PlayerId.BluePlayer)
+        {
+            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+        }
+    }
     public void SetBuilding(GameObject building)
     {
         isHasBuilding = true;
