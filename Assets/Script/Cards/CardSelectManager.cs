@@ -19,7 +19,6 @@ public class CardSelectManager : MonoBehaviour
                 Debug.Log("Card " + card.name + " is played.");
                 card.EndSelect();
             }
-
         }
     }
 
@@ -32,7 +31,6 @@ public class CardSelectManager : MonoBehaviour
                 Debug.Log("Card " + card.name + " is canceled.");
                 card.EndSelect();
             }
-
         }
     }
 
