@@ -5,10 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="Card", menuName ="Card")]
 public class CardComponent : ScriptableObject
 {
-    public new string Cardname;
+    public new string CardName;
     public string Description;
 
-    public Sprite Head;
+    public Sprite HeadPicture;
     public Sprite Academies;
 
     public int Damage;
@@ -17,6 +17,6 @@ public class CardComponent : ScriptableObject
     public int Health;
     public int VisionRange;
     public PlayerId Cardtarget;
-
+    
     public CardBuff cardBuff;
 }

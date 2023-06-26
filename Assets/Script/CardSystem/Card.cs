@@ -27,7 +27,7 @@ public class Card:MonoBehaviour
     {
         Cardname.text = card.name;
         Description.text = card.Description;
-        Head = card.Head;
+        Head = card.HeadPicture;
         Academies = card.Academies;
         Damage = card.Damage;
         LoseHp = card.LoseHp;
