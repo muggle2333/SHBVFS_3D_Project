@@ -35,6 +35,6 @@ public class Card:MonoBehaviour
         Health = card.Health;
         VisionRange = card.VisionRange;
         Cardtarget = card.Cardtarget;
-        cardBuff = card.cardBuff;
+        cardBuff = card.CardBuff;
     }
 }
