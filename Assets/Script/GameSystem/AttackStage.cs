@@ -6,13 +6,7 @@ public class AttackStage : MonoBehaviour
 {
     private List<Player> players;
     private int distance;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            StartAttack();
-        }
-    }
+
     public void StartAttack()
     {
         players = GameplayManager.Instance.GetPlayer();
