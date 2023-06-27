@@ -3776,8 +3776,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handX: 0
-  handY: -125
-  interval: 300
+  handY: 0
+  interval: 250
+  cardsArray: []
+  cardsList: []
 --- !u!1 &292919465
 GameObject:
   m_ObjectHideFlags: 0
@@ -15686,6 +15688,22 @@ MonoBehaviour:
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 0
+  Priority: 0
+  currentGrid:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    landTransform: {fileID: 0}
+    vfxTransform: {fileID: 0}
+    x: 0
+    z: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!1 &964423363
 GameObject:
@@ -17889,6 +17907,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1177065917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1177065919}
+  m_Layer: 0
+  m_Name: AttackTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1177065919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177065917}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 963.30786, y: 532.5692, z: 618.192}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1198241467
 GameObject:
   m_ObjectHideFlags: 0
@@ -19429,6 +19478,7 @@ GameObject:
   - component: {fileID: 1297871945}
   - component: {fileID: 1297871944}
   - component: {fileID: 1297871946}
+  - component: {fileID: 1297871947}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -19448,7 +19498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe564b87c9a65e43a174ae8b659de0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawCardComponent: {fileID: 0}
 --- !u!4 &1297871945
 Transform:
   m_ObjectHideFlags: 0
@@ -19480,7 +19529,21 @@ MonoBehaviour:
   playerStartPointBlue: {x: 2, y: 2}
   playerBlue: {fileID: 962322098}
   playerRed: {fileID: 1456011319}
-  player: {fileID: 0}
+  currentPlayer: {fileID: 0}
+--- !u!114 &1297871947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297871943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41a26da3ef4ddd4cb497c847a766825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RedPlayerInteractList: []
+  BluePlayerInteractList: []
 --- !u!1 &1301046414
 GameObject:
   m_ObjectHideFlags: 0
@@ -22189,10 +22252,26 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 1
-  CurrentActionPoint: 3
+  CurrentActionPoint: 20
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 0
+  Priority: 0
+  currentGrid:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    landTransform: {fileID: 0}
+    vfxTransform: {fileID: 0}
+    x: 0
+    z: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!114 &1456011318
 MonoBehaviour:

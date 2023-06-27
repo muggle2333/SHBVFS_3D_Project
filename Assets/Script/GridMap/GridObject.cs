@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -28,6 +29,7 @@ public enum MeshType
     Grass,
     Sand,
 }
+[Serializable]
 public class GridObject
 {
     public LandType landType = LandType.Plain;
@@ -175,7 +177,7 @@ public class GridObject
     {
         isHasBuilding = true;
         landTransform = building.transform;
-        int randomRotation = Random.Range(0, 6);
+        int randomRotation = UnityEngine.Random.Range(0, 6);
         landTransform.transform.Rotate(new Vector3(0, 60f * randomRotation, 0));
         landTransform.position = grid.GetWorldPositionCenter(x, z);
         grid.TriggerGridObjectChanged(x, z);

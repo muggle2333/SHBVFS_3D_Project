@@ -23,20 +23,20 @@ public class GridObjectUI : MonoBehaviour
     {
         moveBtn.onClick.AddListener(() =>
         {
-            PlayerManager.Instance.MovePlayer(GameplayManager.Instance.player,gridObject);
+            PlayerManager.Instance.TryInteract(PlayerInteractType.Move,GameplayManager.Instance.currentPlayer,gridObject);
         });
         occupyBtn.onClick.AddListener(() =>
         {
-            PlayerManager.Instance.Occupy(GameplayManager.Instance.player,gridObject);
+            PlayerManager.Instance.TryInteract(PlayerInteractType.Occupy,GameplayManager.Instance.currentPlayer,gridObject);
 
         });
         gachaBtn.onClick.AddListener(() =>
         {
-            PlayerManager.Instance.Gacha(GameplayManager.Instance.player,gridObject);
+            PlayerManager.Instance.TryInteract(PlayerInteractType.Gacha, GameplayManager.Instance.currentPlayer, gridObject);
         });
         buildBtn.onClick.AddListener(() =>
         {
-            PlayerManager.Instance.Build(GameplayManager.Instance.player,gridObject);
+            PlayerManager.Instance.TryInteract(PlayerInteractType.Build, GameplayManager.Instance.currentPlayer, gridObject);
         });
 
     }

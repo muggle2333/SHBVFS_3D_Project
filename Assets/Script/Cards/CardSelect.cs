@@ -16,27 +16,24 @@ public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public GameObject Info;
     void Start()
     {
-        transform.gameObject.GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
         isSelected = false;
-        targetY = 30;
-        formerY = 0;
         duration = 0.25f;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
 
-        transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
-        transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
-        //index = transform.GetSiblingIndex();
-        //transform.SetAsLastSibling();
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
+
         Info.SetActive(true);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
-        transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0);
-        //transform.SetSiblingIndex(index);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+
         Info.SetActive(false);
     }
 
@@ -58,11 +55,14 @@ public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnSelect()
     {
+        //index = transform.GetSiblingIndex();
+        //transform.SetAsLastSibling();
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
     }
     public void EndSelect()
     {
+        //transform.SetSiblingIndex(index);
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
     }

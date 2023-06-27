@@ -53,6 +53,7 @@ public class DrawCardComponent : MonoBehaviour
                 DrawCardButton.interactable= false;
             }
             player.CurrentActionPoint--;
+            FindObjectOfType<CardSelectManager>().Start();
             FindObjectOfType<CardSelectManager>().UpdateCardPos();
         }
     }
