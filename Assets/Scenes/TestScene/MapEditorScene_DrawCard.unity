@@ -3776,8 +3776,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handX: 0
-  handY: -125
-  interval: 300
+  handY: 0
+  interval: 220
+  cardsArray: []
+  cardsList: []
 --- !u!1 &292919465
 GameObject:
   m_ObjectHideFlags: 0
@@ -22189,7 +22191,7 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 1
-  CurrentActionPoint: 3
+  CurrentActionPoint: 20
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 0

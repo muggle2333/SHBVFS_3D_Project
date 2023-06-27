@@ -9,9 +9,9 @@ public class CardSelectManager : MonoBehaviour
     public float handX = 0f;
     public float handY = 0f;
     public float interval = 300f;
-    private CardSelect[] cardsArray;
-    private List<CardSelect> cardsList; 
-    void Start()
+    public CardSelect[] cardsArray;
+    public List<CardSelect> cardsList; 
+    public void Start()
     {
         cardsArray = GetComponentsInChildren<CardSelect>();
         cardsList = new List<CardSelect>(cardsArray);
@@ -52,7 +52,8 @@ public class CardSelectManager : MonoBehaviour
 
     public void UpdateCardPos()
     {
-        float offset = interval / cardsList.Count;
+        //float offset = interval / cardsList.Count;
+        float offset = interval;
         Vector2 startPos = new Vector2(handX - cardsList.Count / 2.0f * offset + offset * 0.5f, handY);
         for (int i = 0; i < cardsList.Count; i++)
         {
