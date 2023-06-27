@@ -50,7 +50,7 @@ public class CardSelectManager : MonoBehaviour
         }
     }
 
-    private void UpdateCardPos()
+    public void UpdateCardPos()
     {
         float offset = interval / cardsList.Count;
         Vector2 startPos = new Vector2(handX - cardsList.Count / 2.0f * offset + offset * 0.5f, handY);

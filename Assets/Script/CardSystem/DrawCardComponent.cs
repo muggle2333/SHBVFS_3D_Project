@@ -46,14 +46,14 @@ public class DrawCardComponent : MonoBehaviour
             {
                 DrawBasicCard(player);
                 DrawEventCard(player);
-                player.CurrentActionPoint--;
             }
             else
             {
                 DrawBasicCardAndEventCard.SetActive(true);
                 DrawCardButton.interactable= false;
-                player.CurrentActionPoint--;
             }
+            player.CurrentActionPoint--;
+            FindObjectOfType<CardSelectManager>().UpdateCardPos();
         }
     }
 

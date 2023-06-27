@@ -3,37 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+
 public class Card:MonoBehaviour
 {
     public CardSetting cardSetting;
 
-    //public Text Cardname;
-    //public Text Description;
+    public int cardId;
+    public Text cardName;
+    public Text description;
+    public Sprite headPicture;
+    public AcademyType academyType;
+    public CardCondition cardCondition;
+    public EffectStage effectStage;
+    public int effectDuration;
+    public CardTarget cardTarget;
 
-    //public Sprite Head;
-    //public Sprite Academies;
+    public int effectTime;
 
-    //public int Damage;
-    //public int LoseHp;
-    //public int Defense;
-    //public int Health;
-    //public int VisionRange;
-    //public PlayerId Cardtarget;
+    public int[] academyEffectNum = new int[6];
 
-    //public CardBuff cardBuff;
+    public int Damage;
 
+    public PlayerDataEffect playerDataEffect;
+    public CardType cardType;
+    public CardLevel cardLevel;
+    public CardBuff CardBuff;
     void Start()
     {
-        //Cardname.text = cardSetting.name;
-        //description.text = cardSetting.description;
-        //Head = cardSetting.headPicture;
-        //Damage = cardSetting.Damage;
-        //LoseHp = cardSetting.LoseHp;
-        //Defense = cardSetting.Defense;
-        //Health = cardSetting.Health;
-        //VisionRange = cardSetting.VisionRange;
-        //Cardtarget = cardSetting.Cardtarget;
-        //cardBuff = cardSetting.CardBuff;
+        cardId = cardSetting.cardId;
+        cardName.text = cardSetting.cardName;
+        description.text = cardSetting.description;
+        headPicture = cardSetting.headPicture;
+        academyType = cardSetting.academyType;
+        cardCondition = cardSetting.cardCondition;
+        effectStage = cardSetting.effectStage;
+        effectDuration = cardSetting.effectDuration;
+        cardTarget = cardSetting.cardTarget;
+        effectTime = cardSetting.effectTime;
+        academyEffectNum = cardSetting.academyEffectNum;
+        Damage = cardSetting.Damage;
+        playerDataEffect = cardSetting.playerDataEffect;
+        cardType = cardSetting.cardType;
+        cardLevel = cardSetting.cardLevel;
+        CardBuff = cardSetting.CardBuff;
     }
 
     public void UpdateCardData()

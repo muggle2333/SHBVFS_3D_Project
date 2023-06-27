@@ -12,14 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a68a11223af6ae488a6aae1620975fe, type: 3}
   m_Name: HP+1
   m_EditorClassIdentifier: 
-  Cardname: HP+1
-  Description: 
-  Head: {fileID: 0}
-  Academies: {fileID: 0}
+  cardId: 0
+  cardName: HP+1
+  description: HP+1
+  headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  academyType: 0
+  cardCondition: {fileID: 0}
+  effectStage: 0
+  effectDuration: 0
+  cardTarget: 0
+  effectTime: 0
+  academyEffectNum: 000000000000000000000000000000000000000000000000
   Damage: 0
-  LoseHp: 0
-  Defense: 0
-  Health: 0
-  VisionRange: 0
-  Cardtarget: 0
-  cardBuff: {fileID: 0}
+  playerDataEffect:
+    hp: 0
+    actionPoint: 0
+    defence: 0
+    attack: 0
+    visionRange: 0
+    addBaseCardNum: 0
+    freeMoveNum: 0
+  cardType: 0
+  cardLevel: 0
+  CardBuff: {fileID: 0}
