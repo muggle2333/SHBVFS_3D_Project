@@ -12,26 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a68a11223af6ae488a6aae1620975fe, type: 3}
   m_Name: RU3
   m_EditorClassIdentifier: 
-  cardId: 0
-  cardName: RU3
-  description: RU3
+  cardId: 30
+  cardName: CounterAttack
+  description: You can transform 1 point armor into 1 point to your first damage
+    this turn
   headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
-  academyType: 0
+  academyType: 5
   cardCondition: {fileID: 0}
-  effectStage: 0
+  effectStage: 3
   effectDuration: 0
   cardTarget: 0
   effectTime: 0
   academyEffectNum: 000000000000000000000000000000000000000000000000
-  Damage: 0
+  Damage: 1
   playerDataEffect:
     hp: 0
     actionPoint: 0
-    defence: 0
+    defence: -1
     attack: 0
     visionRange: 0
     addBaseCardNum: 0
     freeMoveNum: 0
-  cardType: 0
+  cardType: 1
   cardLevel: 0
   CardBuff: {fileID: 0}

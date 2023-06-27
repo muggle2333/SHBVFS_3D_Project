@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a68a11223af6ae488a6aae1620975fe, type: 3}
   m_Name: YI2
   m_EditorClassIdentifier: 
-  cardId: 0
-  cardName: YI2
-  description: YI2
+  cardId: 5
+  cardName: Forced March
+  description: Every 2 new academies you discover, you will recover 1 Hp this turn
   headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
-  academyType: 0
+  academyType: 1
   cardCondition: {fileID: 0}
-  effectStage: 0
+  effectStage: 3
   effectDuration: 0
   cardTarget: 0
   effectTime: 0
   academyEffectNum: 000000000000000000000000000000000000000000000000
   Damage: 0
   playerDataEffect:
-    hp: 0
+    hp: 1
     actionPoint: 0
     defence: 0
     attack: 0
     visionRange: 0
     addBaseCardNum: 0
     freeMoveNum: 0
-  cardType: 0
+  cardType: 1
   cardLevel: 0
   CardBuff: {fileID: 0}
