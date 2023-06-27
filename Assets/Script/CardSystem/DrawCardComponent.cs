@@ -4,15 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DrawCards : MonoBehaviour
+public class DrawCardComponent : MonoBehaviour
 {
     public PlayerDeck PlayerDeck;
     public GameObject cardPrefab;
     public GameObject Panel;
     public Button DrawCardButton;
     public GameObject DrawBasicCardAndEventCard;
-
-    public Player player;
 
     public Card Card;
     public int basicCardCount;
@@ -27,18 +25,16 @@ public class DrawCards : MonoBehaviour
     public int YICardCount;
     void Start()
     {
-        player = FindObjectOfType<Player>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Debug.Log(player.currentGrid.academy);
-        }
+
+       
     }
-    public void DrawCard()
+    public void DrawCard(Player player)
     {
         if (player.CurrentActionPoint < 1)
         {
@@ -48,8 +44,8 @@ public class DrawCards : MonoBehaviour
         {
             if (player.currentGrid.isHasBuilding == true)
             {
-                DrawBasicCard();
-                DrawEventCard();
+                DrawBasicCard(player);
+                DrawEventCard(player);
                 player.CurrentActionPoint--;
             }
             else
@@ -61,7 +57,7 @@ public class DrawCards : MonoBehaviour
         }
     }
 
-    public void DrawBasicCard()
+    public void DrawBasicCard(Player player)
     {
 
         DrawBasicCardAndEventCard.SetActive(false);
@@ -77,7 +73,7 @@ public class DrawCards : MonoBehaviour
 
         basicCardCount++;
     }
-    public void DrawEventCard()
+    public void DrawEventCard(Player player)
     {
         DrawCardButton.interactable = true;
         DrawBasicCardAndEventCard.SetActive(false);

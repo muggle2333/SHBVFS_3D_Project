@@ -11,6 +11,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private Transform playerBlue;
     [SerializeField] private Transform playerRed;
     public Player player;
+
     public void Awake()
     {
         if (Instance != null && Instance != this)

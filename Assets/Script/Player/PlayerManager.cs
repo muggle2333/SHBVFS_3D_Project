@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
 
+    [SerializeField] private DrawCardComponent drawCardComponent;
+
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,7 +28,10 @@ public class PlayerManager : MonoBehaviour
         }
         
     }
-    
+    public void Start()
+    {
+        drawCardComponent = FindObjectOfType<DrawCardComponent>();
+    }
 
     public void MovePlayer(Player player,GridObject gridObject)
     {
@@ -49,7 +54,7 @@ public class PlayerManager : MonoBehaviour
     
     public void Gacha(Player player, GridObject gridObject)
     {
-
+        drawCardComponent.DrawCard(player);
     }
 
     
