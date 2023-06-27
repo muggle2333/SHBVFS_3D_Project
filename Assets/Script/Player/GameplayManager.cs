@@ -47,6 +47,7 @@ public class GameplayManager : MonoBehaviour
     {
         List<Player> list = new List<Player>();
         list.Add(playerRed.GetComponent<Player>());
+        list.Add(playerBlue.GetComponent<Player>());
         return list;
     }
     public void UpdateSelectPlayer(Player player)
