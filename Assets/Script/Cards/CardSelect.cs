@@ -55,14 +55,14 @@ public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnSelect()
     {
-        index = transform.GetSiblingIndex();
-        transform.SetAsLastSibling();
+        //index = transform.GetSiblingIndex();
+        //transform.SetAsLastSibling();
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
     }
     public void EndSelect()
     {
-        transform.SetSiblingIndex(index);
+        //transform.SetSiblingIndex(index);
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
     }

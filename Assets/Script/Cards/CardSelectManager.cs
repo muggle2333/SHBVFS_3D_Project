@@ -22,7 +22,7 @@ public class CardSelectManager : MonoBehaviour
         }
     }
 
-    public void SelectCards()
+    public void DiscardCards()
     {
         for (int i = 0; i < cardsList.Count; i++)
         {
