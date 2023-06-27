@@ -9,33 +9,34 @@ public class DrawCardComponent : MonoBehaviour
     public PlayerDeck PlayerDeck;
     public GameObject cardPrefab;
     public GameObject Panel;
-    public Button DrawCardButton;
     public GameObject DrawBasicCardAndEventCard;
+    public GameObject cardObject;
 
     public Card Card;
     public int basicCardCount;
 
     //public int EventCardCount;
+    public Dictionary<AcademyType, int> AllCardCount = new Dictionary<AcademyType, int>();
+    public Player currentPlayer;
 
-    public int BINGCardCount;
-    public int DAOCardCount;
-    public int FACardCount;
-    public int MOCardCount;
-    public int RUCardCount;
-    public int YICardCount;
-    void Start()
+    private void Awake()
     {
-       
+        for (int i = 0; i < (int)AcademyType.FA; i++)
+        {
+            AllCardCount.Add((AcademyType)i,0);
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-       
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Debug.Log(AllCardCount[currentPlayer.currentGrid.academy]);
+            Debug.Log(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy].Count);
+        }
     }
     public void DrawCard(Player player)
     {
+        currentPlayer = player;
         if (player.CurrentActionPoint < 1)
         {
             Debug.Log("NoActionPoint");
@@ -44,117 +45,58 @@ public class DrawCardComponent : MonoBehaviour
         {
             if (player.currentGrid.isHasBuilding == true)
             {
-                DrawBasicCard(player);
-                DrawEventCard(player);
+                DrawBasicCard();
+                DrawEventCard();
             }
             else
             {
                 DrawBasicCardAndEventCard.SetActive(true);
-                DrawCardButton.interactable= false;
+
             }
             player.CurrentActionPoint--;
-            FindObjectOfType<CardSelectManager>().Start();
-            FindObjectOfType<CardSelectManager>().UpdateCardPos();
+            
         }
     }
 
-    public void DrawBasicCard(Player player)
+    public void DrawBasicCard()
     {
 
         DrawBasicCardAndEventCard.SetActive(false);
-        if (basicCardCount > PlayerDeck.basicCardDeck.Count-1)
+        if (AllCardCount[AcademyType.Null] > PlayerDeck.AllCardDeck[AcademyType.Null].Count-1)
         {
-            PlayerDeck.Shuffle();
-            basicCardCount = 0;
+            PlayerDeck.Shuffle(AcademyType.Null);
+            AllCardCount[AcademyType.Null] = 0;
         }
-        Card = Instantiate(cardPrefab,Panel.transform).GetComponent<Card>();
-
-        Card.cardSetting = PlayerDeck.basicCardDeck[basicCardCount];
-        DrawCardButton.interactable = true;
-
-        basicCardCount++;
+        cardObject = Instantiate(cardPrefab, Panel.transform);
+        Card = cardObject.GetComponent<Card>();
+        Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
+        AllCardCount[AcademyType.Null]++;
+        FindObjectOfType<CardSelectManager>().Start();
+        FindObjectOfType<CardSelectManager>().UpdateCardPos();
     }
-    public void DrawEventCard(Player player)
+    public void DrawEventCard()
     {
-        DrawCardButton.interactable = true;
         DrawBasicCardAndEventCard.SetActive(false);
-        if (player.currentGrid.academy == AcademyType.BING)
+        if (AllCardCount[currentPlayer.currentGrid.academy] > PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy].Count - 1)
         {
-            if (BINGCardCount > PlayerDeck.BINGCardDeck.Count - 1)
-            {
-                PlayerDeck.ShuffleEventCard(0);
-                BINGCardCount = 0;
-            }
-            Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
-
-            Card.cardSetting = PlayerDeck.BINGCardDeck[BINGCardCount];
-
-            BINGCardCount++;
+            PlayerDeck.Shuffle(currentPlayer.currentGrid.academy);
+            AllCardCount[currentPlayer.currentGrid.academy] = 0;
         }
-        if (player.currentGrid.academy == AcademyType.DAO)
+        cardObject = Instantiate(cardPrefab, Panel.transform);
+        Card = cardObject.GetComponent<Card>();
+        Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
+        AllCardCount[currentPlayer.currentGrid.academy]++;
+        Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]-1]);
+
+        if (currentPlayer.currentGrid.isHasBuilding == false)
         {
-            if (DAOCardCount > PlayerDeck.DAOCardDeck.Count - 1)
+            if (Card.cardLevel == CardLevel.Top)
             {
-                PlayerDeck.ShuffleEventCard(1);
-                DAOCardCount = 0;
+                Destroy(cardObject);
+                DrawEventCard();
             }
-            Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
-
-            Card.cardSetting = PlayerDeck.DAOCardDeck[DAOCardCount];
-
-            DAOCardCount++;
         }
-        if (player.currentGrid.academy == AcademyType.FA)
-        {
-            if (FACardCount > PlayerDeck.FACardDeck.Count - 1)
-            {
-                PlayerDeck.ShuffleEventCard(2);
-                FACardCount = 0;
-            }
-            Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
-
-            Card.cardSetting = PlayerDeck.FACardDeck[FACardCount];
-
-            FACardCount++;
-        }
-        if (player.currentGrid.academy == AcademyType.MO)
-        {
-            if (MOCardCount > PlayerDeck.MOCardDeck.Count - 1)
-            {
-                PlayerDeck.ShuffleEventCard(3);
-                MOCardCount = 0;
-            }
-            Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
-
-            Card.cardSetting = PlayerDeck.MOCardDeck[MOCardCount];
-
-            MOCardCount++;
-        }
-        if (player.currentGrid.academy == AcademyType.RU)
-        {
-            if (RUCardCount > PlayerDeck.RUCardDeck.Count - 1)
-            {
-                PlayerDeck.ShuffleEventCard(4);
-                RUCardCount = 0;
-            }
-            Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
-
-            Card.cardSetting = PlayerDeck.RUCardDeck[RUCardCount];
-
-            RUCardCount++;
-        }
-        if (player.currentGrid.academy == AcademyType.YI)
-        {
-            if (YICardCount > PlayerDeck.YICardDeck.Count - 1)
-            {
-                PlayerDeck.ShuffleEventCard(5);
-                YICardCount = 0;
-            }
-            Card = Instantiate(cardPrefab, Panel.transform).GetComponent<Card>();
-
-            Card.cardSetting = PlayerDeck.YICardDeck[YICardCount];
-
-            YICardCount++;
-        }
+        FindObjectOfType<CardSelectManager>().Start();
+        FindObjectOfType<CardSelectManager>().UpdateCardPos();
     }
 }

@@ -33,5 +33,5 @@ MonoBehaviour:
     addBaseCardNum: 0
     freeMoveNum: 0
   cardType: 0
-  cardLevel: 0
+  cardLevel: 1
   CardBuff: {fileID: 0}

@@ -25,7 +25,7 @@ public enum CardType
     Data,
     Buff,
     Function,
-    Nulll,
+    Null,
 }
 
 public enum CardLevel

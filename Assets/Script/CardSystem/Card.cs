@@ -50,9 +50,25 @@ public class Card:MonoBehaviour
         CardBuff = cardSetting.CardBuff;
     }
 
-    public void UpdateCardData()
+    public void UpdateCardData(CardSetting cardSetting)
     {
-
+        this.cardSetting = cardSetting;
+        cardId = cardSetting.cardId;
+        cardName.text = cardSetting.cardName;
+        description.text = cardSetting.description;
+        headPicture = cardSetting.headPicture;
+        academyType = cardSetting.academyType;
+        cardCondition = cardSetting.cardCondition;
+        effectStage = cardSetting.effectStage;
+        effectDuration = cardSetting.effectDuration;
+        cardTarget = cardSetting.cardTarget;
+        effectTime = cardSetting.effectTime;
+        academyEffectNum = cardSetting.academyEffectNum;
+        Damage = cardSetting.Damage;
+        playerDataEffect = cardSetting.playerDataEffect;
+        cardType = cardSetting.cardType;
+        cardLevel = cardSetting.cardLevel;
+        CardBuff = cardSetting.CardBuff;
     }
     public void ActivateCard()
     {
