@@ -6,8 +6,10 @@ using DG.Tweening;
 
 public class CardSelectManager : MonoBehaviour
 {
+    public float offset;
     public float handX = 0f;
     public float handY = 0f;
+    public float cardWidth = 240f;
     public float interval = 300f;
     public CardSelect[] cardsArray;
     public List<CardSelect> cardsList; 
@@ -52,8 +54,10 @@ public class CardSelectManager : MonoBehaviour
 
     public void UpdateCardPos()
     {
-        //float offset = interval / cardsList.Count;
-        float offset = interval;
+        if (cardsList.Count > 8) 
+            offset = interval / cardsList.Count;
+        else 
+            offset = cardWidth;
         Vector2 startPos = new Vector2(handX - cardsList.Count / 2.0f * offset + offset * 0.5f, handY);
         for (int i = 0; i < cardsList.Count; i++)
         {

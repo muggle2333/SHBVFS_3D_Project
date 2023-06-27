@@ -6,8 +6,8 @@ using UnityEngine.Rendering;
 
 public enum GameStage
 {
-    S1, //Control Stage
-    RemoveStage,
+    S1, //Opreation Stage
+    DiscardStage,
     S2,
     MoveStage,
     S3,
