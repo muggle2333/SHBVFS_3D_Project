@@ -34,11 +34,15 @@ public class GameplayManager : MonoBehaviour
     {
         //currentPlayer = FindObjectOfType<Player>();
         playerRed.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointRed.x, (int)playerStartPointRed.y);
-        playerRed.GetComponent<Player>().currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
-        
+        playerRed.GetComponent<Player>().startGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
+        playerRed.GetComponent<Player>().currentGrid = playerRed.GetComponent<Player>().startGrid;
+        playerRed.GetComponent<Player>().RefreshLinePath();
+
         playerBlue.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
-        playerBlue.GetComponent<Player>().currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
-        
+        playerBlue.GetComponent<Player>().startGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
+        playerBlue.GetComponent<Player>().currentGrid = playerBlue.GetComponent<Player>().startGrid;
+        playerBlue.GetComponent<Player>().RefreshLinePath();
+
         currentPlayer = playerRed.GetComponent<Player>();
         UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
     }

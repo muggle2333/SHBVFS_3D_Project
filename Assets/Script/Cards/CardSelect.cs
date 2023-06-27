@@ -66,5 +66,4 @@ public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
     }
-
 }

@@ -20,6 +20,7 @@ public class Player : Character
 
     public int Priority;
     public GridObject currentGrid;
+    public GridObject startGrid;
 
     public Dictionary<AcademyType, List<GridObject>> OwnedLandDic = new Dictionary<AcademyType, List<GridObject>>()
 /*    {
@@ -107,5 +108,24 @@ public class Player : Character
     public void UpdatePlayerDate(int[] academyPointEffect, PlayerDataEffect playerDataEffect)
     {
         ChangeAcademyOwnPoint(academyPointEffect);
+    }
+
+    public void RefreshLinePath()
+    {
+        LineRenderer lineRenderer= GetComponentInChildren<LineRenderer>();
+        lineRenderer.transform.rotation = Quaternion.LookRotation(new Vector3(0, -0.5f, 0), lineRenderer.transform.up);
+        lineRenderer.positionCount= 1;
+        lineRenderer.SetPosition(0,transform.position+new Vector3(0,0.1f,0));
+    }
+    public void UpdateLinePath(LandType landType)
+    {
+        LineRenderer lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer.positionCount += 1;
+        Vector3 offset = new Vector3(0,0.1f,0);
+        if(landType==LandType.Mountain)
+        {
+            offset = new Vector3(0, 1.7f, 0);
+        }
+        lineRenderer.SetPosition(lineRenderer.positionCount -1, transform.position+offset);
     }
 }
