@@ -4,13 +4,25 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+public enum GameStage
+{
+    S1, //Control Stage
+    RemoveStage,
+    S2,
+    MoveStage,
+    S3,
+    AttackStage,
+    S4,
+
+}
 public class TurnbasedSystem : MonoBehaviour
 {
+    public GameStage  CurrentGameStage;
     public int RoundNumber = 0;
     public float ControlPhaseTime = 180;
     public float MovingPhaseTime = 15;
     public float AttackPhaseTime = 5;
-    public float PlayerHD = 20;
+    public float PlayerHp = 20;
     public bool IsPlayerDead = false;
     public bool IsControlOvered = true;
     public bool IsEvent1Overed = true;
@@ -42,7 +54,7 @@ public class TurnbasedSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerHD<=0)
+        if(PlayerHp<=0)
         {
             IsPlayerDead = true;
         }
@@ -72,8 +84,10 @@ public class TurnbasedSystem : MonoBehaviour
     #endregion
 
     #region Single phases
+    //S1
     void ControlPhase()
     {
+        CurrentGameStage = GameStage.S1;
         TimerValue = ControlPhaseTime;
         EventsMenu.SetActive(false);
         ControlMenu.SetActive(true);
@@ -84,6 +98,7 @@ public class TurnbasedSystem : MonoBehaviour
 
     void MovePhase()
     {
+        CurrentGameStage = GameStage.MoveStage;
         EventsMenu.SetActive(false);
         MoveMenu.SetActive(true);
         Debug.Log("MovePhase");
@@ -92,6 +107,7 @@ public class TurnbasedSystem : MonoBehaviour
 
     void AttackPhase()
     {
+        CurrentGameStage = GameStage.AttackStage;
         EventsMenu.SetActive(false);
         AttackMenu.SetActive(true);
         Debug.Log("AttackPhase");
@@ -105,6 +121,7 @@ public class TurnbasedSystem : MonoBehaviour
 
     IEnumerator Event2()
     {
+        CurrentGameStage = GameStage.S2;
         ControlMenu.SetActive(false);
         IsControlOvered=true;
         EventsMenu.SetActive(true);
@@ -119,6 +136,7 @@ public class TurnbasedSystem : MonoBehaviour
 
     void Event3()
     {
+        CurrentGameStage = GameStage.S3;
         MoveMenu.SetActive(false);
         EventsMenu.SetActive(true);
         Debug.Log("Event3");
@@ -127,7 +145,8 @@ public class TurnbasedSystem : MonoBehaviour
 
     void Event4()
     {
-        // PlayerHD--;
+        CurrentGameStage = GameStage.S4;
+        // PlayerHp--;
         AttackMenu.SetActive(false);
         EventsMenu.SetActive(true);
         //RoundNumber++;

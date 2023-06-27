@@ -10,11 +10,28 @@ public struct PlayerInteractAuthority
     public bool canOccupy;
     public bool canGacha;
 }
+
+public enum PlayerInteractType
+{
+    Move,
+    Occupy,
+    Build,
+    Gacha,
+}
+
+[Serializable]
+public struct PlayerInteract
+{
+    public PlayerInteractType PlayerInteractType;
+    public GridObject GridObject;
+}
+
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
 
-    [SerializeField] private DrawCardComponent drawCardComponent;
+    private DrawCardComponent drawCardComponent;
+    private ControlStage controlStage;
 
     public void Awake()
     {
@@ -31,12 +48,39 @@ public class PlayerManager : MonoBehaviour
     public void Start()
     {
         drawCardComponent = FindObjectOfType<DrawCardComponent>();
+        controlStage = FindObjectOfType<ControlStage>();
+    }
+
+    public void TryInteract(PlayerInteractType playerInteractType,Player player, GridObject gridObject)
+    {
+        PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObject = gridObject };
+        controlStage.AddPlayerInteract(player, playerInteract);
+        switch(playerInteractType)
+        {
+            case PlayerInteractType.Move:
+                MovePlayer(player, gridObject);break;
+            case PlayerInteractType.Occupy:
+                Occupy(player, gridObject);break;
+            case PlayerInteractType.Build:
+                Build(player, gridObject);break;
+            case PlayerInteractType.Gacha:
+                Gacha(player, gridObject);break;
+
+        }
     }
 
     public void MovePlayer(Player player,GridObject gridObject)
     {
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
         UpdateGridAuthorityData(player, gridObject);
+    }
+
+    public void TryOccupy(Player player, GridObject gridObject)
+    {
+        PlayerInteractType playerInteractType = PlayerInteractType.Occupy;
+        PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObject = gridObject };
+        controlStage.AddPlayerInteract(player, playerInteract);
+        MovePlayer(player, gridObject);
     }
 
     public void Occupy(Player player,GridObject gridObject)
@@ -103,7 +147,7 @@ public class PlayerManager : MonoBehaviour
     public bool CheckGachable(Player player, GridObject gridObject)
     {
         if (player.currentGrid != gridObject) return false;
-        if (!gridObject.isHasBuilding) return false;
+        //if (!gridObject.isHasBuilding) return false;
         if (gridObject.owner == null || gridObject.owner != null && gridObject.owner != player) return false;
         return true;
     }

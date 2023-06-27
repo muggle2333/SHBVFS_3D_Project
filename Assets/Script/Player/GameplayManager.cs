@@ -10,8 +10,10 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private Vector2 playerStartPointBlue;
     [SerializeField] private Transform playerBlue;
     [SerializeField] private Transform playerRed;
-    public Player player;
+    public Player currentPlayer;
 
+
+    private ControlStage controlStage;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -30,28 +32,28 @@ public class GameplayManager : MonoBehaviour
     }
     private void InitializePlayer()
     {
-        //player = FindObjectOfType<Player>();
+        //currentPlayer = FindObjectOfType<Player>();
         playerRed.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointRed.x, (int)playerStartPointRed.y);
         playerRed.GetComponent<Player>().currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
         
         playerBlue.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
         playerBlue.GetComponent<Player>().currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
         
-        player = playerRed.GetComponent<Player>();
-        UIManager.Instance.UpdatePlayerDataUI(player);
+        currentPlayer = playerRed.GetComponent<Player>();
+        UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
     }
 
     public void UpdateSelectPlayer(Player player)
     {
-        this.player = player;
-        UIManager.Instance.UpdatePlayerDataUI(this.player);
+        this.currentPlayer = player;
+        UIManager.Instance.UpdatePlayerDataUI(this.currentPlayer);
     }
     public void ShowGirdObjectData(Vector3 pos)
     {
         GridObject selectedGridObject = GridManager.Instance.GetSelectedGridObject(pos);
         if (selectedGridObject == null) return;
         UIManager.Instance.ShowGridObjectUI(true);
-        PlayerManager.Instance.UpdateGridAuthorityData(player, selectedGridObject);
+        PlayerManager.Instance.UpdateGridAuthorityData(currentPlayer, selectedGridObject);
 
     }
 }
