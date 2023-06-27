@@ -17060,9 +17060,7 @@ MonoBehaviour:
   buildingContainer: {fileID: 1781305110}
   buildingContainerS1: {fileID: 2146290323}
   vfxGridHightlight: {fileID: 7869472198252072756, guid: c74781141ebd0904d838d07861a63a6c, type: 3}
-  vfxGridHightlightS1: {fileID: 0}
-  vfxContainer: {fileID: 963299871}
-  vfxContainerS1: {fileID: 963299871}
+  vfxContainer: {fileID: 1947707924}
   levelIndex: 1
   grid:
     width: 0
