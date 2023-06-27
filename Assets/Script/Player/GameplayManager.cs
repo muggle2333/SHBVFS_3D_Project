@@ -41,6 +41,12 @@ public class GameplayManager : MonoBehaviour
         UIManager.Instance.UpdatePlayerDataUI(player);
     }
 
+    public List<Player> GetPlayer()
+    {
+        List<Player> list = new List<Player>();
+        list.Add(playerRed.GetComponent<Player>());
+        return list;
+    }
     public void UpdateSelectPlayer(Player player)
     {
         this.player = player;

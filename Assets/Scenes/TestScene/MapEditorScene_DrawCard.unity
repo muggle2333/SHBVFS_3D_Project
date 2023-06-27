@@ -3777,7 +3777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handX: 0
   handY: 0
-  interval: 220
+  interval: 250
   cardsArray: []
   cardsList: []
 --- !u!1 &292919465
@@ -15688,6 +15688,7 @@ MonoBehaviour:
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 0
+  Priority: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!1 &964423363
 GameObject:
@@ -22195,6 +22196,7 @@ MonoBehaviour:
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 0
+  Priority: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!114 &1456011318
 MonoBehaviour:
