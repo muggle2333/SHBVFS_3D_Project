@@ -12,11 +12,6 @@ public class ControlStage : MonoBehaviour
 
     public void AddPlayerInteract(Player player,PlayerInteract playerInteract)
     {
-        if (playerInteract.PlayerInteractType == PlayerInteractType.Move)
-        {
-            ShowPath(player, playerInteract.GridObject);
-        }
-
         List<PlayerInteract> list = null;
         if(playerInteractDict.TryGetValue(player, out list))
         {
@@ -41,10 +36,4 @@ public class ControlStage : MonoBehaviour
         
     }
 
-    public void ShowPath(Player player,GridObject target)
-    {
-        LineRenderer lineRenderer = player.GetComponent<LineRenderer>();
-        
-        //lineRenderer.SetPositions()
-    }
 }

@@ -73,6 +73,7 @@ public class PlayerManager : MonoBehaviour
     {
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
         UpdateGridAuthorityData(player, gridObject);
+        player.UpdateLinePath(gridObject.landType);
     }
 
     public void TryOccupy(Player player, GridObject gridObject)
@@ -125,7 +126,8 @@ public class PlayerManager : MonoBehaviour
     public int CheckDistance(Player player, GridObject gridObject)
     {
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter(gridObject.x, gridObject.z);
-        return (int)Math.Ceiling(Vector3.Distance(player.gameObject.transform.position, dirPos) / GridManager.Instance.gridDistance);
+        Vector3 startPos = new Vector3(player.gameObject.transform.position.x, 0, player.gameObject.transform.position.z);
+        return (int)Math.Ceiling(Vector3.Distance(startPos, dirPos) / GridManager.Instance.gridDistance);
         
     }
  
