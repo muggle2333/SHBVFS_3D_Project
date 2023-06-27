@@ -12,8 +12,8 @@ public class CardDataBase : MonoBehaviour
         {
             if(i==0)
             {
-                Debug.Log(Resources.LoadAll<CardSetting>("Cards/BasicCard").Length);
-                AllCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/BasicCard")));
+                Debug.Log(Resources.LoadAll<CardSetting>("Cards/BasicCards").Length);
+                AllCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/BasicCards")));
                 continue;
             }
             AllCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/EventCards/"+ ((AcademyType)i).ToString())));
