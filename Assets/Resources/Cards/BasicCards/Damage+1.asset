@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a68a11223af6ae488a6aae1620975fe, type: 3}
   m_Name: Damage+1
   m_EditorClassIdentifier: 
-  cardId: 0
+  cardId: 3
   cardName: Damage+1
-  description: Damage+1
+  description: Damage+1, increase 1 damage for your next damage
   headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
   academyType: 0
   cardCondition: {fileID: 0}

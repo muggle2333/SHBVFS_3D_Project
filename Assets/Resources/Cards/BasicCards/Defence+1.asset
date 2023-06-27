@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a68a11223af6ae488a6aae1620975fe, type: 3}
   m_Name: Defence+1
   m_EditorClassIdentifier: 
-  cardId: 0
-  cardName: Defence+1
-  description: Defence+1
+  cardId: 2
+  cardName: Defense+1
+  description: Defense+1, till this turn end
   headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
   academyType: 0
   cardCondition: {fileID: 0}
