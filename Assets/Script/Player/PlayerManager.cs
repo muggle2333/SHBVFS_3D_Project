@@ -50,6 +50,15 @@ public class PlayerManager : MonoBehaviour
         drawCardComponent = FindObjectOfType<DrawCardComponent>();
         controlStage = FindObjectOfType<ControlStage>();
     }
+    public void ResetPlayerPosition(Player player)
+    {
+        player.GetComponent<PlayerInteractionComponent>().Move(player.backupGridPos); ;
+    }
+
+    public void BackupPlayerPosition(Player player)
+    {
+        player.backupGridPos= player.currentGrid;
+    }
 
     public void TryInteract(PlayerInteractType playerInteractType,Player player, GridObject gridObject)
     {
@@ -60,15 +69,31 @@ public class PlayerManager : MonoBehaviour
             case PlayerInteractType.Move:
                 MovePlayer(player, gridObject);break;
             case PlayerInteractType.Occupy:
-                Occupy(player, gridObject);break;
+                Occupy(player, gridObject,true);break;
             case PlayerInteractType.Build:
-                Build(player, gridObject);break;
+                Build(player, gridObject,true);break;
             case PlayerInteractType.Gacha:
                 Gacha(player, gridObject);break;
 
         }
     }
 
+    public void Interact(Player player,PlayerInteract playerInteract)
+    {
+        GridObject gridObject = playerInteract.GridObject;
+        switch (playerInteract.PlayerInteractType)
+        {
+            case PlayerInteractType.Move:
+                MovePlayer(player, gridObject); break;
+            case PlayerInteractType.Occupy:
+                Occupy(player, gridObject,false); break;
+            case PlayerInteractType.Build:
+                Build(player, gridObject,false); break;
+            case PlayerInteractType.Gacha:
+                Gacha(player, gridObject); break;
+
+        }
+    }
     public void MovePlayer(Player player,GridObject gridObject)
     {
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
@@ -76,30 +101,24 @@ public class PlayerManager : MonoBehaviour
         player.UpdateLinePath(gridObject.landType);
     }
 
-    public void TryOccupy(Player player, GridObject gridObject)
-    {
-        PlayerInteractType playerInteractType = PlayerInteractType.Occupy;
-        PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObject = gridObject };
-        controlStage.AddPlayerInteract(player, playerInteract);
-        MovePlayer(player, gridObject);
-    }
 
-    public void Occupy(Player player,GridObject gridObject)
+    public void Occupy(Player player,GridObject gridObject,bool isControlStage)
     {
-        gridObject = GridManager.Instance.ManageOwner(gridObject, player);
+        
+        gridObject = GridManager.Instance.ManageOwner(gridObject, player,isControlStage);
         player.OccupyGrid(gridObject);
         UpdateGridAuthorityData(player, gridObject);
     }
 
-    public void Build(Player player,GridObject gridObject)
+    public void Build(Player player,GridObject gridObject, bool isControlStage)
     {
-        gridObject = GridManager.Instance.ManageBuilding(gridObject);
+        gridObject = GridManager.Instance.ManageBuilding(gridObject,isControlStage);
         UpdateGridAuthorityData(player, gridObject);
     }
     
     public void Gacha(Player player, GridObject gridObject)
     {
-        drawCardComponent.DrawCard(player);
+        //drawCardComponent.DrawCard(player);
     }
 
     

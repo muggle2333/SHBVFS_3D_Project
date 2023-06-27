@@ -8,12 +8,14 @@ public class GameplayManager : MonoBehaviour
 
     [SerializeField] private Vector2 playerStartPointRed;
     [SerializeField] private Vector2 playerStartPointBlue;
-    [SerializeField] private Transform playerBlue;
-    [SerializeField] private Transform playerRed;
+    [SerializeField] private Player playerRed;
+    [SerializeField] private Player playerBlue;
+
     public Player currentPlayer;
 
 
     private ControlStage controlStage;
+    private MoveStage moveStage;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,19 +31,19 @@ public class GameplayManager : MonoBehaviour
     private void Start()
     {
         InitializePlayer();
+        controlStage= GetComponent<ControlStage>();
+        moveStage= GetComponent<MoveStage>();
     }
     private void InitializePlayer()
     {
         //currentPlayer = FindObjectOfType<Player>();
         playerRed.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointRed.x, (int)playerStartPointRed.y);
-        playerRed.GetComponent<Player>().startGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
-        playerRed.GetComponent<Player>().currentGrid = playerRed.GetComponent<Player>().startGrid;
-        playerRed.GetComponent<Player>().RefreshLinePath();
+        playerRed.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
+        playerRed.RefreshLinePath();
 
         playerBlue.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
-        playerBlue.GetComponent<Player>().startGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
-        playerBlue.GetComponent<Player>().currentGrid = playerBlue.GetComponent<Player>().startGrid;
-        playerBlue.GetComponent<Player>().RefreshLinePath();
+        playerBlue.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
+        playerBlue.RefreshLinePath();
 
         currentPlayer = playerRed.GetComponent<Player>();
         UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
@@ -66,5 +68,21 @@ public class GameplayManager : MonoBehaviour
         UIManager.Instance.ShowGridObjectUI(true);
         PlayerManager.Instance.UpdateGridAuthorityData(currentPlayer, selectedGridObject);
 
+    }
+
+    public void StartControlStage()
+    {
+        GridManager.Instance.BackupGrid();
+        PlayerManager.Instance.BackupPlayerPosition(playerRed);
+        PlayerManager.Instance.BackupPlayerPosition(playerBlue);
+        controlStage.StartControlStage();
+    }
+
+    public void StartMoveStage()
+    {
+        GridManager.Instance.ResetGrid();
+        PlayerManager.Instance.ResetPlayerPosition(playerRed);
+        PlayerManager.Instance.ResetPlayerPosition(playerBlue);
+        moveStage.StartMoveStage(controlStage.playerInteractDict);
     }
 }

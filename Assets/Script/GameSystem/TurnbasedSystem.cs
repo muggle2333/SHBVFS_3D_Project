@@ -87,30 +87,35 @@ public class TurnbasedSystem : MonoBehaviour
     //S1
     void ControlPhase()
     {
+        Debug.Log("ControlPhase");
         CurrentGameStage = GameStage.S1;
+        GameplayManager.Instance.StartControlStage();
         TimerValue = ControlPhaseTime;
         EventsMenu.SetActive(false);
         ControlMenu.SetActive(true);
-        Debug.Log("ControlPhase");
+
        
     }
 
 
     void MovePhase()
-    {
+    {        
+        Debug.Log("MovePhase");
         CurrentGameStage = GameStage.MoveStage;
+        GameplayManager.Instance.StartMoveStage();
         EventsMenu.SetActive(false);
         MoveMenu.SetActive(true);
-        Debug.Log("MovePhase");
+
        
     }
 
     void AttackPhase()
     {
+        Debug.Log("AttackPhase");
         CurrentGameStage = GameStage.AttackStage;
         EventsMenu.SetActive(false);
         AttackMenu.SetActive(true);
-        Debug.Log("AttackPhase");
+
        
     }
 

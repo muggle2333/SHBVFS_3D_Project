@@ -1,4 +1,4 @@
-using LitJson;
+﻿using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +7,16 @@ using System.IO;
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private GameObject buildingBlue;
+    [SerializeField] private GameObject buildingBlueS1;
     [SerializeField] private Transform buildingContainer;
+    [SerializeField] private Transform buildingContainerS1;
     
     [SerializeField] private GameObject vfxGridHightlight;
     [SerializeField] private Transform vfxContainer;
 
     public int levelIndex =1;
     public Grid<GridObject> grid;
+    public GridObject[,] backupGrid = new GridObject[10,10];
     public GameObject gridUI;
     public float gridDistance;
     public static GridManager Instance { get; private set; }
@@ -35,6 +38,10 @@ public class GridManager : MonoBehaviour
     public void Start()
     {
         
+    }
+    public void Update()
+    {
+       
     }
     public float GetGridSize()
     {
@@ -105,7 +112,7 @@ public class GridManager : MonoBehaviour
         gridUI.SetActive(false);
     }
 
-    public GridObject ManageOwner(GridObject gridObject ,Player player)
+    public GridObject ManageOwner(GridObject gridObject ,Player player,bool isControlStage)
     {
         gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
         if(gridObject.vfxTransform == null)
@@ -113,23 +120,69 @@ public class GridManager : MonoBehaviour
             GameObject vfx = Instantiate(vfxGridHightlight);
             vfx.transform.position = grid.GetWorldPositionCenter(gridObject.x, gridObject.z);
             vfx.transform.SetParent(vfxContainer);
-            gridObject.SetOwner(player, vfx.transform);
+            gridObject.SetOwner(player, vfx.transform,isControlStage);
         }
         else
         {
-            gridObject.SetOwner(player, null);
+            gridObject.SetOwner(player, null, isControlStage);
         }
         
 
         return gridObject;
     }
 
-    public GridObject ManageBuilding(GridObject gridObject)
+    public GridObject ManageBuilding(GridObject gridObject,bool isControlStage)
     {
         gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
-        GameObject building = Instantiate(buildingBlue);
-        building.transform.SetParent(buildingContainer);
-        gridObject.SetBuilding(building);
+        if(isControlStage)
+        {
+            GameObject building = Instantiate(buildingBlueS1);
+            building.transform.SetParent(buildingContainerS1);
+            gridObject.SetBuilding(building);
+        }
+        else
+        {
+            GameObject building = Instantiate(buildingBlue);
+            building.transform.SetParent(buildingContainer);
+            gridObject.SetBuilding(building);
+        }
         return gridObject;
+    }
+    public void BackupGrid()
+    {
+        backupGrid = new GridObject[10, 10];
+        for (int x = 0; x < grid.width; x++)
+        {
+            for (int z = 0; z < grid.length; z++)
+            {
+                backupGrid[x, z] = new GridObject(grid.gridArray[x, z]);
+            }
+        }
+    }
+
+    public void ResetGrid()
+    {
+        //除了visualTransform 都恢复原样
+        for (int x = 0; x < grid.width; x++)
+        {
+            for (int z = 0; z < grid.length; z++)
+            {
+                Transform tmp = grid.gridArray[x, z].vfxTransform;
+                grid.gridArray[x, z] = backupGrid[x,z];
+                grid.gridArray[x, z].vfxTransform = tmp;
+            }
+        }
+        //Clear all the S1 building & vfx
+        for (int i = 0; i < buildingContainerS1.childCount; i++)
+        {
+            Destroy(buildingContainerS1.GetChild(i).gameObject);
+        }
+        for (int x = 0; x < grid.width; x++)
+        {
+            for (int z = 0; z < grid.length; z++)
+            {
+                grid.gridArray[x, z].UpdateVfxColor(false);
+            }
+        }
     }
 }

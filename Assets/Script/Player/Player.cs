@@ -20,7 +20,7 @@ public class Player : Character
 
     public int Priority;
     public GridObject currentGrid;
-    public GridObject startGrid;
+    public GridObject backupGridPos;
 
     public Dictionary<AcademyType, List<GridObject>> OwnedLandDic = new Dictionary<AcademyType, List<GridObject>>()
 /*    {

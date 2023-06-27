@@ -1,3 +1,4 @@
+using Autodesk.Fbx;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,6 +49,7 @@ public class GridObject
     public int x;
     public int z;
 
+    private bool isDiscovered = false;
 
     public GridObject()
     {
@@ -83,6 +85,20 @@ public class GridObject
         isHasBuilding = false;
         canBuild = true;
         canBeOccupied = true;
+    }
+    public GridObject(GridObject tmpObject)
+    {
+        this.grid = tmpObject.grid;
+        this.x = tmpObject.x;
+        this.z = tmpObject.z;
+        owner = tmpObject.owner;
+        academy= tmpObject.academy;
+        landTransform = tmpObject.landTransform;
+        vfxTransform = tmpObject.vfxTransform;
+        this.landType = tmpObject.landType;
+        isHasBuilding = tmpObject.isHasBuilding;
+        canBuild = tmpObject.canBuild;
+        canBeOccupied = tmpObject.canBeOccupied;
     }
     //public void SetGridType()
     //{
@@ -145,33 +161,38 @@ public class GridObject
 
     }
 
-    public void SetOwner(Player player,Transform vfx)
+    public void SetOwner(Player player,Transform vfx,bool isControlStage)
     {
         if(vfx != null)
         {
             vfxTransform = vfx;
         }
         if (owner == player) return;
-        UpdateVfxColor(player);
-        owner= player;
+        owner = player;
+        UpdateVfxColor(isControlStage);
         grid.TriggerGridObjectChanged(x, z);
 
     }
   
-    public void UpdateVfxColor(Player player)
+    public void UpdateVfxColor(bool isControlStage)
     {
-        if(player==null)
+        if(owner==null)
         {
-            vfxTransform.gameObject.SetActive(false);
+            if (vfxTransform == null) return;
+            Color vfxColor = new Color(0, 0, 0, 0f);
+            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = vfxColor;
         }
-        else if(player.Id == PlayerId.RedPlayer)
+        else if(owner.Id == PlayerId.RedPlayer)
         {
-            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+            Color vfxColor = isControlStage?new Color(1, 0, 0, 0.5f): new Color(1, 0, 0, 1);
+            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = vfxColor;
         }
-        else if(player.Id == PlayerId.BluePlayer)
+        else if(owner.Id == PlayerId.BluePlayer)
         {
-            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+            Color vfxColor = isControlStage ? new Color(0, 0,1, 0.5f) : new Color(0, 0, 1, 1);
+            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = vfxColor;
         }
+        
     }
     public void SetBuilding(GameObject building)
     {
@@ -180,6 +201,11 @@ public class GridObject
         int randomRotation = UnityEngine.Random.Range(0, 6);
         landTransform.transform.Rotate(new Vector3(0, 60f * randomRotation, 0));
         landTransform.position = grid.GetWorldPositionCenter(x, z);
+        grid.TriggerGridObjectChanged(x, z);
+    }
+    public void DiscoverLand()
+    {
+        isDiscovered = true;
         grid.TriggerGridObjectChanged(x, z);
     }
 }

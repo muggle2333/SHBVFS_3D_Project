@@ -10,6 +10,10 @@ public class ControlStage : MonoBehaviour
     public List<PlayerInteract> RedPlayerInteractList;
     public List<PlayerInteract> BluePlayerInteractList;
 
+    public void StartControlStage()
+    {
+        playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();
+    }
     public void AddPlayerInteract(Player player,PlayerInteract playerInteract)
     {
         List<PlayerInteract> list = null;
