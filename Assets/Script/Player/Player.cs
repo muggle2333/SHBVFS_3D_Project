@@ -18,6 +18,7 @@ public class Player : Character
     public int MaxActionPoint;
     public int MaxCardCount;
 
+    public int Priority;
     public GridObject currentGrid;
 
     public Dictionary<AcademyType, List<GridObject>> OwnedLandDic = new Dictionary<AcademyType, List<GridObject>>()
@@ -58,10 +59,6 @@ public class Player : Character
 
         MaxActionPoint = ActionPointPerRound * 2;
         MaxCardCount = HP;
-        if (AttackTarget != null)
-        {
-            Attack();
-        }
         if (HP > MaxHP)
         {
             HP = MaxHP;
