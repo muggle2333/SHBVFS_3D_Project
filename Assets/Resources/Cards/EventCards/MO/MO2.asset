@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a68a11223af6ae488a6aae1620975fe, type: 3}
   m_Name: MO2
   m_EditorClassIdentifier: 
-  cardId: 0
-  cardName: MO2
-  description: MO2
+  cardId: 17
+  cardName: Wooden Ox
+  description: You will get 1 free move everytime you spend action point moving.
   headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
-  academyType: 0
+  academyType: 3
   cardCondition: {fileID: 0}
-  effectStage: 0
+  effectStage: 1
   effectDuration: 0
   cardTarget: 0
   effectTime: 0
@@ -32,6 +32,6 @@ MonoBehaviour:
     visionRange: 0
     addBaseCardNum: 0
     freeMoveNum: 0
-  cardType: 0
+  cardType: 3
   cardLevel: 0
   CardBuff: {fileID: 0}
