@@ -69,7 +69,6 @@ public class DrawCardComponent : MonoBehaviour
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
         AllCardCount[AcademyType.Null]++;
         FindObjectOfType<CardSelectManager>().Start();
-        FindObjectOfType<CardSelectManager>().UpdateCardPos();
     }
     public void DrawEventCard()
     {

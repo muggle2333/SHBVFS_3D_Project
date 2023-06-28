@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     private int index;
+    public bool IsInOpreationStage;
     public bool isSelected;
     public float targetY;
     public float formerY;
@@ -49,6 +50,13 @@ public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(IsInOpreationStage)
+        {
+            foreach(var card in FindObjectOfType<CardSelectManager>().cardsList)
+            {
+                card.EndSelect();
+            }
+        }
         if (isSelected) EndSelect();
         else OnSelect();
     }

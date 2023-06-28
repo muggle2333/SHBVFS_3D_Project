@@ -29,7 +29,7 @@ public class CardSelectManager : MonoBehaviour
     {
         for (int i = 0; i < cardsList.Count; i++)
         {
-            if(cardsList[i].isSelected)
+            if (cardsList[i].isSelected)
             {
                 Debug.Log("Card " + cardsList[i].name + " is played.");
                 cardsList[i].EndSelect();
@@ -40,7 +40,21 @@ public class CardSelectManager : MonoBehaviour
         }
         UpdateCardPos();
     }
-
+    public void SelectCards()
+    {
+        for (int i = 0; i < cardsList.Count; i++)
+        {
+            if (cardsList[i].isSelected)
+            {
+                Debug.Log("Card " + cardsList[i].name + " is played.");
+                cardsList[i].EndSelect();
+                Destroy(cardsList[i].gameObject);
+                cardsList.RemoveAt(i);
+                i--;
+            }
+        }
+        UpdateCardPos();
+    }
 
     public void CancelCards()
     {
