@@ -96,6 +96,5 @@ public class DrawCardComponent : MonoBehaviour
 
         
         FindObjectOfType<CardSelectManager>().Start();
-        FindObjectOfType<CardSelectManager>().UpdateCardPos();
     }
 }

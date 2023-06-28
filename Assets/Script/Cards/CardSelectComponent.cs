@@ -6,14 +6,14 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 
-public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
+public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     private int index;
     public bool IsInOpreationStage;
     public bool isSelected;
     public float targetY;
     public float formerY;
-    public float duration;
+    [SerializeField] private float duration;
     public GameObject Info;
     void Start()
     {
@@ -54,6 +54,7 @@ public class CardSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             foreach(var card in FindObjectOfType<CardSelectManager>().cardsList)
             {
+                if (this == card) continue;
                 card.EndSelect();
             }
         }
