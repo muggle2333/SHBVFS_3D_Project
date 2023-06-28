@@ -337,8 +337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSelected: 0
-  targetY: 100
-  formerY: 0
+  targetY: 0
+  formerY: -200
   duration: 0.25
   Info: {fileID: 1743301718821823480}
 --- !u!222 &3639355071388892686

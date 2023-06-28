@@ -15,6 +15,7 @@ public class CardSelectManager : MonoBehaviour
     public List<CardSelect> cardsList; 
     public void Start()
     {
+        offset = cardWidth;
         cardsArray = GetComponentsInChildren<CardSelect>();
         cardsList = new List<CardSelect>(cardsArray);
         if(HasCard())
@@ -40,6 +41,8 @@ public class CardSelectManager : MonoBehaviour
         UpdateCardPos();
     }
 
+    public void 
+
     public void CancelCards()
     {
         for (int i = 0; i < cardsList.Count; i++)
@@ -54,10 +57,8 @@ public class CardSelectManager : MonoBehaviour
 
     public void UpdateCardPos()
     {
-        if (cardsList.Count > 8) 
-            offset = interval / cardsList.Count;
-        else 
-            offset = cardWidth;
+        //offset = interval / cardsList.Count;
+        this.GetComponent<RectTransform>().sizeDelta = new Vector2(cardWidth * cardsList.Count, 100);
         Vector2 startPos = new Vector2(handX - cardsList.Count / 2.0f * offset + offset * 0.5f, handY);
         for (int i = 0; i < cardsList.Count; i++)
         {

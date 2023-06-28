@@ -17834,10 +17834,10 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 0
-  CurrentActionPoint: 0
-  ActionPointPerRound: 0
-  MaxActionPoint: 0
-  MaxCardCount: 0
+  CurrentActionPoint: 999
+  ActionPointPerRound: 3
+  MaxActionPoint: 3
+  MaxCardCount: 3
   Priority: 0
   currentGrid:
     landType: 0
@@ -25103,10 +25103,10 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 1
-  CurrentActionPoint: 0
-  ActionPointPerRound: 0
-  MaxActionPoint: 0
-  MaxCardCount: 0
+  CurrentActionPoint: 3
+  ActionPointPerRound: 3
+  MaxActionPoint: 3
+  MaxCardCount: 3
   Priority: 0
   currentGrid:
     landType: 0

@@ -8,7 +8,7 @@ public class DrawCardComponent : MonoBehaviour
 {
     public PlayerDeck PlayerDeck;
     public GameObject cardPrefab;
-    public GameObject Panel;
+    public GameObject CardContent;
     public GameObject DrawBasicCardAndEventCard;
     public GameObject cardObject;
 
@@ -66,7 +66,7 @@ public class DrawCardComponent : MonoBehaviour
             PlayerDeck.Shuffle(AcademyType.Null);
             AllCardCount[AcademyType.Null] = 0;
         }
-        cardObject = Instantiate(cardPrefab, Panel.transform);
+        cardObject = Instantiate(cardPrefab, CardContent.transform);
         Card = cardObject.GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
         AllCardCount[AcademyType.Null]++;
@@ -91,7 +91,7 @@ public class DrawCardComponent : MonoBehaviour
         }
 
 
-        cardObject = Instantiate(cardPrefab, Panel.transform);
+        cardObject = Instantiate(cardPrefab, CardContent.transform);
         Card = cardObject.GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
         AllCardCount[currentPlayer.currentGrid.academy]++;

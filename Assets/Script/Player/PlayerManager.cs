@@ -119,7 +119,7 @@ public class PlayerManager : MonoBehaviour
     
     public void Gacha(Player player, GridObject gridObject)
     {
-        //drawCardComponent.DrawCard(player);
+        drawCardComponent.DrawCard(player);
     }
 
     
