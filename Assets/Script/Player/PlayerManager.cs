@@ -140,7 +140,7 @@ public class PlayerManager : MonoBehaviour
     public bool CheckMoveable(Player player, GridObject gridObject)
     {
         if (player.currentGrid == gridObject) return false;
-        return CheckDistance(player, gridObject) <= player.Range;
+        return CheckDistance(player, gridObject) <= 1;
     }
 
     public int CheckDistance(Player player, GridObject gridObject)

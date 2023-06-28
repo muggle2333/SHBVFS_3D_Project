@@ -10,7 +10,6 @@ public class DrawCardComponent : MonoBehaviour
     public GameObject cardPrefab;
     public GameObject CardContent;
     public GameObject DrawBasicCardAndEventCard;
-    public GameObject cardObject;
 
     public Card Card;
     public int basicCardCount;
@@ -66,8 +65,7 @@ public class DrawCardComponent : MonoBehaviour
             PlayerDeck.Shuffle(AcademyType.Null);
             AllCardCount[AcademyType.Null] = 0;
         }
-        cardObject = Instantiate(cardPrefab, CardContent.transform);
-        Card = cardObject.GetComponent<Card>();
+        Card = Instantiate(cardPrefab, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
         AllCardCount[AcademyType.Null]++;
         FindObjectOfType<CardSelectManager>().Start();
@@ -83,16 +81,16 @@ public class DrawCardComponent : MonoBehaviour
         }
         if (currentPlayer.currentGrid.isHasBuilding == false)
         {
-            if (Card.cardLevel == CardLevel.Top)
+            if (PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]].cardLevel == CardLevel.Top)
             {
+                AllCardCount[currentPlayer.currentGrid.academy]++;
                 DrawEventCard();
                 return;
             }
         }
 
 
-        cardObject = Instantiate(cardPrefab, CardContent.transform);
-        Card = cardObject.GetComponent<Card>();
+        Card = Instantiate(cardPrefab, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
         AllCardCount[currentPlayer.currentGrid.academy]++;
         Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]-1]);

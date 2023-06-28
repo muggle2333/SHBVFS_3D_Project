@@ -14076,7 +14076,7 @@ Transform:
   - {fileID: 931713192}
   - {fileID: 1565210112}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &861989174
 GameObject:
@@ -14429,7 +14429,7 @@ Transform:
   - {fileID: 1347276436}
   - {fileID: 1243369916}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &880683562
 GameObject:
@@ -15516,6 +15516,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &933371133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 933371134}
+  m_Layer: 0
+  m_Name: BuildingContainer (S1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &933371134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933371133}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &944123218
 GameObject:
   m_ObjectHideFlags: 0
@@ -16556,7 +16587,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingBlue: {fileID: 1523537086631635399, guid: 0b94fe6f2abfe9d42b695b989c5966b9, type: 3}
+  buildingBlueS1: {fileID: 1523537086631635399, guid: b9d60308fcc30f34f9a70e20cfddcadf, type: 3}
   buildingContainer: {fileID: 1781305110}
+  buildingContainerS1: {fileID: 933371134}
   vfxGridHightlight: {fileID: 7869472198252072756, guid: c74781141ebd0904d838d07861a63a6c, type: 3}
   vfxContainer: {fileID: 1947707924}
   levelIndex: 1
@@ -17854,7 +17887,7 @@ MonoBehaviour:
     vfxTransform: {fileID: 0}
     x: 0
     z: 0
-  startGrid:
+  backupGridPos:
     landType: 0
     academy: 1
     meshType: 0
@@ -17897,7 +17930,7 @@ Transform:
   - {fileID: 1217906256}
   - {fileID: 1080817774}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1125699547
 GameObject:
@@ -18290,7 +18323,7 @@ RectTransform:
   - {fileID: 330505427}
   - {fileID: 861989175}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -18463,7 +18496,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1198241467
 GameObject:
@@ -20143,7 +20176,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1297871946
 MonoBehaviour:
@@ -20159,8 +20192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStartPointRed: {x: 4, y: 5}
   playerStartPointBlue: {x: 2, y: 2}
-  playerBlue: {fileID: 1549521145}
-  playerRed: {fileID: 1119179961}
+  playerRed: {fileID: 1119179959}
+  playerBlue: {fileID: 1549521143}
   currentPlayer: {fileID: 0}
 --- !u!114 &1297871947
 MonoBehaviour:
@@ -21176,9 +21209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerDeck: {fileID: 1308010844}
   cardPrefab: {fileID: 1743301719574586815, guid: 16310593ae2fda1418ebd2686a7bda74, type: 3}
-  Panel: {fileID: 287603173}
+  CardContent: {fileID: 287603173}
   DrawBasicCardAndEventCard: {fileID: 646625320}
-  cardObject: {fileID: 0}
   Card: {fileID: 0}
   basicCardCount: 0
   currentPlayer: {fileID: 0}
@@ -25123,7 +25155,7 @@ MonoBehaviour:
     vfxTransform: {fileID: 0}
     x: 0
     z: 0
-  startGrid:
+  backupGridPos:
     landType: 0
     academy: 1
     meshType: 0
@@ -25166,7 +25198,7 @@ Transform:
   - {fileID: 411307303}
   - {fileID: 363047662}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1549899749
 GameObject:
@@ -31581,7 +31613,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1958045860
 GameObject:
