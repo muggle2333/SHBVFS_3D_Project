@@ -32970,6 +32970,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2448498265547551188, guid: b1575745e5d3ce5458b49213251bf0cc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1800
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448498265547551188, guid: b1575745e5d3ce5458b49213251bf0cc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 900
+      objectReference: {fileID: 0}
     - target: {fileID: 2448498265739020845, guid: b1575745e5d3ce5458b49213251bf0cc, type: 3}
       propertyPath: m_Name
       value: CardSystem
@@ -33016,6 +33024,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2448498265739020846, guid: b1575745e5d3ce5458b49213251bf0cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448498266663527322, guid: b1575745e5d3ce5458b49213251bf0cc, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
