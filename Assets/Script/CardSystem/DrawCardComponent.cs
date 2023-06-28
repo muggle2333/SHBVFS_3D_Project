@@ -54,7 +54,6 @@ public class DrawCardComponent : MonoBehaviour
 
             }
             player.CurrentActionPoint--;
-            
         }
     }
 
@@ -82,20 +81,23 @@ public class DrawCardComponent : MonoBehaviour
             PlayerDeck.Shuffle(currentPlayer.currentGrid.academy);
             AllCardCount[currentPlayer.currentGrid.academy] = 0;
         }
+        if (currentPlayer.currentGrid.isHasBuilding == false)
+        {
+            if (Card.cardLevel == CardLevel.Top)
+            {
+                DrawEventCard();
+                return;
+            }
+        }
+
+
         cardObject = Instantiate(cardPrefab, Panel.transform);
         Card = cardObject.GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
         AllCardCount[currentPlayer.currentGrid.academy]++;
         Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]-1]);
 
-        if (currentPlayer.currentGrid.isHasBuilding == false)
-        {
-            if (Card.cardLevel == CardLevel.Top)
-            {
-                Destroy(cardObject);
-                DrawEventCard();
-            }
-        }
+        
         FindObjectOfType<CardSelectManager>().Start();
         FindObjectOfType<CardSelectManager>().UpdateCardPos();
     }
