@@ -41,7 +41,6 @@ public class CardSelectManager : MonoBehaviour
         UpdateCardPos();
     }
 
-    public void 
 
     public void CancelCards()
     {
