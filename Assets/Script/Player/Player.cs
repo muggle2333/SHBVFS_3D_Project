@@ -48,7 +48,7 @@ public class Player : Character
         HP = MaxHP;
         AttackDamage = 1;
         Defence = 0;
-        Range = 1;
+        Range = 10;
         ActionPointPerRound = 3;
 
         List<GridObject> yiLand;

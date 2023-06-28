@@ -52,7 +52,8 @@ public class PlayerManager : MonoBehaviour
     }
     public void ResetPlayerPosition(Player player)
     {
-        player.GetComponent<PlayerInteractionComponent>().Move(player.backupGridPos); ;
+        player.GetComponent<PlayerInteractionComponent>().Move(player.backupGridPos);
+        player.RefreshLinePath();
     }
 
     public void BackupPlayerPosition(Player player)

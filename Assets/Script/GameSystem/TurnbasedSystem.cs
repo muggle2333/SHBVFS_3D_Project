@@ -26,6 +26,7 @@ public class TurnbasedSystem : MonoBehaviour
     public bool IsPlayerDead = false;
     public bool IsControlOvered = true;
     public bool IsEvent1Overed = true;
+    public bool IsMoveOvered = false;
     public bool IsBackAlive = false;
     public GameObject EndMenu;
     public GameObject ControlMenu;
@@ -103,6 +104,7 @@ public class TurnbasedSystem : MonoBehaviour
         Debug.Log("MovePhase");
         CurrentGameStage = GameStage.MoveStage;
         GameplayManager.Instance.StartMoveStage();
+
         EventsMenu.SetActive(false);
         MoveMenu.SetActive(true);
 
@@ -113,6 +115,8 @@ public class TurnbasedSystem : MonoBehaviour
     {
         Debug.Log("AttackPhase");
         CurrentGameStage = GameStage.AttackStage;
+        GameplayManager.Instance.StartAttackStage();
+
         EventsMenu.SetActive(false);
         AttackMenu.SetActive(true);
 
@@ -132,7 +136,7 @@ public class TurnbasedSystem : MonoBehaviour
         EventsMenu.SetActive(true);
         Debug.Log("Event2");
         MovePhase();
-        yield return new WaitForSecondsRealtime(MovingPhaseTime);
+        yield return new WaitUntil(()=>IsMoveOvered);
         Event3();
         AttackPhase();
         yield return new WaitForSecondsRealtime(AttackPhaseTime);

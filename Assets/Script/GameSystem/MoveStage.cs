@@ -38,13 +38,16 @@ public class MoveStage : MonoBehaviour
                     }
                     //Interact 
                     //Debug.Log(priorityList[i].name + " " + playerInteract[0].PlayerInteractType);
-                    PlayerManager.Instance.Interact(priorityList[i], playerInteract[0]);
+
                     yield return new WaitForSeconds(1);
+                    PlayerManager.Instance.Interact(priorityList[i], playerInteract[0]);
+                    
 
                     playerInteract.RemoveAt(0);
                     playerInteractDict[priorityList[i]] = playerInteract;
                 }
             }
         }
+        GameplayManager.Instance.EndMoveStage();
     }
 }
