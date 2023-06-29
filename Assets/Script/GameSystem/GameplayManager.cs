@@ -16,6 +16,11 @@ public class GameplayManager : MonoBehaviour
     private ControlStage controlStage;
     private MoveStage moveStage;
     private AttackStage attackStage;
+    private DiscardStage discardStage;
+    private S2Stage s2Stage;
+    private S3Stage s3Stage;
+    private S4Stage s4Stage;
+
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,8 +37,19 @@ public class GameplayManager : MonoBehaviour
     {
         InitializePlayer();
         controlStage= GetComponent<ControlStage>();
+        discardStage= GetComponent<DiscardStage>();
+        s2Stage= GetComponent<S2Stage>();
         moveStage= GetComponent<MoveStage>();
-        attackStage= GetComponent<AttackStage>();
+        s3Stage = GetComponent<S3Stage>();
+        attackStage = GetComponent<AttackStage>();
+        s4Stage = GetComponent<S4Stage>();
+    }
+    private void Update()
+    {
+        if(playerRed.HP<=0||playerBlue.HP<=0)
+        {
+            TurnbasedSystem.Instance.Pause();
+        }
     }
     private void InitializePlayer()
     {
@@ -76,20 +92,37 @@ public class GameplayManager : MonoBehaviour
         GridManager.Instance.BackupGrid();
         PlayerManager.Instance.BackupPlayerPosition(playerRed);
         PlayerManager.Instance.BackupPlayerPosition(playerBlue);
-        controlStage.StartControlStage();
+        controlStage.StartStage();
     }
 
+    public void StartDiscardStage()
+    {
+        discardStage.StartStage();
+    }
+    public void StartS2Stage()
+    {
+        s2Stage.StartStage();
+    }
     public void StartMoveStage()
     {
         GridManager.Instance.ResetGrid();
         PlayerManager.Instance.ResetPlayerPosition(playerRed);
         PlayerManager.Instance.ResetPlayerPosition(playerBlue);
-        moveStage.StartMoveStage(controlStage.playerInteractDict);
+        moveStage.StartStage(controlStage.playerInteractDict);
     }
 
+    public void StartS3Stage()
+    {
+        s3Stage.StartStage();
+    }
 
     public void StartAttackStage()
     {
         attackStage.StartAttack();
+    }
+
+    public void StartS4Stage()
+    {
+        s4Stage.StartStage() ;
     }
 }
