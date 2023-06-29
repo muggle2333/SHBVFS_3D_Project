@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public enum GameStage
 {
@@ -17,6 +18,7 @@ public enum GameStage
 }
 public class TurnbasedSystem : MonoBehaviour
 {
+    public static TurnbasedSystem Instance { get; private set; }
     public GameStage  CurrentGameStage;
     public int RoundNumber = 0;
     public float ControlPhaseTime = 180;
@@ -33,10 +35,22 @@ public class TurnbasedSystem : MonoBehaviour
     public GameObject MoveMenu;
     public GameObject EventsMenu;
     public GameObject AttackMenu;
+    private TurnbaseUI turnbaseUI;
 
+    private void Awake()
+    {
+        if(Instance!=null&&Instance!=this)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     #region Timer
-    public float TimerValue ;
+    public float timerValue ;
 
     public TextMeshProUGUI Timer;
 
@@ -47,7 +61,9 @@ public class TurnbasedSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TimerValue = ControlPhaseTime;
+        turnbaseUI = FindObjectOfType<TurnbaseUI>();
+
+        timerValue = ControlPhaseTime;
         StartCoroutine("TurnStart");
 
     }
@@ -62,17 +78,19 @@ public class TurnbasedSystem : MonoBehaviour
         EndJudge();
         BackAlive();
        
-        if(TimerValue>0)
+        if(timerValue>0)
         {
-            TimerValue -= Time.deltaTime;
+            timerValue -= Time.deltaTime;
         }
         else
         {
-            TimerValue = 0;
+            timerValue = 0;
         }
-        DisplayTimer(TimerValue);
+        DisplayTimer(timerValue);
 
         Rounds.text = RoundNumber.ToString();
+
+        turnbaseUI.UpdateStageInfo(CurrentGameStage, timerValue, RoundNumber);
     }
     #region One turn
     IEnumerator TurnStart()
@@ -91,7 +109,7 @@ public class TurnbasedSystem : MonoBehaviour
         Debug.Log("ControlPhase");
         CurrentGameStage = GameStage.S1;
         GameplayManager.Instance.StartControlStage();
-        TimerValue = ControlPhaseTime;
+        timerValue = ControlPhaseTime;
         EventsMenu.SetActive(false);
         ControlMenu.SetActive(true);
 
@@ -136,7 +154,7 @@ public class TurnbasedSystem : MonoBehaviour
         EventsMenu.SetActive(true);
         Debug.Log("Event2");
         MovePhase();
-        yield return new WaitUntil(()=>IsMoveOvered);
+        yield return new WaitUntil(()=>CurrentGameStage==GameStage.S2+1);
         Event3();
         AttackPhase();
         yield return new WaitForSecondsRealtime(AttackPhaseTime);
@@ -195,7 +213,7 @@ public class TurnbasedSystem : MonoBehaviour
             timeToDisplay = 0;
         }
 
-        Timer.text = Mathf.FloorToInt(TimerValue) .ToString();
+        Timer.text = Mathf.FloorToInt(timerValue) .ToString();
     }
 
     #endregion
@@ -204,5 +222,10 @@ public class TurnbasedSystem : MonoBehaviour
     {
         StopCoroutine("TurnStart");
         StartCoroutine("Event2");
+    }
+
+    public void TurnToNextStage()
+    {
+        CurrentGameStage += 1;
     }
 }
