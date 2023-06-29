@@ -5,29 +5,36 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 
-public class CardSelectManager : MonoBehaviour, IPointerClickHandler
+public class CardSelectManager : MonoBehaviour
 {
     public bool IsRetracted;
+    public float RetractOffset;
     public float offset;
     public float handX = 0f;
     public float handY = 0f;
     public float cardWidth = 240f;
     public float interval = 300f;
+    public GameObject UpBotton;
+    public GameObject DownBotton;
     [SerializeField] private float upperY;
     [SerializeField] private float lowerY;
     [SerializeField] private float duration;
     public CardSelectComponent[] cardsArray;
-    public List<CardSelectComponent> cardsList; 
-    public void Start()
+    public List<CardSelectComponent> cardsList;
+    private void Awake()
     {
         IsRetracted = false;
         offset = cardWidth;
+        handY = -200f;
+    }
+    public void Start()
+    {
         cardsArray = GetComponentsInChildren<CardSelectComponent>();
         cardsList = new List<CardSelectComponent>(cardsArray);
         if(HasCard())
         {
+            //handY = cardsList[0].formerY;
             UpdateCardPos();
-            handY = cardsList[0].formerY;
         }
     }
 
@@ -91,9 +98,22 @@ public class CardSelectManager : MonoBehaviour, IPointerClickHandler
         return cardsList.Count > 0;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void Retract()
     {
-        if(IsRetracted) transform.DOLocalMoveY(upperY, duration);
-        else transform.DOLocalMoveY(lowerY, duration);
+        handY -= RetractOffset;
+        IsRetracted = true;
+        UpdateCardPos();
+        UpBotton.SetActive(true);
+        DownBotton.SetActive(false);
     }
+
+    public void Disretract()
+    {
+        handY += RetractOffset;
+        IsRetracted = false;
+        UpdateCardPos();
+        DownBotton.SetActive(true);
+        UpBotton.SetActive(false);
+    }
+
 }
