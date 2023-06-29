@@ -6,4 +6,4 @@ using UnityEngine;
 public class CardBuff : ScriptableObject
 {
    
-}
+} 
