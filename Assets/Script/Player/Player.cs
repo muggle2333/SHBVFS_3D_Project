@@ -51,6 +51,7 @@ public class Player : Character
         Range = 1;
         ActionPointPerRound = 3;
 
+
         List<GridObject> yiLand;
         OwnedLandDic.TryGetValue(AcademyType.YI, out yiLand);
         //Debug.Log(yiLand.Count);
@@ -60,11 +61,6 @@ public class Player : Character
 
         MaxActionPoint = ActionPointPerRound * 2;
         MaxCardCount = HP;
-        if (HP > MaxHP)
-        {
-            HP = MaxHP;
-        }
-
     }
 
     public bool OccupyGrid(GridObject gridObject)

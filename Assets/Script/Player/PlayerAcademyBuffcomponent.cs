@@ -33,7 +33,7 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
         {
             academyBuffDict.TryGetValue((AcademyType)i, out academyBuffDataArr);
             academyBuffData = academyBuffDataArr[player.academyOwnedPoint[i]];
-            //academyBuffData???????
+            FindObjectOfType<Caculating>().AcademyBuff(academyBuffData);
         }
         
     }
