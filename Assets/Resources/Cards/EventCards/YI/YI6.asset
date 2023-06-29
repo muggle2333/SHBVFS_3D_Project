@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 9
   cardName: Co advance and retreat
-  description: YI6
+  description: All players lose 1 HP or heal 1 HP
   headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
   academyType: 1
   cardCondition: {fileID: 0}
