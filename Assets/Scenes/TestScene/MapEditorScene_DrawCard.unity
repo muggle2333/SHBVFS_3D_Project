@@ -3715,7 +3715,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9c3c0f3b57b85419bc614bcfe0ebde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  academyBuffDataArr: []
+  academyBuffData:
+    maxHp: 0
+    hpPreRound: 0
+    attackRange: 0
+    attackDamage: 0
+    defense: 0
+    APPerRound: 0
 --- !u!4 &284634034
 Transform:
   m_ObjectHideFlags: 0
@@ -3820,11 +3827,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a954cc7babd5747b047e9c6e51f5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsRetracted: 0
   offset: 0
   handX: 0
   handY: 0
   cardWidth: 240
   interval: 250
+  upperY: 0
+  lowerY: 0
+  duration: 0
   cardsArray: []
   cardsList: []
 --- !u!1 &292919465
