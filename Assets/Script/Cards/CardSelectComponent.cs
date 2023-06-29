@@ -15,9 +15,11 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public float formerY;
     [SerializeField] private float duration;
     public GameObject Info;
+    public CardSelectManager cardSelectManager;
     void Start()
     {
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
+        cardSelectManager = FindObjectOfType<CardSelectManager>();
         isSelected = false;
         duration = 0.25f;
     }
@@ -52,10 +54,14 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         if(IsInOpreationStage)
         {
-            foreach(var card in FindObjectOfType<CardSelectManager>().cardsList)
+            foreach(var card in cardSelectManager.cardsList)
             {
                 if (this == card) continue;
-                card.EndSelect();
+                if(card.isSelected)
+                {
+                    card.EndSelect();
+                    break;
+                }
             }
         }
         if (isSelected) EndSelect();
@@ -68,11 +74,22 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         //transform.SetAsLastSibling();
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
+        cardSelectManager.SelectCount++;
+        cardSelectManager.SelectButton.SetActive(true);
+        cardSelectManager.CancelButton.SetActive(true);
+        Debug.Log(cardSelectManager.SelectCount);
     }
     public void EndSelect()
     {
         //transform.SetSiblingIndex(index);
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
+        cardSelectManager.SelectCount--;
+        if (cardSelectManager.SelectCount == 0)
+        {
+            cardSelectManager.SelectButton.SetActive(false);
+            cardSelectManager.CancelButton.SetActive(false);
+        }
+        Debug.Log(cardSelectManager.SelectCount);
     }
 }
