@@ -48,6 +48,6 @@ public class MoveStage : MonoBehaviour
                 }
             }
         }
-        GameplayManager.Instance.EndMoveStage();
+        TurnbasedSystem.Instance.TurnToNextStage();
     }
 }

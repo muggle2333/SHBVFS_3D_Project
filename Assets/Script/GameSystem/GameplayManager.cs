@@ -13,7 +13,6 @@ public class GameplayManager : MonoBehaviour
 
     public Player currentPlayer;
 
-    private TurnbasedSystem turnbasedSystem;
     private ControlStage controlStage;
     private MoveStage moveStage;
     private AttackStage attackStage;
@@ -35,7 +34,6 @@ public class GameplayManager : MonoBehaviour
         controlStage= GetComponent<ControlStage>();
         moveStage= GetComponent<MoveStage>();
         attackStage= GetComponent<AttackStage>();
-        turnbasedSystem=FindObjectOfType<TurnbasedSystem>();
     }
     private void InitializePlayer()
     {
@@ -89,10 +87,6 @@ public class GameplayManager : MonoBehaviour
         moveStage.StartMoveStage(controlStage.playerInteractDict);
     }
 
-    public void EndMoveStage()
-    {
-        turnbasedSystem.IsMoveOvered = true;
-    }
 
     public void StartAttackStage()
     {
