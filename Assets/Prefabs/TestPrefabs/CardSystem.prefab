@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &825629743503463238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -697,6 +697,8 @@ MonoBehaviour:
   interval: 500
   UpBotton: {fileID: 2479256041630511882}
   DownBotton: {fileID: 7513536321472290937}
+  SelectButton: {fileID: 4164202119701918758}
+  CancelButton: {fileID: 4164202120115445037}
   upperY: 160
   lowerY: -60
   duration: 0.25
@@ -838,7 +840,7 @@ GameObject:
   - component: {fileID: 4164202119701918753}
   - component: {fileID: 4164202119701918752}
   m_Layer: 5
-  m_Name: Discard
+  m_Name: Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -949,7 +951,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4164202119042685852}
         m_TargetAssemblyTypeName: CardSelectManager, Assembly-CSharp
-        m_MethodName: DiscardCards
+        m_MethodName: SelectCards
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1491,7 +1493,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Discard
+  m_Text: Select
 --- !u!1 &4164202120115445037
 GameObject:
   m_ObjectHideFlags: 0

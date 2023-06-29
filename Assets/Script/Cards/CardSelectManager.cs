@@ -16,6 +16,8 @@ public class CardSelectManager : MonoBehaviour
     public float interval = 300f;
     public GameObject UpBotton;
     public GameObject DownBotton;
+    public GameObject SelectButton;
+    public GameObject CancelButton;
     [SerializeField] private float upperY;
     [SerializeField] private float lowerY;
     [SerializeField] private float duration;
@@ -105,6 +107,8 @@ public class CardSelectManager : MonoBehaviour
         UpdateCardPos();
         UpBotton.SetActive(true);
         DownBotton.SetActive(false);
+        SelectButton.SetActive(false);
+        CancelButton.SetActive(false);
     }
 
     public void Disretract()
@@ -114,6 +118,8 @@ public class CardSelectManager : MonoBehaviour
         UpdateCardPos();
         DownBotton.SetActive(true);
         UpBotton.SetActive(false);
+        SelectButton.SetActive(true);
+        CancelButton.SetActive(true);
     }
 
 }
