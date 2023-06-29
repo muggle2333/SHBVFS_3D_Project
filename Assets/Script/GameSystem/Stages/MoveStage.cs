@@ -22,7 +22,7 @@ public class MoveStage : MonoBehaviour
         {
             playerList.Add(playerInteractDict.ElementAt(i).Key);
         }
-        List<Player> priorityList = playerList.OrderBy(x => x.Priority).ToList();
+        List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
 
         while(playerInteractDict.Count!=0)
         {

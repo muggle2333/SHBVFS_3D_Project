@@ -7,6 +7,6 @@ public class GridObjectComponent : MonoBehaviour,IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameplayManager.Instance.ShowGirdObjectData(gameObject.transform.position);
+        GameplayManager.Instance.ShowGirdObjectData(gameObject.transform);
     }
 }

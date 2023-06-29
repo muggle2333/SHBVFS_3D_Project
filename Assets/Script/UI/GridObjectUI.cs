@@ -6,6 +6,13 @@ using UnityEngine.UI;
 
 public class GridObjectUI : MonoBehaviour
 {
+    public const float CAMERA_DEFAULT_FOV = 60f;
+    public const float GRIDOBJECTUI_OFFSET_Y = 300f;
+    public const float GRIDOBJECTUI_X_MAX = 2000f;
+    public const float GRIDOBJECTUI_X_MIN = 0f;
+    public const float GRIDOBJECTUI_Y_MAX =2000f;
+    public const float GRIDOBJECTUI_Y_MIN = 0f;
+
     [SerializeField] private GameObject container;
 
     [SerializeField] private Button moveBtn;
@@ -19,6 +26,7 @@ public class GridObjectUI : MonoBehaviour
     [SerializeField] private TMP_Text buildingText;
 
     private GridObject gridObject;
+    private Transform gridTransform;
     private void Awake()
     {
         moveBtn.onClick.AddListener(() =>
@@ -40,21 +48,46 @@ public class GridObjectUI : MonoBehaviour
         });
 
     }
+    public void Update()
+    {
+        if (gridTransform == null) return;
+        Vector3 pos = new Vector3();
+        pos=Camera.main.WorldToScreenPoint(gridTransform.position)+ new Vector3(0, GRIDOBJECTUI_OFFSET_Y, 0)*Mathf.Log(CAMERA_DEFAULT_FOV, Camera.main.fieldOfView);
+        //ConstrainUI(pos.x, pos.y);
+        //Vector2 worldPosLeftBottom = Camera.main.WorldToScreenPoint(Vector2.zero);
+        //Vector2 worldPosTopRight = Camera.main.WorldToScreenPoint(Vector2.one);
+        //Debug.Log(worldPosTopRight);
+        //Debug.Log(worldPosLeftBottom);
+        //pos = new Vector3(Mathf.Clamp(pos.x, worldPosLeftBottom.x, worldPosTopRight.x),
+        //                                   Mathf.Clamp(pos.y, worldPosLeftBottom.y, worldPosTopRight.y),
+        //                                   pos.z);
+        container.transform.position = pos;
+    }
 
     public void UpdateGridObjectUIData(GridObject gridObject, PlayerInteractAuthority authority)
     {
         this.gridObject = gridObject;
-        academyText.text = gridObject.academy.ToString();
-        if(gridObject.owner!=null)
+
+        if(gridObject.landType != LandType.Plain)
         {
-            ownerText.text = gridObject.owner.Id.ToString();
+            academyText.text = "-----";
+            ownerText.text="-----";
+            buildingText.text="-----";
         }
         else
         {
-            ownerText.text = "null";
+            academyText.text = authority.canKnow? gridObject.academy.ToString() : "UNKNOW";
+            buildingText.text = gridObject.isHasBuilding.ToString();
+            if (gridObject.owner != null)
+            {
+                ownerText.text = gridObject.owner.Id.ToString();
+            }
+            else
+            {
+                ownerText.text = "N0 OWNER";
+            }
         }
-        landBuffText.text = null;
-        buildingText.text = gridObject.isHasBuilding.ToString();
+        //landBuffText.text = null;
 
         //Set the interactive btn
         occupyBtn.interactable = authority.canOccupy;
@@ -64,8 +97,25 @@ public class GridObjectUI : MonoBehaviour
 
     }
 
-    public void ShowGridObjectUI(bool isShow)
+    public void ConstrainUI(float x,float y)
+    {
+        RectTransform rect = container.GetComponent<RectTransform>();
+        float width = rect.sizeDelta.x;
+        float height = rect.sizeDelta.y;
+
+        Vector2 pivot = new Vector2();
+        pivot.x = x + width <= Screen.width ? 0 : 1;
+        pivot.y = y - height >=0 ? 1 : 0;
+        rect.pivot = pivot;
+        Debug.Log(pivot);
+        rect.position = new Vector2(x, y);
+
+    }
+    public void ShowGridObjectUI(bool isShow,Transform gridTrans)
     {
         container.SetActive(isShow);
+        gridTransform = gridTrans;
+        
     }
+
 }

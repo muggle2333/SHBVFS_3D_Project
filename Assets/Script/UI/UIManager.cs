@@ -35,9 +35,9 @@ public class UIManager : MonoBehaviour
         gridObjectUI.UpdateGridObjectUIData(gridObject, authority);
     }
 
-    public void ShowGridObjectUI(bool isShow)
+    public void ShowGridObjectUI(bool isShow,Transform gridPos)
     {
-        gridObjectUI.ShowGridObjectUI(isShow);
+        gridObjectUI.ShowGridObjectUI(isShow,gridPos);
     }
 
 

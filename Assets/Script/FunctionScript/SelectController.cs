@@ -224,7 +224,7 @@ public class SelectController : MonoBehaviour
                 {
                     return;
                 }
-                UIManager.Instance.ShowGridObjectUI(false);
+                UIManager.Instance.ShowGridObjectUI(false,null);
                 TargetRenderer = null;
                 lastTarget = null;
                 if (Selected)

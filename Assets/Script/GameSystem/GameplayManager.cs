@@ -50,6 +50,10 @@ public class GameplayManager : MonoBehaviour
         {
             TurnbasedSystem.Instance.Pause();
         }
+        if (TurnbasedSystem.Instance.CurrentGameStage != GameStage.S1)
+        {
+            UIManager.Instance.ShowGridObjectUI(false,null);
+        }
     }
     private void InitializePlayer()
     {
@@ -78,11 +82,11 @@ public class GameplayManager : MonoBehaviour
         this.currentPlayer = player;
         UIManager.Instance.UpdatePlayerDataUI(this.currentPlayer);
     }
-    public void ShowGirdObjectData(Vector3 pos)
+    public void ShowGirdObjectData(Transform gridTrans)
     {
-        GridObject selectedGridObject = GridManager.Instance.GetSelectedGridObject(pos);
+        GridObject selectedGridObject = GridManager.Instance.GetSelectedGridObject(gridTrans.position);
         if (selectedGridObject == null) return;
-        UIManager.Instance.ShowGridObjectUI(true);
+        UIManager.Instance.ShowGridObjectUI(true,gridTrans);
         PlayerManager.Instance.UpdateGridAuthorityData(currentPlayer, selectedGridObject);
 
     }
@@ -97,6 +101,9 @@ public class GameplayManager : MonoBehaviour
 
     public void StartDiscardStage()
     {
+        GridManager.Instance.ResetGrid();
+        PlayerManager.Instance.ResetPlayerPosition(playerRed);
+        PlayerManager.Instance.ResetPlayerPosition(playerBlue);
         discardStage.StartStage();
     }
     public void StartS2Stage()
@@ -105,9 +112,6 @@ public class GameplayManager : MonoBehaviour
     }
     public void StartMoveStage()
     {
-        GridManager.Instance.ResetGrid();
-        PlayerManager.Instance.ResetPlayerPosition(playerRed);
-        PlayerManager.Instance.ResetPlayerPosition(playerBlue);
         moveStage.StartStage(controlStage.playerInteractDict);
     }
 
@@ -118,7 +122,7 @@ public class GameplayManager : MonoBehaviour
 
     public void StartAttackStage()
     {
-        attackStage.StartAttack();
+        attackStage.StartStage();
     }
 
     public void StartS4Stage()

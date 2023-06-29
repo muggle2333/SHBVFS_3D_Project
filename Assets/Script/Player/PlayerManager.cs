@@ -5,6 +5,7 @@ using UnityEngine;
 
 public struct PlayerInteractAuthority
 {
+    public bool canKnow;
     public bool canMove;
     public bool canBuild;
     public bool canOccupy;
@@ -130,6 +131,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerInteractAuthority CheckPlayerInteractAuthority(Player player, GridObject gridObject)
     {
         PlayerInteractAuthority authority = new PlayerInteractAuthority();
+        authority.canKnow = CheckKnowable(player, gridObject);
         authority.canMove = CheckMoveable(player, gridObject);
         authority.canOccupy = CheckOccupiable(player, gridObject);
         authority.canBuild= CheckBuildable(player, gridObject);
@@ -137,6 +139,10 @@ public class PlayerManager : MonoBehaviour
         return authority;
     }
 
+    public bool CheckKnowable(Player player, GridObject gridObject)
+    {
+        return CheckDistance(player, gridObject) <= player.Range;
+    }
     public bool CheckMoveable(Player player, GridObject gridObject)
     {
         if (player.currentGrid == gridObject) return false;
