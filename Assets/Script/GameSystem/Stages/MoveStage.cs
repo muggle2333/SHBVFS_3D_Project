@@ -9,7 +9,7 @@ public class MoveStage : MonoBehaviour
 
     private List<Player> playerList = new List<Player>();
 
-    public void StartMoveStage(Dictionary<Player, List<PlayerInteract>> playerInteractDict)
+    public void StartStage(Dictionary<Player, List<PlayerInteract>> playerInteractDict)
     { 
         this.playerInteractDict = playerInteractDict;
         playerList = new List<Player>();

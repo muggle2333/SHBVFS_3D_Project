@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class CardSelectManager : MonoBehaviour
 {
+    public int SelectCount;
     public bool IsRetracted;
     public float RetractOffset;
     public float offset;
@@ -25,6 +26,7 @@ public class CardSelectManager : MonoBehaviour
     public List<CardSelectComponent> cardsList;
     private void Awake()
     {
+        SelectCount = 0;
         IsRetracted = false;
         offset = cardWidth;
         handY = -200f;
@@ -102,13 +104,12 @@ public class CardSelectManager : MonoBehaviour
 
     public void Retract()
     {
+        CancelCards();
         handY -= RetractOffset;
         IsRetracted = true;
         UpdateCardPos();
         UpBotton.SetActive(true);
         DownBotton.SetActive(false);
-        SelectButton.SetActive(false);
-        CancelButton.SetActive(false);
     }
 
     public void Disretract()
@@ -118,8 +119,6 @@ public class CardSelectManager : MonoBehaviour
         UpdateCardPos();
         DownBotton.SetActive(true);
         UpBotton.SetActive(false);
-        SelectButton.SetActive(true);
-        CancelButton.SetActive(true);
     }
 
 }

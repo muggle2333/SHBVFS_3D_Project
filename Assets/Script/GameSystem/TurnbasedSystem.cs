@@ -20,21 +20,20 @@ public class TurnbasedSystem : MonoBehaviour
 {
     public static TurnbasedSystem Instance { get; private set; }
     public GameStage  CurrentGameStage;
-    public int RoundNumber = 0;
-    public float ControlPhaseTime = 180;
-    public float MovingPhaseTime = 15;
-    public float AttackPhaseTime = 5;
-    public float PlayerHp = 20;
-    public bool IsPlayerDead = false;
-    public bool IsControlOvered = true;
-    public bool IsEvent1Overed = true;
-    public bool IsMoveOvered = false;
+    public GameStage  CompleteGameStage;
+    public int roundIndex = 0;
+
+    [SerializeField]private float S1PhaseTime = 30;
+    [SerializeField]private float DiscardPhaseTime = 10;
+    [SerializeField]private float S2PhaseTime = 10;
+    [SerializeField]private float MovePhaseTime = 10;
+    [SerializeField]private float S3PhaseTime = 10;
+    [SerializeField]private float AttackPhaseTime = 10;
+    [SerializeField]private float S4PhaseTime = 10;
+
     public bool IsBackAlive = false;
     public GameObject EndMenu;
-    public GameObject ControlMenu;
-    public GameObject MoveMenu;
-    public GameObject EventsMenu;
-    public GameObject AttackMenu;
+
     private TurnbaseUI turnbaseUI;
 
     private void Awake()
@@ -62,8 +61,6 @@ public class TurnbasedSystem : MonoBehaviour
     void Start()
     {
         turnbaseUI = FindObjectOfType<TurnbaseUI>();
-
-        timerValue = ControlPhaseTime;
         StartCoroutine("TurnStart");
 
     }
@@ -71,13 +68,6 @@ public class TurnbasedSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerHp<=0)
-        {
-            IsPlayerDead = true;
-        }
-        EndJudge();
-        BackAlive();
-       
         if(timerValue>0)
         {
             timerValue -= Time.deltaTime;
@@ -86,19 +76,24 @@ public class TurnbasedSystem : MonoBehaviour
         {
             timerValue = 0;
         }
-        DisplayTimer(timerValue);
+        turnbaseUI.UpdateStageInfo(CurrentGameStage, timerValue, roundIndex);
 
-        Rounds.text = RoundNumber.ToString();
-
-        turnbaseUI.UpdateStageInfo(CurrentGameStage, timerValue, RoundNumber);
     }
     #region One turn
     IEnumerator TurnStart()
     {
-        RoundNumber++;
+        roundIndex++;
         ControlPhase();
-        yield return new WaitForSecondsRealtime(ControlPhaseTime);
+        UpdateTimer(S1PhaseTime);
+        yield return new WaitForSecondsRealtime(S1PhaseTime);
+
+        DiscardPhase();
+        UpdateTimer(DiscardPhaseTime);
+        yield return new WaitForSecondsRealtime(DiscardPhaseTime);
+
+
         StartCoroutine("Event2");
+
     }
     #endregion
 
@@ -108,64 +103,73 @@ public class TurnbasedSystem : MonoBehaviour
     {
         Debug.Log("ControlPhase");
         CurrentGameStage = GameStage.S1;
+        CompleteGameStage = GameStage.S4;
         GameplayManager.Instance.StartControlStage();
-        timerValue = ControlPhaseTime;
-        EventsMenu.SetActive(false);
-        ControlMenu.SetActive(true);
 
-       
+        UpdateTimer(S1PhaseTime);
+    
     }
 
+    void DiscardPhase()
+    {
+        CurrentGameStage = GameStage.DiscardStage;
+        CompleteGameStage = CurrentGameStage - 1;
+        GameplayManager.Instance.StartDiscardStage();
+    }
+
+    IEnumerator Event2()
+    {
+        CurrentGameStage = GameStage.S2;
+        CompleteGameStage = CurrentGameStage - 1;
+        UpdateTimer(MovePhaseTime);
+        yield return new WaitForSecondsRealtime(S2PhaseTime);
+
+        MovePhase();
+        yield return new WaitUntil(()=>CurrentGameStage==CompleteGameStage);
+        UpdateTimer(MovePhaseTime);
+        yield return new WaitForSecondsRealtime(MovePhaseTime);
+
+        Event3();
+        UpdateTimer(S3PhaseTime);
+        yield return new WaitForSecondsRealtime(S3PhaseTime);
+
+        AttackPhase();
+        UpdateTimer(AttackPhaseTime);
+        yield return new WaitForSecondsRealtime(AttackPhaseTime);
+
+        Event4();
+        UpdateTimer(S4PhaseTime);
+        yield return new WaitForSecondsRealtime(S4PhaseTime);
+
+        StartCoroutine("TurnStart");
+    }
 
     void MovePhase()
     {        
         Debug.Log("MovePhase");
         CurrentGameStage = GameStage.MoveStage;
+        CompleteGameStage = CurrentGameStage - 1;
         GameplayManager.Instance.StartMoveStage();
-
-        EventsMenu.SetActive(false);
-        MoveMenu.SetActive(true);
-
-       
+      
     }
 
     void AttackPhase()
     {
         Debug.Log("AttackPhase");
         CurrentGameStage = GameStage.AttackStage;
+        CompleteGameStage = CurrentGameStage - 1;
         GameplayManager.Instance.StartAttackStage();
 
-        EventsMenu.SetActive(false);
-        AttackMenu.SetActive(true);
-
-       
     }
 
-    void Event1()
-    {
 
-    }
-
-    IEnumerator Event2()
-    {
-        CurrentGameStage = GameStage.S2;
-        ControlMenu.SetActive(false);
-        IsControlOvered=true;
-        EventsMenu.SetActive(true);
-        Debug.Log("Event2");
-        MovePhase();
-        yield return new WaitUntil(()=>CurrentGameStage==GameStage.S2+1);
-        Event3();
-        AttackPhase();
-        yield return new WaitForSecondsRealtime(AttackPhaseTime);
-        Event4();
-    }
+   
 
     void Event3()
     {
         CurrentGameStage = GameStage.S3;
-        MoveMenu.SetActive(false);
-        EventsMenu.SetActive(true);
+        CompleteGameStage = CurrentGameStage - 1;
+        GameplayManager.Instance.StartS3Stage();
         Debug.Log("Event3");
        
     }
@@ -173,49 +177,12 @@ public class TurnbasedSystem : MonoBehaviour
     void Event4()
     {
         CurrentGameStage = GameStage.S4;
-        // PlayerHp--;
-        AttackMenu.SetActive(false);
-        EventsMenu.SetActive(true);
-        //RoundNumber++;
+        CompleteGameStage = CurrentGameStage - 1;
+        GameplayManager.Instance.StartS4Stage();
         Debug.Log("Event4");
-        StartCoroutine("TurnStart");
         
-       
+        
     }
-    #endregion
-
-    void EndJudge()
-    {
-        //Time.timeScale = 0;
-        if(IsPlayerDead)
-        {
-            Time.timeScale = 0;
-            EndMenu.SetActive(true);
-        }
-    }
-
-    void BackAlive()
-    {
-        if(IsBackAlive)
-        {
-            EndMenu.SetActive(false);
-            Time.timeScale = 1;
-            IsBackAlive = false;
-            IsPlayerDead = false;
-        }
-    }
-
-    #region Display TurnBasedTimer
-   void DisplayTimer(float timeToDisplay)
-    {
-        if(timeToDisplay < 0)
-        {
-            timeToDisplay = 0;
-        }
-
-        Timer.text = Mathf.FloorToInt(timerValue) .ToString();
-    }
-
     #endregion
 
     public void TurnOver()
@@ -224,8 +191,22 @@ public class TurnbasedSystem : MonoBehaviour
         StartCoroutine("Event2");
     }
 
+    public void UpdateTimer(float timer)
+    {
+        timerValue = timer;
+    }
     public void TurnToNextStage()
     {
-        CurrentGameStage += 1;
+        CompleteGameStage += 1;
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1;
     }
 }
