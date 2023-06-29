@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb77eb5e56f5964caf086d86f3ffec8, type: 3}
   m_Name: AcademyBuff_MO
   m_EditorClassIdentifier: 
-  academyType: 1
+  academyType: 3
   academyBuffDatas:
   - maxHp: 0
     hpPreRound: 0
