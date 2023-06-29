@@ -25,6 +25,12 @@ MonoBehaviour:
     attackRange: 0
     attackDamage: 0
     defense: 0
+    APPerRound: 0
+  - maxHp: 0
+    hpPreRound: 0
+    attackRange: 0
+    attackDamage: 0
+    defense: 0
     APPerRound: 1
   - maxHp: 0
     hpPreRound: 0

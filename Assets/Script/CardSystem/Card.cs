@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,24 +31,10 @@ public class Card:MonoBehaviour
     public CardType cardType;
     public CardLevel cardLevel;
     public CardBuff CardBuff;
+    public CardFounction cardFounction;
     void Start()
     {
-        cardId = cardSetting.cardId;
-        cardName.text = cardSetting.cardName;
-        description.text = cardSetting.description;
-        headPicture = cardSetting.headPicture;
-        academyType = cardSetting.academyType;
-        cardCondition = cardSetting.cardCondition;
-        effectStage = cardSetting.effectStage;
-        effectDuration = cardSetting.effectDuration;
-        cardTarget = cardSetting.cardTarget;
-        effectTime = cardSetting.effectTime;
-        academyEffectNum = cardSetting.academyEffectNum;
-        Damage = cardSetting.Damage;
-        playerDataEffect = cardSetting.playerDataEffect;
-        cardType = cardSetting.cardType;
-        cardLevel = cardSetting.cardLevel;
-        CardBuff = cardSetting.CardBuff;
+        UpdateCardData(cardSetting);
     }
 
     public void UpdateCardData(CardSetting cardSetting)
@@ -69,6 +56,7 @@ public class Card:MonoBehaviour
         cardType = cardSetting.cardType;
         cardLevel = cardSetting.cardLevel;
         CardBuff = cardSetting.CardBuff;
+        cardFounction = cardSetting.cardFounction;
     }
     public void ActivateCard()
     {

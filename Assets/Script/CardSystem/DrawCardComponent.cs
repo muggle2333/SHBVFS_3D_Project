@@ -25,14 +25,6 @@ public class DrawCardComponent : MonoBehaviour
             AllCardCount.Add((AcademyType)i,0);
         }
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Debug.Log(AllCardCount[currentPlayer.currentGrid.academy]);
-            Debug.Log(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy].Count);
-        }
-    }
     public void DrawCard(Player player)
     {
         currentPlayer = player;

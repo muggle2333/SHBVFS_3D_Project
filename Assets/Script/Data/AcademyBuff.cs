@@ -19,5 +19,5 @@ public class AcademyBuff : ScriptableObject
 {
     public AcademyType academyType;
 
-    public AcademyBuffData[] academyBuffDatas = new AcademyBuffData[4];
+    public AcademyBuffData[] academyBuffDatas = new AcademyBuffData[5];
 }
