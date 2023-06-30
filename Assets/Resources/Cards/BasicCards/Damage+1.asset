@@ -18,7 +18,7 @@ MonoBehaviour:
   headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
   academyType: 0
   cardCondition: {fileID: 0}
-  effectStage: 0
+  effectStage: 1
   effectDuration: 0
   cardTarget: 0
   effectTime: 0
@@ -28,10 +28,11 @@ MonoBehaviour:
     hp: 0
     actionPoint: 0
     defence: 0
-    attack: 0
+    attack: 1
     visionRange: 0
     addBaseCardNum: 0
     freeMoveNum: 0
   cardType: 0
   cardLevel: 0
   CardBuff: {fileID: 0}
+  cardFounction: {fileID: 0}

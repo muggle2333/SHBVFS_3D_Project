@@ -19,6 +19,9 @@ public class CardSelectManager : MonoBehaviour
     public GameObject DownBotton;
     public GameObject SelectButton;
     public GameObject CancelButton;
+
+    public CardTakeEffect cardTakeEffect;
+
     [SerializeField] private float upperY;
     [SerializeField] private float lowerY;
     [SerializeField] private float duration;
@@ -33,6 +36,7 @@ public class CardSelectManager : MonoBehaviour
     }
     public void Start()
     {
+        cardTakeEffect = FindObjectOfType<CardTakeEffect>();
         cardsArray = GetComponentsInChildren<CardSelectComponent>();
         cardsList = new List<CardSelectComponent>(cardsArray);
         if(HasCard())
@@ -57,7 +61,7 @@ public class CardSelectManager : MonoBehaviour
         }
         UpdateCardPos();
     }
-    public void SelectCards()
+    public void SelectCards(Player player)
     {
         for (int i = 0; i < cardsList.Count; i++)
         {
@@ -65,6 +69,16 @@ public class CardSelectManager : MonoBehaviour
             {
                 Debug.Log("Card " + cardsList[i].name + " is played.");
                 cardsList[i].EndSelect();
+
+                cardTakeEffect.CheckEffectiveStage(cardsList[i].gameObject.GetComponent<Card>());
+                if(cardsList[i].gameObject.GetComponent<Card>().effectStage == EffectStage.Every)
+                {
+                    cardTakeEffect.ImmediateCardTakeEffect(player);
+                }
+                if (cardsList[i].gameObject.GetComponent<Card>().effectStage == EffectStage.S1)
+                {
+                    cardTakeEffect.S1CardTakeEffect(player);
+                }
                 Destroy(cardsList[i].gameObject);
                 cardsList.RemoveAt(i);
                 i--;

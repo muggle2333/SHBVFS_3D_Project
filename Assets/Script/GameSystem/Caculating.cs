@@ -11,7 +11,14 @@ public class Caculating : MonoBehaviour
     protected int academyDefense;
     protected int academyAPPerRound;
 
-    
+    protected int totalAcademyMaxHP;
+    protected int totalAcademyHPPerRound;
+    protected int totalAcademyAttackRange;
+    protected int totalAcademyAttackDamage;
+    protected int totalAcademyDefense;
+    protected int totalAcademyAPPerRound;
+
+
     protected int cardAttackDamage;
     protected int cardDefense;
     protected int cardAttackRange;
@@ -24,9 +31,8 @@ public class Caculating : MonoBehaviour
     protected int totalCardAttackDamage;
     protected int totalCardDefense;
     protected int totalCardAttackRange;
-
-    public int[] academyEffectNum = new int[6];
-
+    
+    protected int[] academyEffectNum = new int[6];
     protected AcademyBuffData AcademyBuffData;
     protected Card CardData; 
 
@@ -38,7 +44,7 @@ public class Caculating : MonoBehaviour
     {
         totalCardAttackRange += card.playerDataEffect.visionRange;
         totalCardDefense += card.playerDataEffect.defence;
-        totalCardAttackDamage += card.playerDataEffect.defence;
+        totalCardAttackDamage += card.playerDataEffect.attack;
 
         academyEffectNum = card.academyEffectNum;
 
@@ -65,23 +71,33 @@ public class Caculating : MonoBehaviour
             academyEffectNum[i] = 0;
         }
     }
-    public void AcademyBuff(AcademyBuffData academyBuffData)
+    public void AcademyBuff(Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict)
     {
-        AcademyBuffData = academyBuffData;
-        TotalAcademyBuff();
+        for(int i = 0; i < 6; i++)
+        {
+            PlayerAcademyBuffDict.TryGetValue((AcademyType)(i + 1), out AcademyBuffData);
+            academyMaxHP += AcademyBuffData.maxHp;
+            academyHPPerRound += AcademyBuffData.hpPreRound;
+            academyAttackRange += AcademyBuffData.attackRange;
+            academyAttackDamage += AcademyBuffData.attackDamage;
+            academyDefense += AcademyBuffData.defense;
+            academyAPPerRound += AcademyBuffData.APPerRound;
+        }
+
+        totalAcademyMaxHP = academyMaxHP;
+        totalAcademyHPPerRound = academyHPPerRound;
+        totalAcademyAttackRange = academyAttackRange;
+        totalAcademyAttackDamage = academyAttackDamage;
+        totalAcademyDefense = academyDefense;
+        totalAcademyAPPerRound = academyAPPerRound;
+
+        academyMaxHP = 0;
+        academyHPPerRound = 0;
+        academyAttackRange = 0;
+        academyAttackDamage = 0;
+        academyDefense = 0;
+        academyAPPerRound = 0;
     }
-
-    public void TotalAcademyBuff()
-    {
-        academyMaxHP = AcademyBuffData.maxHp;
-        academyHPPerRound = AcademyBuffData.hpPreRound;
-        academyAttackRange = AcademyBuffData.attackRange;
-        academyAttackDamage = AcademyBuffData.attackDamage;
-        academyDefense = AcademyBuffData.defense;
-        academyAPPerRound = AcademyBuffData.APPerRound;
-    }
-
-
 
     public void CalaulatPlayerBaseData(Player player)
     {
@@ -91,11 +107,11 @@ public class Caculating : MonoBehaviour
         }
         FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuff(player);
 
-        player.MaxHP = 3 + academyMaxHP;
-        player.AttackDamage = 1 + academyAttackDamage + totalCardAttackDamage;
-        player.Range = 1 + academyAttackRange + totalCardAttackRange;
-        player.Defence = academyDefense + totalCardDefense;
-        player.ActionPointPerRound = 3 + academyAPPerRound;
+        player.MaxHP = 3 + totalAcademyMaxHP;
+        player.AttackDamage = 1 + totalAcademyAttackDamage + totalCardAttackDamage;
+        player.Range = 1 + totalAcademyAttackRange + totalCardAttackRange;
+        player.Defence = totalAcademyDefense + totalCardDefense;
+        player.ActionPointPerRound = 3 + totalAcademyAPPerRound;
 
         
     }
