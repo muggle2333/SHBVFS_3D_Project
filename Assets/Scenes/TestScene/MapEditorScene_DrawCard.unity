@@ -9631,7 +9631,7 @@ MonoBehaviour:
   CurrentGameStage: 0
   CompleteGameStage: 0
   roundIndex: 0
-  S1PhaseTime: 999
+  S1PhaseTime: 30
   DiscardPhaseTime: 5
   S2PhaseTime: 5
   MovePhaseTime: 5
@@ -12851,7 +12851,7 @@ GameObject:
   - component: {fileID: 793467874}
   - component: {fileID: 793467873}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CalculatSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12869,18 +12869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91aeff4ec10a147827f3ad10cad12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  academyMaxHP: 0
-  academyHPPerRound: 0
-  academyAttackRange: 0
-  academyAttackDamage: 0
-  academyDefense: 0
-  academyAPPerRound: 0
-  totalAcademyMaxHP: 0
-  totalAcademyHPPerRound: 0
-  totalAcademyAttackRange: 0
-  totalAcademyAttackDamage: 0
-  totalAcademyDefense: 0
-  totalAcademyAPPerRound: 0
 --- !u!4 &793467874
 Transform:
   m_ObjectHideFlags: 0
@@ -18090,7 +18078,7 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 0
-  CurrentActionPoint: 999
+  CurrentActionPoint: 10
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 3
