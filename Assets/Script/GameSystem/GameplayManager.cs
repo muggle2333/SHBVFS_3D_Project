@@ -31,18 +31,18 @@ public class GameplayManager : MonoBehaviour
         {
             Instance = this;
         }
-
+       
+        controlStage = GetComponent<ControlStage>();
+        discardStage = GetComponent<DiscardStage>();
+        s2Stage = GetComponent<S2Stage>();
+        moveStage = GetComponent<MoveStage>();
+        s3Stage = GetComponent<S3Stage>();
+        attackStage = GetComponent<AttackStage>();
+        s4Stage = GetComponent<S4Stage>();
     }
     private void Start()
     {
         InitializePlayer();
-        controlStage= GetComponent<ControlStage>();
-        discardStage= GetComponent<DiscardStage>();
-        s2Stage= GetComponent<S2Stage>();
-        moveStage= GetComponent<MoveStage>();
-        s3Stage = GetComponent<S3Stage>();
-        attackStage = GetComponent<AttackStage>();
-        s4Stage = GetComponent<S4Stage>();
     }
     private void Update()
     {

@@ -324,6 +324,7 @@ MonoBehaviour:
   cardType: 0
   cardLevel: 0
   CardBuff: {fileID: 0}
+  cardFounction: {fileID: 0}
 --- !u!114 &1169900141954301636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6df17df8ace124f972b5ca858437fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsInOpreationStage: 0
+  IsInOpreationStage: 1
   isSelected: 0
   targetY: 0
   formerY: -200

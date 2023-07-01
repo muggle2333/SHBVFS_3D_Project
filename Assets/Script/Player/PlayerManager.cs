@@ -30,7 +30,7 @@ public struct PlayerInteract
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
-
+    private CardSelectManager cardSelectManager;
     private DrawCardComponent drawCardComponent;
     private ControlStage controlStage;
 
@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
     }
     public void Start()
     {
+        cardSelectManager = FindObjectOfType<CardSelectManager>();
         drawCardComponent = FindObjectOfType<DrawCardComponent>();
         controlStage = FindObjectOfType<ControlStage>();
     }
@@ -189,5 +190,10 @@ public class PlayerManager : MonoBehaviour
     public void EffectPlayer(Player player, int[] academyPointEffect, PlayerDataEffect playerDataEffect)
     {
         
+    }
+
+    public void PlayCard()
+    {
+        cardSelectManager.SelectCards(FindObjectOfType<GameplayManager>().currentPlayer);
     }
 }

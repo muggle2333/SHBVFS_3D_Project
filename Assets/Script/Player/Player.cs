@@ -124,4 +124,5 @@ public class Player : Character
         }
         lineRenderer.SetPosition(lineRenderer.positionCount -1, transform.position+offset);
     }
+
 }
