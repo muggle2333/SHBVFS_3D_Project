@@ -6,6 +6,7 @@ using System.IO;
 
 public class GridManager : MonoBehaviour
 {
+    [SerializeField] private GameObject academyText;
     [SerializeField] private GameObject buildingBlue;
     [SerializeField] private GameObject buildingBlueS1;
     [SerializeField] private Transform buildingContainer;
@@ -37,7 +38,7 @@ public class GridManager : MonoBehaviour
     }
     public void Start()
     {
-        
+
     }
     public void Update()
     {
@@ -48,7 +49,7 @@ public class GridManager : MonoBehaviour
         return grid.GetGridCellSize();
     }
  
-    public static Grid<GridObject> LoadGridData(int levelIndex)
+    public  Grid<GridObject> LoadGridData(int levelIndex)
     {
         //Load Grid Data
 #if UNITY_EDITOR
@@ -86,6 +87,7 @@ public class GridManager : MonoBehaviour
                 if (gridArray[x, z].landType == LandType.Plain)
                 {
                     gridArray[x, z].academy = (AcademyType)Random.Range(1, 6);
+                    ShowVisual(x, z);
                 }
                 else
                 {
@@ -96,6 +98,10 @@ public class GridManager : MonoBehaviour
 
         grid.gridArray = gridArray;
         return grid;
+    }
+    public void ShowVisual(int x,int z)
+    {
+        Instantiate(academyText, grid.GetWorldPositionCenter(x, z), Quaternion.identity);
     }
 
     public GridObject GetSelectedGridObject(Vector3 pointPos)
