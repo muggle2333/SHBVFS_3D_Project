@@ -40,7 +40,6 @@ public class CameraTest : MonoBehaviour
         DragRotation();
         DragMove();
         Scale();
-        //???????
         var position = gameObject.transform.position;
         position = new Vector3(Mathf.Clamp(position.x, CameraMin_X, CameraMax_X),
                                Mathf.Clamp(position.y, CameraMin_Y, CameraMax_Y),
@@ -52,7 +51,7 @@ public class CameraTest : MonoBehaviour
 
     void DragRotation()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(2))
         {
             if (target)
             {
