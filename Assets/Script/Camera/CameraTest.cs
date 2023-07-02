@@ -2,11 +2,12 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
+using UnityEngine.ProBuilder.Shapes;
 
 
 public class CameraTest : MonoBehaviour
 {
-    public Transform target;
+    public Transform target;//rotate center
     public float distance = 10.0f;
     public float CameraMax_X;
     public float CameraMin_X;
@@ -58,7 +59,7 @@ public class CameraTest : MonoBehaviour
                 x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
                 y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
 
-                y = ClampAngle(y, yMinLimit, yMaxLimit);
+                //y = ClampAngle(y, yMinLimit, yMaxLimit);
 
                 var rotation = Quaternion.Euler(y, x, 0);
                 var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;

@@ -33117,7 +33117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53afbc773af8f2d4b8d1ed428acdad3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1067360232}
   distance: 10
   CameraMax_X: 100
   CameraMin_X: -100
