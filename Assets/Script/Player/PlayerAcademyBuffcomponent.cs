@@ -53,9 +53,17 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
         for (int i = 0; i < (int)AcademyType.FA; i++)
         {
             academyBuffDict.TryGetValue((AcademyType)(i+1), out academyBuffDataArr);
-            PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[player.academyOwnedPoint[i]];
+            if (player.academyOwnedPoint[i] <= 4)
+            {
+                PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[player.academyOwnedPoint[i]];
+            }
+            else
+            {
+                PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[4];
+            }
+            
             
         }
-        FindObjectOfType<Caculating>().AcademyBuff(PlayerAcademyBuffDict);
+        FindObjectOfType<Caculating>().AcademyBuff(PlayerAcademyBuffDict,player);
     }
 }

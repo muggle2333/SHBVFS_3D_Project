@@ -34,27 +34,39 @@ public class Caculating : MonoBehaviour
     
     protected int[] academyEffectNum = new int[6];
     protected AcademyBuffData AcademyBuffData;
-    protected Card CardData; 
+    protected Card CardData;
+
+    protected PlayerAcademyBuffcomponent playerAcademyBuffcomponent;
 
      void Start()
     {
-        
+        playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();   
     }
-    public void DelataCardData (Card card)
+    public void DelataCardData (Card card,Player player)
     {
         totalCardAttackRange += card.playerDataEffect.visionRange;
         totalCardDefense += card.playerDataEffect.defence;
         totalCardAttackDamage += card.playerDataEffect.attack;
 
         academyEffectNum = card.academyEffectNum;
+        for(int i = 0; i < 6; i++)
+        {
+            player.academyOwnedPoint[i] += academyEffectNum[i];
+        }
+        
+        playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
 
+        for (int i = 0; i < 6; i++)
+        {
+            player.academyOwnedPoint[i] -= academyEffectNum[i];
+        }
         cardDamage = card.Damage;
         cardAP = card.playerDataEffect.actionPoint;
         cardHP = card.playerDataEffect.hp;
     
     }    
 
-    public void CardDataInitialize()
+    public void CardDataInitialize(Player player)
     {
       
         cardAttackDamage = 0;
@@ -70,8 +82,9 @@ public class Caculating : MonoBehaviour
         {
             academyEffectNum[i] = 0;
         }
+        playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
     }
-    public void AcademyBuff(Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict)
+    public void AcademyBuff(Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict,Player player)
     {
         for(int i = 0; i < 6; i++)
         {
@@ -97,9 +110,11 @@ public class Caculating : MonoBehaviour
         academyAttackDamage = 0;
         academyDefense = 0;
         academyAPPerRound = 0;
+
+        CalculatPlayerBaseData(player);
     }
 
-    public void CalaulatPlayerBaseData(Player player)
+    public void CalculatPlayerBaseData(Player player)
     {
         for (int i = 0; i < player.academyOwnedPoint.Length; i++)
         {
