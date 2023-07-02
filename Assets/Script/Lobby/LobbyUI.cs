@@ -24,7 +24,7 @@ public class LobbyUI : MonoBehaviour
         });
         joinGameBtn.onClick.AddListener(() =>
         {
-            MultiplayerManager.Instance.StartClient();
+            //MultiplayerManager.Instance.StartClient();
         });
         closeBtn.onClick.AddListener(() =>
         {

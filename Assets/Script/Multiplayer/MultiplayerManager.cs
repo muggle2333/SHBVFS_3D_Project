@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Net;
 using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.UI;
+using Unity.Netcode.Transports.UTP;
 using System;
 
 public class MultiplayerManager : NetworkBehaviour
@@ -11,6 +14,8 @@ public class MultiplayerManager : NetworkBehaviour
 
     public event EventHandler OnTryingToJoinGame;
     public event EventHandler OnFailToJoinGame;
+
+    private UnityTransport networkTransport;
 
     private void Awake()
     {
@@ -23,6 +28,10 @@ public class MultiplayerManager : NetworkBehaviour
             Instance= this;
         }
         DontDestroyOnLoad(gameObject);
+    }
+    public void Start()
+    {
+        networkTransport= FindObjectOfType<UnityTransport>();
     }
 
     public void StartHost()
@@ -53,8 +62,9 @@ public class MultiplayerManager : NetworkBehaviour
         //}
     }
 
-    public void StartClient()
+    public void StartClient(string ip)
     {
+        networkTransport.SetConnectionData(ip, 7777);
         OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
         NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartClient();
@@ -64,4 +74,6 @@ public class MultiplayerManager : NetworkBehaviour
     {
         OnFailToJoinGame?.Invoke(this, EventArgs.Empty);
     }
+
+
 }
