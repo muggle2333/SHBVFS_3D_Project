@@ -41,10 +41,14 @@ public class GridObject
     public bool isHasBuilding = false;
     public bool canBuild = true;
     public bool canBeOccupied = true;
+    
+    private Dictionary<Player,bool> playerKnowDict = new Dictionary<Player,bool>();
 
     public Grid<GridObject> grid;
     public Transform landTransform; //place the building
     public Transform vfxTransform;
+
+    private Transform academyVfxTransform;
     
     public int x;
     public int z;
@@ -207,5 +211,37 @@ public class GridObject
     {
         isDiscovered = true;
         grid.TriggerGridObjectChanged(x, z);
+    }
+
+    public void SetAcademyVfx(Transform academyTransform)
+    {
+        academyVfxTransform = academyTransform;
+    }
+
+    public void SetKnowAuthority(Player player)
+    {
+        bool isKnowable = true;
+        if(playerKnowDict.TryGetValue(player,out isKnowable))
+        {
+            playerKnowDict[player] = true;
+        }
+        else
+        {
+            playerKnowDict.Add(player, true);
+        }
+    }
+
+    public bool CheckKnowAuthority(Player player)
+    {
+        bool isKnowable = false;
+        if (playerKnowDict.TryGetValue(player, out isKnowable))
+        {
+            return isKnowable;
+        }
+        else
+        {
+            playerKnowDict.Add(player, false);
+        }
+        return false;
     }
 }

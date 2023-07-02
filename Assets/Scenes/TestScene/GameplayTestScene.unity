@@ -16431,6 +16431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f25b7964832da41bcbfee15f5d6fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  academyText: {fileID: 4674322804664641995, guid: a1c8631e78d32af49baeef196f84517f, type: 3}
   buildingBlue: {fileID: 1523537086631635399, guid: 0b94fe6f2abfe9d42b695b989c5966b9, type: 3}
   buildingBlueS1: {fileID: 1523537086631635399, guid: b9d60308fcc30f34f9a70e20cfddcadf, type: 3}
   buildingContainer: {fileID: 1781305110}

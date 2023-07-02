@@ -38,6 +38,7 @@ public class GridManager : MonoBehaviour
     }
     public void Start()
     {
+        CreateVfx();
 
     }
     public void Update()
@@ -87,7 +88,7 @@ public class GridManager : MonoBehaviour
                 if (gridArray[x, z].landType == LandType.Plain)
                 {
                     gridArray[x, z].academy = (AcademyType)Random.Range(1, 6);
-                    ShowVisual(x, z);
+                    
                 }
                 else
                 {
@@ -99,9 +100,19 @@ public class GridManager : MonoBehaviour
         grid.gridArray = gridArray;
         return grid;
     }
-    public void ShowVisual(int x,int z)
+    public void CreateVfx()
     {
-        Instantiate(academyText, grid.GetWorldPositionCenter(x, z), Quaternion.identity);
+        for (int x = 0; x < grid.width; x++)
+        {
+            for (int z = 0; z < grid.length; z++)
+            {
+                GridObject gridObject = grid.gridArray[x, z];
+                if (gridObject.landType != LandType.Plain) continue;
+                GameObject vfx = Instantiate(academyText, grid.GetWorldPositionCenter(x, z), Quaternion.identity);
+                vfx.transform.SetParent(vfxContainer, false);
+                gridObject.SetAcademyVfx(vfx.transform);
+            }
+        }
     }
 
     public GridObject GetSelectedGridObject(Vector3 pointPos)
