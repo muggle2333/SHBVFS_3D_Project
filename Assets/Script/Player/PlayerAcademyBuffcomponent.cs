@@ -31,7 +31,7 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
     
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -46,7 +46,7 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
         {
             UpdatePlayerAcademyBuff(player);
         }
-    }
+    }*/
 
     public void UpdatePlayerAcademyBuff(Player player)
     {

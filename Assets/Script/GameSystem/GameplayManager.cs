@@ -31,7 +31,8 @@ public class GameplayManager : MonoBehaviour
         {
             Instance = this;
         }
-       
+        
+
         controlStage = GetComponent<ControlStage>();
         discardStage = GetComponent<DiscardStage>();
         s2Stage = GetComponent<S2Stage>();
@@ -108,7 +109,7 @@ public class GameplayManager : MonoBehaviour
     }
     public void StartS2Stage()
     {
-        s2Stage.StartStage();
+        s2Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
     }
     public void StartMoveStage()
     {
