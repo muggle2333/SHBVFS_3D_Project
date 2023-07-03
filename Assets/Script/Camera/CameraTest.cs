@@ -8,7 +8,7 @@ using UnityEngine.ProBuilder.Shapes;
 public class CameraTest : MonoBehaviour
 {
     public Transform target;//rotate center
-    public float distance = 10.0f;
+    public float distance;
     public float CameraMax_X;
     public float CameraMin_X;
     public float CameraMax_Y;
@@ -26,6 +26,7 @@ public class CameraTest : MonoBehaviour
 
     void Start()
     {
+        distance = (transform.position -target.position).magnitude;
         var angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;
@@ -64,7 +65,7 @@ public class CameraTest : MonoBehaviour
 
                 var rotation = Quaternion.Euler(y, x, 0);
                 var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
-
+                target.rotation = rotation;
                 transform.rotation = rotation;
                 transform.position = position;
             }
