@@ -8,19 +8,20 @@ using UnityEngine.ProBuilder.Shapes;
 public class CameraTest : MonoBehaviour
 {
     public Transform target;//rotate center
-    public float distance;
     public float CameraMax_X;
     public float CameraMin_X;
     public float CameraMax_Y;
     public float CameraMin_Y;
     public float CameraMax_Z;
     public float CameraMin_Z;
+
     public Vector2 rotationSpeed = new Vector2(250.0f, 120.0f);
     public Vector2 moveSpeed = new Vector2(20.0f, 20.0f);
 
     float yMinLimit = -20;
     float yMaxLimit = 80;
 
+    private float distance;
     private float x = 0.0f;
     private float y = 0.0f;
 

@@ -33184,7 +33184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 685196437}
-  distance: 20
   CameraMax_X: 100
   CameraMin_X: -100
   CameraMax_Y: 100
@@ -33192,7 +33191,7 @@ MonoBehaviour:
   CameraMax_Z: 100
   CameraMin_Z: -100
   rotationSpeed: {x: 250, y: 120}
-  moveSpeed: {x: 20, y: 20}
+  moveSpeed: {x: 40, y: 40}
 --- !u!1 &2105257262
 GameObject:
   m_ObjectHideFlags: 0
