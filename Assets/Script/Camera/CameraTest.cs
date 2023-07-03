@@ -45,6 +45,7 @@ public class CameraTest : MonoBehaviour
         position = new Vector3(Mathf.Clamp(position.x, CameraMin_X, CameraMax_X),
                                Mathf.Clamp(position.y, CameraMin_Y, CameraMax_Y),
                                Mathf.Clamp(position.z, CameraMin_Z, CameraMax_Z));
+        
         gameObject.transform.position = position;
 
 
@@ -58,8 +59,8 @@ public class CameraTest : MonoBehaviour
             {
                 x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
                 y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
-
-                //y = ClampAngle(y, yMinLimit, yMaxLimit);
+                
+                y = ClampAngle(y, yMinLimit, yMaxLimit);
 
                 var rotation = Quaternion.Euler(y, x, 0);
                 var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
@@ -78,6 +79,7 @@ public class CameraTest : MonoBehaviour
             float y = -Input.GetAxis("Mouse Y") * moveSpeed.y * 0.02f;
             Vector3 pos = new Vector3(x, y, 0.0f);
             transform.Translate(pos);
+            target.transform.Translate(pos);    
         }
     }
 
