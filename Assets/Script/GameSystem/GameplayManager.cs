@@ -118,7 +118,7 @@ public class GameplayManager : MonoBehaviour
 
     public void StartS3Stage()
     {
-        s3Stage.StartStage();
+        s3Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
     }
 
     public void StartAttackStage()
@@ -128,6 +128,6 @@ public class GameplayManager : MonoBehaviour
 
     public void StartS4Stage()
     {
-        s4Stage.StartStage() ;
+        s4Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
     }
 }

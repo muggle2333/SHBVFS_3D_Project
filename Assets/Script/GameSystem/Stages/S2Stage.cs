@@ -5,15 +5,9 @@ using UnityEngine;
 
 public class S2Stage : MonoBehaviour
 {
-    private CardManager cardManager;
     private Dictionary<Player, List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
     private List<Player> playerList = new List<Player>();
     //private Dictionary<Player,>;
-    private void Start()
-    {
-        cardManager = FindObjectOfType<CardManager>();
-        
-    }
     public void StartStage(Dictionary<Player,List<Card>> playerCardListDict)
     {
         playedCardDict = playerCardListDict;

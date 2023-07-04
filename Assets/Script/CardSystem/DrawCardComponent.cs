@@ -42,15 +42,17 @@ public class DrawCardComponent : MonoBehaviour
             else
             {
                 DrawBasicCardAndEventCard.SetActive(true);
-
             }
             player.CurrentActionPoint--;
         }
     }
 
+    public void TryDrawCard(Player player)
+    {
+        
+    }
     public void DrawBasicCard()
     {
-
         DrawBasicCardAndEventCard.SetActive(false);
         if (AllCardCount[AcademyType.Null] > PlayerDeck.AllCardDeck[AcademyType.Null].Count-1)
         {
@@ -79,8 +81,6 @@ public class DrawCardComponent : MonoBehaviour
                 return;
             }
         }
-
-
         Card = Instantiate(cardPrefab, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
         AllCardCount[currentPlayer.currentGrid.academy]++;

@@ -77,7 +77,6 @@ public class PlayerManager : MonoBehaviour
                 Build(player, gridObject,true);break;
             case PlayerInteractType.Gacha:
                 Gacha(player, gridObject);break;
-
         }
     }
 
@@ -94,7 +93,6 @@ public class PlayerManager : MonoBehaviour
                 Build(player, gridObject,false); break;
             case PlayerInteractType.Gacha:
                 Gacha(player, gridObject); break;
-
         }
     }
     public void MovePlayer(Player player,GridObject gridObject)
@@ -121,7 +119,7 @@ public class PlayerManager : MonoBehaviour
     
     public void Gacha(Player player, GridObject gridObject)
     {
-        drawCardComponent.DrawCard(player);
+        drawCardComponent.TryDrawCard(player);
     }
 
     

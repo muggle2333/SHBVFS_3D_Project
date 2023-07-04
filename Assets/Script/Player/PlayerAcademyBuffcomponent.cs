@@ -61,8 +61,6 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
             {
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[4];
             }
-            
-            
         }
         FindObjectOfType<Caculating>().AcademyBuff(PlayerAcademyBuffDict,player);
     }
