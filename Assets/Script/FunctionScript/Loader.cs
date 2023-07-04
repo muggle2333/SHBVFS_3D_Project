@@ -9,10 +9,10 @@ public static class Loader
     public enum Scene
     {
         MainMenuScene,
-        GameScene,
+        GameplayScene,
         LoadingScene,
         LobbyScene,
-        CharacterSelectedScene,
+        WaitRoomScene,
     }
 
     private static Scene targetScene;
@@ -25,6 +25,7 @@ public static class Loader
 
     public static void LoadNetwork(Scene scene)
     {
+        targetScene = scene;
         NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
     }
     

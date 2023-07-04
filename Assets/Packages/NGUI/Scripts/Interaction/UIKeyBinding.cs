@@ -105,7 +105,7 @@ public class UIKeyBinding : MonoBehaviour
 	protected virtual void OnDisable () { list.Remove(this); }
 
 	/// <summary>
-	/// If we're bound to an input field, subscribe to its Submit notification.
+	/// If we're bound to an input field, subscribe to its Submit notificationPanel.
 	/// </summary>
 
 #if TNET

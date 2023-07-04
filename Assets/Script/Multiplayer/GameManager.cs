@@ -5,11 +5,12 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public event EventHandler OnLoalPlayerChanged;
+    private Dictionary<ulong, bool> playerReadyDictionary;
+    public event EventHandler OnLocalPlayerChanged;
     private enum GameState
     {
         WaitingToStart,
@@ -20,20 +21,41 @@ public class GameManager : MonoBehaviour
 
     private GameState gameState = GameState.WaitingToStart;
     private bool isLocalPlayerReady = false;
+    private void Awake()
+    {
+        Instance= this;
+        DontDestroyOnLoad(gameObject);
+        playerReadyDictionary = new Dictionary<ulong, bool>();
+    }
     private void GameInput_OnInteractAction()
     {
         if(gameState == GameState.WaitingToStart)
         {
             isLocalPlayerReady= true;
-            SetPlyaerReadyServerRpc();
-            OnLoalPlayerChanged?.Invoke(this,EventArgs.Empty);
+            SetPlayerReadyServerRpc();
+            OnLocalPlayerChanged?.Invoke(this,EventArgs.Empty);
         }
     }
 
     [ServerRpc(RequireOwnership =false)]
-    private void SetPlyaerReadyServerRpc(ServerRpcParams serverRpcParams=default)
+    public void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams=default)
     {
-    
+        playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
+
+        bool isAllReady = true;
+        foreach(ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            if (!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
+            {
+                isAllReady= false;
+                break;
+            }
+        }
+        if(isAllReady)
+        {
+            gameState = GameState.CountdownToStart;
+            Loader.LoadNetwork(Loader.Scene.GameplayScene);
+        }
     }
 
 

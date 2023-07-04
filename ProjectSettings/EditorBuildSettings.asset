@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/NoGameplayScene/MainMenuScene.unity
+    guid: 90cacf82d047bf945ad3d1826f22e17e
   - enabled: 0
     path: Assets/Scenes/TestScene/MultiplayerTestScene.unity
     guid: 474b89c66cefb6646ac4bd472fecef70
@@ -15,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene/GameplayTestScene.unity
     guid: d217a8099f06c0d4980c2cfec9d389dd
   - enabled: 1
-    path: Assets/Scenes/NoGameplayScene/MainMenuScene.unity
-    guid: 90cacf82d047bf945ad3d1826f22e17e
+    path: Assets/Scenes/NoGameplayScene/WaitRoomScene.unity
+    guid: 5e73bb67be4bedb478517bec8970e545
+  - enabled: 1
+    path: Assets/Scenes/NoGameplayScene/GameplayScene.unity
+    guid: ebd6f9135a954cf44a995d87b45a024a
   m_configObjects: {}

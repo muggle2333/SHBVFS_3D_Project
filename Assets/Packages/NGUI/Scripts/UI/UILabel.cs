@@ -1219,7 +1219,7 @@ public class UILabel : UIWidget
 	/// <summary>
 	/// Notification called when the Unity's font's texture gets rebuilt.
 	/// Unity's font has a nice tendency to simply discard other characters when the texture's dimensions change.
-	/// By requesting them inside the notification callback, we immediately force them back in.
+	/// By requesting them inside the notificationPanel callback, we immediately force them back in.
 	/// Originally I was subscribing each label to the font individually, but as it turned out
 	/// mono's delegate system causes an insane amount of memory allocations when += or -= to a delegate.
 	/// So... queue yet another work-around.
