@@ -49,8 +49,6 @@ public class CameraTest : MonoBehaviour
                                Mathf.Clamp(position.z, CameraMin_Z, CameraMax_Z));
         
         gameObject.transform.position = position;
-
-
     }
 
     void DragRotation()

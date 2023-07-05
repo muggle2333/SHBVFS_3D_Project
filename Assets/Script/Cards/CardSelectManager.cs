@@ -68,7 +68,7 @@ public class CardSelectManager : MonoBehaviour
             if (cardsList[i].isSelected)
             {
                 Debug.Log("Card " + cardsList[i].name + " is played.");
-                cardsList[i].EndSelect();
+                //cardsList[i].EndSelect();
 
                 cardTakeEffect.AddPlayedCard(cardsList[i].gameObject.GetComponent<Card>(),player);
                 if(cardsList[i].gameObject.GetComponent<Card>().effectStage == EffectStage.Every)
@@ -79,11 +79,11 @@ public class CardSelectManager : MonoBehaviour
                 {
                     cardTakeEffect.S1CardTakeEffect(player);
                 }
-                //StartCoroutine(playCard());
-                Destroy(cardsList[i].gameObject); 
+                //StartCoroutine(playCardAnimation(cardsList[i]));
+                //Destroy(cardsList[i].gameObject);
+                cardsList[i].Interactable = false;
                 cardsList.RemoveAt(i);
                 i--;
-
             }
         }
         UpdateCardPos();
@@ -136,10 +136,13 @@ public class CardSelectManager : MonoBehaviour
         DownBotton.SetActive(true);
         UpBotton.SetActive(false);
     }
-    public IEnumerator playCard()
-    {
-        yield return new WaitForSeconds(1f);
-    }
+
+    //public IEnumerator playCardAnimation(CardSelectComponent card)
+    //{
+    //    card.transform.DOLocalMove(new Vector3(0, 450, 0), 0.4f);
+    //    yield return new WaitForSeconds(1f);
+    //    Destroy(card.gameObject);
+    //}
+
 
 }
-

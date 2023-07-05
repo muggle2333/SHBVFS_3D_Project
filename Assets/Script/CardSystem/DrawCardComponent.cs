@@ -64,7 +64,7 @@ public class DrawCardComponent : MonoBehaviour
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
         AllCardCount[AcademyType.Null]++;
-        Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.Start();
     }
