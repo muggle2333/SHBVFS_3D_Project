@@ -15891,7 +15891,7 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 0
-  CurrentActionPoint: 3
+  CurrentActionPoint: 99
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 10
@@ -29468,7 +29468,7 @@ MonoBehaviour:
   CurrentGameStage: 0
   CompleteGameStage: 0
   roundIndex: 0
-  S1PhaseTime: 10
+  S1PhaseTime: 999
   DiscardPhaseTime: 5
   S2PhaseTime: 5
   MovePhaseTime: 5

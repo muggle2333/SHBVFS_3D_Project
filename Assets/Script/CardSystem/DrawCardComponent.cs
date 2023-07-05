@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class DrawCardComponent : MonoBehaviour
 {
+    public Canvas parentCanvas;
     public PlayerDeck PlayerDeck;
     public GameObject cardPrefab;
     public GameObject CardContent;
@@ -59,10 +60,10 @@ public class DrawCardComponent : MonoBehaviour
             PlayerDeck.Shuffle(AcademyType.Null);
             AllCardCount[AcademyType.Null] = 0;
         }
-        Card = Instantiate(cardPrefab, CardContent.transform).GetComponent<Card>();
+        Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
         AllCardCount[AcademyType.Null]++;
-        FindObjectOfType<CardSelectManager>().Start();
+        PlayerManager.Instance.cardSelectManager.Start();
     }
     public void DrawEventCard()
     {
@@ -81,12 +82,25 @@ public class DrawCardComponent : MonoBehaviour
                 return;
             }
         }
-        Card = Instantiate(cardPrefab, CardContent.transform).GetComponent<Card>();
+        Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
         AllCardCount[currentPlayer.currentGrid.academy]++;
         Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]-1]);
+        PlayerManager.Instance.cardSelectManager.Start();
+    }
 
-        
-        FindObjectOfType<CardSelectManager>().Start();
+    public Vector3 GetScreenPosition(GameObject target)
+    {
+        RectTransform canvasRtm = parentCanvas.GetComponent<RectTransform>();
+        float width = canvasRtm.sizeDelta.x;
+        float height = canvasRtm.sizeDelta.y;
+        Vector3 pos = Camera.main.WorldToScreenPoint(target.transform.position);
+        pos.x *= width / Screen.width;
+        pos.y *= height / Screen.height;
+        pos.x -= width * 0.5f;
+        pos.y -= height * 0.5f;
+        pos.x += 950;
+        pos.y += 450;
+        return pos;
     }
 }

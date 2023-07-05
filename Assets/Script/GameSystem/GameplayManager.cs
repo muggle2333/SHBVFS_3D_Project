@@ -130,4 +130,6 @@ public class GameplayManager : MonoBehaviour
     {
         s4Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
     }
+
+
 }

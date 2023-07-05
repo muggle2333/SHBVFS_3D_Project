@@ -785,7 +785,7 @@ Transform:
   - {fileID: 4164202119351235544}
   - {fileID: 1152004960}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4164202119351235551
 GameObject:
@@ -1053,6 +1053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239a8ea90cf009e43861fb3a57bceb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentCanvas: {fileID: 4164202118832277108}
   PlayerDeck: {fileID: 4164202119457475384}
   cardPrefab: {fileID: 1743301719574586815, guid: 16310593ae2fda1418ebd2686a7bda74, type: 3}
   CardContent: {fileID: 4164202119042685842}
