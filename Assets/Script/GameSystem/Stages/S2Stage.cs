@@ -12,10 +12,10 @@ public class S2Stage : MonoBehaviour
     {
         playedCardDict = playerCardListDict;
         playerList = new List<Player>();
-        StartCoroutine("S1CardTakeEffect");
+        StartCoroutine("S2CardTakeEffect");
 
     }
-    IEnumerator S1CardTakeEffect()
+    IEnumerator S2CardTakeEffect()
     {
         for (int i = 0; i < playedCardDict.Count; i++)
         {

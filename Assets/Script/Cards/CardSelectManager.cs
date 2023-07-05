@@ -79,7 +79,7 @@ public class CardSelectManager : MonoBehaviour
                 {
                     cardTakeEffect.S1CardTakeEffect(player);
                 }
-                Destroy(cardsList[i].gameObject);
+                Destroy(cardsList[i].gameObject); 
                 cardsList.RemoveAt(i);
                 i--;
             }

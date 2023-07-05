@@ -32,7 +32,7 @@ public struct PlayerInteract
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
-    private CardSelectManager cardSelectManager;
+    public CardSelectManager cardSelectManager;
     private DrawCardComponent drawCardComponent;
     private ControlStage controlStage;
 
@@ -207,6 +207,6 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayCard()
     {
-        cardSelectManager.SelectCards(FindObjectOfType<GameplayManager>().currentPlayer);
+        cardSelectManager.SelectCards(GameplayManager.Instance.currentPlayer);
     }
 }

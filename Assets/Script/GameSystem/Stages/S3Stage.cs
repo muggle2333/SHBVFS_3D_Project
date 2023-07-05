@@ -12,10 +12,10 @@ public class S3Stage : MonoBehaviour
     {
         playedCardDict = playerCardListDict;
         playerList = new List<Player>();
-        StartCoroutine("S1CardTakeEffect");
+        StartCoroutine("S3CardTakeEffect");
 
     }
-    IEnumerator S1CardTakeEffect()
+    IEnumerator S3CardTakeEffect()
     {
         for (int i = 0; i < playedCardDict.Count; i++)
         {
