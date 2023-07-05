@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
 
     private Dictionary<ulong, bool> playerReadyDictionary;
     public event EventHandler OnLocalPlayerChanged;
-    private enum GameState
+    private enum WholeGameState
     {
         WaitingToStart,
         CountdownToStart,
@@ -19,7 +19,7 @@ public class GameManager : NetworkBehaviour
         GameOver,
     }
 
-    private GameState gameState = GameState.WaitingToStart;
+    private WholeGameState gameState = WholeGameState.WaitingToStart;
     private bool isLocalPlayerReady = false;
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class GameManager : NetworkBehaviour
     }
     private void GameInput_OnInteractAction()
     {
-        if(gameState == GameState.WaitingToStart)
+        if(gameState == WholeGameState.WaitingToStart)
         {
             isLocalPlayerReady= true;
             SetPlayerReadyServerRpc();
@@ -53,14 +53,16 @@ public class GameManager : NetworkBehaviour
         }
         if(isAllReady)
         {
-            gameState = GameState.CountdownToStart;
-            Loader.LoadNetwork(Loader.Scene.GameplayScene);
+            gameState = WholeGameState.CountdownToStart;
+           
         }
     }
 
 
     public bool IsWaitingToStart()
     {
-        return gameState == GameState.WaitingToStart;
+        return gameState == WholeGameState.WaitingToStart;
     }
+
+    
 }
