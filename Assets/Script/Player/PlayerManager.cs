@@ -207,6 +207,6 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayCard()
     {
-        cardSelectManager.SelectCards(GameplayManager.Instance.currentPlayer);
+        cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
     }
 }

@@ -61,7 +61,7 @@ public class CardSelectManager : MonoBehaviour
         }
         UpdateCardPos();
     }
-    public void SelectCards(Player player)
+    public void PlayCards(Player player)
     {
         for (int i = 0; i < cardsList.Count; i++)
         {
@@ -83,6 +83,7 @@ public class CardSelectManager : MonoBehaviour
                 Destroy(cardsList[i].gameObject); 
                 cardsList.RemoveAt(i);
                 i--;
+
             }
         }
         UpdateCardPos();

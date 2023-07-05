@@ -14,7 +14,7 @@ public class GamePlayUI : MonoBehaviour
     {
         playCard.onClick.AddListener(() =>
         {
-            PlayerManager.Instance.cardSelectManager.SelectCards(GameplayManager.Instance.currentPlayer);
+            PlayerManager.Instance.cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
         });
         cancel.onClick.AddListener(() =>
         {
