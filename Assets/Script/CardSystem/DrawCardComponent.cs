@@ -47,7 +47,7 @@ public class DrawCardComponent : MonoBehaviour
         }
     }
 
-    public void TryDrawCard(Player player)
+    public void TryDrawCard()
     {
         
     }
