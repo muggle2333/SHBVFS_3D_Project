@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class DrawCardComponent : MonoBehaviour
 {
@@ -63,6 +64,8 @@ public class DrawCardComponent : MonoBehaviour
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
         AllCardCount[AcademyType.Null]++;
+        Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.Start();
     }
     public void DrawEventCard()
@@ -86,6 +89,8 @@ public class DrawCardComponent : MonoBehaviour
         Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
         AllCardCount[currentPlayer.currentGrid.academy]++;
         Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]-1]);
+        Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.Start();
     }
 
