@@ -274,7 +274,7 @@ public class UIPopupList : UIWidgetContainer
 	[Tooltip("Whether the selection will be persistent even after the popup list is closed. By default the selection is " +
 		"cleared when the popup is closed so that the same selection can be chosen again the next time the popup list is opened. " +
 		"If enabled, the selection will persist, but selecting the same choice in succession will not result in the onChange " +
-		"notification being triggered more than once.")]
+		"notificationPanel being triggered more than once.")]
 	public bool keepValue = false;
 
 	[System.NonSerialized] protected GameObject mSelection;
@@ -286,7 +286,7 @@ public class UIPopupList : UIWidgetContainer
 	[HideInInspector][SerializeField] float textScale = 0f;
 
 	// This functionality is no longer needed as the same can be achieved by choosing a
-	// OnValueChange notification targeting a label's SetCurrentSelection function.
+	// OnValueChange notificationPanel targeting a label's SetCurrentSelection function.
 	// If your code was list.textLabel = myLabel, change it to:
 	// EventDelegate.Add(list.onChange, lbl.SetCurrentSelection);
 	[HideInInspector][SerializeField] UILabel textLabel;
@@ -517,7 +517,7 @@ public class UIPopupList : UIWidgetContainer
 	[System.NonSerialized] protected bool mExecuting = false;
 
 	/// <summary>
-	/// Trigger all event notification callbacks.
+	/// Trigger all event notificationPanel callbacks.
 	/// </summary>
 
 	protected void TriggerCallbacks ()

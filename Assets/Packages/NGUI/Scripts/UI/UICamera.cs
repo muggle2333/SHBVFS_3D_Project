@@ -50,7 +50,7 @@ public class UICamera : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Whether the touch event will be sending out the OnClick notification at the end.
+	/// Whether the touch event will be sending out the OnClick notificationPanel at the end.
 	/// </summary>
 
 	[DoNotObfuscateNGUI] public enum ClickNotification
@@ -329,7 +329,7 @@ public class UICamera : MonoBehaviour
 	public float mouseDragThreshold = 4f;
 
 	/// <summary>
-	/// How far the mouse is allowed to move in pixels before it's no longer considered for click events, if the click notification is based on delta.
+	/// How far the mouse is allowed to move in pixels before it's no longer considered for click events, if the click notificationPanel is based on delta.
 	/// </summary>
 
 	public float mouseClickThreshold = 10f;
@@ -341,7 +341,7 @@ public class UICamera : MonoBehaviour
 	public float touchDragThreshold = 40f;
 
 	/// <summary>
-	/// How far the touch is allowed to move in pixels before it's no longer considered for click events, if the click notification is based on delta.
+	/// How far the touch is allowed to move in pixels before it's no longer considered for click events, if the click notificationPanel is based on delta.
 	/// </summary>
 
 	public float touchClickThreshold = 40f;
@@ -1903,7 +1903,7 @@ public class UICamera : MonoBehaviour
 	static int mNotifying = 0;
 
 	/// <summary>
-	/// Generic notification function. Used in place of SendMessage to shorten the code and allow for more than one receiver.
+	/// Generic notificationPanel function. Used in place of SendMessage to shorten the code and allow for more than one receiver.
 	/// </summary>
 
 	static public void Notify (GameObject go, string funcName, object obj)
@@ -2737,7 +2737,7 @@ public class UICamera : MonoBehaviour
 
 				if (isDisabled)
 				{
-					// If the notification status has already been disabled, keep it as such
+					// If the notificationPanel status has already been disabled, keep it as such
 					currentTouch.clickNotification = ClickNotification.None;
 				}
 				else if (currentTouch.clickNotification == ClickNotification.BasedOnDelta && click < mag)
@@ -2779,7 +2779,7 @@ public class UICamera : MonoBehaviour
 				Notify(currentTouch.dragged, "OnDragEnd", null);
 			}
 
-			// Send the notification of a touch ending
+			// Send the notificationPanel of a touch ending
 			if (onPress != null) onPress(currentTouch.pressed, false);
 			Notify(currentTouch.pressed, "OnPress", false);
 
@@ -2814,7 +2814,7 @@ public class UICamera : MonoBehaviour
 				currentTouch.clickNotification != ClickNotification.None &&
 				currentTouch.totalDelta.sqrMagnitude < drag))
 			{
-				// If the touch should consider clicks, send out an OnClick notification
+				// If the touch should consider clicks, send out an OnClick notificationPanel
 				if (currentTouch.clickNotification != ClickNotification.None && currentTouch.pressed == currentTouch.current)
 				{
 					ShowTooltip(null);
@@ -2835,7 +2835,7 @@ public class UICamera : MonoBehaviour
 			}
 			else if (currentTouch.dragStarted) // The button/touch was released on a different object
 			{
-				// Send a drop notification (for drag & drop)
+				// Send a drop notificationPanel (for drag & drop)
 				if (onDrop != null) onDrop(currentTouch.current, currentTouch.dragged);
 				Notify(currentTouch.current, "OnDrop", currentTouch.dragged);
 			}

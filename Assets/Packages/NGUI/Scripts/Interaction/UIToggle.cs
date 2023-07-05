@@ -22,7 +22,7 @@ public class UIToggle : UIWidgetContainer
 	static public BetterList<UIToggle> list = new BetterList<UIToggle>();
 
 	/// <summary>
-	/// Current toggle that sent a state change notification.
+	/// Current toggle that sent a state change notificationPanel.
 	/// </summary>
 
 	static public UIToggle current;

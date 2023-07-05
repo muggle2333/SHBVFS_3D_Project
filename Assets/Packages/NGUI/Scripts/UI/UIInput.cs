@@ -1586,7 +1586,7 @@ public class UIInput : MonoBehaviour
 	public void RemoveFocus () { isSelected = false; }
 
 	/// <summary>
-	/// Convenience function that can be used as a callback for On Change notification.
+	/// Convenience function that can be used as a callback for On Change notificationPanel.
 	/// </summary>
 
 	public void SaveValue () { SaveToPlayerPrefs(mValue); }

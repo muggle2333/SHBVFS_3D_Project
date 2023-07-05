@@ -33,7 +33,7 @@ public class ChatInput : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Submit notification is sent by UIInput when 'enter' is pressed or iOS/Android keyboard finalizes input.
+	/// Submit notificationPanel is sent by UIInput when 'enter' is pressed or iOS/Android keyboard finalizes input.
 	/// </summary>
 
 	public void OnSubmit ()

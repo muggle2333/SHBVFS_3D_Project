@@ -16,7 +16,7 @@ using System.Collections.Generic;
 public class ActiveAnimation : MonoBehaviour
 {
 	/// <summary>
-	/// Active animation that resulted in the event notification.
+	/// Active animation that resulted in the event notificationPanel.
 	/// </summary>
 
 	static public ActiveAnimation current;

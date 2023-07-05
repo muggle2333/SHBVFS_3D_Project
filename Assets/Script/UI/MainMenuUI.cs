@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -11,10 +12,12 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button joinBtn;
     [SerializeField] private Button quitBtn;
     [SerializeField] private Button tryEnterBtn;
-    [SerializeField] private GameObject hostPanel;
+
     [SerializeField] private GameObject clientPanel;
-    [SerializeField] private TMP_Text ipText;
+    [SerializeField] private GameObject connectingPanel;
+
     [SerializeField] private TMP_InputField ipInputText;
+
 
 
     private GameObject currentPanel;
@@ -38,7 +41,11 @@ public class MainMenuUI : MonoBehaviour
             QuitGame();
         });
     }
-
+    public void Start()
+    {
+        MultiplayerManager.Instance.OnTryingToJoinGame += MultiplayerManager_OnTryingToJoinGame;
+        MultiplayerManager.Instance.OnFailToJoinGame += MultiplayerManager_OnFailedToJoinGame;
+    }
     public void Update()
     {
         if(Input.GetKeyUp(KeyCode.Escape))
@@ -46,10 +53,13 @@ public class MainMenuUI : MonoBehaviour
             ExitPanel();
         }
     }
+    private void OnDestroy()
+    {
+        MultiplayerManager.Instance.OnTryingToJoinGame -= MultiplayerManager_OnTryingToJoinGame;
+        MultiplayerManager.Instance.OnFailToJoinGame -= MultiplayerManager_OnFailedToJoinGame;
+    }
     private void CreateGame()
     {
-        currentPanel = hostPanel;
-        currentPanel.SetActive(true);
         MultiplayerManager.Instance.StartHost();
     }
 
@@ -100,5 +110,14 @@ public class MainMenuUI : MonoBehaviour
         {
             return "";
         }
+    }
+
+    private void MultiplayerManager_OnTryingToJoinGame(object sender, EventArgs e)
+    {
+        connectingPanel.SetActive(true);
+    }
+    private void MultiplayerManager_OnFailedToJoinGame(object sender, EventArgs e)
+    {
+        connectingPanel.SetActive(false);
     }
 }
