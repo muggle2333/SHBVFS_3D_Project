@@ -81,17 +81,31 @@ public class Player : Character
         return true;
     }
 
+    
     public int[] CountAcademyOwnedPoint()
     {
         int[] academyOwnedPoint = new int[6];
-        for (int i=0;i<6;i++)
+        //for (int i=0;i<6;i++)
+        //{
+        //    List<GridObject> gridList;
+        //    OwnedLandDic.TryGetValue((AcademyType)(i+1), out gridList); //academy 第一个是 null
+        //    academyOwnedPoint[i] = gridList.Count;
+        //}
+        var grid = GridManager.Instance.grid;
+        for(int x = 0;x< grid.width;x++)
         {
-            List<GridObject> gridList;
-            OwnedLandDic.TryGetValue((AcademyType)(i+1), out gridList); //academy 第一个是 null
-            academyOwnedPoint[i] = gridList.Count;
+            for(int z = 0;z<grid.length;z++)
+            {
+                if (grid.gridArray[x, z].owner == this && grid.gridArray[x, z].academy != AcademyType.Null)
+                {
+                    int academyIndex = (int)grid.gridArray[x, z].academy;
+                    academyOwnedPoint[academyIndex-1]++;
+                }
+            }
         }
         return academyOwnedPoint;
     }
+
 
     public void ChangeAcademyOwnPoint(int[] academyPointEffect)
     {
@@ -125,4 +139,5 @@ public class Player : Character
         lineRenderer.SetPosition(lineRenderer.positionCount -1, transform.position+offset);
     }
 
+    
 }

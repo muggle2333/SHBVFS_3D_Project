@@ -18,6 +18,8 @@ public enum PlayerInteractType
     Occupy,
     Build,
     Gacha,
+    DrawBasic,
+    DrawEvent,
 }
 
 [Serializable]
@@ -30,7 +32,7 @@ public struct PlayerInteract
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
-    private CardSelectManager cardSelectManager;
+    public CardSelectManager cardSelectManager;
     private DrawCardComponent drawCardComponent;
     private ControlStage controlStage;
 
@@ -76,7 +78,8 @@ public class PlayerManager : MonoBehaviour
             case PlayerInteractType.Build:
                 Build(player, gridObject,true);break;
             case PlayerInteractType.Gacha:
-                Gacha(player, gridObject);break;
+                TryGacha(player, gridObject);break;
+            
         }
     }
 
@@ -91,8 +94,11 @@ public class PlayerManager : MonoBehaviour
                 Occupy(player, gridObject,false); break;
             case PlayerInteractType.Build:
                 Build(player, gridObject,false); break;
-            case PlayerInteractType.Gacha:
-                Gacha(player, gridObject); break;
+            case PlayerInteractType.DrawBasic:
+                DrawBasic(player, gridObject); break;
+            case PlayerInteractType.DrawEvent:
+                DrawEvent(player, gridObject); break;
+                
         }
     }
     public void MovePlayer(Player player,GridObject gridObject)
@@ -117,12 +123,21 @@ public class PlayerManager : MonoBehaviour
         UpdateGridAuthorityData(player, gridObject);
     }
     
-    public void Gacha(Player player, GridObject gridObject)
+    public void TryGacha(Player player, GridObject gridObject)
     {
-        drawCardComponent.TryDrawCard(player);
+        //drawCardComponent.TryDrawCard();
+        drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
     }
 
-    
+    public void DrawBasic(Player player, GridObject gridObject)
+    {
+        drawCardComponent.DrawBasicCard();
+    }
+
+    public void DrawEvent(Player player, GridObject gridObject)
+    {
+        drawCardComponent.DrawEventCard();
+    }
     public void UpdateGridAuthorityData(Player player, GridObject gridObject)
     {
         UIManager.Instance.UpdateGridObjectUI(gridObject, CheckPlayerInteractAuthority(player, gridObject));
@@ -192,6 +207,6 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayCard()
     {
-        cardSelectManager.SelectCards(FindObjectOfType<GameplayManager>().currentPlayer);
+        cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
     }
 }

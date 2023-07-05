@@ -36,9 +36,22 @@ public class Caculating : MonoBehaviour
     protected AcademyBuffData AcademyBuffData;
     protected Card CardData;
 
+    public static Caculating Instance;
+
     protected PlayerAcademyBuffcomponent playerAcademyBuffcomponent;
 
-     void Start()
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+    void Start()
     {
         playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();   
     }
@@ -56,10 +69,7 @@ public class Caculating : MonoBehaviour
         
         playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
 
-        for (int i = 0; i < 6; i++)
-        {
-            player.academyOwnedPoint[i] -= academyEffectNum[i];
-        }
+        
         cardDamage = card.Damage;
         cardAP = card.playerDataEffect.actionPoint;
         cardHP = card.playerDataEffect.hp;
@@ -77,11 +87,15 @@ public class Caculating : MonoBehaviour
         cardAP = 0;
         cardHP = 0;
         cardFreeMoveNum = 0;
-
-        for(int i = 0; i < 6 ; i++)
+        for (int i = 0; i < 6; i++)
+        {
+            player.academyOwnedPoint[i] -= academyEffectNum[i];
+        }
+        for (int i = 0; i < 6 ; i++)
         {
             academyEffectNum[i] = 0;
         }
+
         playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
     }
     public void AcademyBuff(Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict,Player player)
@@ -120,15 +134,13 @@ public class Caculating : MonoBehaviour
         {
             player.academyOwnedPoint[i] = player.academyOwnedPoint[i] + academyEffectNum[i];
         }
-        FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuff(player);
+        //FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuff(player);
 
         player.MaxHP = 3 + totalAcademyMaxHP;
         player.AttackDamage = 1 + totalAcademyAttackDamage + totalCardAttackDamage;
         player.Range = 1 + totalAcademyAttackRange + totalCardAttackRange;
         player.Defence = totalAcademyDefense + totalCardDefense;
         player.ActionPointPerRound = 3 + totalAcademyAPPerRound;
-
-        
     }
 
     public void CalaulatPlayerData(Player player)

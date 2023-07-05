@@ -12,10 +12,10 @@ public class S4Stage : MonoBehaviour
     {
         playedCardDict = playerCardListDict;
         playerList = new List<Player>();
-        StartCoroutine("S1CardTakeEffect");
+        StartCoroutine("S4CardTakeEffect");
 
     }
-    IEnumerator S1CardTakeEffect()
+    IEnumerator S4CardTakeEffect()
     {
         for (int i = 0; i < playedCardDict.Count; i++)
         {
@@ -46,6 +46,9 @@ public class S4Stage : MonoBehaviour
                 }
             }
         }
+
+        Caculating.Instance.CardDataInitialize(playerList[0]);
+        Caculating.Instance.CardDataInitialize(playerList[1]);
         TurnbasedSystem.Instance.TurnToNextStage();
 
     }

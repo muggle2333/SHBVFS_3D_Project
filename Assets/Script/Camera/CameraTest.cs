@@ -27,7 +27,7 @@ public class CameraTest : MonoBehaviour
 
     void Start()
     {
-        distance = (transform.position -target.position).magnitude;
+        distance = (transform.position - target.position).magnitude;
         var angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;
@@ -49,8 +49,6 @@ public class CameraTest : MonoBehaviour
                                Mathf.Clamp(position.z, CameraMin_Z, CameraMax_Z));
         
         gameObject.transform.position = position;
-
-
     }
 
     void DragRotation()
