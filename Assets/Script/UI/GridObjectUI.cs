@@ -36,7 +36,6 @@ public class GridObjectUI : MonoBehaviour
         occupyBtn.onClick.AddListener(() =>
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Occupy,GameplayManager.Instance.currentPlayer,gridObject);
-
         });
         gachaBtn.onClick.AddListener(() =>
         {

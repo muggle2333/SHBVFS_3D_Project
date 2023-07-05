@@ -36,9 +36,22 @@ public class Caculating : MonoBehaviour
     protected AcademyBuffData AcademyBuffData;
     protected Card CardData;
 
+    public static Caculating Instance;
+
     protected PlayerAcademyBuffcomponent playerAcademyBuffcomponent;
 
-     void Start()
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+    void Start()
     {
         playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();   
     }
@@ -120,15 +133,13 @@ public class Caculating : MonoBehaviour
         {
             player.academyOwnedPoint[i] = player.academyOwnedPoint[i] + academyEffectNum[i];
         }
-        FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuff(player);
+        //FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuff(player);
 
         player.MaxHP = 3 + totalAcademyMaxHP;
         player.AttackDamage = 1 + totalAcademyAttackDamage + totalCardAttackDamage;
         player.Range = 1 + totalAcademyAttackRange + totalCardAttackRange;
         player.Defence = totalAcademyDefense + totalCardDefense;
         player.ActionPointPerRound = 3 + totalAcademyAPPerRound;
-
-        
     }
 
     public void CalaulatPlayerData(Player player)
