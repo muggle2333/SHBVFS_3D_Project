@@ -199,7 +199,12 @@ PrefabInstance:
       propertyPath: playerColorList.Array.data[1].g
       value: 0.50425243
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7713599181561974642, guid: 32eb6507983588640ab8961507d3fba0, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 780280818429077316, guid: cf986b0b44e960b488fbfef41fa5ac09, type: 3}
+    m_RemovedComponents:
+    - {fileID: 7713599181561974642, guid: 32eb6507983588640ab8961507d3fba0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -215,6 +220,7 @@ GameObject:
   - component: {fileID: 167698654}
   - component: {fileID: 167698653}
   - component: {fileID: 167698652}
+  - component: {fileID: 167698655}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -298,6 +304,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &167698655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167698651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283ae301c6c11634493c21dc88f82fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prebabs:
+  - {fileID: 780280818429077319, guid: cf986b0b44e960b488fbfef41fa5ac09, type: 3}
 --- !u!1 &174982791
 GameObject:
   m_ObjectHideFlags: 0

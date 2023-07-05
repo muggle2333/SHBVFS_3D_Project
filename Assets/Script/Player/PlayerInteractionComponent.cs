@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerInteractionComponent : MonoBehaviour
+public class PlayerInteractionComponent : NetworkBehaviour
 {
 
 

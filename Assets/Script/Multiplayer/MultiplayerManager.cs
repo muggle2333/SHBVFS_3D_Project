@@ -95,7 +95,6 @@ public class MultiplayerManager : NetworkBehaviour
 
     private void NetWorkManager_Host_OnClientConnectedCallback(ulong clientId)
     {
-        Debug.Log(clientId);
         playerIdDataNetworkList.Add(new PlayerIdData
         {
             clientId = clientId,

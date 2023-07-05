@@ -22,7 +22,7 @@ public class WaitRoomUI : MonoBehaviour
         });
         startBtn.onClick.AddListener(() =>
         {
-            WaitRoomManager.Instance.SetPlayerReady();
+            WaitRoomManager.Instance.StartGameplay();
         });
     }
     public void Start()

@@ -27,6 +27,11 @@ public class WaitRoomManager : NetworkBehaviour
     {
         waitRoomUI = FindObjectOfType<WaitRoomUI>();
         waitRoomUI.SetStartBtn(false);
+
+        if(NetworkManager.Singleton.IsHost)
+        {
+            //SetPlayerReady();
+        }
     }
     public void SetPlayerReady()
     {
@@ -39,7 +44,7 @@ public class WaitRoomManager : NetworkBehaviour
         SetPlayerReadyClientRpc(serverRpcParams.Receive.SenderClientId);
         playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
 
-        bool isAllReady = true;
+        bool isOthersReady = true;
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             if(clientId== 0)
@@ -48,16 +53,11 @@ public class WaitRoomManager : NetworkBehaviour
             }
             if (!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId] || NetworkManager.Singleton.ConnectedClientsIds.Count < MultiplayerManager.MAX_PLAYER_AMOUNT)
             {
-                isAllReady = false;
+                isOthersReady = false;
                 break;
             }
         }
-        waitRoomUI.SetStartBtn(isAllReady);
-
-        if(NetworkManager.Singleton.IsHost)
-        {
-            Invoke("StartGameplay", 1f);
-        }
+        waitRoomUI.SetStartBtn(isOthersReady);
 
     }
 
