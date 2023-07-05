@@ -27,7 +27,7 @@ public class CameraTest : MonoBehaviour
 
     void Start()
     {
-        distance = (transform.position -target.position).magnitude;
+        distance = (transform.position - target.position).magnitude;
         var angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;

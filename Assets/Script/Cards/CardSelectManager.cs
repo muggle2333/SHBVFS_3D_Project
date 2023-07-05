@@ -79,6 +79,7 @@ public class CardSelectManager : MonoBehaviour
                 {
                     cardTakeEffect.S1CardTakeEffect(player);
                 }
+                //StartCoroutine(playCard());
                 Destroy(cardsList[i].gameObject); 
                 cardsList.RemoveAt(i);
                 i--;
@@ -134,5 +135,10 @@ public class CardSelectManager : MonoBehaviour
         DownBotton.SetActive(true);
         UpBotton.SetActive(false);
     }
+    public IEnumerator playCard()
+    {
+        yield return new WaitForSeconds(1f);
+    }
 
 }
+
