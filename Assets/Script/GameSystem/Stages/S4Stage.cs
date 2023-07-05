@@ -46,6 +46,9 @@ public class S4Stage : MonoBehaviour
                 }
             }
         }
+
+        Caculating.Instance.CardDataInitialize(playerList[0]);
+        Caculating.Instance.CardDataInitialize(playerList[1]);
         TurnbasedSystem.Instance.TurnToNextStage();
 
     }

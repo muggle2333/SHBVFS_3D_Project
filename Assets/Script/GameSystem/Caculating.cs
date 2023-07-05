@@ -69,10 +69,7 @@ public class Caculating : MonoBehaviour
         
         playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
 
-        for (int i = 0; i < 6; i++)
-        {
-            player.academyOwnedPoint[i] -= academyEffectNum[i];
-        }
+        
         cardDamage = card.Damage;
         cardAP = card.playerDataEffect.actionPoint;
         cardHP = card.playerDataEffect.hp;
@@ -90,11 +87,15 @@ public class Caculating : MonoBehaviour
         cardAP = 0;
         cardHP = 0;
         cardFreeMoveNum = 0;
-
-        for(int i = 0; i < 6 ; i++)
+        for (int i = 0; i < 6; i++)
+        {
+            player.academyOwnedPoint[i] -= academyEffectNum[i];
+        }
+        for (int i = 0; i < 6 ; i++)
         {
             academyEffectNum[i] = 0;
         }
+
         playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
     }
     public void AcademyBuff(Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict,Player player)
