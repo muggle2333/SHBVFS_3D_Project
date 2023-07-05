@@ -125,7 +125,8 @@ public class PlayerManager : MonoBehaviour
     
     public void TryGacha(Player player, GridObject gridObject)
     {
-        drawCardComponent.TryDrawCard();
+        //drawCardComponent.TryDrawCard();
+        drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
     }
 
     public void DrawBasic(Player player, GridObject gridObject)
