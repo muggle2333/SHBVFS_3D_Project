@@ -14,10 +14,9 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public bool isSelected;
     public float targetY;
     public float formerY;
-    public Tweener CardPlayAniamtion;
-    public Tweener CardDiscardAniamtion;
-    public Tweener CardTakeEffectAniamtion;
-    public Tweener EnemyCardTakeEffectAniamtion;
+    //public DG.Tweening.Sequence CardDiscardAniamtion;
+    //public DG.Tweening.Sequence CardTakeEffectAniamtion;
+    //public DG.Tweening.Sequence EnemyCardTakeEffectAniamtion;
     [SerializeField] private float duration;
     public GameObject Info;
     public CardSelectManager cardSelectManager;
@@ -25,14 +24,14 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         Interactable = true;
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
-        cardSelectManager = FindObjectOfType<CardSelectManager>();
+        cardSelectManager = PlayerManager.Instance.cardSelectManager;
         isSelected = false;
         duration = 0.25f;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
+        if (Interactable == false) return;
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
 
@@ -89,6 +88,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void EndSelect()
     {
         //transform.SetSiblingIndex(index);
+        if(Interactable)
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount--;
@@ -100,4 +100,19 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         Debug.Log(cardSelectManager.SelectCount);
     }
 
+    public void CardPlayAniamtion()
+    {
+        Interactable = false;
+        this.EndSelect();
+        this.transform.SetParent(cardSelectManager.canvas.transform);
+        var seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveY(0, 0.4f));
+        seq.Join(transform.DOLocalMoveX(0, 0.4f));
+        seq.Join(transform.DOScale(1.5f, 0.4f));
+        seq.AppendInterval(0.5f);
+        seq.Append(transform.DOLocalMoveX(-800, 0.5f));
+        seq.Join(transform.DOScale(0.05f, 0.5f));
+        //seq.AppendInterval(1f);
+        seq.AppendCallback(() => { Destroy(transform.gameObject); });
+    }
 }
