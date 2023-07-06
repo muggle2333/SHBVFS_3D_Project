@@ -19,15 +19,15 @@ MonoBehaviour:
   headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
   academyType: 1
   cardCondition: {fileID: 0}
-  effectStage: 1
+  effectStage: 2
   effectDuration: 0
   cardTarget: 2
   effectTime: 0
   academyEffectNum: 000000000000000000000000000000000000000000000000
   Damage: 0
   playerDataEffect:
-    hp: 1
-    actionPoint: 0
+    hp: 0
+    actionPoint: -1
     defence: 0
     attack: 0
     visionRange: 0
@@ -36,4 +36,4 @@ MonoBehaviour:
   cardType: 3
   cardLevel: 1
   CardBuff: {fileID: 0}
-  cardFounction: {fileID: 5055412884555373187, guid: 2c0a20f20f543ee4ca0dcf1ee93f7c96, type: 3}
+  cardFounction: {fileID: 6896789876836155389, guid: 2c0a20f20f543ee4ca0dcf1ee93f7c96, type: 3}
