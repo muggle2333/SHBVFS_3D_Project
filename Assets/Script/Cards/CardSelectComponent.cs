@@ -113,6 +113,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.Append(transform.DOLocalMoveX(-800, 0.5f));
         seq.Join(transform.DOScale(0.05f, 0.5f));
         //seq.AppendInterval(1f);
-        seq.AppendCallback(() => { Destroy(transform.gameObject); });
+        seq.AppendCallback(() => { this.gameObject.SetActive(false); });
     }
 }
