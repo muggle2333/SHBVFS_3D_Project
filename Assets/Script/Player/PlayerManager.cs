@@ -131,12 +131,12 @@ public class PlayerManager : MonoBehaviour
 
     public void DrawBasic(Player player, GridObject gridObject)
     {
-        drawCardComponent.DrawBasicCard();
+        drawCardComponent.DrawBasicCard(player);
     }
 
     public void DrawEvent(Player player, GridObject gridObject)
     {
-        drawCardComponent.DrawEventCard();
+        drawCardComponent.DrawEventCard(player);
     }
     public void UpdateGridAuthorityData(Player player, GridObject gridObject)
     {
