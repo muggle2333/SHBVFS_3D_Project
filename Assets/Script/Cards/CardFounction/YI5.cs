@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class YI5 : CardFounction
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    private bool HasTakeEffect=false;
     void Update()
     {
-        
+        if(TurnbasedSystem.Instance.CurrentGameStage == GameStage.S4 && HasTakeEffect == false)
+        {
+            HasTakeEffect = true;
+            Founction(GameplayManager.Instance.currentPlayer);
+        }
     }
-    public void Founction()
+    public void Founction(Player player)
     {
-
+        player.CurrentActionPoint += 2;
+        Destroy(this.gameObject);
     }
 }

@@ -19,12 +19,13 @@ public class CardSelectManager : MonoBehaviour
     public GameObject DownBotton;
     public GameObject SelectButton;
     public GameObject CancelButton;
-
     public CardManager cardTakeEffect;
+    public Canvas canvas;
 
     [SerializeField] private float upperY;
     [SerializeField] private float lowerY;
     [SerializeField] private float duration;
+
     public CardSelectComponent[] cardsArray;
     public List<CardSelectComponent> cardsList;
     private void Awake()
@@ -79,9 +80,9 @@ public class CardSelectManager : MonoBehaviour
                 {
                     cardTakeEffect.S1CardTakeEffect(player);
                 }
-                //StartCoroutine(playCardAnimation(cardsList[i]));
-                //Destroy(cardsList[i].gameObject);
-                cardsList[i].Interactable = false;
+                cardsList[i].CardPlayAniamtion();
+                //cardsList[i].Interactable = false;
+                //cardsList[i].EndSelect();
                 cardsList.RemoveAt(i);
                 i--;
             }

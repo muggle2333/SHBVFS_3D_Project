@@ -31,7 +31,7 @@ public class Card:MonoBehaviour
     public CardType cardType;
     public CardLevel cardLevel;
     public CardBuff CardBuff;
-    public CardFounction cardFounction;
+    public GameObject cardFounction;
     void Start()
     {
         UpdateCardData(cardSetting);

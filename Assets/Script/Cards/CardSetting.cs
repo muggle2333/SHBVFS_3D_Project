@@ -69,5 +69,6 @@ public class CardSetting : ScriptableObject
     public CardType cardType;
     public CardLevel cardLevel;
     public CardBuff CardBuff;
-    public CardFounction cardFounction;
+    public GameObject cardFounction;
 }
+
