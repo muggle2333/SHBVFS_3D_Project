@@ -749,6 +749,7 @@ MonoBehaviour:
   upperY: 160
   lowerY: -60
   duration: 0.25
+  canvas: {fileID: 4164202118832277108}
   cardsArray: []
   cardsList: []
 --- !u!1 &4164202119315470929

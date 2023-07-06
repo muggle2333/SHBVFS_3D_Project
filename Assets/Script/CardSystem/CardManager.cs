@@ -5,8 +5,7 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     public static CardManager Instance;
-
-
+    public Dictionary<Player, List<Card>> playerHandCardDict = new Dictionary<Player, List<Card>>();
     public Dictionary<Player,List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
     public Caculating calculating;
     public void Awake()
@@ -27,6 +26,7 @@ public class CardManager : MonoBehaviour
         for(int i = 0; i < playerList.Count; i++)
         {
             playedCardDict.Add(playerList[i], new List<Card>());  
+            playerHandCardDict.Add(playerList[i], new List<Card>());
         }
         calculating = FindObjectOfType<Caculating>();
     }
@@ -44,6 +44,10 @@ public class CardManager : MonoBehaviour
         {
             if (playedCardDict[player][i].effectStage == EffectStage.S1)
             {
+                if (playedCardDict[player][i].cardFounction != null)
+                {
+                    Instantiate(playedCardDict[player][i].cardFounction);
+                }
                 calculating.DelataCardData(playedCardDict[player][i], player);
                 calculating.CalculatPlayerBaseData(player);
                 calculating.CalaulatPlayerData(player);
@@ -57,6 +61,10 @@ public class CardManager : MonoBehaviour
         {
             if (playedCardDict[player][i].effectStage == stage)
             {
+                if (playedCardDict[player][i].cardFounction != null)
+                {
+                    Instantiate(playedCardDict[player][i].cardFounction);
+                }
                 calculating.DelataCardData(playedCardDict[player][i], player);
                 calculating.CalculatPlayerBaseData(player);
                 calculating.CalaulatPlayerData(player);

@@ -19,12 +19,12 @@ public class CardSelectManager : MonoBehaviour
     public GameObject DownBotton;
     public GameObject SelectButton;
     public GameObject CancelButton;
-
-    public CardManager cardTakeEffect;
+    public Canvas canvas;
 
     [SerializeField] private float upperY;
     [SerializeField] private float lowerY;
     [SerializeField] private float duration;
+
     public CardSelectComponent[] cardsArray;
     public List<CardSelectComponent> cardsList;
     private void Awake()
@@ -36,7 +36,6 @@ public class CardSelectManager : MonoBehaviour
     }
     public void Start()
     {
-        cardTakeEffect = FindObjectOfType<CardManager>();
         cardsArray = GetComponentsInChildren<CardSelectComponent>();
         cardsList = new List<CardSelectComponent>(cardsArray);
         if(HasCard())
@@ -70,18 +69,31 @@ public class CardSelectManager : MonoBehaviour
                 Debug.Log("Card " + cardsList[i].name + " is played.");
                 //cardsList[i].EndSelect();
 
-                cardTakeEffect.AddPlayedCard(cardsList[i].gameObject.GetComponent<Card>(),player);
+                CardManager.Instance.AddPlayedCard(cardsList[i].gameObject.GetComponent<Card>(),player);
+                for(int k = 0; k < CardManager.Instance.playerHandCardDict[player].Count; k++)
+                {
+                    if (CardManager.Instance.playerHandCardDict[player][k] == cardsList[i])
+                    {
+                        CardManager.Instance.playerHandCardDict[player].RemoveAt(k);
+                    }
+                }
+                
                 if(cardsList[i].gameObject.GetComponent<Card>().effectStage == EffectStage.Every)
                 {
-                    cardTakeEffect.ImmediateCardTakeEffect(player);
+                    CardManager.Instance.ImmediateCardTakeEffect(player);
                 }
-                if (cardsList[i].gameObject.GetComponent<Card>().effectStage == EffectStage.S1)
+                else if (cardsList[i].gameObject.GetComponent<Card>().effectStage == EffectStage.S1)
                 {
-                    cardTakeEffect.S1CardTakeEffect(player);
+                    CardManager.Instance.S1CardTakeEffect(player);
                 }
-                //StartCoroutine(playCardAnimation(cardsList[i]));
-                //Destroy(cardsList[i].gameObject);
-                cardsList[i].Interactable = false;
+                else
+                {
+                    CardManager.Instance.AddPlayedCard( cardsList[i].gameObject.GetComponent<Card>(),player);
+                }
+                
+                cardsList[i].CardPlayAniamtion();
+                //cardsList[i].Interactable = false;
+                //cardsList[i].EndSelect();
                 cardsList.RemoveAt(i);
                 i--;
             }
