@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class GameplayManager : MonoBehaviour
+public class GameplayManager : NetworkBehaviour
 {
     public static GameplayManager Instance;
 
-    [SerializeField] private Vector2 playerStartPointRed;
-    [SerializeField] private Vector2 playerStartPointBlue;
-    [SerializeField] private Player playerRed;
-    [SerializeField] private Player playerBlue;
-
+    [SerializeField] private Vector2[] playerStartPoint = new Vector2[2];
+    //public Player playerRed;
+    //public Player playerBlue;
+    public List<Player> playerList = new List<Player>();
     public Player currentPlayer;
 
     private ControlStage controlStage;
@@ -43,40 +44,74 @@ public class GameplayManager : MonoBehaviour
     }
     private void Start()
     {
-        InitializePlayer();
+        //InitializePlayerServerRpc();
     }
     private void Update()
     {
-        if(playerRed.HP<=0||playerBlue.HP<=0)
-        {
-            TurnbasedSystem.Instance.Pause();
-        }
-        if (TurnbasedSystem.Instance.CurrentGameStage != GameStage.S1)
-        {
-            UIManager.Instance.ShowGridObjectUI(false,null);
-        }
+        //if (playerRed.HP <= 0 || playerBlue.HP <= 0)
+        //{
+        //    TurnbasedSystem.Instance.Pause();
+        //}
+        //if (TurnbasedSystem.Instance.CurrentGameStage != GameStage.S1)
+        //{
+        //    UIManager.Instance.ShowGridObjectUI(false, null);
+        //}
     }
-    private void InitializePlayer()
+    public void InitializePlayer()
     {
-        //currentPlayer = FindObjectOfType<Player>();
-        playerRed.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointRed.x, (int)playerStartPointRed.y);
-        playerRed.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
-        playerRed.RefreshLinePath();
+        foreach(var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            playerList.Add(client.PlayerObject.GetComponent<Player>());
+        }
+        for(int i =0;i< playerList.Count;i++)
+        {
+            Debug.LogError(i);
+            playerList[i].transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
+            playerList[i].currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
+            playerList[i].RefreshLinePath();
+        }
 
-        playerBlue.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
-        playerBlue.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
-        playerBlue.RefreshLinePath();
+        Debug.LogError(IsClient + " " + IsServer + " " + IsHost);
+        Debug.LogError("server");
+        InitializePlayerClientRpc();
+        TestClientRpc();
+    }
+    [ClientRpc]
+    public void TestClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        Debug.LogError(clientRpcParams.Receive.ToString());
+    }
+    [ClientRpc]
+    private void InitializePlayerClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        Debug.LogError(clientRpcParams.Receive.ToString());
+        Debug.LogError("rpc");
+        currentPlayer = playerList[(int)NetworkManager.Singleton.LocalClientId];
+        //playerRed = NetworkManager.Singleton.ConnectedClients[0].PlayerObject.GetComponent<Player>();
+        //playerRed.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointRed.x, (int)playerStartPointRed.y);
+        //playerRed.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
+        //playerRed.RefreshLinePath();
 
-        currentPlayer = playerRed.GetComponent<Player>();
+        //playerBlue = NetworkManager.Singleton.ConnectedClients[1].PlayerObject.GetComponent<Player>();
+        //playerBlue.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
+        //playerBlue.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
+        //playerBlue.RefreshLinePath();
+    
+    
         UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
+    }
+    public void SetCurrentPlayer(Player player)
+    {
+        currentPlayer = player;
+
     }
 
     public List<Player> GetPlayer()
     {
-        List<Player> list = new List<Player>();
-        list.Add(playerRed.GetComponent<Player>());
-        list.Add(playerBlue.GetComponent<Player>());
-        return list;
+        //List<Player> list = new List<Player>();
+        //list.Add(playerRed.GetComponent<Player>());
+        //list.Add(playerBlue.GetComponent<Player>());
+        return playerList;
     }
     public void UpdateSelectPlayer(Player player)
     {
@@ -95,16 +130,20 @@ public class GameplayManager : MonoBehaviour
     public void StartControlStage()
     {
         GridManager.Instance.BackupGrid();
-        PlayerManager.Instance.BackupPlayerPosition(playerRed);
-        PlayerManager.Instance.BackupPlayerPosition(playerBlue);
+        foreach(var player in playerList)
+        {
+            PlayerManager.Instance.BackupPlayerPosition(player);
+        }
         controlStage.StartStage();
     }
 
     public void StartDiscardStage()
     {
         GridManager.Instance.ResetGrid();
-        PlayerManager.Instance.ResetPlayerPosition(playerRed);
-        PlayerManager.Instance.ResetPlayerPosition(playerBlue);
+        foreach (var player in playerList)
+        {
+            PlayerManager.Instance.BackupPlayerPosition(player);
+        }
         discardStage.StartStage();
     }
     public void StartS2Stage()

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerInteractionComponent : NetworkBehaviour
+public class PlayerInteractionComponent : MonoBehaviour
 {
 
 

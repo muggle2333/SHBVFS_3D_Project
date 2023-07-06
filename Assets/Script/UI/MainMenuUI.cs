@@ -51,6 +51,7 @@ public class MainMenuUI : MonoBehaviour
     {
         MultiplayerManager.Instance.OnTryingToJoinGame += MultiplayerManager_OnTryingToJoinGame;
         MultiplayerManager.Instance.OnFailToJoinGame += MultiplayerManager_OnFailedToJoinGame;
+        ipInputText.text = "127.0.0.1";
     }
     public void Update()
     {

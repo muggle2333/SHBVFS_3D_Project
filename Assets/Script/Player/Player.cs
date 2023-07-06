@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public enum PlayerId
@@ -12,7 +13,7 @@ public enum PlayerId
 public class Player : Character
 {
     public PlayerId Id;
-
+    public NetworkVariable<int> playerIdNetwork;
     public int CurrentActionPoint;
     public int ActionPointPerRound;
     public int MaxActionPoint;

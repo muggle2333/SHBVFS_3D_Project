@@ -34,19 +34,14 @@ public class GameManager : NetworkBehaviour
         Instance= this;
         DontDestroyOnLoad(gameObject);
         playerReadyDictionary = new Dictionary<ulong, bool>();
-        if (NetworkManager.Singleton.IsServer)
-        {
-            GetComponent<NetworkObject>().Spawn();
-        }
-        
     }
-    public override void OnNetworkSpawn()
+    //public override void OnNetworkSpawn()
+    private void Start()
     {
         wholeGameState.OnValueChanged += WholeGameState_OnValueChanged;
         isGamePaused.OnValueChanged += IsGamePaused_OnValueChanged;
         if (NetworkManager.Singleton.IsServer)
         {
-            Debug.Log(NetworkManager.Singleton.IsServer);
             NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
         }
@@ -73,10 +68,11 @@ public class GameManager : NetworkBehaviour
         Debug.Log(sceneName);
         foreach(ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-
             Transform playerTransform = Instantiate(playerPrefab);
+            //playerTransform.GetComponent<Player>().Id=(PlayerId)clientId;
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId,true);
         }
+        GameplayManager.Instance.InitializePlayer();
     }
 
     private void GameInput_OnInteractAction()

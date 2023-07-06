@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -195,7 +196,7 @@ public class SelectController : MonoBehaviour
             {
 
                 TargetRenderer = hit.transform.GetComponent<Renderer>();
-                if (TargetRenderer.gameObject.GetComponentInParent<Player>())
+                if (TargetRenderer.gameObject.GetComponentInParent<Player>() && FindObjectOfType<NetworkManager>()==null)
                 {
                     GameplayManager.Instance.UpdateSelectPlayer(TargetRenderer.gameObject.GetComponentInParent<Player>());
                 }
