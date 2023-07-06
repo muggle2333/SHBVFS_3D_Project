@@ -8,20 +8,28 @@ using Unity.Netcode.Transports.UTP;
 using System;
 using UnityEngine.SceneManagement;
 
+
+[Serializable]
+public struct PlayerData
+{
+    public ulong clientId;
+    public string playerName;
+}
 public class MultiplayerManager : NetworkBehaviour
 {
-    private const int MAX_PLAYER_AMOUNT = 2;
+    public const int MAX_PLAYER_AMOUNT = 2;
     public static MultiplayerManager Instance { get; private set; }
 
     public event EventHandler OnTryingToJoinGame;
     public event EventHandler OnFailToJoinGame;
     public event EventHandler OnPlayerIdDataNetworkListChanged;
+    public event EventHandler OnWaitingToStart;
 
     private NetworkList<PlayerIdData> playerIdDataNetworkList;
     private string playerName;
     private UnityTransport networkTransport;
 
-    [SerializeField]private List<Color> playerColorList;
+    [SerializeField] private List<PlayerData> playerList = new List<PlayerData>();//For serializefield
     private void Awake()
     {
         if(Instance!=null&&Instance!=this)
@@ -42,7 +50,11 @@ public class MultiplayerManager : NetworkBehaviour
     private void PlayerIdDataNetworkList_OnListChanged(NetworkListEvent<PlayerIdData> changeEvent)
     {
         OnPlayerIdDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
-
+        playerList.Clear();
+        foreach(var player in playerIdDataNetworkList) 
+        {
+            playerList.Add(new PlayerData { clientId = player.clientId, playerName = player.playerName.ToString() });
+        }
     }
 
     public void Start()
@@ -63,7 +75,6 @@ public class MultiplayerManager : NetworkBehaviour
 
     private void NetWorkManager_Host_ConnectedApprovalCallback(NetworkManager.ConnectionApprovalRequest connectionApprovalRequest, NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
     {
-        Debug.LogError(NetworkManager.Singleton.IsHost);
         //if(NetworkManager.Singleton.IsHost==false && SceneManager.GetActiveScene().name != Loader.Scene.WaitRoomScene.ToString()) 
         if(SceneManager.GetActiveScene().name != Loader.Scene.WaitRoomScene.ToString()) 
         {
@@ -87,7 +98,6 @@ public class MultiplayerManager : NetworkBehaviour
         playerIdDataNetworkList.Add(new PlayerIdData
         {
             clientId = clientId,
-            colorId = GetFirstUnusedColorId(),
         });
         SetPlayerNameServerRpc(GetPlayerNameFromInput());
 
@@ -107,8 +117,16 @@ public class MultiplayerManager : NetworkBehaviour
     private void SetPlayerNameServerRpc(string playerName,ServerRpcParams serverRpcParams = default)
     {
         int playerIdDataIndex = GetPlayerIdDataIndex(serverRpcParams.Receive.SenderClientId);
-        PlayerIdData playerTmp = new PlayerIdData();
-        playerTmp.playerName = playerName;
+        PlayerIdData playerTmp = playerIdDataNetworkList[playerIdDataIndex];
+        //playerTmp.playerName = playerName;
+        if(playerIdDataIndex==0)
+        {
+            playerTmp.playerName = "Red Player";
+        }
+        else
+        {
+            playerTmp.playerName = "Blue Player";
+        }
         playerIdDataNetworkList[playerIdDataIndex] = playerTmp;
     }
     public void StartClient(string ip)
@@ -124,7 +142,6 @@ public class MultiplayerManager : NetworkBehaviour
     private void NetworkManager_Client_OnClientDisconnectCallback(ulong clientId)
     {
         OnFailToJoinGame?.Invoke(this, EventArgs.Empty);
-        Debug.Log("fail");
     }
 
     private void NetworkManager_Client_OnClientConnectedCallback(ulong clientId)
@@ -148,32 +165,22 @@ public class MultiplayerManager : NetworkBehaviour
         //return mainMenu.GetPlayerName();
         return "0";
     }
-    private bool IsColorAvailable(int colorId)
+
+    public bool IsPlayerIndexConnect(int playerIndex)
     {
-        foreach (PlayerIdData playerData in playerIdDataNetworkList)
-        {
-            if (playerData.colorId == colorId)
-            {
-                return false;
-            }
-        }
-        return true;
+        return playerIndex < playerIdDataNetworkList.Count;
     }
 
-    private int GetFirstUnusedColorId()
+    public PlayerIdData GetPlayerIdDataFromPlayerIndex(int playerIndex)
     {
-        for (int i = 0; i < playerColorList.Count; i++)
-        {
-            if (IsColorAvailable(i))
-            {
-                return i;
-            }
-        }
-        return -1;
+        return playerIdDataNetworkList[playerIndex];
     }
 
-
-
+    public void StartGamePlay()
+    {
+        OnWaitingToStart?.Invoke(this, EventArgs.Empty);
+        Loader.LoadNetwork(Loader.Scene.GameplayScene);
+    }
 
 
 }

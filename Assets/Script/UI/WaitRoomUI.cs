@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -9,6 +10,7 @@ using UnityEngine.UI;
 public class WaitRoomUI : MonoBehaviour
 {
     [SerializeField] private Button readyBtn;
+    [SerializeField] private Button startBtn;
     [SerializeField] private GameObject hostPanel;
     [SerializeField] private TMP_Text ipText;
 
@@ -16,24 +18,24 @@ public class WaitRoomUI : MonoBehaviour
     {
         readyBtn.onClick.AddListener(() =>
         {
-            GameManager.Instance.SetPlayerReadyServerRpc();
+            WaitRoomManager.Instance.SetPlayerReady();
+        });
+        startBtn.onClick.AddListener(() =>
+        {
+            WaitRoomManager.Instance.StartGameplay();
         });
     }
     public void Start()
     {
-        CheckPlayerIdentify();
-    }
-    private void CheckPlayerIdentify()
-    {
-        if(NetworkManager.Singleton.IsHost)
-        {
-            ShowHostPanel(true);
-        }
-        else
-        {
+        CheckPlayerIdentify(NetworkManager.Singleton.IsHost);
 
-            ShowHostPanel(false);
-        }
+    }
+    private void CheckPlayerIdentify(bool isHost)
+    {
+        startBtn.gameObject.SetActive(isHost);
+        readyBtn.gameObject.SetActive(!isHost);
+        ShowHostPanel(isHost);
+
 
     }
     public void ShowHostPanel(bool isShow)
@@ -60,5 +62,10 @@ public class WaitRoomUI : MonoBehaviour
         {
             return "";
         }
+    }
+
+    public void SetStartBtn(bool isStart)
+    {
+        startBtn.interactable= isStart;
     }
 }

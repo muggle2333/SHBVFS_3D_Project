@@ -9,15 +9,21 @@ using Unity.VisualScripting;
 public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     private int index;
+    public bool Interactable = true;
     public bool IsInOpreationStage;
     public bool isSelected;
     public float targetY;
     public float formerY;
+    public Tweener CardPlayAniamtion;
+    public Tweener CardDiscardAniamtion;
+    public Tweener CardTakeEffectAniamtion;
+    public Tweener EnemyCardTakeEffectAniamtion;
     [SerializeField] private float duration;
     public GameObject Info;
     public CardSelectManager cardSelectManager;
     void Start()
     {
+        Interactable = true;
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
         cardSelectManager = FindObjectOfType<CardSelectManager>();
         isSelected = false;
@@ -52,6 +58,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (Interactable == false) return;
         if(IsInOpreationStage)
         {
             foreach(var card in cardSelectManager.cardsList)
@@ -92,4 +99,5 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }
         Debug.Log(cardSelectManager.SelectCount);
     }
+
 }

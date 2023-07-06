@@ -12,6 +12,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button joinBtn;
     [SerializeField] private Button quitBtn;
     [SerializeField] private Button tryEnterBtn;
+    [SerializeField] private Button backBtn;
 
     [SerializeField] private GameObject clientPanel;
     [SerializeField] private GameObject connectingPanel;
@@ -36,6 +37,11 @@ public class MainMenuUI : MonoBehaviour
         {
             TryEnterGame();
         });
+        backBtn.onClick.AddListener(() =>
+        {
+            Back();
+        }
+        );
         quitBtn.onClick.AddListener(() =>
         {
             QuitGame();
@@ -80,8 +86,13 @@ public class MainMenuUI : MonoBehaviour
         {
             Debug.Log("Print string");
         }
+        Back();
     }
 
+    private void Back()
+    {
+        clientPanel.SetActive(false);
+    }
     private void QuitGame()
     {
         Application.Quit();

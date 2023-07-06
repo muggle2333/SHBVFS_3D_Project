@@ -183,7 +183,7 @@ MonoBehaviour:
   CameraMax_Z: 100
   CameraMin_Z: -100
   rotationSpeed: {x: 250, y: 120}
-  moveSpeed: {x: 50, y: 50}
+  moveSpeed: {x: 70, y: 70}
 --- !u!1 &339269490835202873
 GameObject:
   m_ObjectHideFlags: 0
