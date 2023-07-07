@@ -9,9 +9,12 @@ public class ControlStage : MonoBehaviour
     //用来inspector上观察的
     public List<PlayerInteract> RedPlayerInteractList;
     public List<PlayerInteract> BluePlayerInteractList;
-
+    private List<Player> players;
     public void StartStage()
     {
+        players = GameplayManager.Instance.GetPlayer();
+        players[0].hasAttcaked = false;
+        players[1].hasAttcaked = false;
         playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();
     }
     public void AddPlayerInteract(Player player,PlayerInteract playerInteract)

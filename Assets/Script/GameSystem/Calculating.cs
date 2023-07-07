@@ -2,43 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Caculating : MonoBehaviour
+public class Calculating : MonoBehaviour
 {
-    protected int academyMaxHP;
-    protected int academyHPPerRound;
-    protected int academyAttackRange;
-    protected int academyAttackDamage;
-    protected int academyDefense;
-    protected int academyAPPerRound;
+    public int academyMaxHP;
+    public int academyHPPerRound;
+    public int academyAttackRange;
+    public int academyAttackDamage;
+    public int academyDefense;
+    public int academyAPPerRound;
 
-    protected int totalAcademyMaxHP;
-    protected int totalAcademyHPPerRound;
-    protected int totalAcademyAttackRange;
-    protected int totalAcademyAttackDamage;
-    protected int totalAcademyDefense;
-    protected int totalAcademyAPPerRound;
+    public int totalAcademyMaxHP;
+    public int totalAcademyHPPerRound;
+    public int totalAcademyAttackRange;
+    public int totalAcademyAttackDamage;
+    public int totalAcademyDefense;
+    public int totalAcademyAPPerRound;
 
 
-    protected int cardAttackDamage;
-    protected int cardDefense;
-    protected int cardAttackRange;
+    public int cardAttackDamage;
+    public int cardDefense;
+    public int cardAttackRange;
 
-    protected int cardDamage;
-    protected int cardAP;
-    protected int cardHP;
-    protected int cardFreeMoveNum;
+    public int cardDamage;
+    public int cardAP;
+    public int cardHP;
+    public int cardFreeMoveNum;
 
-    protected int totalCardAttackDamage;
-    protected int totalCardDefense;
-    protected int totalCardAttackRange;
-    
-    protected int[] academyEffectNum = new int[6];
-    protected AcademyBuffData AcademyBuffData;
-    protected Card CardData;
+    public int totalCardAttackDamage;
+    public int totalCardDefense;
+    public int totalCardAttackRange;
 
-    public static Caculating Instance;
+    public int[] academyEffectNum = new int[6];
+    public AcademyBuffData AcademyBuffData;
+    public Card CardData;
 
-    protected PlayerAcademyBuffcomponent playerAcademyBuffcomponent;
+    public static Calculating Instance;
+
+    public PlayerAcademyBuffcomponent playerAcademyBuffcomponent;
 
     public void Awake()
     {
@@ -136,11 +136,11 @@ public class Caculating : MonoBehaviour
         }
         //FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuff(player);
 
-        player.MaxHP = 3 + totalAcademyMaxHP;
-        player.AttackDamage = 1 + totalAcademyAttackDamage + totalCardAttackDamage;
-        player.Range = 1 + totalAcademyAttackRange + totalCardAttackRange;
-        player.Defence = totalAcademyDefense + totalCardDefense;
-        player.ActionPointPerRound = 3 + totalAcademyAPPerRound;
+        player.MaxHP = player.baseMaxHP + totalAcademyMaxHP;
+        player.AttackDamage = player.baseAttackDamage + totalAcademyAttackDamage + totalCardAttackDamage;
+        player.Range = player.baseRange + totalAcademyAttackRange + totalCardAttackRange;
+        player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefense;
+        player.ActionPointPerRound = player.baseActionPointPerRound + totalAcademyAPPerRound;
     }
 
     public void CalaulatPlayerData(Player player)

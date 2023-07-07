@@ -66,6 +66,6 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[0];
             }
         }
-        FindObjectOfType<Caculating>().AcademyBuff(PlayerAcademyBuffDict,player);
+        FindObjectOfType<Calculating>().AcademyBuff(PlayerAcademyBuffDict,player);
     }
 }

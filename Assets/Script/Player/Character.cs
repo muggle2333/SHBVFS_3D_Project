@@ -11,8 +11,8 @@ public class Character : MonoBehaviour
     public int Defence;
     public int Range;
 
-    
-   
+    public bool hasAttcaked;
+
 
 
     public Character AttackTarget;
@@ -34,6 +34,7 @@ public class Character : MonoBehaviour
             Damage = 0;
         }
         AttackTarget.HP -= (Damage);
+        hasAttcaked = true;
         AttackTarget = null;
     }
 }

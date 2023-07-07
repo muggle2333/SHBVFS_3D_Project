@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DAO4 : CardFounction
+public class DAO4 : CardFunction
 {
     // Start is called before the first frame update
     void Start()

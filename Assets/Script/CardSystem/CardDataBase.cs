@@ -12,7 +12,7 @@ public class CardDataBase : MonoBehaviour
         {
             if(i==0)
             {
-                Debug.Log(Resources.LoadAll<CardSetting>("Cards/BasicCards").Length);
+                //Debug.Log(Resources.LoadAll<CardSetting>("Cards/BasicCards").Length);
                 AllCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/BasicCards")));
                 continue;
             }

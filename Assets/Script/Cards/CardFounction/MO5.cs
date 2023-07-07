@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MO5 : CardFounction
+public class MO5 : CardFunction
 {
     // Start is called before the first frame update
     void Start()

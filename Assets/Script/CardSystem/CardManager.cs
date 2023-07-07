@@ -6,8 +6,8 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager Instance;
     public Dictionary<Player, List<Card>> playerHandCardDict = new Dictionary<Player, List<Card>>();
-    public Dictionary<Player,List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
-    public Caculating calculating;
+    public Dictionary<Player, List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
+    public Calculating calculating;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,11 +28,7 @@ public class CardManager : MonoBehaviour
             playedCardDict.Add(playerList[i], new List<Card>());  
             playerHandCardDict.Add(playerList[i], new List<Card>());
         }
-        calculating = FindObjectOfType<Caculating>();
-    }
-    public void AddPlayedCard(Card card,Player player)
-    {
-        playedCardDict[player].Add(card);
+        calculating = FindObjectOfType<Calculating>();
     }
     public void ImmediateCardTakeEffect(Player player)
     {
@@ -65,6 +61,7 @@ public class CardManager : MonoBehaviour
                 {
                     Instantiate(playedCardDict[player][i].cardFounction);
                 }
+                playedCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
                 calculating.DelataCardData(playedCardDict[player][i], player);
                 calculating.CalculatPlayerBaseData(player);
                 calculating.CalaulatPlayerData(player);

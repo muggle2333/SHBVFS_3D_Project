@@ -12,12 +12,20 @@ public enum PlayerId
 
 public class Player : Character
 {
+
+
     public PlayerId Id;
     public NetworkVariable<int> playerIdNetwork;
     public int CurrentActionPoint;
     public int ActionPointPerRound;
     public int MaxActionPoint;
     public int MaxCardCount;
+
+    public int baseMaxHP = 3;
+    public int baseDefense = 0;
+    public int baseAttackDamage = 1;
+    public int baseRange = 1;
+    public int baseActionPointPerRound = 3;
 
     public int Priority;
     public GridObject currentGrid;
@@ -62,6 +70,10 @@ public class Player : Character
 
         MaxActionPoint = ActionPointPerRound * 2;
         MaxCardCount = HP;
+        if(Defence < 0)
+        {
+            Defence = 0;
+        }
     }
 
     public bool OccupyGrid(GridObject gridObject)
