@@ -68,7 +68,7 @@ public class DrawCardComponent : MonoBehaviour
         AllCardCount[AcademyType.Null]++;
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         Card.transform.DOScale(1, 0.4f);
-        PlayerManager.Instance.cardSelectManager.Start();
+        //PlayerManager.Instance.cardSelectManager.Start();
     }
     public void DrawEventCard(Player player)
     {
@@ -94,7 +94,7 @@ public class DrawCardComponent : MonoBehaviour
         Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]-1]);
         Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         Card.transform.DOScale(1, 0.4f);
-        PlayerManager.Instance.cardSelectManager.Start();
+        //PlayerManager.Instance.cardSelectManager.Start();
     }
 
     public Vector3 GetScreenPosition(GameObject target)

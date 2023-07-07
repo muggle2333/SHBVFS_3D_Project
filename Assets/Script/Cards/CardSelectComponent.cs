@@ -60,12 +60,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         if (Interactable == false) return;
         if(IsInOpreationStage)
         {
-            foreach(var card in cardSelectManager.cardsList)
+            foreach(var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
             {
-                if (this == card) continue;
-                if(card.isSelected)
+                if (this.gameObject == card.gameObject) continue;
+                if(card.gameObject.GetComponent<CardSelectComponent>().isSelected)
                 {
-                    card.EndSelect();
+                    card.gameObject.GetComponent<CardSelectComponent>().EndSelect();
                     break;
                 }
             }
@@ -80,7 +80,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         //transform.SetAsLastSibling();
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
-        cardSelectManager.SelectCount++;
+        cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
         cardSelectManager.SelectButton.SetActive(true);
         cardSelectManager.CancelButton.SetActive(true);
         Debug.Log(cardSelectManager.SelectCount);
@@ -91,8 +91,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         if(Interactable)
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
-        cardSelectManager.SelectCount--;
-        if (cardSelectManager.SelectCount == 0)
+        cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
+        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
         {
             cardSelectManager.SelectButton.SetActive(false);
             cardSelectManager.CancelButton.SetActive(false);
@@ -112,7 +112,16 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendInterval(0.5f);
         seq.Append(transform.DOLocalMoveX(-800, 0.5f));
         seq.Join(transform.DOScale(0.05f, 0.5f));
-        //seq.AppendInterval(1f);
         seq.AppendCallback(() => { this.gameObject.SetActive(false); });
+    }
+
+    public void CardTakeEffectAnimation()
+    {
+
+    }
+
+    public void EnemyCardTakeEffectAnimation()
+    {
+
     }
 }

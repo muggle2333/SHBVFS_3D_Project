@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class CardSelectManager : MonoBehaviour
 {
-    public int SelectCount;
+    public Dictionary<Player, int> SelectCount = new Dictionary<Player, int>();
     public bool IsRetracted;
     public float RetractOffset;
     public float offset;
@@ -25,136 +25,111 @@ public class CardSelectManager : MonoBehaviour
     [SerializeField] private float lowerY;
     [SerializeField] private float duration;
 
-    public CardSelectComponent[] cardsArray;
-    public List<CardSelectComponent> cardsList;
+    //public CardSelectComponent[] cardsArray;
+    //public List<CardSelectComponent> cardsList;
     private void Awake()
     {
-        SelectCount = 0;
+        SelectCount[GameplayManager.Instance.currentPlayer] = 0;
         IsRetracted = false;
         offset = cardWidth;
         handY = -200f;
     }
     public void Start()
     {
-        cardsArray = GetComponentsInChildren<CardSelectComponent>();
-        cardsList = new List<CardSelectComponent>(cardsArray);
-        if(HasCard())
-        {
-            //handY = cardsList[0].formerY;
-            UpdateCardPos();
-        }
+        //cardsArray = GetComponentsInChildren<CardSelectComponent>();
+        //cardsList = new List<CardSelectComponent>(cardsArray);
+        UpdateCardPos(GameplayManager.Instance.currentPlayer);
     }
 
-    public void DiscardCards()
+    public void DiscardCards(Player player)
     {
-        for (int i = 0; i < cardsList.Count; i++)
+        for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
         {
-            if (cardsList[i].isSelected)
+            if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
-                Debug.Log("Card " + cardsList[i].name + " is played.");
-                cardsList[i].EndSelect();
-                Destroy(cardsList[i].gameObject);
-                cardsList.RemoveAt(i);
+                //Debug.Log("Card " + cardsList[i].name + " is played.");
+                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelect();
+                Destroy(CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().gameObject);
+                CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 i--;
             }
         }
-        UpdateCardPos();
+        UpdateCardPos(player);
     }
     public void PlayCards(Player player)
     {
-        for (int i = 0; i < cardsList.Count; i++)
+        for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
         {
-            if (cardsList[i].isSelected)
+            if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
-                Debug.Log("Card " + cardsList[i].name + " is played.");
-                //cardsList[i].EndSelect();
-
-                CardManager.Instance.AddPlayedCard(cardsList[i].gameObject.GetComponent<Card>(),player);
-                for(int k = 0; k < CardManager.Instance.playerHandCardDict[player].Count; k++)
-                {
-                    if (CardManager.Instance.playerHandCardDict[player][k] == cardsList[i])
-                    {
-                        CardManager.Instance.playerHandCardDict[player].RemoveAt(k);
-                    }
-                }
+                //Debug.Log("Card " + cardsList[i].name + " is played.");
                 
-                if(cardsList[i].gameObject.GetComponent<Card>().effectStage == EffectStage.Every)
+                if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.Every)
                 {
                     CardManager.Instance.ImmediateCardTakeEffect(player);
                 }
-                else if (cardsList[i].gameObject.GetComponent<Card>().effectStage == EffectStage.S1)
+                else if (CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S1)
                 {
                     CardManager.Instance.S1CardTakeEffect(player);
                 }
                 else
                 {
-                    CardManager.Instance.AddPlayedCard( cardsList[i].gameObject.GetComponent<Card>(),player);
+                    CardManager.Instance.playedCardDict[player].Add(CardManager.Instance.playerHandCardDict[player][i]);
                 }
-                
-                cardsList[i].CardPlayAniamtion();
+
+                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
                 //cardsList[i].Interactable = false;
                 //cardsList[i].EndSelect();
-                cardsList.RemoveAt(i);
+                CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 i--;
             }
         }
-        UpdateCardPos();
+        UpdateCardPos(player);
     }
 
-    public void CancelCards()
+    public void CancelCards(Player player)
     {
-        for (int i = 0; i < cardsList.Count; i++)
+        for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
         {
-            if (cardsList[i].isSelected)
+            if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
-                Debug.Log("Card " + cardsList[i].name + " is canceled.");
-                cardsList[i].EndSelect();
+                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelect();
+                CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
+                i--;
             }
         }
     }
 
-    public void UpdateCardPos()
+    public void UpdateCardPos(Player player)
     {
         //offset = interval / cardsList.Count;
-        this.GetComponent<RectTransform>().sizeDelta = new Vector2(cardWidth * cardsList.Count + 50, 100);
-        Vector2 startPos = new Vector2(handX - cardsList.Count / 2.0f * offset + offset * 0.5f, handY);
-        for (int i = 0; i < cardsList.Count; i++)
+        int count = CardManager.Instance.playerHandCardDict[player].Count;
+        this.GetComponent<RectTransform>().sizeDelta = new Vector2(cardWidth * count + 50, 100);
+        Vector2 startPos = new Vector2(handX - count / 2.0f * offset + offset * 0.5f, handY);
+        for (int i = 0; i < count; i++)
         {
-            cardsList[i].GetComponent<RectTransform>().DOAnchorPos(startPos, 0.4f);
+            CardManager.Instance.playerHandCardDict[player][i].GetComponent<RectTransform>().DOAnchorPos(startPos, 0.4f);
             startPos.x += offset;
         }
     }
 
-    public bool HasCard()
+    public void Retract(Player player)
     {
-        return cardsList.Count > 0;
-    }
-
-    public void Retract()
-    {
-        CancelCards();
+        CancelCards(player);
         handY -= RetractOffset;
         IsRetracted = true;
-        UpdateCardPos();
+        UpdateCardPos(player);
         UpBotton.SetActive(true);
         DownBotton.SetActive(false);
     }
 
-    public void Disretract()
+    public void Disretract(Player player)
     {
         handY += RetractOffset;
         IsRetracted = false;
-        UpdateCardPos();
+        UpdateCardPos(player);
         DownBotton.SetActive(true);
         UpBotton.SetActive(false);
     }
-
-    //public IEnumerator playCardAnimation(CardSelectComponent card)
-    //{
-    //    card.transform.DOLocalMove(new Vector3(0, 450, 0), 0.4f);
-    //    yield return new WaitForSeconds(1f);
-    //    Destroy(card.gameObject);
-    //}
-
 
 }

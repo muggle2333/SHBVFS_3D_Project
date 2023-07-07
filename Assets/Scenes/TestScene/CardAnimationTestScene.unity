@@ -15860,6 +15860,8 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 0
+  playerIdNetwork:
+    m_InternalValue: 0
   CurrentActionPoint: 99
   ActionPointPerRound: 3
   MaxActionPoint: 3
@@ -20148,6 +20150,7 @@ GameObject:
   - component: {fileID: 1297871951}
   - component: {fileID: 1297871949}
   - component: {fileID: 1297871950}
+  - component: {fileID: 1297871954}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -20195,10 +20198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a1f3d683d8493469ae3e4d3e9c5fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStartPointRed: {x: 1, y: 0}
-  playerStartPointBlue: {x: 0, y: 0}
-  playerRed: {fileID: 962322100}
-  playerBlue: {fileID: 1456011317}
+  playerStartPoint:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  playerList: []
   currentPlayer: {fileID: 0}
 --- !u!114 &1297871947
 MonoBehaviour:
@@ -20286,6 +20289,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ee76abc97e9f442abf526191ab4c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1297871954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297871943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1646493301
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1301046414
 GameObject:
   m_ObjectHideFlags: 0
@@ -22955,6 +22974,8 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 1
+  playerIdNetwork:
+    m_InternalValue: 0
   CurrentActionPoint: 3
   ActionPointPerRound: 3
   MaxActionPoint: 3
