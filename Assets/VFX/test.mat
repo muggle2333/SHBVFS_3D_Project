@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainText:
-        m_Texture: {fileID: 2800000, guid: 8d2c379687966e14eb981383e6ab2029, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ba3c1d7a504aa94781ab5e6de004c52, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -45,13 +45,13 @@ Material:
     - _DecalMeshDepthBias: 0
     - _DecalMeshViewBias: 0
     - _DrawOrder: 0
-    - _NoiseStrength: 1
+    - _NoiseStrength: 0.55
     - _NoiseWidth: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 20
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1039224077487555870
 MonoBehaviour:
