@@ -12,6 +12,8 @@ public enum PlayerId
 
 public class Player : Character
 {
+
+
     public PlayerId Id;
     public NetworkVariable<int> playerIdNetwork;
     public int CurrentActionPoint;
