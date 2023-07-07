@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5474372095417353054}
   - component: {fileID: 5055412884555373187}
-  - component: {fileID: -7559931521609274013}
   m_Layer: 0
-  m_Name: RU2Founction
+  m_Name: YI5Function
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,17 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2738e94537511de45911a9b61e8497a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7559931521609274013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6896789876836155389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da0b547699d01843adcdd12023b967d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasAdded: 0
-  CanAdd: 0

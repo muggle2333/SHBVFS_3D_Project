@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RU2 : CardFounction
+public class RU2 : CardFunction
 {
     public bool hasAdded = false;
     public bool CanAdd = false;
     // Start is called before the first frame update
     void Start()
     {
-        Founction(GameplayManager.Instance.currentPlayer);
+        Function(GameplayManager.Instance.currentPlayer);
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class RU2 : CardFounction
             Destroy(gameObject);
         }
     }
-    void Founction(Player player)
+    void Function(Player player)
     {
         if (player.hasAttcaked == false)
         {

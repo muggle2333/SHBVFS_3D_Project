@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BING6 : CardFounction
+public class BING6 : CardFunction
 {
     private List<Player> players;
     private int distance;
@@ -12,7 +12,7 @@ public class BING6 : CardFounction
     void Start()
     {
         players = GameplayManager.Instance.GetPlayer();
-        Founction(GameplayManager.Instance.currentPlayer);
+        Function(GameplayManager.Instance.currentPlayer);
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class BING6 : CardFounction
     {
         
     }
-    void Founction(Player player)
+    void Function(Player player)
     {
         thisPlayer = player;
         if (players[0] == player)

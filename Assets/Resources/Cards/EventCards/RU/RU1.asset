@@ -35,3 +35,4 @@ MonoBehaviour:
   cardType: 1
   cardLevel: 0
   CardBuff: {fileID: 0}
+  cardFounction: {fileID: 0}

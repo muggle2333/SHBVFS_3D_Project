@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class YI5 : CardFounction
+public class YI5 : CardFunction
 {
     private bool HasTakeEffect=false;
     void Update()
@@ -10,10 +10,10 @@ public class YI5 : CardFounction
         if(TurnbasedSystem.Instance.CurrentGameStage == GameStage.S4 && HasTakeEffect == false)
         {
             HasTakeEffect = true;
-            Founction(GameplayManager.Instance.currentPlayer);
+            Function(GameplayManager.Instance.currentPlayer);
         }
     }
-    public void Founction(Player player)
+    public void Function(Player player)
     {
         player.CurrentActionPoint += 2;
         Destroy(this.gameObject);
