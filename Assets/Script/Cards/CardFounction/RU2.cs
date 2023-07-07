@@ -17,12 +17,14 @@ public class RU2 : CardFounction
     {
         if(TurnbasedSystem.Instance.CurrentGameStage == GameStage.S1 && hasAdded == false && CanAdd == true)
         {
-            GameplayManager.Instance.currentPlayer.Defence += 2;
+            GameplayManager.Instance.currentPlayer.baseDefense += 2;
+            Calculating.Instance.CalculatPlayerBaseData(GameplayManager.Instance.currentPlayer);
             hasAdded = true;
         }
         if(TurnbasedSystem.Instance.CurrentGameStage == GameStage.S4 && hasAdded == true)
         {
-            GameplayManager.Instance.currentPlayer.Defence -= 2;
+            GameplayManager.Instance.currentPlayer.baseDefense -= 2;
+            Calculating.Instance.CalculatPlayerBaseData(GameplayManager.Instance.currentPlayer);
             Destroy(gameObject);
         }
     }
