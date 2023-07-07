@@ -81,8 +81,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
-        cardSelectManager.SelectButton.SetActive(true);
-        cardSelectManager.CancelButton.SetActive(true);
+        GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
+        GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
         Debug.Log(cardSelectManager.SelectCount);
     }
     public void EndSelect()
@@ -94,8 +94,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
         {
-            cardSelectManager.SelectButton.SetActive(false);
-            cardSelectManager.CancelButton.SetActive(false);
+            GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(false);
+            GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);
         }
         Debug.Log(cardSelectManager.SelectCount);
     }
@@ -117,7 +117,9 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void CardTakeEffectAnimation()
     {
-
+        this.gameObject.SetActive(true);
+        var seq = DOTween.Sequence();
+        seq.Append(transform.DOScale(1.5f, 0.4f));
     }
 
     public void EnemyCardTakeEffectAnimation()

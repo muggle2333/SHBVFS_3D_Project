@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class GamePlayUI : MonoBehaviour
 {
-    [SerializeField] private Button playCard;
-    [SerializeField] private Button cancel;
-    //[SerializeField] private Button discardCards;
-    [SerializeField] private Button retract;
-    [SerializeField] private Button disretract;
+    public Button playCard;
+    public Button cancel;
+    //public Button discardCards;
+    public Button retract;
+    public Button disretract;
 
     // Start is called before the first frame update
     void Awake()

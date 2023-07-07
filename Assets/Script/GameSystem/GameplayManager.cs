@@ -13,7 +13,7 @@ public class GameplayManager : NetworkBehaviour
     //public Player playerBlue;
     public List<Player> playerList = new List<Player>();
     public Player currentPlayer;
-
+    public GamePlayUI gameplayUI;
     private ControlStage controlStage;
     private MoveStage moveStage;
     private AttackStage attackStage;

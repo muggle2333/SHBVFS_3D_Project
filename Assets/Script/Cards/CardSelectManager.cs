@@ -15,10 +15,10 @@ public class CardSelectManager : MonoBehaviour
     public float handY = 0f;
     public float cardWidth = 240f;
     public float interval = 300f;
-    public GameObject UpBotton;
-    public GameObject DownBotton;
-    public GameObject SelectButton;
-    public GameObject CancelButton;
+    //public GameObject UpBotton;
+    //public GameObject DownBotton;
+    //public GameObject SelectButton;
+    //public GameObject CancelButton;
     public Canvas canvas;
 
     [SerializeField] private float upperY;
@@ -95,7 +95,6 @@ public class CardSelectManager : MonoBehaviour
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
                 CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelect();
-                CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 i--;
             }
         }
@@ -121,8 +120,8 @@ public class CardSelectManager : MonoBehaviour
         handY -= RetractOffset;
         IsRetracted = true;
         UpdateCardPos(player);
-        UpBotton.SetActive(true);
-        DownBotton.SetActive(false);
+        GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(true);
+        GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(false);
     }
 
     public void Disretract(Player player)
@@ -130,8 +129,8 @@ public class CardSelectManager : MonoBehaviour
         handY += RetractOffset;
         IsRetracted = false;
         UpdateCardPos(player);
-        DownBotton.SetActive(true);
-        UpBotton.SetActive(false);
+        GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(false);
+        GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(true);
     }
 
 }
