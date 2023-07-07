@@ -50,7 +50,6 @@ public class DrawCardComponent : MonoBehaviour
     }
     public void DrawBasicCard(Player player)
     {
-        DrawBasicCardAndEventCard.SetActive(false);
         if (AllCardCount[AcademyType.Null] > PlayerDeck.AllCardDeck[AcademyType.Null].Count-1)
         {
             PlayerDeck.Shuffle(AcademyType.Null);
@@ -67,7 +66,6 @@ public class DrawCardComponent : MonoBehaviour
     }
     public void DrawEventCard(Player player)
     {
-        DrawBasicCardAndEventCard.SetActive(false);
         if (AllCardCount[currentPlayer.currentGrid.academy] > PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy].Count - 1)
         {
             PlayerDeck.Shuffle(currentPlayer.currentGrid.academy);
