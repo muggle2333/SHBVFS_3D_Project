@@ -29,13 +29,14 @@ public class CardSelectManager : MonoBehaviour
     //public List<CardSelectComponent> cardsList;
     private void Awake()
     {
-        SelectCount[GameplayManager.Instance.currentPlayer] = 0;
+
         IsRetracted = false;
         offset = cardWidth;
         handY = -200f;
     }
     public void Start()
     {
+        SelectCount[GameplayManager.Instance.currentPlayer] = 0;
         //cardsArray = GetComponentsInChildren<CardSelectComponent>();
         //cardsList = new List<CardSelectComponent>(cardsArray);
         UpdateCardPos(GameplayManager.Instance.currentPlayer);
@@ -102,6 +103,7 @@ public class CardSelectManager : MonoBehaviour
 
     public void UpdateCardPos(Player player)
     {
+        Debug.Log(3333);
         //offset = interval / cardsList.Count;
         int count = CardManager.Instance.playerHandCardDict[player].Count;
         this.GetComponent<RectTransform>().sizeDelta = new Vector2(cardWidth * count + 50, 100);
