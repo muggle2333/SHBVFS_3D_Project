@@ -28,7 +28,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         isSelected = false;
         duration = 0.25f;
     }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (Interactable == false) return;
@@ -36,6 +35,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
 
         Info.SetActive(true);
+        if (isSelected) return;
+        transform.DOLocalMoveY((targetY - formerY) / 2 + formerY, duration);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -43,6 +44,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
 
         Info.SetActive(false);
+        if (isSelected) return;
+        transform.DOLocalMoveY(formerY, duration);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -76,8 +79,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnSelect()
     {
-        //index = transform.GetSiblingIndex();
-        //transform.SetAsLastSibling();
+        index = transform.GetSiblingIndex();
+        transform.SetAsLastSibling();
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
@@ -90,7 +93,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     }
     public void EndSelect()
     {
-        //transform.SetSiblingIndex(index);
+        transform.SetSiblingIndex(index);
         if(Interactable)
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;

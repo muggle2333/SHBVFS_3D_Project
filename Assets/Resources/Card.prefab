@@ -252,7 +252,7 @@ MonoBehaviour:
   Interactable: 1
   IsInOpreationStage: 1
   isSelected: 0
-  targetY: 0
+  targetY: 50
   formerY: -200
   duration: 0.25
   Info: {fileID: 1743301718821823480}
@@ -373,7 +373,7 @@ RectTransform:
   m_GameObject: {fileID: 6493511748873790835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 16, y: 16, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1743301719574586812}

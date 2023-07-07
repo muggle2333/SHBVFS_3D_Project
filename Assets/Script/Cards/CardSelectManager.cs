@@ -29,7 +29,6 @@ public class CardSelectManager : MonoBehaviour
     //public List<CardSelectComponent> cardsList;
     private void Awake()
     {
-
         IsRetracted = false;
         offset = cardWidth;
         handY = -200f;
