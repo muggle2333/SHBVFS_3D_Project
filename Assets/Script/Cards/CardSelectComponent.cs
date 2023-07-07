@@ -81,8 +81,11 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
-        GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
-        GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+        if (TurnbasedSystem.Instance.CurrentGameStage == GameStage.S1)
+        {
+            GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
+            GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+        }
         Debug.Log(cardSelectManager.SelectCount);
     }
     public void EndSelect()
