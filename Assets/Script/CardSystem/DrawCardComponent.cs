@@ -27,6 +27,13 @@ public class DrawCardComponent : MonoBehaviour
             AllCardCount.Add((AcademyType)i,0);
         }
     }
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DrawCard(GameplayManager.Instance.currentPlayer);
+        }
+    }
     public void DrawCard(Player player)
     {
         currentPlayer = player;

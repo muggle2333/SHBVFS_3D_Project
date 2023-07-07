@@ -58,7 +58,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        if(IsInOpreationStage)
+        if(TurnbasedSystem.Instance.CurrentGameStage != GameStage.DiscardStage)
         {
             foreach(var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
             {
