@@ -43,15 +43,10 @@ public class DrawCardComponent : MonoBehaviour
             }
             else
             {
-                DrawBasicCardAndEventCard.SetActive(true);
+                DrawEventCard(player);
             }
             player.CurrentActionPoint--;
         }
-    }
-
-    public void TryDrawCard()
-    {
-        
     }
     public void DrawBasicCard(Player player)
     {

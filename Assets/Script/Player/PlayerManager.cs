@@ -94,11 +94,9 @@ public class PlayerManager : MonoBehaviour
                 Occupy(player, gridObject,false); break;
             case PlayerInteractType.Build:
                 Build(player, gridObject,false); break;
-            case PlayerInteractType.DrawBasic:
-                DrawBasic(player, gridObject); break;
-            case PlayerInteractType.DrawEvent:
-                DrawEvent(player, gridObject); break;
-                
+            case PlayerInteractType.Gacha:
+                DrawCard(player, gridObject); break;
+
         }
     }
     public void MovePlayer(Player player,GridObject gridObject)
@@ -126,17 +124,12 @@ public class PlayerManager : MonoBehaviour
     public void TryGacha(Player player, GridObject gridObject)
     {
         //drawCardComponent.TryDrawCard();
+        //drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
+    }
+
+    public void DrawCard(Player player, GridObject gridObject)
+    {
         drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
-    }
-
-    public void DrawBasic(Player player, GridObject gridObject)
-    {
-        drawCardComponent.DrawBasicCard(player);
-    }
-
-    public void DrawEvent(Player player, GridObject gridObject)
-    {
-        drawCardComponent.DrawEventCard(player);
     }
     public void UpdateGridAuthorityData(Player player, GridObject gridObject)
     {
