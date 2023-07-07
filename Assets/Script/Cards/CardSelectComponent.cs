@@ -34,16 +34,15 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
 
-        Info.SetActive(true);
         if (isSelected) return;
         transform.DOLocalMoveY((targetY - formerY) / 2 + formerY, duration);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (Interactable == false) return;
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
 
-        Info.SetActive(false);
         if (isSelected) return;
         transform.DOLocalMoveY(formerY, duration);
     }
@@ -79,6 +78,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnSelect()
     {
+        Info.SetActive(true);
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
         transform.DOLocalMoveY(targetY, duration);
@@ -89,10 +89,11 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
             GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
         }
-        Debug.Log(cardSelectManager.SelectCount);
+        //Debug.Log(cardSelectManager.SelectCount);
     }
     public void EndSelect()
     {
+        Info.SetActive(false);
         transform.SetSiblingIndex(index);
         if(Interactable)
         transform.DOLocalMoveY(formerY, duration);

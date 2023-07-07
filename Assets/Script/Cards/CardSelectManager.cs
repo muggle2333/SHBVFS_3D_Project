@@ -78,8 +78,6 @@ public class CardSelectManager : MonoBehaviour
                 }
 
                 CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
-                //cardsList[i].Interactable = false;
-                //cardsList[i].EndSelect();
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 i--;
             }
@@ -104,7 +102,7 @@ public class CardSelectManager : MonoBehaviour
         Debug.Log(3333);
         //offset = interval / cardsList.Count;
         int count = CardManager.Instance.playerHandCardDict[player].Count;
-        this.GetComponent<RectTransform>().sizeDelta = new Vector2(cardWidth * count + 50, 100);
+        this.GetComponent<RectTransform>().sizeDelta = new Vector2(cardWidth * count + 100, 100);
         Vector2 startPos = new Vector2(handX - count / 2.0f * offset + offset * 0.5f, handY);
         for (int i = 0; i < count; i++)
         {
