@@ -60,7 +60,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        if(TurnbasedSystem.Instance.CurrentGameStage != GameStage.DiscardStage)
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value != GameStage.DiscardStage)
         {
             foreach(var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
             {
@@ -79,7 +79,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnSelect()
     {
         Info.SetActive(true);
-        if (TurnbasedSystem.Instance.CurrentGameStage == GameStage.DiscardStage)
+        if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
         {
             foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
             {
@@ -92,12 +92,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
-        if (TurnbasedSystem.Instance.CurrentGameStage == GameStage.S1)
+        if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
         {
             GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
             GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
         }
-        else if (TurnbasedSystem.Instance.CurrentGameStage == GameStage.DiscardStage)
+        else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
         {
             GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(true);
             GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);

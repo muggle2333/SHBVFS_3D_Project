@@ -7,7 +7,7 @@ public class YI5 : CardFunction
     private bool HasTakeEffect=false;
     void Update()
     {
-        if(TurnbasedSystem.Instance.CurrentGameStage == GameStage.S4 && HasTakeEffect == false)
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S4 && HasTakeEffect == false)
         {
             HasTakeEffect = true;
             Function(GameplayManager.Instance.currentPlayer);

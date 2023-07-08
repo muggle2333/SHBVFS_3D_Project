@@ -15,13 +15,13 @@ public class RU2 : CardFunction
     // Update is called once per frame
     void Update()
     {
-        if(TurnbasedSystem.Instance.CurrentGameStage == GameStage.S1 && hasAdded == false && CanAdd == true)
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1 && hasAdded == false && CanAdd == true)
         {
             GameplayManager.Instance.currentPlayer.baseDefense += 2;
             Calculating.Instance.CalculatPlayerBaseData(GameplayManager.Instance.currentPlayer);
             hasAdded = true;
         }
-        if(TurnbasedSystem.Instance.CurrentGameStage == GameStage.S4 && hasAdded == true)
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S4 && hasAdded == true)
         {
             GameplayManager.Instance.currentPlayer.baseDefense -= 2;
             Calculating.Instance.CalculatPlayerBaseData(GameplayManager.Instance.currentPlayer);

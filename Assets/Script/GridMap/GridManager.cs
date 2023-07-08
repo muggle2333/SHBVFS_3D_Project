@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Unity.Netcode;
 
-public class GridManager : MonoBehaviour
+public class GridManager : NetworkBehaviour
 {
     [SerializeField] private GameObject academyText;
     [SerializeField] private GameObject buildingBlue;

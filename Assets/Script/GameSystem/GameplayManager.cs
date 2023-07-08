@@ -58,6 +58,8 @@ public class GameplayManager : NetworkBehaviour
         //    UIManager.Instance.ShowGridObjectUI(false, null);
         //}
     }
+    #region initializePlayer funcation ABANDON
+    //can't use
     public void InitializePlayer()
     {
         //connectedClientsList only accessable to the server
@@ -73,6 +75,7 @@ public class GameplayManager : NetworkBehaviour
         }
         InitializePlayerClientRpc();
     }
+    #endregion
     [ClientRpc]
     private void InitializePlayerClientRpc(ClientRpcParams clientRpcParams = default)
     {

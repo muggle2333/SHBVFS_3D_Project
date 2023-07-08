@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
+using static GameManager;
 
 public enum GameStage
 {
-    S1, //Opreation Stage
+    S1, //Control Stage
     DiscardStage,
     S2,
     MoveStage,
@@ -16,12 +18,12 @@ public enum GameStage
     S4,
 
 }
-public class TurnbasedSystem : MonoBehaviour
-{
+public class TurnbasedSystem : NetworkBehaviour
+{ 
     public static TurnbasedSystem Instance { get; private set; }
-    public GameStage  CurrentGameStage;
-    public GameStage  CompleteGameStage;
-    public int roundIndex = 0;
+    public NetworkVariable<GameStage>  CurrentGameStage = new NetworkVariable<GameStage>(GameStage.S1);
+    public NetworkVariable<GameStage> CompleteGameStage = new NetworkVariable<GameStage>(GameStage.S1);
+
 
     [SerializeField]private float S1PhaseTime = 30;
     [SerializeField]private float DiscardPhaseTime = 10;
@@ -35,7 +37,8 @@ public class TurnbasedSystem : MonoBehaviour
     public GameObject EndMenu;
 
     private TurnbaseUI turnbaseUI;
-
+    public NetworkVariable<bool> isStart = new NetworkVariable<bool>(false);
+    public NetworkVariable<int> roundIndex = new NetworkVariable<int>(0);
     private void Awake()
     {
         if(Instance!=null&&Instance!=this)
@@ -49,7 +52,7 @@ public class TurnbasedSystem : MonoBehaviour
     }
 
     #region Timer
-    public float timerValue ;
+    public NetworkVariable<float> timerValue = new NetworkVariable<float>(0f);
 
     public TextMeshProUGUI Timer;
 
@@ -61,28 +64,39 @@ public class TurnbasedSystem : MonoBehaviour
     void Start()
     {
         turnbaseUI = FindObjectOfType<TurnbaseUI>();
+        //For test
+        if (FindObjectOfType<NetworkManager>() != null) return;
+        StartTurnbaseSystem();
+    }
+    public void StartTurnbaseSystem()
+    {
+        if (!NetworkManager.Singleton.IsHost) return;
+        isStart.Value = true;
         StartCoroutine("TurnStart");
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timerValue>0)
+        if (!isStart.Value) return;
+
+        turnbaseUI.UpdateStageInfo(CurrentGameStage.Value, timerValue.Value, roundIndex.Value);
+
+        if (!NetworkManager.Singleton.IsHost) return;
+       
+        if(timerValue.Value>0)
         {
-            timerValue -= Time.deltaTime;
+            timerValue.Value -= Time.deltaTime;
         }
         else
         {
-            timerValue = 0;
+            timerValue.Value = 0;
         }
-        turnbaseUI.UpdateStageInfo(CurrentGameStage, timerValue, roundIndex);
-
     }
     #region One turn
     IEnumerator TurnStart()
     {
-        roundIndex++;
+        roundIndex.Value++;
         ControlPhase();
         UpdateTimer(S1PhaseTime);
         yield return new WaitForSecondsRealtime(S1PhaseTime);
@@ -102,8 +116,8 @@ public class TurnbasedSystem : MonoBehaviour
     void ControlPhase()
     {
         //Debug.Log("ControlPhase");
-        CurrentGameStage = GameStage.S1;
-        CompleteGameStage = GameStage.S4;
+        CurrentGameStage.Value = GameStage.S1;
+        CompleteGameStage.Value = GameStage.S4;
         GameplayManager.Instance.StartControlStage();
 
         UpdateTimer(S1PhaseTime);
@@ -112,15 +126,15 @@ public class TurnbasedSystem : MonoBehaviour
 
     void DiscardPhase()
     {
-        CurrentGameStage = GameStage.DiscardStage;
-        CompleteGameStage = CurrentGameStage - 1;
+        CurrentGameStage.Value = GameStage.DiscardStage;
+        CompleteGameStage.Value = CurrentGameStage.Value - 1;
         GameplayManager.Instance.StartDiscardStage();
     }
 
     IEnumerator Event2()
     {
-        CurrentGameStage = GameStage.S2;
-        CompleteGameStage = CurrentGameStage - 1;
+        CurrentGameStage.Value = GameStage.S2;
+        CompleteGameStage.Value = CurrentGameStage.Value - 1;
         GameplayManager.Instance.StartS2Stage();
         UpdateTimer(MovePhaseTime);
         yield return new WaitForSecondsRealtime(S2PhaseTime);
@@ -148,8 +162,8 @@ public class TurnbasedSystem : MonoBehaviour
     void MovePhase()
     {        
         //Debug.Log("MovePhase");
-        CurrentGameStage = GameStage.MoveStage;
-        CompleteGameStage = CurrentGameStage - 1;
+        CurrentGameStage.Value = GameStage.MoveStage;
+        CompleteGameStage.Value = CurrentGameStage.Value - 1;
         GameplayManager.Instance.StartMoveStage();
       
     }
@@ -157,8 +171,8 @@ public class TurnbasedSystem : MonoBehaviour
     void AttackPhase()
     {
         //Debug.Log("AttackPhase");
-        CurrentGameStage = GameStage.AttackStage;
-        CompleteGameStage = CurrentGameStage - 1;
+        CurrentGameStage.Value = GameStage.AttackStage;
+        CompleteGameStage.Value = CurrentGameStage.Value - 1;
         GameplayManager.Instance.StartAttackStage();
 
     }
@@ -166,8 +180,8 @@ public class TurnbasedSystem : MonoBehaviour
 
     void Event3()
     {
-        CurrentGameStage = GameStage.S3;
-        CompleteGameStage = CurrentGameStage - 1;
+        CurrentGameStage.Value = GameStage.S3;
+        CompleteGameStage.Value = CurrentGameStage.Value - 1;
         GameplayManager.Instance.StartS3Stage();
         //Debug.Log("Event3");
        
@@ -175,8 +189,8 @@ public class TurnbasedSystem : MonoBehaviour
 
     void Event4()
     {
-        CurrentGameStage = GameStage.S4;
-        CompleteGameStage = CurrentGameStage - 1;
+        CurrentGameStage.Value = GameStage.S4;
+        CompleteGameStage.Value = CurrentGameStage.Value - 1;
         GameplayManager.Instance.StartS4Stage();
         //Debug.Log("Event4");
         
@@ -192,11 +206,11 @@ public class TurnbasedSystem : MonoBehaviour
 
     public void UpdateTimer(float timer)
     {
-        timerValue = timer;
+        timerValue.Value = timer;
     }
     public void TurnToNextStage()
     {
-        CompleteGameStage += 1;
+        CompleteGameStage.Value += 1;
     }
 
     public void Pause()
