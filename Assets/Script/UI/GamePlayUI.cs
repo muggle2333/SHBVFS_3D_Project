@@ -11,6 +11,8 @@ public class GamePlayUI : MonoBehaviour
     public Button retract;
     public Button disretract;
 
+    public GameObject dyingPlayerUI;
+    public GameObject alivePlayerUI;
     // Start is called before the first frame update
     void Awake()
     {

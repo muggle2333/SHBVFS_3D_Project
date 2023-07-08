@@ -7,6 +7,7 @@ public class S3Stage : MonoBehaviour
 {
     private Dictionary<Player, List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
     private List<Player> playerList = new List<Player>();
+    private int i;
     //private Dictionary<Player,>;
     public void StartStage(Dictionary<Player, List<Card>> playerCardListDict)
     {
@@ -22,9 +23,9 @@ public class S3Stage : MonoBehaviour
             playerList.Add(playedCardDict.ElementAt(i).Key);
         }
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
-        while (playedCardDict.Count != 0)
+        while (playedCardDict[priorityList[i]].Count != 0)
         {
-            for (int i = 0; i < priorityList.Count; i++)
+            for (i = 0; i < priorityList.Count; i++)
             {
                 List<Card> playedCard = null;
                 if (playedCardDict.TryGetValue(priorityList[i], out playedCard))

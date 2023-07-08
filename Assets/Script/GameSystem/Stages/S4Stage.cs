@@ -7,6 +7,7 @@ public class S4Stage : MonoBehaviour
 {
     private Dictionary<Player, List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
     private List<Player> playerList = new List<Player>();
+    private int i;
     //private Dictionary<Player,>;
     public void StartStage(Dictionary<Player, List<Card>> playerCardListDict)
     {
@@ -19,7 +20,7 @@ public class S4Stage : MonoBehaviour
     IEnumerator S4CardTakeEffect()
     {
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
-        while (playedCardDict.Count != 0)
+        while (playedCardDict[priorityList[i]].Count != 0)
         {
             for (int i = 0; i < priorityList.Count; i++)
             {

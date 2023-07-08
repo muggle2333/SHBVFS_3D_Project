@@ -202,4 +202,9 @@ public class PlayerManager : MonoBehaviour
     {
         cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
     }
+
+    public void PlayerDying(Player dyingPlayer,Player alivePlayer)
+    {
+
+    }
 }
