@@ -24,27 +24,29 @@ public class GameManager : NetworkBehaviour
         GameOver,
     }
 
-    [SerializeField] private Transform playerPrefab;
+    //[SerializeField] private Transform playerPrefab;
     private NetworkVariable<WholeGameState> wholeGameState = new NetworkVariable<WholeGameState>(WholeGameState.WaitingToStart);
     private bool isLocalPlayerReady = false;
     private bool isPlayerPauesed;
     private NetworkVariable<bool> isGamePaused = new NetworkVariable<bool> (false);
+
+    [SerializeField] private GameObject managerContainerPath;
     private void Awake()
     {
         Instance= this;
-        DontDestroyOnLoad(gameObject);
         playerReadyDictionary = new Dictionary<ulong, bool>();
+        if (NetworkManager.Singleton.IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
+        }
     }
     //public override void OnNetworkSpawn()
     private void Start()
     {
         wholeGameState.OnValueChanged += WholeGameState_OnValueChanged;
         isGamePaused.OnValueChanged += IsGamePaused_OnValueChanged;
-        if (NetworkManager.Singleton.IsServer)
-        {
-            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
-            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
-        }
+        
     }
 
 
@@ -68,11 +70,13 @@ public class GameManager : NetworkBehaviour
         Debug.Log(sceneName);
         foreach(ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Transform playerTransform = Instantiate(playerPrefab);
-            //playerTransform.GetComponent<Player>().Id=(PlayerId)clientId;
+            Transform playerTransform = Instantiate(Resources.Load<GameObject>("PlayerPrefab").transform);
+            playerTransform.GetComponent<Player>().Id=(PlayerId)clientId;
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId,true);
         }
-        GameplayManager.Instance.InitializePlayer();
+        GameObject managerContainer = Instantiate(Resources.Load<GameObject>(managerContainerPath.name), Vector3.zero, Quaternion.identity);
+        managerContainer.GetComponent<NetworkObject>().Spawn();
+        //GameplayManager.Instance.InitializePlayer();
     }
 
     private void GameInput_OnInteractAction()
