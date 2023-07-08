@@ -49,6 +49,9 @@ public class GridObject
     public Transform vfxTransform;
 
     private Transform academyVfxTransform;
+    private Transform ownerVfxTransform;
+    private Transform buildingVfxTransform;
+    private Transform gachaVfxTransform;
     
     public int x;
     public int z;

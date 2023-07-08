@@ -24,10 +24,16 @@ public enum PlayerInteractType
 }
 
 [Serializable]
-public struct PlayerInteract
+public struct PlayerInteract : INetworkSerializable
 {
     public PlayerInteractType PlayerInteractType;
     public Vector2 GridObjectXZ;
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T: IReaderWriter
+    {
+        serializer.SerializeValue(ref PlayerInteractType);
+        serializer.SerializeValue(ref GridObjectXZ);
+    }
 }
 
 public class PlayerManager : NetworkBehaviour
@@ -88,9 +94,8 @@ public class PlayerManager : NetworkBehaviour
     [ServerRpc(RequireOwnership =false)]
     public void SaveInteractServerRpc(PlayerInteractType playerInteractType, PlayerId playerId, Vector2 gridObjectXZ)
     {
-        PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObjectXZ = new Vector2(0, 0) };
+        PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObjectXZ = gridObjectXZ };
         Player player= GameplayManager.Instance.playerList[(int)playerId];
-        GridObject gridObject = GridManager.Instance.grid.gridArray[(int)gridObjectXZ.x, (int)gridObjectXZ.y];
         controlStage.AddPlayerInteract(player, playerInteract);
     }
     public void Interact(Player player,PlayerInteract playerInteract)
@@ -108,6 +113,12 @@ public class PlayerManager : NetworkBehaviour
                 DrawCard(player, gridObject); break;
 
         }
+    }
+    [ClientRpc]
+    public void InteractClientRpc(PlayerId playerId,PlayerInteract playerInteract,ClientRpcParams clientRpcParams = default)
+    {
+        Player player = GameplayManager.Instance.playerList[(int)playerId];
+        Interact(player, playerInteract);
     }
     public void MovePlayer(Player player,GridObject gridObject)
     {

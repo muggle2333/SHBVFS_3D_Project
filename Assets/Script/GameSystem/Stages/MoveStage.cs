@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 
-public class MoveStage : MonoBehaviour
+public class MoveStage : NetworkBehaviour
 {
     private Dictionary<Player, List<PlayerInteract>> playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();
 
     private List<Player> playerList = new List<Player>();
 
     public void StartStage(Dictionary<Player, List<PlayerInteract>> playerInteractDict)
-    { 
+    {
+        if (!NetworkManager.Singleton.IsHost) return;
         this.playerInteractDict = playerInteractDict;
         playerList = new List<Player>();
         StartCoroutine("StartMove");
@@ -40,8 +42,20 @@ public class MoveStage : MonoBehaviour
                     //Debug.Log(priorityList[i].name + " " + playerInteract[0].PlayerInteractType);
 
                     yield return new WaitForSeconds(1);
-                    PlayerManager.Instance.Interact(priorityList[i], playerInteract[0]);
-                    
+                    if(FindObjectOfType<NetworkManager>())
+                    {
+                        PlayerManager.Instance.InteractClientRpc(priorityList[i].Id, playerInteract[0], new ClientRpcParams
+                        {
+                            Send = new ClientRpcSendParams
+                            {
+                                TargetClientIds = new ulong[] { (ulong)priorityList[i].Id }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        PlayerManager.Instance.Interact(priorityList[i], playerInteract[0]);
+                    }
 
                     playerInteract.RemoveAt(0);
                     playerInteractDict[priorityList[i]] = playerInteract;

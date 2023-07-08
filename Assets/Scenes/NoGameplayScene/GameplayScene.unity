@@ -16413,10 +16413,6 @@ MonoBehaviour:
   grid:
     width: 0
     length: 0
-  gridText:
-    m_InternalValue:
-      width: 0
-      length: 0
   gridUI: {fileID: 330505426}
   gridDistance: 0
 --- !u!4 &1005686198
@@ -33888,6 +33884,10 @@ PrefabInstance:
       propertyPath: EndMenu
       value: 
       objectReference: {fileID: 63415791}
+    - target: {fileID: 5054783593724278040, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
+      propertyPath: S1PhaseTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5054783593724278041, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
       propertyPath: m_Name
       value: Turnbased System
