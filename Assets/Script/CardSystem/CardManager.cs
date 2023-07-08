@@ -55,12 +55,16 @@ public class CardManager : MonoBehaviour
     {
         for (int i = 0; i < playedCardDict[player].Count; i++)
         {
+            Debug.Log("aa");
             if (playedCardDict[player][i].effectStage == stage)
             {
+
+                Debug.Log("bb");
                 if (playedCardDict[player][i].cardFounction != null)
                 {
                     Instantiate(playedCardDict[player][i].cardFounction);
                 }
+                Debug.Log("cc");
                 playedCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
                 calculating.DelataCardData(playedCardDict[player][i], player);
                 calculating.CalculatPlayerBaseData(player);
