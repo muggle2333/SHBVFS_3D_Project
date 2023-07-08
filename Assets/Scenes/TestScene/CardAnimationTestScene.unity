@@ -29704,7 +29704,7 @@ MonoBehaviour:
   CompleteGameStage: 0
   roundIndex: 0
   S1PhaseTime: 10
-  DiscardPhaseTime: 5
+  DiscardPhaseTime: 10
   S2PhaseTime: 5
   MovePhaseTime: 5
   S3PhaseTime: 5

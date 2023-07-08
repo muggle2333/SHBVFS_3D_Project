@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class CardSelectManager : MonoBehaviour
 {
     public Dictionary<Player, int> SelectCount = new Dictionary<Player, int>();
+    public Dictionary<Player, int> maxSelected = new Dictionary<Player, int>();
     public bool IsRetracted;
     public float RetractOffset;
     public float offset;
@@ -36,6 +37,7 @@ public class CardSelectManager : MonoBehaviour
     public void Start()
     {
         SelectCount[GameplayManager.Instance.currentPlayer] = 0;
+        maxSelected[GameplayManager.Instance.currentPlayer] = 1;
         //cardsArray = GetComponentsInChildren<CardSelectComponent>();
         //cardsList = new List<CardSelectComponent>(cardsArray);
         UpdateCardPos(GameplayManager.Instance.currentPlayer);
@@ -43,8 +45,6 @@ public class CardSelectManager : MonoBehaviour
 
     public void DiscardCards(Player player)
     {
-        int discardCount = CardManager.Instance.playerHandCardDict[player].Count - GameplayManager.Instance.currentPlayer.HP;
-        if (discardCount < 0) discardCount = 0;
         for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
         {
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
@@ -56,6 +56,8 @@ public class CardSelectManager : MonoBehaviour
             }
         }
         UpdateCardPos(player);
+        GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] = 0;
+        maxSelected[GameplayManager.Instance.currentPlayer] = 1;
     }
     public void PlayCards(Player player)
     {
