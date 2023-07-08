@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -44,7 +45,7 @@ public class GameplayManager : NetworkBehaviour
     }
     private void Start()
     {
-        //InitializePlayerServerRpc();
+        InitializePlayerClientRpc();
     }
     private void Update()
     {
@@ -59,46 +60,33 @@ public class GameplayManager : NetworkBehaviour
     }
     public void InitializePlayer()
     {
+        //connectedClientsList only accessable to the server
         foreach(var client in NetworkManager.Singleton.ConnectedClientsList)
         {
             playerList.Add(client.PlayerObject.GetComponent<Player>());
         }
         for(int i =0;i< playerList.Count;i++)
         {
-            Debug.LogError(i);
             playerList[i].transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
             playerList[i].currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
             playerList[i].RefreshLinePath();
         }
-
-        Debug.LogError(IsClient + " " + IsServer + " " + IsHost);
-        Debug.LogError("server");
         InitializePlayerClientRpc();
-        TestClientRpc();
-    }
-    [ClientRpc]
-    public void TestClientRpc(ClientRpcParams clientRpcParams = default)
-    {
-        Debug.LogError(clientRpcParams.Receive.ToString());
     }
     [ClientRpc]
     private void InitializePlayerClientRpc(ClientRpcParams clientRpcParams = default)
     {
-        Debug.LogError(clientRpcParams.Receive.ToString());
-        Debug.LogError("rpc");
+        playerList =FindObjectsOfType<Player>().ToList<Player>();
+        playerList = playerList.OrderBy(a=>a.Id).ToList();
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            playerList[i].transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
+            playerList[i].currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
+            playerList[i].RefreshLinePath();
+        }
         currentPlayer = playerList[(int)NetworkManager.Singleton.LocalClientId];
-        //playerRed = NetworkManager.Singleton.ConnectedClients[0].PlayerObject.GetComponent<Player>();
-        //playerRed.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointRed.x, (int)playerStartPointRed.y);
-        //playerRed.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointRed.x, (int)playerStartPointRed.y);
-        //playerRed.RefreshLinePath();
-
-        //playerBlue = NetworkManager.Singleton.ConnectedClients[1].PlayerObject.GetComponent<Player>();
-        //playerBlue.transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
-        //playerBlue.currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPointBlue.x, (int)playerStartPointBlue.y);
-        //playerBlue.RefreshLinePath();
-    
-    
         UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
+        
     }
     public void SetCurrentPlayer(Player player)
     {
@@ -108,9 +96,6 @@ public class GameplayManager : NetworkBehaviour
 
     public List<Player> GetPlayer()
     {
-        //List<Player> list = new List<Player>();
-        //list.Add(playerRed.GetComponent<Player>());
-        //list.Add(playerBlue.GetComponent<Player>());
         return playerList;
     }
     public void UpdateSelectPlayer(Player player)

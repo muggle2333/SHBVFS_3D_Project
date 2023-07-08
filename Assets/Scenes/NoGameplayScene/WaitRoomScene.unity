@@ -493,7 +493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c12d73199cd304598d9a8ddf86e4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitRoomUI: {fileID: 0}
+  waitRoomUI: {fileID: 1217554113}
+  managerContainerPath: {fileID: 115149969472261574, guid: 4bc9afb463f06a64da870ccd967e155d, type: 3}
 --- !u!4 &470132613
 Transform:
   m_ObjectHideFlags: 0
