@@ -86,6 +86,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
         if (TurnbasedSystem.Instance.CurrentGameStage == GameStage.S1)
         {
+            /////
             GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
             GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
         }
@@ -95,8 +96,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
-        if(Interactable)
-        transform.DOLocalMoveY(formerY, duration);
+        if(Interactable) transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
@@ -126,11 +126,26 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         this.gameObject.SetActive(true);
         var seq = DOTween.Sequence();
-        seq.Append(transform.DOScale(1.5f, 0.4f));
+        seq.Append(transform.DOLocalMoveX(0, 0.4f));
+        seq.Join(transform.DOScale(1.5f, 0.4f));
+        seq.AppendInterval(0.5f);
+        seq.Append(transform.DOLocalMoveX(-200, 0.4f));
+        seq.Join(transform.DOScale(1f, 0.4f));
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 
     public void EnemyCardTakeEffectAnimation()
     {
-
+        this.transform.localPosition = new Vector3(800, transform.localPosition.y, transform.localPosition.z);
+        this.gameObject.SetActive(true);
+        var seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveX(0, 0.4f));
+        seq.Join(transform.DOScale(1.5f, 0.4f));
+        seq.AppendInterval(0.5f);
+        seq.Append(transform.DOLocalMoveX(-200, 0.4f));
+        seq.Join(transform.DOScale(1f, 0.4f));
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 }

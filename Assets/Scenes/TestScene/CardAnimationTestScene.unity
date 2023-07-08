@@ -2670,9 +2670,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 191666971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e91aeff4ec10a147827f3ad10cad12b, type: 3}
+  m_Script: {fileID: 11500000, guid: 59d03a2a0433a664e9ab440c5f54551e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  academyMaxHP: 0
+  academyHPPerRound: 0
+  academyAttackRange: 0
+  academyAttackDamage: 0
+  academyDefense: 0
+  academyAPPerRound: 0
+  totalAcademyMaxHP: 0
+  totalAcademyHPPerRound: 0
+  totalAcademyAttackRange: 0
+  totalAcademyAttackDamage: 0
+  totalAcademyDefense: 0
+  totalAcademyAPPerRound: 0
+  cardAttackDamage: 0
+  cardDefense: 0
+  cardAttackRange: 0
+  cardDamage: 0
+  cardAP: 0
+  cardHP: 0
+  cardFreeMoveNum: 0
+  totalCardAttackDamage: 0
+  totalCardDefense: 0
+  totalCardAttackRange: 0
+  academyEffectNum: 000000000000000000000000000000000000000000000000
+  AcademyBuffData:
+    maxHp: 0
+    hpPreRound: 0
+    attackRange: 0
+    attackDamage: 0
+    defense: 0
+    APPerRound: 0
+  CardData: {fileID: 0}
+  playerAcademyBuffcomponent: {fileID: 0}
 --- !u!4 &191666973
 Transform:
   m_ObjectHideFlags: 0
@@ -29671,7 +29703,7 @@ MonoBehaviour:
   CurrentGameStage: 0
   CompleteGameStage: 0
   roundIndex: 0
-  S1PhaseTime: 999
+  S1PhaseTime: 10
   DiscardPhaseTime: 5
   S2PhaseTime: 5
   MovePhaseTime: 5
