@@ -12,6 +12,7 @@ public class S2Stage : MonoBehaviour
     {
         playedCardDict = playerCardListDict;
         playerList = new List<Player>();
+        playerList = GameplayManager.Instance.playerList;
         StartCoroutine("S2CardTakeEffect");
 
     }

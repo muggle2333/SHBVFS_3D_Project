@@ -12,6 +12,7 @@ public class S4Stage : MonoBehaviour
     {
         playedCardDict = playerCardListDict;
         playerList = new List<Player>();
+        playerList = GameplayManager.Instance.playerList;
         StartCoroutine("S4CardTakeEffect");
 
     }

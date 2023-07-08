@@ -22,7 +22,7 @@ public class CardManager : MonoBehaviour
     void Start()
     {
         List<Player> playerList = new List<Player>();
-        playerList = FindObjectOfType<GameplayManager>().GetPlayer();
+        playerList = GameplayManager.Instance.playerList;
         for(int i = 0; i < playerList.Count; i++)
         {
             playedCardDict.Add(playerList[i], new List<Card>());  
