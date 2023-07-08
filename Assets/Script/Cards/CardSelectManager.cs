@@ -99,7 +99,6 @@ public class CardSelectManager : MonoBehaviour
 
     public void UpdateCardPos(Player player)
     {
-        Debug.Log(3333);
         //offset = interval / cardsList.Count;
         int count = CardManager.Instance.playerHandCardDict[player].Count;
         this.GetComponent<RectTransform>().sizeDelta = new Vector2(cardWidth * count + 100, 100);

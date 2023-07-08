@@ -194,7 +194,7 @@ public class SelectController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 TargetRenderer = hit.transform.GetComponent<Renderer>();
                 if (TargetRenderer.gameObject.GetComponentInParent<Player>() && FindObjectOfType<NetworkManager>()==null)
                 {

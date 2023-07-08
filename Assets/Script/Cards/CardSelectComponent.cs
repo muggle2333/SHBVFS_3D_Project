@@ -126,7 +126,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         this.gameObject.SetActive(true);
         var seq = DOTween.Sequence();
-        seq.Append(transform.DOScale(1.5f, 0.4f));
+        seq.Append(transform.DOLocalMoveX(0, 0.4f));
+        seq.Join(transform.DOScale(1.5f, 0.4f));
+        seq.AppendInterval(0.5f);
+        seq.Append(transform.DOLocalMoveX(-200, 0.4f));
+        seq.Join(transform.DOScale(1f, 0.4f));
+        seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 
     public void EnemyCardTakeEffectAnimation()
