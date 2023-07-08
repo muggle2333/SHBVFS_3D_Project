@@ -4,18 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Unity.Netcode;
+using TMPro;
 
 public class GridManager : NetworkBehaviour
 {
-    [SerializeField] private GameObject academyText;
-    [SerializeField] private GameObject buildingBlue;
-    [SerializeField] private GameObject buildingBlueS1;
-    [SerializeField] private Transform buildingContainer;
-    [SerializeField] private Transform buildingContainerS1;
-    
-    [SerializeField] private GameObject vfxGridHightlight;
-    [SerializeField] private Transform vfxContainer;
-
     public int levelIndex =1;
     public Grid<GridObject> grid;
     public GridObject[,] backupGrid = new GridObject[10,10];
@@ -36,11 +28,11 @@ public class GridManager : NetworkBehaviour
 
         grid = LoadGridData(levelIndex);
         gridDistance = grid.GetGridDistance();
+        //GridVfxManager.Instance.CreateVfx();
     }
     public void Start()
     {
-        CreateVfx();
-
+        //GridVfxManager.Instance.CreateVfx();
     }
     public void Update()
     {
@@ -101,20 +93,7 @@ public class GridManager : NetworkBehaviour
         grid.gridArray = gridArray;
         return grid;
     }
-    public void CreateVfx()
-    {
-        for (int x = 0; x < grid.width; x++)
-        {
-            for (int z = 0; z < grid.length; z++)
-            {
-                GridObject gridObject = grid.gridArray[x, z];
-                if (gridObject.landType != LandType.Plain) continue;
-                GameObject vfx = Instantiate(academyText, grid.GetWorldPositionCenter(x, z), Quaternion.identity);
-                vfx.transform.SetParent(vfxContainer, false);
-                gridObject.SetAcademyVfx(vfx.transform);
-            }
-        }
-    }
+    
 
     public GridObject GetSelectedGridObject(Vector3 pointPos)
     {
@@ -133,37 +112,14 @@ public class GridManager : NetworkBehaviour
     public GridObject ManageOwner(GridObject gridObject ,Player player,bool isControlStage)
     {
         gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
-        if(gridObject.vfxTransform == null)
-        {
-            GameObject vfx = Instantiate(vfxGridHightlight);
-            vfx.transform.position = grid.GetWorldPositionCenter(gridObject.x, gridObject.z);
-            vfx.transform.SetParent(vfxContainer);
-            gridObject.SetOwner(player, vfx.transform,isControlStage);
-        }
-        else
-        {
-            gridObject.SetOwner(player, null, isControlStage);
-        }
-        
-
+        gridObject.SetOwner(player, isControlStage);
         return gridObject;
     }
 
     public GridObject ManageBuilding(GridObject gridObject,bool isControlStage)
     {
         gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
-        if(isControlStage)
-        {
-            GameObject building = Instantiate(buildingBlueS1);
-            building.transform.SetParent(buildingContainerS1);
-            gridObject.SetBuilding(building);
-        }
-        else
-        {
-            GameObject building = Instantiate(buildingBlue);
-            building.transform.SetParent(buildingContainer);
-            gridObject.SetBuilding(building);
-        }
+        gridObject.SetBuilding(true,isControlStage);
         return gridObject;
     }
     public void BackupGrid()
@@ -180,27 +136,29 @@ public class GridManager : NetworkBehaviour
 
     public void ResetGrid()
     {
-        //除了visualTransform 都恢复原样
+        //除了探知 都恢复原样
         for (int x = 0; x < grid.width; x++)
         {
             for (int z = 0; z < grid.length; z++)
             {
-                Transform tmp = grid.gridArray[x, z].vfxTransform;
+                //Transform tmp = grid.gridArray[x, z].ownerVfxTransform;
                 grid.gridArray[x, z] = backupGrid[x,z];
-                grid.gridArray[x, z].vfxTransform = tmp;
+                //grid.gridArray[x, z].ownerVfxTransform = tmp;
             }
         }
-        //Clear all the S1 building & vfx
-        for (int i = 0; i < buildingContainerS1.childCount; i++)
-        {
-            Destroy(buildingContainerS1.GetChild(i).gameObject);
-        }
+        //Clear all the S1 buildingOwner & vfx
+        //for (int i = 0; i < buildingContainerS1.childCount; i++)
+        //{
+        //    Destroy(buildingContainerS1.GetChild(i).gameObject);
+        //}
         for (int x = 0; x < grid.width; x++)
         {
             for (int z = 0; z < grid.length; z++)
             {
-                grid.gridArray[x, z].UpdateVfxColor(false);
+                GridObject gridObject = grid.gridArray[x, z];
+                GridVfxManager.Instance.UpdateVfx(gridObject);
             }
         }
     }
 }
+

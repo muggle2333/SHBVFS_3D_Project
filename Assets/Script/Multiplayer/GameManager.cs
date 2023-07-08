@@ -108,7 +108,8 @@ public class GameManager : NetworkBehaviour
         Debug.Log(sceneName);
         foreach(ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Transform playerTransform = Instantiate(Resources.Load<GameObject>("PlayerPrefab").transform);
+            string playerPath = clientId == 0 ? "PlayerPrefab_Red" : "PlayerPrefab_Blue";
+            Transform playerTransform = Instantiate(Resources.Load<GameObject>(playerPath).transform);
             playerTransform.GetComponent<Player>().Id=(PlayerId)clientId;
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId,true);
         }

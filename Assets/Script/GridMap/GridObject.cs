@@ -1,4 +1,4 @@
-//using Autodesk.Fbx;
+﻿//using Autodesk.Fbx;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,44 +41,37 @@ public class GridObject
     public bool isHasBuilding = false;
     public bool canBuild = true;
     public bool canBeOccupied = true;
-    
-    private Dictionary<Player,bool> playerKnowDict = new Dictionary<Player,bool>();
+
+    private bool[] playerKnowList = new bool[] { false, false };
 
     public Grid<GridObject> grid;
-    public Transform landTransform; //place the building
-    public Transform vfxTransform;
-
-    private Transform academyVfxTransform;
-    private Transform ownerVfxTransform;
-    private Transform buildingVfxTransform;
-    private Transform gachaVfxTransform;
     
     public int x;
     public int z;
 
-    private bool isDiscovered = false;
+    public bool isDiscovered = false;
 
     public GridObject()
     {
         this.landType = LandType.Plain;
         owner = null;
-        landTransform = null;
-        vfxTransform = null;
         isHasBuilding = false;
+        isDiscovered = false;
         canBuild = true;
         canBeOccupied = true;
-    }
+
+}
     public GridObject(int x, int z)
     {
         this.x = x;
         this.z = z;
         owner = null;
-        landTransform = null;
-        vfxTransform = null;
         this.landType = LandType.Plain;
         isHasBuilding = false;
+        isDiscovered = false;
         canBuild = true;
         canBeOccupied = true;
+
     }
     public GridObject(Grid<GridObject> grid, int x, int z)
     {
@@ -86,12 +79,12 @@ public class GridObject
         this.x = x;
         this.z = z;
         owner = null;
-        landTransform = null;
-        vfxTransform = null;
         this.landType = LandType.Plain;
         isHasBuilding = false;
+        isDiscovered = false;
         canBuild = true;
         canBeOccupied = true;
+
     }
     public GridObject(GridObject tmpObject)
     {
@@ -100,8 +93,6 @@ public class GridObject
         this.z = tmpObject.z;
         owner = tmpObject.owner;
         academy= tmpObject.academy;
-        landTransform = tmpObject.landTransform;
-        vfxTransform = tmpObject.vfxTransform;
         this.landType = tmpObject.landType;
         isHasBuilding = tmpObject.isHasBuilding;
         canBuild = tmpObject.canBuild;
@@ -168,83 +159,34 @@ public class GridObject
 
     }
 
-    public void SetOwner(Player player,Transform vfx,bool isControlStage)
+    public void SetOwner(Player player,bool isControlStage)
     {
-        if(vfx != null)
-        {
-            vfxTransform = vfx;
-        }
-        if (owner == player) return;
         owner = player;
-        UpdateVfxColor(isControlStage);
         grid.TriggerGridObjectChanged(x, z);
+        GridVfxManager.Instance.UpdateVfxOwner(this,isControlStage);
 
     }
-  
-    public void UpdateVfxColor(bool isControlStage)
+ 
+    public void SetBuilding(bool isHasBuilding,bool isControlStage)
     {
-        if(owner==null)
-        {
-            if (vfxTransform == null) return;
-            Color vfxColor = new Color(0, 0, 0, 0f);
-            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = vfxColor;
-        }
-        else if(owner.Id == PlayerId.RedPlayer)
-        {
-            Color vfxColor = isControlStage?new Color(1, 0, 0, 0.5f): new Color(1, 0, 0, 1);
-            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = vfxColor;
-        }
-        else if(owner.Id == PlayerId.BluePlayer)
-        {
-            Color vfxColor = isControlStage ? new Color(0, 0,1, 0.5f) : new Color(0, 0, 1, 1);
-            vfxTransform.gameObject.GetComponentInChildren<SpriteRenderer>().color = vfxColor;
-        }
-        
-    }
-    public void SetBuilding(GameObject building)
-    {
-        isHasBuilding = true;
-        landTransform = building.transform;
-        int randomRotation = UnityEngine.Random.Range(0, 6);
-        landTransform.transform.Rotate(new Vector3(0, 60f * randomRotation, 0));
-        landTransform.position = grid.GetWorldPositionCenter(x, z);
+        this.isHasBuilding = isHasBuilding;
         grid.TriggerGridObjectChanged(x, z);
+        GridVfxManager.Instance.UpdateVfxBuilding(this,isControlStage);
     }
+    //被走到过，及全员都知道属性
     public void DiscoverLand()
     {
         isDiscovered = true;
         grid.TriggerGridObjectChanged(x, z);
     }
 
-    public void SetAcademyVfx(Transform academyTransform)
-    {
-        academyVfxTransform = academyTransform;
-    }
-
     public void SetKnowAuthority(Player player)
     {
-        bool isKnowable = true;
-        if(playerKnowDict.TryGetValue(player,out isKnowable))
-        {
-            playerKnowDict[player] = true;
-        }
-        else
-        {
-            playerKnowDict.Add(player, true);
-        }
+        playerKnowList[(int)player.Id] = true;
     }
 
     public bool CheckKnowAuthority(Player player)
     {
-        bool isKnowable = false;
-        if (playerKnowDict.TryGetValue(player, out isKnowable))
-        {
-            return isKnowable;
-        }
-        else
-        {
-            playerKnowDict.Add(player, false);
-        }
-        return false;
+        return playerKnowList[(int)player.Id];
     }
 }
