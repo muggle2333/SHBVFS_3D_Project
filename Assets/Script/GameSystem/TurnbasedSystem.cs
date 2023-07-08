@@ -121,6 +121,7 @@ public class TurnbasedSystem : MonoBehaviour
     {
         CurrentGameStage = GameStage.S2;
         CompleteGameStage = CurrentGameStage - 1;
+        GameplayManager.Instance.StartS2Stage();
         UpdateTimer(MovePhaseTime);
         yield return new WaitForSecondsRealtime(S2PhaseTime);
 
@@ -161,8 +162,6 @@ public class TurnbasedSystem : MonoBehaviour
         GameplayManager.Instance.StartAttackStage();
 
     }
-
-
    
 
     void Event3()

@@ -39,8 +39,6 @@ public class S3Stage : MonoBehaviour
 
                     yield return new WaitForSeconds(1);
                     CardManager.Instance.CardTakeEffect(priorityList[i], EffectStage.S3);
-
-
                     playedCard.RemoveAt(0);
                     playedCardDict[priorityList[i]] = playedCard;
                 }
