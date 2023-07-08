@@ -18,7 +18,7 @@ public class GameplayManager : NetworkBehaviour
     private ControlStage controlStage;
     private MoveStage moveStage;
     private AttackStage attackStage;
-    private DiscardStage discardStage;
+    public DiscardStage discardStage;
     private S2Stage s2Stage;
     private S3Stage s3Stage;
     private S4Stage s4Stage;

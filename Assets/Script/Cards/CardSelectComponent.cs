@@ -49,7 +49,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
+
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -60,18 +60,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        if(TurnbasedSystem.Instance.CurrentGameStage.Value != GameStage.DiscardStage)
-        {
-            foreach(var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
-            {
-                if (this.gameObject == card.gameObject) continue;
-                if(card.gameObject.GetComponent<CardSelectComponent>().isSelected)
-                {
-                    card.gameObject.GetComponent<CardSelectComponent>().EndSelect();
-                    break;
-                }
-            }
-        }
         if (isSelected) EndSelect();
         else OnSelect();
     }
@@ -79,45 +67,76 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnSelect()
     {
         Info.SetActive(true);
-        if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
-        {
-            foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
-            {
-                if (this.gameObject == card.gameObject) continue;
-                card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);
-            }
-        }
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
+        foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+        {
+            if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] <= cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
+                break;
+            if (this.gameObject == card.gameObject) continue;
+            if (card.gameObject.GetComponent<CardSelectComponent>().isSelected)
+            {
+                card.gameObject.GetComponent<CardSelectComponent>().EndSelect();
+            }
+        }//ensure current selected count
         if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
         {
-            GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
-            GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+            S1AdditionalCondition();
         }
-        else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
+        else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage && GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] > 0)
         {
-            GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(true);
-            GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
-        }
-        //Debug.Log(cardSelectManager.SelectCount);
+            DiscardAdditionalCondition();
+        }//activate UI button
+        //Debug.Log(cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]);
     }
     public void EndSelect()
     {
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
-        if(Interactable) transform.DOLocalMoveY(formerY, duration);
+        if (Interactable) transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
-        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
+        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
             GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(false);
-            GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);
             GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(false);
         }
-        //Debug.Log(cardSelectManager.SelectCount);
+        if(cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
+            GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);
+        //Debug.Log(cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]);
+    }
+
+    public void S1AdditionalCondition()
+    {
+        GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
+        GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+    }
+
+    public void DiscardAdditionalCondition()
+    {
+        foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+        {
+            if (this.gameObject == card.gameObject) continue;
+            card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);
+        }//turn off Info
+        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
+        {
+            GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(true);
+
+        }
+        GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+    }
+
+    public void DyingAdditionalCondition()
+    {
+        foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+        {
+            if (this.gameObject == card.gameObject) continue;
+            card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);
+        }//turn off Info
     }
 
     public void CardPlayAniamtion()

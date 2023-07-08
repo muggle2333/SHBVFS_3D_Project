@@ -66,7 +66,8 @@ public class TurnbasedSystem : NetworkBehaviour
         turnbaseUI = FindObjectOfType<TurnbaseUI>();
         //For test
         if (FindObjectOfType<NetworkManager>() != null) return;
-        StartTurnbaseSystem();
+        isStart.Value = true;
+        StartCoroutine("TurnStart");
     }
     public void StartTurnbaseSystem()
     {
@@ -78,11 +79,12 @@ public class TurnbasedSystem : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (!isStart.Value) return;
 
         turnbaseUI.UpdateStageInfo(CurrentGameStage.Value, timerValue.Value, roundIndex.Value);
 
-        if (!NetworkManager.Singleton.IsHost) return;
+        if (FindObjectOfType<NetworkManager>()!=null && !NetworkManager.Singleton.IsHost) return;
        
         if(timerValue.Value>0)
         {

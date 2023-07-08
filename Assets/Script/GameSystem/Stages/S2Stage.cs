@@ -8,9 +8,23 @@ public class S2Stage : MonoBehaviour
     private Dictionary<Player, List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
     private List<Player> playerList = new List<Player>();
     private int i;
-    //private Dictionary<Player,>;
     public void StartStage(Dictionary<Player,List<Card>> playerCardListDict)
     {
+        PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
+        if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] > 0)
+        {
+            for (int i = 0; i < GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer]; i++)
+            {
+                CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer][0].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
+                CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer].RemoveAt(0);
+            }
+            foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+            {
+                card.GetComponent<CardSelectComponent>().EndSelect();
+            }
+            PlayerManager.Instance.cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] = 0;
+            PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.currentPlayer);
+        }
         playedCardDict = playerCardListDict;
         playerList = new List<Player>();
         StartCoroutine("S2CardTakeEffect");
