@@ -12,7 +12,6 @@ public class S3Stage : MonoBehaviour
     {
         playedCardDict = playerCardListDict;
         playerList = new List<Player>();
-        playerList = GameplayManager.Instance.playerList;
         StartCoroutine("S3CardTakeEffect");
 
     }

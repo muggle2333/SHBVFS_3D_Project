@@ -12,16 +12,12 @@ public class S4Stage : MonoBehaviour
     {
         playedCardDict = playerCardListDict;
         playerList = new List<Player>();
-        playerList = GameplayManager.Instance.playerList;
+        playerList = GameplayManager.Instance.GetPlayer();
         StartCoroutine("S4CardTakeEffect");
 
     }
     IEnumerator S4CardTakeEffect()
     {
-        for (int i = 0; i < playedCardDict.Count; i++)
-        {
-            playerList.Add(playedCardDict.ElementAt(i).Key);
-        }
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
         while (playedCardDict.Count != 0)
         {

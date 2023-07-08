@@ -72,7 +72,7 @@ public class CardSelectManager : MonoBehaviour
                 {
                     CardManager.Instance.S1CardTakeEffect(player);
                 }
-                else
+                else if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S2|| CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S3|| CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S4)
                 {
                     CardManager.Instance.playedCardDict[player].Add(CardManager.Instance.playerHandCardDict[player][i]);
                 }
@@ -99,7 +99,7 @@ public class CardSelectManager : MonoBehaviour
 
     public void UpdateCardPos(Player player)
     {
-        Debug.Log(3333);
+        //Debug.Log(3333);
         //offset = interval / cardsList.Count;
         int count = CardManager.Instance.playerHandCardDict[player].Count;
         this.GetComponent<RectTransform>().sizeDelta = new Vector2(cardWidth * count + 100, 100);

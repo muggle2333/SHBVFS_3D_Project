@@ -104,7 +104,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(false);
             GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);
         }
-        Debug.Log(cardSelectManager.SelectCount);
+        //Debug.Log(cardSelectManager.SelectCount);
     }
 
     public void CardPlayAniamtion()

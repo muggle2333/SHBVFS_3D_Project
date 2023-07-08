@@ -62,6 +62,9 @@ public class CardManager : MonoBehaviour
                     Instantiate(playedCardDict[player][i].cardFounction);
                 }
                 playedCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
+                Debug.Log(player);
+                Debug.Log(playedCardDict[player][i]);
+                
                 calculating.DelataCardData(playedCardDict[player][i], player);
                 calculating.CalculatPlayerBaseData(player);
                 calculating.CalaulatPlayerData(player);

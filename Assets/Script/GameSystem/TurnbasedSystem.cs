@@ -101,7 +101,7 @@ public class TurnbasedSystem : MonoBehaviour
     //S1
     void ControlPhase()
     {
-        Debug.Log("ControlPhase");
+        //Debug.Log("ControlPhase");
         CurrentGameStage = GameStage.S1;
         CompleteGameStage = GameStage.S4;
         GameplayManager.Instance.StartControlStage();
@@ -146,7 +146,7 @@ public class TurnbasedSystem : MonoBehaviour
 
     void MovePhase()
     {        
-        Debug.Log("MovePhase");
+        //Debug.Log("MovePhase");
         CurrentGameStage = GameStage.MoveStage;
         CompleteGameStage = CurrentGameStage - 1;
         GameplayManager.Instance.StartMoveStage();
@@ -155,7 +155,7 @@ public class TurnbasedSystem : MonoBehaviour
 
     void AttackPhase()
     {
-        Debug.Log("AttackPhase");
+        //Debug.Log("AttackPhase");
         CurrentGameStage = GameStage.AttackStage;
         CompleteGameStage = CurrentGameStage - 1;
         GameplayManager.Instance.StartAttackStage();
@@ -170,7 +170,7 @@ public class TurnbasedSystem : MonoBehaviour
         CurrentGameStage = GameStage.S3;
         CompleteGameStage = CurrentGameStage - 1;
         GameplayManager.Instance.StartS3Stage();
-        Debug.Log("Event3");
+        //Debug.Log("Event3");
        
     }
 
@@ -179,7 +179,7 @@ public class TurnbasedSystem : MonoBehaviour
         CurrentGameStage = GameStage.S4;
         CompleteGameStage = CurrentGameStage - 1;
         GameplayManager.Instance.StartS4Stage();
-        Debug.Log("Event4");
+        //Debug.Log("Event4");
         
         
     }
