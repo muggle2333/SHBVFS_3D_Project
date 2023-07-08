@@ -31,6 +31,9 @@ public struct PlayerInteract
 
 public class PlayerManager : MonoBehaviour
 {
+    public GameObject dyingPlayerUI;
+    public GameObject alivePlayerUI;
+
     public static PlayerManager Instance;
     public CardSelectManager cardSelectManager;
     private DrawCardComponent drawCardComponent;
@@ -203,8 +206,28 @@ public class PlayerManager : MonoBehaviour
         cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
     }
 
-    public void PlayerDying(Player dyingPlayer,Player alivePlayer)
+    public void PlayerDying(List<Player> dyingPlayerList, List<Player> alivePlayerList)
     {
-
+        if (alivePlayerList != null)
+        {
+            if (alivePlayerList[0] == GameplayManager.Instance.currentPlayer)
+            {
+                alivePlayerUI.SetActive(true);
+            }
+            else
+            {
+                dyingPlayerUI.SetActive(true);
+            }
+        }
+        else
+        {
+            for(int i = 0; i < dyingPlayerList.Count; i++)
+            {
+                if(dyingPlayerList[i] == GameplayManager.Instance.currentPlayer)
+                {
+                    alivePlayerUI.SetActive(true);
+                }
+            }
+        }
     }
 }

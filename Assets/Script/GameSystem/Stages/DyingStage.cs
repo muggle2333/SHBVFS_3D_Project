@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class DyingStage : MonoBehaviour
 {
-    public void StartStage(List<Player> players)
+    public void StartStage(List<Player> dyingPlayerList,List<Player> alivePlayerList)
+    {
+        PlayerManager.Instance.PlayerDying(dyingPlayerList, alivePlayerList);
+
+    }
+    public void Update()
     {
         
-
     }
 }
