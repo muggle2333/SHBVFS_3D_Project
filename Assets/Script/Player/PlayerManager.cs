@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public struct PlayerInteractAuthority
@@ -26,10 +27,10 @@ public enum PlayerInteractType
 public struct PlayerInteract
 {
     public PlayerInteractType PlayerInteractType;
-    public GridObject GridObject;
+    public Vector2 GridObjectXZ;
 }
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     public GameObject dyingPlayerUI;
     public GameObject alivePlayerUI;
@@ -70,25 +71,31 @@ public class PlayerManager : MonoBehaviour
 
     public void TryInteract(PlayerInteractType playerInteractType,Player player, GridObject gridObject)
     {
-        PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObject = gridObject };
-        controlStage.AddPlayerInteract(player, playerInteract);
-        switch(playerInteractType)
+        switch (playerInteractType)
         {
             case PlayerInteractType.Move:
-                MovePlayer(player, gridObject);break;
+                MovePlayer(player, gridObject); break;
             case PlayerInteractType.Occupy:
-                Occupy(player, gridObject,true);break;
+                Occupy(player, gridObject, true); break;
             case PlayerInteractType.Build:
-                Build(player, gridObject,true);break;
+                Build(player, gridObject, true); break;
             case PlayerInteractType.Gacha:
-                TryGacha(player, gridObject);break;
-            
+                TryGacha(player, gridObject); break;
         }
+        SaveInteractServerRpc(playerInteractType, player.Id, new Vector2(gridObject.x, gridObject.z));
     }
 
+    [ServerRpc(RequireOwnership =false)]
+    public void SaveInteractServerRpc(PlayerInteractType playerInteractType, PlayerId playerId, Vector2 gridObjectXZ)
+    {
+        PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObjectXZ = new Vector2(0, 0) };
+        Player player= GameplayManager.Instance.playerList[(int)playerId];
+        GridObject gridObject = GridManager.Instance.grid.gridArray[(int)gridObjectXZ.x, (int)gridObjectXZ.y];
+        controlStage.AddPlayerInteract(player, playerInteract);
+    }
     public void Interact(Player player,PlayerInteract playerInteract)
     {
-        GridObject gridObject = playerInteract.GridObject;
+        GridObject gridObject = GridManager.Instance.grid.gridArray[(int)playerInteract.GridObjectXZ.x, (int)playerInteract.GridObjectXZ.y]; 
         switch (playerInteract.PlayerInteractType)
         {
             case PlayerInteractType.Move:
@@ -109,6 +116,14 @@ public class PlayerManager : MonoBehaviour
         player.UpdateLinePath(gridObject.landType);
     }
 
+    [ClientRpc]
+    public void TryMovePlayerClientRpc(PlayerId playerId,Vector2 gridObjectXZ,ClientRpcParams clientRpcParams = default)
+    {
+        Player player = GameplayManager.Instance.playerList[(int)playerId];
+        GridObject gridObject = GridManager.Instance.grid.gridArray[(int)gridObjectXZ.x, (int)gridObjectXZ.y];
+        UpdateGridAuthorityData(player, gridObject);
+        player.UpdateLinePath(gridObject.landType);
+    }
 
     public void Occupy(Player player,GridObject gridObject,bool isControlStage)
     {

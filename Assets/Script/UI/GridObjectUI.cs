@@ -32,18 +32,22 @@ public class GridObjectUI : MonoBehaviour
         moveBtn.onClick.AddListener(() =>
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Move,GameplayManager.Instance.currentPlayer,gridObject);
+            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
         });
         occupyBtn.onClick.AddListener(() =>
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Occupy,GameplayManager.Instance.currentPlayer,gridObject);
+            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Occupy, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
         });
         gachaBtn.onClick.AddListener(() =>
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Gacha, GameplayManager.Instance.currentPlayer, gridObject);
+            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
         });
         buildBtn.onClick.AddListener(() =>
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Build, GameplayManager.Instance.currentPlayer, gridObject);
+            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
         });
 
     }
