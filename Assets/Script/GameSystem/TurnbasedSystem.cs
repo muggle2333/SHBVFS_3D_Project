@@ -16,7 +16,7 @@ public enum GameStage
     S3,
     AttackStage,
     S4,
-
+    DyingStage,
 }
 public class TurnbasedSystem : NetworkBehaviour
 { 

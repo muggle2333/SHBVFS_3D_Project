@@ -11,6 +11,9 @@ public class DyingStage : MonoBehaviour
     }
     public void Update()
     {
-        
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DyingStage)
+        {
+
+        }
     }
 }
