@@ -7,7 +7,7 @@ public class GamePlayUI : MonoBehaviour
 {
     public Button playCard;
     public Button cancel;
-    //public Button discardCards;
+    public Button discardCards;
     public Button retract;
     public Button disretract;
 
@@ -22,10 +22,10 @@ public class GamePlayUI : MonoBehaviour
         {
             PlayerManager.Instance.cardSelectManager.CancelCards(GameplayManager.Instance.currentPlayer);
         });
-        //discardCards.onClick.AddListener(() =>
-        //{
-        //    PlayerManager.Instance.cardSelectManager.DiscardCards(GameplayManager.Instance.currentPlayer);
-        //});
+        discardCards.onClick.AddListener(() =>
+        {
+            PlayerManager.Instance.cardSelectManager.DiscardCards(GameplayManager.Instance.currentPlayer);
+        });
         retract.onClick.AddListener(() =>
         {
             PlayerManager.Instance.cardSelectManager.Retract(GameplayManager.Instance.currentPlayer);

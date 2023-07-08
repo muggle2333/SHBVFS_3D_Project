@@ -43,13 +43,14 @@ public class CardSelectManager : MonoBehaviour
 
     public void DiscardCards(Player player)
     {
+        int discardCount = CardManager.Instance.playerHandCardDict[player].Count - GameplayManager.Instance.currentPlayer.HP;
+        if (discardCount < 0) discardCount = 0;
         for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
         {
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
                 //Debug.Log("Card " + cardsList[i].name + " is played.");
-                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelect();
-                Destroy(CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().gameObject);
+                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 i--;
             }

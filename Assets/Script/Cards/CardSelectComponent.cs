@@ -79,6 +79,14 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnSelect()
     {
         Info.SetActive(true);
+        if (TurnbasedSystem.Instance.CurrentGameStage == GameStage.DiscardStage)
+        {
+            foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+            {
+                if (this.gameObject == card.gameObject) continue;
+                card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);
+            }
+        }
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
         transform.DOLocalMoveY(targetY, duration);
@@ -86,8 +94,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
         if (TurnbasedSystem.Instance.CurrentGameStage == GameStage.S1)
         {
-            /////
             GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
+            GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+        }
+        else if (TurnbasedSystem.Instance.CurrentGameStage == GameStage.DiscardStage)
+        {
+            GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(true);
             GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
         }
         //Debug.Log(cardSelectManager.SelectCount);
@@ -103,6 +115,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(false);
             GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);
+            GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(false);
         }
         //Debug.Log(cardSelectManager.SelectCount);
     }
@@ -115,11 +128,22 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         var seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveY(0, 0.4f));
         seq.Join(transform.DOLocalMoveX(0, 0.4f));
-        seq.Join(transform.DOScale(1.5f, 0.4f));
+        //seq.Join(transform.DOScale(1.5f, 0.4f));
         seq.AppendInterval(0.5f);
         seq.Append(transform.DOLocalMoveX(-800, 0.5f));
         seq.Join(transform.DOScale(0.05f, 0.5f));
         seq.AppendCallback(() => { this.gameObject.SetActive(false); });
+    }
+
+    public void CardDiscardAnimation()
+    {
+        Interactable = false;
+        this.EndSelect();
+        this.transform.SetParent(cardSelectManager.canvas.transform);
+        var seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveY(0, 0.4f));
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 
     public void CardTakeEffectAnimation()
@@ -148,4 +172,5 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
+
 }
