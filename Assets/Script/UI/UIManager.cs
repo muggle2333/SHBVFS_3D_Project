@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : NetworkBehaviour
 {
@@ -75,7 +76,21 @@ public class UIManager : NetworkBehaviour
             case GameplayUIType.discardCards:
                 gameplayUI.discardCards.gameObject.SetActive(isActive); break;
         }
-
-    }    
-
+    }
+    public void SetGameplayPlayUIInteractable(GameplayUIType gameplayUItype, bool isActive)
+    {
+        switch (gameplayUItype)
+        {
+            case GameplayUIType.playCard:
+                gameplayUI.playCard.gameObject.GetComponent<Button>().interactable = isActive; break;
+            case GameplayUIType.retract:
+                gameplayUI.retract.gameObject.GetComponent<Button>().interactable = isActive; break;
+            case GameplayUIType.disretract:
+                gameplayUI.disretract.gameObject.GetComponent<Button>().interactable = isActive; break;
+            case GameplayUIType.cancel:
+                gameplayUI.cancel.gameObject.GetComponent<Button>().interactable = isActive; break;
+            case GameplayUIType.discardCards:
+                gameplayUI.discardCards.gameObject.GetComponent<Button>().interactable = isActive; break;
+        }
+    }
 }
