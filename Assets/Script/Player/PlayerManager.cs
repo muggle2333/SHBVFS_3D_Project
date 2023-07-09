@@ -43,6 +43,10 @@ public class PlayerManager : NetworkBehaviour
     public GameObject alivePlayerUI;
     public GameObject winUI;
     public GameObject loseUI;
+    public GameObject drawUI;
+
+    public int player0LandCount;
+    public int player1LandCount;
 
     public float dyingTimer = 10;
 
@@ -335,7 +339,37 @@ public class PlayerManager : NetworkBehaviour
             }
             else if (dyingPlayers[0].HP == dyingPlayers[1].HP)
             {
-
+                for(AcademyType i = AcademyType.YI; i < AcademyType.FA; i++)
+                {
+                    player0LandCount += dyingPlayers[0].OwnedLandDic[i].Count;
+                    player1LandCount += dyingPlayers[1].OwnedLandDic[i].Count;
+                }
+                if(player0LandCount > player1LandCount)
+                {
+                    if(dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+                    {
+                        winUI.SetActive(true);
+                    }
+                    else
+                    {
+                        loseUI.SetActive(true);
+                    }
+                }
+                else if(player0LandCount < player1LandCount)
+                {
+                    if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+                    {
+                        loseUI.SetActive(true);
+                    }
+                    else
+                    {
+                        winUI.SetActive(true);
+                    }
+                }
+                else if(player0LandCount == player1LandCount)
+                {
+                    drawUI.SetActive(true);
+                }
             }
         }
     }
