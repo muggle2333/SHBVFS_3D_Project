@@ -159,4 +159,8 @@ public class Calculating : MonoBehaviour
         player.CurrentActionPoint += cardAP;
     }
 
+    public CalculateAPCost(PlayerInteractType playerInteractType,)
+    {
+        if(playerInteractType == playerInteractType.)
+    }
 }
