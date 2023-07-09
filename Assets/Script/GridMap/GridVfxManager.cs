@@ -76,6 +76,7 @@ public class GridVfxManager : MonoBehaviour
     }
     public void UpdateVfxOwner(GridObject gridObject,bool isControlStage)
     {
+        if(gridObject.landType!=LandType.Plain) return;
         Transform ownerVfx = vfxTransformArray[gridObject.x,gridObject.z].ownerVfx;
         Player owner = gridObject.owner;
         if (owner == null)
@@ -97,6 +98,7 @@ public class GridVfxManager : MonoBehaviour
 
     public void UpdateVfxBuilding(GridObject gridObject, bool isControlStage)
     {
+        if (gridObject.landType != LandType.Plain) return;
         Transform buildingVfx = vfxTransformArray[gridObject.x,gridObject.z].buildingVfx;
         bool isHasBuilding = gridObject.isHasBuilding;
         buildingVfx.gameObject.SetActive(isHasBuilding);
@@ -105,6 +107,7 @@ public class GridVfxManager : MonoBehaviour
 
     public void UpdateVfxAcademy(GridObject gridObject)
     {
+        if (gridObject.landType != LandType.Plain) return;
         Transform academyVfx = vfxTransformArray[gridObject.x,gridObject.z].academyVfx;
         if (gridObject.isDiscovered || gridObject.CheckKnowAuthority(GameplayManager.Instance.currentPlayer)) 
         {
