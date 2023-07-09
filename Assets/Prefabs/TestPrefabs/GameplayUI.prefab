@@ -1137,7 +1137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7458967917720580479}
-  - component: {fileID: 6405610236245493825}
+  - component: {fileID: 4092491997667424746}
   m_Layer: 5
   m_Name: GameplayUI
   m_TagString: Untagged
@@ -1168,7 +1168,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6405610236245493825
+--- !u!114 &4092491997667424746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1183,9 +1183,7 @@ MonoBehaviour:
   playCard: {fileID: 7458967917365370520}
   cancel: {fileID: 7458967917661586630}
   discardCards: {fileID: 8794525318912475993}
-  playHP: {fileID: 0}
-  retract: {fileID: 0}
-  disretract: {fileID: 0}
+  playHP: {fileID: 4425685645554919538}
 --- !u!1 &7458967918485311228
 GameObject:
   m_ObjectHideFlags: 0
