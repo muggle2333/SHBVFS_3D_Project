@@ -15988,10 +15988,9 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
+    isDiscovered: 0
   backupGridPos:
     landType: 0
     academy: 1
@@ -16003,10 +16002,9 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
+    isDiscovered: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!1 &964423363
 GameObject:
@@ -16524,6 +16522,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1005686198}
   - component: {fileID: 1005686197}
+  - component: {fileID: 1005686199}
+  - component: {fileID: 1005686200}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -16543,18 +16543,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f25b7964832da41bcbfee15f5d6fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  academyText: {fileID: 4674322804664641995, guid: a1c8631e78d32af49baeef196f84517f, type: 3}
-  buildingBlue: {fileID: 1523537086631635399, guid: 0b94fe6f2abfe9d42b695b989c5966b9, type: 3}
-  buildingBlueS1: {fileID: 1523537086631635399, guid: b9d60308fcc30f34f9a70e20cfddcadf, type: 3}
-  buildingContainer: {fileID: 1781305110}
-  buildingContainerS1: {fileID: 2146290323}
-  vfxGridHightlight: {fileID: 7869472198252072756, guid: c74781141ebd0904d838d07861a63a6c, type: 3}
-  vfxContainer: {fileID: 1947707924}
   levelIndex: 1
   grid:
     width: 0
     length: 0
-  gridUI: {fileID: 0}
+  gridUI: {fileID: 330505426}
   gridDistance: 0
 --- !u!4 &1005686198
 Transform:
@@ -16571,6 +16564,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1005686199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005686196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2173299086
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1005686200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005686196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c982e486755b714cb1601faad1cb197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxPrefabs:
+    academyVfx: {fileID: 3056813220892033553, guid: a1c8631e78d32af49baeef196f84517f, type: 3}
+    ownerVfx: {fileID: 7869472198252072759, guid: c74781141ebd0904d838d07861a63a6c, type: 3}
+    buildingVfx: {fileID: 2193077389137785725, guid: 0b94fe6f2abfe9d42b695b989c5966b9, type: 3}
+    gachaVfx: {fileID: 0}
 --- !u!1 &1007099296
 GameObject:
   m_ObjectHideFlags: 0
@@ -18548,6 +18574,7 @@ GameObject:
   - component: {fileID: 1149073685}
   - component: {fileID: 1149073684}
   - component: {fileID: 1149073688}
+  - component: {fileID: 1149073689}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -18653,6 +18680,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929aec3d3bcc64441bbcc83eba7daf28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1149073689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149073683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1651620716
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1151417272
 GameObject:
   m_ObjectHideFlags: 0
@@ -23117,10 +23160,9 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
+    isDiscovered: 0
   backupGridPos:
     landType: 0
     academy: 1
@@ -23132,10 +23174,9 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
+    isDiscovered: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!114 &1456011318
 MonoBehaviour:
