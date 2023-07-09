@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -40,6 +41,10 @@ public class PlayerManager : NetworkBehaviour
 {
     public GameObject dyingPlayerUI;
     public GameObject alivePlayerUI;
+    public GameObject winUI;
+    public GameObject loseUI;
+
+    public float dyingTimer = 10;
 
     public static PlayerManager Instance;
     public CardSelectManager cardSelectManager;
@@ -57,6 +62,19 @@ public class PlayerManager : NetworkBehaviour
             Instance = this;
         }
         
+    }
+    public void Update()
+    {
+        if (TurnbasedSystem.Instance.isDie.Value == true)
+        {
+            dyingTimer -= Time.deltaTime;
+        }
+        if (dyingTimer <= 0)
+        {
+            alivePlayerUI.SetActive(false);
+            dyingPlayerUI.SetActive(false);
+            GameOver();
+        }
     }
     public void Start()
     {
@@ -246,6 +264,7 @@ public class PlayerManager : NetworkBehaviour
 
     public void PlayerDying(List<Player> dyingPlayerList, List<Player> alivePlayerList)
     {
+
         if (alivePlayerList != null)
         {
             if (alivePlayerList[0] == GameplayManager.Instance.currentPlayer)
@@ -261,10 +280,62 @@ public class PlayerManager : NetworkBehaviour
         {
             for(int i = 0; i < dyingPlayerList.Count; i++)
             {
-                if(dyingPlayerList[i] == GameplayManager.Instance.currentPlayer)
+                dyingPlayerList[i].isDying.Value = true;
+                if (dyingPlayerList[i] == GameplayManager.Instance.currentPlayer)
                 {
                     dyingPlayerUI.SetActive(true);
                 }
+            }
+        }
+    }
+    public void GameOver()
+    {
+        List<Player> dyingPlayers = new List<Player>();
+        for (int i = 0;i < GameplayManager.Instance.playerList.Count; i++)
+        {
+            if(GameplayManager.Instance.playerList[i].isDying.Value)
+            {
+                dyingPlayers.Add(GameplayManager.Instance.playerList[i]);
+            }
+        }
+        if(dyingPlayers.Count == 1)
+        {
+            if(dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+            {
+                loseUI.SetActive(true);
+            }
+            else
+            {
+                winUI.SetActive(true);
+            }
+        }
+        else if(dyingPlayers.Count == 2)
+        {
+            if (dyingPlayers[0].HP > dyingPlayers[1].HP)
+            {
+                if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+                {
+                    winUI.SetActive(true);
+                }
+                else
+                {
+                    loseUI.SetActive(true);
+                }
+            }
+            else if(dyingPlayers[0].HP < dyingPlayers[1].HP)
+            {
+                if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+                {
+                    loseUI.SetActive(true);
+                }
+                else
+                {
+                    winUI.SetActive(true);
+                }
+            }
+            else if (dyingPlayers[0].HP == dyingPlayers[1].HP)
+            {
+
             }
         }
     }

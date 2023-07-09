@@ -20,6 +20,10 @@ public class Player : Character
     public int ActionPointPerRound;
     public int MaxActionPoint;
     public int MaxCardCount;
+    public int moveAPCost = 1;
+    public int occupyAPCost = 1;
+    public int buildAPCost = 2;
+
 
     public int baseMaxHP = 3;
     public int baseDefense = 0;
@@ -28,6 +32,8 @@ public class Player : Character
     public int baseActionPointPerRound = 3;
 
     public int Priority;
+    public NetworkVariable<bool> isDying = new NetworkVariable<bool>(false);
+
     public GridObject currentGrid;
     public GridObject backupGridPos;
 
