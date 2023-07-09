@@ -263,7 +263,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 if(dyingPlayerList[i] == GameplayManager.Instance.currentPlayer)
                 {
-                    alivePlayerUI.SetActive(true);
+                    dyingPlayerUI.SetActive(true);
                 }
             }
         }
