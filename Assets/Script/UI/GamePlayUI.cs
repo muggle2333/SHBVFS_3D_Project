@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GamePlayUI : MonoBehaviour
+public enum GameplayUIType
+{
+    playCard,
+    cancel,
+    discardCards,
+    retract,
+    disretract,
+}
+public class GameplayUI : MonoBehaviour
 {
     public Button playCard;
     public Button cancel;
@@ -40,9 +48,4 @@ public class GamePlayUI : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -12,7 +12,7 @@ public class MoveStage : NetworkBehaviour
 
     public void StartStage(Dictionary<Player, List<PlayerInteract>> playerInteractDict)
     {
-        if (!NetworkManager.Singleton.IsHost) return;
+        if (FindObjectOfType<NetworkManager>()!=null && !NetworkManager.Singleton.IsHost) return;
         this.playerInteractDict = playerInteractDict;
         playerList = new List<Player>();
         StartCoroutine("StartMove");

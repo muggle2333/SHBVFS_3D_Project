@@ -10,7 +10,8 @@ public class UIManager : NetworkBehaviour
 
     private PlayerDataUI playerDataUI;
     private GridObjectUI gridObjectUI;
-    private MessageUI MessageUI;
+    private MessageUI messageUI;
+    private GameplayUI gameplayUI;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,7 +28,8 @@ public class UIManager : NetworkBehaviour
     {
         playerDataUI= GetComponentInChildren<PlayerDataUI>();
         gridObjectUI= GetComponentInChildren<GridObjectUI>();
-        MessageUI= GetComponentInChildren<MessageUI>();
+        messageUI= GetComponentInChildren<MessageUI>();
+        gameplayUI= GetComponentInChildren<GameplayUI>();
     }
     public void UpdatePlayerDataUI(Player player)
     {
@@ -45,17 +47,35 @@ public class UIManager : NetworkBehaviour
     [ClientRpc]
     public void ShowMessageInfoClientRpc(string info,ClientRpcParams clientRpcParams=default)
     {
-        MessageUI.ShowMessageInfo(info);
+        messageUI.ShowMessageInfo(info);
     }
     [ClientRpc]
     public void ShowMessageTimerClientRpc(float timer,ClientRpcParams clientRpcParams=default)
     {
-        MessageUI.ShowMessage(timer);
+        messageUI.ShowMessage(timer);
     }
     [ClientRpc]
     public void HideMessageTimerClientRpc(ClientRpcParams clientRpcParams = default)
     {
-        MessageUI.HideMessage();
+        messageUI.HideMessage();
     }
+
+    public void SetGameplayPlayUI(GameplayUIType gameplayUItype,bool isActive)
+    {
+        switch(gameplayUItype)
+        {
+            case GameplayUIType.playCard:
+                gameplayUI.playCard.gameObject.SetActive(isActive); break;
+            case GameplayUIType.retract:
+                gameplayUI.retract.gameObject.SetActive(isActive); break;
+            case GameplayUIType.disretract:
+                gameplayUI.disretract.gameObject.SetActive(isActive); break;
+            case GameplayUIType.cancel:
+                gameplayUI.cancel.gameObject.SetActive(isActive); break;
+            case GameplayUIType.discardCards:
+                gameplayUI.discardCards.gameObject.SetActive(isActive); break;
+        }
+
+    }    
 
 }

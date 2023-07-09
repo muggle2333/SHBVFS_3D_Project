@@ -142,7 +142,7 @@ public class TurnbasedSystem : NetworkBehaviour
         yield return new WaitForSecondsRealtime(S2PhaseTime);
 
         MovePhase();
-        yield return new WaitUntil(()=>CurrentGameStage==CompleteGameStage);
+        yield return new WaitUntil(()=>CurrentGameStage.Value==CompleteGameStage.Value);
         UpdateTimer(MovePhaseTime);
         yield return new WaitForSecondsRealtime(MovePhaseTime);
 

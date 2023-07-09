@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using Unity.Netcode;
 
 public class CardSelectManager : MonoBehaviour
 {
@@ -36,13 +37,17 @@ public class CardSelectManager : MonoBehaviour
     }
     public void Start()
     {
+        if (FindObjectOfType<NetworkManager>()) return;
+        InitializeCardSelectManager();
+    }
+    public void InitializeCardSelectManager()
+    {
         SelectCount[GameplayManager.Instance.currentPlayer] = 0;
         maxSelected[GameplayManager.Instance.currentPlayer] = 1;
         //cardsArray = GetComponentsInChildren<CardSelectComponent>();
         //cardsList = new List<CardSelectComponent>(cardsArray);
         UpdateCardPos(GameplayManager.Instance.currentPlayer);
     }
-
     public void DiscardCards(Player player)
     {
         for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
@@ -120,8 +125,10 @@ public class CardSelectManager : MonoBehaviour
         handY -= RetractOffset;
         IsRetracted = true;
         UpdateCardPos(player);
-        GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(true);
-        GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(false);
+        //GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(true);
+        //GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.disretract, true);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.retract, false);
     }
 
     public void Disretract(Player player)
@@ -129,8 +136,10 @@ public class CardSelectManager : MonoBehaviour
         handY += RetractOffset;
         IsRetracted = false;
         UpdateCardPos(player);
-        GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(false);
-        GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(true);
+        //GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(false);
+        //GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(true);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.disretract, false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.retract, true);
     }
 
 }

@@ -101,18 +101,23 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
-            GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(false);
-            GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(false);
+            //GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(false);
+            //GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(false);
+            UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
+            UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
         }
         if(cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
-            GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);
+            //GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);
+            UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancel, false);
         //Debug.Log(cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]);
     }
 
     public void S1AdditionalCondition()
     {
-        GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
-        GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+        //GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(true);
+        //GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, true);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancel, true);
     }
 
     public void DiscardAdditionalCondition()
@@ -124,10 +129,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }//turn off Info
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
-            GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(true);
+            //GameplayManager.Instance.gameplayUI.discardCards.gameObject.SetActive(true);
+            UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, true);
 
         }
-        GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+        //GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(true);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancel, true);
     }
 
     public void DyingAdditionalCondition()

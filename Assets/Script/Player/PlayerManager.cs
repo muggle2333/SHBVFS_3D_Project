@@ -88,7 +88,14 @@ public class PlayerManager : NetworkBehaviour
             case PlayerInteractType.Gacha:
                 TryGacha(player, gridObject); break;
         }
-        SaveInteractServerRpc(playerInteractType, player.Id, new Vector2(gridObject.x, gridObject.z));
+        if(FindObjectOfType<NetworkManager>())
+        {
+            SaveInteractServerRpc(playerInteractType, player.Id, new Vector2(gridObject.x, gridObject.z));
+        }else
+        {
+            SaveInteract(playerInteractType, player,new Vector2(gridObject.x, gridObject.z));
+        }
+        
     }
 
     [ServerRpc(RequireOwnership =false)]
@@ -96,6 +103,11 @@ public class PlayerManager : NetworkBehaviour
     {
         PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObjectXZ = gridObjectXZ };
         Player player= GameplayManager.Instance.playerList[(int)playerId];
+        controlStage.AddPlayerInteract(player, playerInteract);
+    }
+    public void SaveInteract(PlayerInteractType playerInteractType,Player player, Vector2 gridObjectXZ)
+    {
+        PlayerInteract playerInteract = new PlayerInteract() { PlayerInteractType = playerInteractType, GridObjectXZ = gridObjectXZ };
         controlStage.AddPlayerInteract(player, playerInteract);
     }
     public void Interact(Player player,PlayerInteract playerInteract)

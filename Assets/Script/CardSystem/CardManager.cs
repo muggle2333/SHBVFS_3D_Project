@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
@@ -21,11 +22,16 @@ public class CardManager : MonoBehaviour
     }
     void Start()
     {
+        if (FindObjectOfType<NetworkManager>()) return;
+        InitializeCardManager();
+    }
+    public void InitializeCardManager()
+    {
         List<Player> playerList = new List<Player>();
         playerList = GameplayManager.Instance.playerList;
-        for(int i = 0; i < playerList.Count; i++)
+        for (int i = 0; i < playerList.Count; i++)
         {
-            playedCardDict.Add(playerList[i], new List<Card>());  
+            playedCardDict.Add(playerList[i], new List<Card>());
             playerHandCardDict.Add(playerList[i], new List<Card>());
         }
         calculating = FindObjectOfType<Calculating>();

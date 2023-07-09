@@ -14,7 +14,7 @@ public class GameplayManager : NetworkBehaviour
     //public Player playerBlue;
     public List<Player> playerList = new List<Player>();
     public Player currentPlayer;
-    public GamePlayUI gameplayUI;
+    public GameplayUI gameplayUI;
     private ControlStage controlStage;
     private MoveStage moveStage;
     private AttackStage attackStage;
@@ -46,6 +46,8 @@ public class GameplayManager : NetworkBehaviour
     private void Start()
     {
         InitializePlayerClientRpc();
+        CardManager.Instance.InitializeCardManager();
+        FindObjectOfType<CardSelectManager>().InitializeCardSelectManager();
     }
     private void Update()
     {
