@@ -45,6 +45,28 @@ public class S3Stage : MonoBehaviour
                 }
             }
         }
+        List<Player> dyingPlayers = new List<Player>();
+        List<Player> alivePlayers = new List<Player>();
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].HP <= 0)
+            {
+                dyingPlayers.Add(playerList[i]);
+            }
+            else
+            {
+                alivePlayers.Add(playerList[i]);
+            }
+        }
+        if (dyingPlayers.Count == 0)
+        {
+            TurnbasedSystem.Instance.isDie.Value = false;
+        }
+        else
+        {
+            TurnbasedSystem.Instance.isDie.Value = true;
+            PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
+        }
         TurnbasedSystem.Instance.TurnToNextStage();
 
     }

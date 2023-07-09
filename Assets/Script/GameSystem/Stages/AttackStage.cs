@@ -71,5 +71,27 @@ public class AttackStage : MonoBehaviour
                 yield return new WaitForSecondsRealtime(1f);
             }
         }
+        List<Player> dyingPlayers = new List<Player>();
+        List<Player> alivePlayers = new List<Player>();
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i].HP <= 0)
+            {
+                dyingPlayers.Add(players[i]);
+            }
+            else
+            {
+                alivePlayers.Add(players[i]);
+            }
+        }
+        if (dyingPlayers.Count == 0)
+        {
+            TurnbasedSystem.Instance.isDie.Value = false;
+        }
+        else
+        {
+            TurnbasedSystem.Instance.isDie.Value = true;
+            PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
+        }
     }
 }
