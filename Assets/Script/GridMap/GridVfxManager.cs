@@ -65,6 +65,8 @@ public class GridVfxManager : MonoBehaviour
                     //gachaVfx=gtmpVfx.transform,
                     gachaVfx = null,
                 };
+
+                //atmpVfx.GetComponentInChildren<TextMesh>().text = gridObject.academy.ToString();
             }
         }
     }
@@ -72,7 +74,8 @@ public class GridVfxManager : MonoBehaviour
     public void UpdateVfx(GridObject gridObject)
     {
         UpdateVfxOwner(gridObject, false);
-        UpdateVfxOwner(gridObject, false);
+        UpdateVfxBuilding(gridObject, false);
+        UpdateVfxAcademy(gridObject);
     }
     public void UpdateVfxOwner(GridObject gridObject,bool isControlStage)
     {
@@ -111,11 +114,11 @@ public class GridVfxManager : MonoBehaviour
         Transform academyVfx = vfxTransformArray[gridObject.x,gridObject.z].academyVfx;
         if (gridObject.isDiscovered || gridObject.CheckKnowAuthority(GameplayManager.Instance.currentPlayer)) 
         {
-            academyVfx.gameObject.GetComponentInChildren<TextMeshPro>().text = gridObject.academy.ToString();
+            academyVfx.gameObject.GetComponentInChildren<TextMesh>().text = gridObject.academy.ToString();
         }
         else
         {
-            academyVfx.gameObject.GetComponentInChildren<TextMeshPro>().text = null;
+            academyVfx.gameObject.GetComponentInChildren<TextMesh>().text = null;
         }
     }
 }

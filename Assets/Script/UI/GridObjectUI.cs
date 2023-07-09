@@ -19,6 +19,7 @@ public class GridObjectUI : MonoBehaviour
     [SerializeField] private Button occupyBtn;
     [SerializeField] private Button gachaBtn;
     [SerializeField] private Button buildBtn;
+    [SerializeField] private Button searchBtn;
 
     [SerializeField] private TMP_Text academyText;
     [SerializeField] private TMP_Text ownerText;
@@ -48,6 +49,10 @@ public class GridObjectUI : MonoBehaviour
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Build, GameplayManager.Instance.currentPlayer, gridObject);
             //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
+        });
+        searchBtn.onClick.AddListener(() =>
+        {
+            PlayerManager.Instance.TryInteract(PlayerInteractType.Search, GameplayManager.Instance.currentPlayer, gridObject);
         });
 
     }
@@ -97,7 +102,7 @@ public class GridObjectUI : MonoBehaviour
         gachaBtn.interactable = authority.canGacha;
         buildBtn.interactable = authority.canBuild;
         moveBtn.interactable = authority.canMove;
-
+        searchBtn.interactable = authority.canSearch;
     }
 
     public void ConstrainUI(float x,float y)

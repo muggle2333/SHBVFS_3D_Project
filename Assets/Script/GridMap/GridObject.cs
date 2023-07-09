@@ -163,7 +163,7 @@ public class GridObject
     {
         owner = player;
         grid.TriggerGridObjectChanged(x, z);
-        GridVfxManager.Instance.UpdateVfxOwner(this,isControlStage);
+        //GridVfxManager.Instance.UpdateVfxOwner(this,isControlStage);
 
     }
  
@@ -171,7 +171,7 @@ public class GridObject
     {
         this.isHasBuilding = isHasBuilding;
         grid.TriggerGridObjectChanged(x, z);
-        GridVfxManager.Instance.UpdateVfxBuilding(this,isControlStage);
+        //GridVfxManager.Instance.UpdateVfxBuilding(this,isControlStage);
     }
     //被走到过，及全员都知道属性
     public void DiscoverLand()
@@ -183,6 +183,7 @@ public class GridObject
     public void SetKnowAuthority(Player player)
     {
         playerKnowList[(int)player.Id] = true;
+        grid.TriggerGridObjectChanged(x, z);
     }
 
     public bool CheckKnowAuthority(Player player)

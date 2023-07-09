@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public struct PlayerInteractAuthority
@@ -12,6 +13,7 @@ public struct PlayerInteractAuthority
     public bool canBuild;
     public bool canOccupy;
     public bool canGacha;
+    public bool canSearch;
 }
 
 public enum PlayerInteractType
@@ -20,8 +22,7 @@ public enum PlayerInteractType
     Occupy,
     Build,
     Gacha,
-    DrawBasic,
-    DrawEvent,
+    Search,
 }
 
 [Serializable]
@@ -50,6 +51,7 @@ public class PlayerManager : NetworkBehaviour
     public CardSelectManager cardSelectManager;
     private DrawCardComponent drawCardComponent;
     private ControlStage controlStage;
+
 
     public void Awake()
     {
@@ -84,27 +86,35 @@ public class PlayerManager : NetworkBehaviour
     }
     public void ResetPlayerPosition(Player player)
     {
-        player.GetComponent<PlayerInteractionComponent>().Move(player.backupGridPos);
+        //player.GetComponent<PlayerInteractionComponent>().Move(player.trueGrid)
+        player.GetComponent<PlayerInteractionComponent>().HideVfxPlayer();
+        player.GetComponent<PlayerInteractionComponent>().ResetGachaVfx();
         player.RefreshLinePath();
     }
 
     public void BackupPlayerPosition(Player player)
     {
-        player.backupGridPos= player.currentGrid;
+        player.trueGrid= player.currentGrid;
     }
 
+    public void Research(Player player,GridObject gridObject)
+    {
+
+    }
     public void TryInteract(PlayerInteractType playerInteractType,Player player, GridObject gridObject)
     {
         switch (playerInteractType)
         {
             case PlayerInteractType.Move:
-                MovePlayer(player, gridObject); break;
+                TryMove(player, gridObject); break;
             case PlayerInteractType.Occupy:
-                Occupy(player, gridObject, true); break;
+                Occupy(player, gridObject,true); break;
             case PlayerInteractType.Build:
                 Build(player, gridObject, true); break;
             case PlayerInteractType.Gacha:
                 TryGacha(player, gridObject); break;
+            case PlayerInteractType.Search:
+                TrySearch(player);break;
         }
         if(FindObjectOfType<NetworkManager>())
         {
@@ -141,7 +151,8 @@ public class PlayerManager : NetworkBehaviour
                 Build(player, gridObject,false); break;
             case PlayerInteractType.Gacha:
                 DrawCard(player, gridObject); break;
-
+            case PlayerInteractType.Search:
+                Search(player); break;
         }
     }
     [ClientRpc]
@@ -156,32 +167,53 @@ public class PlayerManager : NetworkBehaviour
         UpdateGridAuthorityData(player, gridObject);
         player.UpdateLinePath(gridObject.landType);
     }
-
-    [ClientRpc]
-    public void TryMovePlayerClientRpc(PlayerId playerId,Vector2 gridObjectXZ,ClientRpcParams clientRpcParams = default)
+    public void TryMove(Player player,GridObject gridObject)
     {
-        Player player = GameplayManager.Instance.playerList[(int)playerId];
-        GridObject gridObject = GridManager.Instance.grid.gridArray[(int)gridObjectXZ.x, (int)gridObjectXZ.y];
+        player.GetComponent<PlayerInteractionComponent>().MoveVfxPlayer(gridObject);
         UpdateGridAuthorityData(player, gridObject);
         player.UpdateLinePath(gridObject.landType);
     }
 
     public void Occupy(Player player,GridObject gridObject,bool isControlStage)
     {
-        
         gridObject = GridManager.Instance.ManageOwner(gridObject, player,isControlStage);
         player.OccupyGrid(gridObject);
-        UpdateGridAuthorityData(player, gridObject);
+        GridVfxManager.Instance.UpdateVfxOwner(gridObject,isControlStage);
+        if (isControlStage)
+        {
+            UpdateGridAuthorityData(player, gridObject);
+        }
+        
     }
 
     public void Build(Player player,GridObject gridObject, bool isControlStage)
     {
         gridObject = GridManager.Instance.ManageBuilding(gridObject,isControlStage);
-        UpdateGridAuthorityData(player, gridObject);
+        GridVfxManager.Instance.UpdateVfxBuilding(gridObject,isControlStage);
+        if (isControlStage)
+        {
+            UpdateGridAuthorityData(player, gridObject);
+        }
+        
     }
-    
+    public void TrySearch(Player player)
+    {
+        
+    }
+    public void Search(Player player)
+    {
+        var neighbourList = GridManager.Instance.grid.GetNeighbour(player.currentGrid);
+        neighbourList.Add(player.currentGrid);
+        foreach(GridObject neighbour in neighbourList)
+        {
+            GridManager.Instance.ManageKnowable(player, neighbour);
+            GridVfxManager.Instance.UpdateVfxAcademy(neighbour);
+        }
+       
+    }
     public void TryGacha(Player player, GridObject gridObject)
     {
+        player.GetComponent<PlayerInteractionComponent>().TryGacha(player.currentGrid);
         //drawCardComponent.TryDrawCard();
         //drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
     }
@@ -202,12 +234,17 @@ public class PlayerManager : NetworkBehaviour
         authority.canOccupy = CheckOccupiable(player, gridObject);
         authority.canBuild= CheckBuildable(player, gridObject);
         authority.canGacha = CheckGachable(player, gridObject);
+        authority.canSearch = CheckSearchable(player, gridObject);
         return authority;
     }
-
+    public bool CheckSearchable(Player player, GridObject gridObject)
+    {
+        return player.currentGrid == gridObject;
+    }
     public bool CheckKnowable(Player player, GridObject gridObject)
     {
-        return CheckDistance(player, gridObject) <= player.Range;
+        if(player.trueGrid == gridObject) return true;
+        return gridObject.CheckKnowAuthority(player);
     }
     public bool CheckMoveable(Player player, GridObject gridObject)
     {
@@ -218,7 +255,8 @@ public class PlayerManager : NetworkBehaviour
     public int CheckDistance(Player player, GridObject gridObject)
     {
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter(gridObject.x, gridObject.z);
-        Vector3 startPos = new Vector3(player.gameObject.transform.position.x, 0, player.gameObject.transform.position.z);
+        //Vector3 startPos = new Vector3(player.gameObject.transform.position.x, 0, player.gameObject.transform.position.z);
+        Vector3 startPos = GridManager.Instance.grid.GetWorldPositionCenter(player.currentGrid.x, player.currentGrid.z);
         return (int)Math.Ceiling(Vector3.Distance(startPos, dirPos) / GridManager.Instance.gridDistance);
         
     }

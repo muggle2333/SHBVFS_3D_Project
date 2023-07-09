@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
@@ -44,13 +44,16 @@ public class MoveStage : NetworkBehaviour
                     yield return new WaitForSeconds(1);
                     if(FindObjectOfType<NetworkManager>())
                     {
-                        PlayerManager.Instance.InteractClientRpc(priorityList[i].Id, playerInteract[0], new ClientRpcParams
+                        //针对特定的client执行操作
+                        /*PlayerManager.Instance.InteractClientRpc(priorityList[i].Id, playerInteract[0], new ClientRpcParams
                         {
                             Send = new ClientRpcSendParams
                             {
                                 TargetClientIds = new ulong[] { (ulong)priorityList[i].Id }
                             }
-                        });
+                        });*/
+
+                        PlayerManager.Instance.InteractClientRpc(priorityList[i].Id, playerInteract[0]);
                     }
                     else
                     {

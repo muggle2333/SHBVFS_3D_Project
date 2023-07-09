@@ -35,7 +35,7 @@ public class Player : Character
     public NetworkVariable<bool> isDying = new NetworkVariable<bool>(false);
 
     public GridObject currentGrid;
-    public GridObject backupGridPos;
+    public GridObject trueGrid;
 
     public Dictionary<AcademyType, List<GridObject>> OwnedLandDic = new Dictionary<AcademyType, List<GridObject>>()
 /*    {

@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using Unity.Netcode;
 using TMPro;
+using System;
 
 public class GridManager : NetworkBehaviour
 {
@@ -80,7 +81,7 @@ public class GridManager : NetworkBehaviour
                 //Initialize the Land AcademyType
                 if (gridArray[x, z].landType == LandType.Plain)
                 {
-                    gridArray[x, z].academy = (AcademyType)Random.Range(1, 6);
+                    gridArray[x, z].academy = (AcademyType)UnityEngine.Random.Range(1, 6);
                     
                 }
                 else
@@ -116,10 +117,31 @@ public class GridManager : NetworkBehaviour
         return gridObject;
     }
 
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ManageOwnerServerRpc(Vector2 gridObjectXZ, PlayerId playerId)
+    {
+        ManageOwnerClientRpc(gridObjectXZ, playerId);
+    }
+
+    [ClientRpc]
+    public void ManageOwnerClientRpc(Vector2 gridObjectXZ, PlayerId playerId)
+    {
+        GridObject gridObject = grid.GetGridObject((int)gridObjectXZ.x, (int)gridObjectXZ.y);
+        Player player = GameplayManager.Instance.playerList[(int)playerId];
+        gridObject.SetOwner(player, false);
+    }
+
     public GridObject ManageBuilding(GridObject gridObject,bool isControlStage)
     {
         gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
         gridObject.SetBuilding(true,isControlStage);
+        return gridObject;
+    }
+
+    public GridObject ManageKnowable(Player player,GridObject gridObject)
+    {
+        gridObject.SetKnowAuthority(player);
         return gridObject;
     }
     public void BackupGrid()
@@ -144,6 +166,7 @@ public class GridManager : NetworkBehaviour
                 //Transform tmp = grid.gridArray[x, z].ownerVfxTransform;
                 grid.gridArray[x, z] = backupGrid[x,z];
                 //grid.gridArray[x, z].ownerVfxTransform = tmp;
+                GridVfxManager.Instance.UpdateVfx(grid.gridArray[x, z]);
             }
         }
         //Clear all the S1 buildingOwner & vfx
@@ -151,14 +174,14 @@ public class GridManager : NetworkBehaviour
         //{
         //    Destroy(buildingContainerS1.GetChild(i).gameObject);
         //}
-        for (int x = 0; x < grid.width; x++)
-        {
-            for (int z = 0; z < grid.length; z++)
-            {
-                GridObject gridObject = grid.gridArray[x, z];
-                GridVfxManager.Instance.UpdateVfx(gridObject);
-            }
-        }
+        //for (int x = 0; x < grid.width; x++)
+        //{
+        //    for (int z = 0; z < grid.length; z++)
+        //    {
+        //        GridObject gridObject = grid.gridArray[x, z];
+        //        GridVfxManager.Instance.UpdateVfx(gridObject);
+        //    }
+        //}
     }
 }
 

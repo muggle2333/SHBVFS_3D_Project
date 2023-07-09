@@ -100,13 +100,13 @@ public class GameManager : NetworkBehaviour
 
     private void NetworkManager_OnClientDisconnectCallback(ulong obj)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     private void SceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
         Debug.Log(sceneName);
-        foreach(ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+         foreach(ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             string playerPath = clientId == 0 ? "PlayerPrefab_Red" : "PlayerPrefab_Blue";
             Transform playerTransform = Instantiate(Resources.Load<GameObject>(playerPath).transform);
