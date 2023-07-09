@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class UIManager : NetworkBehaviour
 {
     public static UIManager Instance { get; private set; }
-
     private PlayerDataUI playerDataUI;
     private GridObjectUI gridObjectUI;
     private MessageUI messageUI;
@@ -67,10 +66,6 @@ public class UIManager : NetworkBehaviour
         {
             case GameplayUIType.playCard:
                 gameplayUI.playCard.gameObject.SetActive(isActive); break;
-            case GameplayUIType.retract:
-                gameplayUI.retract.gameObject.SetActive(isActive); break;
-            case GameplayUIType.disretract:
-                gameplayUI.disretract.gameObject.SetActive(isActive); break;
             case GameplayUIType.cancel:
                 gameplayUI.cancel.gameObject.SetActive(isActive); break;
             case GameplayUIType.discardCards:
@@ -83,10 +78,6 @@ public class UIManager : NetworkBehaviour
         {
             case GameplayUIType.playCard:
                 gameplayUI.playCard.gameObject.GetComponent<Button>().interactable = isActive; break;
-            case GameplayUIType.retract:
-                gameplayUI.retract.gameObject.GetComponent<Button>().interactable = isActive; break;
-            case GameplayUIType.disretract:
-                gameplayUI.disretract.gameObject.GetComponent<Button>().interactable = isActive; break;
             case GameplayUIType.cancel:
                 gameplayUI.cancel.gameObject.GetComponent<Button>().interactable = isActive; break;
             case GameplayUIType.discardCards:

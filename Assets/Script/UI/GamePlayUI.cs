@@ -16,10 +16,10 @@ public class GameplayUI : MonoBehaviour
     public Button playCard;
     public Button cancel;
     public Button discardCards;
-    public Button retract;
-    public Button disretract;
+    public Button playHP;
 
-    
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -35,15 +35,10 @@ public class GameplayUI : MonoBehaviour
         {
             PlayerManager.Instance.cardSelectManager.DiscardCards(GameplayManager.Instance.currentPlayer);
         });
-        retract.onClick.AddListener(() =>
+        playHP.onClick.AddListener(() =>
         {
-            PlayerManager.Instance.cardSelectManager.Retract(GameplayManager.Instance.currentPlayer);
+            PlayerManager.Instance.cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
         });
-        disretract.onClick.AddListener(() =>
-        {
-            PlayerManager.Instance.cardSelectManager.Disretract(GameplayManager.Instance.currentPlayer);
-        });
-
 
 
     }
