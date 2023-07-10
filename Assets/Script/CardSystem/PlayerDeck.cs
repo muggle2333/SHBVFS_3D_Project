@@ -8,12 +8,13 @@ public class PlayerDeck : MonoBehaviour
     public Dictionary<AcademyType, List<CardSetting>> AllCardDeck = new Dictionary<AcademyType, List<CardSetting>>();
 
     private List<CardSetting> CardContainer = new List<CardSetting>();
+    public List<CardSetting> cardDeck;
     private void Awake()
     {
         CardContainer.Add(null);
         for (int i = 0; i < (int)AcademyType.FA; i++)
         {
-            List<CardSetting> cardDeck = null;
+            cardDeck = null;
             if (i == 0)
             {
                 CardDataBase.AllCardListDic.TryGetValue((AcademyType)i,out cardDeck);
@@ -32,7 +33,7 @@ public class PlayerDeck : MonoBehaviour
         }
         for (int i = 0; i < (int)AcademyType.FA; i++)
         {
-            Shuffle((AcademyType)i);
+            ShuffleServerRpc((AcademyType)i);
         }
     }
     void Start()
@@ -47,7 +48,7 @@ public class PlayerDeck : MonoBehaviour
     }
 
 
-    public void Shuffle(AcademyType AcademyType)
+    /*public void Shuffle(AcademyType AcademyType)
     {
         List<CardSetting> cardDeck = null;
         AllCardDeck.TryGetValue(AcademyType, out cardDeck);
@@ -61,27 +62,29 @@ public class PlayerDeck : MonoBehaviour
             cardDeck[randomIndex] = CardContainer[0];
         }
         AllCardDeck[AcademyType] = cardDeck;
-    }
+    }*/
 
     [ServerRpc(RequireOwnership =false)]
     public void ShuffleServerRpc(AcademyType AcademyType)
     {
-         List<CardSetting> cardDeck = null;
+        cardDeck= null;
         AllCardDeck.TryGetValue(AcademyType, out cardDeck);
 
-
-        for (int i = 0; i< cardDeck.Count; i++)
+        for(int i = 0;i< cardDeck.Count; i++)
         {
-            CardContainer[0] = cardDeck[i];
             int randomIndex = Random.Range(0, cardDeck.Count);
-            cardDeck[i] = cardDeck[randomIndex];
-            cardDeck[randomIndex] = CardContainer[0];
+            SetCardDeckClientRpc(randomIndex, AcademyType, i);
         }
-        AllCardDeck[AcademyType] = cardDeck;
     }
     [ClientRpc]
-    public void SetCardDeckClientRpc(int i)
+    public void SetCardDeckClientRpc(int randomIndex,AcademyType AcademyType,int i)
     {
-        
+        CardContainer[0] = cardDeck[i];
+        cardDeck[i] = cardDeck[randomIndex];
+        cardDeck[randomIndex] = CardContainer[0];
+        if(i == cardDeck.Count)
+        {
+            AllCardDeck[AcademyType] = cardDeck;
+        }
     }
 }

@@ -54,7 +54,7 @@ public class DrawCardComponent :NetworkBehaviour
     {
         if (AllCardCount[AcademyType.Null] > PlayerDeck.AllCardDeck[AcademyType.Null].Count-1)
         {
-            PlayerDeck.Shuffle(AcademyType.Null);
+            PlayerDeck.ShuffleServerRpc(AcademyType.Null);
             AllCardCount[AcademyType.Null] = 0;
         }
         
@@ -70,7 +70,7 @@ public class DrawCardComponent :NetworkBehaviour
     {
         if (AllCardCount[currentPlayer.currentGrid.academy] > PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy].Count - 1)
         {
-            PlayerDeck.Shuffle(currentPlayer.currentGrid.academy);
+            PlayerDeck.ShuffleServerRpc(currentPlayer.currentGrid.academy);
             AllCardCount[currentPlayer.currentGrid.academy] = 0;
         }
         if (currentPlayer.currentGrid.isHasBuilding == false)
