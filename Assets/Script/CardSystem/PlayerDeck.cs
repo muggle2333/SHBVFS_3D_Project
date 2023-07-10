@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerDeck : MonoBehaviour
@@ -45,6 +46,7 @@ public class PlayerDeck : MonoBehaviour
         
     }
 
+
     public void Shuffle(AcademyType AcademyType)
     {
         List<CardSetting> cardDeck = null;
@@ -59,5 +61,27 @@ public class PlayerDeck : MonoBehaviour
             cardDeck[randomIndex] = CardContainer[0];
         }
         AllCardDeck[AcademyType] = cardDeck;
+    }
+
+    [ServerRpc(RequireOwnership =false)]
+    public void ShuffleServerRpc(AcademyType AcademyType)
+    {
+         List<CardSetting> cardDeck = null;
+        AllCardDeck.TryGetValue(AcademyType, out cardDeck);
+
+
+        for (int i = 0; i< cardDeck.Count; i++)
+        {
+            CardContainer[0] = cardDeck[i];
+            int randomIndex = Random.Range(0, cardDeck.Count);
+            cardDeck[i] = cardDeck[randomIndex];
+            cardDeck[randomIndex] = CardContainer[0];
+        }
+        AllCardDeck[AcademyType] = cardDeck;
+    }
+    [ClientRpc]
+    public void SetCardDeckClientRpc(int i)
+    {
+        
     }
 }

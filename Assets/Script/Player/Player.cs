@@ -35,6 +35,8 @@ public class Player : Character
     public int Priority;
     public NetworkVariable<bool> isDying = new NetworkVariable<bool>(false);
 
+    public List<int> handCards;
+
     public GridObject targetGrid;
     public GridObject currentGrid;
     public GridObject trueGrid;
