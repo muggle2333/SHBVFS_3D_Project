@@ -46,12 +46,12 @@ Material:
     - _DecalMeshViewBias: 0
     - _DrawOrder: 0
     - _NoiseStrength: 1
-    - _NoiseWidth: 0.267
+    - _NoiseWidth: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 20
     m_Colors:
-    - _Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1039224077487555870
 MonoBehaviour:
