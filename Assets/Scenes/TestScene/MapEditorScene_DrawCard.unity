@@ -6389,6 +6389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 412754331}
   - component: {fileID: 412754330}
+  - component: {fileID: 412754332}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -6473,6 +6474,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &412754332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412754329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &414030554
 GameObject:
   m_ObjectHideFlags: 0
@@ -9628,9 +9652,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be669c933734f4a448b1a8d398ce2a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentGameStage: 0
-  CompleteGameStage: 0
-  roundIndex: 0
+  CurrentGameStage:
+    m_InternalValue: 0
+  CompleteGameStage:
+    m_InternalValue: 0
   S1PhaseTime: 30
   DiscardPhaseTime: 5
   S2PhaseTime: 5
@@ -9640,7 +9665,14 @@ MonoBehaviour:
   S4PhaseTime: 5
   IsBackAlive: 0
   EndMenu: {fileID: 528250616}
-  timerValue: 0
+  isStart:
+    m_InternalValue: 0
+  isDie:
+    m_InternalValue: 0
+  roundIndex:
+    m_InternalValue: 0
+  timerValue:
+    m_InternalValue: 0
   Timer: {fileID: 2141824683}
   Rounds: {fileID: 227135727}
 --- !u!4 &582217333
@@ -16796,12 +16828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f25b7964832da41bcbfee15f5d6fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingBlue: {fileID: 1523537086631635399, guid: 0b94fe6f2abfe9d42b695b989c5966b9, type: 3}
-  buildingBlueS1: {fileID: 1523537086631635399, guid: b9d60308fcc30f34f9a70e20cfddcadf, type: 3}
-  buildingContainer: {fileID: 1781305110}
-  buildingContainerS1: {fileID: 933371134}
-  vfxGridHightlight: {fileID: 7869472198252072756, guid: c74781141ebd0904d838d07861a63a6c, type: 3}
-  vfxContainer: {fileID: 1947707924}
   levelIndex: 1
   grid:
     width: 0
@@ -18075,14 +18101,42 @@ MonoBehaviour:
   AttackDamage: 3
   Defence: 3
   Range: 1
+  hasAttcaked: 0
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 0
+  playerIdNetwork:
+    m_InternalValue: 0
+  canCost1APInEnemy: 0
+  canFreeMoveInSelfGrid: 0
   CurrentActionPoint: 10
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 3
+  freeMoveCount: 0
+  baseMaxHP: 3
+  baseDefense: 0
+  baseAttackDamage: 1
+  baseRange: 1
+  baseActionPointPerRound: 3
   Priority: 0
+  isDying:
+    m_InternalValue: 0
+  handCards: 
+  targetGrid:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
   currentGrid:
     landType: 0
     academy: 1
@@ -18094,11 +18148,10 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
-  backupGridPos:
+    isDiscovered: 0
+  trueGrid:
     landType: 0
     academy: 1
     meshType: 0
@@ -18109,10 +18162,9 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
+    isDiscovered: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!114 &1119179960
 MonoBehaviour:
@@ -19069,6 +19121,7 @@ GameObject:
   - component: {fileID: 1217175456}
   - component: {fileID: 1217175455}
   - component: {fileID: 1217175454}
+  - component: {fileID: 1217175465}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -19160,11 +19213,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a1f3d683d8493469ae3e4d3e9c5fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStartPointRed: {x: 1, y: 0}
-  playerStartPointBlue: {x: 0, y: 0}
-  playerRed: {fileID: 1119179959}
-  playerBlue: {fileID: 1549521143}
+  playerStartPoint:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  playerList: []
   currentPlayer: {fileID: 0}
+  gameplayUI: {fileID: 0}
+  discardStage: {fileID: 0}
 --- !u!114 &1217175462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19177,6 +19232,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe564b87c9a65e43a174ae8b659de0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dyingPlayerUI: {fileID: 0}
+  alivePlayerUI: {fileID: 0}
+  winUI: {fileID: 0}
+  loseUI: {fileID: 0}
+  drawUI: {fileID: 0}
+  player0LandCount: 0
+  player1LandCount: 0
+  dyingTimer: 10
+  cardSelectManager: {fileID: 0}
 --- !u!4 &1217175463
 Transform:
   m_ObjectHideFlags: 0
@@ -19206,6 +19270,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RedPlayerInteractList: []
   BluePlayerInteractList: []
+--- !u!114 &1217175465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217175453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3360342199
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1217906255
 GameObject:
   m_ObjectHideFlags: 0
@@ -21636,6 +21716,7 @@ MonoBehaviour:
   occupyBtn: {fileID: 1862648696}
   gachaBtn: {fileID: 133011712}
   buildBtn: {fileID: 1583174887}
+  searchBtn: {fileID: 0}
   academyText: {fileID: 745433979}
   ownerText: {fileID: 375999550}
   landBuffText: {fileID: 376712430}
@@ -25292,14 +25373,42 @@ MonoBehaviour:
   AttackDamage: 3
   Defence: 3
   Range: 1
+  hasAttcaked: 0
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 1
+  playerIdNetwork:
+    m_InternalValue: 0
+  canCost1APInEnemy: 0
+  canFreeMoveInSelfGrid: 0
   CurrentActionPoint: 3
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 3
+  freeMoveCount: 0
+  baseMaxHP: 3
+  baseDefense: 0
+  baseAttackDamage: 1
+  baseRange: 1
+  baseActionPointPerRound: 3
   Priority: 0
+  isDying:
+    m_InternalValue: 0
+  handCards: 
+  targetGrid:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
   currentGrid:
     landType: 0
     academy: 1
@@ -25311,11 +25420,10 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
-  backupGridPos:
+    isDiscovered: 0
+  trueGrid:
     landType: 0
     academy: 1
     meshType: 0
@@ -25326,10 +25434,9 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
+    isDiscovered: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!114 &1549521144
 MonoBehaviour:
@@ -32938,7 +33045,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  distance: 10
   CameraMax_X: 100
   CameraMin_X: -100
   CameraMax_Y: 100

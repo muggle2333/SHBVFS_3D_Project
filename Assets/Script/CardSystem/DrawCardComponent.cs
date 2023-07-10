@@ -30,12 +30,22 @@ public class DrawCardComponent :NetworkBehaviour
             AllCardCount.Add((AcademyType)i,0);
         }
     }
-    public void Update()
+    [ServerRpc(RequireOwnership = false)]
+    public void DrawCardServerRpc(PlayerId playerId)
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if(playerId == GameplayManager.Instance.currentPlayer.Id)
         {
-            DrawCard(GameplayManager.Instance.currentPlayer);
+            DrawCardClientRpc();
         }
+        else
+        {
+
+        }
+    }
+    [ClientRpc]
+    public void DrawCardClientRpc()
+    {
+        DrawCard(GameplayManager.Instance.currentPlayer);
     }
     public void DrawCard(Player player)
     {
