@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6568540d0d0c57b41a68a9b8fcf1a06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerVfx: {fileID: 0}
 --- !u!114 &780280818429077314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,16 +173,42 @@ MonoBehaviour:
   AttackDamage: 3
   Defence: 3
   Range: 10
+  hasAttcaked: 0
   AttackTarget: {fileID: 0}
   hasMoved: 0
   Id: 0
   playerIdNetwork:
     m_InternalValue: 0
+  canCost1APInEnemy: 0
+  canFreeMoveInSelfGrid: 0
   CurrentActionPoint: 3
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 10
+  freeMoveCount: 0
+  baseMaxHP: 3
+  baseDefense: 0
+  baseAttackDamage: 1
+  baseRange: 1
+  baseActionPointPerRound: 3
   Priority: 1
+  isDying:
+    m_InternalValue: 0
+  handCards: 
+  targetGrid:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
   currentGrid:
     landType: 0
     academy: 1
@@ -193,11 +220,10 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
-  backupGridPos:
+    isDiscovered: 0
+  trueGrid:
     landType: 0
     academy: 1
     meshType: 0
@@ -208,10 +234,9 @@ MonoBehaviour:
     grid:
       width: 0
       length: 0
-    landTransform: {fileID: 0}
-    vfxTransform: {fileID: 0}
     x: 0
     z: 0
+    isDiscovered: 0
   academyOwnedPoint: 000000000000000000000000000000000000000000000000
 --- !u!114 &499257089889080854
 MonoBehaviour:
@@ -320,7 +345,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -714514529603521784, guid: de80d3e5c97842447a9677b45b557dc8, type: 3}
+  - {fileID: 2100000, guid: 58990eb248551134fbad1ebada4d5161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

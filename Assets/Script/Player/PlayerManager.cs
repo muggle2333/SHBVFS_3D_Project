@@ -88,12 +88,12 @@ public class PlayerManager : NetworkBehaviour
         drawCardComponent = FindObjectOfType<DrawCardComponent>();
         controlStage = FindObjectOfType<ControlStage>();
     }
-    public void ResetPlayerPosition(Player player)
+    public void ResetControlVfx(Player player)
     {
         //player.GetComponent<PlayerInteractionComponent>().Move(player.trueGrid)
         player.GetComponent<PlayerInteractionComponent>().HideVfxPlayer();
         player.GetComponent<PlayerInteractionComponent>().ResetGachaVfx();
-        player.RefreshLinePath();
+        //player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
     }
 
     public void BackupPlayerPosition(Player player)
@@ -158,6 +158,7 @@ public class PlayerManager : NetworkBehaviour
             case PlayerInteractType.Search:
                 Search(player); break;
         }
+        GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
     }
     [ClientRpc]
     public void InteractClientRpc(PlayerId playerId,PlayerInteract playerInteract,ClientRpcParams clientRpcParams = default)
@@ -170,8 +171,10 @@ public class PlayerManager : NetworkBehaviour
         player.targetGrid = gridObject;
         int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
+        GridManager.Instance.DiscoverGridObject(gridObject);
         UpdateGridAuthorityData(player, gridObject);
-        player.UpdateLinePath(gridObject.landType);
+        //player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
+        player.GetComponent<PlayerInteractionComponent>().DeduceFirstPath();
     }
     public void TryMove(Player player,GridObject gridObject)
     {
@@ -179,7 +182,7 @@ public class PlayerManager : NetworkBehaviour
         int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         player.GetComponent<PlayerInteractionComponent>().MoveVfxPlayer(gridObject);
         UpdateGridAuthorityData(player, gridObject);
-        player.UpdateLinePath(gridObject.landType);
+        player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
     }
 
     public void Occupy(Player player,GridObject gridObject,bool isControlStage)

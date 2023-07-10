@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -8,7 +9,7 @@ using UnityEngine;
 public class PlayerInteractionComponent : MonoBehaviour
 {
 
-    private GameObject playerVfx;
+    public GameObject playerVfx;
     private GameObject gachaContainer;
     public void Move(GridObject gridObject)
     {
@@ -31,7 +32,7 @@ public class PlayerInteractionComponent : MonoBehaviour
     {
         if (playerVfx == null)
         {
-            string path = "VfxPlayer";
+            string path = GetComponent<Player>().Id == PlayerId.RedPlayer? "VfxPlayer_Red":"VfxPlayer_Blue";
             playerVfx = Instantiate(Resources.Load<GameObject>(path));
             playerVfx.transform.position = transform.position;
         }
@@ -71,5 +72,35 @@ public class PlayerInteractionComponent : MonoBehaviour
         if (gachaContainer == null) return;
         Destroy(gachaContainer);
         gachaContainer= null;
+    }
+
+    public void UpdateLinePath(LandType landType)
+    {
+        LineRenderer lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer.positionCount += 1;
+        Vector3 offset = new Vector3(0, 0.1f, 0);
+        if (landType == LandType.Mountain)
+        {
+            offset = new Vector3(0, 1.7f, 0);
+        }
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, playerVfx.transform.position + offset);
+    }
+
+    public void RefreshLinePath()
+    {
+        LineRenderer lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer.transform.rotation = Quaternion.LookRotation(new Vector3(0, -0.5f, 0), lineRenderer.transform.up);
+        lineRenderer.positionCount = 1;
+        lineRenderer.SetPosition(0, transform.position + new Vector3(0, 0.1f, 0));
+    }
+
+    public void DeduceFirstPath()
+    {
+        LineRenderer lineRenderer = GetComponentInChildren<LineRenderer>();
+        Vector3[] positionArray = new Vector3[lineRenderer.positionCount];
+        lineRenderer.GetPositions(positionArray);
+        var positionList = positionArray.ToList<Vector3>();
+        positionList.RemoveAt(0);
+        lineRenderer.SetPositions(positionList.ToArray<Vector3>());
     }
 }

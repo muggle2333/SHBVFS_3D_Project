@@ -74,7 +74,7 @@ public class GameplayManager : NetworkBehaviour
             playerList[i].transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
             playerList[i].currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
             playerList[i].trueGrid = playerList[i].currentGrid;
-            playerList[i].RefreshLinePath();
+            playerList[i].GetComponent<PlayerInteractionComponent>().RefreshLinePath();
         }
         InitializePlayerClientRpc();
     }
@@ -88,7 +88,7 @@ public class GameplayManager : NetworkBehaviour
         {
             playerList[i].transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
             playerList[i].currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
-            playerList[i].RefreshLinePath();
+            playerList[i].GetComponent<PlayerInteractionComponent>().RefreshLinePath();
         }
         currentPlayer = playerList[(int)NetworkManager.Singleton.LocalClientId];
         UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
@@ -143,7 +143,7 @@ public class GameplayManager : NetworkBehaviour
         GridManager.Instance.ResetGrid();
         foreach (var player in playerList)
         {
-            PlayerManager.Instance.ResetPlayerPosition(player);
+            PlayerManager.Instance.ResetControlVfx(player);
         }
     }
     public void StartS2Stage()

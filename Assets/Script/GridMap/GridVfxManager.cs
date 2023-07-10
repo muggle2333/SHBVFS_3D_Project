@@ -32,7 +32,6 @@ public class GridVfxManager : MonoBehaviour
     }
     public void Start()
     {
-        Debug.Log("CreateVFX");
         CreateVfx();
     }
     public void CreateVfx()

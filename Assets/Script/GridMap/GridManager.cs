@@ -106,7 +106,6 @@ public class GridManager : NetworkBehaviour
     
     public void InitializeGridAcademy()
     {
-        Debug.LogError("start");
         for (int x = 0; x < grid.width; x++)
         {
             for (int z = 0; z < grid.length; z++)
@@ -121,11 +120,9 @@ public class GridManager : NetworkBehaviour
         }
     }
     [ClientRpc]
-    public void SyncAcademyClientRpc(Vector2Int gridObjectXZ,AcademyType academyType)
+    public void SyncAcademyClientRpc(Vector2Int gridObjectXZ, AcademyType academyType)
     {
-        Debug.LogError("hh");
         grid.gridArray[gridObjectXZ.x, gridObjectXZ.y].academy = academyType;
-        Debug.LogError(gridObjectXZ.x + " " + gridObjectXZ.y + " "+grid.gridArray[gridObjectXZ.x, gridObjectXZ.y].academy.ToString());
     }
 
     public GridObject GetSelectedGridObject(Vector3 pointPos)
@@ -140,6 +137,11 @@ public class GridManager : NetworkBehaviour
     public void HideAimGrid()
     {
         gridUI.SetActive(false);
+    }
+    public void DiscoverGridObject(GridObject gridObject)
+    {
+        gridObject.DiscoverLand();
+
     }
 
     public GridObject ManageOwner(GridObject gridObject ,Player player,bool isControlStage)

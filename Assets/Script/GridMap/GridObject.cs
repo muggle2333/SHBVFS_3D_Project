@@ -188,6 +188,6 @@ public class GridObject
 
     public bool CheckKnowAuthority(Player player)
     {
-        return playerKnowList[(int)player.Id];
+        return isDiscovered || playerKnowList[(int)player.Id];
     }
 }
