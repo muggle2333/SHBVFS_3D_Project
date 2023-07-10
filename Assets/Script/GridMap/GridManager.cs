@@ -29,10 +29,19 @@ public class GridManager : NetworkBehaviour
 
         grid = LoadGridData(levelIndex);
         gridDistance = grid.GetGridDistance();
+        
         //GridVfxManager.Instance.CreateVfx();
     }
     public void Start()
     {
+        if (FindObjectOfType<NetworkManager>() != null && NetworkManager.Singleton.IsHost)
+        {
+            InitializeGridAcademy();
+        }
+        else
+        {
+            //InitializeGridAcademy();
+        }
         //GridVfxManager.Instance.CreateVfx();
     }
     public void Update()
@@ -79,15 +88,15 @@ public class GridManager : NetworkBehaviour
                 gridArray[x, z].grid = grid;
 
                 //Initialize the Land AcademyType
-                if (gridArray[x, z].landType == LandType.Plain)
-                {
-                    gridArray[x, z].academy = (AcademyType)UnityEngine.Random.Range(1, 6);
+                //if (gridArray[x, z].landType == LandType.Plain)
+                //{
+                //    gridArray[x, z].academy = (AcademyType)UnityEngine.Random.Range(1, 6);
                     
-                }
-                else
-                {
-                    gridArray[x, z].academy = AcademyType.Null;
-                }
+                //}
+                //else
+                //{
+                //    gridArray[x, z].academy = AcademyType.Null;
+                //}
             }
         }
 
@@ -95,6 +104,29 @@ public class GridManager : NetworkBehaviour
         return grid;
     }
     
+    public void InitializeGridAcademy()
+    {
+        Debug.LogError("start");
+        for (int x = 0; x < grid.width; x++)
+        {
+            for (int z = 0; z < grid.length; z++)
+            {
+                //Initialize the Land AcademyType
+                if (grid.gridArray[x, z].landType == LandType.Plain)
+                {
+                    var academy = (AcademyType)UnityEngine.Random.Range(1, 7);
+                    SyncAcademyClientRpc(new Vector2Int(x, z), academy);
+                }
+            }
+        }
+    }
+    [ClientRpc]
+    public void SyncAcademyClientRpc(Vector2Int gridObjectXZ,AcademyType academyType)
+    {
+        Debug.LogError("hh");
+        grid.gridArray[gridObjectXZ.x, gridObjectXZ.y].academy = academyType;
+        Debug.LogError(gridObjectXZ.x + " " + gridObjectXZ.y + " "+grid.gridArray[gridObjectXZ.x, gridObjectXZ.y].academy.ToString());
+    }
 
     public GridObject GetSelectedGridObject(Vector3 pointPos)
     {
