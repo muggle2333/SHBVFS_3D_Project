@@ -6,6 +6,7 @@ using UnityEngine;
 public class CardDataBase : MonoBehaviour
 {
     public static Dictionary<AcademyType, List<CardSetting>> AllCardListDic = new Dictionary<AcademyType, List<CardSetting>>();
+    public List<CardSetting> AllCardList = new List<CardSetting>();
     private void Awake()
     {
         for(int i=0;i<(int)AcademyType.FA;i++)
@@ -18,6 +19,7 @@ public class CardDataBase : MonoBehaviour
             }
             AllCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/EventCards/"+ ((AcademyType)i).ToString())));
         }
+        AllCardList = new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards"));
 
     }
 }

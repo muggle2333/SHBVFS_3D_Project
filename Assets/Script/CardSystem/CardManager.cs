@@ -31,8 +31,14 @@ public class CardManager : MonoBehaviour
         playerList = GameplayManager.Instance.playerList;
         for (int i = 0; i < playerList.Count; i++)
         {
-            playedCardDict.Add(playerList[i], new List<Card>());
-            playerHandCardDict.Add(playerList[i], new List<Card>());
+            if (!playedCardDict.ContainsKey(playerList[i]))
+            {
+                playedCardDict.Add(playerList[i], new List<Card>());
+            }
+            if (!playerHandCardDict.ContainsKey(playerList[i]))
+            {
+                playerHandCardDict.Add(playerList[i], new List<Card>());
+            }
         }
         calculating = FindObjectOfType<Calculating>();
     }

@@ -16,7 +16,6 @@ public enum GameStage
     S3,
     AttackStage,
     S4,
-    DyingStage,
 }
 public class TurnbasedSystem : NetworkBehaviour
 { 
@@ -38,6 +37,7 @@ public class TurnbasedSystem : NetworkBehaviour
 
     private TurnbaseUI turnbaseUI;
     public NetworkVariable<bool> isStart = new NetworkVariable<bool>(false);
+    public NetworkVariable<bool> isDie = new NetworkVariable<bool>(false);
     public NetworkVariable<int> roundIndex = new NetworkVariable<int>(0);
     private void Awake()
     {
@@ -142,19 +142,22 @@ public class TurnbasedSystem : NetworkBehaviour
         yield return new WaitForSecondsRealtime(S2PhaseTime);
 
         MovePhase();
-        yield return new WaitUntil(()=>CurrentGameStage.Value==CompleteGameStage.Value);
+        yield return new WaitUntil(()=>CurrentGameStage.Value==CompleteGameStage.Value && !isDie.Value);
         UpdateTimer(MovePhaseTime);
         yield return new WaitForSecondsRealtime(MovePhaseTime);
 
         Event3();
+        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value);
         UpdateTimer(S3PhaseTime);
         yield return new WaitForSecondsRealtime(S3PhaseTime);
 
         AttackPhase();
+        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         UpdateTimer(AttackPhaseTime);
         yield return new WaitForSecondsRealtime(AttackPhaseTime);
 
         Event4();
+        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         UpdateTimer(S4PhaseTime);
         yield return new WaitForSecondsRealtime(S4PhaseTime);
 
@@ -214,7 +217,6 @@ public class TurnbasedSystem : NetworkBehaviour
     {
         CompleteGameStage.Value += 1;
     }
-
     public void Pause()
     {
         Time.timeScale = 0;

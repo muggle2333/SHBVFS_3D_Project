@@ -4,8 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Unity.Netcode;
 
-public class DrawCardComponent : MonoBehaviour
+public class DrawCardComponent :NetworkBehaviour
 {
     public Canvas parentCanvas;
     public PlayerDeck PlayerDeck;
@@ -18,6 +19,8 @@ public class DrawCardComponent : MonoBehaviour
 
     //public int EventCardCount;
     public Dictionary<AcademyType, int> AllCardCount = new Dictionary<AcademyType, int>();
+
+    public NetworkList<int> cardIndex;
     public Player currentPlayer;
 
     private void Awake()
@@ -37,22 +40,14 @@ public class DrawCardComponent : MonoBehaviour
     public void DrawCard(Player player)
     {
         currentPlayer = player;
-        if (player.CurrentActionPoint < 1)
+        if (player.currentGrid.isHasBuilding == true)
         {
-            Debug.Log("NoActionPoint");
+            DrawBasicCard(player);
+            DrawEventCard(player);
         }
         else
         {
-            if (player.currentGrid.isHasBuilding == true)
-            {
-                DrawBasicCard(player);
-                DrawEventCard(player);
-            }
-            else
-            {
-                DrawEventCard(player);
-            }
-            player.CurrentActionPoint--;
+            DrawEventCard(player);
         }
     }
     public void DrawBasicCard(Player player)
@@ -64,7 +59,7 @@ public class DrawCardComponent : MonoBehaviour
         }
         
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-        CardManager.Instance.playerHandCardDict[player].Add(Card);
+        player.handCards.Add(Card.cardId);
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
         AllCardCount[AcademyType.Null]++;
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
@@ -88,7 +83,7 @@ public class DrawCardComponent : MonoBehaviour
             }
         }
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-        CardManager.Instance.playerHandCardDict[player].Add(Card);
+        player.handCards.Add(Card.cardId);
         Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
         AllCardCount[currentPlayer.currentGrid.academy]++;
         Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]-1]);

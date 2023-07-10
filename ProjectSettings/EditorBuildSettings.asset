@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NoGameplayScene/GameplayScene.unity
     guid: dde0bc9ba3437f74bb37ccab88ba002b
+  - enabled: 1
+    path: Assets/Scenes/TestScene/CardAnimationTestScene 1.unity
+    guid: cceb5f1b0f1b0d74c8b8c04e90c90342
   m_configObjects: {}

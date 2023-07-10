@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Calculating : MonoBehaviour
 {
+    public int APCost;
+
     public int academyMaxHP;
     public int academyHPPerRound;
     public int academyAttackRange;
@@ -159,4 +161,312 @@ public class Calculating : MonoBehaviour
         player.CurrentActionPoint += cardAP;
     }
 
+    public int CalculateAPCost(PlayerInteractType playerInteractType,Player player)
+    {
+        switch (playerInteractType)
+        {
+            case PlayerInteractType.Move:
+                return CalculateMoveAPCost(player);
+            case PlayerInteractType.Occupy:
+                return 1;
+            case PlayerInteractType.Build:
+                return 2;
+            case PlayerInteractType.Gacha:
+                return 1;
+            case PlayerInteractType.Search:
+                return 1;
+            default:
+                return 0;
+        }
+    }
+
+    public int CalculateMoveAPCost(Player player)
+    {
+        switch (player.currentGrid.landType)
+        {
+            case LandType.Mountain:
+                switch (player.targetGrid.landType)
+                {
+                    case LandType.Lake:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 2;
+                        }
+                    case LandType.Forest:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    case LandType.Mountain:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    case LandType.Plain:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            if (player.targetGrid.owner != null)
+                            {
+                                if (player.targetGrid.owner != player)
+                                {
+                                    if (player.canCost1APInEnemy)
+                                    {
+                                        return 1;
+                                    }
+                                    else
+                                    {
+                                        return 2;
+                                    }
+                                }
+                                else
+                                {
+                                    return 1;
+                                }
+                            }
+                            else
+                            {
+                                return 1;
+                            }
+                        }
+                    default:
+                        return 0;
+                }
+            case LandType.Lake:
+                switch (player.targetGrid.landType)
+                {
+                    case LandType.Lake:
+                        return 0;
+                    case LandType.Forest:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    case LandType.Mountain:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 2;
+                        }
+                    case LandType.Plain:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            if (player.targetGrid.owner != null)
+                            {
+                                if (player.targetGrid.owner != player)
+                                {
+                                    if (player.canCost1APInEnemy)
+                                    {
+                                        return 1;
+                                    }
+                                    else
+                                    {
+                                        return 2;
+                                    }
+                                }
+                                else
+                                {
+                                    return 1;
+                                }
+                            }
+                            else
+                            {
+                                return 1;
+                            }
+                        }
+                    default:
+                        return 0;
+                }
+            case LandType.Forest:
+                switch (player.targetGrid.landType)
+                {
+                    case LandType.Lake:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 2;
+                        }
+                    case LandType.Forest:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    case LandType.Mountain:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 2;
+                        }
+                    case LandType.Plain:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            if (player.targetGrid.owner != null)
+                            {
+                                if (player.targetGrid.owner != player)
+                                {
+                                    if (player.canCost1APInEnemy)
+                                    {
+                                        return 1;
+                                    }
+                                    else
+                                    {
+                                        return 2;
+                                    }
+                                }
+                                else
+                                {
+                                    return 1;
+                                }
+                            }
+                            else
+                            {
+                                return 1;
+                            }
+                        }
+                    default:
+                        return 0;
+                }
+            case LandType.Plain:
+                switch (player.targetGrid.landType)
+                {
+                    case LandType.Lake:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 2;
+                        }
+                    case LandType.Forest:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    case LandType.Mountain:
+                        if (player.freeMoveCount > 0)
+                        {
+                            player.freeMoveCount--;
+                            return 0;
+                        }
+                        else
+                        {
+                            return 2;
+                        }
+                    case LandType.Plain:
+                        if (player.freeMoveCount > 0)
+                        {
+                            if (player.canFreeMoveInSelfGrid && player.targetGrid.owner == player && player.currentGrid.owner == player)
+                            {
+                                return 0;
+                            }
+                            else
+                            {
+                                player.freeMoveCount--;
+                                return 0;
+                            }
+                        }
+                        else
+                        {
+                            if (player.targetGrid.owner != null)
+                            {
+                                if (player.targetGrid.owner != player)
+                                {
+                                    if (player.canCost1APInEnemy)
+                                    {
+                                        return 1;
+                                    }
+                                    else
+                                    {
+                                        return 2;
+                                    }
+                                }
+                                else
+                                {
+                                    if (player.currentGrid.owner != player)
+                                    {
+                                        return 1;
+                                    }
+                                    else
+                                    {
+                                        if (player.canFreeMoveInSelfGrid)
+                                        {
+                                            return 0;
+                                        }
+                                        else
+                                        {
+                                            return 1;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                return 1;
+                            }
+                        }
+                    default:
+                        return 0;
+                }
+            default:
+                return 0;
+        }
+    }
 }

@@ -16,10 +16,15 @@ public class Player : Character
 
     public PlayerId Id;
     public NetworkVariable<int> playerIdNetwork;
+
+    public bool canCost1APInEnemy = false;
+    public bool canFreeMoveInSelfGrid = false;
+
     public int CurrentActionPoint;
     public int ActionPointPerRound;
     public int MaxActionPoint;
     public int MaxCardCount;
+    public int freeMoveCount;
 
     public int baseMaxHP = 3;
     public int baseDefense = 0;
@@ -28,8 +33,13 @@ public class Player : Character
     public int baseActionPointPerRound = 3;
 
     public int Priority;
+    public NetworkVariable<bool> isDying = new NetworkVariable<bool>(false);
+
+    public List<int> handCards;
+
+    public GridObject targetGrid;
     public GridObject currentGrid;
-    public GridObject backupGridPos;
+    public GridObject trueGrid;
 
     public Dictionary<AcademyType, List<GridObject>> OwnedLandDic = new Dictionary<AcademyType, List<GridObject>>()
 /*    {

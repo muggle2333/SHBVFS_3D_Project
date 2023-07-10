@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -113,6 +114,32 @@ public class Grid<TGridObject>
         z = closestXZ.z;
     }
 
+    public List<TGridObject> GetNeighbour(GridObject gridObject)
+    {
+        int x = gridObject.x;
+        int z = gridObject.z;
+        Vector3Int roughXZ = new Vector3Int(x, 0, z);
+        bool oddRow = z % 2 == 1;
+        List<Vector3Int> neighbourList = new List<Vector3Int>
+        {
+            roughXZ + new Vector3Int(-1,0,0),
+            roughXZ + new Vector3Int(+1,0,0),
+
+            roughXZ + new Vector3Int(oddRow ? +1 : -1,0,+1),
+            roughXZ + new Vector3Int(+0,0,+1),
+
+            roughXZ + new Vector3Int(oddRow ? +1 : -1,0,-1),
+            roughXZ + new Vector3Int(+0,0,-1),
+        };
+        List<TGridObject> neighbourGridObjects = new List<TGridObject>();
+        foreach(var neighbour in neighbourList)
+        {
+            var neighbourGridObject = GetGridObject(neighbour.x, neighbour.z);
+            if (neighbourGridObject == null) continue;
+            neighbourGridObjects.Add(neighbourGridObject);
+        }
+        return neighbourGridObjects;
+    }
     public TextMesh CreateWorldText(string text, Transform parent, Vector3 localPosition, Vector2 indexXY)
     {
         string objectName = "World_Text" + indexXY.x + "_" + indexXY.y;

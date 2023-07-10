@@ -73,6 +73,7 @@ public class GameplayManager : NetworkBehaviour
         {
             playerList[i].transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
             playerList[i].currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
+            playerList[i].trueGrid = playerList[i].currentGrid;
             playerList[i].RefreshLinePath();
         }
         InitializePlayerClientRpc();
@@ -119,22 +120,31 @@ public class GameplayManager : NetworkBehaviour
 
     public void StartControlStage()
     {
-        GridManager.Instance.BackupGrid();
-        foreach(var player in playerList)
-        {
-            PlayerManager.Instance.BackupPlayerPosition(player);
-        }
+        BackUpControlStageClientRpc();
         controlStage.StartStage();
     }
-
-    public void StartDiscardStage()
+    [ClientRpc]
+    public void BackUpControlStageClientRpc()
     {
-        GridManager.Instance.ResetGrid();
+        GridManager.Instance.BackupGrid();
         foreach (var player in playerList)
         {
             PlayerManager.Instance.BackupPlayerPosition(player);
         }
+    }
+    public void StartDiscardStage()
+    {
+        ResetControlStageClientRpc();
         discardStage.StartStage();
+    }
+    [ClientRpc]
+    public void ResetControlStageClientRpc()
+    {
+        GridManager.Instance.ResetGrid();
+        foreach (var player in playerList)
+        {
+            PlayerManager.Instance.ResetPlayerPosition(player);
+        }
     }
     public void StartS2Stage()
     {
