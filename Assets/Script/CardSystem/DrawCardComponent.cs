@@ -37,22 +37,14 @@ public class DrawCardComponent : MonoBehaviour
     public void DrawCard(Player player)
     {
         currentPlayer = player;
-        if (player.CurrentActionPoint < 1)
+        if (player.currentGrid.isHasBuilding == true)
         {
-            Debug.Log("NoActionPoint");
+            DrawBasicCard(player);
+            DrawEventCard(player);
         }
         else
         {
-            if (player.currentGrid.isHasBuilding == true)
-            {
-                DrawBasicCard(player);
-                DrawEventCard(player);
-            }
-            else
-            {
-                DrawEventCard(player);
-            }
-            player.CurrentActionPoint--;
+            DrawEventCard(player);
         }
     }
     public void DrawBasicCard(Player player)

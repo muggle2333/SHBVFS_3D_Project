@@ -16,14 +16,15 @@ public class Player : Character
 
     public PlayerId Id;
     public NetworkVariable<int> playerIdNetwork;
+
+    public bool canCost1APInEnemy = false;
+    public bool canFreeMoveInSelfGrid = false;
+
     public int CurrentActionPoint;
     public int ActionPointPerRound;
     public int MaxActionPoint;
     public int MaxCardCount;
-    public int moveAPCost = 1;
-    public int occupyAPCost = 1;
-    public int buildAPCost = 2;
-
+    public int freeMoveCount;
 
     public int baseMaxHP = 3;
     public int baseDefense = 0;
@@ -34,6 +35,7 @@ public class Player : Character
     public int Priority;
     public NetworkVariable<bool> isDying = new NetworkVariable<bool>(false);
 
+    public GridObject targetGrid;
     public GridObject currentGrid;
     public GridObject trueGrid;
 
