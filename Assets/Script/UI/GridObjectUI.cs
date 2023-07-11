@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -70,6 +70,8 @@ public class GridObjectUI : MonoBehaviour
         //                                   Mathf.Clamp(pos.y, worldPosLeftBottom.y, worldPosTopRight.y),
         //                                   pos.z);
         container.transform.position = pos;
+
+        //control stage外锁定一下
     }
 
     public void UpdateGridObjectUIData(GridObject gridObject, PlayerInteractAuthority authority)
@@ -103,6 +105,15 @@ public class GridObjectUI : MonoBehaviour
         buildBtn.interactable = authority.canBuild;
         moveBtn.interactable = authority.canMove;
         searchBtn.interactable = authority.canSearch;
+
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value!=GameStage.S1||GameManager.Instance.wholeGameState.Value!=GameManager.WholeGameState.GamePlaying)
+        {
+            occupyBtn.interactable = false;
+            gachaBtn.interactable = false;
+            buildBtn.interactable = false;
+            moveBtn.interactable = false;
+            searchBtn.interactable = false;
+        }
     }
 
     public void ConstrainUI(float x,float y)

@@ -58,7 +58,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void TryGacha(GridObject gridObject)
     {
-        if(gachaContainer == null)
+        if (gachaContainer == null)
         {
             gachaContainer = new GameObject("gachaVfxContainer");
         }

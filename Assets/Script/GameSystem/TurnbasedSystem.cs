@@ -1,7 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
@@ -18,19 +19,19 @@ public enum GameStage
     S4,
 }
 public class TurnbasedSystem : NetworkBehaviour
-{ 
+{
     public static TurnbasedSystem Instance { get; private set; }
-    public NetworkVariable<GameStage>  CurrentGameStage = new NetworkVariable<GameStage>(GameStage.S1);
-    public NetworkVariable<GameStage> CompleteGameStage = new NetworkVariable<GameStage>(GameStage.S1);
+    public NetworkVariable<GameStage> CurrentGameStage = new NetworkVariable<GameStage>(GameStage.S1);
+    public NetworkVariable<GameStage> CompleteGameStage = new NetworkVariable<GameStage>(GameStage.S4);
 
 
-    [SerializeField]private float S1PhaseTime = 30;
-    [SerializeField]private float DiscardPhaseTime = 10;
-    [SerializeField]private float S2PhaseTime = 10;
-    [SerializeField]private float MovePhaseTime = 10;
-    [SerializeField]private float S3PhaseTime = 10;
-    [SerializeField]private float AttackPhaseTime = 10;
-    [SerializeField]private float S4PhaseTime = 10;
+    [SerializeField] private float S1PhaseTime = 30;
+    [SerializeField] private float DiscardPhaseTime = 10;
+    [SerializeField] private float S2PhaseTime = 10;
+    [SerializeField] private float MovePhaseTime = 10;
+    [SerializeField] private float S3PhaseTime = 10;
+    [SerializeField] private float AttackPhaseTime = 10;
+    [SerializeField] private float S4PhaseTime = 10;
 
     public bool IsBackAlive = false;
     public GameObject EndMenu;
@@ -38,7 +39,10 @@ public class TurnbasedSystem : NetworkBehaviour
     private TurnbaseUI turnbaseUI;
     public NetworkVariable<bool> isStart = new NetworkVariable<bool>(false);
     public NetworkVariable<bool> isDie = new NetworkVariable<bool>(false);
-    public NetworkVariable<int> roundIndex = new NetworkVariable<int>(0);
+    public NetworkVariable<int> roundIndex = new NetworkVariable<int>(1);
+
+    private Dictionary<ulong, bool> playerSkipDict = new Dictionary<ulong, bool>() { { 0, false }, { 1, false } };
+    private bool isPlayerAllSkip = false;
     private void Awake()
     {
         if(Instance!=null&&Instance!=this)
@@ -95,54 +99,38 @@ public class TurnbasedSystem : NetworkBehaviour
             timerValue.Value = 0;
         }
     }
-    #region One turn
+
     IEnumerator TurnStart()
     {
         roundIndex.Value++;
         ControlPhase();
         UpdateTimer(S1PhaseTime);
-        yield return new WaitForSecondsRealtime(S1PhaseTime);
+        //yield return new WaitForSecondsRealtime(S1PhaseTime);
+        //加设跳过回合，不能用waitforsecondsRealtime
+        while (timerValue.Value > 0)
+        {
+            if (isPlayerAllSkip)
+            {
+                break;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
 
         DiscardPhase();
         UpdateTimer(DiscardPhaseTime);
         yield return new WaitForSecondsRealtime(DiscardPhaseTime);
 
 
-        StartCoroutine("Event2");
-
-    }
-    #endregion
-
-    #region Single phases
-    //S1
-    void ControlPhase()
-    {
-        //Debug.Log("ControlPhase");
-        CurrentGameStage.Value = GameStage.S1;
-        CompleteGameStage.Value = GameStage.S4;
-        GameplayManager.Instance.StartControlStage();
-
-        UpdateTimer(S1PhaseTime);
-    
-    }
-
-    void DiscardPhase()
-    {
-        CurrentGameStage.Value = GameStage.DiscardStage;
-        CompleteGameStage.Value = CurrentGameStage.Value - 1;
-        GameplayManager.Instance.StartDiscardStage();
-    }
-
-    IEnumerator Event2()
-    {
-        CurrentGameStage.Value = GameStage.S2;
-        CompleteGameStage.Value = CurrentGameStage.Value - 1;
-        GameplayManager.Instance.StartS2Stage();
-        UpdateTimer(MovePhaseTime);
+        Event2();
+        UpdateTimer(S2PhaseTime);
         yield return new WaitForSecondsRealtime(S2PhaseTime);
 
+
         MovePhase();
-        yield return new WaitUntil(()=>CurrentGameStage.Value==CompleteGameStage.Value && !isDie.Value);
+        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         UpdateTimer(MovePhaseTime);
         yield return new WaitForSecondsRealtime(MovePhaseTime);
 
@@ -162,7 +150,31 @@ public class TurnbasedSystem : NetworkBehaviour
         yield return new WaitForSecondsRealtime(S4PhaseTime);
 
         StartCoroutine("TurnStart");
+
     }
+
+    //S1
+    void ControlPhase()
+    {
+        RefreshPlayerSkipDict();
+        //Debug.Log("ControlPhase");
+        CurrentGameStage.Value = GameStage.S1;
+        CompleteGameStage.Value = GameStage.S4;
+        GameplayManager.Instance.StartControlStage();
+
+        //UpdateTimer(S1PhaseTime);
+    
+    }
+
+    void DiscardPhase()
+    {
+
+        CurrentGameStage.Value = GameStage.DiscardStage;
+        CompleteGameStage.Value = CurrentGameStage.Value - 1;
+        GameplayManager.Instance.StartDiscardStage();
+    }
+
+    
 
     void MovePhase()
     {        
@@ -171,6 +183,12 @@ public class TurnbasedSystem : NetworkBehaviour
         CompleteGameStage.Value = CurrentGameStage.Value - 1;
         GameplayManager.Instance.StartMoveStage();
       
+    }
+    void Event2()
+    {
+        CurrentGameStage.Value = GameStage.S2;
+        CompleteGameStage.Value = CurrentGameStage.Value - 1;
+        GameplayManager.Instance.StartS2Stage();
     }
 
     void AttackPhase()
@@ -182,6 +200,7 @@ public class TurnbasedSystem : NetworkBehaviour
 
     }
    
+
 
     void Event3()
     {
@@ -201,21 +220,16 @@ public class TurnbasedSystem : NetworkBehaviour
         
         
     }
-    #endregion
 
-    public void TurnOver()
-    {
-        StopCoroutine("TurnStart");
-        StartCoroutine("Event2");
-    }
+
 
     public void UpdateTimer(float timer)
     {
         timerValue.Value = timer;
     }
-    public void TurnToNextStage()
+    public void CompleteStage(GameStage currentGameStage)
     {
-        CompleteGameStage.Value += 1;
+        CompleteGameStage.Value = currentGameStage;
     }
     public void Pause()
     {
@@ -225,5 +239,32 @@ public class TurnbasedSystem : NetworkBehaviour
     public void Continue()
     {
         Time.timeScale = 1;
+    }
+
+    private void RefreshPlayerSkipDict()
+    {
+        playerSkipDict = new Dictionary<ulong, bool>() { { 0, false }, { 1, false } };
+        turnbaseUI.ShowSkipBtnClientRpc(true);
+        isPlayerAllSkip = false;
+    }
+    [ServerRpc(RequireOwnership =false)]
+    public void SkipControlStageServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        playerSkipDict[serverRpcParams.Receive.SenderClientId] = true;
+        isPlayerAllSkip = CheckIsAllSkip();
+    }
+
+    public bool CheckIsAllSkip()
+    {
+        bool isAllSkip = true;
+        foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            if (playerSkipDict[clientId] == false)
+            {
+                isAllSkip = false;
+                break;
+            }
+        }
+        return isAllSkip;
     }
 }

@@ -145,6 +145,7 @@ public class GameplayManager : NetworkBehaviour
         {
             PlayerManager.Instance.ResetControlVfx(player);
         }
+        UIManager.Instance.ShowGridObjectUI(false, null);
     }
     public void StartS2Stage()
     {

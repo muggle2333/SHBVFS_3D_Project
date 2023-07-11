@@ -65,6 +65,12 @@ public class MoveStage : NetworkBehaviour
                 }
             }
         }
-        TurnbasedSystem.Instance.TurnToNextStage();
+        EndStage();
+    }
+
+    public void EndStage()
+    {
+        GridManager.Instance.RefreshGridVfxClientRpc();
+        TurnbasedSystem.Instance.CompleteStage(GameStage.MoveStage);
     }
 }

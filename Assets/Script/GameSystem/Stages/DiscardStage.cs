@@ -17,5 +17,6 @@ public class DiscardStage : MonoBehaviour
         {
             PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = discardCount[GameplayManager.Instance.currentPlayer];
         }
+        TurnbasedSystem.Instance.CompleteStage(GameStage.DiscardStage);
     }
 }

@@ -84,7 +84,7 @@ public class S2Stage : MonoBehaviour
             TurnbasedSystem.Instance.isDie.Value = true;
             PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
         }
-        TurnbasedSystem.Instance.TurnToNextStage();
+        TurnbasedSystem.Instance.CompleteStage(GameStage.S2);
 
     }
 }

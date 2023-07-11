@@ -93,5 +93,6 @@ public class AttackStage : MonoBehaviour
             TurnbasedSystem.Instance.isDie.Value = true;
             PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
         }
+        TurnbasedSystem.Instance.CompleteStage(GameStage.AttackStage);
     }
 }

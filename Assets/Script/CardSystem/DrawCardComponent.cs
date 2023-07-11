@@ -29,6 +29,7 @@ public class DrawCardComponent :NetworkBehaviour
         {
             AllCardCount.Add((AcademyType)i,0);
         }
+        cardIndex = new NetworkList<int>();
     }
     [ServerRpc(RequireOwnership = false)]
     public void DrawCardServerRpc(PlayerId playerId)

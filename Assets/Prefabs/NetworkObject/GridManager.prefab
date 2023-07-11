@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5704261030465529035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5704261030465529033}
+  - component: {fileID: 5704261030465529034}
+  - component: {fileID: 5704261030465529032}
+  - component: {fileID: 5704261030465529031}
+  m_Layer: 0
+  m_Name: GridManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5704261030465529033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704261030465529035}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.765167, y: -11.302797, z: 26.530266}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5704261030465529034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704261030465529035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f25b7964832da41bcbfee15f5d6fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelIndex: 1
+  grid:
+    width: 0
+    length: 0
+  gridUI: {fileID: 0}
+  gridDistance: 0
+--- !u!114 &5704261030465529032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704261030465529035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &5704261030465529031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704261030465529035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c982e486755b714cb1601faad1cb197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxPrefabs:
+    academyVfx: {fileID: 3056813220892033553, guid: a1c8631e78d32af49baeef196f84517f, type: 3}
+    ownerVfx: {fileID: 7869472198252072759, guid: c74781141ebd0904d838d07861a63a6c, type: 3}
+    buildingVfx: {fileID: 2193077389137785725, guid: 0b94fe6f2abfe9d42b695b989c5966b9, type: 3}
+    gachaVfx: {fileID: 780280818429077316, guid: ffc3e8714f2441c4e8960035c5a977cc, type: 3}
+  buildingVfx_Red: {fileID: 5807987092232120488, guid: a7bf98dbb8ae81046b31e14f539faabf, type: 3}
+  buildingVfx_Red_True: {fileID: 6368850634917442223, guid: 9291df9c8f0bb224193e703c840bb7dd, type: 3}
+  buildingVfx_Blue: {fileID: 5807987092232120488, guid: 2b9dc781c478a384d9ed48c933685d9e, type: 3}
+  buildingVfx_Blue_True: {fileID: 8091827570454539437, guid: 67ca841fa7ed7e946b86974204423b95, type: 3}

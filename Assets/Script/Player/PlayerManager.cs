@@ -90,7 +90,6 @@ public class PlayerManager : NetworkBehaviour
     }
     public void ResetControlVfx(Player player)
     {
-        //player.GetComponent<PlayerInteractionComponent>().Move(player.trueGrid)
         player.GetComponent<PlayerInteractionComponent>().HideVfxPlayer();
         player.GetComponent<PlayerInteractionComponent>().ResetGachaVfx();
         //player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
@@ -229,8 +228,9 @@ public class PlayerManager : NetworkBehaviour
     public void TryGacha(Player player, GridObject gridObject)
     {
         int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
+        GridVfxManager.Instance.UpdateVfxGacha(gridObject,true);
+        //player.GetComponent<PlayerInteractionComponent>().TryGacha(player.currentGrid);
 
-        player.GetComponent<PlayerInteractionComponent>().TryGacha(player.currentGrid);
         //drawCardComponent.TryDrawCard();
         //drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
     }
@@ -238,7 +238,7 @@ public class PlayerManager : NetworkBehaviour
     public void DrawCard(Player player, GridObject gridObject)
     {
         int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
-
+        GridVfxManager.Instance.UpdateVfxGacha(gridObject, false);
         drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
     }
     public void UpdateGridAuthorityData(Player player, GridObject gridObject)

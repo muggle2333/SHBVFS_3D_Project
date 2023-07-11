@@ -192,30 +192,26 @@ public class GridManager : NetworkBehaviour
 
     public void ResetGrid()
     {
-        //除了探知 都恢复原样
         for (int x = 0; x < grid.width; x++)
         {
             for (int z = 0; z < grid.length; z++)
             {
-                //Transform tmp = grid.gridArray[x, z].ownerVfxTransform;
                 grid.gridArray[x, z] = backupGrid[x,z];
-                //grid.gridArray[x, z].ownerVfxTransform = tmp;
+                //执行阶段恢复vfx
+                //GridVfxManager.Instance.UpdateVfx(grid.gridArray[x, z]);
+            }
+        }
+    }
+    [ClientRpc]
+    public void RefreshGridVfxClientRpc()
+    {
+        for (int x = 0; x < grid.width; x++)
+        {
+            for (int z = 0; z < grid.length; z++)
+            {
                 GridVfxManager.Instance.UpdateVfx(grid.gridArray[x, z]);
             }
         }
-        //Clear all the S1 buildingOwner & vfx
-        //for (int i = 0; i < buildingContainerS1.childCount; i++)
-        //{
-        //    Destroy(buildingContainerS1.GetChild(i).gameObject);
-        //}
-        //for (int x = 0; x < grid.width; x++)
-        //{
-        //    for (int z = 0; z < grid.length; z++)
-        //    {
-        //        GridObject gridObject = grid.gridArray[x, z];
-        //        GridVfxManager.Instance.UpdateVfx(gridObject);
-        //    }
-        //}
     }
 }
 

@@ -68,7 +68,7 @@ public class S4Stage : MonoBehaviour
         }
         Calculating.Instance.CardDataInitialize(playerList[0]);
         Calculating.Instance.CardDataInitialize(playerList[1]);
-        TurnbasedSystem.Instance.TurnToNextStage();
+        TurnbasedSystem.Instance.CompleteStage(GameStage.S4);
 
     }
 }

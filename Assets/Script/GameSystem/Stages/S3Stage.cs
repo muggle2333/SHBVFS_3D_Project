@@ -67,7 +67,7 @@ public class S3Stage : MonoBehaviour
             TurnbasedSystem.Instance.isDie.Value = true;
             PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
         }
-        TurnbasedSystem.Instance.TurnToNextStage();
+        TurnbasedSystem.Instance.CompleteStage(GameStage.S3);
 
     }
 }

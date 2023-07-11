@@ -19,6 +19,12 @@ public class GridVfxManager : MonoBehaviour
 
     [SerializeField] private VfxTransform[,] vfxTransformArray;
     [SerializeField] private VfxTransform vfxPrefabs;
+
+    [SerializeField] private GameObject buildingVfx_Red;
+    [SerializeField] private GameObject buildingVfx_Red_True;
+    [SerializeField] private GameObject buildingVfx_Blue;
+    [SerializeField] private GameObject buildingVfx_Blue_True;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -53,16 +59,24 @@ public class GridVfxManager : MonoBehaviour
 
                 GameObject atmpVfx = Instantiate(vfxPrefabs.academyVfx.gameObject,container.transform);
                 GameObject otmpVfx = Instantiate(vfxPrefabs.ownerVfx.gameObject, container.transform);
-                GameObject btmpVfx = Instantiate(vfxPrefabs.buildingVfx.gameObject,  container.transform);
-                btmpVfx.SetActive(false);
-                //GameObject gtmpVfx = Instantiate(vfxPrefabs.gachaVfx.gameObject, container.transform);
+
+                //GameObject btmpVfx = Instantiate(vfxPrefabs.buildingVfx.gameObject,  container.transform);
+                //btmpVfx.SetActive(false);
+                GameObject btmpVfx = new GameObject("buildingContainer");
+                btmpVfx.transform.SetParent(container.transform,false);
+                int rotateIndex = UnityEngine.Random.Range(0, 7);
+                btmpVfx.transform.Rotate(new Vector3(0, rotateIndex*60, 0));
+
+                GameObject gtmpVfx = Instantiate(vfxPrefabs.gachaVfx.gameObject, container.transform);
+                gtmpVfx.transform.Rotate(new Vector3(0, rotateIndex * 30, 0));
+                gtmpVfx.SetActive(false);
 
                 vfxTransformArray[x, z] = new VfxTransform {
                     academyVfx = atmpVfx.transform,
                     ownerVfx = otmpVfx.transform,
                     buildingVfx = btmpVfx.transform,
-                    //gachaVfx=gtmpVfx.transform,
-                    gachaVfx = null,
+                    gachaVfx=gtmpVfx.transform,
+                    //gachaVfx = null,
                 };
 
                 //atmpVfx.GetComponentInChildren<TextMesh>().text = gridObject.academy.ToString();
@@ -75,6 +89,7 @@ public class GridVfxManager : MonoBehaviour
         UpdateVfxOwner(gridObject, false);
         UpdateVfxBuilding(gridObject, false);
         UpdateVfxAcademy(gridObject);
+        UpdateVfxGacha(gridObject, false);
     }
     public void UpdateVfxOwner(GridObject gridObject,bool isControlStage)
     {
@@ -101,10 +116,28 @@ public class GridVfxManager : MonoBehaviour
     public void UpdateVfxBuilding(GridObject gridObject, bool isControlStage)
     {
         if (gridObject.landType != LandType.Plain) return;
-        Transform buildingVfx = vfxTransformArray[gridObject.x,gridObject.z].buildingVfx;
-        bool isHasBuilding = gridObject.isHasBuilding;
-        buildingVfx.gameObject.SetActive(isHasBuilding);
-        
+
+        //Transform buildingVfx = vfxTransformArray[gridObject.x,gridObject.z].buildingVfx;
+        //bool isHasBuilding = gridObject.isHasBuilding;
+        //buildingVfx.gameObject.SetActive(isHasBuilding);
+
+        Transform buildingContainer = vfxTransformArray[gridObject.x, gridObject.z].buildingVfx;
+        if(!gridObject.isHasBuilding)
+        {
+            buildingContainer.DestroyChildren();
+            return;
+        }
+        buildingContainer.DestroyChildren();
+        GameObject buildingPrefab = vfxPrefabs.buildingVfx.gameObject;
+        if (gridObject.owner.Id == PlayerId.RedPlayer)
+        {
+            buildingPrefab = isControlStage ? buildingVfx_Red : buildingVfx_Red_True;
+        }
+        else if (gridObject.owner.Id == PlayerId.BluePlayer)
+        {
+            buildingPrefab = isControlStage ? buildingVfx_Blue : buildingVfx_Blue_True;
+        }
+        GameObject buildingTmp = Instantiate(buildingPrefab, buildingContainer);
     }
 
     public void UpdateVfxAcademy(GridObject gridObject)
@@ -119,5 +152,12 @@ public class GridVfxManager : MonoBehaviour
         {
             academyVfx.gameObject.GetComponentInChildren<TextMesh>().text = null;
         }
+    }
+
+    public void UpdateVfxGacha(GridObject gridObject,bool isControlStage)
+    {
+        if (gridObject.landType != LandType.Plain) return;
+        Transform gachaVfx = vfxTransformArray[gridObject.x, gridObject.z].gachaVfx;
+        gachaVfx.gameObject.SetActive(isControlStage);
     }
 }
