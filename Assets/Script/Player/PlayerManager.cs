@@ -46,6 +46,9 @@ public class PlayerManager : NetworkBehaviour
     public GameObject loseUI;
     public GameObject drawUI;
 
+    public NetworkList<int> redPlayerHandCardsList;
+    public NetworkList<int> bluePlayerHandCardsList;
+
     public int player0LandCount;
     public int player1LandCount;
 
@@ -59,6 +62,8 @@ public class PlayerManager : NetworkBehaviour
 
     public void Awake()
     {
+        redPlayerHandCardsList = new NetworkList<int>();
+        bluePlayerHandCardsList = new NetworkList<int>();
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);

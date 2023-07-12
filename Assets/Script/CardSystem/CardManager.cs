@@ -8,9 +8,14 @@ public class CardManager : MonoBehaviour
     public static CardManager Instance;
     public Dictionary<Player, List<Card>> playerHandCardDict = new Dictionary<Player, List<Card>>();
     public Dictionary<Player, List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
+
+    public NetworkList<int> redPlayerPlayedCards;
+    public NetworkList<int> bluePlayerPlayedCards;
     public Calculating calculating;
     public void Awake()
     {
+        redPlayerPlayedCards = new NetworkList<int>();
+        bluePlayerPlayedCards = new NetworkList<int>();
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
@@ -63,30 +68,71 @@ public class CardManager : MonoBehaviour
             }
         }
     }
-    public void CardTakeEffect(Player player,EffectStage stage)
+    [ClientRpc]
+    public void CardTakeEffectClientRpc(PlayerId playerId,EffectStage stage)
+    {
+        if(playerId == PlayerId.RedPlayer)
+        {
+            CardTakeEffect(GameplayManager.Instance.playerList[0],stage);
+        }
+        else
+        {
+            CardTakeEffect(GameplayManager.Instance.playerList[1], stage);
+        }
+    }
+    public void CardTakeEffect(Player player, EffectStage stage)
     {
         for (int i = 0; i < playedCardDict[player].Count; i++)
         {
-            Debug.Log("aa");
             if (playedCardDict[player][i].effectStage == stage)
             {
-
-                Debug.Log("bb");
                 if (playedCardDict[player][i].cardFounction != null)
                 {
                     Instantiate(playedCardDict[player][i].cardFounction);
                 }
-                Debug.Log("cc");
                 playedCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
-                Debug.Log(player);
-                Debug.Log(playedCardDict[player][i]);
-                
                 calculating.DelataCardData(playedCardDict[player][i], player);
                 calculating.CalculatPlayerBaseData(player);
                 calculating.CalaulatPlayerData(player);
                 playedCardDict[player].RemoveAt(i);
                 break;
             }
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void AddCardToPlayerHandServerRpc(PlayerId playerId,int cardId)
+    {
+        if (playerId == PlayerId.RedPlayer)
+        {
+            PlayerManager.Instance.redPlayerHandCardsList.Add(cardId);
+        }
+        else
+        {
+            PlayerManager.Instance.bluePlayerHandCardsList.Add(cardId);
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void RemoveCardFromPlayerHandServerRpc(PlayerId playerId, int i)
+    {
+        if (playerId == PlayerId.RedPlayer)
+        {
+            PlayerManager.Instance.redPlayerHandCardsList.RemoveAt(i);
+        }
+        else
+        {
+            PlayerManager.Instance.bluePlayerHandCardsList.RemoveAt(i);
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void AddPlayedCardServerRpc(PlayerId playerId, int cardId)
+    {
+        if (playerId == PlayerId.RedPlayer)
+        {
+            redPlayerPlayedCards.Add(cardId);
+        }
+        else
+        {
+            bluePlayerPlayedCards.Add(cardId);
         }
     }
 }

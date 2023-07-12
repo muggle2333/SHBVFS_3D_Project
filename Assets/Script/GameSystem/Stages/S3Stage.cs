@@ -39,7 +39,7 @@ public class S3Stage : MonoBehaviour
                     //Debug.Log(priorityList[i].name + " " + playerInteract[0].PlayerInteractType);
 
                     yield return new WaitForSeconds(1);
-                    CardManager.Instance.CardTakeEffect(priorityList[i], EffectStage.S3);
+                    CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, EffectStage.S3);
                     playedCard.RemoveAt(0);
                     playedCardDict[priorityList[i]] = playedCard;
                 }

@@ -6,13 +6,13 @@ using UnityEngine;
 public class PlayerDeck : MonoBehaviour
 {
     public Dictionary<AcademyType, List<CardSetting>> AllCardDeck = new Dictionary<AcademyType, List<CardSetting>>();
-
+    public List<CardSetting> AllCards = new List<CardSetting>();
     private List<CardSetting> CardContainer = new List<CardSetting>();
     public List<CardSetting> cardDeck;
     private void Awake()
     {
         CardContainer.Add(null);
-        for (int i = 0; i < (int)AcademyType.FA; i++)
+        for (int i = 0; i <= (int)AcademyType.FA; i++)
         {
             cardDeck = null;
             if (i == 0)
@@ -31,7 +31,7 @@ public class PlayerDeck : MonoBehaviour
             CardDataBase.AllCardListDic.TryGetValue((AcademyType)i, out cardDeck);
             AllCardDeck.Add((AcademyType)i, cardDeck);
         }
-        for (int i = 0; i < (int)AcademyType.FA; i++)
+        for (int i = 0; i <= (int)AcademyType.FA; i++)
         {
             ShuffleServerRpc((AcademyType)i);
         }
@@ -44,7 +44,7 @@ public class PlayerDeck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        AllCards = AllCardDeck[AcademyType.Null];
     }
 
 
