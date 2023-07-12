@@ -23184,6 +23184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1349824700}
   - component: {fileID: 1349824701}
+  - component: {fileID: 1349824702}
   m_Layer: 5
   m_Name: SecondaryChooseUI
   m_TagString: Untagged
@@ -23226,6 +23227,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SecondaryChooseUI: {fileID: 1349824699}
+  isUsed: 0
+--- !u!114 &1349824702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349824699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2952573b7c0177d448633cc0d9755c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1366557549
 GameObject:
   m_ObjectHideFlags: 0
