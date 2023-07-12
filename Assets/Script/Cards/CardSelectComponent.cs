@@ -60,21 +60,81 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
+        if(true)
         {
 
+        }
+        else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
+        {
+            if (isSelected) EndSelectOperation();
+            else OnSelectOperation();
         }
         else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
         {
-
+            if (isSelected) EndSelectDiscard();
+            else OnSelectDiscard();
         }
         else if (TurnbasedSystem.Instance.isDie.Value == true)
         {
-
+            if(this.gameObject.GetComponent<Card>().cardId == 0)
+            if (isSelected) EndSelectDying();
+            else OnSelectDying();
+        }
+        else
+        {
+            if (isSelected) EndSelectOther();
+            else OnSelectOther();
         }
 
         if (isSelected) EndSelect();
         else OnSelect();
+    }
+
+    public void OnSelectOperation()
+    {
+
+    }
+
+    public void EndSelectOperation()
+    {
+
+    }
+
+    public void OnSelectDiscard()
+    {
+
+    }
+
+    public void EndSelectDiscard()
+    {
+
+    }
+
+    public void OnSelectDying()
+    {
+        
+    }
+
+    public void EndSelectDying()
+    {
+
+    }
+
+    public void OnSelectOther()
+    {
+        Info.SetActive(true);
+        index = transform.GetSiblingIndex();
+        transform.SetAsLastSibling();
+        transform.DOLocalMoveY(targetY, duration);
+        isSelected = true;
+    }
+
+    public void EndSelectOther()
+    {
+        Info.SetActive(false);
+        transform.SetSiblingIndex(index);
+        transform.DOLocalMoveY(formerY, duration);
+        isSelected = false;
     }
 
     public void OnSelect()
