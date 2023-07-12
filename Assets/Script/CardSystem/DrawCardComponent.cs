@@ -19,18 +19,28 @@ public class DrawCardComponent :NetworkBehaviour
     public int basicCardCount;
 
     //public int EventCardCount;
-    public Dictionary<AcademyType, int> AllCardCount = new Dictionary<AcademyType, int>();
+    //public Dictionary<AcademyType, int> AllCardCount = new Dictionary<AcademyType, int>();
 
+    public NetworkList<int> AllCardCount;
     public NetworkList<int> cardIndex;
     public Player currentPlayer;
 
     private void Awake()
     {
-        for (int i = 0; i < (int)AcademyType.FA; i++)
-        {
-            AllCardCount.Add((AcademyType)i,0);
-        }
+        AllCardCount = new NetworkList<int>();
+        
         cardIndex = new NetworkList<int>();
+    }
+    public void Start()
+    {
+        if(NetworkManager.Singleton.IsServer)
+        {
+            for (int i = 0; i <= (int)AcademyType.FA; i++)
+            {
+                AllCardCount.Add(0);
+            }
+        }
+
     }
     /*[ServerRpc(RequireOwnership = false)]
     public void DrawCardServerRpc(PlayerId playerId)
@@ -67,45 +77,56 @@ public class DrawCardComponent :NetworkBehaviour
     }
     public void DrawBasicCard(Player player)
     {
-        if (AllCardCount[AcademyType.Null] > PlayerDeck.AllCardDeck[AcademyType.Null].Count-1)
+        if (AllCardCount[0] > PlayerDeck.AllCardDeck[AcademyType.Null].Count-1)
         {
             PlayerDeck.ShuffleServerRpc(AcademyType.Null);
-            AllCardCount[AcademyType.Null] = 0;
+            AllCardCount[0] = 0;
         }
         
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-        player.handCards.Add(Card.cardId);
-        Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[AcademyType.Null]];
-        AllCardCount[AcademyType.Null]++;
+        Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
+        AllCardCount[0]++;
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
+        player.handCards.Add(Card.cardId);
+        if (player.Id == PlayerId.RedPlayer)
+        {
+            PlayerManager.Instance.redPlayerHandCardsList.Add(Card.cardId);
+        }
+        else
+        {
+            PlayerManager.Instance.bluePlayerHandCardsList.Add(Card.cardId);
+        }
     }
     public void DrawEventCard(Player player)
     {
-        if (AllCardCount[currentPlayer.currentGrid.academy] > PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy].Count - 1)
+        if (AllCardCount[(int)currentPlayer.currentGrid.academy] > PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy].Count - 1)
         {
             PlayerDeck.ShuffleServerRpc(currentPlayer.currentGrid.academy);
-            AllCardCount[currentPlayer.currentGrid.academy] = 0;
+            AllCardCount[(int)currentPlayer.currentGrid.academy] = 0;
         }
         if (currentPlayer.currentGrid.isHasBuilding == false)
         {
-            if (PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]].cardLevel == CardLevel.Top)
+            if (PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]].cardLevel == CardLevel.Top)
             {
-                AllCardCount[currentPlayer.currentGrid.academy]++;
+                AllCardCount[(int)currentPlayer.currentGrid.academy]++;
                 DrawEventCard(player);
                 return;
             }
         }
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-        player.handCards.Add(Card.cardId);
-        Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]];
-        AllCardCount[currentPlayer.currentGrid.academy]++;
-        Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[currentPlayer.currentGrid.academy]-1]);
+        Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]];
+        
+        AllCardCount[(int)currentPlayer.currentGrid.academy]++;
+        Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]-1]);
         Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
+        
+        CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id,Card.cardId);
     }
+    
 
     public Vector3 GetScreenPosition(GameObject target)
     {

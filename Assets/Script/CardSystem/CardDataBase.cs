@@ -9,7 +9,7 @@ public class CardDataBase : MonoBehaviour
     public List<CardSetting> AllCardList = new List<CardSetting>();
     private void Awake()
     {
-        for(int i=0;i<(int)AcademyType.FA;i++)
+        for(int i=0;i<=(int)AcademyType.FA;i++)
         {
             if(i==0)
             {

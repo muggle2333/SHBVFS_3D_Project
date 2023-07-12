@@ -53,7 +53,7 @@ public class S2Stage : MonoBehaviour
                     //Debug.Log(priorityList[i].name + " " + playerInteract[0].PlayerInteractType);
 
                     yield return new WaitForSeconds(1);
-                    CardManager.Instance.CardTakeEffect(priorityList[i], EffectStage.S2);
+                    CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, EffectStage.S2);
 
 
                     playedCard.RemoveAt(0);
