@@ -119,27 +119,27 @@ public class CardSelectManager : MonoBehaviour
         }
     }
 
-    public void Retract(Player player)
-    {
-        CancelCards(player);
-        handY -= RetractOffset;
-        IsRetracted = true;
-        UpdateCardPos(player);
-        //GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(true);
-        //GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.disretract, true);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.retract, false);
-    }
+    //public void Retract(Player player)
+    //{
+    //    CancelCards(player);
+    //    handY -= RetractOffset;
+    //    IsRetracted = true;
+    //    UpdateCardPos(player);
+    //    //GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(true);
+    //    //GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(false);
+    //    UIManager.Instance.SetGameplayPlayUI(GameplayUIType.disretract, true);
+    //    UIManager.Instance.SetGameplayPlayUI(GameplayUIType.retract, false);
+    //}
 
-    public void Disretract(Player player)
-    {
-        handY += RetractOffset;
-        IsRetracted = false;
-        UpdateCardPos(player);
-        //GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(false);
-        //GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(true);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.disretract, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.retract, true);
-    }
+    //public void Disretract(Player player)
+    //{
+    //    handY += RetractOffset;
+    //    IsRetracted = false;
+    //    UpdateCardPos(player);
+    //    //GameplayManager.Instance.gameplayUI.disretract.gameObject.SetActive(false);
+    //    //GameplayManager.Instance.gameplayUI.retract.gameObject.SetActive(true);
+    //    UIManager.Instance.SetGameplayPlayUI(GameplayUIType.disretract, false);
+    //    UIManager.Instance.SetGameplayPlayUI(GameplayUIType.retract, true);
+    //}
 
 }
