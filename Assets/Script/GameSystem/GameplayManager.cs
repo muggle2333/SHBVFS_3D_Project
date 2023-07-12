@@ -141,24 +141,35 @@ public class GameplayManager : NetworkBehaviour
     public void ResetControlStageClientRpc()
     {
         GridManager.Instance.ResetGrid();
-        foreach (var player in playerList)
-        {
-            PlayerManager.Instance.ResetControlVfx(player);
-        }
+        //foreach (var player in playerList)
+        //{
+        //    PlayerManager.Instance.ResetControlVfx(player);
+        //}
         UIManager.Instance.ShowGridObjectUI(false, null);
     }
     public void StartS2Stage()
     {
         s2Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
     }
+
     public void StartMoveStage()
     {
         moveStage.StartStage(controlStage.playerInteractDict);
     }
 
+    [ClientRpc]
+    public void RefreshDataClientRpc()
+    {
+        foreach (var player in playerList)
+        {
+            PlayerManager.Instance.ResetControlVfx(player);
+        }
+    }
+
     public void StartS3Stage()
     {
         s3Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
+        RefreshDataClientRpc();
     }
 
     public void StartAttackStage()

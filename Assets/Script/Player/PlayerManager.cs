@@ -91,7 +91,7 @@ public class PlayerManager : NetworkBehaviour
     public void ResetControlVfx(Player player)
     {
         player.GetComponent<PlayerInteractionComponent>().HideVfxPlayer();
-        player.GetComponent<PlayerInteractionComponent>().ResetGachaVfx();
+        //player.GetComponent<PlayerInteractionComponent>().ResetGachaVfx();
         //player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
     }
 

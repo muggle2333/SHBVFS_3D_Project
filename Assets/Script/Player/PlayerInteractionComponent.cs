@@ -26,6 +26,10 @@ public class PlayerInteractionComponent : MonoBehaviour
         GetComponent<Player>().currentGrid = gridObject;
         GetComponent<Player>().trueGrid = gridObject;
 
+        if(playerVfx!=null&&Vector3.Distance(playerVfx.transform.position, transform.position)<GridManager.Instance.gridDistance*0.5f)
+        {
+            HideVfxPlayer();
+        }
     }
 
     public void MoveVfxPlayer(GridObject gridObject)
