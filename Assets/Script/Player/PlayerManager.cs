@@ -167,6 +167,7 @@ public class PlayerManager : NetworkBehaviour
     }
     public void MovePlayer(Player player,GridObject gridObject)
     {
+        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return;
         player.targetGrid = gridObject;
         int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
@@ -237,9 +238,11 @@ public class PlayerManager : NetworkBehaviour
 
     public void DrawCard(Player player, GridObject gridObject)
     {
+        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return;
         int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
         GridVfxManager.Instance.UpdateVfxGacha(gridObject, false);
-        drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
+        //drawCardComponent.DrawCardServerRpc(player.Id);
+        drawCardComponent.DrawCard(player);
     }
     public void UpdateGridAuthorityData(Player player, GridObject gridObject)
     {

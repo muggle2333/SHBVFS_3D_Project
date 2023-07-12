@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Unity.Netcode;
+using UnityEditor.PackageManager;
 
 public class DrawCardComponent :NetworkBehaviour
 {
@@ -31,23 +32,26 @@ public class DrawCardComponent :NetworkBehaviour
         }
         cardIndex = new NetworkList<int>();
     }
-    [ServerRpc(RequireOwnership = false)]
+    /*[ServerRpc(RequireOwnership = false)]
     public void DrawCardServerRpc(PlayerId playerId)
     {
-        if(playerId == GameplayManager.Instance.currentPlayer.Id)
-        {
-            DrawCardClientRpc();
-        }
-        else
-        {
+        ClientRpcParams clientRpcParams = new ClientRpcParams{
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = new ulong[] { (ulong)playerId }
+            }
+        };
+        DrawCardClientRpc(playerId,clientRpcParams);
 
-        }
     }
     [ClientRpc]
-    public void DrawCardClientRpc()
+    public void DrawCardClientRpc(PlayerId playerId,ClientRpcParams clientRpcParams=default)
     {
+        Debug.LogError(playerId);
         DrawCard(GameplayManager.Instance.currentPlayer);
-    }
+
+        
+    }*/
     public void DrawCard(Player player)
     {
         currentPlayer = player;
