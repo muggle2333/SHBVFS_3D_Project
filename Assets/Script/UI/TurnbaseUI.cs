@@ -11,7 +11,6 @@ public class TurnbaseUI : MonoBehaviour
     [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text roundText;
-    [SerializeField] private Button endBtn;
     [SerializeField] private Button skipBtn;
 
     private void Awake()
