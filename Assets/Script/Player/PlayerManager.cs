@@ -163,6 +163,10 @@ public class PlayerManager : NetworkBehaviour
                 Search(player); break;
         }
         GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
+        foreach (var tmpPlayer in GameplayManager.Instance.playerList)
+        {
+            tmpPlayer.GetComponentInChildren<PlayerInteractionComponent>().SetPlayerPointed(tmpPlayer == player);
+        }
     }
     [ClientRpc]
     public void InteractClientRpc(PlayerId playerId,PlayerInteract playerInteract,ClientRpcParams clientRpcParams = default)
@@ -352,6 +356,18 @@ public class PlayerManager : NetworkBehaviour
                 }
             }
         }
+    }
+    [ClientRpc]
+    public void SetAttackClientRpc(PlayerId attackPlayerId, PlayerId attackTargetId, ClientRpcParams clientRpcParams = default)
+    {
+        Debug.LogError("client");
+        Player attackPlayer = GameplayManager.Instance.playerList[(int)attackPlayerId];
+        Player attackTarget = GameplayManager.Instance.playerList[(int)attackTargetId];
+        attackPlayer.AttackTarget = attackTarget;
+        attackPlayer.Attack();
+        Debug.LogError(attackPlayerId + " attack " + attackTargetId);
+
+        VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
     }
     public void GameOver()
     {

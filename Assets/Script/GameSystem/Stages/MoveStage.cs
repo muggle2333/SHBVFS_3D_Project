@@ -42,6 +42,8 @@ public class MoveStage : NetworkBehaviour
                     //Debug.Log(priorityList[i].name + " " + playerInteract[0].PlayerInteractType);
 
                     yield return new WaitForSeconds(1);
+
+
                     if(FindObjectOfType<NetworkManager>())
                     {
                         //针对特定的client执行操作

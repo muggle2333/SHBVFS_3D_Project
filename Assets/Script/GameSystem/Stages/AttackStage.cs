@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 
 public class AttackStage : MonoBehaviour
@@ -65,9 +66,17 @@ public class AttackStage : MonoBehaviour
             }
             if (targetIndex != i)
             {
-                playerList[i].AttackTarget = playerList[targetIndex];
-                playerList[i].Attack();
-                Debug.Log(playerList[i] + " attack " + playerList[targetIndex]);
+                if(FindObjectOfType<NetworkManager>()==null)
+                {
+                    playerList[i].AttackTarget = playerList[targetIndex];
+                    playerList[i].Attack();
+                    Debug.Log(playerList[i] + " attack " + playerList[targetIndex]);
+                }
+                else
+                {
+                    PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
+                }
+                
                 yield return new WaitForSecondsRealtime(1f);
             }
         }

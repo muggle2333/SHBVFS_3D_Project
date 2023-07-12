@@ -9,8 +9,9 @@ using UnityEngine;
 public class PlayerInteractionComponent : MonoBehaviour
 {
 
-    public GameObject playerVfx;
-    private GameObject gachaContainer;
+    private GameObject playerVfx;
+    //private GameObject gachaContainer;
+    [SerializeField] private GameObject vfx_Player_Point;
     public void Move(GridObject gridObject)
     {
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
@@ -60,23 +61,23 @@ public class PlayerInteractionComponent : MonoBehaviour
         playerVfx.SetActive(false);
     }
 
-    public void TryGacha(GridObject gridObject)
-    {
-        if (gachaContainer == null)
-        {
-            gachaContainer = new GameObject("gachaVfxContainer");
-        }
-        GameObject gachaTmp = Instantiate(Resources.Load<GameObject>("VfxGacha"), gachaContainer.transform);
-        Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
-        gachaTmp.transform.position = dirPos;
-    }
+    //public void TryGacha(GridObject gridObject)
+    //{
+    //    if (gachaContainer == null)
+    //    {
+    //        gachaContainer = new GameObject("gachaVfxContainer");
+    //    }
+    //    GameObject gachaTmp = Instantiate(Resources.Load<GameObject>("VfxGacha"), gachaContainer.transform);
+    //    Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
+    //    gachaTmp.transform.position = dirPos;
+    //}
 
-    public void ResetGachaVfx()
-    {
-        if (gachaContainer == null) return;
-        Destroy(gachaContainer);
-        gachaContainer= null;
-    }
+    //public void ResetGachaVfx()
+    //{
+    //    if (gachaContainer == null) return;
+    //    Destroy(gachaContainer);
+    //    gachaContainer= null;
+    //}
 
     public void UpdateLinePath(LandType landType)
     {
@@ -106,5 +107,10 @@ public class PlayerInteractionComponent : MonoBehaviour
         var positionList = positionArray.ToList<Vector3>();
         positionList.RemoveAt(0);
         lineRenderer.SetPositions(positionList.ToArray<Vector3>());
+    }
+
+    public void SetPlayerPointed(bool isPointed)
+    {
+        vfx_Player_Point.SetActive(isPointed);
     }
 }
