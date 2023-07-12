@@ -60,6 +60,19 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Interactable == false) return;
+        if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
+        {
+
+        }
+        else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
+        {
+
+        }
+        else if (TurnbasedSystem.Instance.isDie.Value == true)
+        {
+
+        }
+
         if (isSelected) EndSelect();
         else OnSelect();
     }
