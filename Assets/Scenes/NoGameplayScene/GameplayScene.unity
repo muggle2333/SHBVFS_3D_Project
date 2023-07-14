@@ -9059,9 +9059,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playCard: {fileID: 1964566412}
-  cancel: {fileID: 884009875}
+  cancelControl: {fileID: 884009875}
   discardCards: {fileID: 102955045}
+  cancelDiscard: {fileID: 1931558587}
   playHP: {fileID: 421882140}
+  cancelDying: {fileID: 866039023}
 --- !u!1 &492490541
 GameObject:
   m_ObjectHideFlags: 0
