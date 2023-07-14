@@ -80,7 +80,7 @@ public class CardSelectManager : MonoBehaviour
                 {
                     CardManager.Instance.S1CardTakeEffect(player);
                 }
-                else if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S2|| CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S3|| CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S4)
+                else if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S2 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S3 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S4)
                 {
                     CardManager.Instance.playedCardDict[player].Add(CardManager.Instance.playerHandCardDict[player][i]);
                     //CardManager.Instance.AddPlayedCardServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
@@ -88,7 +88,7 @@ public class CardSelectManager : MonoBehaviour
 
                 CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
-                CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);
+                CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);//?
                 i--;
             }
         }
@@ -105,6 +105,12 @@ public class CardSelectManager : MonoBehaviour
                 i--;
             }
         }
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDying, false);
     }
 
     public void UpdateCardPos(Player player)

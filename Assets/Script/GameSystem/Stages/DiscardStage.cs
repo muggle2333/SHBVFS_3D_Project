@@ -11,7 +11,7 @@ public class DiscardStage : MonoBehaviour
         //GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(false);
         //GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancel, false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
         discardCount[GameplayManager.Instance.currentPlayer] = CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer].Count - GameplayManager.Instance.currentPlayer.HP;
         if (discardCount[GameplayManager.Instance.currentPlayer] > 1)
         {

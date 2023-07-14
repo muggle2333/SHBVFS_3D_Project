@@ -60,16 +60,22 @@ public class UIManager : NetworkBehaviour
         messageUI.HideMessage();
     }
 
-    public void SetGameplayPlayUI(GameplayUIType gameplayUItype,bool isActive)
+    public void SetGameplayPlayUI(GameplayUIType gameplayUItype, bool isActive)
     {
         switch(gameplayUItype)
         {
             case GameplayUIType.playCard:
                 gameplayUI.playCard.gameObject.SetActive(isActive); break;
-            case GameplayUIType.cancel:
-                gameplayUI.cancel.gameObject.SetActive(isActive); break;
+            case GameplayUIType.cancelControl:
+                gameplayUI.cancelControl.gameObject.SetActive(isActive); break;
             case GameplayUIType.discardCards:
                 gameplayUI.discardCards.gameObject.SetActive(isActive); break;
+            case GameplayUIType.cancelDiscard:
+                gameplayUI.cancelDiscard.gameObject.SetActive(isActive); break;
+            case GameplayUIType.playHP:
+                gameplayUI.playHP.gameObject.SetActive(isActive); break;
+            case GameplayUIType.cancelDying:
+                gameplayUI.cancelDying.gameObject.SetActive(isActive); break;
         }
     }
     public void SetGameplayPlayUIInteractable(GameplayUIType gameplayUItype, bool isActive)
@@ -78,10 +84,11 @@ public class UIManager : NetworkBehaviour
         {
             case GameplayUIType.playCard:
                 gameplayUI.playCard.gameObject.GetComponent<Button>().interactable = isActive; break;
-            case GameplayUIType.cancel:
-                gameplayUI.cancel.gameObject.GetComponent<Button>().interactable = isActive; break;
             case GameplayUIType.discardCards:
                 gameplayUI.discardCards.gameObject.GetComponent<Button>().interactable = isActive; break;
+            case GameplayUIType.playHP:
+                gameplayUI.playHP.gameObject.GetComponent<Button>().interactable = isActive; break;
+
         }
     }
 }

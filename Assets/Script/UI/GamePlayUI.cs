@@ -6,17 +6,21 @@ using UnityEngine.UI;
 public enum GameplayUIType
 {
     playCard,
-    cancel,
+    cancelControl,
     discardCards,
-    retract,
-    disretract,
+    cancelDiscard,
+    playHP,
+    cancelDying
 }
+
 public class GameplayUI : MonoBehaviour
 {
     public Button playCard;
-    public Button cancel;
+    public Button cancelControl;
     public Button discardCards;
+    public Button cancelDiscard;
     public Button playHP;
+    public Button cancelDying;
 
 
 
@@ -27,7 +31,7 @@ public class GameplayUI : MonoBehaviour
         {
             PlayerManager.Instance.cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
         });
-        cancel.onClick.AddListener(() =>
+        cancelControl.onClick.AddListener(() =>
         {
             PlayerManager.Instance.cardSelectManager.CancelCards(GameplayManager.Instance.currentPlayer);
         });
@@ -35,9 +39,17 @@ public class GameplayUI : MonoBehaviour
         {
             PlayerManager.Instance.cardSelectManager.DiscardCards(GameplayManager.Instance.currentPlayer);
         });
+        cancelDiscard.onClick.AddListener(() =>
+        {
+            PlayerManager.Instance.cardSelectManager.CancelCards(GameplayManager.Instance.currentPlayer);
+        });
         playHP.onClick.AddListener(() =>
         {
             PlayerManager.Instance.cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
+        });
+        cancelDying.onClick.AddListener(() =>
+        {
+            PlayerManager.Instance.cardSelectManager.CancelCards(GameplayManager.Instance.currentPlayer);
         });
 
 

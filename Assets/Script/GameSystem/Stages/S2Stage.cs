@@ -20,7 +20,7 @@ public class S2Stage : MonoBehaviour
             }
             foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
             {
-                card.GetComponent<CardSelectComponent>().EndSelect();
+                card.GetComponent<CardSelectComponent>().EndSelectDiscard();
             }
             PlayerManager.Instance.cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] = 0;
             PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.currentPlayer);
