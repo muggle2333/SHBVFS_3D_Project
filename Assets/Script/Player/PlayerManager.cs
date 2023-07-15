@@ -360,12 +360,10 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     public void SetAttackClientRpc(PlayerId attackPlayerId, PlayerId attackTargetId, ClientRpcParams clientRpcParams = default)
     {
-        Debug.LogError("client");
         Player attackPlayer = GameplayManager.Instance.playerList[(int)attackPlayerId];
         Player attackTarget = GameplayManager.Instance.playerList[(int)attackTargetId];
         attackPlayer.AttackTarget = attackTarget;
         attackPlayer.Attack();
-        Debug.LogError(attackPlayerId + " attack " + attackTargetId);
 
         VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
     }

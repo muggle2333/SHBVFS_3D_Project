@@ -90,7 +90,8 @@ public class DrawCardComponent :NetworkBehaviour
         {
             if (PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]].cardLevel == CardLevel.Top)
             {
-                AllCardCount[(int)currentPlayer.currentGrid.academy]++;
+                //AllCardCount[(int)currentPlayer.currentGrid.academy]++;
+                AllCardCountPlusServerRpc((int)currentPlayer.currentGrid.academy, currentPlayer.currentGrid.academy);
                 DrawEventCard(player);
                 return;
             }
