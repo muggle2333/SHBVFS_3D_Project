@@ -194,20 +194,20 @@ public class UITooltip : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Show a tooltip with the specified text.
+	/// ShowBtn a tooltip with the specified text.
 	/// </summary>
 
-	[System.Obsolete("Use UITooltip.Show instead")]
+	[System.Obsolete("Use UITooltip.ShowBtn instead")]
 	static public void ShowText (string text) { if (mInstance != null) mInstance.SetText(text); }
 
 	/// <summary>
-	/// Show the tooltip.
+	/// ShowBtn the tooltip.
 	/// </summary>
 
 	static public void Show (string text) { if (mInstance != null) mInstance.SetText(text); }
 
 	/// <summary>
-	/// Hide the tooltip.
+	/// HideBtn the tooltip.
 	/// </summary>
 
 	static public void Hide () { if (mInstance != null) { mInstance.mTooltip = null; mInstance.mTarget = 0f; } }

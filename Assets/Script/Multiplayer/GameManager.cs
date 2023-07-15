@@ -10,9 +10,12 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private Dictionary<ulong, bool> playerReadyDictionary;
     public event EventHandler OnLocalPlayerReadyChanged;
     public event EventHandler OnWholeGameStateChanged;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnpaused;
+    public event EventHandler OnLocalGamePaused;
+    public event EventHandler OnLocalGameUnpaused;
 
 
     public enum WholeGameState
@@ -26,10 +29,13 @@ public class GameManager : NetworkBehaviour
     //[SerializeField] private Transform playerPrefab;
     public NetworkVariable<WholeGameState> wholeGameState = new NetworkVariable<WholeGameState>(WholeGameState.WaitingToStart);
     private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3.5f);
+    private NetworkVariable<bool> isGamePaused = new NetworkVariable<bool>(false);
     private bool isLocalPlayerReady = false;
-    private bool isPlayerPauesed;
+    private bool isLocalPlayerPaused = false;
     private bool isGameOver = false;
-    private NetworkVariable<bool> isGamePaused = new NetworkVariable<bool> (false);
+
+    private Dictionary<ulong, bool> playerReadyDictionary;
+    private Dictionary<ulong, bool> playerPausedDictionary;
 
     [SerializeField] private GameObject managerContainerPath;
     private void Awake()
@@ -37,6 +43,7 @@ public class GameManager : NetworkBehaviour
         Instance= this;
         wholeGameState.Value = WholeGameState.WaitingToStart;
         playerReadyDictionary = new Dictionary<ulong, bool>();
+        playerPausedDictionary = new Dictionary<ulong, bool>();
     }
     //public override void OnNetworkSpawn()
     private void Start()
@@ -57,6 +64,10 @@ public class GameManager : NetworkBehaviour
         {
             GameInput_OnInteractAction();
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseGame();
+        }
         if(!IsServer)
         {
             return;
@@ -71,7 +82,7 @@ public class GameManager : NetworkBehaviour
                 UIManager.Instance.ShowMessageTimerClientRpc(countdownToStartTimer.Value);
                 if(countdownToStartTimer.Value<0f)
                 {
-                    UIManager.Instance.HideMessageTimerClientRpc();
+                    UIManager.Instance.HideMessageClientRpc();
                     wholeGameState.Value = WholeGameState.GamePlaying;
                     TurnbasedSystem.Instance.StartTurnbaseSystem();
                 }
@@ -95,7 +106,16 @@ public class GameManager : NetworkBehaviour
 
     private void IsGamePaused_OnValueChanged(bool previousValue, bool newValue)
     {
-        throw new NotImplementedException();
+        if (isGamePaused.Value)
+        {
+            Time.timeScale = 0f;
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void NetworkManager_OnClientDisconnectCallback(ulong obj)
@@ -132,6 +152,7 @@ public class GameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership =false)]
     private void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams=default)
     {
+        if (wholeGameState.Value != WholeGameState.WaitingToStart) return;
         playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
 
         bool isAllReady = true;
@@ -142,26 +163,66 @@ public class GameManager : NetworkBehaviour
                 isAllReady= false;
                 break;
             }
-            else
-            {
-                UIManager.Instance.ShowMessageInfoClientRpc("Waiting for others", new ClientRpcParams { Send = new ClientRpcSendParams
-                {
-                    TargetClientIds = new List<ulong> { serverRpcParams.Receive.SenderClientId }
-                } });
-            }
+            //else
+            //{
+                //UIManager.Instance.ShowMessageInfoClientRpc("Waiting for others", new ClientRpcParams { Send = new ClientRpcSendParams
+                //{
+                //    TargetClientIds = new List<ulong> { serverRpcParams.Receive.SenderClientId }
+                //} });
+            //}
         }
         if(isAllReady)
         {
             wholeGameState.Value = WholeGameState.CountdownToStart;
-           
         }
     }
-
 
     public bool IsWaitingToStart()
     {
         return wholeGameState.Value == WholeGameState.WaitingToStart;
     }
-
+    public bool IsPaused()
+    {
+        return isGamePaused.Value;
+    }
+    public void TogglePauseGame()
+    {
+        isLocalPlayerPaused = !isLocalPlayerPaused;
+        if (isLocalPlayerPaused)
+        {
+            PauseGameServerRpc();
+            OnLocalGamePaused?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            UnpauseGameServerRpc();
+            OnLocalGameUnpaused?.Invoke(this, EventArgs.Empty);
+            
+        }
+    }
+    [ServerRpc(RequireOwnership =false)]
+    private void PauseGameServerRpc(ServerRpcParams serverRpcParams=default)
+    {
+        playerPausedDictionary[serverRpcParams.Receive.SenderClientId] = true;
+        TestGamePausedState();
+    }
+    [ServerRpc(RequireOwnership =false)]
+    private void UnpauseGameServerRpc(ServerRpcParams serverRpcParams=default)
+    {
+        playerPausedDictionary[serverRpcParams.Receive.SenderClientId] = false;
+        TestGamePausedState();
+    }
+    private void TestGamePausedState()
+    {
+        foreach(ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            if (playerPausedDictionary.ContainsKey(clientId) && playerPausedDictionary[clientId])
+            {
+                isGamePaused.Value = true;
+                return;
+            }
+        }
+        isGamePaused.Value = false;
+    }
     
 }

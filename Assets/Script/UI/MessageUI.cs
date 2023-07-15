@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,31 +7,51 @@ using UnityEngine;
 public class MessageUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text messageText;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private GameObject content;
+    [SerializeField] private GameObject messageContent;
+    
 
     public void Start()
     {
-        messageText.text = "Press SPACE to Ready Waiting...";
+        messageText.text = "Press SPACE to Ready";
+        GameManager.Instance.OnLocalPlayerReadyChanged += GameManager_OnLocalPlayerReadyChanged;
+
     }
+
+    public void Update()
+    {
+    }
+
+    private void GameManager_OnLocalPlayerReadyChanged(object sender, EventArgs e)
+    {
+        messageText.text = "Waiting for others to Ready";
+    }
+
     public void ShowMessageInfo(string info)
-    {
+    { 
         messageText.text = info;
+        messageContent.SetActive(true);
+        timerText.gameObject.SetActive(false);
     }
-    public void ShowMessage(float timer)
+    public void ShowMessageTimer(float timer)
     {
-        messageText.gameObject.SetActive(true);
+        messageContent.SetActive(false);
+        timerText.gameObject.SetActive(true);
         int time = Mathf.FloorToInt(timer);
         if (time == 0)
         {
-            messageText.text = "START";
+            //timerText.text = "START";
+            timerText.text = "0";
         }
         else
         {
-            messageText.text = Mathf.FloorToInt(timer).ToString();
+            timerText.text = Mathf.FloorToInt(timer).ToString();
         }
     }
 
     public void HideMessage()
-    {
-        messageText.gameObject.SetActive(false);
+    { 
+        content.gameObject.SetActive(false);
     }
 }

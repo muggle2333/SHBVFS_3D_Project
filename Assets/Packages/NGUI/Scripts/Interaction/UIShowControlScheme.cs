@@ -6,7 +6,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Show or hide the widget based on whether the control scheme is appropriate.
+/// ShowBtn or hide the widget based on whether the control scheme is appropriate.
 /// </summary>
 
 public class UIShowControlScheme : MonoBehaviour

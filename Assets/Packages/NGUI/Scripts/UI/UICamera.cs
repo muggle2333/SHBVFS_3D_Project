@@ -1019,7 +1019,7 @@ public class UICamera : MonoBehaviour
 				currentTouch = controller;
 			}
 
-			// Hide the tooltip
+			// HideBtn the tooltip
 			ShowTooltip(null);
 
 			// Remove the selection
@@ -1165,7 +1165,7 @@ public class UICamera : MonoBehaviour
 				return;
 			}
 
-			// Hide the tooltip
+			// HideBtn the tooltip
 			ShowTooltip(null);
 
 			bool statesDiffer = false;
@@ -2239,7 +2239,7 @@ public class UICamera : MonoBehaviour
 			}
 			else if (mTooltip != null && (!stickyTooltip || highlightChanged))
 			{
-				// Hide the tooltip
+				// HideBtn the tooltip
 				ShowTooltip(null);
 			}
 		}
@@ -2903,7 +2903,7 @@ public class UICamera : MonoBehaviour
 	static public void CancelNextTooltip () { mTooltipTime = 0f; }
 
 	/// <summary>
-	/// Show or hide the tooltip.
+	/// ShowBtn or hide the tooltip.
 	/// </summary>
 
 	static public bool ShowTooltip (GameObject go)
@@ -2930,7 +2930,7 @@ public class UICamera : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Hide the tooltip, if one is visible.
+	/// HideBtn the tooltip, if one is visible.
 	/// </summary>
 
 	static public bool HideTooltip () { return ShowTooltip(null); }

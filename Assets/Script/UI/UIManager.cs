@@ -12,6 +12,7 @@ public class UIManager : NetworkBehaviour
     private GridObjectUI gridObjectUI;
     private MessageUI messageUI;
     private GameplayUI gameplayUI;
+    private PauseMenuUI pauseMenuUI;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -30,6 +31,7 @@ public class UIManager : NetworkBehaviour
         gridObjectUI= GetComponentInChildren<GridObjectUI>();
         messageUI= GetComponentInChildren<MessageUI>();
         gameplayUI= GetComponentInChildren<GameplayUI>();
+        pauseMenuUI= GetComponentInChildren<PauseMenuUI>();
     }
     public void UpdatePlayerDataUI(Player player)
     {
@@ -52,10 +54,10 @@ public class UIManager : NetworkBehaviour
     [ClientRpc]
     public void ShowMessageTimerClientRpc(float timer,ClientRpcParams clientRpcParams=default)
     {
-        messageUI.ShowMessage(timer);
+        messageUI.ShowMessageTimer(timer);
     }
     [ClientRpc]
-    public void HideMessageTimerClientRpc(ClientRpcParams clientRpcParams = default)
+    public void HideMessageClientRpc(ClientRpcParams clientRpcParams = default)
     {
         messageUI.HideMessage();
     }
@@ -91,4 +93,5 @@ public class UIManager : NetworkBehaviour
 
         }
     }
+
 }

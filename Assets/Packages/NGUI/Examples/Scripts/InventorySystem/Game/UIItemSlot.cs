@@ -41,7 +41,7 @@ public abstract class UIItemSlot : MonoBehaviour
 	abstract protected InvGameItem Replace (InvGameItem item);
 
 	/// <summary>
-	/// Show a tooltip for the item.
+	/// ShowBtn a tooltip for the item.
 	/// </summary>
 
 	void OnTooltip (bool show)

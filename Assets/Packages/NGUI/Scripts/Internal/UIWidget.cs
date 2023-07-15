@@ -98,7 +98,7 @@ public class UIWidget : UIRect
 	public bool autoResizeBoxCollider = false;
 
 	/// <summary>
-	/// Hide the widget if it happens to be off-screen.
+	/// HideBtn the widget if it happens to be off-screen.
 	/// </summary>
 
 	public bool hideIfOffScreen = false;

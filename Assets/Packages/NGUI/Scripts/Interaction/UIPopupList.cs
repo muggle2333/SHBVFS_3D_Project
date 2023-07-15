@@ -938,7 +938,7 @@ public class UIPopupList : UIWidgetContainer
 	}
 
 	/// <summary>
-	/// Show the popup list on double-click.
+	/// ShowBtn the popup list on double-click.
 	/// </summary>
 
 	protected virtual void OnDoubleClick () { if (openOn == OpenOn.DoubleClick) Show(); }
@@ -966,7 +966,7 @@ public class UIPopupList : UIWidgetContainer
 	public GameObject source;
 
 	/// <summary>
-	/// Show the popup list dialog.
+	/// ShowBtn the popup list dialog.
 	/// </summary>
 
 	public virtual void Show ()
