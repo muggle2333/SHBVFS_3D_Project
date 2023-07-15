@@ -101,6 +101,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
+        transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
@@ -144,6 +145,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
+        transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
@@ -189,6 +191,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
+        transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
@@ -310,13 +313,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     //}
     #endregion
 
-    public void EndSelect()
-    {
-        Info.SetActive(false);
-        transform.SetSiblingIndex(index);
-        isSelected = false;
-        cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
-    }
 
     public void CardPlayAniamtion()
     {

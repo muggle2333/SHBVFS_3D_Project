@@ -15,7 +15,7 @@ public class CardSelectManager : MonoBehaviour
     public float offset;
     public float handX = 0f;
     public float handY = 0f;
-    public float cardWidth = 180f;
+    public float cardWidth;
     public float interval = 300f;
     //public GameObject UpBotton;
     //public GameObject DownBotton;
@@ -101,7 +101,7 @@ public class CardSelectManager : MonoBehaviour
         {
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
-                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelect();
+                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectOther();
                 i--;
             }
         }
@@ -123,6 +123,7 @@ public class CardSelectManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             CardManager.Instance.playerHandCardDict[player][i].GetComponent<RectTransform>().DOAnchorPos(startPos, 0.4f);
+            CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectOther();
             startPos.x += offset;
         }
     }
