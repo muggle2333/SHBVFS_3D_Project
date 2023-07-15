@@ -15,7 +15,7 @@ public class CardSelectManager : MonoBehaviour
     public float offset;
     public float handX = 0f;
     public float handY = 0f;
-    public float cardWidth = 240f;
+    public float cardWidth = 180f;
     public float interval = 300f;
     //public GameObject UpBotton;
     //public GameObject DownBotton;

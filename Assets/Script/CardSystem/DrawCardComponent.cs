@@ -78,6 +78,7 @@ public class DrawCardComponent :NetworkBehaviour
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
         AllCardCountPlusServerRpc(0,AcademyType.Null);
+        CardManager.Instance.playerHandCardDict[player].Add(Card);
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
@@ -98,17 +99,18 @@ public class DrawCardComponent :NetworkBehaviour
         Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]];
         AllCardCountPlusServerRpc((int)currentPlayer.currentGrid.academy, currentPlayer.currentGrid.academy);
         Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]-1]);
+        CardManager.Instance.playerHandCardDict[player].Add(Card);
         Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
-        CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id,Card.cardId);
+        CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
     }
     
 
     public Vector3 GetScreenPosition(GameObject target)
     {
         RectTransform canvasRtm = parentCanvas.GetComponent<RectTransform>();
-        float width = canvasRtm.sizeDelta.x;
+        float width = canvasRtm.sizeDelta.x; 
         float height = canvasRtm.sizeDelta.y;
         Vector3 pos = Camera.main.WorldToScreenPoint(target.transform.position);
         pos.x *= width / Screen.width;
