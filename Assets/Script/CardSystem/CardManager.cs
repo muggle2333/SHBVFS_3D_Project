@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class CardManager : MonoBehaviour
+public class CardManager : NetworkBehaviour
 {
     public static CardManager Instance;
     public Dictionary<Player, List<Card>> playerHandCardDict = new Dictionary<Player, List<Card>>();

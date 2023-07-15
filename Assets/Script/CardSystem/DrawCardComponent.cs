@@ -86,20 +86,22 @@ public class DrawCardComponent :NetworkBehaviour
     }
     public void DrawEventCard(Player player)
     {
+        AcademyType currentAcedemy = currentPlayer.currentGrid.academy;
         if (currentPlayer.currentGrid.isHasBuilding == false)
         {
-            if (PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]].cardLevel == CardLevel.Top)
+            if (PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]].cardLevel == CardLevel.Top)
             {
                 //AllCardCount[(int)currentPlayer.currentGrid.academy]++;
-                AllCardCountPlusServerRpc((int)currentPlayer.currentGrid.academy, currentPlayer.currentGrid.academy);
+                AllCardCountPlusServerRpc((int)currentAcedemy, currentAcedemy);
                 DrawEventCard(player);
                 return;
             }
         }
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-        Card.cardSetting = PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]];
-        AllCardCountPlusServerRpc((int)currentPlayer.currentGrid.academy, currentPlayer.currentGrid.academy);
-        Card.UpdateCardData(PlayerDeck.AllCardDeck[currentPlayer.currentGrid.academy][AllCardCount[(int)currentPlayer.currentGrid.academy]-1]);
+        Card.cardSetting = PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]];
+        AllCardCountPlusServerRpc((int)currentAcedemy, currentAcedemy);
+        //Card.UpdateCardData(PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy] -1]);
+        Card.UpdateCardData(Card.cardSetting);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
         Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         Card.transform.DOScale(1, 0.4f);
