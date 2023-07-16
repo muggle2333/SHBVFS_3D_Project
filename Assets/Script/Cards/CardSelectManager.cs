@@ -75,18 +75,21 @@ public class CardSelectManager : MonoBehaviour
                 if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.Every)
                 {
                     CardManager.Instance.ImmediateCardTakeEffect(player);
+                    CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
                 }
                 else if (CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S1)
                 {
                     CardManager.Instance.S1CardTakeEffect(player);
+                    CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
                 }
                 else if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S2 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S3 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S4)
                 {
                     CardManager.Instance.playedCardDict[player].Add(CardManager.Instance.playerHandCardDict[player][i]);
                     //CardManager.Instance.AddPlayedCardServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
+                    CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
                 }
 
-                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
+                
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);//?
                 i--;

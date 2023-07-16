@@ -94,7 +94,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }//ensure current selected count
         //SecondarySelect
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, true);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, true);
+        //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, true);
     }
 
     public void EndSelectOperation()
@@ -132,7 +132,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             if (this.gameObject == card.gameObject) continue;
             card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);
         }//turn off Info
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, true);
+        //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, true);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, true);
         UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
@@ -179,7 +179,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);
         }//turn off Info
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, true);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDying, true);
+        //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDying, true);
         UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, false);
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
