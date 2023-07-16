@@ -7,6 +7,7 @@ public class CardDataBase : MonoBehaviour
 {
     public static CardDataBase Instance;
     public static Dictionary<AcademyType, List<CardSetting>> AllCardListDic = new Dictionary<AcademyType, List<CardSetting>>();
+    public Dictionary<AcademyType, List<CardSetting>> AllTopCardListDic = new Dictionary<AcademyType, List<CardSetting>>();
     public List<CardSetting> AllCardList = new List<CardSetting>();
     public List<Card> cards = new List<Card>();
     public Card card;
@@ -29,6 +30,7 @@ public class CardDataBase : MonoBehaviour
                 continue;
             }
             AllCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/EventCards/"+ ((AcademyType)i).ToString())));
+            AllTopCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/TopCards/" + ((AcademyType)i).ToString())));
         }
         AllCardList = new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards"));
         

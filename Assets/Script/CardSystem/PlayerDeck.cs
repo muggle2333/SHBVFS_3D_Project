@@ -66,8 +66,6 @@ public class PlayerDeck : NetworkBehaviour
             {
                 Debug.Log(cardDeck[i]);
             }
-
-            
         }
     }
 

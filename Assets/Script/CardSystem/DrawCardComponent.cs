@@ -88,17 +88,24 @@ public class DrawCardComponent :NetworkBehaviour
     public void DrawEventCard(Player player)
     {
         AcademyType currentAcedemy = currentPlayer.currentGrid.academy;
-        if (currentPlayer.currentGrid.isHasBuilding == false)
+        Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+        if (currentPlayer.currentGrid.isHasBuilding)
         {
-            while (PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]].cardLevel == CardLevel.Top)
+            int randomIndex = Random.Range(0, 3);
+            int randomIndex_ = Random.Range(0, 2);
+            if (randomIndex == 0)
             {
-                //AllCardCount[(int)currentPlayer.currentGrid.academy]++;
-                Debug.LogError(PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]].cardLevel);
-                AllCardCountPlusServerRpc((int)currentAcedemy, currentAcedemy);
+                Card.cardSetting = CardDataBase.Instance.AllTopCardListDic[currentAcedemy][randomIndex_];
+            }
+            else
+            {
+                Card.cardSetting = PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]];
             }
         }
-        Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-        Card.cardSetting = PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]];
+        else
+        {
+            Card.cardSetting = PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]];
+        }
         AllCardCountPlusServerRpc((int)currentAcedemy, currentAcedemy);
         //Card.UpdateCardData(PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy] -1]);
         Card.UpdateCardData(Card.cardSetting);
