@@ -3,22 +3,28 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerDeck : MonoBehaviour
+public class PlayerDeck : NetworkBehaviour
 {
     public Dictionary<AcademyType, List<CardSetting>> AllCardDeck = new Dictionary<AcademyType, List<CardSetting>>();
     public List<CardSetting> AllCards = new List<CardSetting>();
-    private List<CardSetting> CardContainer = new List<CardSetting>();
+    public List<CardSetting> CardContainer = new List<CardSetting>();
     public List<CardSetting> cardDeck;
+    NetworkVariable<int> randomIndex;
     private void Awake()
     {
+        randomIndex = new NetworkVariable<int>(0);
         CardContainer.Add(null);
+        
+    }
+    void Start()
+    {
         for (int i = 0; i <= (int)AcademyType.FA; i++)
         {
             cardDeck = null;
             if (i == 0)
             {
-                CardDataBase.AllCardListDic.TryGetValue((AcademyType)i,out cardDeck);
-                for(int j = 0; j < 10; j++)
+                CardDataBase.AllCardListDic.TryGetValue((AcademyType)i, out cardDeck);
+                for (int j = 0; j < 10; j++)
                 {
                     for (int k = 0; k < 4; k++)
                     {
@@ -31,20 +37,23 @@ public class PlayerDeck : MonoBehaviour
             CardDataBase.AllCardListDic.TryGetValue((AcademyType)i, out cardDeck);
             AllCardDeck.Add((AcademyType)i, cardDeck);
         }
-        for (int i = 0; i <= (int)AcademyType.FA; i++)
+        if (NetworkManager.Singleton.IsHost)
         {
-            ShuffleServerRpc((AcademyType)i);
+            for (int i = 0; i <= (int)AcademyType.FA; i++)
+            {
+                ShuffleServerRpc((AcademyType)i);
+            }
         }
-    }
-    void Start()
-    { 
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        AllCards = AllCardDeck[AcademyType.Null];
+        AllCards = AllCardDeck[AcademyType.FA];
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            ShuffleServerRpc(AcademyType.FA);
+        }
     }
 
 
@@ -67,18 +76,21 @@ public class PlayerDeck : MonoBehaviour
     [ServerRpc(RequireOwnership =false)]
     public void ShuffleServerRpc(AcademyType AcademyType)
     {
-        cardDeck= null;
-        AllCardDeck.TryGetValue(AcademyType, out cardDeck);
+        
 
         for(int i = 0;i< cardDeck.Count; i++)
         {
-            int randomIndex = Random.Range(0, cardDeck.Count);
-            SetCardDeckClientRpc(randomIndex, AcademyType, i);
+
+            randomIndex.Value = Random.Range(0, cardDeck.Count);
+            SetCardDeckClientRpc(randomIndex.Value, AcademyType, i);
         }
     }
     [ClientRpc]
     public void SetCardDeckClientRpc(int randomIndex,AcademyType AcademyType,int i)
     {
+        Debug.Log(randomIndex);
+        cardDeck = null;
+        AllCardDeck.TryGetValue(AcademyType, out cardDeck);
         CardContainer[0] = cardDeck[i];
         cardDeck[i] = cardDeck[randomIndex];
         cardDeck[randomIndex] = CardContainer[0];

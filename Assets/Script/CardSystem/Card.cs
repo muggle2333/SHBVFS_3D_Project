@@ -23,7 +23,7 @@ public class Card:MonoBehaviour
 
     public int effectTime;
 
-    public int[] academyEffectNum = new int[6];
+    public int[] academyEffectNum;
 
     public int Damage;
 
@@ -39,6 +39,7 @@ public class Card:MonoBehaviour
 
     public void UpdateCardData(CardSetting cardSetting)
     {
+        academyEffectNum = new int[6];
         this.cardSetting = cardSetting;
         cardId = cardSetting.cardId;
         cardName.text = cardSetting.cardName;

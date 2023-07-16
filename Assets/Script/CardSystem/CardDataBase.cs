@@ -5,11 +5,22 @@ using UnityEngine;
 
 public class CardDataBase : MonoBehaviour
 {
+    public static CardDataBase Instance;
     public static Dictionary<AcademyType, List<CardSetting>> AllCardListDic = new Dictionary<AcademyType, List<CardSetting>>();
     public List<CardSetting> AllCardList = new List<CardSetting>();
+    public List<Card> cards = new List<Card>();
+    public Card card;
     private void Awake()
     {
-        for(int i=0;i<=(int)AcademyType.FA;i++)
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+        }
+        for (int i=0;i<=(int)AcademyType.FA;i++)
         {
             if(i==0)
             {
@@ -20,6 +31,14 @@ public class CardDataBase : MonoBehaviour
             AllCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/EventCards/"+ ((AcademyType)i).ToString())));
         }
         AllCardList = new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards"));
-
+        
+    }
+    public void Start()
+    {
+        for (int i = 0; i < AllCardList.Count; i++)
+        {
+            card.cardSetting = AllCardList[i];
+            cards.Add(card);
+        }
     }
 }

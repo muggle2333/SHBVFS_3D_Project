@@ -47,26 +47,25 @@ public class CardManager : NetworkBehaviour
         }
         calculating = FindObjectOfType<Calculating>();
     }
-    public void ImmediateCardTakeEffect(Player player)
+    public void ImmediateCardTakeEffect(Player player, Card card)
     {
-
-    }
-    public void S1CardTakeEffect(Player player)
-    {
-        for(int i = 0; i < playedCardDict[player].Count; i++)
+        if (card.cardFounction != null)
         {
-            if (playedCardDict[player][i].effectStage == EffectStage.S1)
-            {
-                if (playedCardDict[player][i].cardFounction != null)
-                {
-                    Instantiate(playedCardDict[player][i].cardFounction);
-                }
-                calculating.DelataCardData(playedCardDict[player][i], player);
-                calculating.CalculatPlayerBaseData(player);
-                calculating.CalaulatPlayerData(player);
-                playedCardDict[player].RemoveAt(i);
-            }
+            Instantiate(card.cardFounction);
         }
+        calculating.DelataCardData(card, player);
+        calculating.CalculatPlayerBaseData(player);
+        calculating.CalaulatPlayerData(player);
+    }
+    public void S1CardTakeEffect(Player player,Card card)
+    {
+        if (card.cardFounction != null)
+        {
+            Instantiate(card.cardFounction);
+        }
+        calculating.DelataCardData(card, player);
+        calculating.CalculatPlayerBaseData(player);
+        calculating.CalaulatPlayerData(player);
     }
     [ClientRpc]
     public void CardTakeEffectClientRpc(PlayerId playerId,EffectStage stage)
@@ -90,6 +89,7 @@ public class CardManager : NetworkBehaviour
                 {
                     Instantiate(playedCardDict[player][i].cardFounction);
                 }
+
                 playedCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
                 calculating.DelataCardData(playedCardDict[player][i], player);
                 calculating.CalculatPlayerBaseData(player);
@@ -129,10 +129,40 @@ public class CardManager : NetworkBehaviour
         if (playerId == PlayerId.RedPlayer)
         {
             redPlayerPlayedCards.Add(cardId);
+            RefreshPlayedCardDictClientRpc();
         }
         else
         {
             bluePlayerPlayedCards.Add(cardId);
+            RefreshPlayedCardDictClientRpc();
         }
+    }
+    [ClientRpc]
+    public void RefreshPlayedCardDictClientRpc()
+    {
+        List<Card> redPlayerPlayed = new List<Card>();
+        List<Card> bluePlayerPlayed = new List<Card>();
+        for(int i = 0; i < redPlayerPlayedCards.Count; i++)
+        {
+            for(int j = 0; j < CardDataBase.Instance.cards.Count; j++)
+            {
+                if (redPlayerPlayedCards[i] == CardDataBase.Instance.cards[j].cardId)
+                {
+                    redPlayerPlayed.Add(CardDataBase.Instance.cards[j]);
+                }
+            }
+        }
+        for (int i = 0; i < bluePlayerPlayedCards.Count; i++)
+        {
+            for (int j = 0; j < CardDataBase.Instance.cards.Count; j++)
+            {
+                if (bluePlayerPlayedCards[i] == CardDataBase.Instance.cards[j].cardId)
+                {
+                    bluePlayerPlayed.Add(CardDataBase.Instance.cards[j]);
+                }
+            }
+        }
+        playedCardDict[GameplayManager.Instance.playerList[0]] = redPlayerPlayed;
+        playedCardDict[GameplayManager.Instance.playerList[1]] = bluePlayerPlayed;
     }
 }

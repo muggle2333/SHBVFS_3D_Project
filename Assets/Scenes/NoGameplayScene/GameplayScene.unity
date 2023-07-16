@@ -27050,25 +27050,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4164202118987497896, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -110
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202119042685843, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202119042685852, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: cardWidth
-      value: 200
+    - target: {fileID: 1500861385438643778, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4164202119315470929, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: m_Name
       value: CardSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202119315470929, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4164202119315470930, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: m_RootOrder
@@ -27114,44 +27102,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4164202119701918752, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202119701918752, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    - target: {fileID: 4164202119351235545, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+      propertyPath: card
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202119701918752, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayCard
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202119701918752, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202119701918758, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_Name
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202120012730226, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_Text
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202120115445039, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1578779542}
     - target: {fileID: 4525186938329760962, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 272251406
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4164202119967101926, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+    - {fileID: 1500861385438643778, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+--- !u!114 &1578779542 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2078696190863777083, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+  m_PrefabInstance: {fileID: 1578779541}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4415cf87428964cae95edb23d8afb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1578931556
 GameObject:
   m_ObjectHideFlags: 0

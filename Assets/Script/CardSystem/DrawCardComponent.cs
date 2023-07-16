@@ -127,10 +127,11 @@ public class DrawCardComponent :NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void AllCardCountPlusServerRpc(int i,AcademyType type)
     {
-        if (AllCardCount[i] > PlayerDeck.AllCardDeck[type].Count - 1)
+        if (AllCardCount[i] == PlayerDeck.AllCardDeck[type].Count - 1)
         {
             PlayerDeck.ShuffleServerRpc(type);
             AllCardCount[i] = 0;
+            return;
         }
         AllCardCount[i]++;
     }
