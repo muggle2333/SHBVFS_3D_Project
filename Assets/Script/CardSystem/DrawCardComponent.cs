@@ -75,6 +75,7 @@ public class DrawCardComponent :NetworkBehaviour
 
     public void DrawBasicCard(Player player)
     {
+        
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
         AllCardCountPlusServerRpc(0,AcademyType.Null);
@@ -89,12 +90,11 @@ public class DrawCardComponent :NetworkBehaviour
         AcademyType currentAcedemy = currentPlayer.currentGrid.academy;
         if (currentPlayer.currentGrid.isHasBuilding == false)
         {
-            if (PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]].cardLevel == CardLevel.Top)
+            while (PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]].cardLevel == CardLevel.Top)
             {
                 //AllCardCount[(int)currentPlayer.currentGrid.academy]++;
+                Debug.LogError(PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]].cardLevel);
                 AllCardCountPlusServerRpc((int)currentAcedemy, currentAcedemy);
-                DrawEventCard(player);
-                return;
             }
         }
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
