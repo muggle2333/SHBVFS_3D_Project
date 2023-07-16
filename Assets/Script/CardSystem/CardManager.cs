@@ -11,7 +11,9 @@ public class CardManager : NetworkBehaviour
 
     public NetworkList<int> redPlayerPlayedCards;
     public NetworkList<int> bluePlayerPlayedCards;
-    public Calculating calculating;
+    private Calculating calculating;
+    private PlayerDeck playerDeck;
+    private CardSelectManager cardSelectManager;
     public void Awake()
     {
         redPlayerPlayedCards = new NetworkList<int>();
@@ -46,6 +48,10 @@ public class CardManager : NetworkBehaviour
             }
         }
         calculating = FindObjectOfType<Calculating>();
+        cardSelectManager = GetComponentInChildren<CardSelectManager>();
+        cardSelectManager.InitializeCardSelectManager();
+        playerDeck = GetComponentInChildren<PlayerDeck>();
+        playerDeck.InitializePlayerDeck();
     }
     public void ImmediateCardTakeEffect(Player player, Card card)
     {

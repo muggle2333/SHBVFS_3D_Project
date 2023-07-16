@@ -47,7 +47,7 @@ public class GameplayManager : NetworkBehaviour
     {
         InitializePlayerClientRpc();
         CardManager.Instance.InitializeCardManager();
-        FindObjectOfType<CardSelectManager>().InitializeCardSelectManager();
+        
     }
     private void Update()
     {

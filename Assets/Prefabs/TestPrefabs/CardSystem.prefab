@@ -1,50 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1152004959
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1152004960}
-  - component: {fileID: 1152004961}
-  m_Layer: 0
-  m_Name: CardManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1152004960
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152004959}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4164202119315470930}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1152004961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152004959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ccc1fd500a204e449eed35b3310ec52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  calculating: {fileID: 0}
 --- !u!1 &4164202118832277096
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4164202119315470930}
   - component: {fileID: 4525186938329760962}
+  - component: {fileID: 552847490979672559}
   m_Layer: 0
   m_Name: CardSystem
   m_TagString: Untagged
@@ -331,9 +287,8 @@ Transform:
   - {fileID: 4164202119457475385}
   - {fileID: 4164202119782100208}
   - {fileID: 4164202119351235544}
-  - {fileID: 1152004960}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4525186938329760962
 MonoBehaviour:
@@ -351,6 +306,18 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &552847490979672559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4164202119315470929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccc1fd500a204e449eed35b3310ec52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4164202119351235551
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a635547e5bfea245b9bac68c20c773a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllCards: []
+  CardContainer: []
   cardDeck: []
 --- !u!1 &4164202119782100215
 GameObject:

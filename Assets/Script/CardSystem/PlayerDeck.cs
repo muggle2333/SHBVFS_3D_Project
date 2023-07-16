@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerDeck : NetworkBehaviour
 {
     public Dictionary<AcademyType, List<CardSetting>> AllCardDeck = new Dictionary<AcademyType, List<CardSetting>>();
-    public List<CardSetting> AllCards = new List<CardSetting>();
     public List<CardSetting> CardContainer = new List<CardSetting>();
     public List<CardSetting> cardDeck;
     NetworkVariable<int> randomIndex;
@@ -17,6 +16,10 @@ public class PlayerDeck : NetworkBehaviour
         
     }
     void Start()
+    {
+
+    }
+    public void InitializePlayerDeck()
     {
         for (int i = 0; i <= (int)AcademyType.FA; i++)
         {
@@ -37,30 +40,42 @@ public class PlayerDeck : NetworkBehaviour
             CardDataBase.AllCardListDic.TryGetValue((AcademyType)i, out cardDeck);
             AllCardDeck.Add((AcademyType)i, cardDeck);
         }
+        Debug.LogError(AllCardDeck.Count);
         if (NetworkManager.Singleton.IsHost)
         {
-            for (int i = 0; i <= (int)AcademyType.FA; i++)
-            {
-                ShuffleServerRpc((AcademyType)i);
-            }
+            Invoke("ShuffleAllCard",2f);
         }
     }
-
+    private void ShuffleAllCard()
+    {
+        for (int i = 0; i <= (int)AcademyType.FA; i++)
+        {
+            ShuffleServerRpc((AcademyType)i);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        AllCards = AllCardDeck[AcademyType.FA];
         if (Input.GetKeyDown(KeyCode.A))
         {
             ShuffleServerRpc(AcademyType.FA);
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            for(int i = 0; i <= cardDeck.Count; i++)
+            {
+                Debug.Log(cardDeck[i]);
+            }
+
+            
+        }
     }
 
 
-    /*public void Shuffle(AcademyType AcademyType)
+    /*public void Shuffle(academyType academyType)
     {
         List<CardSetting> cardDeck = null;
-        AllCardDeck.TryGetValue(AcademyType, out cardDeck);
+        AllCardDeck.TryGetValue(academyType, out cardDeck);
 
 
         for (int i = 0; i< cardDeck.Count; i++)
@@ -70,31 +85,30 @@ public class PlayerDeck : NetworkBehaviour
             cardDeck[i] = cardDeck[randomIndex];
             cardDeck[randomIndex] = CardContainer[0];
         }
-        AllCardDeck[AcademyType] = cardDeck;
+        AllCardDeck[academyType] = cardDeck;
     }*/
 
     [ServerRpc(RequireOwnership =false)]
-    public void ShuffleServerRpc(AcademyType AcademyType)
+    public void ShuffleServerRpc(AcademyType academyType)
     {
         
 
-        for(int i = 0;i< cardDeck.Count; i++)
+        for(int i = 0;i < AllCardDeck[academyType].Count; i++)
         {
-
+            cardDeck = null;
+            AllCardDeck.TryGetValue(academyType, out cardDeck);
             randomIndex.Value = Random.Range(0, cardDeck.Count);
-            SetCardDeckClientRpc(randomIndex.Value, AcademyType, i);
+            SetCardDeckClientRpc(randomIndex.Value, academyType, i);
         }
     }
     [ClientRpc]
     public void SetCardDeckClientRpc(int randomIndex,AcademyType AcademyType,int i)
     {
-        Debug.Log(randomIndex);
-        cardDeck = null;
-        AllCardDeck.TryGetValue(AcademyType, out cardDeck);
-        CardContainer[0] = cardDeck[i];
+        cardDeck = AllCardDeck[AcademyType];
+        CardSetting cardsetting = cardDeck[i];
         cardDeck[i] = cardDeck[randomIndex];
-        cardDeck[randomIndex] = CardContainer[0];
-        if(i == cardDeck.Count)
+        cardDeck[randomIndex] = cardsetting;
+        if (i == cardDeck.Count)
         {
             AllCardDeck[AcademyType] = cardDeck;
         }
