@@ -25,6 +25,8 @@ public class GridVfxManager : MonoBehaviour
     [SerializeField] private GameObject buildingVfx_Blue;
     [SerializeField] private GameObject buildingVfx_Blue_True;
 
+    [SerializeField] private List<Sprite> academySprite = new List<Sprite>();
+    [SerializeField] private List<Color> academyColor= new List<Color>();
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -146,11 +148,14 @@ public class GridVfxManager : MonoBehaviour
         Transform academyVfx = vfxTransformArray[gridObject.x,gridObject.z].academyVfx;
         if (gridObject.isDiscovered || gridObject.CheckKnowAuthority(GameplayManager.Instance.currentPlayer)) 
         {
-            academyVfx.gameObject.GetComponentInChildren<TextMesh>().text = gridObject.academy.ToString();
+            //academyVfx.gameObject.GetComponentInChildren<TextMesh>().text = gridObject.academy.ToString();
+            academyVfx.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = academySprite[(int)gridObject.academy - 1];
+            academyVfx.gameObject.GetComponentInChildren<SpriteRenderer>().color= academyColor[(int)gridObject.academy - 1];
         }
         else
         {
-            academyVfx.gameObject.GetComponentInChildren<TextMesh>().text = null;
+            //academyVfx.gameObject.GetComponentInChildren<TextMesh>().text = null;
+            academyVfx.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = null;
         }
     }
 

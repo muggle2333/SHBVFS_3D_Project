@@ -20,12 +20,20 @@ public static class Loader
     public static void Load(Scene scene)
     {
         targetScene = scene;
+        if (scene == Scene.MainMenuScene)
+        {
+            MainMenuCleanUp.Instance.CleanUp();
+        }
         SceneManager.LoadScene(scene.ToString());
     }
 
     public static void LoadNetwork(Scene scene)
     {
         targetScene = scene;
+        if(scene == Scene.MainMenuScene)
+        {
+            MainMenuCleanUp.Instance.CleanUp();
+        }
         NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
     }
     

@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -20,15 +21,16 @@ public class TurnbaseUI : MonoBehaviour
             TurnbasedSystem.Instance.SkipControlStageServerRpc();
             skipBtn.gameObject.SetActive(false);
         });
+        TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += UpdateTurnbaseUI;
     }
-    private void Update()
+
+    private void UpdateTurnbaseUI(GameStage previousValue, GameStage newValue)
     {
-        if(TurnbasedSystem.Instance.CurrentGameStage.Value != GameStage.S1)
+        if(previousValue==GameStage.S1) //CONTROL 结束
         {
             skipBtn.gameObject.SetActive(false);
-        }
-        else
-        {
+        }else if(newValue==GameStage.S1) // 进入 CONTROL
+        { 
             skipBtn.gameObject.SetActive(true);
         }
     }
@@ -36,6 +38,24 @@ public class TurnbaseUI : MonoBehaviour
     public void UpdateStageInfo(GameStage stage,float timer, int round)
     {
         stageText.text = stage.ToString();
+        switch(stage)
+        {
+            case GameStage.S1:
+                stageText.text = "Control Stage";break;
+            case GameStage.DiscardStage:
+                stageText.text = "Discard Stage";break;
+            case GameStage.S2:
+                stageText.text = "Discard Stage"; break;
+            case GameStage.MoveStage:
+                stageText.text = "Move Stage";break;
+            case GameStage.S3:
+                stageText.text = "Move Stage"; break;
+            case GameStage.AttackStage:
+                stageText.text = "Attack Stage";break;
+            case GameStage.S4:
+                stageText.text = "Attack Stage";break;
+            
+        }
         if (timer <= 0) timer = 0;
         timerText.text = Mathf.FloorToInt(timer).ToString();
         roundText.text = round.ToString();
@@ -45,5 +65,9 @@ public class TurnbaseUI : MonoBehaviour
     public void ShowSkipBtnClientRpc(bool isShow)
     {
         skipBtn.gameObject.SetActive(isShow);
+    }
+    private void OnDestroy()
+    {
+        TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged -= UpdateTurnbaseUI;
     }
 }

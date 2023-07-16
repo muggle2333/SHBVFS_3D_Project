@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using Unity.Netcode;
 using UnityEditor.PackageManager;
@@ -182,5 +183,44 @@ public class GameplayManager : NetworkBehaviour
         s4Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
     }
 
-
+    public int GetWinner()
+    {
+        List<Player> dyingPlayers = new List<Player>();
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].isDying.Value)
+            {
+                dyingPlayers.Add(playerList[i]);
+            }
+        }
+        if (dyingPlayers.Count == 1)
+        {
+            return dyingPlayers[0].Id == PlayerId.RedPlayer ? 0 : 1;
+        }
+        else if (dyingPlayers.Count == 2)
+        {
+            dyingPlayers.OrderByDescending(a => a.HP);
+            if (dyingPlayers[0].HP != dyingPlayers[1].HP)
+            {
+                return dyingPlayers[0].Id == PlayerId.RedPlayer ? 1 : 0;
+            }
+            else{
+                int player0LandCount=0;
+                int player1LandCount=0;
+                for (AcademyType i = AcademyType.YI; i < AcademyType.FA; i++)
+                {
+                    player0LandCount += dyingPlayers[0].OwnedLandDic[i].Count;
+                    player1LandCount += dyingPlayers[1].OwnedLandDic[i].Count;
+                }
+                if (player0LandCount == player1LandCount)
+                {
+                    return 2;
+                }else
+                {
+                    return player0LandCount > player1LandCount ? 1 : 0;
+                }
+            }
+        }
+        return 0;
+    }
 }

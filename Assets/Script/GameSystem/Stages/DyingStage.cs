@@ -6,8 +6,11 @@ public class DyingStage : MonoBehaviour
 {
     public void StartStage(List<Player> dyingPlayerList,List<Player> alivePlayerList)
     {
-        PlayerManager.Instance.PlayerDying(dyingPlayerList, alivePlayerList);
-
+        
+        if (dyingPlayerList.Count != null)
+        {
+            //foreach()
+        }
     }
     public void Update()
     {
@@ -15,5 +18,10 @@ public class DyingStage : MonoBehaviour
         {
 
         }*/
+    }
+
+    public void StartPlayerDyingStage(PlayerId playerId)
+    {
+
     }
 }

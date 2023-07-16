@@ -89,3 +89,17 @@ MonoBehaviour:
   buildingVfx_Red_True: {fileID: 6368850634917442223, guid: 9291df9c8f0bb224193e703c840bb7dd, type: 3}
   buildingVfx_Blue: {fileID: 5807987092232120488, guid: 2b9dc781c478a384d9ed48c933685d9e, type: 3}
   buildingVfx_Blue_True: {fileID: 8091827570454539437, guid: 67ca841fa7ed7e946b86974204423b95, type: 3}
+  academySprite:
+  - {fileID: -1882502512, guid: 064c860cc1ba034429bc38812e7af82e, type: 3}
+  - {fileID: -558068218, guid: 064c860cc1ba034429bc38812e7af82e, type: 3}
+  - {fileID: -1207554497, guid: 064c860cc1ba034429bc38812e7af82e, type: 3}
+  - {fileID: -297636541, guid: 064c860cc1ba034429bc38812e7af82e, type: 3}
+  - {fileID: -325773366, guid: 064c860cc1ba034429bc38812e7af82e, type: 3}
+  - {fileID: -1894579071, guid: 064c860cc1ba034429bc38812e7af82e, type: 3}
+  academyColor:
+  - {r: 0.13265285, g: 0.4056604, b: 0, a: 1}
+  - {r: 0, g: 0.08752705, b: 0.49056602, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.6784314, g: 0.26092163, b: 0, a: 0}
+  - {r: 0.4010784, g: 0, b: 0.5849056, a: 1}
+  - {r: 1, g: 0.6316455, b: 0, a: 0}

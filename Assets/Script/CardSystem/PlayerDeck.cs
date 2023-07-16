@@ -40,7 +40,6 @@ public class PlayerDeck : NetworkBehaviour
             CardDataBase.AllCardListDic.TryGetValue((AcademyType)i, out cardDeck);
             AllCardDeck.Add((AcademyType)i, cardDeck);
         }
-        Debug.LogError(AllCardDeck.Count);
         if (NetworkManager.Singleton.IsHost)
         {
             Invoke("ShuffleAllCard",2f);

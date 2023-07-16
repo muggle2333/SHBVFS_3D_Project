@@ -21,6 +21,8 @@ public class CardDataBase : MonoBehaviour
         {
             Instance = this;
         }
+        AllCardListDic = new Dictionary<AcademyType, List<CardSetting>>();
+        AllTopCardListDic = new Dictionary<AcademyType, List<CardSetting>>();
         for (int i=0;i<=(int)AcademyType.FA;i++)
         {
             if(i==0)

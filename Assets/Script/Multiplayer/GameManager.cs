@@ -14,8 +14,10 @@ public class GameManager : NetworkBehaviour
     public event EventHandler OnWholeGameStateChanged;
     public event EventHandler OnGamePaused;
     public event EventHandler OnGameUnpaused;
+    public event EventHandler OnGameOver;
     public event EventHandler OnLocalGamePaused;
     public event EventHandler OnLocalGameUnpaused;
+    public event EventHandler OnPlayerDisconnect;
 
 
     public enum WholeGameState
@@ -62,7 +64,7 @@ public class GameManager : NetworkBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            GameInput_OnInteractAction();
+            SetReadyGame();
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -91,6 +93,7 @@ public class GameManager : NetworkBehaviour
                 if(isGameOver)
                 {
                     wholeGameState.Value = WholeGameState.GameOver;
+                    OnGameOver?.Invoke(this, EventArgs.Empty);
                 }
                 break;
             case WholeGameState.GameOver:
@@ -119,9 +122,13 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    private void NetworkManager_OnClientDisconnectCallback(ulong obj)
+    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
     {
-        //throw new NotImplementedException();
+        //if(NetworkManager.Singleton.ConnectedClientsIds.Count<2)
+        //{
+            Time.timeScale = 0f;
+            OnPlayerDisconnect?.Invoke(this, EventArgs.Empty);
+        //}
     }
 
     private void SceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
@@ -140,7 +147,7 @@ public class GameManager : NetworkBehaviour
     }
 
 
-    private void GameInput_OnInteractAction()
+    private void SetReadyGame()
     {
         if(wholeGameState.Value == WholeGameState.WaitingToStart)
         {
