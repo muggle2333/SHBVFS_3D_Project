@@ -89,7 +89,7 @@ public class CardSelectManager : MonoBehaviour
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
                 }
 
-                
+                CancelCards(player);
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);//?
                 i--;
