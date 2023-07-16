@@ -109,6 +109,7 @@ public class GameManager : NetworkBehaviour
         if (isGamePaused.Value)
         {
             Time.timeScale = 0f;
+            UIManager.Instance.ShowGridObjectUI(false, null);
             OnGamePaused?.Invoke(this, EventArgs.Empty);
         }
         else
@@ -184,6 +185,10 @@ public class GameManager : NetworkBehaviour
     public bool IsPaused()
     {
         return isGamePaused.Value;
+    }
+    public bool IsLocalPlayerPaused()
+    {
+        return isLocalPlayerPaused;
     }
     public void TogglePauseGame()
     {

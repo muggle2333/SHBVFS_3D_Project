@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenuUI : MonoBehaviour
@@ -19,7 +20,7 @@ public class PauseMenuUI : MonoBehaviour
         });
         leaveBtn.onClick.AddListener(() =>
         {
-
+            Loader.Load(Loader.Scene.MainMenuScene);
         });
     }
 
@@ -31,47 +32,43 @@ public class PauseMenuUI : MonoBehaviour
         GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
     }
     private void GameManager_OnGamePaused(object sender, EventArgs e)
-    { 
+    {
         content.SetActive(true);
-        messageText.gameObject.SetActive(true);
+        bool isLocalGamePaused = GameManager.Instance.IsLocalPlayerPaused();
+        messageText.gameObject.SetActive(!isLocalGamePaused);
         messageText.text = "Waiting for ALL to unpause";
     }
     private void GameManager_OnGameUnpaused(object sender, EventArgs e)
-    {
-        messageText.gameObject.SetActive(false);
-        content.gameObject.SetActive(false);
+    {;
+        content.SetActive(false);
     }
     private void GameMangaer_OnLocalGamePaused(object sender, EventArgs e)
     {
         ShowBtn();
-        Invoke("HideMessage", 0.5f);
     }
 
     private void GameMangaer_OnLocalGameUnpaused(object sender, EventArgs e)
     {
         HideBtn();
-        if (GameManager.Instance.IsPaused())
-        {
-            messageText.gameObject.SetActive(true);
-        }
+        
     }
 
-    private void HideMessage()
-    {
-        messageText.gameObject.SetActive(false);
-    }
     private void ShowBtn()
     {
-        content.gameObject.SetActive(true);
         resumeBtn.gameObject.SetActive(true);
         leaveBtn.gameObject.SetActive(true);
+        messageText.gameObject.SetActive(false);
+
     }
 
     private void HideBtn()
     {
-        content.gameObject.SetActive(true);
         resumeBtn.gameObject.SetActive(false);
         leaveBtn.gameObject.SetActive(false);
+        if (GameManager.Instance.IsPaused())
+        {
+            messageText.gameObject.SetActive(true);
+        }
     }
 
     private void OnDestroy()
