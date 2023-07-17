@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class S2Stage : MonoBehaviour
 {
-    private Dictionary<Player, List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
+    private Dictionary<Player, List<int>> playedCardDict = new Dictionary<Player, List<int>>();
     private List<Player> playerList = new List<Player>();
-    private int i;
-    public void StartStage(Dictionary<Player,List<Card>> playerCardListDict)
+    public List<int> redPlayerNeedsToEffect = new List<int>();
+    public List<int> bluePlayerNeedsToEffect = new List<int>();
+    public void StartStage(Dictionary<Player,List<Card>> playedCardListDict)
     {
         PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
         if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] > 0)
@@ -25,40 +26,50 @@ public class S2Stage : MonoBehaviour
             PlayerManager.Instance.cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] = 0;
             PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.currentPlayer);
         }
-        playedCardDict = playerCardListDict;
+        for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
+        {
+            if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S2)
+            {
+                redPlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
+                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.RedPlayer,playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
+            }
+        }
+        for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[1]].Count; i++)
+        {
+            if (playedCardListDict[GameplayManager.Instance.playerList[1]][i].effectStage == EffectStage.S2)
+            {
+                bluePlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
+                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
+            }
+        }
+        if(redPlayerNeedsToEffect.Count > 0)
+        {
+            playedCardDict.Add(GameplayManager.Instance.playerList[0], redPlayerNeedsToEffect);
+        }
+        if (bluePlayerNeedsToEffect.Count > 0)
+        {
+            playedCardDict.Add(GameplayManager.Instance.playerList[1], bluePlayerNeedsToEffect);
+        }
         playerList = new List<Player>();
+        playerList = GameplayManager.Instance.GetPlayer();
         StartCoroutine("S2CardTakeEffect");
 
     }
     IEnumerator S2CardTakeEffect()
     {
-        for (int i = 0; i < playedCardDict.Count; i++)
-        {
-            playerList.Add(playedCardDict.ElementAt(i).Key);
-        }
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
-        while (playedCardDict[priorityList[i]].Count != 0)
+        while (playedCardDict.Count != 0)
         {
             for (int i = 0; i < priorityList.Count; i++)
             {
-                List<Card> playedCard = null;
-                if (playedCardDict.TryGetValue(priorityList[i], out playedCard))
+                if (playedCardDict[priorityList[i]].Count == 0)
                 {
-                    if (playedCard.Count == 0)
-                    {
-                        playedCardDict.Remove(priorityList[i]);
-                        break;
-                    }
-                    //Interact 
-                    //Debug.Log(priorityList[i].name + " " + playerInteract[0].PlayerInteractType);
-
-                    yield return new WaitForSeconds(1);
-                    CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, EffectStage.S2);
-
-
-                    playedCard.RemoveAt(0);
-                    playedCardDict[priorityList[i]] = playedCard;
+                    playedCardDict.Remove(priorityList[i]);
+                    break;
                 }
+                yield return new WaitForSeconds(1);
+                CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
+                playedCardDict[priorityList[i]].RemoveAt(0);
             }
         }
 

@@ -57,7 +57,7 @@ public class Calculating : MonoBehaviour
     {
         playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();   
     }
-    public void DelataCardData (Card card,Player player)
+    public void DelataCardData (CardSetting card,Player player)
     {
         totalCardAttackRange += card.playerDataEffect.visionRange;
         totalCardDefense += card.playerDataEffect.defence;
