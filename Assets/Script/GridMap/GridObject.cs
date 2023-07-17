@@ -84,7 +84,6 @@ public class GridObject
         isDiscovered = false;
         canBuild = true;
         canBeOccupied = true;
-
     }
     public GridObject(GridObject tmpObject)
     {
@@ -97,6 +96,7 @@ public class GridObject
         isHasBuilding = tmpObject.isHasBuilding;
         canBuild = tmpObject.canBuild;
         canBeOccupied = tmpObject.canBeOccupied;
+        playerKnowList= tmpObject.playerKnowList;
     }
     //public void SetGridType()
     //{
@@ -158,7 +158,6 @@ public class GridObject
         }
 
     }
-
     public void SetOwner(Player player,bool isControlStage)
     {
         owner = player;
@@ -173,11 +172,11 @@ public class GridObject
         grid.TriggerGridObjectChanged(x, z);
         //GridVfxManager.Instance.UpdateVfxBuilding(this,isControlStage);
     }
-    //被走到过，及全员都知道属性
-    public void DiscoverLand()
+    //被走到过，及全员都知道属性 ->走过的才知道
+    public void DiscoverLand(Player player)
     {
-        isDiscovered = true;
-        grid.TriggerGridObjectChanged(x, z);
+        //isDiscovered = true;
+        SetKnowAuthority(player);
     }
 
     public void SetKnowAuthority(Player player)
@@ -188,6 +187,16 @@ public class GridObject
 
     public bool CheckKnowAuthority(Player player)
     {
-        return isDiscovered || playerKnowList[(int)player.Id];
+        //return isDiscovered || playerKnowList[(int)player.Id];
+        return playerKnowList[(int)player.Id];
+    }
+
+    public bool[] GetPlayerKnowList()
+    {
+        return playerKnowList;
+    }
+    public void SetPlayerKnowList(bool[] list)
+    {
+        this.playerKnowList = list;
     }
 }

@@ -20,7 +20,8 @@ public class Player : Character
     public bool canCost1APInEnemy = false;
     public bool canFreeMoveInSelfGrid = false;
 
-    public int CurrentActionPoint;
+    public int CurrentActionPoint; //control阶段也会扣
+    public int TrueActionPoint;
     public int ActionPointPerRound;
     public int MaxActionPoint;
     public int MaxCardCount;
@@ -59,8 +60,13 @@ public class Player : Character
         public List<GridObject> Testlist;
     }
 
-   // [SerializeField]
-   // private OwnedLandTest ownedLandTest;
+    // [SerializeField]
+    // private OwnedLandTest ownedLandTest;
+
+    public void Awake()
+    {
+        
+    }
     void Start()
     {
         MaxHP = 3;
@@ -69,7 +75,8 @@ public class Player : Character
         Defence = 0;
         Range = 1;
         ActionPointPerRound = 3;
-
+        CurrentActionPoint = 0;
+        TrueActionPoint = CurrentActionPoint;
 
         List<GridObject> yiLand;
         OwnedLandDic.TryGetValue(AcademyType.YI, out yiLand);
@@ -86,6 +93,12 @@ public class Player : Character
         }
     }
 
+    public void UpdateDataPerTurn()
+    {
+        CurrentActionPoint = CurrentActionPoint+ ActionPointPerRound>MaxActionPoint? MaxActionPoint: CurrentActionPoint + ActionPointPerRound;
+        TrueActionPoint = CurrentActionPoint;
+
+    }
     public bool OccupyGrid(GridObject gridObject)
     {
         List<GridObject> gridList;
@@ -143,6 +156,23 @@ public class Player : Character
         ChangeAcademyOwnPoint(academyPointEffect);
     }
 
+    public bool UseActionPoint(int apCost)
+    {
+        if (CurrentActionPoint < apCost)
+        {
+            return false;
+        }
+        else
+        {
+            CurrentActionPoint -= apCost;
+            return true;
+        }
+    }
+
+    public bool IsApEnough(int apCost)
+    {
+        return CurrentActionPoint >= apCost;
+    }
     //public void RefreshLinePath()
     //{
     //    LineRenderer lineRenderer= GetComponentInChildren<LineRenderer>();

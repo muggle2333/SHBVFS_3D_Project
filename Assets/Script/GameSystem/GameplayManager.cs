@@ -87,11 +87,17 @@ public class GameplayManager : NetworkBehaviour
         playerList = playerList.OrderBy(a=>a.Id).ToList();
         for (int i = 0; i < playerList.Count; i++)
         {
-            playerList[i].transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
-            playerList[i].currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
-            playerList[i].GetComponent<PlayerInteractionComponent>().RefreshLinePath();
+            //playerList[i].transform.position = GridManager.Instance.grid.GetWorldPositionCenter((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
+            //playerList[i].currentGrid = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
+            //playerList[i].GetComponent<PlayerInteractionComponent>().RefreshLinePath();
+            GridObject targetGridObject = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[i].x, (int)playerStartPoint[i].y);
+            PlayerManager.Instance.InitializePlayerStartPoint(playerList[i],targetGridObject);
+
         }
-        currentPlayer = playerList[(int)NetworkManager.Singleton.LocalClientId];
+        int currentPlayrId = (int)NetworkManager.Singleton.LocalClientId;
+        currentPlayer = playerList[currentPlayrId];
+        GridObject currentGridObject = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[currentPlayrId].x, (int)playerStartPoint[currentPlayrId].y);
+        GridVfxManager.Instance.UpdateVfxAcademy(currentGridObject);
         UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
         
     }
@@ -130,7 +136,8 @@ public class GameplayManager : NetworkBehaviour
         GridManager.Instance.BackupGrid();
         foreach (var player in playerList)
         {
-            PlayerManager.Instance.BackupPlayerPosition(player);
+            PlayerManager.Instance.BackupPlayerData(player);
+            player.UpdateDataPerTurn();
         }
     }
     public void StartDiscardStage()
@@ -144,7 +151,7 @@ public class GameplayManager : NetworkBehaviour
         GridManager.Instance.ResetGrid();
         //foreach (var player in playerList)
         //{
-        //    PlayerManager.Instance.ResetControlVfx(player);
+        //    PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
         //}
         UIManager.Instance.ShowGridObjectUI(false, null);
     }
@@ -155,6 +162,7 @@ public class GameplayManager : NetworkBehaviour
 
     public void StartMoveStage()
     {
+        RefreshDataClientRpc();
         moveStage.StartStage(controlStage.playerInteractDict);
     }
 
@@ -163,14 +171,13 @@ public class GameplayManager : NetworkBehaviour
     {
         foreach (var player in playerList)
         {
-            PlayerManager.Instance.ResetControlVfx(player);
+            PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
         }
     }
 
     public void StartS3Stage()
     {
         s3Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
-        RefreshDataClientRpc();
     }
 
     public void StartAttackStage()

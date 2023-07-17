@@ -138,9 +138,9 @@ public class GridManager : NetworkBehaviour
     {
         gridUI.SetActive(false);
     }
-    public void DiscoverGridObject(GridObject gridObject)
+    public void DiscoverGridObject(Player player,GridObject gridObject)
     {
-        gridObject.DiscoverLand();
+        gridObject.DiscoverLand(player);
 
     }
 

@@ -146,7 +146,7 @@ public class GridVfxManager : MonoBehaviour
     {
         if (gridObject.landType != LandType.Plain) return;
         Transform academyVfx = vfxTransformArray[gridObject.x,gridObject.z].academyVfx;
-        if (gridObject.isDiscovered || gridObject.CheckKnowAuthority(GameplayManager.Instance.currentPlayer)) 
+        if (gridObject.CheckKnowAuthority(GameplayManager.Instance.currentPlayer)) 
         {
             //academyVfx.gameObject.GetComponentInChildren<TextMesh>().text = gridObject.academy.ToString();
             academyVfx.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = academySprite[(int)gridObject.academy - 1];

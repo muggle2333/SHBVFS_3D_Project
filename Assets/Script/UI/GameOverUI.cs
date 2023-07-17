@@ -25,7 +25,7 @@ public class GameOverUI : MonoBehaviour
     private void GameManager_OnPlayerDisconnect(object sender, System.EventArgs e)
     {
         content.SetActive(true);
-        gameOverText.text = "YOUR OPONENT LEFT";
+        gameOverText.text = "YOUR COMPETITOR LEFT";
     }
 
     private void GameManager_OnGameOver(object sender, System.EventArgs e)

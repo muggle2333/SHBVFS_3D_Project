@@ -13,6 +13,7 @@ public class UIManager : NetworkBehaviour
     private MessageUI messageUI;
     private GameplayUI gameplayUI;
     private PauseMenuUI pauseMenuUI;
+    private TurnbaseUI turnbaseUI;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,6 +33,7 @@ public class UIManager : NetworkBehaviour
         messageUI= GetComponentInChildren<MessageUI>();
         gameplayUI= GetComponentInChildren<GameplayUI>();
         pauseMenuUI= GetComponentInChildren<PauseMenuUI>();
+        turnbaseUI = GetComponentInChildren<TurnbaseUI>();
     }
     public void UpdatePlayerDataUI(Player player)
     {
@@ -45,6 +47,11 @@ public class UIManager : NetworkBehaviour
     public void ShowGridObjectUI(bool isShow,Transform gridPos)
     {
         gridObjectUI.ShowGridObjectUI(isShow,gridPos);
+    }
+    [ClientRpc]
+    public void StartTurnbaseUIClientRpc()
+    {
+        turnbaseUI.StartTurnbaseUI();
     }
     [ClientRpc]
     public void ShowMessageInfoClientRpc(string info,ClientRpcParams clientRpcParams=default)

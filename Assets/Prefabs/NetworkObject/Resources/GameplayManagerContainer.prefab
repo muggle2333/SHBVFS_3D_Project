@@ -71,10 +71,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStartPoint:
   - {x: 0, y: 0}
-  - {x: 0, y: 0}
+  - {x: 7, y: 0}
   playerList: []
   currentPlayer: {fileID: 0}
   gameplayUI: {fileID: 0}
+  discardStage: {fileID: 0}
 --- !u!114 &6936664478954252166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f67785db08e0d04ebcf9304b2df2130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redPlayerNeedsToEffect: 
+  bluePlayerNeedsToEffect: 
 --- !u!114 &6936664478954252185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187cbf9cb948e4c479a8979eac71a4b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redPlayerNeedsToEffect: 
+  bluePlayerNeedsToEffect: 
 --- !u!114 &6936664478954252188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8205c8a1abf81142a64a2186f0df51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redPlayerNeedsToEffect: 
+  bluePlayerNeedsToEffect: 
 --- !u!114 &6936664478954252189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,4 +180,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe564b87c9a65e43a174ae8b659de0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dyingPlayerUI: {fileID: 0}
+  alivePlayerUI: {fileID: 0}
+  winUI: {fileID: 0}
+  loseUI: {fileID: 0}
+  drawUI: {fileID: 0}
+  player0LandCount: 0
+  player1LandCount: 0
+  dyingTimer: 10
   cardSelectManager: {fileID: 0}

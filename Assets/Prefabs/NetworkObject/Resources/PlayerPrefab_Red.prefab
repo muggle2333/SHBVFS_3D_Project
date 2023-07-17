@@ -257,7 +257,7 @@ MonoBehaviour:
   MaxHP: 3
   AttackDamage: 3
   Defence: 3
-  Range: 10
+  Range: 1
   hasAttcaked: 0
   AttackTarget: {fileID: 0}
   hasMoved: 0
@@ -266,7 +266,8 @@ MonoBehaviour:
     m_InternalValue: 0
   canCost1APInEnemy: 0
   canFreeMoveInSelfGrid: 0
-  CurrentActionPoint: 3
+  CurrentActionPoint: 0
+  TrueActionPoint: 3
   ActionPointPerRound: 3
   MaxActionPoint: 3
   MaxCardCount: 10

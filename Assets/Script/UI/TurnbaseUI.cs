@@ -13,6 +13,7 @@ public class TurnbaseUI : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text roundText;
     [SerializeField] private Button skipBtn;
+    [SerializeField] private GameObject container;
 
     private void Awake()
     {
@@ -21,9 +22,15 @@ public class TurnbaseUI : MonoBehaviour
             TurnbasedSystem.Instance.SkipControlStageServerRpc();
             skipBtn.gameObject.SetActive(false);
         });
-        TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += UpdateTurnbaseUI;
+        container.SetActive(false);
+        //TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += UpdateTurnbaseUI;
     }
 
+    public void StartTurnbaseUI()
+    {
+        container.SetActive(true);
+        TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += UpdateTurnbaseUI;
+    }
     private void UpdateTurnbaseUI(GameStage previousValue, GameStage newValue)
     {
         if(previousValue==GameStage.S1) //CONTROL 结束

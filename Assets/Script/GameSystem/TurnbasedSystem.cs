@@ -71,13 +71,16 @@ public class TurnbasedSystem : NetworkBehaviour
         //For test
         if (FindObjectOfType<NetworkManager>() != null) return;
         isStart.Value = true;
+        UIManager.Instance.StartTurnbaseUIClientRpc();
         StartCoroutine("TurnStart");
     }
     public void StartTurnbaseSystem()
     {
         if (!NetworkManager.Singleton.IsHost) return;
         isStart.Value = true;
+        UIManager.Instance.StartTurnbaseUIClientRpc();
         StartCoroutine("TurnStart");
+
     }
 
     // Update is called once per frame

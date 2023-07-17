@@ -93,22 +93,20 @@ public class PlayerManager : NetworkBehaviour
         drawCardComponent = FindObjectOfType<DrawCardComponent>();
         controlStage = FindObjectOfType<ControlStage>();
     }
-    public void ResetControlVfx(Player player)
+    public void ResetPlayerDateAfterControlStage(Player player)
     {
-        player.GetComponent<PlayerInteractionComponent>().HideVfxPlayer();
+        //player.GetComponent<PlayerInteractionComponent>().HideVfxPlayer();
         //player.GetComponent<PlayerInteractionComponent>().ResetGachaVfx();
         //player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
+        player.CurrentActionPoint = player.TrueActionPoint;
     }
 
-    public void BackupPlayerPosition(Player player)
+    public void BackupPlayerData(Player player)
     {
         player.trueGrid= player.currentGrid;
+        player.TrueActionPoint = player.CurrentActionPoint;
     }
 
-    public void Research(Player player,GridObject gridObject)
-    {
-
-    }
     public void TryInteract(PlayerInteractType playerInteractType,Player player, GridObject gridObject)
     {
         switch (playerInteractType)
@@ -162,7 +160,7 @@ public class PlayerManager : NetworkBehaviour
             case PlayerInteractType.Search:
                 Search(player); break;
         }
-        GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
+        //GridVfxManager.Instance.UpdateVfx(gridObject);
         foreach (var tmpPlayer in GameplayManager.Instance.playerList)
         {
             tmpPlayer.GetComponentInChildren<PlayerInteractionComponent>().SetPlayerPointed(tmpPlayer == player);
@@ -174,29 +172,40 @@ public class PlayerManager : NetworkBehaviour
         Player player = GameplayManager.Instance.playerList[(int)playerId];
         Interact(player, playerInteract);
     }
-    public void MovePlayer(Player player,GridObject gridObject)
+    public void InitializePlayerStartPoint(Player player,GridObject gridObject)
     {
-        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return;
-        player.targetGrid = gridObject;
-        int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
-        GridManager.Instance.DiscoverGridObject(gridObject);
+        GridManager.Instance.DiscoverGridObject(player, gridObject);
+        player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
+    }
+    public bool MovePlayer(Player player,GridObject gridObject)
+    {
+        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return false;
+        player.targetGrid = gridObject;
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
+        if (!player.UseActionPoint(apCost)) return false;
+        player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
+        GridManager.Instance.DiscoverGridObject(player,gridObject);
         UpdateGridAuthorityData(player, gridObject);
         //player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
         player.GetComponent<PlayerInteractionComponent>().DeduceFirstPath();
+        GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
+        return true;
     }
     public void TryMove(Player player,GridObject gridObject)
     {
         player.targetGrid = gridObject;
-        int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
+        if (!player.UseActionPoint(apCost)) return;
         player.GetComponent<PlayerInteractionComponent>().MoveVfxPlayer(gridObject);
         UpdateGridAuthorityData(player, gridObject);
         player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
     }
 
-    public void Occupy(Player player,GridObject gridObject,bool isControlStage)
+    public bool Occupy(Player player,GridObject gridObject,bool isControlStage)
     {
-        int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Occupy, player);
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Occupy, player);
+        if (!player.UseActionPoint(apCost)) return false;
         gridObject = GridManager.Instance.ManageOwner(gridObject, player,isControlStage);
         player.OccupyGrid(gridObject);
         GridVfxManager.Instance.UpdateVfxOwner(gridObject,isControlStage);
@@ -204,28 +213,33 @@ public class PlayerManager : NetworkBehaviour
         {
             UpdateGridAuthorityData(player, gridObject);
         }
-        
+        return true;
     }
 
-    public void Build(Player player,GridObject gridObject, bool isControlStage)
+    public bool Build(Player player,GridObject gridObject, bool isControlStage)
     {
-        int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Build, player);
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Build, player);
+        if (!player.UseActionPoint(apCost)) return false;
+
         gridObject = GridManager.Instance.ManageBuilding(gridObject,isControlStage);
         GridVfxManager.Instance.UpdateVfxBuilding(gridObject,isControlStage);
         if (isControlStage)
         {
             UpdateGridAuthorityData(player, gridObject);
         }
+        return true;
         
     }
     public void TrySearch(Player player)
     {
-        int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
-
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
+        if (!player.UseActionPoint(apCost)) return;
     }
-    public void Search(Player player)
+    public bool Search(Player player)
     {
-        int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
+        if (!player.UseActionPoint(apCost)) return false;
+
         var neighbourList = GridManager.Instance.grid.GetNeighbour(player.currentGrid);
         neighbourList.Add(player.currentGrid);
         foreach(GridObject neighbour in neighbourList)
@@ -233,7 +247,7 @@ public class PlayerManager : NetworkBehaviour
             GridManager.Instance.ManageKnowable(player, neighbour);
             GridVfxManager.Instance.UpdateVfxAcademy(neighbour);
         }
-       
+        return true;
     }
     public void TryGacha(Player player, GridObject gridObject)
     {
@@ -245,13 +259,16 @@ public class PlayerManager : NetworkBehaviour
         //drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
     }
 
-    public void DrawCard(Player player, GridObject gridObject)
+    public bool DrawCard(Player player, GridObject gridObject)
     {
-        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return;
-        int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
+        if (!player.UseActionPoint(apCost)) return false;
+
+        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return false;
         GridVfxManager.Instance.UpdateVfxGacha(gridObject, false);
         //drawCardComponent.DrawCardServerRpc(player.Id);
         drawCardComponent.DrawCard(player);
+        return true;
     }
     public void UpdateGridAuthorityData(Player player, GridObject gridObject)
     {
@@ -270,7 +287,8 @@ public class PlayerManager : NetworkBehaviour
     }
     public bool CheckSearchable(Player player, GridObject gridObject)
     {
-        return player.currentGrid == gridObject;
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
+        return player.IsApEnough(apCost) && player.currentGrid == gridObject;
     }
     public bool CheckKnowable(Player player, GridObject gridObject)
     {
@@ -279,8 +297,10 @@ public class PlayerManager : NetworkBehaviour
     }
     public bool CheckMoveable(Player player, GridObject gridObject)
     {
+        player.targetGrid =gridObject;
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         if (player.currentGrid == gridObject) return false;
-        return CheckDistance(player, gridObject) <= 1;
+        return player.IsApEnough(apCost) && CheckDistance(player, gridObject) <= 1;
     }
 
     public int CheckDistance(Player player, GridObject gridObject)
@@ -294,6 +314,9 @@ public class PlayerManager : NetworkBehaviour
  
     public bool CheckOccupiable(Player player, GridObject gridObject)
     {
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Occupy, player);
+        if (!player.IsApEnough(apCost)) return false;
+
         if (player.currentGrid != gridObject) return false;
         if(!gridObject.canBeOccupied) return false;
         if (gridObject.owner!=null && gridObject.owner== player) return false;
@@ -301,6 +324,9 @@ public class PlayerManager : NetworkBehaviour
     }
     public bool CheckBuildable(Player player, GridObject gridObject)
     {
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Build, player);
+        if (!player.IsApEnough(apCost)) return false;
+
         if (player.currentGrid != gridObject) return false;
         if (gridObject.isHasBuilding) return false;
         if (gridObject.owner == null || gridObject.owner != player) return false;
@@ -309,6 +335,9 @@ public class PlayerManager : NetworkBehaviour
 
     public bool CheckGachable(Player player, GridObject gridObject)
     {
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
+        if (!player.IsApEnough(apCost)) return false;
+
         if (player.currentGrid != gridObject) return false;
         //if (!gridObject.isHasBuilding) return false;
         if (gridObject.owner == null || gridObject.owner != null && gridObject.owner != player) return false;
