@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Calculating : MonoBehaviour
@@ -35,6 +36,7 @@ public class Calculating : MonoBehaviour
     public int totalCardAttackRange;
 
     public int[] academyEffectNum = new int[6];
+    public Dictionary<Player, int[]> totalAcademyEffectNum = new Dictionary<Player, int[]>();
     public AcademyBuffData AcademyBuffData;
     public Card CardData;
 
@@ -55,7 +57,14 @@ public class Calculating : MonoBehaviour
     }
     void Start()
     {
-        playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();   
+        playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();
+        Invoke("AddTotalAcademyEffectNum", 3);
+        
+    }
+    public void AddTotalAcademyEffectNum()
+    {
+        totalAcademyEffectNum.Add(GameplayManager.Instance.playerList[0], new int[6]);
+        totalAcademyEffectNum.Add(GameplayManager.Instance.playerList[1], new int[6]);
     }
     public void DelataCardData (CardSetting card,Player player)
     {
@@ -63,10 +72,15 @@ public class Calculating : MonoBehaviour
         totalCardDefense += card.playerDataEffect.defence;
         totalCardAttackDamage += card.playerDataEffect.attack;
 
+        player.cardAD = totalCardAttackDamage;
+        player.cardAR = totalCardAttackRange;
+        player.cardDF = totalCardDefense;
+
         academyEffectNum = card.academyEffectNum;
         for(int i = 0; i < 6; i++)
         {
             player.academyOwnedPoint[i] += academyEffectNum[i];
+            totalAcademyEffectNum[player][i] += academyEffectNum[i];
         }
         
         playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
@@ -75,12 +89,12 @@ public class Calculating : MonoBehaviour
         cardDamage = card.Damage;
         cardAP = card.playerDataEffect.actionPoint;
         cardHP = card.playerDataEffect.hp;
-    
-    }    
 
-    public void CardDataInitialize(Player player)
+    }
+    [ClientRpc]    
+    
+    public void CardDataInitializeClientRpc(Player player)
     {
-      
         cardAttackDamage = 0;
         cardAttackRange = 0;
         cardDefense = 0;
@@ -91,11 +105,13 @@ public class Calculating : MonoBehaviour
         cardFreeMoveNum = 0;
         for (int i = 0; i < 6; i++)
         {
-            player.academyOwnedPoint[i] -= academyEffectNum[i];
+            player.academyOwnedPoint[i] -= totalAcademyEffectNum[player][i];
+            
         }
         for (int i = 0; i < 6 ; i++)
         {
             academyEffectNum[i] = 0;
+            totalAcademyEffectNum[player][i] = 0;
         }
 
         playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);

@@ -9,8 +9,6 @@ public class CardDataBase : MonoBehaviour
     public static Dictionary<AcademyType, List<CardSetting>> AllCardListDic = new Dictionary<AcademyType, List<CardSetting>>();
     public Dictionary<AcademyType, List<CardSetting>> AllTopCardListDic = new Dictionary<AcademyType, List<CardSetting>>();
     public List<CardSetting> AllCardList = new List<CardSetting>();
-    public List<Card> cards = new List<Card>();
-    public Card card;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -36,13 +34,5 @@ public class CardDataBase : MonoBehaviour
         }
         AllCardList = new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards"));
         
-    }
-    public void Start()
-    {
-        for (int i = 0; i < AllCardList.Count; i++)
-        {
-            card.cardSetting = AllCardList[i];
-            cards.Add(card);
-        }
     }
 }

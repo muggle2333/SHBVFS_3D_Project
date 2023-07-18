@@ -16,7 +16,7 @@ public class S4Stage : MonoBehaviour
         Debug.LogError("S4");
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {
-            if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S2)
+            if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S4)
             {
                 redPlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
                 CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.RedPlayer, playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
@@ -24,7 +24,7 @@ public class S4Stage : MonoBehaviour
         }
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[1]].Count; i++)
         {
-            if (playedCardListDict[GameplayManager.Instance.playerList[1]][i].effectStage == EffectStage.S2)
+            if (playedCardListDict[GameplayManager.Instance.playerList[1]][i].effectStage == EffectStage.S4)
             {
                 bluePlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
                 CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
@@ -99,8 +99,8 @@ public class S4Stage : MonoBehaviour
                 GameplayManager.Instance.LeaveDyingStageClientRpc();
             }
         }
-        Calculating.Instance.CardDataInitialize(playerList[0]);
-        Calculating.Instance.CardDataInitialize(playerList[1]);
+        Calculating.Instance.CardDataInitializeClientRpc(playerList[0]);
+        Calculating.Instance.CardDataInitializeClientRpc(playerList[1]);
         TurnbasedSystem.Instance.CompleteStage(GameStage.S4);
 
     }

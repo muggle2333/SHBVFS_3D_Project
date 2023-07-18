@@ -27,6 +27,10 @@ public class Player : Character
     public int MaxCardCount;
     public int freeMoveCount;
 
+    public int cardAR;
+    public int cardAD;
+    public int cardDF;
+
     public int baseMaxHP = 3;
     public int baseDefense = 0;
     public int baseAttackDamage = 1;

@@ -8,7 +8,7 @@ public class CardManager : NetworkBehaviour
     public static CardManager Instance;
     public Dictionary<Player, List<Card>> playerHandCardDict = new Dictionary<Player, List<Card>>();
     public Dictionary<Player, List<CardSetting>> playedCardDict = new Dictionary<Player, List<CardSetting>>();
-
+    public PlayedCardUI playedCardUI;
     public NetworkList<int> redPlayerPlayedCards;
     public NetworkList<int> bluePlayerPlayedCards;
     public GameObject CardPrefeb;
@@ -16,6 +16,14 @@ public class CardManager : NetworkBehaviour
     private Calculating calculating;
     private PlayerDeck playerDeck;
     private CardSelectManager cardSelectManager;
+
+    public int red;
+    public int blue;
+    private void Update()
+    {
+        red = redPlayerPlayedCards.Count;
+        blue = bluePlayerPlayedCards.Count;
+    }
     public void Awake()
     {
         redPlayerPlayedCards = new NetworkList<int>();
