@@ -7,10 +7,12 @@ public class CardManager : NetworkBehaviour
 {
     public static CardManager Instance;
     public Dictionary<Player, List<Card>> playerHandCardDict = new Dictionary<Player, List<Card>>();
-    public Dictionary<Player, List<Card>> playedCardDict = new Dictionary<Player, List<Card>>();
+    public Dictionary<Player, List<CardSetting>> playedCardDict = new Dictionary<Player, List<CardSetting>>();
 
     public NetworkList<int> redPlayerPlayedCards;
     public NetworkList<int> bluePlayerPlayedCards;
+    public GameObject CardPrefeb;
+    public GameObject CardContent;
     private Calculating calculating;
     private PlayerDeck playerDeck;
     private CardSelectManager cardSelectManager;
@@ -40,7 +42,7 @@ public class CardManager : NetworkBehaviour
         {
             if (!playedCardDict.ContainsKey(playerList[i]))
             {
-                playedCardDict.Add(playerList[i], new List<Card>());
+                playedCardDict.Add(playerList[i], new List<CardSetting>());
             }
             if (!playerHandCardDict.ContainsKey(playerList[i]))
             {
@@ -93,18 +95,37 @@ public class CardManager : NetworkBehaviour
         {
             if(cardId == CardDataBase.Instance.AllCardList[i].cardId)
             {
-                if(player == GameplayManager.Instance.currentPlayer)
+                for (int j = 0; j < playedCardDict[player].Count; j++)
                 {
-                    //Self Card TakeEffect Animation
+                    if (playedCardDict[player][j].cardId == cardId)
+                    {
+                        if (player == GameplayManager.Instance.currentPlayer)
+                        {
+                            //Self Card TakeEffect Animation
+                            //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
+                            var card = Instantiate(CardPrefeb, new Vector3(-800, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+                            card.cardSetting = CardDataBase.Instance.AllCardList[i];
+                            card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
+                            playedCardDict[player].RemoveAt(j);
+                        }
+                        else
+                        {
+                            //Enemy Card TakeEffect Animation
+                            //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
+                            var card = Instantiate(CardPrefeb, new Vector3(-800, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+                            card.cardSetting = CardDataBase.Instance.AllCardList[i];
+                            card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
+                            playedCardDict[player].RemoveAt(j);
+                        }
+                    }
                 }
-                else
+                if (CardDataBase.Instance.AllCardList[i].cardFounction != null)
                 {
-                    //Enemy Card TakeEffect Animation
+                    Instantiate(CardDataBase.Instance.AllCardList[i].cardFounction);
                 }
                 calculating.DelataCardData(CardDataBase.Instance.AllCardList[i], player);
                 calculating.CalculatPlayerBaseData(player);
                 calculating.CalaulatPlayerData(player);
-                playedCardDict[player].RemoveAt(i);
             }
         }
 
@@ -177,25 +198,25 @@ public class CardManager : NetworkBehaviour
     [ClientRpc]
     public void RefreshPlayedCardDictClientRpc()
     {
-        List<Card> redPlayerPlayed = new List<Card>();
-        List<Card> bluePlayerPlayed = new List<Card>();
+        List<CardSetting> redPlayerPlayed = new List<CardSetting>();
+        List<CardSetting> bluePlayerPlayed = new List<CardSetting>();
         for(int i = 0; i < redPlayerPlayedCards.Count; i++)
         {
-            for(int j = 0; j < CardDataBase.Instance.cards.Count; j++)
+            for(int j = 0; j < CardDataBase.Instance.AllCardList.Count; j++)
             {
-                if (redPlayerPlayedCards[i] == CardDataBase.Instance.cards[j].cardId)
+                if (redPlayerPlayedCards[i] == CardDataBase.Instance.AllCardList[j].cardId)
                 {
-                    redPlayerPlayed.Add(CardDataBase.Instance.cards[j]);
+                    redPlayerPlayed.Add(CardDataBase.Instance.AllCardList[j]);
                 }
             }
         }
         for (int i = 0; i < bluePlayerPlayedCards.Count; i++)
         {
-            for (int j = 0; j < CardDataBase.Instance.cards.Count; j++)
+            for (int j = 0; j < CardDataBase.Instance.AllCardList.Count; j++)
             {
-                if (bluePlayerPlayedCards[i] == CardDataBase.Instance.cards[j].cardId)
+                if (bluePlayerPlayedCards[i] == CardDataBase.Instance.AllCardList[j].cardId)
                 {
-                    bluePlayerPlayed.Add(CardDataBase.Instance.cards[j]);
+                    bluePlayerPlayed.Add(CardDataBase.Instance.AllCardList[j]);
                 }
             }
         }

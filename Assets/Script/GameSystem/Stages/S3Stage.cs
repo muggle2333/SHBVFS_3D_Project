@@ -9,8 +9,9 @@ public class S3Stage : MonoBehaviour
     private List<Player> playerList = new List<Player>();
     public List<int> redPlayerNeedsToEffect = new List<int>();
     public List<int> bluePlayerNeedsToEffect = new List<int>();
-    public void StartStage(Dictionary<Player, List<Card>> playedCardListDict)
+    public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
     {
+        Debug.LogError("S3");
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {
             if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S3)
@@ -29,10 +30,12 @@ public class S3Stage : MonoBehaviour
         }
         if (redPlayerNeedsToEffect.Count > 0)
         {
+            Debug.LogError("S3 RED" + redPlayerNeedsToEffect.Count);
             playedCardDict.Add(GameplayManager.Instance.playerList[0], redPlayerNeedsToEffect);
         }
         if (bluePlayerNeedsToEffect.Count > 0)
         {
+            Debug.LogError("S3 BLUE" + bluePlayerNeedsToEffect.Count);
             playedCardDict.Add(GameplayManager.Instance.playerList[1], bluePlayerNeedsToEffect);
         }
         playerList = new List<Player>();

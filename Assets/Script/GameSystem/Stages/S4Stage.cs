@@ -10,8 +10,9 @@ public class S4Stage : MonoBehaviour
     public List<int> redPlayerNeedsToEffect = new List<int>();
     public List<int> bluePlayerNeedsToEffect = new List<int>();
     //private Dictionary<Player,>;
-    public void StartStage(Dictionary<Player, List<Card>> playedCardListDict)
+    public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
     {
+        Debug.LogError("S4");
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {
             if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S2)
@@ -30,10 +31,12 @@ public class S4Stage : MonoBehaviour
         }
         if (redPlayerNeedsToEffect.Count > 0)
         {
+            Debug.LogError("S4 RED" + redPlayerNeedsToEffect.Count);
             playedCardDict.Add(GameplayManager.Instance.playerList[0], redPlayerNeedsToEffect);
         }
         if (bluePlayerNeedsToEffect.Count > 0)
         {
+            Debug.LogError("S4 BLUE" + bluePlayerNeedsToEffect.Count);
             playedCardDict.Add(GameplayManager.Instance.playerList[1], bluePlayerNeedsToEffect);
         }
         playerList = new List<Player>();
