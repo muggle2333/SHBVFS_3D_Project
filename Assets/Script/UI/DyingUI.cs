@@ -9,18 +9,34 @@ public class DyingUI : MonoBehaviour
     [SerializeField] private GameObject container;
     [SerializeField] private GameObject selfDyingNotice;
     [SerializeField] private TMP_Text dyingTitle;
+    [SerializeField] private TMP_Text timerText;
 
+    private float dyingTimerValue;
     public void InitializeDyingUI()
     {
         GameplayManager.Instance.OnPlayerDying += GameplayManager_OnPlayerDying;
         GameplayManager.Instance.OnPlayerSelfDying += GameplayManager_OnPlayerSelfDying;
         GameplayManager.Instance.OnLeaveDyingStage += GameplayManager_OnLeaveDyingStage;
     }
+    public void Update()
+    {
+        if (!container.activeSelf) return;
+        if(dyingTimerValue>0)
+        {
+            dyingTimerValue-= Time.deltaTime;
+            timerText.text = Mathf.FloorToInt(dyingTimerValue).ToString();
+        }
+        else
+        {
+            timerText.text = Mathf.FloorToInt(0).ToString();
+        }
+    }
 
     private void GameplayManager_OnPlayerDying(object sender, EventArgs e)
     {
         container.SetActive(true);
-        if(GameplayManager.Instance.GetDyingPlayer().Count==1)
+        dyingTimerValue = GameplayManager.DYING_TIMER;
+        if (GameplayManager.Instance.GetDyingPlayer().Count==1)
         {
             if(GameplayManager.Instance.currentPlayer.HP<=0)
             {

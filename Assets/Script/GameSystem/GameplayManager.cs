@@ -9,6 +9,9 @@ using UnityEngine.EventSystems;
 
 public class GameplayManager : NetworkBehaviour
 {
+    public const float DYING_TIMER = 10f;
+    public const float DISCARD_TIMER = 10f;
+
     public static GameplayManager Instance;
 
     [SerializeField] private Vector2[] playerStartPoint = new Vector2[2];
@@ -28,6 +31,7 @@ public class GameplayManager : NetworkBehaviour
     public event EventHandler OnPlayerDying;
     public event EventHandler OnPlayerSelfDying;
     public event EventHandler OnLeaveDyingStage;
+
 
     public void Awake()
     {
@@ -220,10 +224,14 @@ public class GameplayManager : NetworkBehaviour
             else{
                 int player0LandCount=0;
                 int player1LandCount=0;
+                int[] player0LandArray = dyingPlayers[0].CountAcademyOwnedPoint();
+                int[] player1LandArray = dyingPlayers[0].CountAcademyOwnedPoint();
                 for (AcademyType i = AcademyType.YI; i < AcademyType.FA; i++)
                 {
-                    player0LandCount += dyingPlayers[0].OwnedLandDic[i].Count;
-                    player1LandCount += dyingPlayers[1].OwnedLandDic[i].Count;
+                    //player0LandCount += dyingPlayers[0].OwnedLandDic[i].Count;
+                    //player1LandCount += dyingPlayers[1].OwnedLandDic[i].Count;
+                    player0LandCount += player0LandArray[(int)i];
+                    player1LandCount += player1LandArray[(int)i];
                 }
                 if (player0LandCount == player1LandCount)
                 {

@@ -40,11 +40,11 @@ public struct PlayerInteract : INetworkSerializable
 
 public class PlayerManager : NetworkBehaviour
 {
-    public GameObject dyingPlayerUI;
-    public GameObject alivePlayerUI;
-    public GameObject winUI;
-    public GameObject loseUI;
-    public GameObject drawUI;
+    //public GameObject dyingPlayerUI;
+    //public GameObject alivePlayerUI;
+    //public GameObject winUI;
+    //public GameObject loseUI;
+    //public GameObject drawUI;
 
     public NetworkList<int> redPlayerHandCardsList;
     public NetworkList<int> bluePlayerHandCardsList;
@@ -80,7 +80,7 @@ public class PlayerManager : NetworkBehaviour
         {
             dyingTimer -= Time.deltaTime;
         }
-        //if (dyingTimer <= 0)
+        //if (dyingTimerValue <= 0)
         //{
         //    alivePlayerUI.SetActive(false);
         //    dyingPlayerUI.SetActive(false);
@@ -365,32 +365,32 @@ public class PlayerManager : NetworkBehaviour
         cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
     }
 
-    public void PlayerDying(List<Player> dyingPlayerList, List<Player> alivePlayerList)
-    {
+    //public void PlayerDying(List<Player> dyingPlayerList, List<Player> alivePlayerList)
+    //{
 
-        if (alivePlayerList != null)
-        {
-            if (alivePlayerList[0] == GameplayManager.Instance.currentPlayer)
-            {
-                alivePlayerUI.SetActive(true);
-            }
-            else
-            {
-                dyingPlayerUI.SetActive(true);
-            }
-        }
-        else
-        {
-            for(int i = 0; i < dyingPlayerList.Count; i++)
-            {
-                dyingPlayerList[i].isDying.Value = true;
-                if (dyingPlayerList[i] == GameplayManager.Instance.currentPlayer)
-                {
-                    dyingPlayerUI.SetActive(true);
-                }
-            }
-        }
-    }
+    //    if (alivePlayerList != null)
+    //    {
+    //        if (alivePlayerList[0] == GameplayManager.Instance.currentPlayer)
+    //        {
+    //            alivePlayerUI.SetActive(true);
+    //        }
+    //        else
+    //        {
+    //            dyingPlayerUI.SetActive(true);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        for(int i = 0; i < dyingPlayerList.Count; i++)
+    //        {
+    //            dyingPlayerList[i].isDying.Value = true;
+    //            if (dyingPlayerList[i] == GameplayManager.Instance.currentPlayer)
+    //            {
+    //                dyingPlayerUI.SetActive(true);
+    //            }
+    //        }
+    //    }
+    //}
     [ClientRpc]
     public void SetAttackClientRpc(PlayerId attackPlayerId, PlayerId attackTargetId, ClientRpcParams clientRpcParams = default)
     {
@@ -401,85 +401,85 @@ public class PlayerManager : NetworkBehaviour
         attackPlayer.GetComponent<PlayerInteractionComponent>().SetAttackPath(attackPlayer.transform,attackTarget.transform);
         //VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
     }
-    public void GameOver()
-    {
-        List<Player> dyingPlayers = new List<Player>();
-        for (int i = 0;i < GameplayManager.Instance.playerList.Count; i++)
-        {
-            if(GameplayManager.Instance.playerList[i].isDying.Value)
-            {
-                dyingPlayers.Add(GameplayManager.Instance.playerList[i]);
-            }
-        }
-        if(dyingPlayers.Count == 1)
-        {
-            if(dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
-            {
-                loseUI.SetActive(true);
-            }
-            else
-            {
-                winUI.SetActive(true);
-            }
-        }
-        else if(dyingPlayers.Count == 2)
-        {
-            if (dyingPlayers[0].HP > dyingPlayers[1].HP)
-            {
-                if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
-                {
-                    winUI.SetActive(true);
-                }
-                else
-                {
-                    loseUI.SetActive(true);
-                }
-            }
-            else if(dyingPlayers[0].HP < dyingPlayers[1].HP)
-            {
-                if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
-                {
-                    loseUI.SetActive(true);
-                }
-                else
-                {
-                    winUI.SetActive(true);
-                }
-            }
-            else if (dyingPlayers[0].HP == dyingPlayers[1].HP)
-            {
-                for(AcademyType i = AcademyType.YI; i < AcademyType.FA; i++)
-                {
-                    player0LandCount += dyingPlayers[0].OwnedLandDic[i].Count;
-                    player1LandCount += dyingPlayers[1].OwnedLandDic[i].Count;
-                }
-                if(player0LandCount > player1LandCount)
-                {
-                    if(dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
-                    {
-                        winUI.SetActive(true);
-                    }
-                    else
-                    {
-                        loseUI.SetActive(true);
-                    }
-                }
-                else if(player0LandCount < player1LandCount)
-                {
-                    if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
-                    {
-                        loseUI.SetActive(true);
-                    }
-                    else
-                    {
-                        winUI.SetActive(true);
-                    }
-                }
-                else if(player0LandCount == player1LandCount)
-                {
-                    drawUI.SetActive(true);
-                }
-            }
-        }
-    }
+    //public void GameOver()
+    //{
+    //    List<Player> dyingPlayers = new List<Player>();
+    //    for (int i = 0;i < GameplayManager.Instance.playerList.Count; i++)
+    //    {
+    //        if(GameplayManager.Instance.playerList[i].isDying.Value)
+    //        {
+    //            dyingPlayers.Add(GameplayManager.Instance.playerList[i]);
+    //        }
+    //    }
+    //    if(dyingPlayers.Count == 1)
+    //    {
+    //        if(dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //        {
+    //            loseUI.SetActive(true);
+    //        }
+    //        else
+    //        {
+    //            winUI.SetActive(true);
+    //        }
+    //    }
+    //    else if(dyingPlayers.Count == 2)
+    //    {
+    //        if (dyingPlayers[0].HP > dyingPlayers[1].HP)
+    //        {
+    //            if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //            {
+    //                winUI.SetActive(true);
+    //            }
+    //            else
+    //            {
+    //                loseUI.SetActive(true);
+    //            }
+    //        }
+    //        else if(dyingPlayers[0].HP < dyingPlayers[1].HP)
+    //        {
+    //            if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //            {
+    //                loseUI.SetActive(true);
+    //            }
+    //            else
+    //            {
+    //                winUI.SetActive(true);
+    //            }
+    //        }
+    //        else if (dyingPlayers[0].HP == dyingPlayers[1].HP)
+    //        {
+    //            for(AcademyType i = AcademyType.YI; i < AcademyType.FA; i++)
+    //            {
+    //                player0LandCount += dyingPlayers[0].OwnedLandDic[i].Count;
+    //                player1LandCount += dyingPlayers[1].OwnedLandDic[i].Count;
+    //            }
+    //            if(player0LandCount > player1LandCount)
+    //            {
+    //                if(dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //                {
+    //                    winUI.SetActive(true);
+    //                }
+    //                else
+    //                {
+    //                    loseUI.SetActive(true);
+    //                }
+    //            }
+    //            else if(player0LandCount < player1LandCount)
+    //            {
+    //                if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //                {
+    //                    loseUI.SetActive(true);
+    //                }
+    //                else
+    //                {
+    //                    winUI.SetActive(true);
+    //                }
+    //            }
+    //            else if(player0LandCount == player1LandCount)
+    //            {
+    //                drawUI.SetActive(true);
+    //            }
+    //        }
+    //    }
+    //}
 }

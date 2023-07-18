@@ -31200,8 +31200,8 @@ RectTransform:
   - {fileID: 491949961}
   - {fileID: 1349824700}
   - {fileID: 1511184623}
-  - {fileID: 3229274210215344952}
   - {fileID: 4791333657227457759}
+  - {fileID: 3229274210215344952}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32130,9 +32130,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2104841662}
     m_Modifications:
+    - target: {fileID: 2040765188495388178, guid: a89af5eb3b543a14a959a9f780bc3bbd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5437943796783131544, guid: a89af5eb3b543a14a959a9f780bc3bbd, type: 3}
       propertyPath: m_Name
       value: DyingUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5437943796783131544, guid: a89af5eb3b543a14a959a9f780bc3bbd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6185256333053903032, guid: a89af5eb3b543a14a959a9f780bc3bbd, type: 3}
       propertyPath: m_Pivot.x
@@ -32683,15 +32691,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6031464968756181985, guid: fa582022f9a4a154db971acc674e4a8a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6031464968756181985, guid: fa582022f9a4a154db971acc674e4a8a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6031464968756181985, guid: fa582022f9a4a154db971acc674e4a8a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6031464968756181985, guid: fa582022f9a4a154db971acc674e4a8a, type: 3}
       propertyPath: m_AnchoredPosition.x

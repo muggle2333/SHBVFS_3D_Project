@@ -128,29 +128,30 @@ public class TurnbasedSystem : NetworkBehaviour
 
 
         Event2();
+        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         //UpdateTimer(S2PhaseTime);
-        yield return new WaitForSecondsRealtime(S2PhaseTime);
+        //yield return new WaitForSecondsRealtime(S2PhaseTime);
 
 
         MovePhase();
         yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         //UpdateTimer(MovePhaseTime);
-        yield return new WaitForSecondsRealtime(MovePhaseTime);
+        //yield return new WaitForSecondsRealtime(MovePhaseTime);
 
         Event3();
         yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         //UpdateTimer(S3PhaseTime);
-        yield return new WaitForSecondsRealtime(S3PhaseTime);
+        //yield return new WaitForSecondsRealtime(S3PhaseTime);
 
         AttackPhase();
         yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         //UpdateTimer(AttackPhaseTime);
-        yield return new WaitForSecondsRealtime(AttackPhaseTime);
+        //yield return new WaitForSecondsRealtime(AttackPhaseTime);
 
         Event4();
         yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         //UpdateTimer(S4PhaseTime);
-        yield return new WaitForSecondsRealtime(S4PhaseTime);
+        //yield return new WaitForSecondsRealtime(S4PhaseTime);
 
         StartCoroutine("TurnStart");
 

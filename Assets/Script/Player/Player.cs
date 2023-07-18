@@ -43,14 +43,14 @@ public class Player : Character
     public GridObject trueGrid;
 
     public Dictionary<AcademyType, List<GridObject>> OwnedLandDic = new Dictionary<AcademyType, List<GridObject>>()
-/*    {
+    {
         { AcademyType.Null,null },
         { AcademyType.YI,null },
         { AcademyType.DAO,null },
         { AcademyType.MO,null },
         { AcademyType.BING,null },
         { AcademyType.RU,null },
-    }*/;
+    };
 
     public int[] academyOwnedPoint = new int[6];
     [System.Serializable]

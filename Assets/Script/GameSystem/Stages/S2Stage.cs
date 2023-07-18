@@ -104,7 +104,7 @@ public class S2Stage : MonoBehaviour
             //PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
 
             GameplayManager.Instance.PlayerDyingStageClientRpc();
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(GameplayManager.DYING_TIMER);
 
             if(GetDyingPlayer().Count>0)
             {

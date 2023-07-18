@@ -93,7 +93,6 @@ public class GameManager : NetworkBehaviour
                 if(isGameOver)
                 {
                     wholeGameState.Value = WholeGameState.GameOver;
-                    OnGameOver?.Invoke(this, EventArgs.Empty);
                 }
                 break;
             case WholeGameState.GameOver:
@@ -105,6 +104,10 @@ public class GameManager : NetworkBehaviour
     private void WholeGameState_OnValueChanged(WholeGameState previousValue, WholeGameState newValue)
     {
         OnWholeGameStateChanged?.Invoke(this, EventArgs.Empty);
+        if (wholeGameState.Value == WholeGameState.GameOver)
+        {
+            OnGameOver?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void IsGamePaused_OnValueChanged(bool previousValue, bool newValue)

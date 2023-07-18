@@ -103,8 +103,33 @@ public class AttackStage : MonoBehaviour
         else
         {
             TurnbasedSystem.Instance.isDie.Value = true;
-            PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
+            //PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
+            GameplayManager.Instance.PlayerDyingStageClientRpc();
+            yield return new WaitForSeconds(GameplayManager.DYING_TIMER);
+
+            if (GetDyingPlayer().Count > 0)
+            {
+                GameManager.Instance.SetGameOver();
+            }
+            else
+            {
+                GameplayManager.Instance.LeaveDyingStageClientRpc();
+            }
         }
         TurnbasedSystem.Instance.CompleteStage(GameStage.AttackStage);
+    }
+
+    private List<Player> GetDyingPlayer()
+    {
+        List<Player> dyingPlayers = new List<Player>();
+        var playerList = GameplayManager.Instance.playerList;
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].HP <= 0)
+            {
+                dyingPlayers.Add(playerList[i]);
+            }
+        }
+        return dyingPlayers;
     }
 }
