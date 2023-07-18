@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -14,6 +15,24 @@ public class PlayerInteractionComponent : MonoBehaviour
     [SerializeField] private GameObject vfx_Player_Point;
     [SerializeField] private LineRenderer pathLine;
     [SerializeField] private LineRenderer attackLine;
+    [SerializeField] private TMP_Text playerText;
+    [SerializeField] private TMP_Text hpText;
+
+    private void Start()
+    {
+        if(GetComponentInParent<Player>()!= GameplayManager.Instance.currentPlayer)
+        {
+            playerText.text = "SELF";
+        }
+        else
+        {
+            playerText.text = "RIVAL";
+        }
+    }
+    private void Update()
+    {
+        hpText.text = GetComponentInParent<Player>().HP.ToString();
+    }
     public void Move(GridObject gridObject)
     {
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
