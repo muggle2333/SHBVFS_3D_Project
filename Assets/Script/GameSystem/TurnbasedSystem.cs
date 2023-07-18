@@ -138,7 +138,7 @@ public class TurnbasedSystem : NetworkBehaviour
         yield return new WaitForSecondsRealtime(MovePhaseTime);
 
         Event3();
-        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value);
+        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value && !isDie.Value);
         UpdateTimer(S3PhaseTime);
         yield return new WaitForSecondsRealtime(S3PhaseTime);
 

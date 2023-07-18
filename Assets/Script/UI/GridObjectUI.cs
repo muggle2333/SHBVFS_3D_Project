@@ -132,6 +132,10 @@ public class GridObjectUI : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            academyText.text = "无";
+        }
 
         //Set the interactive btn
         occupyBtn.interactable = authority.canOccupy;

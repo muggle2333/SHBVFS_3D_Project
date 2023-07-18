@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -5,6 +6,7 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameplayManager : NetworkBehaviour
 {
@@ -23,6 +25,10 @@ public class GameplayManager : NetworkBehaviour
     private S2Stage s2Stage;
     private S3Stage s3Stage;
     private S4Stage s4Stage;
+
+    public event EventHandler OnPlayerDying;
+    public event EventHandler OnPlayerSelfDying;
+    public event EventHandler OnLeaveDyingStage;
 
     public void Awake()
     {
@@ -230,4 +236,39 @@ public class GameplayManager : NetworkBehaviour
         }
         return 0;
     }
+    [ClientRpc]
+    public void PlayerDyingStageClientRpc()
+    {
+        if(GetDyingPlayer().Count != 0)
+        {
+            OnPlayerDying?.Invoke(this, EventArgs.Empty);
+        }
+        foreach (var player in playerList)
+        {
+            if (player.HP < 0 && player == currentPlayer)
+            {
+                OnPlayerSelfDying?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    public List<Player> GetDyingPlayer()
+    {
+        List<Player> dyingPlayers = new List<Player>();
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].HP <= 0)
+            {
+                dyingPlayers.Add(playerList[i]);
+            }
+        }
+        return dyingPlayers;
+    }
+
+    [ClientRpc]
+    public void LeaveDyingStageClientRpc()
+    {
+        OnLeaveDyingStage.Invoke(this, EventArgs.Empty);
+    }
+
 }

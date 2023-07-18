@@ -236,5 +236,10 @@ public class GameManager : NetworkBehaviour
         }
         isGamePaused.Value = false;
     }
+
+    public void SetGameOver()
+    {
+        isGameOver= true;
+    }
     
 }

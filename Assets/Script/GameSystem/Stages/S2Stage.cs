@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,9 +97,46 @@ public class S2Stage : MonoBehaviour
         else
         {
             TurnbasedSystem.Instance.isDie.Value = true;
-            PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
+            //PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
+
+            GameplayManager.Instance.PlayerDyingStageClientRpc();
+            yield return new WaitForSeconds(5);
+
+            if(GetDyingPlayer().Count>0)
+            {
+                GameManager.Instance.SetGameOver();
+            }
+            else
+            {
+                GameplayManager.Instance.LeaveDyingStageClientRpc();
+            }
         }
         TurnbasedSystem.Instance.CompleteStage(GameStage.S2);
 
+    }
+
+    private List<Player> GetDyingPlayer()
+    {
+        List<Player> dyingPlayers = new List<Player>();
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].HP <= 0)
+            {
+                dyingPlayers.Add(playerList[i]);
+            }
+        }
+        return dyingPlayers;
+    }
+    private List<Player> GetAlivePlayer()
+    {
+        List<Player> alivePlayers = new List<Player>();
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].HP > 0)
+            {
+                alivePlayers.Add(playerList[i]);
+            }
+        }
+        return alivePlayers;
     }
 }
