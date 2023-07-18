@@ -80,12 +80,12 @@ public class PlayerManager : NetworkBehaviour
         {
             dyingTimer -= Time.deltaTime;
         }
-        if (dyingTimer <= 0)
-        {
-            alivePlayerUI.SetActive(false);
-            dyingPlayerUI.SetActive(false);
-            GameOver();
-        }
+        //if (dyingTimer <= 0)
+        //{
+        //    alivePlayerUI.SetActive(false);
+        //    dyingPlayerUI.SetActive(false);
+        //    GameOver();
+        //}
     }
     public void Start()
     {
@@ -180,7 +180,7 @@ public class PlayerManager : NetworkBehaviour
     }
     public bool MovePlayer(Player player,GridObject gridObject)
     {
-        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return false;
+        //if (player.Id != GameplayManager.Instance.currentPlayer.Id) return false;
         player.targetGrid = gridObject;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         if (!player.UseActionPoint(apCost)) return false;

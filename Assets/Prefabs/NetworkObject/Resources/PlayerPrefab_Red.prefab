@@ -202,7 +202,6 @@ GameObject:
   - component: {fileID: 780280818429077314}
   - component: {fileID: 499257089889080854}
   - component: {fileID: 6265796262920773923}
-  - component: {fileID: 3504262234773285131}
   m_Layer: 0
   m_Name: PlayerPrefab_Red
   m_TagString: Untagged
@@ -352,32 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef96b4eb74096b438c7249360b3a48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3504262234773285131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780280818429077319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7eeb7e7aa698f04ba17b6c4e71a2a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
 --- !u!1 &780280819640846122
 GameObject:
   m_ObjectHideFlags: 0
