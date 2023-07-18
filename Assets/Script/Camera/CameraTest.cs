@@ -36,6 +36,20 @@ public class CameraTest : MonoBehaviour
         {
             GetComponent<Rigidbody>().freezeRotation = true;
         }
+
+        if (target)
+        {
+            x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
+            y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
+
+            y = ClampAngle(y, yMinLimit, yMaxLimit);
+
+            var rotation = Quaternion.Euler(y, x, 0);
+            var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
+            target.rotation = rotation;
+            transform.rotation = rotation;
+            transform.position = position;
+        }
     }
 
     void LateUpdate()
