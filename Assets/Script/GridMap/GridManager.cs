@@ -59,7 +59,7 @@ public class GridManager : NetworkBehaviour
 #if UNITY_EDITOR
         string gridDataPath = Application.dataPath + "/StreamingAssets/GridDatas/" + "GridData_" + levelIndex + ".json";
 #else
-        string gridDataPath = Application.streamingAssetsPath+"GridDatas/GridData_" + levelIndex + ".json";
+        string gridDataPath = Application.streamingAssetsPath+"/GridDatas/GridData_" + levelIndex + ".json";
 #endif 
         string json = File.ReadAllText(gridDataPath);
         List<GridObject> gridObjectList = JsonMapper.ToObject<List<GridObject>>(json);
@@ -68,7 +68,7 @@ public class GridManager : NetworkBehaviour
 #if UNITY_EDITOR
         string gridSettingPath = Application.dataPath + "/StreamingAssets/GridSettings/" + "GridSetting_" + levelIndex + ".json";
 #else
-        string gridSettingPath = Application.streamingAssetsPath+"GridSettings/GridSetting_" + levelIndex + ".json";
+        string gridSettingPath = Application.streamingAssetsPath+"/GridSettings/GridSetting_" + levelIndex + ".json";
 #endif
         string gridSettingJson = File.ReadAllText(gridSettingPath);
         GridSetting gridSetting = ScriptableObject.CreateInstance<GridSetting>();

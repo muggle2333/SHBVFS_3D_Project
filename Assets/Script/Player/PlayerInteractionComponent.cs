@@ -12,6 +12,8 @@ public class PlayerInteractionComponent : MonoBehaviour
     private GameObject playerVfx;
     //private GameObject gachaContainer;
     [SerializeField] private GameObject vfx_Player_Point;
+    [SerializeField] private LineRenderer pathLine;
+    [SerializeField] private LineRenderer attackLine;
     public void Move(GridObject gridObject)
     {
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
@@ -81,36 +83,47 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void UpdateLinePath(LandType landType)
     {
-        LineRenderer lineRenderer = GetComponentInChildren<LineRenderer>();
-        lineRenderer.positionCount += 1;
+        pathLine.positionCount += 1;
         Vector3 offset = new Vector3(0, 0.1f, 0);
         if (landType == LandType.Mountain)
         {
             offset = new Vector3(0, 1.7f, 0);
         }
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, playerVfx.transform.position + offset);
+        pathLine.SetPosition(pathLine.positionCount - 1, playerVfx.transform.position + offset);
     }
 
     public void RefreshLinePath()
     {
-        LineRenderer lineRenderer = GetComponentInChildren<LineRenderer>();
-        lineRenderer.transform.rotation = Quaternion.LookRotation(new Vector3(0, -0.5f, 0), lineRenderer.transform.up);
-        lineRenderer.positionCount = 1;
-        lineRenderer.SetPosition(0, transform.position + new Vector3(0, 0.1f, 0));
+        pathLine.transform.rotation = Quaternion.LookRotation(new Vector3(0, -0.5f, 0), pathLine.transform.up);
+        pathLine.positionCount = 1;
+        pathLine.SetPosition(0, transform.position + new Vector3(0, 0.1f, 0));
     }
 
     public void DeduceFirstPath()
     {
-        LineRenderer lineRenderer = GetComponentInChildren<LineRenderer>();
-        Vector3[] positionArray = new Vector3[lineRenderer.positionCount];
-        lineRenderer.GetPositions(positionArray);
+        Vector3[] positionArray = new Vector3[pathLine.positionCount];
+        pathLine.GetPositions(positionArray);
         var positionList = positionArray.ToList<Vector3>();
         positionList.RemoveAt(0);
-        lineRenderer.SetPositions(positionList.ToArray<Vector3>());
+        pathLine.SetPositions(positionList.ToArray<Vector3>());
     }
 
     public void SetPlayerPointed(bool isPointed)
     {
         vfx_Player_Point.SetActive(isPointed);
     }
+
+    public void SetAttackPath(Transform start,Transform target)
+    {
+        attackLine.positionCount = 2;
+        attackLine.SetPosition(0,start.position + new Vector3(0, 0.1f, 0));
+        attackLine.SetPosition(1,target.position + new Vector3(0, 0.1f, 0));
+        Invoke("HideAttackPath", 1f);
+    }
+
+    public void HideAttackPath()
+    {
+        attackLine.positionCount = 0;
+    }
+
 }

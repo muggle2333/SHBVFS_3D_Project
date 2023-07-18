@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using Unity.Netcode;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -102,6 +101,7 @@ public class GameplayManager : NetworkBehaviour
         }
         int currentPlayrId = (int)NetworkManager.Singleton.LocalClientId;
         currentPlayer = playerList[currentPlayrId];
+        FindObjectOfType<CameraTest>().FocusOnPlayer();
         GridObject currentGridObject = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[currentPlayrId].x, (int)playerStartPoint[currentPlayrId].y);
         GridVfxManager.Instance.UpdateVfxAcademy(currentGridObject);
         UIManager.Instance.UpdatePlayerDataUI(currentPlayer);

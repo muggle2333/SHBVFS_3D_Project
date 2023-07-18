@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Unity.Netcode;
-using UnityEditor.PackageManager;
 
 public class DrawCardComponent :NetworkBehaviour
 {

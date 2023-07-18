@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using UnityEngine.ProBuilder.Shapes;
-
+using DG.Tweening;
 
 public class CameraTest : MonoBehaviour
 {
@@ -25,6 +25,8 @@ public class CameraTest : MonoBehaviour
     private float x = 0.0f;
     private float y = 0.0f;
 
+    private bool isTargetMoving = false;
+
     void Start()
     {
         distance = (transform.position - target.position).magnitude;
@@ -45,7 +47,13 @@ public class CameraTest : MonoBehaviour
 
     void LateUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (isTargetMoving)
+        {
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 24, 60 * Time.deltaTime);
+            UpdateRotate();
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
         {
             FocusOnPlayer();
         }
@@ -135,7 +143,17 @@ public class CameraTest : MonoBehaviour
 
     public void FocusOnPlayer()
     {
-        target.position = GameplayManager.Instance.currentPlayer.gameObject.transform.position;
-        UpdateRotate();
+        var targetPosition = GameplayManager.Instance.currentPlayer.gameObject.transform.position;
+        target.DOMove(targetPosition, 1);
+        isTargetMoving= true;
+        Invoke("MovingStop", 1f);
+
+        //target.position = GameplayManager.Instance.currentPlayer.gameObject.transform.position;
+        //UpdateRotate();
+    }
+
+    private void MovingStop()
+    {
+        isTargetMoving= false;
     }
 }
