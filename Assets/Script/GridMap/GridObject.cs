@@ -161,6 +161,7 @@ public class GridObject
     public void SetOwner(Player player,bool isControlStage)
     {
         owner = player;
+        playerKnowList = new bool[] { true , true };
         grid.TriggerGridObjectChanged(x, z);
         //GridVfxManager.Instance.UpdateVfxOwner(this,isControlStage);
 

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Netcode;
@@ -14,6 +14,7 @@ public class UIManager : NetworkBehaviour
     private GameplayUI gameplayUI;
     private PauseMenuUI pauseMenuUI;
     private TurnbaseUI turnbaseUI;
+    private EnemyUI enemyUI;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -34,6 +35,7 @@ public class UIManager : NetworkBehaviour
         gameplayUI= GetComponentInChildren<GameplayUI>();
         pauseMenuUI= GetComponentInChildren<PauseMenuUI>();
         turnbaseUI = GetComponentInChildren<TurnbaseUI>();
+        enemyUI = gridObjectUI.enemyUI;
     }
     public void UpdatePlayerDataUI(Player player)
     {
@@ -42,6 +44,7 @@ public class UIManager : NetworkBehaviour
     public void UpdateGridObjectUI(GridObject gridObject, PlayerInteractAuthority authority)
     {
         gridObjectUI.UpdateGridObjectUIData(gridObject, authority);
+        enemyUI.SetEnemyUI(gridObject);
     }
 
     public void ShowGridObjectUI(bool isShow,Transform gridPos)

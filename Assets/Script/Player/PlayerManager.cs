@@ -209,6 +209,7 @@ public class PlayerManager : NetworkBehaviour
         gridObject = GridManager.Instance.ManageOwner(gridObject, player,isControlStage);
         player.OccupyGrid(gridObject);
         GridVfxManager.Instance.UpdateVfxOwner(gridObject,isControlStage);
+        GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
         if (isControlStage)
         {
             UpdateGridAuthorityData(player, gridObject);
@@ -251,7 +252,8 @@ public class PlayerManager : NetworkBehaviour
     }
     public void TryGacha(Player player, GridObject gridObject)
     {
-        int APCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
+        int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
+        if (!player.UseActionPoint(apCost)) return;
         GridVfxManager.Instance.UpdateVfxGacha(gridObject,true);
         //player.GetComponent<PlayerInteractionComponent>().TryGacha(player.currentGrid);
 
@@ -299,7 +301,7 @@ public class PlayerManager : NetworkBehaviour
     {
         player.targetGrid =gridObject;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
-        if (player.currentGrid == gridObject) return false;
+        if (CheckGridObjectIsSame(gridObject,player.currentGrid)) return false;
         return player.IsApEnough(apCost) && CheckDistance(player, gridObject) <= 1;
     }
 
@@ -317,7 +319,7 @@ public class PlayerManager : NetworkBehaviour
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Occupy, player);
         if (!player.IsApEnough(apCost)) return false;
 
-        if (player.currentGrid != gridObject) return false;
+        if (!CheckGridObjectIsSame(gridObject, player.currentGrid)) return false;
         if(!gridObject.canBeOccupied) return false;
         if (gridObject.owner!=null && gridObject.owner== player) return false;
         return true;
@@ -327,7 +329,7 @@ public class PlayerManager : NetworkBehaviour
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Build, player);
         if (!player.IsApEnough(apCost)) return false;
 
-        if (player.currentGrid != gridObject) return false;
+        if (!CheckGridObjectIsSame(gridObject, player.currentGrid)) return false;
         if (gridObject.isHasBuilding) return false;
         if (gridObject.owner == null || gridObject.owner != player) return false;
         return true;
@@ -338,13 +340,16 @@ public class PlayerManager : NetworkBehaviour
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
         if (!player.IsApEnough(apCost)) return false;
 
-        if (player.currentGrid != gridObject) return false;
+        if (!CheckGridObjectIsSame(gridObject, player.currentGrid)) return false;
         //if (!gridObject.isHasBuilding) return false;
         if (gridObject.owner == null || gridObject.owner != null && gridObject.owner != player) return false;
         return true;
     }
 
-
+    private bool CheckGridObjectIsSame(GridObject gridObject1, GridObject gridObject2)
+    {
+        return gridObject1.x == gridObject2.x && gridObject1.z == gridObject2.z;
+    }
     public int GetActionPointCost(Player player,GridObject currentGrid, GridObject targetGrid)
     {
         return 0;

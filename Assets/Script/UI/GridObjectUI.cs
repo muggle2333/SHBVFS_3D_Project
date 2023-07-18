@@ -24,6 +24,7 @@ public class GridObjectUI : MonoBehaviour
 
     [SerializeField] private TMP_Text academyText;
     [SerializeField] private List<TMP_Text> apCostTextList;
+    public EnemyUI enemyUI;
     //[SerializeField] private TMP_Text ownerText;
     //[SerializeField] private TMP_Text landBuffText;
     //[SerializeField] private TMP_Text buildingText;
