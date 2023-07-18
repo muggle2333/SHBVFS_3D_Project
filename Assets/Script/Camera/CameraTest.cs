@@ -39,21 +39,16 @@ public class CameraTest : MonoBehaviour
 
         if (target)
         {
-            x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
-            y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
-
-            y = ClampAngle(y, yMinLimit, yMaxLimit);
-
-            var rotation = Quaternion.Euler(y, x, 0);
-            var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
-            target.rotation = rotation;
-            transform.rotation = rotation;
-            transform.position = position;
+            UpdateRotate();
         }
     }
 
     void LateUpdate()
     {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            FocusOnPlayer();
+        }
         DragRotation();
         DragMove();
         Scale();
@@ -71,16 +66,7 @@ public class CameraTest : MonoBehaviour
         {
             if (target)
             {
-                x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
-                y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
-                
-                y = ClampAngle(y, yMinLimit, yMaxLimit);
-
-                var rotation = Quaternion.Euler(y, x, 0);
-                var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
-                target.rotation = rotation;
-                transform.rotation = rotation;
-                transform.position = position;
+               UpdateRotate();
             }
         }
     }
@@ -89,11 +75,7 @@ public class CameraTest : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            float x = -Input.GetAxis("Mouse X") * moveSpeed.x * 0.02f;
-            float y = -Input.GetAxis("Mouse Y") * moveSpeed.y * 0.02f;
-            Vector3 pos = new Vector3(x, y, 0.0f);
-            transform.Translate(pos);
-            target.transform.Translate(pos);    
+            UpdateMove();
         }
     }
 
@@ -126,5 +108,34 @@ public class CameraTest : MonoBehaviour
             angle -= 360;
         }
         return Mathf.Clamp(angle, min, max);
+    }
+
+    private void UpdateRotate()
+    {
+        x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
+        y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
+
+        y = ClampAngle(y, yMinLimit, yMaxLimit);
+
+        var rotation = Quaternion.Euler(y, x, 0);
+        var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
+        target.rotation = rotation;
+        transform.rotation = rotation;
+        transform.position = position;
+    }
+
+    private void UpdateMove()
+    {
+        float xx = -Input.GetAxis("Mouse X") * moveSpeed.x * 0.02f;
+        float yy = -Input.GetAxis("Mouse Y") * moveSpeed.y * 0.02f;
+        Vector3 pos = new Vector3(xx, yy, 0.0f);
+        transform.Translate(pos);
+        target.transform.Translate(pos);
+    }
+
+    public void FocusOnPlayer()
+    {
+        target.position = GameplayManager.Instance.currentPlayer.gameObject.transform.position;
+        UpdateRotate();
     }
 }
