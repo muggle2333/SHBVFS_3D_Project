@@ -58,26 +58,29 @@ public class AttackStage : MonoBehaviour
             {
                 if (j == i) continue;
                 distance = PlayerManager.Instance.CheckDistance(playerList[i], playerList[j].currentGrid);
+                Debug.LogError(playerList[i] + " distance " + distance);
                 if (distance < minDistance && playerList[i].Range >= distance)
                 {
                     minDistance = distance;
                     targetIndex = j;
-                }
+                    if (targetIndex != i)
+                    {
+                        if (FindObjectOfType<NetworkManager>() == null)
+                        {
+                            playerList[i].AttackTarget = playerList[targetIndex];
+                            playerList[i].Attack();
+                            Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
+                        }
+                        else
+                        {
+                            PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
+                            Debug.LogError(playerList[i] + " attack Online" + playerList[targetIndex]);
+                        }
+                    }
             }
-            if (targetIndex != i)
-            {
-                if(FindObjectOfType<NetworkManager>()==null)
-                {
-                    playerList[i].AttackTarget = playerList[targetIndex];
-                    playerList[i].Attack();
-                    Debug.Log(playerList[i] + " attack " + playerList[targetIndex]);
-                }
-                else
-                {
-                    PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
-                }
-                
-                yield return new WaitForSecondsRealtime(1f);
+            //Debug.LogError("targetIndex = "+targetIndex);
+            //Debug.LogError("i = " + i); 
+            yield return new WaitForSecondsRealtime(1f);
             }
         }
         List<Player> dyingPlayers = new List<Player>();
