@@ -20,7 +20,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     private void Start()
     {
-        if(GetComponentInParent<Player>()!= GameplayManager.Instance.currentPlayer)
+        if(GetComponentInParent<Player>()== GameplayManager.Instance.currentPlayer)
         {
             playerText.text = "SELF";
         }
