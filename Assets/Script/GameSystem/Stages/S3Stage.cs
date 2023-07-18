@@ -9,6 +9,7 @@ public class S3Stage : MonoBehaviour
     private List<Player> playerList = new List<Player>();
     public List<int> redPlayerNeedsToEffect = new List<int>();
     public List<int> bluePlayerNeedsToEffect = new List<int>();
+    private int i;
     public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
     {
         Debug.LogError("S3");
@@ -25,7 +26,7 @@ public class S3Stage : MonoBehaviour
             if (playedCardListDict[GameplayManager.Instance.playerList[1]][i].effectStage == EffectStage.S3)
             {
                 bluePlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
-                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
+                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
             }
         }
         if (redPlayerNeedsToEffect.Count > 0)
@@ -48,18 +49,22 @@ public class S3Stage : MonoBehaviour
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
         while (playedCardDict.Count != 0)
         {
-            for (int i = 0; i < priorityList.Count; i++)
+            for (i = 0; i < priorityList.Count; i++)
             {
-                if (playedCardDict[priorityList[i]].Count == 0)
+                if (playedCardDict.ContainsKey(priorityList[i]))
                 {
-                    playedCardDict.Remove(priorityList[i]);
-                    break;
+                    if (playedCardDict[priorityList[i]].Count == 0)
+                    {
+                        playedCardDict.Remove(priorityList[i]);
+                        break;
+                    }
+                    yield return new WaitForSeconds(1);
+                    CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
+                    playedCardDict[priorityList[i]].RemoveAt(0);
                 }
-                yield return new WaitForSeconds(1);
-                CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
-                playedCardDict[priorityList[i]].RemoveAt(0);
             }
         }
+        i = 0;
         List<Player> dyingPlayers = new List<Player>();
         List<Player> alivePlayers = new List<Player>();
         for (int i = 0; i < playerList.Count; i++)
