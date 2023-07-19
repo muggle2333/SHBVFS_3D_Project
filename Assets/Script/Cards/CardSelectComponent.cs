@@ -325,6 +325,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         //seq.Join(transform.DOScale(1.5f, 0.4f));
         seq.AppendInterval(0.5f);
         seq.Append(transform.DOLocalMoveX(-800, 0.5f));
+        seq.Join(transform.DOLocalMoveY(500, 0.5f));
         seq.Join(transform.DOScale(0.05f, 0.5f));
         seq.AppendCallback(() => { this.gameObject.SetActive(false); });
     }
@@ -343,29 +344,34 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void CardTakeEffectAnimation()
     {
         Interactable = false;
-        this.gameObject.SetActive(true);
+        this.transform.localPosition = new Vector3(-800, 500, transform.localPosition.z);
+        //this.gameObject.SetActive(true);
         var seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveX(0, 0.4f));
+        seq.Join(transform.DOLocalMoveY(0, 0.4f));
         seq.Join(transform.DOScale(1.5f, 0.4f));
-        seq.AppendInterval(0.5f);
-        seq.Append(transform.DOLocalMoveX(-200, 0.4f));
-        seq.Join(transform.DOScale(1f, 0.4f));
-        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { this.Info.SetActive(true); });
+        seq.AppendInterval(1f);
+        //seq.Append(transform.DOLocalMoveX(-200, 0.4f));
+        //seq.Join(transform.DOScale(1f, 0.4f));
+        //seq.AppendInterval(0.5f);
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 
     public void EnemyCardTakeEffectAnimation()
     {
         Interactable = false;
-        this.transform.localPosition = new Vector3(800, transform.localPosition.y, transform.localPosition.z);
-        this.gameObject.SetActive(true);
+        this.transform.localPosition = new Vector3(800, 500, transform.localPosition.z);
+        //this.gameObject.SetActive(true);
         var seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveX(0, 0.4f));
+        seq.Join(transform.DOLocalMoveY(0, 0.4f));
         seq.Join(transform.DOScale(1.5f, 0.4f));
-        seq.AppendInterval(0.5f);
-        seq.Append(transform.DOLocalMoveX(-200, 0.4f));
-        seq.Join(transform.DOScale(1f, 0.4f));
-        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { this.Info.SetActive(true); });
+        seq.AppendInterval(1f);
+        //seq.Append(transform.DOLocalMoveX(-200, 0.4f));
+        //seq.Join(transform.DOScale(1f, 0.4f));
+        //seq.AppendInterval(0.5f);
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 }

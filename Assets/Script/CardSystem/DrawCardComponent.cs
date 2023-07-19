@@ -75,7 +75,6 @@ public class DrawCardComponent :NetworkBehaviour
 
     public void DrawBasicCard(Player player)
     {
-        
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
         AllCardCountPlusServerRpc(0,AcademyType.Null);

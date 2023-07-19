@@ -109,6 +109,8 @@ public class DiscardStage : NetworkBehaviour
             PlayerManager.Instance.cardSelectManager.SelectCount[player] = 0;
             PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         }
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, false);
     }
 
     [ClientRpc]

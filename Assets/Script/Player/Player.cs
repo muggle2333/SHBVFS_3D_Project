@@ -27,6 +27,8 @@ public class Player : Character
     public int MaxCardCount;
     public int freeMoveCount;
 
+    public int gridAR;
+    public int gridDF;
     public int cardAR;
     //public NetworkVariable<int> cardARNetwork = new NetworkVariable<int>(0);
     public int cardAD;
@@ -95,7 +97,19 @@ public class Player : Character
     }
     void Update()
     {
-
+        if(currentGrid.landType == LandType.Mountain)
+        {
+            gridAR = 1;
+        }
+        else if(currentGrid.landType == LandType.Forest)
+        {
+            gridDF = 1;
+        }
+        else if(currentGrid.landType == LandType.Lake || currentGrid.landType == LandType.Plain)
+        {
+            gridAR = 0;
+            gridDF = 0;
+        }
         MaxActionPoint = ActionPointPerRound * 2;
         MaxCardCount = HP;
         if(Defence < 0)
