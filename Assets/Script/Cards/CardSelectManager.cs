@@ -68,6 +68,7 @@ public class CardSelectManager : MonoBehaviour
         GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] = 0;
         maxSelected[GameplayManager.Instance.currentPlayer] = 1;
         OnDiscardCard?.Invoke(this,EventArgs.Empty);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
     }
     public void PlayCards(Player player)
     {
@@ -76,15 +77,14 @@ public class CardSelectManager : MonoBehaviour
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
                 //Debug.Log("Card " + cardsList[i].name + " is played.");
-
                 if (CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.Every)
                 {
-                    CardManager.Instance.ImmediateCardTakeEffect(player, CardManager.Instance.playerHandCardDict[player][i]);
+                    CardManager.Instance.ImmediateCardTakeEffectServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
                 }
                 else if (CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S1)
                 {
-                    CardManager.Instance.S1CardTakeEffect(player, CardManager.Instance.playerHandCardDict[player][i]);
+                    CardManager.Instance.S1CardTakeEffectServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
                 }
                 else if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S2 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S3 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S4)
@@ -101,6 +101,7 @@ public class CardSelectManager : MonoBehaviour
             }
         }
         UpdateCardPos(player);
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
     }
 
     public void CancelCards(Player player)

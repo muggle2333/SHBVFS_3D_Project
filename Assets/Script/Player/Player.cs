@@ -27,14 +27,23 @@ public class Player : Character
     public int MaxCardCount;
     public int freeMoveCount;
 
+    public int gridAR;
+    public int gridDF;
     public int cardAR;
+    //public NetworkVariable<int> cardARNetwork = new NetworkVariable<int>(0);
     public int cardAD;
+    //public NetworkVariable<int> cardADNetwork = new NetworkVariable<int>(0);
     public int cardDF;
+    //public NetworkVariable<int> cardDFNetwork = new NetworkVariable<int>(0);
 
     public int baseMaxHP = 3;
+    //public NetworkVariable<int> baseMaxHPNetwork = new NetworkVariable<int>(3);
     public int baseDefense = 0;
+    //public NetworkVariable<int> baseDefenseNetwork = new NetworkVariable<int>(0);
     public int baseAttackDamage = 1;
+    //public NetworkVariable<int> baseAttackDamageNetwork = new NetworkVariable<int>(1);
     public int baseRange = 1;
+    //public NetworkVariable<int> baseRangeNetwork = new NetworkVariable<int>(1);
     public int baseActionPointPerRound = 3;
 
     public int Priority;
@@ -88,7 +97,19 @@ public class Player : Character
     }
     void Update()
     {
-
+        if(currentGrid.landType == LandType.Mountain)
+        {
+            gridAR = 1;
+        }
+        else if(currentGrid.landType == LandType.Forest)
+        {
+            gridDF = 1;
+        }
+        else if(currentGrid.landType == LandType.Lake || currentGrid.landType == LandType.Plain)
+        {
+            gridAR = 0;
+            gridDF = 0;
+        }
         MaxActionPoint = ActionPointPerRound * 2;
         MaxCardCount = HP;
         if(Defence < 0)
