@@ -49,7 +49,7 @@ public class CameraTest : MonoBehaviour
     {
         if (isTargetMoving)
         {
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 24, 60 * Time.deltaTime);
+            //Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 24, 60 * Time.deltaTime);
             UpdateRotate();
             return;
         }
@@ -120,8 +120,11 @@ public class CameraTest : MonoBehaviour
 
     private void UpdateRotate()
     {
-        x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
-        y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
+        if(!isTargetMoving)
+        {
+            x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
+            y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
+        }
 
         y = ClampAngle(y, yMinLimit, yMaxLimit);
 
@@ -143,9 +146,10 @@ public class CameraTest : MonoBehaviour
 
     public void FocusOnPlayer()
     {
+        DOTween.To(() => Camera.main.fieldOfView, x => Camera.main.fieldOfView = x, 24, 0.8f);
         var targetPosition = GameplayManager.Instance.currentPlayer.gameObject.transform.position;
         target.DOMove(targetPosition, 1);
-        isTargetMoving= true;
+        isTargetMoving = true;
         Invoke("MovingStop", 1f);
 
         //target.position = GameplayManager.Instance.currentPlayer.gameObject.transform.position;
@@ -154,6 +158,6 @@ public class CameraTest : MonoBehaviour
 
     private void MovingStop()
     {
-        isTargetMoving= false;
+        isTargetMoving = false;
     }
 }
