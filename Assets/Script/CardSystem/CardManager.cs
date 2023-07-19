@@ -65,25 +65,33 @@ public class CardManager : NetworkBehaviour
         playerDeck = GetComponentInChildren<PlayerDeck>();
         playerDeck.InitializePlayerDeck();
     }
-    public void ImmediateCardTakeEffect(Player player, Card card)
+    [ServerRpc(RequireOwnership = false)]
+    public void ImmediateCardTakeEffectServerRpc(PlayerId playerId, int cardId)
     {
-        if (card.cardFounction != null)
-        {
-            Instantiate(card.cardFounction);
-        }
-        calculating.DelataCardData(card.cardSetting, player);
-        calculating.CalculatPlayerBaseData(player);
-        calculating.CalaulatPlayerData(player);
+        CalculateClientRpc(playerId, cardId);
     }
-    public void S1CardTakeEffect(Player player,Card card)
+
+    [ServerRpc(RequireOwnership = false)]
+    public void S1CardTakeEffectServerRpc(PlayerId playerId, int cardId)
     {
-        if (card.cardFounction != null)
+        CalculateClientRpc(playerId, cardId);
+    }
+    [ClientRpc]
+    public void CalculateClientRpc(PlayerId playerId, int cardId)
+    {
+        for (int i = 0; i < CardDataBase.Instance.AllCardList.Count; i++)
         {
-            Instantiate(card.cardFounction);
+            if (cardId == CardDataBase.Instance.AllCardList[i].cardId)
+            {
+                if (CardDataBase.Instance.AllCardList[i].cardFounction != null)
+                {
+                    Instantiate(CardDataBase.Instance.AllCardList[i].cardFounction);
+                }
+                calculating.DelataCardData(CardDataBase.Instance.AllCardList[i], GameplayManager.Instance.playerList[(int)playerId]);
+                calculating.CalculatPlayerBaseData(GameplayManager.Instance.playerList[(int)playerId]);
+                calculating.CalaulatPlayerData(GameplayManager.Instance.playerList[(int)playerId]);
+            }
         }
-        calculating.DelataCardData(card.cardSetting, player);
-        calculating.CalculatPlayerBaseData(player);
-        calculating.CalaulatPlayerData(player);
     }
     [ClientRpc]
     public void CardTakeEffectClientRpc(PlayerId playerId,int cardId)

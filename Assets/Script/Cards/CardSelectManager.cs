@@ -79,12 +79,12 @@ public class CardSelectManager : MonoBehaviour
 
                 if (CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.Every)
                 {
-                    CardManager.Instance.ImmediateCardTakeEffect(player, CardManager.Instance.playerHandCardDict[player][i]);
+                    CardManager.Instance.ImmediateCardTakeEffectServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
                 }
                 else if (CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S1)
                 {
-                    CardManager.Instance.S1CardTakeEffect(player, CardManager.Instance.playerHandCardDict[player][i]);
+                    CardManager.Instance.S1CardTakeEffectServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
                 }
                 else if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S2 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S3 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S4)

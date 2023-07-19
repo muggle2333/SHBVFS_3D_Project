@@ -28,13 +28,20 @@ public class Player : Character
     public int freeMoveCount;
 
     public int cardAR;
+    //public NetworkVariable<int> cardARNetwork = new NetworkVariable<int>(0);
     public int cardAD;
+    //public NetworkVariable<int> cardADNetwork = new NetworkVariable<int>(0);
     public int cardDF;
+    //public NetworkVariable<int> cardDFNetwork = new NetworkVariable<int>(0);
 
     public int baseMaxHP = 3;
+    //public NetworkVariable<int> baseMaxHPNetwork = new NetworkVariable<int>(3);
     public int baseDefense = 0;
+    //public NetworkVariable<int> baseDefenseNetwork = new NetworkVariable<int>(0);
     public int baseAttackDamage = 1;
+    //public NetworkVariable<int> baseAttackDamageNetwork = new NetworkVariable<int>(1);
     public int baseRange = 1;
+    //public NetworkVariable<int> baseRangeNetwork = new NetworkVariable<int>(1);
     public int baseActionPointPerRound = 3;
 
     public int Priority;

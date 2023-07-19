@@ -100,10 +100,8 @@ public class S4Stage : MonoBehaviour
                 GameplayManager.Instance.LeaveDyingStageClientRpc();
             }
         }
-        Calculating.Instance.CardDataInitializeClientRpc(playerList[0]);
-        Calculating.Instance.CardDataInitializeClientRpc(playerList[1]);
+        
         TurnbasedSystem.Instance.CompleteStage(GameStage.S4);
-
     }
     private List<Player> GetDyingPlayer()
     {

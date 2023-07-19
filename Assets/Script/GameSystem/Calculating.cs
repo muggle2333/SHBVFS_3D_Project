@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Calculating : MonoBehaviour
+public class Calculating : NetworkBehaviour
 {
     public int APCost;
 
@@ -21,11 +21,6 @@ public class Calculating : MonoBehaviour
     public int totalAcademyDefense;
     public int totalAcademyAPPerRound;
 
-
-    public int cardAttackDamage;
-    public int cardDefense;
-    public int cardAttackRange;
-
     public int cardDamage;
     public int cardAP;
     public int cardHP;
@@ -34,6 +29,10 @@ public class Calculating : MonoBehaviour
     public int totalCardAttackDamage;
     public int totalCardDefense;
     public int totalCardAttackRange;
+
+    public Dictionary<Player, int> totalCardAttackDamageDic = new Dictionary<Player, int>();
+    public Dictionary<Player, int> totalCardDefenseDic = new Dictionary<Player, int>();
+    public Dictionary<Player, int> totalCardAttackRangeDic = new Dictionary<Player, int>();
 
     public int[] academyEffectNum = new int[6];
     public Dictionary<Player, int[]> totalAcademyEffectNum = new Dictionary<Player, int[]>();
@@ -58,24 +57,33 @@ public class Calculating : MonoBehaviour
     void Start()
     {
         totalAcademyEffectNum.Clear();
+        totalCardAttackDamageDic.Clear();
+        totalCardDefenseDic.Clear();
+        totalCardAttackRangeDic.Clear();
         playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();
         Invoke("AddTotalAcademyEffectNum", 3);
         
     }
     public void AddTotalAcademyEffectNum()
     {
+        totalCardAttackDamageDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalCardAttackDamageDic.Add(GameplayManager.Instance.playerList[1], 0);
+        totalCardDefenseDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalCardDefenseDic.Add(GameplayManager.Instance.playerList[1], 0);
+        totalCardAttackRangeDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalCardAttackRangeDic.Add(GameplayManager.Instance.playerList[1], 0);
         totalAcademyEffectNum.Add(GameplayManager.Instance.playerList[0], new int[6]);
         totalAcademyEffectNum.Add(GameplayManager.Instance.playerList[1], new int[6]);
     }
     public void DelataCardData (CardSetting card,Player player)
     {
-        totalCardAttackRange += card.playerDataEffect.visionRange;
-        totalCardDefense += card.playerDataEffect.defence;
-        totalCardAttackDamage += card.playerDataEffect.attack;
+        totalCardAttackRangeDic[player] += card.playerDataEffect.visionRange;
+        totalCardDefenseDic[player] += card.playerDataEffect.defence;
+        totalCardAttackDamageDic[player] += card.playerDataEffect.attack;
 
-        player.cardAD = totalCardAttackDamage;
-        player.cardAR = totalCardAttackRange;
-        player.cardDF = totalCardDefense;
+        player.cardAD = totalCardAttackDamageDic[player];
+        player.cardAR = totalCardAttackRangeDic[player];
+        player.cardDF = totalCardDefenseDic[player];
 
         academyEffectNum = card.academyEffectNum;
         for(int i = 0; i < 6; i++)
@@ -93,29 +101,30 @@ public class Calculating : MonoBehaviour
 
     }
     [ClientRpc]    
-    
-    public void CardDataInitializeClientRpc(Player player)
+    public void CardDataInitializeClientRpc(PlayerId playerId)
     {
-        cardAttackDamage = 0;
-        cardAttackRange = 0;
-        cardDefense = 0;
-
         cardDamage = 0;
         cardAP = 0;
         cardHP = 0;
         cardFreeMoveNum = 0;
         for (int i = 0; i < 6; i++)
         {
-            player.academyOwnedPoint[i] -= totalAcademyEffectNum[player][i];
+            GameplayManager.Instance.playerList[(int)playerId].academyOwnedPoint[i] -= totalAcademyEffectNum[GameplayManager.Instance.playerList[(int)playerId]][i];
             
         }
+        GameplayManager.Instance.playerList[(int)playerId].cardAD = 0;
+        GameplayManager.Instance.playerList[(int)playerId].cardAR = 0;
+        GameplayManager.Instance.playerList[(int)playerId].cardDF = 0;
         for (int i = 0; i < 6 ; i++)
         {
             academyEffectNum[i] = 0;
-            totalAcademyEffectNum[player][i] = 0;
+            totalAcademyEffectNum[GameplayManager.Instance.playerList[(int)playerId]][i] = 0;
+            totalCardAttackRangeDic[GameplayManager.Instance.playerList[(int)playerId]] = 0;
+            totalCardDefenseDic[GameplayManager.Instance.playerList[(int)playerId]] = 0;
+            totalCardAttackDamageDic[GameplayManager.Instance.playerList[(int)playerId]] = 0;
         }
 
-        playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
+        playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(GameplayManager.Instance.playerList[(int)playerId]);
     }
     public void AcademyBuff(Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict,Player player)
     {
@@ -156,9 +165,9 @@ public class Calculating : MonoBehaviour
         //FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuff(player);
 
         player.MaxHP = player.baseMaxHP + totalAcademyMaxHP;
-        player.AttackDamage = player.baseAttackDamage + totalAcademyAttackDamage + totalCardAttackDamage;
-        player.Range = player.baseRange + totalAcademyAttackRange + totalCardAttackRange;
-        player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefense;
+        player.AttackDamage = player.baseAttackDamage + totalAcademyAttackDamage + totalCardAttackDamageDic[player];
+        player.Range = player.baseRange + totalAcademyAttackRange + totalCardAttackRangeDic[player];
+        player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefenseDic[player];
         player.ActionPointPerRound = player.baseActionPointPerRound + totalAcademyAPPerRound;
     }
 

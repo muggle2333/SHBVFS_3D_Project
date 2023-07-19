@@ -13,6 +13,7 @@ public class S2Stage : MonoBehaviour
     private int i;
     public void StartStage(Dictionary<Player,List<CardSetting>> playedCardListDict)
     {
+
         playedCardDict.Clear();
         Debug.LogError("S2");
         PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
@@ -58,6 +59,8 @@ public class S2Stage : MonoBehaviour
         }
         playerList = new List<Player>();
         playerList = GameplayManager.Instance.GetPlayer();
+        Calculating.Instance.CardDataInitializeClientRpc(playerList[0].Id);
+        Calculating.Instance.CardDataInitializeClientRpc(playerList[1].Id);
         StartCoroutine("S2CardTakeEffect");
 
     }
