@@ -13,6 +13,7 @@ public class S2Stage : MonoBehaviour
     private int i;
     public void StartStage(Dictionary<Player,List<CardSetting>> playedCardListDict)
     {
+        playedCardDict.Clear();
         Debug.LogError("S2");
         PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
         if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] > 0)

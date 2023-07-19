@@ -9,6 +9,7 @@ public class DiscardStage : NetworkBehaviour
     [ClientRpc]
     public void StartStageClientRpc()
     {
+        discardCount.Clear();
         //Debug.Log("Now enter discard stage");
         //GameplayManager.Instance.gameplayUI.playCard.gameObject.SetActive(false);
         //GameplayManager.Instance.gameplayUI.cancel.gameObject.SetActive(false);

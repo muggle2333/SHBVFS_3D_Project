@@ -17,7 +17,7 @@ public class PlayerDeck : NetworkBehaviour
     }
     void Start()
     {
-
+        AllCardDeck.Clear();
     }
     public void InitializePlayerDeck()
     {
