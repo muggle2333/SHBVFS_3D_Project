@@ -12,6 +12,7 @@ public class S3Stage : MonoBehaviour
     private int i;
     public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
     {
+        playedCardDict.Clear();
         Debug.LogError("S3");
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {

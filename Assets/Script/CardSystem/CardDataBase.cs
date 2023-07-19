@@ -11,6 +11,8 @@ public class CardDataBase : MonoBehaviour
     public List<CardSetting> AllCardList = new List<CardSetting>();
     private void Awake()
     {
+        AllCardListDic.Clear();
+        AllTopCardListDic.Clear();
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);

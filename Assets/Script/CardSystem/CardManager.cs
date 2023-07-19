@@ -26,6 +26,8 @@ public class CardManager : NetworkBehaviour
     }
     public void Awake()
     {
+        playerHandCardDict.Clear();
+        playedCardDict.Clear();
         redPlayerPlayedCards = new NetworkList<int>();
         bluePlayerPlayedCards = new NetworkList<int>();
         if (Instance != null && Instance != this)

@@ -57,6 +57,7 @@ public class Calculating : MonoBehaviour
     }
     void Start()
     {
+        totalAcademyEffectNum.Clear();
         playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();
         Invoke("AddTotalAcademyEffectNum", 3);
         
