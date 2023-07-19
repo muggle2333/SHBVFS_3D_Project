@@ -14,7 +14,7 @@ public class Card:MonoBehaviour
     public int cardId;
     public Text cardName;
     public Text description;
-    public Sprite headPicture;
+    public Image headPicture;
     public AcademyType academyType;
     public CardCondition cardCondition;
     public EffectStage effectStage;
@@ -43,8 +43,8 @@ public class Card:MonoBehaviour
         this.cardSetting = cardSetting;
         cardId = cardSetting.cardId;
         cardName.text = cardSetting.cardName;
+        headPicture.sprite= cardSetting.headPicture;
         description.text = cardSetting.description;
-        headPicture = cardSetting.headPicture;
         academyType = cardSetting.academyType;
         cardCondition = cardSetting.cardCondition;
         effectStage = cardSetting.effectStage;

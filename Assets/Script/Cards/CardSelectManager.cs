@@ -135,6 +135,10 @@ public class CardSelectManager : MonoBehaviour
         }
     }
 
+    public bool CheckDiscarded(Player player)
+    {
+        return true;
+    }
     //public void Retract(Player player)
     //{
     //    CancelCards(player);

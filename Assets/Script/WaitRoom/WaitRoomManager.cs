@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class WaitRoomManager : NetworkBehaviour
 {
@@ -31,6 +32,13 @@ public class WaitRoomManager : NetworkBehaviour
         if(NetworkManager.Singleton.IsHost)
         {
             //SetPlayerReady();
+        }
+    }
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Loader.Load(Loader.Scene.MainMenuScene);
         }
     }
     public void SetPlayerReady()

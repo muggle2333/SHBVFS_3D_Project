@@ -15,7 +15,7 @@ public class S2Stage : MonoBehaviour
     {
         Debug.LogError("S2");
         PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
-        if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] > 0)
+/*        if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] > 0)
         {
             for (int i = 0; i < GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer]; i++)
             {
@@ -28,7 +28,7 @@ public class S2Stage : MonoBehaviour
             }
             PlayerManager.Instance.cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] = 0;
             PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.currentPlayer);
-        }
+        }*/
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {
             if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S2)

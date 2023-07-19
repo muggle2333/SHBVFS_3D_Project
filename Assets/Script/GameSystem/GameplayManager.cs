@@ -153,7 +153,7 @@ public class GameplayManager : NetworkBehaviour
     public void StartDiscardStage()
     {
         ResetControlStageClientRpc();
-        discardStage.StartStageClientRpc();
+        discardStage.StartStage();
     }
     [ClientRpc]
     public void ResetControlStageClientRpc()

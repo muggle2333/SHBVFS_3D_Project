@@ -15,7 +15,7 @@ MonoBehaviour:
   cardId: 3
   cardName: Damage+1
   description: Damage+1, increase 1 damage for your next damage
-  headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  headPicture: {fileID: 21300000, guid: ddde7583bfa83494cbbcde5089cda27e, type: 3}
   academyType: 0
   cardCondition: {fileID: 0}
   effectStage: 1
