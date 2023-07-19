@@ -15,7 +15,7 @@ MonoBehaviour:
   cardId: 9
   cardName: Co advance and retreat
   description: All players lose 1 HP or heal 1 HP
-  headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  headPicture: {fileID: 21300000, guid: 7e0eb7abda823514f9ff0b2f52ccf16e, type: 3}
   academyType: 1
   cardCondition: {fileID: 0}
   effectStage: 2
