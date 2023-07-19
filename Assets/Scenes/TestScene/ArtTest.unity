@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 1ca9c94fbec8bb3419362aa460c4a6c8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.422887, g: 0.39402413, b: 0.27326936, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -251,6 +251,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &3597680
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +561,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &28175806
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,6 +832,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &37225753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1248,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &64707446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,6 +1871,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &97820453
 GameObject:
   m_ObjectHideFlags: 0
@@ -2166,6 +2236,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &110727969
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,6 +2546,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &130367637
 GameObject:
   m_ObjectHideFlags: 0
@@ -3038,6 +3136,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &166057749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,6 +3578,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &199569601
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,6 +4812,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &261929076
 GameObject:
   m_ObjectHideFlags: 0
@@ -5004,6 +5144,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &292790174
 GameObject:
   m_ObjectHideFlags: 0
@@ -5781,10 +5935,10 @@ MonoBehaviour:
   occupyBtn: {fileID: 1988389201}
   gachaBtn: {fileID: 130367639}
   buildBtn: {fileID: 1842135075}
+  searchBtn: {fileID: 0}
   academyText: {fileID: 853051519}
-  ownerText: {fileID: 490921769}
-  landBuffText: {fileID: 292919467}
-  buildingText: {fileID: 1271881657}
+  apCostTextList: []
+  enemyUI: {fileID: 0}
 --- !u!1 &336776189
 GameObject:
   m_ObjectHideFlags: 0
@@ -6629,6 +6783,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &388072370
 GameObject:
   m_ObjectHideFlags: 0
@@ -6757,6 +6925,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &404142904
 GameObject:
   m_ObjectHideFlags: 0
@@ -6802,6 +6984,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &405298832
 GameObject:
   m_ObjectHideFlags: 0
@@ -7015,6 +7211,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &411518705
 GameObject:
   m_ObjectHideFlags: 0
@@ -7192,7 +7402,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &412754332
 MonoBehaviour:
@@ -7368,6 +7578,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &427152068
 GameObject:
   m_ObjectHideFlags: 0
@@ -7606,6 +7830,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &441609779
 GameObject:
   m_ObjectHideFlags: 0
@@ -8091,7 +8329,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d116163b3e4999b4d80fbc2e8648294b, type: 2}
+  - {fileID: 2100000, guid: 97e5b8c5a62996346b98b9e6da2456e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8385,6 +8623,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &484099620
 GameObject:
   m_ObjectHideFlags: 0
@@ -8860,6 +9112,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &503695736
 GameObject:
   m_ObjectHideFlags: 0
@@ -9095,6 +9361,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &511622082
 GameObject:
   m_ObjectHideFlags: 0
@@ -9224,6 +9504,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &519254141
 GameObject:
   m_ObjectHideFlags: 0
@@ -9965,6 +10259,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &571220480
 GameObject:
   m_ObjectHideFlags: 0
@@ -10094,6 +10402,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &583665246
 GameObject:
   m_ObjectHideFlags: 0
@@ -10139,6 +10461,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &589722079
 GameObject:
   m_ObjectHideFlags: 0
@@ -11062,6 +11398,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &649309240
 GameObject:
   m_ObjectHideFlags: 0
@@ -11384,6 +11734,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &670235720
 GameObject:
   m_ObjectHideFlags: 0
@@ -11513,6 +11877,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &688345836
 GameObject:
   m_ObjectHideFlags: 0
@@ -11558,6 +11936,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &696728196
 GameObject:
   m_ObjectHideFlags: 0
@@ -11687,6 +12079,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &718827648
 GameObject:
   m_ObjectHideFlags: 0
@@ -11732,6 +12138,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &725111386
 GameObject:
   m_ObjectHideFlags: 0
@@ -11777,6 +12197,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &727334246
 GameObject:
   m_ObjectHideFlags: 0
@@ -11822,6 +12256,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &729909407
 GameObject:
   m_ObjectHideFlags: 0
@@ -12551,6 +12999,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &751827536
 GameObject:
   m_ObjectHideFlags: 0
@@ -13183,6 +13645,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &779336936
 GameObject:
   m_ObjectHideFlags: 0
@@ -13985,7 +14461,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840537008
 GameObject:
@@ -14032,6 +14508,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &844532643
 GameObject:
   m_ObjectHideFlags: 0
@@ -14161,6 +14651,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &852079405
 GameObject:
   m_ObjectHideFlags: 0
@@ -14509,6 +15013,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &860055080
 GameObject:
   m_ObjectHideFlags: 0
@@ -14779,7 +15297,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &873367690
 GameObject:
@@ -14994,6 +15512,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &887225744
 GameObject:
   m_ObjectHideFlags: 0
@@ -16786,7 +17318,7 @@ Transform:
   m_Children:
   - {fileID: 1063212850}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &962322099
 MonoBehaviour:
@@ -16800,6 +17332,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6568540d0d0c57b41a68a9b8fcf1a06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vfx_Player_Point: {fileID: 0}
+  pathLine: {fileID: 0}
+  attackLine: {fileID: 0}
+  playerText: {fileID: 0}
+  hpText: {fileID: 0}
 --- !u!1 &966694512
 GameObject:
   m_ObjectHideFlags: 0
@@ -16929,6 +17466,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &977014630
 GameObject:
   m_ObjectHideFlags: 0
@@ -17163,6 +17714,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &996772757
 GameObject:
   m_ObjectHideFlags: 0
@@ -17276,13 +17841,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f25b7964832da41bcbfee15f5d6fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  academyText: {fileID: 0}
-  buildingBlue: {fileID: 0}
-  buildingBlueS1: {fileID: 0}
-  buildingContainer: {fileID: 0}
-  buildingContainerS1: {fileID: 0}
-  vfxGridHightlight: {fileID: 0}
-  vfxContainer: {fileID: 0}
   levelIndex: 1
   grid:
     width: 0
@@ -17302,7 +17860,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1006537563
 GameObject:
@@ -17747,6 +18305,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1034297720
 GameObject:
   m_ObjectHideFlags: 0
@@ -18200,6 +18772,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1054158849
 GameObject:
   m_ObjectHideFlags: 0
@@ -18245,6 +18831,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1058729701
 GameObject:
   m_ObjectHideFlags: 0
@@ -18356,7 +18956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063212849}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -1.46, y: 1, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -18920,6 +19520,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1093101512
 GameObject:
   m_ObjectHideFlags: 0
@@ -18965,6 +19579,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1094184423
 GameObject:
   m_ObjectHideFlags: 0
@@ -19133,67 +19761,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094768416}
   m_Mesh: {fileID: -2077042420276276771, guid: 10a15d905600bf54eb46ce63d89ad392, type: 3}
---- !u!1001 &1095252705
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2533344815156034869, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_Name
-      value: LandObject_Alternate_Plain
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 14.104407
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.9503684
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7291563693805962538, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7dcb476fb69a1f949a49946a69cbabd0, type: 3}
 --- !u!1 &1098848740
 GameObject:
   m_ObjectHideFlags: 0
@@ -19322,6 +19889,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1109625188
 GameObject:
   m_ObjectHideFlags: 0
@@ -19571,7 +20152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -262.027, y: -357.168, z: -177.136}
 --- !u!1 &1130771855
 GameObject:
@@ -19859,6 +20440,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1149073683
 GameObject:
   m_ObjectHideFlags: 0
@@ -19954,7 +20549,7 @@ RectTransform:
   m_Children:
   - {fileID: 330505427}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -20115,6 +20710,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1156306697
 GameObject:
   m_ObjectHideFlags: 0
@@ -20981,6 +21590,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1214303355
 GameObject:
   m_ObjectHideFlags: 0
@@ -21109,6 +21732,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1228534143
 GameObject:
   m_ObjectHideFlags: 0
@@ -21405,6 +22042,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1258086616
 GameObject:
   m_ObjectHideFlags: 0
@@ -21450,6 +22101,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1259758989
 GameObject:
   m_ObjectHideFlags: 0
@@ -21823,6 +22488,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1288558317
 GameObject:
   m_ObjectHideFlags: 0
@@ -21868,6 +22547,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1289722571
 GameObject:
   m_ObjectHideFlags: 0
@@ -21997,6 +22690,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1297871943
 GameObject:
   m_ObjectHideFlags: 0
@@ -22026,6 +22733,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe564b87c9a65e43a174ae8b659de0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player0LandCount: 0
+  player1LandCount: 0
+  dyingTimer: 10
   cardSelectManager: {fileID: 0}
 --- !u!4 &1297871945
 Transform:
@@ -22040,7 +22750,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1300800973
 GameObject:
@@ -22087,6 +22797,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1307500154
 GameObject:
   m_ObjectHideFlags: 0
@@ -22580,6 +23304,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1349786925
 GameObject:
   m_ObjectHideFlags: 0
@@ -22656,7 +23394,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d116163b3e4999b4d80fbc2e8648294b, type: 2}
+  - {fileID: 2100000, guid: 97e5b8c5a62996346b98b9e6da2456e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22731,6 +23469,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1362158488
 GameObject:
   m_ObjectHideFlags: 0
@@ -22807,7 +23559,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d116163b3e4999b4d80fbc2e8648294b, type: 2}
+  - {fileID: 2100000, guid: 97e5b8c5a62996346b98b9e6da2456e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22882,6 +23634,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1386224144
 GameObject:
   m_ObjectHideFlags: 0
@@ -22927,6 +23693,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1398542592
 GameObject:
   m_ObjectHideFlags: 0
@@ -23579,6 +24359,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1426128758
 GameObject:
   m_ObjectHideFlags: 0
@@ -23708,6 +24502,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1428104658
 GameObject:
   m_ObjectHideFlags: 0
@@ -24216,6 +25024,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1469386795
 GameObject:
   m_ObjectHideFlags: 0
@@ -25385,6 +26207,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1534679779
 GameObject:
   m_ObjectHideFlags: 0
@@ -25430,6 +26266,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1542602218
 GameObject:
   m_ObjectHideFlags: 0
@@ -25855,6 +26705,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1562006805
 GameObject:
   m_ObjectHideFlags: 0
@@ -26622,6 +27486,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1630292473
 GameObject:
   m_ObjectHideFlags: 0
@@ -26879,6 +27757,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1648244655
 GameObject:
   m_ObjectHideFlags: 0
@@ -26924,6 +27816,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1650376705
 GameObject:
   m_ObjectHideFlags: 0
@@ -26969,6 +27875,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1659357045
 GameObject:
   m_ObjectHideFlags: 0
@@ -27182,6 +28102,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1665037000
 GameObject:
   m_ObjectHideFlags: 0
@@ -27310,6 +28244,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1674202540
 GameObject:
   m_ObjectHideFlags: 0
@@ -27544,6 +28492,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1686939936
 GameObject:
   m_ObjectHideFlags: 0
@@ -27673,6 +28635,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1692825683
 GameObject:
   m_ObjectHideFlags: 0
@@ -28350,6 +29326,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1726206553
 GameObject:
   m_ObjectHideFlags: 0
@@ -28426,7 +29416,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d116163b3e4999b4d80fbc2e8648294b, type: 2}
+  - {fileID: 2100000, guid: 97e5b8c5a62996346b98b9e6da2456e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29195,6 +30185,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1765810820
 GameObject:
   m_ObjectHideFlags: 0
@@ -29324,6 +30328,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1785889744
 GameObject:
   m_ObjectHideFlags: 0
@@ -29610,6 +30628,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1811372846
 GameObject:
   m_ObjectHideFlags: 0
@@ -30011,6 +31043,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1834858966
 GameObject:
   m_ObjectHideFlags: 0
@@ -30140,6 +31186,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1840257673
 GameObject:
   m_ObjectHideFlags: 0
@@ -30291,6 +31351,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1842135073
 GameObject:
   m_ObjectHideFlags: 0
@@ -30564,6 +31638,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1852281840
 GameObject:
   m_ObjectHideFlags: 0
@@ -31013,6 +32101,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1871463840
 GameObject:
   m_ObjectHideFlags: 0
@@ -31164,6 +32266,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1882060470
 GameObject:
   m_ObjectHideFlags: 0
@@ -31648,6 +32764,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1912041976
 GameObject:
   m_ObjectHideFlags: 0
@@ -32049,6 +33179,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1929205356
 GameObject:
   m_ObjectHideFlags: 0
@@ -32450,7 +33594,7 @@ Transform:
   - {fileID: 1671765977}
   - {fileID: 404142905}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1944203908
 GameObject:
@@ -32497,6 +33641,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1948795645
 GameObject:
   m_ObjectHideFlags: 0
@@ -32986,6 +34144,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1981326964
 GameObject:
   m_ObjectHideFlags: 0
@@ -33114,6 +34286,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &1988389199
 GameObject:
   m_ObjectHideFlags: 0
@@ -33281,6 +34467,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2005996439
 GameObject:
   m_ObjectHideFlags: 0
@@ -33326,6 +34526,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2016332669
 GameObject:
   m_ObjectHideFlags: 0
@@ -33402,7 +34616,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d116163b3e4999b4d80fbc2e8648294b, type: 2}
+  - {fileID: 2100000, guid: 97e5b8c5a62996346b98b9e6da2456e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33583,6 +34797,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2032492876
 GameObject:
   m_ObjectHideFlags: 0
@@ -33628,6 +34856,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2034278428
 GameObject:
   m_ObjectHideFlags: 0
@@ -33673,6 +34915,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2035756990
 GameObject:
   m_ObjectHideFlags: 0
@@ -34527,6 +35783,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2074443503
 GameObject:
   m_ObjectHideFlags: 0
@@ -34572,6 +35842,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2079731554
 GameObject:
   m_ObjectHideFlags: 0
@@ -35355,6 +36639,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2108457155
 GameObject:
   m_ObjectHideFlags: 0
@@ -35484,6 +36782,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2116071348
 GameObject:
   m_ObjectHideFlags: 0
@@ -35575,7 +36887,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d116163b3e4999b4d80fbc2e8648294b, type: 2}
+  - {fileID: 2100000, guid: 97e5b8c5a62996346b98b9e6da2456e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -35734,6 +37046,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2132771736
 GameObject:
   m_ObjectHideFlags: 0
@@ -35885,6 +37211,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1 &2144681240
 GameObject:
   m_ObjectHideFlags: 0
