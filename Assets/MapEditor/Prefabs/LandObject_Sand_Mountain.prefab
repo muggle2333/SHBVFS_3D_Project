@@ -203,6 +203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Land_SandMountain
       objectReference: {fileID: 0}
+    - target: {fileID: 1263157809813482651, guid: 9f5844e79671373449f3020875d5e130, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: daa7dc1d9c2e8cb4a9600012a77336a9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
