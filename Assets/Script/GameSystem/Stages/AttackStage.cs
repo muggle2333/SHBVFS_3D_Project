@@ -58,7 +58,7 @@ public class AttackStage : MonoBehaviour
             {
                 if (j == i) continue;
                 distance = PlayerManager.Instance.CheckDistance(playerList[i], playerList[j].currentGrid);
-                Debug.LogError(playerList[i] + " distance " + distance);
+                //Debug.LogError(playerList[i] + " distance " + distance);
                 if (distance < minDistance && playerList[i].Range >= distance)
                 {
                     minDistance = distance;
@@ -69,12 +69,12 @@ public class AttackStage : MonoBehaviour
                         {
                             playerList[i].AttackTarget = playerList[targetIndex];
                             playerList[i].Attack();
-                            Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
+                            //Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
                         }
                         else
                         {
                             PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
-                            Debug.LogError(playerList[i] + " attack Online" + playerList[targetIndex]);
+                            //Debug.LogError(playerList[i] + " attack Online" + playerList[targetIndex]);
                         }
                     }
             }

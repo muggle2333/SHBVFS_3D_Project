@@ -3627,83 +3627,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180721207}
   m_Mesh: {fileID: -2185983309138278462, guid: 0b04c3349eb1f9a4b9b4a98f4f40d72b, type: 3}
---- !u!1 &191666971
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 191666973}
-  - component: {fileID: 191666972}
-  m_Layer: 0
-  m_Name: CalculatSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &191666972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191666971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d03a2a0433a664e9ab440c5f54551e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  APCost: 0
-  academyMaxHP: 0
-  academyHPPerRound: 0
-  academyAttackRange: 0
-  academyAttackDamage: 0
-  academyDefense: 0
-  academyAPPerRound: 0
-  totalAcademyMaxHP: 0
-  totalAcademyHPPerRound: 0
-  totalAcademyAttackRange: 0
-  totalAcademyAttackDamage: 0
-  totalAcademyDefense: 0
-  totalAcademyAPPerRound: 0
-  cardAttackDamage: 0
-  cardDefense: 0
-  cardAttackRange: 0
-  cardDamage: 0
-  cardAP: 0
-  cardHP: 0
-  cardFreeMoveNum: 0
-  totalCardAttackDamage: 0
-  totalCardDefense: 0
-  totalCardAttackRange: 0
-  academyEffectNum: 000000000000000000000000000000000000000000000000
-  AcademyBuffData:
-    maxHp: 0
-    hpPreRound: 0
-    attackRange: 0
-    attackDamage: 0
-    defense: 0
-    APPerRound: 0
-  CardData: {fileID: 0}
-  playerAcademyBuffcomponent: {fileID: 0}
---- !u!4 &191666973
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191666971}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1045.1848, y: 526.8652, z: 202.84563}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203568593
 GameObject:
   m_ObjectHideFlags: 0
@@ -6011,7 +5934,7 @@ Transform:
   - {fileID: 405741092}
   - {fileID: 2000127820}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &367220810
 GameObject:
@@ -13203,7 +13126,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &870808761
 MonoBehaviour:
@@ -14100,7 +14023,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 339269489216589206, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 339269489216589206, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21493,18 +21416,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 552847490979672559, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: CardPrefeb
-      value: 
-      objectReference: {fileID: 1743301719574586815, guid: 16310593ae2fda1418ebd2686a7bda74, type: 3}
-    - target: {fileID: 552847490979672559, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: CardContent
-      value: 
-      objectReference: {fileID: 1578779543}
-    - target: {fileID: 1500861385438643778, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4164202119315470929, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: m_Name
       value: CardSystem
@@ -21553,25 +21464,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4164202119351235545, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: card
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4525186938329760962, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 272251406
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1500861385438643778, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 191666971, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
---- !u!1 &1578779543 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4164202118832277096, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-  m_PrefabInstance: {fileID: 1578779541}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578931556
 GameObject:
   m_ObjectHideFlags: 0
@@ -26077,7 +25979,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1900381095
 GameObject:
@@ -30801,7 +30703,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2521327370408840747, guid: 4af5af1a9d206b54f9e97fb0cfbeadb5, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2521327370408840747, guid: 4af5af1a9d206b54f9e97fb0cfbeadb5, type: 3}
       propertyPath: m_LocalPosition.x
