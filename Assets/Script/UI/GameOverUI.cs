@@ -45,7 +45,7 @@ public class GameOverUI : MonoBehaviour
             }
             else
             {
-                gameOverText.text = "YOU LOOSE";
+                gameOverText.text = "YOU LOSE";
             }
         }
     }

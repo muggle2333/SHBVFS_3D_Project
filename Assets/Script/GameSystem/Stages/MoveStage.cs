@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
+//Move 和 Attack 的优先级是轮次的
 public class MoveStage : NetworkBehaviour
 {
     private Dictionary<Player, List<PlayerInteract>> playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();
@@ -24,7 +26,15 @@ public class MoveStage : NetworkBehaviour
         {
             playerList.Add(playerInteractDict.ElementAt(i).Key);
         }
-        List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
+        List<Player> priorityList = null;
+        if (TurnbasedSystem.Instance.roundIndex.Value %2 != 0)
+        {
+            priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
+        }
+        else
+        {
+            priorityList = playerList.OrderBy(x => x.Priority).ToList();
+        }
 
         while(playerInteractDict.Count!=0)
         {

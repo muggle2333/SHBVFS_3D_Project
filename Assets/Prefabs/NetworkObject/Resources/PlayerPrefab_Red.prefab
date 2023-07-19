@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8289786415763504901}
   - component: {fileID: 8640832635464059543}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 185241148421094987}
   - component: {fileID: 5637906135021775142}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AttackLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 780280818328186563}
   - component: {fileID: 780280818328186562}
   - component: {fileID: 780280818328186565}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 780280818429077314}
   - component: {fileID: 499257089889080854}
   - component: {fileID: 6265796262920773923}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerPrefab_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6568540d0d0c57b41a68a9b8fcf1a06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 5323745679965835634}
   vfx_Player_Point: {fileID: 680657266464478812}
   pathLine: {fileID: 780280819640846120}
   attackLine: {fileID: 5637906135021775142}
@@ -411,6 +412,9 @@ MonoBehaviour:
   MaxActionPoint: 3
   MaxCardCount: 10
   freeMoveCount: 0
+  cardAR: 0
+  cardAD: 0
+  cardDF: 0
   baseMaxHP: 3
   baseDefense: 0
   baseAttackDamage: 1
@@ -501,7 +505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 780280819640846123}
   - component: {fileID: 780280819640846120}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LinePath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +640,7 @@ GameObject:
   - component: {fileID: 7922339525606918402}
   - component: {fileID: 4265806540872283652}
   - component: {fileID: 9099003167912751039}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: PlayerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +776,7 @@ GameObject:
   - component: {fileID: 5323745679965835634}
   - component: {fileID: 8181602684847540818}
   - component: {fileID: 9182286649164676688}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +879,7 @@ GameObject:
   - component: {fileID: 6748308540287229000}
   - component: {fileID: 3000855937530299802}
   - component: {fileID: 1812273555563892226}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1012,7 +1016,7 @@ GameObject:
   - component: {fileID: 1397583743768244452}
   - component: {fileID: 1949269116453756775}
   - component: {fileID: 3691373319621009258}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

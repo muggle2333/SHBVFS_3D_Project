@@ -48,7 +48,15 @@ public class AttackStage : MonoBehaviour
 
     IEnumerator StartAttack()
     {
-        List<Player> playerList = players.OrderByDescending(x => x.Priority).ToList();
+        List<Player> playerList = GameplayManager.Instance.GetPlayer();
+        if (TurnbasedSystem.Instance.roundIndex.Value % 2 != 0)
+        {
+            playerList = playerList.OrderBy(x => x.Priority).ToList();
+        }
+        else
+        {
+            playerList = playerList.OrderByDescending(x => x.Priority).ToList();
+        }
         for (int i = 0; i < playerList.Count; i++)
         {
             int minDistance = 10;

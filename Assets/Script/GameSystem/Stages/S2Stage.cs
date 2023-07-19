@@ -17,19 +17,19 @@ public class S2Stage : MonoBehaviour
         playedCardDict.Clear();
         Debug.LogError("S2");
         PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
-/*        if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] > 0)
+/*        if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.player] > 0)
         {
-            for (int i = 0; i < GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer]; i++)
+            for (int i = 0; i < GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.player]; i++)
             {
-                CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer][0].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
-                CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer].RemoveAt(0);
+                CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player][0].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
+                CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player].RemoveAt(0);
             }
-            foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+            foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player])
             {
                 card.GetComponent<CardSelectComponent>().EndSelectDiscard();
             }
-            PlayerManager.Instance.cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] = 0;
-            PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.currentPlayer);
+            PlayerManager.Instance.cardSelectManager.SelectCount[GameplayManager.Instance.player] = 0;
+            PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.player);
         }*/
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {

@@ -72,7 +72,6 @@ public class PlayerManager : NetworkBehaviour
         {
             Instance = this;
         }
-        
     }
     public void Update()
     {
@@ -180,7 +179,7 @@ public class PlayerManager : NetworkBehaviour
     }
     public bool MovePlayer(Player player,GridObject gridObject)
     {
-        //if (player.Id != GameplayManager.Instance.currentPlayer.Id) return false;
+        //if (player.Id != GameplayManager.Instance.player.Id) return false;
         player.targetGrid = gridObject;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         if (!player.UseActionPoint(apCost)) return false;
@@ -208,9 +207,21 @@ public class PlayerManager : NetworkBehaviour
         if (!player.UseActionPoint(apCost)) return false;
         gridObject = GridManager.Instance.ManageOwner(gridObject, player,isControlStage);
         player.OccupyGrid(gridObject);
+        player.currentGrid= gridObject;
         GridVfxManager.Instance.UpdateVfxOwner(gridObject,isControlStage);
-        GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
-        if (isControlStage)
+        if (!isControlStage)
+        {
+            GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
+            if (player != GameplayManager.Instance.currentPlayer)
+            {
+                return true;
+            }
+            else
+            {
+                drawCardComponent.DrawEventCard(player);
+            }
+        }
+        else
         {
             UpdateGridAuthorityData(player, gridObject);
         }
@@ -224,12 +235,12 @@ public class PlayerManager : NetworkBehaviour
 
         gridObject = GridManager.Instance.ManageBuilding(gridObject,isControlStage);
         GridVfxManager.Instance.UpdateVfxBuilding(gridObject,isControlStage);
+        player.currentGrid = gridObject;
         if (isControlStage)
         {
             UpdateGridAuthorityData(player, gridObject);
         }
         return true;
-        
     }
     public void TrySearch(Player player)
     {
@@ -258,7 +269,7 @@ public class PlayerManager : NetworkBehaviour
         //player.GetComponent<PlayerInteractionComponent>().TryGacha(player.currentGrid);
 
         //drawCardComponent.TryDrawCard();
-        //drawCardComponent.DrawCard(GameplayManager.Instance.currentPlayer);
+        //drawCardComponent.DrawCard(GameplayManager.Instance.player);
     }
 
     public bool DrawCard(Player player, GridObject gridObject)
@@ -266,7 +277,7 @@ public class PlayerManager : NetworkBehaviour
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
         if (!player.UseActionPoint(apCost)) return false;
 
-        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return false;
+        if (player.Id != GameplayManager.Instance.currentPlayer.Id) return true;
         GridVfxManager.Instance.UpdateVfxGacha(gridObject, false);
         //drawCardComponent.DrawCardServerRpc(player.Id);
         drawCardComponent.DrawCard(player);
@@ -290,11 +301,12 @@ public class PlayerManager : NetworkBehaviour
     public bool CheckSearchable(Player player, GridObject gridObject)
     {
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
-        return player.IsApEnough(apCost) && player.currentGrid == gridObject;
+        return player.IsApEnough(apCost) && CheckGridObjectIsSame(gridObject,player.currentGrid);
     }
     public bool CheckKnowable(Player player, GridObject gridObject)
     {
         if(player.trueGrid == gridObject) return true;
+        //if (gridObject.owner != null) return true;
         return gridObject.CheckKnowAuthority(player);
     }
     public bool CheckMoveable(Player player, GridObject gridObject)
@@ -370,7 +382,7 @@ public class PlayerManager : NetworkBehaviour
 
     //    if (alivePlayerList != null)
     //    {
-    //        if (alivePlayerList[0] == GameplayManager.Instance.currentPlayer)
+    //        if (alivePlayerList[0] == GameplayManager.Instance.player)
     //        {
     //            alivePlayerUI.SetActive(true);
     //        }
@@ -384,7 +396,7 @@ public class PlayerManager : NetworkBehaviour
     //        for(int i = 0; i < dyingPlayerList.Count; i++)
     //        {
     //            dyingPlayerList[i].isDying.Value = true;
-    //            if (dyingPlayerList[i] == GameplayManager.Instance.currentPlayer)
+    //            if (dyingPlayerList[i] == GameplayManager.Instance.player)
     //            {
     //                dyingPlayerUI.SetActive(true);
     //            }
@@ -413,7 +425,7 @@ public class PlayerManager : NetworkBehaviour
     //    }
     //    if(dyingPlayers.Count == 1)
     //    {
-    //        if(dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //        if(dyingPlayers[0] == GameplayManager.Instance.player)
     //        {
     //            loseUI.SetActive(true);
     //        }
@@ -426,7 +438,7 @@ public class PlayerManager : NetworkBehaviour
     //    {
     //        if (dyingPlayers[0].HP > dyingPlayers[1].HP)
     //        {
-    //            if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //            if (dyingPlayers[0] == GameplayManager.Instance.player)
     //            {
     //                winUI.SetActive(true);
     //            }
@@ -437,7 +449,7 @@ public class PlayerManager : NetworkBehaviour
     //        }
     //        else if(dyingPlayers[0].HP < dyingPlayers[1].HP)
     //        {
-    //            if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //            if (dyingPlayers[0] == GameplayManager.Instance.player)
     //            {
     //                loseUI.SetActive(true);
     //            }
@@ -455,7 +467,7 @@ public class PlayerManager : NetworkBehaviour
     //            }
     //            if(player0LandCount > player1LandCount)
     //            {
-    //                if(dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //                if(dyingPlayers[0] == GameplayManager.Instance.player)
     //                {
     //                    winUI.SetActive(true);
     //                }
@@ -466,7 +478,7 @@ public class PlayerManager : NetworkBehaviour
     //            }
     //            else if(player0LandCount < player1LandCount)
     //            {
-    //                if (dyingPlayers[0] == GameplayManager.Instance.currentPlayer)
+    //                if (dyingPlayers[0] == GameplayManager.Instance.player)
     //                {
     //                    loseUI.SetActive(true);
     //                }

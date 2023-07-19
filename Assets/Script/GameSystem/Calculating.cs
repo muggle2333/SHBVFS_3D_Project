@@ -194,7 +194,7 @@ public class Calculating : NetworkBehaviour
             case PlayerInteractType.Occupy:
                 return 1;
             case PlayerInteractType.Build:
-                return 2;
+                return 1;
             case PlayerInteractType.Gacha:
                 return 1;
             case PlayerInteractType.Search:
@@ -206,6 +206,7 @@ public class Calculating : NetworkBehaviour
 
     public int CalculateMoveAPCost(Player player)
     {
+        player.currentGrid = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
         switch (player.currentGrid.landType)
         {
             case LandType.Mountain:

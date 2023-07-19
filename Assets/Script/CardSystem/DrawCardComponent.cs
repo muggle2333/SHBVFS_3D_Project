@@ -21,7 +21,7 @@ public class DrawCardComponent :NetworkBehaviour
     //public Dictionary<AcademyType, int> AllCardCount = new Dictionary<AcademyType, int>();
 
     public NetworkList<int> AllCardCount;
-    public Player currentPlayer;
+    public Player player;
 
     private void Awake()
     {
@@ -54,14 +54,15 @@ public class DrawCardComponent :NetworkBehaviour
     public void DrawCardClientRpc(PlayerId playerId,ClientRpcParams clientRpcParams=default)
     {
         Debug.LogError(playerId);
-        DrawCard(GameplayManager.Instance.currentPlayer);
+        DrawCard(GameplayManager.Instance.player);
 
         
     }*/
     public void DrawCard(Player player)
     {
-        currentPlayer = player;
-        if (player.currentGrid.isHasBuilding == true)
+        this.player = player;
+        GridObject gridObject = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
+        if (gridObject.isHasBuilding == true)
         {
             DrawBasicCard(player);
             DrawEventCard(player);
@@ -85,9 +86,10 @@ public class DrawCardComponent :NetworkBehaviour
     }
     public void DrawEventCard(Player player)
     {
-        AcademyType currentAcedemy = currentPlayer.currentGrid.academy;
+        AcademyType currentAcedemy = player.currentGrid.academy;
+        GridObject currentGridObject = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
         Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-        if (currentPlayer.currentGrid.isHasBuilding)
+        if (currentGridObject.isHasBuilding)
         {
             int randomIndex = Random.Range(0, 3);
             int randomIndex_ = Random.Range(0, 2);

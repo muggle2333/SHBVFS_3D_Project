@@ -5,33 +5,37 @@ using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PlayerInteractionComponent : MonoBehaviour
 {
 
     private GameObject playerVfx;
+    [SerializeField] private Canvas canvas;
     //private GameObject gachaContainer;
     [SerializeField] private GameObject vfx_Player_Point;
     [SerializeField] private LineRenderer pathLine;
     [SerializeField] private LineRenderer attackLine;
     [SerializeField] private TMP_Text playerText;
     [SerializeField] private TMP_Text hpText;
-
-    private void Start()
-    {
-        if(GetComponentInParent<Player>()== GameplayManager.Instance.currentPlayer)
-        {
-            playerText.text = "SELF";
-        }
-        else
-        {
-            playerText.text = "RIVAL";
-        }
-    }
+    //private void Start()
+    //{
+    //    canvas= GetComponent<Canvas>();
+    //}
     private void Update()
     {
         hpText.text = GetComponentInParent<Player>().HP.ToString();
+        //Canvas follow camera
+        Vector3 targetPos = canvas.transform.position + Camera.main.transform.rotation * Vector3.forward;
+        Vector3 targetOrientation = Camera.main.transform.rotation * Vector3.up;
+        canvas.transform.LookAt(targetPos, targetOrientation);
+
+    }
+    public void SetPlayerName(bool isSelf)
+    {
+        playerText.text = isSelf ? "SELF" : "RIVAL";
+
     }
     public void Move(GridObject gridObject)
     {

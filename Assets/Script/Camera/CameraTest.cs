@@ -152,7 +152,7 @@ public class CameraTest : MonoBehaviour
         isTargetMoving = true;
         Invoke("MovingStop", 1f);
 
-        //target.position = GameplayManager.Instance.currentPlayer.gameObject.transform.position;
+        //target.position = GameplayManager.Instance.player.gameObject.transform.position;
         //UpdateRotate();
     }
 
