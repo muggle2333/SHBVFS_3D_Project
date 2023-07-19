@@ -18,7 +18,7 @@ public class PlayerNetworkComponent : NetworkBehaviour
         //{
         //    NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnect;
         //}
-
+        GetComponent<PlayerInteractionComponent>().SetPlayerName(IsOwner);
     }
 
     private void NetworkManager_OnClientDisconnect(ulong clientId)

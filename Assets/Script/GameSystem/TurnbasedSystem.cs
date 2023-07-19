@@ -39,7 +39,7 @@ public class TurnbasedSystem : NetworkBehaviour
     private TurnbaseUI turnbaseUI;
     public NetworkVariable<bool> isStart = new NetworkVariable<bool>(false);
     public NetworkVariable<bool> isDie = new NetworkVariable<bool>(false);
-    public NetworkVariable<int> roundIndex = new NetworkVariable<int>(1);
+    public NetworkVariable<int> roundIndex = new NetworkVariable<int>(0);
 
     private Dictionary<ulong, bool> playerSkipDict = new Dictionary<ulong, bool>() { { 0, false }, { 1, false } };
     private bool isPlayerAllSkip = false;

@@ -25,7 +25,8 @@ public class DiscardStage : NetworkBehaviour
     }
     private void Update()
     {
-        if(timerValue.Value>0)
+        if (!NetworkManager.Singleton.IsHost) return;
+        if (timerValue.Value>0)
         {
             timerValue.Value -= Time.deltaTime;
         }else

@@ -37,25 +37,25 @@ public class GridObjectUI : MonoBehaviour
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Move,GameplayManager.Instance.currentPlayer,gridObject);
             ShowGridObjectUI(false, null);
-            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
+            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.player.Id, new Vector2(gridObject.x, gridObject.z));
         });
         occupyBtn.onClick.AddListener(() =>
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Occupy,GameplayManager.Instance.currentPlayer,gridObject);
             ShowGridObjectUI(false, null);
-            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Occupy, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
+            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Occupy, GameplayManager.Instance.player.Id, new Vector2(gridObject.x, gridObject.z));
         });
         gachaBtn.onClick.AddListener(() =>
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Gacha, GameplayManager.Instance.currentPlayer, gridObject);
             ShowGridObjectUI(false, null);
-            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
+            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.player.Id, new Vector2(gridObject.x, gridObject.z));
         });
         buildBtn.onClick.AddListener(() =>
         {
             PlayerManager.Instance.TryInteract(PlayerInteractType.Build, GameplayManager.Instance.currentPlayer, gridObject);
             ShowGridObjectUI(false, null);
-            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.currentPlayer.Id, new Vector2(gridObject.x, gridObject.z));
+            //PlayerManager.Instance.TryInteractServerRpc(PlayerInteractType.Move, GameplayManager.Instance.player.Id, new Vector2(gridObject.x, gridObject.z));
         });
         searchBtn.onClick.AddListener(() =>
         {

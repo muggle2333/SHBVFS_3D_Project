@@ -238,10 +238,10 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     //    transform.SetAsLastSibling();
     //    transform.DOLocalMoveY(targetY, duration);
     //    isSelected = true;
-    //    cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
-    //    foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+    //    cardSelectManager.SelectCount[GameplayManager.Instance.player]++;
+    //    foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player])
     //    {
-    //        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] <= cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
+    //        if (cardSelectManager.SelectCount[GameplayManager.Instance.player] <= cardSelectManager.maxSelected[GameplayManager.Instance.player])
     //            break;
     //        if (this.gameObject == card.gameObject) continue;
     //        if (card.gameObject.GetComponent<CardSelectComponent>().isSelected)
@@ -253,7 +253,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     //    {
     //        S1AdditionalCondition();
     //    }
-    //    else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage && GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] > 0)
+    //    else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage && GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.player] > 0)
     //    {
     //        DiscardAdditionalCondition();
     //    }
@@ -261,20 +261,20 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     //    {
     //        DyingAdditionalCondition();
     //    }//activate UI button
-    //    //Debug.Log(cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]);
+    //    //Debug.Log(cardSelectManager.SelectCount[GameplayManager.Instance.player]);
     //}
     //public void EndSelect()
     //{
     //    Info.SetActive(false);
     //    transform.SetSiblingIndex(index);
     //    isSelected = false;
-    //    cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
-    //    if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
+    //    cardSelectManager.SelectCount[GameplayManager.Instance.player]--;
+    //    if (cardSelectManager.SelectCount[GameplayManager.Instance.player] < cardSelectManager.maxSelected[GameplayManager.Instance.player])
     //    {
     //        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
     //        UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
     //    }
-    //    if(cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
+    //    if(cardSelectManager.SelectCount[GameplayManager.Instance.player] == 0)
     //    {
     //        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
     //        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancel, false);
@@ -289,7 +289,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     //public void DiscardAdditionalCondition()
     //{
-    //    foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+    //    foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player])
     //    {
     //        if (this.gameObject == card.gameObject) continue;
     //        card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);
@@ -297,7 +297,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     //    UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancel, true);
     //    UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, true);
     //    UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
-    //    if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
+    //    if (cardSelectManager.SelectCount[GameplayManager.Instance.player] == cardSelectManager.maxSelected[GameplayManager.Instance.player])
     //    {
     //        UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, true);
     //    }
@@ -305,7 +305,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     //public void DyingAdditionalCondition()
     //{
-    //    foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
+    //    foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player])
     //    {
     //        if (this.gameObject == card.gameObject) continue;
     //        card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);

@@ -21,6 +21,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3616021447206621134, guid: de80d3e5c97842447a9677b45b557dc8, type: 3}
     - target: {fileID: 780280818429077314, guid: cf986b0b44e960b488fbfef41fa5ac09, type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780280818429077314, guid: cf986b0b44e960b488fbfef41fa5ac09, type: 3}
       propertyPath: TrueActionPoint
       value: 3
       objectReference: {fileID: 0}

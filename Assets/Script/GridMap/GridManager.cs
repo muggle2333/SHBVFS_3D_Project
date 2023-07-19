@@ -213,5 +213,10 @@ public class GridManager : NetworkBehaviour
             }
         }
     }
+
+    public GridObject GetCurrentGridObject(GridObject gridObject)
+    {
+        return grid.GetGridObject(gridObject.x, gridObject.z);
+    }
 }
 
