@@ -26,6 +26,8 @@ public class CardManager : NetworkBehaviour
     }
     public void Awake()
     {
+        playerHandCardDict.Clear();
+        playedCardDict.Clear();
         redPlayerPlayedCards = new NetworkList<int>();
         bluePlayerPlayedCards = new NetworkList<int>();
         if (Instance != null && Instance != this)
@@ -232,5 +234,13 @@ public class CardManager : NetworkBehaviour
         }
         playedCardDict[GameplayManager.Instance.playerList[0]] = redPlayerPlayed;
         playedCardDict[GameplayManager.Instance.playerList[1]] = bluePlayerPlayed;
+    }
+
+    public int[] CheckDiscardNum()
+    {
+        int[] additionCardNum = new int[2];
+        additionCardNum[0]= PlayerManager.Instance.redPlayerHandCardsList.Count - GameplayManager.Instance.playerList[0].HP;
+        additionCardNum[1]= PlayerManager.Instance.bluePlayerHandCardsList.Count - GameplayManager.Instance.playerList[1].HP;
+        return additionCardNum;
     }
 }

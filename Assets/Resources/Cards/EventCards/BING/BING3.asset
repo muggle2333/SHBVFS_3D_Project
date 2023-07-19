@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Bide One's Time
   description: If you don't attack this turn, you will get 2 points of Bing next
     turn
-  headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  headPicture: {fileID: 21300000, guid: 1d56a691a17a95d42806777d2b67790f, type: 3}
   academyType: 4
   cardCondition: {fileID: 0}
   effectStage: 4
@@ -36,3 +36,4 @@ MonoBehaviour:
   cardType: 1
   cardLevel: 0
   CardBuff: {fileID: 0}
+  cardFounction: {fileID: 0}

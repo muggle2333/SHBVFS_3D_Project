@@ -16,6 +16,7 @@ public class UIManager : NetworkBehaviour
     private TurnbaseUI turnbaseUI;
     private DyingUI dyingUI;
     private EnemyUI enemyUI;
+    private DiscardUI discardUI;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -37,6 +38,7 @@ public class UIManager : NetworkBehaviour
         pauseMenuUI= GetComponentInChildren<PauseMenuUI>();
         turnbaseUI = GetComponentInChildren<TurnbaseUI>();
         dyingUI= GetComponentInChildren<DyingUI>();
+        discardUI= GetComponentInChildren<DiscardUI>();
         enemyUI = gridObjectUI.enemyUI;
     }
     public void UpdatePlayerDataUI(Player player)
@@ -58,6 +60,7 @@ public class UIManager : NetworkBehaviour
     {
         turnbaseUI.StartTurnbaseUI();
         dyingUI.InitializeDyingUI();
+        discardUI.InitializeDiscardUI();
     }
     [ClientRpc]
     public void ShowMessageInfoClientRpc(string info,ClientRpcParams clientRpcParams=default)

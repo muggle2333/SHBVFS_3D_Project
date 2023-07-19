@@ -15,7 +15,7 @@ MonoBehaviour:
   cardId: 28
   cardName: Cultivating RU
   description: You can transform 1 point aggressivity into 1 point armor
-  headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  headPicture: {fileID: 21300000, guid: cf6f4058c6aab154395a7682f1227aa4, type: 3}
   academyType: 5
   cardCondition: {fileID: 0}
   effectStage: 1

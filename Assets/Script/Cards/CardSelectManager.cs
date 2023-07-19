@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 using Unity.Netcode;
+using System;
 
 public class CardSelectManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class CardSelectManager : MonoBehaviour
     [SerializeField] private float upperY;
     [SerializeField] private float lowerY;
     [SerializeField] private float duration;
+
+    public event EventHandler OnDiscardCard;
 
     //public CardSelectComponent[] cardsArray;
     //public List<CardSelectComponent> cardsList;
@@ -57,12 +60,14 @@ public class CardSelectManager : MonoBehaviour
                 //Debug.Log("Card " + cardsList[i].name + " is played.");
                 CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
+                CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);
                 i--;
             }
         }
         UpdateCardPos(player);
         GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] = 0;
         maxSelected[GameplayManager.Instance.currentPlayer] = 1;
+        OnDiscardCard?.Invoke(this,EventArgs.Empty);
     }
     public void PlayCards(Player player)
     {
@@ -135,6 +140,7 @@ public class CardSelectManager : MonoBehaviour
         }
     }
 
+    
     //public void Retract(Player player)
     //{
     //    CancelCards(player);

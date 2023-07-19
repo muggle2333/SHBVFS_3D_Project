@@ -67,6 +67,7 @@ public class TurnbasedSystem : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerSkipDict = new Dictionary<ulong, bool>() { { 0, false }, { 1, false } };
         turnbaseUI = FindObjectOfType<TurnbaseUI>();
         //For test
         if (FindObjectOfType<NetworkManager>() != null) return;
@@ -123,8 +124,9 @@ public class TurnbasedSystem : NetworkBehaviour
         }
 
         DiscardPhase();
-        UpdateTimer(DiscardPhaseTime);
-        yield return new WaitForSecondsRealtime(DiscardPhaseTime);
+        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value);
+        //UpdateTimer(DiscardPhaseTime);
+        //yield return new WaitForSecondsRealtime(DiscardPhaseTime);
 
 
         Event2();
