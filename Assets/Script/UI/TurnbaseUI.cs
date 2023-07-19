@@ -36,15 +36,15 @@ public class TurnbaseUI : MonoBehaviour
         if(previousValue==GameStage.S1) //CONTROL 结束
         {
             skipBtn.gameObject.SetActive(false);
-            //timerText.gameObject.SetActive(false);
+            timerText.gameObject.SetActive(false);
         }else if(newValue==GameStage.S1) // 进入 CONTROL
         { 
             skipBtn.gameObject.SetActive(true);
             timerText.gameObject.SetActive(true);
-        }else if(previousValue==GameStage.DiscardStage)
-        {
-            timerText.gameObject.SetActive(false);
-        }
+        }//else if(previousValue==GameStage.DiscardStage)
+        //{
+        //    timerText.gameObject.SetActive(false);
+        //}
     }
 
     public void UpdateStageInfo(GameStage stage,float timer, int round)

@@ -124,8 +124,9 @@ public class TurnbasedSystem : NetworkBehaviour
         }
 
         DiscardPhase();
-        UpdateTimer(DiscardPhaseTime);
-        yield return new WaitForSecondsRealtime(DiscardPhaseTime);
+        yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value);
+        //UpdateTimer(DiscardPhaseTime);
+        //yield return new WaitForSecondsRealtime(DiscardPhaseTime);
 
 
         Event2();
