@@ -15,7 +15,7 @@ MonoBehaviour:
   cardId: 21
   cardName: Looting The City
   description: You can erase a city of your opponent at the end of this turn
-  headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  headPicture: {fileID: 21300000, guid: d76b57532850fdc4d9749036cc711a79, type: 3}
   academyType: 3
   cardCondition: {fileID: 0}
   effectStage: 4
@@ -35,3 +35,4 @@ MonoBehaviour:
   cardType: 3
   cardLevel: 1
   CardBuff: {fileID: 0}
+  cardFounction: {fileID: 0}

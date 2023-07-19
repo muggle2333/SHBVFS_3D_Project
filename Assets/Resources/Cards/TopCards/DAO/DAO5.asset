@@ -15,7 +15,7 @@ MonoBehaviour:
   cardId: 14
   cardName: First Move
   description: Your opponent will move after your movment finish this turn
-  headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  headPicture: {fileID: 21300000, guid: c89217310d0364041929e3ed8702bce1, type: 3}
   academyType: 2
   cardCondition: {fileID: 0}
   effectStage: 2

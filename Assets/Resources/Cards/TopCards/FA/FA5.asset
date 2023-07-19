@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Invulnerable
   description: You can automatically defense any cards from you opponent whose target
     is you
-  headPicture: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  headPicture: {fileID: 21300000, guid: 13eecf6179a690d4793a71b7ff88907b, type: 3}
   academyType: 6
   cardCondition: {fileID: 0}
   effectStage: 2
@@ -36,3 +36,4 @@ MonoBehaviour:
   cardType: 3
   cardLevel: 1
   CardBuff: {fileID: 0}
+  cardFounction: {fileID: 0}
