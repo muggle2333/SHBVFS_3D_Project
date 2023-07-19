@@ -128,7 +128,11 @@ public class Calculating : NetworkBehaviour
     }
     public void AcademyBuff(Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict,Player player)
     {
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < player.academyOwnedPoint.Length; i++)
+        {
+            player.academyOwnedPoint[i] = player.academyOwnedPoint[i] + academyEffectNum[i];
+        }
+        for (int i = 0; i < 6; i++)
         {
             PlayerAcademyBuffDict.TryGetValue((AcademyType)(i + 1), out AcademyBuffData);
             academyMaxHP += AcademyBuffData.maxHp;
@@ -158,16 +162,10 @@ public class Calculating : NetworkBehaviour
 
     public void CalculatPlayerBaseData(Player player)
     {
-        for (int i = 0; i < player.academyOwnedPoint.Length; i++)
-        {
-            player.academyOwnedPoint[i] = player.academyOwnedPoint[i] + academyEffectNum[i];
-        }
-        //FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuff(player);
-
         player.MaxHP = player.baseMaxHP + totalAcademyMaxHP;
         player.AttackDamage = player.baseAttackDamage + totalAcademyAttackDamage + totalCardAttackDamageDic[player];
-        player.Range = player.baseRange + totalAcademyAttackRange + totalCardAttackRangeDic[player];
-        player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefenseDic[player];
+        player.Range = player.baseRange + totalAcademyAttackRange + totalCardAttackRangeDic[player] + player.gridAR;
+        player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefenseDic[player] + player.gridDF;
         player.ActionPointPerRound = player.baseActionPointPerRound + totalAcademyAPPerRound;
     }
 
