@@ -177,6 +177,11 @@ public class PlayerManager : NetworkBehaviour
         GridManager.Instance.DiscoverGridObject(player, gridObject);
         player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
     }
+    public void SendCardWhenGameStart(Player player)
+    {
+        drawCardComponent.DrawBasicCard(player);
+        drawCardComponent.DrawBasicCard(player);
+    }
     public bool MovePlayer(Player player,GridObject gridObject)
     {
         //if (player.Id != GameplayManager.Instance.player.Id) return false;

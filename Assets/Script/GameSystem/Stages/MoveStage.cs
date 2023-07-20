@@ -27,14 +27,14 @@ public class MoveStage : NetworkBehaviour
             playerList.Add(playerInteractDict.ElementAt(i).Key);
         }
         List<Player> priorityList = null;
-        if (TurnbasedSystem.Instance.roundIndex.Value %2 != 0)
-        {
+        //if (TurnbasedSystem.Instance.roundIndex.Value %2 != 0)
+        //{
             priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
-        }
-        else
-        {
-            priorityList = playerList.OrderBy(x => x.Priority).ToList();
-        }
+        //}
+        //else
+        //{
+        //    priorityList = playerList.OrderBy(x => x.Priority).ToList();
+        //}
 
         while(playerInteractDict.Count!=0)
         {

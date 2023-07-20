@@ -63,56 +63,33 @@ public class S4Stage : MonoBehaviour
                     yield return new WaitForSeconds(1);
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
                     playedCardDict[priorityList[i]].RemoveAt(0);
+                    //Check dying
+                    List<Player> dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
+                    if (dyingPlayers.Count == 0)
+                    {
+                        TurnbasedSystem.Instance.isDie.Value = false;
+                    }
+                    else
+                    {
+                        TurnbasedSystem.Instance.isDie.Value = true;
+                        GameplayManager.Instance.PlayerDyingStageClientRpc();
+                        yield return new WaitForSeconds(GameplayManager.DYING_TIMER);
+                        //Recheck is Dying
+                        dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
+                        if (dyingPlayers.Count > 0)
+                        {
+                            GameManager.Instance.SetGameOver();
+                        }
+                        else
+                        {
+                            GameplayManager.Instance.LeaveDyingStageClientRpc();
+                        }
+                    }
                 }
             }
         }
-        i = 0;
-        List<Player> dyingPlayers = new List<Player>();
-        List<Player> alivePlayers = new List<Player>();
-        for (int i = 0; i < playerList.Count; i++)
-        {
-            if (playerList[i].HP <= 0)
-            {
-                dyingPlayers.Add(playerList[i]);
-            }
-            else
-            {
-                alivePlayers.Add(playerList[i]);
-            }
-        }
-        if (dyingPlayers.Count == 0)
-        {
-            TurnbasedSystem.Instance.isDie.Value = false;
-        }
-        else
-        {
-            TurnbasedSystem.Instance.isDie.Value = true;
-            //PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
-            GameplayManager.Instance.PlayerDyingStageClientRpc();
-            yield return new WaitForSeconds(GameplayManager.DYING_TIMER);
 
-            if (GetDyingPlayer().Count > 0)
-            {
-                GameManager.Instance.SetGameOver();
-            }
-            else
-            {
-                GameplayManager.Instance.LeaveDyingStageClientRpc();
-            }
-        }
         
         TurnbasedSystem.Instance.CompleteStage(GameStage.S4);
-    }
-    private List<Player> GetDyingPlayer()
-    {
-        List<Player> dyingPlayers = new List<Player>();
-        for (int i = 0; i < playerList.Count; i++)
-        {
-            if (playerList[i].HP <= 0)
-            {
-                dyingPlayers.Add(playerList[i]);
-            }
-        }
-        return dyingPlayers;
     }
 }
