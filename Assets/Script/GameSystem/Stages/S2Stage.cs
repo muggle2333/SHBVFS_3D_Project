@@ -84,18 +84,12 @@ public class S2Stage : MonoBehaviour
                 }
             }
         }
-        i = 0;
         List<Player> dyingPlayers = new List<Player>();
-        List<Player> alivePlayers = new List<Player>();
         for (int i = 0; i < playerList.Count; i++)
         {
             if (playerList[i].HP <= 0)
             {
                 dyingPlayers.Add(playerList[i]);
-            }
-            else
-            {
-                alivePlayers.Add(playerList[i]);
             }
         }
         if(dyingPlayers.Count == 0)
