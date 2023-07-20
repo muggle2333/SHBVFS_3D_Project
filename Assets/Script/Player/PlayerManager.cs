@@ -413,6 +413,7 @@ public class PlayerManager : NetworkBehaviour
         attackPlayer.GetComponent<PlayerInteractionComponent>().SetAttackPath(attackPlayer.transform,attackTarget.transform);
         //VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
     }
+
     //public void GameOver()
     //{
     //    List<Player> dyingPlayers = new List<Player>();
