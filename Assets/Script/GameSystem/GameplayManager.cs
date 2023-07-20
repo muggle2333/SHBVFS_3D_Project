@@ -278,5 +278,17 @@ public class GameplayManager : NetworkBehaviour
     {
         OnLeaveDyingStage.Invoke(this, EventArgs.Empty);
     }
-
+    public PlayerId GetEnemy(PlayerId playerId)
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerId != playerList[i].Id)
+            {
+                return playerList[i].Id;
+            }
+            else continue;
+        }
+        Debug.LogError("Get Enemy Fail");
+        return playerId;
+    }
 }

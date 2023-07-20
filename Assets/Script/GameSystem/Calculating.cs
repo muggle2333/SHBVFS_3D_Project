@@ -171,7 +171,14 @@ public class Calculating : NetworkBehaviour
 
     public void CalaulatPlayerData(Player player)
     {
-        player.HP += cardHP;
+        if (cardHP >= 0)
+        {
+            player.HP += cardHP;
+        }
+        else
+        {
+            
+        }
 
         if (player.HP > player.MaxHP)
         {
