@@ -18,7 +18,7 @@ MonoBehaviour:
   headPicture: {fileID: 21300000, guid: 1d56a691a17a95d42806777d2b67790f, type: 3}
   academyType: 4
   cardCondition: {fileID: 0}
-  effectStage: 1
+  effectStage: 2
   effectDuration: 0
   cardTarget: 0
   effectTime: 0
