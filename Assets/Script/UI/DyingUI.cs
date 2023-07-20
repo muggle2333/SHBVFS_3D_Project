@@ -36,21 +36,26 @@ public class DyingUI : MonoBehaviour
     {
         container.SetActive(true);
         dyingTimerValue = GameplayManager.DYING_TIMER;
-        if (GameplayManager.Instance.GetDyingPlayer().Count==1)
+        if (GameplayManager.Instance.GetDyingPlayer().Count>0)
         {
             if(GameplayManager.Instance.currentPlayer.HP<=0)
             {
                 dyingTitle.text = " YOU ARE DYING";
             }
+            else
+            {
+                dyingTitle.text = " COMPETITIVE IS DYING, WAIT HIM TO HEAL";
+            }
         }
-        else if(GameplayManager.Instance.GetDyingPlayer().Count == 2)
-        {
-            dyingTitle.text = " YOU BOTH ARE DYING";
-        }
+        //else if(GameplayManager.Instance.GetDyingPlayer().Count == 2)
+        //{
+        //    dyingTitle.text = " YOU BOTH ARE DYING";
+        //}
     }
     private void GameplayManager_OnPlayerSelfDying(object sender, EventArgs e)
     {
         selfDyingNotice.SetActive(true);
+        
     }
     private void GameplayManager_OnLeaveDyingStage(object sender, EventArgs e)
     {

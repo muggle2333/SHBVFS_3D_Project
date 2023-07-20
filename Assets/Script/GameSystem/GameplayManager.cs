@@ -253,7 +253,7 @@ public class GameplayManager : NetworkBehaviour
         }
         foreach (var player in playerList)
         {
-            if (player.HP < 0 && player == currentPlayer)
+            if (player.HP <= 0 && player == currentPlayer)
             {
                 OnPlayerSelfDying?.Invoke(this, EventArgs.Empty);
             }
@@ -268,6 +268,7 @@ public class GameplayManager : NetworkBehaviour
             if (playerList[i].HP <= 0)
             {
                 dyingPlayers.Add(playerList[i]);
+                Debug.LogError(playerList[i].Id);
             }
         }
         return dyingPlayers;
