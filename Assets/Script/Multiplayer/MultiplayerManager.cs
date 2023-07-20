@@ -40,6 +40,7 @@ public class MultiplayerManager : NetworkBehaviour
         {
             Instance= this;
         }
+        Time.timeScale = 1.0f;
         DontDestroyOnLoad(gameObject);
         playerName = UnityEngine.Random.Range(0,10).ToString();
         playerIdDataNetworkList = new NetworkList<PlayerIdData>();

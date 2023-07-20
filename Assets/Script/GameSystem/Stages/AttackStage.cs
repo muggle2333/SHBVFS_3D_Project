@@ -11,9 +11,9 @@ public class AttackStage : MonoBehaviour
 
     public void StartStage()
     {
-        players = GameplayManager.Instance.GetPlayer();
         StartCoroutine("StartAttack");
         #region Johnny
+        //players = GameplayManager.Instance.GetPlayer();
         //Debug.Log(players.Count);
         //distance = PlayerManager.Instance.CheckDistance(players[0], players[1].currentGrid);
         //if (players[0].Range >= distance && players[1].Range >= distance)
@@ -49,14 +49,15 @@ public class AttackStage : MonoBehaviour
     IEnumerator StartAttack()
     {
         List<Player> playerList = GameplayManager.Instance.GetPlayer();
-        if (TurnbasedSystem.Instance.roundIndex.Value % 2 != 0)
-        {
-            playerList = playerList.OrderBy(x => x.Priority).ToList();
-        }
-        else
-        {
+        //if (TurnbasedSystem.Instance.roundIndex.Value % 2 != 0)
+        //{
+        //    playerList = playerList.OrderBy(x => x.Priority).ToList();
+        //}
+        //else
+        //{
             playerList = playerList.OrderByDescending(x => x.Priority).ToList();
-        }
+        //}
+        //Attack per Player
         for (int i = 0; i < playerList.Count; i++)
         {
             int minDistance = 10;
@@ -82,62 +83,35 @@ public class AttackStage : MonoBehaviour
                         else
                         {
                             PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
-                            //Debug.LogError(playerList[i] + " attack Online" + playerList[targetIndex]);
                         }
                     }
-            }
-            //Debug.LogError("targetIndex = "+targetIndex);
-            //Debug.LogError("i = " + i); 
-            yield return new WaitForSecondsRealtime(1f);
-            }
-        }
-        List<Player> dyingPlayers = new List<Player>();
-        List<Player> alivePlayers = new List<Player>();
-        for (int i = 0; i < players.Count; i++)
-        {
-            if (players[i].HP <= 0)
-            {
-                dyingPlayers.Add(players[i]);
-            }
-            else
-            {
-                alivePlayers.Add(players[i]);
-            }
-        }
-        if (dyingPlayers.Count == 0)
-        {
-            TurnbasedSystem.Instance.isDie.Value = false;
-        }
-        else
-        {
-            TurnbasedSystem.Instance.isDie.Value = true;
-            //PlayerManager.Instance.PlayerDying(dyingPlayers, alivePlayers);
-            GameplayManager.Instance.PlayerDyingStageClientRpc();
-            yield return new WaitForSeconds(GameplayManager.DYING_TIMER);
+                }
 
-            if (GetDyingPlayer().Count > 0)
+            }
+            yield return new WaitForSecondsRealtime(1f);
+            //Check dying
+            List<Player> dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
+            if (dyingPlayers.Count == 0)
             {
-                GameManager.Instance.SetGameOver();
+                TurnbasedSystem.Instance.isDie.Value = false;
             }
             else
             {
-                GameplayManager.Instance.LeaveDyingStageClientRpc();
+                TurnbasedSystem.Instance.isDie.Value = true;
+                GameplayManager.Instance.PlayerDyingStageClientRpc();
+                yield return new WaitForSeconds(GameplayManager.DYING_TIMER);
+
+                if (dyingPlayers.Count > 0)
+                {
+                    GameManager.Instance.SetGameOver();
+                }
+                else
+                {
+                    GameplayManager.Instance.LeaveDyingStageClientRpc();
+                }
             }
         }
         TurnbasedSystem.Instance.CompleteStage(GameStage.AttackStage);
     }
 
-    private List<Player> GetDyingPlayer()
-    {
-        List<Player> dyingPlayers = new List<Player>();
-        var playerList = GameplayManager.Instance.playerList;
-        for (int i = 0; i < playerList.Count; i++)
-        {
-            if (playerList[i].HP <= 0)
-            {
-                dyingPlayers.Add(playerList[i]);
-            }
-        }
-        return dyingPlayers;
-    }
 }
