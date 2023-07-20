@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -77,6 +78,8 @@ public class Calculating : NetworkBehaviour
     }
     public void DelataCardData (CardSetting card,Player player)
     {
+        player.RefreshAcademyOwnedPoint();
+        
         totalCardAttackRangeDic[player] += card.playerDataEffect.visionRange;
         totalCardDefenseDic[player] += card.playerDataEffect.defence;
         totalCardAttackDamageDic[player] += card.playerDataEffect.attack;
@@ -88,8 +91,7 @@ public class Calculating : NetworkBehaviour
         academyEffectNum = card.academyEffectNum;
         for(int i = 0; i < 6; i++)
         {
-            player.academyOwnedPoint[i] += academyEffectNum[i];
-            totalAcademyEffectNum[player][i] += academyEffectNum[i];
+            player.cardAcademyEffectNum[i] += academyEffectNum[i];
         }
         
         playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
@@ -103,35 +105,31 @@ public class Calculating : NetworkBehaviour
     [ClientRpc]    
     public void CardDataInitializeClientRpc(PlayerId playerId)
     {
+        Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
         cardDamage = 0;
         cardAP = 0;
         cardHP = 0;
         cardFreeMoveNum = 0;
         for (int i = 0; i < 6; i++)
         {
-            GameplayManager.Instance.playerList[(int)playerId].academyOwnedPoint[i] -= totalAcademyEffectNum[GameplayManager.Instance.playerList[(int)playerId]][i];
+            player.cardAcademyEffectNum[i] = 0;
             
         }
-        GameplayManager.Instance.playerList[(int)playerId].cardAD = 0;
-        GameplayManager.Instance.playerList[(int)playerId].cardAR = 0;
-        GameplayManager.Instance.playerList[(int)playerId].cardDF = 0;
+        player.cardAD = 0;
+        player.cardAR = 0;
+        player.cardDF = 0;
         for (int i = 0; i < 6 ; i++)
         {
             academyEffectNum[i] = 0;
-            totalAcademyEffectNum[GameplayManager.Instance.playerList[(int)playerId]][i] = 0;
-            totalCardAttackRangeDic[GameplayManager.Instance.playerList[(int)playerId]] = 0;
-            totalCardDefenseDic[GameplayManager.Instance.playerList[(int)playerId]] = 0;
-            totalCardAttackDamageDic[GameplayManager.Instance.playerList[(int)playerId]] = 0;
+            totalCardAttackRangeDic[player] = 0;
+            totalCardDefenseDic[player] = 0;
+            totalCardAttackDamageDic[player] = 0;
         }
 
-        playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(GameplayManager.Instance.playerList[(int)playerId]);
+        playerAcademyBuffcomponent.UpdatePlayerAcademyBuff(player);
     }
     public void AcademyBuff(Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict,Player player)
     {
-        for (int i = 0; i < player.academyOwnedPoint.Length; i++)
-        {
-            player.academyOwnedPoint[i] = player.academyOwnedPoint[i] + academyEffectNum[i];
-        }
         for (int i = 0; i < 6; i++)
         {
             PlayerAcademyBuffDict.TryGetValue((AcademyType)(i + 1), out AcademyBuffData);
@@ -171,13 +169,14 @@ public class Calculating : NetworkBehaviour
 
     public void CalaulatPlayerData(Player player)
     {
+        var enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
         if (cardHP >= 0)
         {
             player.HP += cardHP;
         }
         else
         {
-            
+            enemy.HP -= cardHP;
         }
 
         if (player.HP > player.MaxHP)
@@ -185,9 +184,14 @@ public class Calculating : NetworkBehaviour
             player.HP = player.MaxHP;
         }
 
-        if (cardDamage > player.Defence)
+        if(enemy.HP > enemy.MaxHP)
         {
-            player.HP -= (cardDamage - player.Defence);
+            enemy.HP = enemy.MaxHP;
+        }
+
+        if (cardDamage > enemy.Defence)
+        {
+            enemy.HP -= (cardDamage - enemy.Defence);
         }
         player.CurrentActionPoint += cardAP;
     }
@@ -214,6 +218,10 @@ public class Calculating : NetworkBehaviour
     public int CalculateMoveAPCost(Player player)
     {
         player.currentGrid = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
+        if (player.targetGrid.owner == player && player.targetGrid.isHasBuilding)
+        {
+            return 0;
+        }
         switch (player.currentGrid.landType)
         {
             case LandType.Mountain:

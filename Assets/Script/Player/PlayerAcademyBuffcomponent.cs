@@ -50,18 +50,23 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
 
     public void UpdatePlayerAcademyBuff(Player player)
     {
+        for(int i=0; i < 6; i++)
+        {
+            player.totalAcademyOwnedPoint[i] = player.academyOwnedPoint[i] + player.cardAcademyEffectNum[i];
+        }
+        
         for (int i = 0; i < (int)AcademyType.FA; i++)
         {
             academyBuffDict.TryGetValue((AcademyType)(i+1), out academyBuffDataArr);
-            if (player.academyOwnedPoint[i] <= 4 && player.academyOwnedPoint[i] >=0)
+            if (player.totalAcademyOwnedPoint[i] <= 4 && player.totalAcademyOwnedPoint[i] >=0)
             {
-                PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[player.academyOwnedPoint[i]];
+                PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[player.totalAcademyOwnedPoint[i]];
             }
-            else if(player.academyOwnedPoint[i] >4)
+            else if(player.totalAcademyOwnedPoint[i] >4)
             {
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[4];
             }
-            else if (player.academyOwnedPoint[i] <0)
+            else if (player.totalAcademyOwnedPoint[i] <0)
             {
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[0];
             }

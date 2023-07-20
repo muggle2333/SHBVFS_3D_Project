@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -65,7 +66,10 @@ public class Player : Character
         { AcademyType.RU,null },
     }*/;
 
-    public int[] academyOwnedPoint = new int[6];
+    //public int[] academyOwnedPoint = new int[6];
+    public NetworkList<int> academyOwnedPoint;
+    public NetworkList<int> cardAcademyEffectNum;
+    public NetworkList<int> totalAcademyOwnedPoint;
     [System.Serializable]
     public class OwnedLandTest
     {
@@ -78,7 +82,15 @@ public class Player : Character
 
     public void Awake()
     {
-        
+        academyOwnedPoint = new NetworkList<int>();
+        cardAcademyEffectNum = new NetworkList<int>();
+        totalAcademyOwnedPoint = new NetworkList<int>();
+        for (int i = 0; i < 6; i++)
+        {
+            totalAcademyOwnedPoint.Add(0);
+            academyOwnedPoint.Add(0);
+            cardAcademyEffectNum.Add(0);
+        }
     }
     void Start()
     {
@@ -167,10 +179,18 @@ public class Player : Character
         return academyOwnedPoint;
     }
 
+    public void RefreshAcademyOwnedPoint()
+    {
+        List<int> playeracademyOwnedPoint = CountAcademyOwnedPoint().ToList();
+        for (int i = 0; i < playeracademyOwnedPoint.Count; i++)
+        {
+            academyOwnedPoint[i] = playeracademyOwnedPoint[i];
+        }
+    }
 
     public void ChangeAcademyOwnPoint(int[] academyPointEffect)
     {
-        for(int i=0;i< academyOwnedPoint.Length;i++)
+        for(int i=0;i< academyOwnedPoint.Count;i++)
         {
             academyOwnedPoint[i] += academyPointEffect[i];
         }
