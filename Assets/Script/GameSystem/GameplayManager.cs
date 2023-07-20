@@ -291,4 +291,18 @@ public class GameplayManager : NetworkBehaviour
         Debug.LogError("Get Enemy Fail");
         return playerId;
     }
+
+    public Player PlayerIdToPlayer(PlayerId playerId)
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerId == playerList[i].Id)
+            {
+                return playerList[i];
+            }
+            else continue;
+        }
+        Debug.LogError("PlayerId To Player Fail");
+        return null;
+    }
 }
