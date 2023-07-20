@@ -122,6 +122,7 @@ public class CardManager : NetworkBehaviour
                             //Self Card TakeEffect Animation
                             //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
                             var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+                            card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                             card.cardSetting = CardDataBase.Instance.AllCardList[i];
                             card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
                             playedCardDict[player].RemoveAt(j);
@@ -131,6 +132,7 @@ public class CardManager : NetworkBehaviour
                             //Enemy Card TakeEffect Animation
                             //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
                             var card = Instantiate(CardPrefeb, new Vector3(800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+                            card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                             card.cardSetting = CardDataBase.Instance.AllCardList[i];
                             card.gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
                             playedCardDict[player].RemoveAt(j);
