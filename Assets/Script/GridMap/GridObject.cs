@@ -160,11 +160,14 @@ public class GridObject
     }
     public void SetOwner(Player player,bool isControlStage)
     {
+        if (owner != player)
+        {
+            owner.RemoveOwnedLand(this);
+        }
         owner = player;
         playerKnowList = new bool[] { true , true };
         grid.TriggerGridObjectChanged(x, z);
         //GridVfxManager.Instance.UpdateVfxOwner(this,isControlStage);
-
     }
  
     public void SetBuilding(bool isHasBuilding,bool isControlStage)

@@ -30894,6 +30894,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2104841662}
     m_Modifications:
+    - target: {fileID: 4926071450769721994, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e105abacca485ea4a9b3ea28b87e1886, type: 3}
+    - target: {fileID: 4926071451036163674, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9fdde66461c6dd34eb1f5880efe89fed, type: 3}
+    - target: {fileID: 4926071451134591270, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e288e98f8f16f4f4caffdc3e578ff7a9, type: 3}
+    - target: {fileID: 4926071452179428172, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 63.166668
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926071452179428172, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 63.333332
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926071452179428175, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e8b0b9108bbde9841bf1f6d5036f587c, type: 3}
     - target: {fileID: 4926071452224620618, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
       propertyPath: m_Name
       value: PlayerDataUI
@@ -30982,6 +31006,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4926071452529981939, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 41aac14bb7748544f93739474dda2341, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

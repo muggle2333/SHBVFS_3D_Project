@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum PlayerId
 {
@@ -178,7 +180,22 @@ public class Player : Character
         }
         return academyOwnedPoint;
     }
-
+    public void RemoveOwnedLand(GridObject gridObject)
+    {
+        List<GridObject> gridList;
+        if (OwnedLandDic.TryGetValue(gridObject.academy, out gridList))
+        {
+            foreach(var tmpGridObject in gridList)
+            {
+                if(GridManager.Instance.CheckGridObjectIsSame(gridObject,tmpGridObject))
+                {
+                    gridList.Remove(tmpGridObject);
+                    break;
+                }
+            }
+            OwnedLandDic[gridObject.academy] = gridList;
+        }
+    }
     public void RefreshAcademyOwnedPoint()
     {
         List<int> playeracademyOwnedPoint = CountAcademyOwnedPoint().ToList();
@@ -218,6 +235,8 @@ public class Player : Character
     {
         return CurrentActionPoint >= apCost;
     }
+
+
     //public void RefreshLinePath()
     //{
     //    LineRenderer lineRenderer= GetComponentInChildren<LineRenderer>();

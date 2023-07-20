@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 2963298694078238478}
   hpText: {fileID: 2963298694127894350}
+  maxHpText: {fileID: 0}
   defenceText: {fileID: 2963298695000968017}
   attackText: {fileID: 2963298693305966352}
   rangeText: {fileID: 2963298693303323931}
@@ -59,6 +60,9 @@ MonoBehaviour:
   colorList:
   - {r: 0.5, g: 0, b: 0, a: 1}
   - {r: 0, g: 0.3199344, b: 0.49056602, a: 1}
+  cardARText: {fileID: 0}
+  cardADText: {fileID: 0}
+  cardDFText: {fileID: 0}
 --- !u!1 &2963298693138945652
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +130,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1e773033aeb31c64eacba76f77a79fc6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9fdde66461c6dd34eb1f5880efe89fed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -824,7 +828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 767af0a46831a99408090e4cd9d0562b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e288e98f8f16f4f4caffdc3e578ff7a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -901,7 +905,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 82b8e17259fd59b42b29ad54a4d86662, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e105abacca485ea4a9b3ea28b87e1886, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -978,7 +982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55299b5447acf1e488edba230218114f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 41aac14bb7748544f93739474dda2341, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

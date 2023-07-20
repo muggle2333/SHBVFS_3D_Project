@@ -218,5 +218,10 @@ public class GridManager : NetworkBehaviour
     {
         return grid.GetGridObject(gridObject.x, gridObject.z);
     }
+
+    public bool CheckGridObjectIsSame(GridObject gridObject1,GridObject gridObject2)
+    {
+        return gridObject1.x == gridObject2.x && gridObject1.z == gridObject2.z;
+    }
 }
 
