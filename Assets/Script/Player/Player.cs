@@ -159,7 +159,7 @@ public class Player : Character
             OwnedLandDic.Add(gridObject.academy, gridListNew);
         }
 
-        if(IsServer)
+        if(NetworkManager.Singleton.IsServer)
         {
             academyOwnedPoint[(int)gridObject.academy - 1]++;
         }
@@ -204,13 +204,14 @@ public class Player : Character
                 }
             }
             OwnedLandDic[gridObject.academy] = gridList;
-            if (IsServer)
+            if (NetworkManager.Singleton.IsServer)
             {
                 academyOwnedPoint[(int)gridObject.academy - 1]--;
             }
         }
     }
-    public void RefreshAcademyOwnedPoint()
+    [ServerRpc(RequireOwnership =false)]
+    public void RefreshAcademyOwnedPointServerRpc()
     {
         List<int> playeracademyOwnedPoint = CountAcademyOwnedPoint().ToList();
         for (int i = 0; i < playeracademyOwnedPoint.Count; i++)

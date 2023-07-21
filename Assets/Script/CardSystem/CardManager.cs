@@ -224,7 +224,7 @@ public class CardManager : NetworkBehaviour
             {
                 if (redPlayerPlayedCards[i] == CardDataBase.Instance.AllCardList[j].cardId)
                 {
-                    Debug.LogError(CardDataBase.Instance.AllCardList[j].cardId);
+                    //Debug.LogError(CardDataBase.Instance.AllCardList[j].cardId);
                     redPlayerPlayed.Add(CardDataBase.Instance.AllCardList[j]);
                 }
             }
@@ -235,7 +235,7 @@ public class CardManager : NetworkBehaviour
             {
                 if (bluePlayerPlayedCards[i] == CardDataBase.Instance.AllCardList[j].cardId)
                 {
-                    Debug.LogError(CardDataBase.Instance.AllCardList[j].cardId);
+                    //Debug.LogError(CardDataBase.Instance.AllCardList[j].cardId);
                     bluePlayerPlayed.Add(CardDataBase.Instance.AllCardList[j]);
                 }
             }

@@ -48,7 +48,7 @@ public class CardSelectManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(SelectCount[GameplayManager.Instance.currentPlayer]);
+        //Debug.Log(SelectCount[GameplayManager.Instance.currentPlayer]);
     }
 
     public void InitializeCardSelectManager()

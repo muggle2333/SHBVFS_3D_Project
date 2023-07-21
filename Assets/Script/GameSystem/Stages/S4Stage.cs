@@ -11,9 +11,13 @@ public class S4Stage : MonoBehaviour
     public List<int> bluePlayerNeedsToEffect = new List<int>();
     private int i;
     //private Dictionary<Player,>;
-    public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
+    public void Start()
     {
         playedCardDict.Clear();
+    }
+    public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
+    {
+        
         Debug.LogError("S4");
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {
@@ -88,8 +92,9 @@ public class S4Stage : MonoBehaviour
                 }
             }
         }
+        Calculating.Instance.CardDataInitializeClientRpc(playerList[0].Id);
+        Calculating.Instance.CardDataInitializeClientRpc(playerList[1].Id);
 
-        
         TurnbasedSystem.Instance.CompleteStage(GameStage.S4);
     }
 }

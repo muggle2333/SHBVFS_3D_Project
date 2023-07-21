@@ -10,9 +10,13 @@ public class S3Stage : MonoBehaviour
     public List<int> redPlayerNeedsToEffect = new List<int>();
     public List<int> bluePlayerNeedsToEffect = new List<int>();
     private int i;
-    public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
+    public void Start()
     {
         playedCardDict.Clear();
+    }
+    public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
+    {
+        
         Debug.LogError("S3");
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {
