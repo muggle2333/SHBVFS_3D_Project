@@ -57,7 +57,7 @@ public class CardSetting : ScriptableObject
     public EffectStage effectStage;
     public int effectDuration;
     public CardTarget cardTarget;
-    
+    public Texture2D cardTexture;
     //生效次数1、x
     public int effectTime;
 

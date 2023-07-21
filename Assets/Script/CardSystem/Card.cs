@@ -15,6 +15,7 @@ public class Card:MonoBehaviour
     public Text cardName;
     public Text description;
     public Image headPicture;
+    public Texture2D cardTexture;
     public AcademyType academyType;
     public CardCondition cardCondition;
     public EffectStage effectStage;
@@ -39,6 +40,7 @@ public class Card:MonoBehaviour
 
     public void UpdateCardData(CardSetting cardSetting)
     {
+        cardTexture = cardSetting.cardTexture;
         academyEffectNum = new int[6];
         this.cardSetting = cardSetting;
         cardId = cardSetting.cardId;

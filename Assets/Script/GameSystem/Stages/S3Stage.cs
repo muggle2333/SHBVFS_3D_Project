@@ -23,7 +23,7 @@ public class S3Stage : MonoBehaviour
             if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S3)
             {
                 redPlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
-                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.RedPlayer, playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
+                //CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.RedPlayer, playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
             }
         }
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[1]].Count; i++)
@@ -31,7 +31,7 @@ public class S3Stage : MonoBehaviour
             if (playedCardListDict[GameplayManager.Instance.playerList[1]][i].effectStage == EffectStage.S3)
             {
                 bluePlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
-                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
+                //CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
             }
         }
         if (redPlayerNeedsToEffect.Count > 0)

@@ -117,12 +117,8 @@ public class CardManager : NetworkBehaviour
         {
             if (playedCardDict[player][j].cardId == effectCard.cardId)
             {
-                Debug.LogError("Self Animation");
                 if (player == GameplayManager.Instance.currentPlayer)
                 {
-                    //Self Card TakeEffect Animation
-                    //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
-                    
                     var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
                     card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                     card.cardSetting = effectCard;
@@ -131,8 +127,6 @@ public class CardManager : NetworkBehaviour
                 }
                 else
                 {
-                    //Enemy Card TakeEffect Animation
-                    //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
                     var card = Instantiate(CardPrefeb, new Vector3(800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
                     card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                     card.cardSetting = effectCard;

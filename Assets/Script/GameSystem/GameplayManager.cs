@@ -292,7 +292,14 @@ public class GameplayManager : NetworkBehaviour
         Debug.LogError("Get Enemy Fail");
         return playerId;
     }
-
+    [ClientRpc]
+    public void ChangePlayerPriorityClientRpc()
+    {
+        int priorityContainer;
+        priorityContainer = playerList[0].Priority;
+        playerList[0].Priority = playerList[1].Priority;
+        playerList[1].Priority = priorityContainer;
+    }
     public Player PlayerIdToPlayer(PlayerId playerId)
     {
         for (int i = 0; i < playerList.Count; i++)
