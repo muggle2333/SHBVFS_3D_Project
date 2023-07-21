@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5704261030465529034}
   - component: {fileID: 5704261030465529032}
   - component: {fileID: 5704261030465529031}
+  - component: {fileID: 6084720043181725972}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -103,3 +104,31 @@ MonoBehaviour:
   - {r: 0.4811321, g: 0.18633437, b: 0, a: 1}
   - {r: 0.4010784, g: 0, b: 0.5849056, a: 1}
   - {r: 1, g: 0.6316455, b: 0, a: 1}
+--- !u!114 &6084720043181725972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704261030465529035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a03446963d7b24ba76482d6300a459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedList: []
+  selectCount: 1
+  currentSelect:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0

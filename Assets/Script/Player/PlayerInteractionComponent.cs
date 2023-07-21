@@ -21,6 +21,8 @@ public class PlayerInteractionComponent : MonoBehaviour
     [SerializeField] private TMP_Text playerText;
     [SerializeField] private TMP_Text hpText;
 
+    [SerializeField] private GameObject craft;
+
     [SerializeField] private MeshRenderer meshRenderer;
     private bool isPlayingVfx = false;
     private float hitVfxFloat = -1f;
@@ -57,6 +59,14 @@ public class PlayerInteractionComponent : MonoBehaviour
         if (gridObject.landType==LandType.Mountain)
         {
             dirPos += new Vector3(0, 1.7f, 0);
+        }
+        if(gridObject.landType == LandType.Lake)
+        {
+            craft.SetActive(true);
+        }
+        else
+        {
+            craft.SetActive(false);
         }
         //else if(gridObject.landType == LandType.Lake)
         //{

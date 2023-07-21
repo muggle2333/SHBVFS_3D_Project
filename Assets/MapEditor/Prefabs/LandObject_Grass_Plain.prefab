@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7787114256906247977}
-  - component: {fileID: -5781528206909014775}
   m_Layer: 0
   m_Name: LandObject_Grass_Plain
   m_TagString: Untagged
@@ -33,18 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5781528206909014775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3029104005822654262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6696238496625874493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,6 +95,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 23956264375101949, guid: d0e4b21d1da3ff34dbfa68ad25c65e1d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2468417487465394815}
+    - targetCorrespondingSourceObject: {fileID: 23956264375101949, guid: d0e4b21d1da3ff34dbfa68ad25c65e1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4663511948138212733}
   m_SourcePrefab: {fileID: 100100000, guid: d0e4b21d1da3ff34dbfa68ad25c65e1d, type: 3}
 --- !u!4 &6337441930634798458 stripped
 Transform:
@@ -141,3 +131,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2185983309138278462, guid: 0b04c3349eb1f9a4b9b4a98f4f40d72b, type: 3}
+--- !u!114 &4663511948138212733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6681315959507484608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0

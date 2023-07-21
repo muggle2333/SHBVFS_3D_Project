@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858992382896473910}
-  - component: {fileID: 3149547482976684755}
   m_Layer: 0
   m_Name: LandObject_Sand_Forest
   m_TagString: Untagged
@@ -33,32 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3149547482976684755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5616877306582466345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridObject:
-    landType: 0
-    academy: 1
-    meshType: 0
-    owner: {fileID: 0}
-    isHasBuilding: 0
-    canBuild: 1
-    canBeOccupied: 1
-    grid:
-      width: 0
-      length: 0
-    x: 0
-    z: 0
-    isDiscovered: 0
 --- !u!1001 &27361769040965584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -851,6 +824,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 537344516294702406, guid: 7f1c0db4a4ac6a542b41f31aff471e48, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5534828839203921141}
+    - targetCorrespondingSourceObject: {fileID: 537344516294702406, guid: 7f1c0db4a4ac6a542b41f31aff471e48, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4049077600918512442}
   m_SourcePrefab: {fileID: 100100000, guid: 7f1c0db4a4ac6a542b41f31aff471e48, type: 3}
 --- !u!4 &5970197318842614980 stripped
 Transform:
@@ -884,6 +860,32 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2185983309138278462, guid: 0b04c3349eb1f9a4b9b4a98f4f40d72b, type: 3}
+--- !u!114 &4049077600918512442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6454140371372531326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!1001 &8572813646517094453
 PrefabInstance:
   m_ObjectHideFlags: 0

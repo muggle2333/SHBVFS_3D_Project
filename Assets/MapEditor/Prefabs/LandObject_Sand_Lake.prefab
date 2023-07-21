@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1721156284062479341}
-  - component: {fileID: 2876114103869567754}
   m_Layer: 0
   m_Name: LandObject_Sand_Lake
   m_TagString: Untagged
@@ -33,32 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2876114103869567754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5907086253559041010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridObject:
-    landType: 0
-    academy: 1
-    meshType: 0
-    owner: {fileID: 0}
-    isHasBuilding: 0
-    canBuild: 1
-    canBeOccupied: 1
-    grid:
-      width: 0
-      length: 0
-    x: 0
-    z: 0
-    isDiscovered: 0
 --- !u!1001 &5759520642561130163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,6 +99,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6634342472789848557, guid: 505cc427a7c9cf244b887944fa29b0d9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8582115285311592133}
+    - targetCorrespondingSourceObject: {fileID: 6634342472789848557, guid: 505cc427a7c9cf244b887944fa29b0d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3075765753507023810}
   m_SourcePrefab: {fileID: 100100000, guid: 505cc427a7c9cf244b887944fa29b0d9, type: 3}
 --- !u!1 &1440033498932858718 stripped
 GameObject:
@@ -154,6 +130,32 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2185983309138278462, guid: 0b04c3349eb1f9a4b9b4a98f4f40d72b, type: 3}
+--- !u!114 &3075765753507023810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440033498932858718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8067c7f2a6f375f4dae068059c84b7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridObject:
+    landType: 0
+    academy: 1
+    meshType: 0
+    owner: {fileID: 0}
+    isHasBuilding: 0
+    canBuild: 1
+    canBeOccupied: 1
+    grid:
+      width: 0
+      length: 0
+    x: 0
+    z: 0
+    isDiscovered: 0
 --- !u!4 &1781128001052612068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6294409368534035287, guid: 505cc427a7c9cf244b887944fa29b0d9, type: 3}

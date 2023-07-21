@@ -11,5 +11,24 @@ public class GridObjectComponent : MonoBehaviour,IPointerClickHandler
         GameplayManager.Instance.ShowGirdObjectData(gameObject.transform);
 
         gridObject = GridManager.Instance.grid.GetGridObject(gameObject.transform.position);
+
+        
+    }
+
+    private void OnMouseEnter()
+    {
+        gridObject = GridManager.Instance.grid.GetGridObject(gameObject.transform.position);
+        //Debug.Log(gridObject.x+"+"+gridObject.z);
+        SelectManager.Instance.SetCurrentSelectObject(gridObject);
+    }
+
+    private void OnMouseExit()
+    {
+        SelectManager.Instance.RemoveCurrentSelectObject(gridObject);
+    }
+
+    private void OnMouseDown()
+    {
+        SelectManager.Instance.SetSelectObject(gridObject);
     }
 }
