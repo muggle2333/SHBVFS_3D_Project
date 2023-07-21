@@ -12,7 +12,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public bool Interactable = true;
     public bool IsInOpreationStage;
     public bool isSelected;
-    public bool isBuring;
+    public bool isBurning;
     public float targetY;
     public float formerY;
     //public DG.Tweening.Sequence CardDiscardAniamtion;
@@ -362,7 +362,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     }
     private void Update()
     {
-        if (isBuring)
+        if (isBurning)
         {
             cardVFX.SetFloat("_NoiseStrength", vfxFloat);
         }
@@ -370,9 +370,9 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void CardTakeEffectAnimation()
     {
         vfxFloat = 1;
-        isBuring = true;
+        isBurning = true;
         
-        //Interactable = false;
+        Interactable = false;
         this.transform.localPosition = new Vector3(-800, 500, transform.localPosition.z);
         //this.gameObject.SetActive(true);
         var seq = DOTween.Sequence();
@@ -389,7 +389,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         //seq.Append(transform.DOLocalMoveX(-200, 0.4f));
         //seq.Join(transform.DOScale(1f, 0.4f));
         //seq.AppendInterval(0.5f);
-        seq.AppendCallback(() => { isBuring = false; });
+        seq.AppendCallback(() => { isBurning = false; });
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
     public void AddMaterial()
