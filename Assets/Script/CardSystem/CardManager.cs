@@ -19,6 +19,7 @@ public class CardManager : NetworkBehaviour
 
     public int red;
     public int blue;
+    public int redPlayed;
     private void Update()
     {
         red = redPlayerPlayedCards.Count;
@@ -96,58 +97,57 @@ public class CardManager : NetworkBehaviour
     [ClientRpc]
     public void CardTakeEffectClientRpc(PlayerId playerId,int cardId)
     {
-        if(playerId == PlayerId.RedPlayer)
-        {
-            CardTakeEffect(GameplayManager.Instance.playerList[0], cardId);
-        }
-        else
-        {
-            CardTakeEffect(GameplayManager.Instance.playerList[1], cardId);
-        }
+        Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
+        CardTakeEffect(player, CardIdToCardSetting(cardId));
     }
-    public void CardTakeEffect(Player player, int cardId)
+    public CardSetting CardIdToCardSetting(int cardId)
     {
-        //playedCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
-
-        for(int i = 0; i < CardDataBase.Instance.AllCardList.Count; i++)
+        for (int i = 0; i < CardDataBase.Instance.AllCardList.Count; i++)
         {
-            if(cardId == CardDataBase.Instance.AllCardList[i].cardId)
+            if (cardId == CardDataBase.Instance.AllCardList[i].cardId)
             {
-                for (int j = 0; j < playedCardDict[player].Count; j++)
-                {
-                    if (playedCardDict[player][j].cardId == cardId)
-                    {
-                        if (player == GameplayManager.Instance.currentPlayer)
-                        {
-                            //Self Card TakeEffect Animation
-                            //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
-                            var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-                            card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
-                            card.cardSetting = CardDataBase.Instance.AllCardList[i];
-                            card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
-                            playedCardDict[player].RemoveAt(j);
-                        }
-                        else
-                        {
-                            //Enemy Card TakeEffect Animation
-                            //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
-                            var card = Instantiate(CardPrefeb, new Vector3(800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-                            card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
-                            card.cardSetting = CardDataBase.Instance.AllCardList[i];
-                            card.gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
-                            playedCardDict[player].RemoveAt(j);
-                        }
-                    }
-                }
-                if (CardDataBase.Instance.AllCardList[i].cardFounction != null)
-                {
-                    Instantiate(CardDataBase.Instance.AllCardList[i].cardFounction);
-                }
-                calculating.DelataCardData(CardDataBase.Instance.AllCardList[i], player);
-                calculating.CalculatPlayerBaseData(player);
-                calculating.CalaulatPlayerData(player);
+                return CardDataBase.Instance.AllCardList[i];
             }
         }
+        return null;
+    }
+    public void CardTakeEffect(Player player, CardSetting effectCard)
+    {
+        for (int j = 0; j < playedCardDict[player].Count; j++)
+        {
+            if (playedCardDict[player][j].cardId == effectCard.cardId)
+            {
+                Debug.LogError("Self Animation");
+                if (player == GameplayManager.Instance.currentPlayer)
+                {
+                    //Self Card TakeEffect Animation
+                    //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
+                    
+                    var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+                    card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
+                    card.cardSetting = effectCard;
+                    card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
+                    RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
+                }
+                else
+                {
+                    //Enemy Card TakeEffect Animation
+                    //playedCardDict[player][j].gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
+                    var card = Instantiate(CardPrefeb, new Vector3(800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+                    card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
+                    card.cardSetting = effectCard;
+                    card.gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
+                    RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
+                }
+            }
+        }
+        if (effectCard.cardFounction != null)
+        {
+            Instantiate(effectCard.cardFounction);
+        }
+        calculating.DelataCardData(effectCard, player);
+        calculating.CalculatPlayerBaseData(player);
+        calculating.CalaulatPlayerData(player);
     }
     [ServerRpc(RequireOwnership = false)]
     public void AddCardToPlayerHandServerRpc(PlayerId playerId,int cardId)
@@ -179,12 +179,12 @@ public class CardManager : NetworkBehaviour
         if (playerId == PlayerId.RedPlayer)
         {
             redPlayerPlayedCards.Add(cardId);
-            RefreshPlayedCardDictClientRpc();
+            Invoke("RefreshPlayedCardDictClientRpc", 1);
         }
         else
         {
             bluePlayerPlayedCards.Add(cardId);
-            RefreshPlayedCardDictClientRpc();
+            Invoke("RefreshPlayedCardDictClientRpc", 1);
         }
     }
     [ServerRpc(RequireOwnership = false)]
@@ -199,7 +199,7 @@ public class CardManager : NetworkBehaviour
                     redPlayerPlayedCards.RemoveAt(i);
                 }
             }
-            RefreshPlayedCardDictClientRpc();
+            Invoke("RefreshPlayedCardDictClientRpc", 1);
         }
         else
         {
@@ -210,7 +210,7 @@ public class CardManager : NetworkBehaviour
                     bluePlayerPlayedCards.RemoveAt(i);
                 }
             }
-            RefreshPlayedCardDictClientRpc();
+            Invoke("RefreshPlayedCardDictClientRpc", 1);
         }
     }
     [ClientRpc]

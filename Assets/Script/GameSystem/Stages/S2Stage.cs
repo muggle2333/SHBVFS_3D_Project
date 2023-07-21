@@ -41,7 +41,7 @@ public class S2Stage : MonoBehaviour
             if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S2)
             {
                 redPlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
-                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.RedPlayer,playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
+                //CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.RedPlayer,playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
             }
         }
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[1]].Count; i++)
@@ -49,7 +49,7 @@ public class S2Stage : MonoBehaviour
             if (playedCardListDict[GameplayManager.Instance.playerList[1]][i].effectStage == EffectStage.S2)
             {
                 bluePlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
-                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
+                //CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
             }
         }
 
@@ -65,7 +65,7 @@ public class S2Stage : MonoBehaviour
         }
         playerList = new List<Player>();
         playerList = GameplayManager.Instance.GetPlayer();
-        Debug.LogError("Red has played " + playedCardDict[GameplayManager.Instance.playerList[0]].Count + "cards");
+        Debug.LogError("Red has played " + playedCardListDict[GameplayManager.Instance.playerList[0]].Count + "cards");
         StartCoroutine("S2CardTakeEffect");
 
     }

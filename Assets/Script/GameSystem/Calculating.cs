@@ -111,10 +111,7 @@ public class Calculating : NetworkBehaviour
         cardAP = 0;
         cardHP = 0;
         cardFreeMoveNum = 0;
-        if (NetworkManager.Singleton.IsServer)
-        {
-            CardAcademyEffectNumInitializeServerRpc(playerId);
-        }
+        
         player.cardAD = 0;
         player.cardAR = 0;
         player.cardDF = 0;
@@ -125,8 +122,11 @@ public class Calculating : NetworkBehaviour
             totalCardDefenseDic[player] = 0;
             totalCardAttackDamageDic[player] = 0;
         }
+        if (NetworkManager.Singleton.IsServer)
+        {
+            CardAcademyEffectNumInitializeServerRpc(playerId);
+        }
 
-        
     }
     [ServerRpc]
     public void CardAcademyEffectNumInitializeServerRpc(PlayerId playerId)
