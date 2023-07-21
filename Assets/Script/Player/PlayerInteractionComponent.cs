@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ public class PlayerInteractionComponent : MonoBehaviour
     [SerializeField] private TMP_Text hpText;
 
     [SerializeField] private MeshRenderer meshRenderer;
+    private bool isPlayingVfx = false;
+    private float hitVfxFloat = -1f;
     //private void Start()
     //{
     //    canvas= GetComponent<Canvas>();
@@ -34,8 +37,12 @@ public class PlayerInteractionComponent : MonoBehaviour
         canvas.transform.LookAt(targetPos, targetOrientation);
         if(Input.GetMouseButton(0))
         {
-            PlayHitVfx();
+            StartCoroutine("PlayHitVfx");
         }
+        if (isPlayingVfx)
+        {
+            meshRenderer.materials[5].SetFloat("_Float", hitVfxFloat);
+        }        
     }
     public void SetPlayerName(bool isSelf)
     {
@@ -45,15 +52,18 @@ public class PlayerInteractionComponent : MonoBehaviour
     public void Move(GridObject gridObject)
     {
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
-        if(gridObject.landType==LandType.Mountain)
+        transform.LookAt(dirPos);
+
+        if (gridObject.landType==LandType.Mountain)
         {
             dirPos += new Vector3(0, 1.7f, 0);
         }
-        else if(gridObject.landType == LandType.Lake)
-        {
-            dirPos += new Vector3(0, -1f, 0);
-        }
+        //else if(gridObject.landType == LandType.Lake)
+        //{
+        //    dirPos += new Vector3(0, -1f, 0);
+        //}
         transform.position = dirPos;
+        
         GetComponent<Player>().currentGrid = gridObject;
         GetComponent<Player>().trueGrid = gridObject;
 
@@ -73,14 +83,15 @@ public class PlayerInteractionComponent : MonoBehaviour
         }
         playerVfx.SetActive(true);
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
+        transform.LookAt(dirPos);
         if (gridObject.landType == LandType.Mountain)
         {
             dirPos += new Vector3(0, 1.7f, 0);
         }
-        else if (gridObject.landType == LandType.Lake)
-        {
-            dirPos += new Vector3(0, -1f, 0);
-        }
+        //else if (gridObject.landType == LandType.Lake)
+        //{
+        //    dirPos += new Vector3(0, -1f, 0);
+        //}
         playerVfx.transform.position = dirPos;
         GetComponent<Player>().currentGrid = gridObject;
     }
@@ -154,9 +165,15 @@ public class PlayerInteractionComponent : MonoBehaviour
         attackLine.positionCount = 0;
     }
 
-    public void PlayHitVfx()
+    IEnumerator PlayHitVfx()
     {
-        Debug.LogError(meshRenderer.materials[5]);
-        meshRenderer.materials[5].SetFloat("Time", 1f);
+        hitVfxFloat = -1;
+        isPlayingVfx = true;
+        DOTween.To(() => this.hitVfxFloat, x => this.hitVfxFloat = x, 1, 1f);
+        yield return new WaitForSeconds(1f);
+        DOTween.To(() => this.hitVfxFloat, x => this.hitVfxFloat = x, -1, 1f);
+        yield return new WaitForSeconds(1f);
+        isPlayingVfx= false;
+        yield return null;
     }
 }

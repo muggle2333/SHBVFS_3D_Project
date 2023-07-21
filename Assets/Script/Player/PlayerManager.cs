@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -106,6 +107,10 @@ public class PlayerManager : NetworkBehaviour
         player.TrueActionPoint = player.CurrentActionPoint;
     }
 
+    public void ResetPlayerData(Player player)
+    {
+        player.currentGrid = player.trueGrid;
+    }
     public void TryInteract(PlayerInteractType playerInteractType,Player player, GridObject gridObject)
     {
         switch (playerInteractType)
@@ -174,6 +179,8 @@ public class PlayerManager : NetworkBehaviour
     public void InitializePlayerStartPoint(Player player,GridObject gridObject)
     {
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
+        var direction = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
+        player.transform.LookAt(direction);
         GridManager.Instance.DiscoverGridObject(player, gridObject);
         player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
 
@@ -191,14 +198,10 @@ public class PlayerManager : NetworkBehaviour
             drawCardComponent.DrawCard(player);
         }
     }
-    public void InitializePlayerState(Player player)
-    {
-        player.OccupyGrid(player.currentGrid);
-        drawCardComponent.DrawCard(player);
-    }
     public bool MovePlayer(Player player,GridObject gridObject)
     {
         //判断是否可以执行
+        //Debug.LogError(CheckMoveable(player, gridObject)+" "+gridObject.x +"|||"+gridObject.z );
         if (!CheckMoveable(player, gridObject)) return false;
         //if (player.Id != GameplayManager.Instance.player.Id) return false;
         player.targetGrid = gridObject;
@@ -340,6 +343,16 @@ public class PlayerManager : NetworkBehaviour
     {
         player.targetGrid =gridObject;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value==GameStage.MoveStage)
+        {
+            Debug.LogError(player.IsApEnough(apCost) + " \\" + CheckGridObjectIsSame(gridObject, player.currentGrid));
+            //if(CheckGridObjectIsSame(gridObject, player.currentGrid))
+            //{
+                //Debug.Log(gridObject.x + "___" + gridObject.z);
+                //Debug.Log(player.currentGrid.x + "___" + player.currentGrid.z);
+            //}
+        }
+
         if (CheckGridObjectIsSame(gridObject,player.currentGrid)) return false;
         return player.IsApEnough(apCost) && CheckDistance(player, gridObject) <= 1;
     }

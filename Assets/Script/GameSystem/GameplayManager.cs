@@ -159,10 +159,11 @@ public class GameplayManager : NetworkBehaviour
     public void ResetControlStageClientRpc()
     {
         GridManager.Instance.ResetGrid();
-        //foreach (var player in playerList)
-        //{
-        //    PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
-        //}
+        foreach (var player in playerList)
+        {
+            //PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
+            PlayerManager.Instance.ResetPlayerData(player);
+        }
         UIManager.Instance.ShowGridObjectUI(false, null);
     }
     public void StartS2Stage()
