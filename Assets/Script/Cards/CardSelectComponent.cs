@@ -372,7 +372,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         vfxFloat = 1;
         isBurning = true;
         
-        //Interactable = false;
+        Interactable = false;
         this.transform.localPosition = new Vector3(-800, 500, transform.localPosition.z);
         //this.gameObject.SetActive(true);
         var seq = DOTween.Sequence();
