@@ -103,6 +103,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.SetSiblingIndex(index);
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
+        cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
     }
@@ -115,8 +116,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(targetY, duration);
         isSelected = true;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
-        if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] <= 0)
-            return;//no need to discard
         foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
         {
             if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] <= cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
@@ -132,13 +131,22 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             if (this.gameObject == card.gameObject) continue;
             card.gameObject.GetComponent<CardSelectComponent>().Info.SetActive(false);
         }//turn off Info
+        if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] <= 0)
+            return;//no need to discard
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, true);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, true);
-        UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
+        cardSelectManager.ToDiscardText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer];
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, true);
+            cardSelectManager.ToDiscardText.color = Color.green;
         }
+        else
+        {
+            UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
+            cardSelectManager.ToDiscardText.color = Color.red;
+        }
+
     }
 
     public void EndSelectDiscard()
@@ -148,6 +156,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
+        cardSelectManager.ToDiscardText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer];
+        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
+        {
+            UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
+            cardSelectManager.ToDiscardText.color = Color.red;
+        }
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
         {
             UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);

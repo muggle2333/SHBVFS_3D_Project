@@ -160,7 +160,7 @@ public class GridObject
     }
     public void SetOwner(Player player,bool isControlStage)
     {
-        if (owner != player)
+        if (owner!=null && owner != player)
         {
             owner.RemoveOwnedLand(this);
         }

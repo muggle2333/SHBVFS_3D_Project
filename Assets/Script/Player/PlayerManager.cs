@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -176,14 +176,30 @@ public class PlayerManager : NetworkBehaviour
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
         GridManager.Instance.DiscoverGridObject(player, gridObject);
         player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
+
     }
-    public void SendCardWhenGameStart(Player player)
+    public void SetPlayerSetting(Player player)
     {
-        drawCardComponent.DrawBasicCard(player);
-        drawCardComponent.DrawBasicCard(player);
+        player.currentGrid = GridManager.Instance.ManageOwner(player.currentGrid, player, false);
+        GridManager.Instance.DiscoverGridObject(player, player.currentGrid);
+        player.currentGrid = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
+
+        //player.OccupyGrid(gridObject);
+        GridVfxManager.Instance.UpdateVfx(player.currentGrid);
+        if ((int)player.Id == (int)NetworkManager.Singleton.LocalClientId)
+        {
+            drawCardComponent.DrawCard(player);
+        }
+    }
+    public void InitializePlayerState(Player player)
+    {
+        player.OccupyGrid(player.currentGrid);
+        drawCardComponent.DrawCard(player);
     }
     public bool MovePlayer(Player player,GridObject gridObject)
     {
+        //判断是否可以执行
+        if (!CheckMoveable(player, gridObject)) return false;
         //if (player.Id != GameplayManager.Instance.player.Id) return false;
         player.targetGrid = gridObject;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
@@ -208,6 +224,8 @@ public class PlayerManager : NetworkBehaviour
 
     public bool Occupy(Player player,GridObject gridObject,bool isControlStage)
     {
+        if (!CheckOccupiable(player, gridObject)) return false;
+
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Occupy, player);
         if (!player.UseActionPoint(apCost)) return false;
         gridObject = GridManager.Instance.ManageOwner(gridObject, player,isControlStage);
@@ -235,6 +253,8 @@ public class PlayerManager : NetworkBehaviour
 
     public bool Build(Player player,GridObject gridObject, bool isControlStage)
     {
+        if (!CheckBuildable(player, gridObject)) return false;
+
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Build, player);
         if (!player.UseActionPoint(apCost)) return false;
 
@@ -254,6 +274,8 @@ public class PlayerManager : NetworkBehaviour
     }
     public bool Search(Player player)
     {
+        if (!CheckSearchable(player, player.currentGrid)) return false;
+
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
         if (!player.UseActionPoint(apCost)) return false;
 

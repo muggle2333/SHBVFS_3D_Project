@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 
-public class PlayerAcademyBuffcomponent : MonoBehaviour
+public class PlayerAcademyBuffcomponent : NetworkBehaviour
 {
     public Dictionary<AcademyType, AcademyBuffData[]> academyBuffDict = new Dictionary<AcademyType, AcademyBuffData[]>();
     public Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict = new Dictionary<AcademyType, AcademyBuffData>();
@@ -28,7 +29,6 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
             PlayerAcademyBuffDict.Add((AcademyType)(i + 1), academyBuffData);
         }
     }
-    
 
     // Update is called once per frame
     /*void Update()
@@ -44,13 +44,14 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            UpdatePlayerAcademyBuff(player);
+            UpdatePlayerAcademyBuffServerRpc(player);
         }
     }*/
-
-    public void UpdatePlayerAcademyBuff(Player player)
+    [ServerRpc]
+    public void UpdatePlayerAcademyBuffServerRpc(PlayerId playerId)
     {
-        for(int i=0; i < 6; i++)
+        Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
+        for (int i=0; i < 6; i++)
         {
             player.totalAcademyOwnedPoint[i] = player.academyOwnedPoint[i] + player.cardAcademyEffectNum[i];
         }
@@ -71,6 +72,6 @@ public class PlayerAcademyBuffcomponent : MonoBehaviour
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[0];
             }
         }
-        FindObjectOfType<Calculating>().AcademyBuff(PlayerAcademyBuffDict,player);
+        FindObjectOfType<Calculating>().AcademyBuffClientRpc(playerId);
     }
 }

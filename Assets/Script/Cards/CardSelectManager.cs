@@ -6,11 +6,13 @@ using DG.Tweening;
 using UnityEngine.EventSystems;
 using Unity.Netcode;
 using System;
+using TMPro;
 
 public class CardSelectManager : MonoBehaviour
 {
     public Dictionary<Player, int> SelectCount = new Dictionary<Player, int>();
     public Dictionary<Player, int> maxSelected = new Dictionary<Player, int>();
+    public TMP_Text ToDiscardText;
     public bool IsRetracted;
     public float RetractOffset;
     public float offset;
@@ -43,6 +45,12 @@ public class CardSelectManager : MonoBehaviour
         if (FindObjectOfType<NetworkManager>()) return;
         InitializeCardSelectManager();
     }
+
+    private void Update()
+    {
+        //Debug.Log(SelectCount[GameplayManager.Instance.currentPlayer]);
+    }
+
     public void InitializeCardSelectManager()
     {
         SelectCount[GameplayManager.Instance.currentPlayer] = 0;
@@ -65,8 +73,8 @@ public class CardSelectManager : MonoBehaviour
             }
         }
         UpdateCardPos(player);
-        GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] = 0;
-        maxSelected[GameplayManager.Instance.currentPlayer] = 1;
+        GameplayManager.Instance.discardStage.discardCount[player] = 0;
+        maxSelected[player] = 1;
         OnDiscardCard?.Invoke(this,EventArgs.Empty);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
     }

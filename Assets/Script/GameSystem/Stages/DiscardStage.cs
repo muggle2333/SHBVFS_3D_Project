@@ -90,6 +90,7 @@ public class DiscardStage : NetworkBehaviour
     [ClientRpc]
     public void AutoDiscardClientRpc()
     {
+        PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
         Player player = GameplayManager.Instance.currentPlayer;
         if (GameplayManager.Instance.discardStage.discardCount[player] > 0)
         {

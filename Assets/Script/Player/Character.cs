@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : NetworkBehaviour
 {
     public int HP;
     //public NetworkVariable<int> HPNetwork = new NetworkVariable<int>(0);

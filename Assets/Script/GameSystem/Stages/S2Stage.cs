@@ -11,26 +11,31 @@ public class S2Stage : MonoBehaviour
     public List<int> redPlayerNeedsToEffect = new List<int>();
     public List<int> bluePlayerNeedsToEffect = new List<int>();
     private int i;
+    public void Start()
+    {
+        playedCardDict.Clear();
+    }
     public void StartStage(Dictionary<Player,List<CardSetting>> playedCardListDict)
     {
 
-        playedCardDict.Clear();
+        
         Debug.LogError("S2");
-        PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
-/*        if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.player] > 0)
-        {
-            for (int i = 0; i < GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.player]; i++)
-            {
-                CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player][0].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
-                CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player].RemoveAt(0);
-            }
-            foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player])
-            {
-                card.GetComponent<CardSelectComponent>().EndSelectDiscard();
-            }
-            PlayerManager.Instance.cardSelectManager.SelectCount[GameplayManager.Instance.player] = 0;
-            PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.player);
-        }*/
+        
+        //PlayerManager.Instance.cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer] = 1;
+        //if (GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.player] > 0)
+        //{
+        //    for (int i = 0; i < GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.player]; i++)
+        //    {
+        //        CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player][0].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
+        //        CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player].RemoveAt(0);
+        //    }
+        //    foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.player])
+        //    {
+        //        card.GetComponent<CardSelectComponent>().EndSelectDiscard();
+        //    }
+        //    PlayerManager.Instance.cardSelectManager.SelectCount[GameplayManager.Instance.player] = 0;
+        //    PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.player);
+        //}
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {
             if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S2)
@@ -47,6 +52,7 @@ public class S2Stage : MonoBehaviour
                 CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
             }
         }
+
         if(redPlayerNeedsToEffect.Count > 0)
         {
             Debug.LogError("S2 RED" + redPlayerNeedsToEffect.Count);
@@ -59,8 +65,7 @@ public class S2Stage : MonoBehaviour
         }
         playerList = new List<Player>();
         playerList = GameplayManager.Instance.GetPlayer();
-        Calculating.Instance.CardDataInitializeClientRpc(playerList[0].Id);
-        Calculating.Instance.CardDataInitializeClientRpc(playerList[1].Id);
+        Debug.LogError("Red has played " + playedCardDict[GameplayManager.Instance.playerList[0]].Count + "cards");
         StartCoroutine("S2CardTakeEffect");
 
     }
