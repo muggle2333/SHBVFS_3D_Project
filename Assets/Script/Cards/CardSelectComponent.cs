@@ -398,6 +398,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     }
     public void EnemyCardTakeEffectAnimation()
     {
+        vfxFloat = 1;
+        isBurning = true;
         Interactable = false;
         this.transform.localPosition = new Vector3(800, 500, transform.localPosition.z);
         //this.gameObject.SetActive(true);
@@ -407,9 +409,15 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.Join(transform.DOScale(1.5f, 0.4f));
         seq.AppendCallback(() => { this.Info.SetActive(true); });
         seq.AppendInterval(1f);
+        Invoke("AddMaterial", 1);
+
+        //burn function
+        seq.AppendCallback(() => { DOTween.To(() => vfxFloat, x => vfxFloat = x, 0, 1f); });
+        seq.AppendInterval(1f);
         //seq.Append(transform.DOLocalMoveX(-200, 0.4f));
         //seq.Join(transform.DOScale(1f, 0.4f));
         //seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { isBurning = false; });
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 }
