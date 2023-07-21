@@ -27,7 +27,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     void Start()
     {
         cardVFX.SetTexture("_MainText",gameObject.GetComponent<Card>().cardTexture);
-        Interactable = true;
+        //Interactable = true;
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
         cardSelectManager = PlayerManager.Instance.cardSelectManager;
         isSelected = false;
