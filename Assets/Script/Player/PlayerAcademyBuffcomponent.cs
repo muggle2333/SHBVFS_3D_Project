@@ -44,13 +44,14 @@ public class PlayerAcademyBuffcomponent : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            UpdatePlayerAcademyBuff(player);
+            UpdatePlayerAcademyBuffServerRpc(player);
         }
     }*/
-
-    public void UpdatePlayerAcademyBuff(Player player)
+    [ServerRpc]
+    public void UpdatePlayerAcademyBuffServerRpc(PlayerId playerId)
     {
-        for(int i=0; i < 6; i++)
+        Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
+        for (int i=0; i < 6; i++)
         {
             player.totalAcademyOwnedPoint[i] = player.academyOwnedPoint[i] + player.cardAcademyEffectNum[i];
         }
@@ -71,6 +72,6 @@ public class PlayerAcademyBuffcomponent : NetworkBehaviour
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[0];
             }
         }
-        FindObjectOfType<Calculating>().AcademyBuff(PlayerAcademyBuffDict,player);
+        FindObjectOfType<Calculating>().AcademyBuffClientRpc(playerId);
     }
 }
