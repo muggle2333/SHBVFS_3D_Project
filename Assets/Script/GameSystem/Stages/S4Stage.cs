@@ -24,7 +24,7 @@ public class S4Stage : MonoBehaviour
             if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S4)
             {
                 redPlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
-                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.RedPlayer, playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
+                //CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.RedPlayer, playedCardListDict[GameplayManager.Instance.playerList[0]][i].cardId);
             }
         }
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[1]].Count; i++)
@@ -32,7 +32,7 @@ public class S4Stage : MonoBehaviour
             if (playedCardListDict[GameplayManager.Instance.playerList[1]][i].effectStage == EffectStage.S4)
             {
                 bluePlayerNeedsToEffect.Add(playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
-                CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
+                //CardManager.Instance.RemovePlayedCardServerRpc(PlayerId.BluePlayer, playedCardListDict[GameplayManager.Instance.playerList[1]][i].cardId);
             }
         }
         if (redPlayerNeedsToEffect.Count > 0)
@@ -64,7 +64,7 @@ public class S4Stage : MonoBehaviour
                         playedCardDict.Remove(priorityList[i]);
                         break;
                     }
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(3);
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
                     playedCardDict[priorityList[i]].RemoveAt(0);
                     //Check dying

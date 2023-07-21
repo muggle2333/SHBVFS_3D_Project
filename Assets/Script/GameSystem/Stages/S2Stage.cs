@@ -84,7 +84,7 @@ public class S2Stage : MonoBehaviour
                         break;
                     }
                     //Use card
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(3);
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
                     playedCardDict[priorityList[i]].RemoveAt(0);
                     //Check dying

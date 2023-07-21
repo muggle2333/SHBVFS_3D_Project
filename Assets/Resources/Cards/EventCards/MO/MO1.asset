@@ -21,8 +21,9 @@ MonoBehaviour:
   effectStage: 2
   effectDuration: 0
   cardTarget: 1
+  cardTexture: {fileID: 2800000, guid: 5ee5540dccaed5c4c96be965a10a54eb, type: 3}
   effectTime: 0
-  academyEffectNum: 0000000000000000fcffffff000000000000000000000000
+  academyEffectNum: 000000000000000000000000000000000000000000000000
   Damage: 0
   playerDataEffect:
     hp: 0

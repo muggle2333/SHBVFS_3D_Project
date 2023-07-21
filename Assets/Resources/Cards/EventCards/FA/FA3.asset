@@ -22,6 +22,7 @@ MonoBehaviour:
   effectStage: 4
   effectDuration: 0
   cardTarget: 0
+  cardTexture: {fileID: 2800000, guid: 672f10b7325140141b992e87f36e0806, type: 3}
   effectTime: 0
   academyEffectNum: 000000000000000000000000000000000000000000000000
   Damage: 0

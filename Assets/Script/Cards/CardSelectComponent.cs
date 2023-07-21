@@ -12,6 +12,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public bool Interactable = true;
     public bool IsInOpreationStage;
     public bool isSelected;
+    public bool isBurning;
     public float targetY;
     public float formerY;
     //public DG.Tweening.Sequence CardDiscardAniamtion;
@@ -20,9 +21,13 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     [SerializeField] private float duration;
     public GameObject Info;
     public CardSelectManager cardSelectManager;
+    
+    [SerializeField] private Material cardVFX;
+    private float vfxFloat;
     void Start()
     {
-        Interactable = true;
+        cardVFX.SetTexture("_MainText",gameObject.GetComponent<Card>().cardTexture);
+        //Interactable = true;
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
         cardSelectManager = PlayerManager.Instance.cardSelectManager;
         isSelected = false;
@@ -49,6 +54,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.LogWarning(Interactable);
         if (Interactable == false) return;
         if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
         {
@@ -354,9 +360,18 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
-
+    private void Update()
+    {
+        if (isBurning)
+        {
+            cardVFX.SetFloat("_NoiseStrength", vfxFloat);
+        }
+    }
     public void CardTakeEffectAnimation()
     {
+        vfxFloat = 1;
+        isBurning = true;
+        
         Interactable = false;
         this.transform.localPosition = new Vector3(-800, 500, transform.localPosition.z);
         //this.gameObject.SetActive(true);
@@ -366,14 +381,25 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.Join(transform.DOScale(1.5f, 0.4f));
         seq.AppendCallback(() => { this.Info.SetActive(true); });
         seq.AppendInterval(1f);
+        Invoke("AddMaterial", 1);
+        
+        //burn function
+        seq.AppendCallback(() => { DOTween.To(() => vfxFloat, x => vfxFloat = x, 0, 1f); });
+        seq.AppendInterval(1f);
         //seq.Append(transform.DOLocalMoveX(-200, 0.4f));
         //seq.Join(transform.DOScale(1f, 0.4f));
         //seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { isBurning = false; });
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
-
+    public void AddMaterial()
+    {
+        gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = cardVFX;
+    }
     public void EnemyCardTakeEffectAnimation()
     {
+        vfxFloat = 1;
+        isBurning = true;
         Interactable = false;
         this.transform.localPosition = new Vector3(800, 500, transform.localPosition.z);
         //this.gameObject.SetActive(true);
@@ -383,9 +409,15 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.Join(transform.DOScale(1.5f, 0.4f));
         seq.AppendCallback(() => { this.Info.SetActive(true); });
         seq.AppendInterval(1f);
+        Invoke("AddMaterial", 1);
+
+        //burn function
+        seq.AppendCallback(() => { DOTween.To(() => vfxFloat, x => vfxFloat = x, 0, 1f); });
+        seq.AppendInterval(1f);
         //seq.Append(transform.DOLocalMoveX(-200, 0.4f));
         //seq.Join(transform.DOScale(1f, 0.4f));
         //seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { isBurning = false; });
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 }
