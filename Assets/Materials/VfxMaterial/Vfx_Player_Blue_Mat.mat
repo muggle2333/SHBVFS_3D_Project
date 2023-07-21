@@ -94,6 +94,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _DstBlendAlpha: 10
+    - _EdgeWidth: 0.01
     - _EnvironmentReflections: 1
     - _Float: -1
     - _GlossMapScale: 1

@@ -19,6 +19,8 @@ public class PlayerInteractionComponent : MonoBehaviour
     [SerializeField] private LineRenderer attackLine;
     [SerializeField] private TMP_Text playerText;
     [SerializeField] private TMP_Text hpText;
+
+    [SerializeField] private MeshRenderer meshRenderer;
     //private void Start()
     //{
     //    canvas= GetComponent<Canvas>();
@@ -30,7 +32,10 @@ public class PlayerInteractionComponent : MonoBehaviour
         Vector3 targetPos = canvas.transform.position + Camera.main.transform.rotation * Vector3.forward;
         Vector3 targetOrientation = Camera.main.transform.rotation * Vector3.up;
         canvas.transform.LookAt(targetPos, targetOrientation);
-
+        if(Input.GetMouseButton(0))
+        {
+            PlayHitVfx();
+        }
     }
     public void SetPlayerName(bool isSelf)
     {
@@ -149,4 +154,9 @@ public class PlayerInteractionComponent : MonoBehaviour
         attackLine.positionCount = 0;
     }
 
+    public void PlayHitVfx()
+    {
+        Debug.LogError(meshRenderer.materials[5]);
+        meshRenderer.materials[5].SetFloat("Time", 1f);
+    }
 }

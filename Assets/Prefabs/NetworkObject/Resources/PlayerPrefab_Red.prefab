@@ -382,6 +382,7 @@ MonoBehaviour:
   attackLine: {fileID: 5637906135021775142}
   playerText: {fileID: 9099003167912751039}
   hpText: {fileID: 1812273555563892226}
+  meshRenderer: {fileID: 2216558283354736458}
 --- !u!114 &780280818429077314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,5 +1196,10 @@ PrefabInstance:
 --- !u!4 &1047615638388931621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be08490fe71c38a488b5a55f9b07c151, type: 3}
+  m_PrefabInstance: {fileID: 649461324093168590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2216558283354736458 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: be08490fe71c38a488b5a55f9b07c151, type: 3}
   m_PrefabInstance: {fileID: 649461324093168590}
   m_PrefabAsset: {fileID: 0}
