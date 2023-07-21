@@ -45,6 +45,12 @@ public class CardSelectManager : MonoBehaviour
         if (FindObjectOfType<NetworkManager>()) return;
         InitializeCardSelectManager();
     }
+
+    private void Update()
+    {
+        Debug.Log(SelectCount[GameplayManager.Instance.currentPlayer]);
+    }
+
     public void InitializeCardSelectManager()
     {
         SelectCount[GameplayManager.Instance.currentPlayer] = 0;
@@ -67,8 +73,8 @@ public class CardSelectManager : MonoBehaviour
             }
         }
         UpdateCardPos(player);
-        GameplayManager.Instance.discardStage.discardCount[GameplayManager.Instance.currentPlayer] = 0;
-        maxSelected[GameplayManager.Instance.currentPlayer] = 1;
+        GameplayManager.Instance.discardStage.discardCount[player] = 0;
+        maxSelected[player] = 1;
         OnDiscardCard?.Invoke(this,EventArgs.Empty);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
     }

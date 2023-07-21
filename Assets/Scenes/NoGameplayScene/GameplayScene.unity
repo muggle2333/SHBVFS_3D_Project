@@ -21448,6 +21448,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4164202119042685852, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+      propertyPath: cardWidth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164202119042685852, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: ToDiscardText
       value: 
       objectReference: {fileID: 1174562876}
