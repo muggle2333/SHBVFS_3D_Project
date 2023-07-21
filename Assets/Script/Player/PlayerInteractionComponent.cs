@@ -133,9 +133,10 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void RefreshLinePath()
     {
-        pathLine.transform.rotation = Quaternion.LookRotation(new Vector3(0, -0.5f, 0), pathLine.transform.up);
+        //pathLine.transform.rotation = Quaternion.LookRotation(new Vector3(0, -0.5f, 0), pathLine.transform.up);
         pathLine.positionCount = 1;
         pathLine.SetPosition(0, transform.position + new Vector3(0, 0.1f, 0));
+
     }
 
     public void DeduceFirstPath()
@@ -154,9 +155,21 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void SetAttackPath(Transform start,Transform target)
     {
-        attackLine.positionCount = 2;
-        attackLine.SetPosition(0,start.position + new Vector3(0, 0.1f, 0));
-        attackLine.SetPosition(1,target.position + new Vector3(0, 0.1f, 0));
+        //attackLine.positionCount = 2;
+        //attackLine.SetPosition(0,start.position + new Vector3(0, 0.1f, 0));
+        //attackLine.SetPosition(1,target.position + new Vector3(0, 0.1f, 0));
+        int lineNum = 10;
+        attackLine.positionCount = lineNum;
+        Vector3 startPos = start.position + new Vector3(0, 3.1f, 0);
+        Vector3 endPos = target.position + new Vector3(0, 3.1f, 0);
+        float step = 1f / lineNum;
+        for(int i=0; i <= lineNum; i++)
+        {
+            float  t = step* i;
+            Vector3 position = CalculateParabola(startPos, endPos, t);
+            attackLine.SetPosition(i-1, position);
+        }
+        
         Invoke("HideAttackPath", 1f);
     }
 
@@ -175,5 +188,22 @@ public class PlayerInteractionComponent : MonoBehaviour
         yield return new WaitForSeconds(1f);
         isPlayingVfx= false;
         yield return null;
+    }
+
+    private Vector3 CalculateParabola(Vector3 start, Vector3 end, float t)
+    {
+        Vector3 height = Vector3.up * (end - start).magnitude * 0.3f;
+        Vector3 midPoint = (start + end) * 0.5f + height;
+
+        Vector3 P0 = start;
+        Vector3 P1 = midPoint;
+        Vector3 P2 = end;
+        float u = 1 - t;
+        float tt = t * t;
+        float uu = u * u;
+        Vector3 p = uu * P0;
+        p += 2 * u * t * P1;
+        p += tt * P2;
+        return p;
     }
 }

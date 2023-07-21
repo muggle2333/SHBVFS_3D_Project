@@ -343,15 +343,15 @@ public class PlayerManager : NetworkBehaviour
     {
         player.targetGrid =gridObject;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
-        if(TurnbasedSystem.Instance.CurrentGameStage.Value==GameStage.MoveStage)
-        {
-            Debug.LogError(player.IsApEnough(apCost) + " \\" + CheckGridObjectIsSame(gridObject, player.currentGrid));
+        //if(TurnbasedSystem.Instance.CurrentGameStage.Value==GameStage.MoveStage)
+        //{
+            //Debug.LogError(player.IsApEnough(apCost) + " \\" + CheckGridObjectIsSame(gridObject, player.currentGrid));
             //if(CheckGridObjectIsSame(gridObject, player.currentGrid))
             //{
                 //Debug.Log(gridObject.x + "___" + gridObject.z);
                 //Debug.Log(player.currentGrid.x + "___" + player.currentGrid.z);
             //}
-        }
+        //}
 
         if (CheckGridObjectIsSame(gridObject,player.currentGrid)) return false;
         return player.IsApEnough(apCost) && CheckDistance(player, gridObject) <= 1;

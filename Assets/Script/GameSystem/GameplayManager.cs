@@ -185,11 +185,21 @@ public class GameplayManager : NetworkBehaviour
             PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
         }
     }
-
+    [ClientRpc]
+    public void RefreshAfterMoveStageClientRpc()
+    {
+        foreach(var player in playerList)
+        {
+            player.GetComponentInChildren<PlayerInteractionComponent>().RefreshLinePath();
+        }
+        //GridVfx is Refreshed in Move Stage Scripts
+    }
     public void StartS3Stage()
     {
+        RefreshAfterMoveStageClientRpc();
         s3Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
     }
+    
 
     public void StartAttackStage()
     {
