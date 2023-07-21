@@ -64,7 +64,7 @@ public class S4Stage : MonoBehaviour
                         playedCardDict.Remove(priorityList[i]);
                         break;
                     }
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(3);
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
                     playedCardDict[priorityList[i]].RemoveAt(0);
                     //Check dying

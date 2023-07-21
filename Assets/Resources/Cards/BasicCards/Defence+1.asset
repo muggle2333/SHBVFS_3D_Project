@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Defence+1
   m_EditorClassIdentifier: 
   cardId: 2
-  cardName: Defense+1
+  cardName: 
   description: Defense +1, till this turn end
   headPicture: {fileID: 21300000, guid: ad11af91be7d7d349a227ee7848987b7, type: 3}
   academyType: 0
