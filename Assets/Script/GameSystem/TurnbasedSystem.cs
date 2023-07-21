@@ -80,14 +80,17 @@ public class TurnbasedSystem : NetworkBehaviour
         if (!NetworkManager.Singleton.IsHost) return;
         isStart.Value = true;
         UIManager.Instance.StartTurnbaseUIClientRpc();
-        SendCardClientRpc();
+        SetPlayerSettingClientRpc();
         StartCoroutine("TurnStart");
     }
 
     [ClientRpc]
-    private void SendCardClientRpc()
+    public void SetPlayerSettingClientRpc()
     {
-        PlayerManager.Instance.SendCardWhenGameStart(GameplayManager.Instance.currentPlayer);
+        foreach(var player in GameplayManager.Instance.playerList)
+        {
+            PlayerManager.Instance.SetPlayerSetting(player);
+        }
     }
     // Update is called once per frame
     void Update()
