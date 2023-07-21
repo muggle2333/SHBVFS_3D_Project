@@ -6,11 +6,13 @@ using DG.Tweening;
 using UnityEngine.EventSystems;
 using Unity.Netcode;
 using System;
+using TMPro;
 
 public class CardSelectManager : MonoBehaviour
 {
     public Dictionary<Player, int> SelectCount = new Dictionary<Player, int>();
     public Dictionary<Player, int> maxSelected = new Dictionary<Player, int>();
+    public TMP_Text ToDiscardText;
     public bool IsRetracted;
     public float RetractOffset;
     public float offset;

@@ -134,11 +134,18 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }//turn off Info
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, true);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, true);
-        UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
+        cardSelectManager.ToDiscardText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer];
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, true);
+            cardSelectManager.ToDiscardText.color = Color.green;
         }
+        else
+        {
+            UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
+            cardSelectManager.ToDiscardText.color = Color.red;
+        }
+
     }
 
     public void EndSelectDiscard()
@@ -148,6 +155,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
+        cardSelectManager.ToDiscardText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer];
+        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
+        {
+            UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
+            cardSelectManager.ToDiscardText.color = Color.red;
+        }
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
         {
             UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
