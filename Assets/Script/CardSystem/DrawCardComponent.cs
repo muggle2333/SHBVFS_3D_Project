@@ -13,10 +13,9 @@ public class DrawCardComponent :NetworkBehaviour
     public GameObject cardPrefab;
     public GameObject CardContent;
     public GameObject DrawBasicCardAndEventCard;
-
     public Card Card;
     public int basicCardCount;
-
+    public Camera cam;
     //public int EventCardCount;
     //public Dictionary<AcademyType, int> AllCardCount = new Dictionary<AcademyType, int>();
 
@@ -75,10 +74,11 @@ public class DrawCardComponent :NetworkBehaviour
 
     public void DrawBasicCard(Player player)
     {
-        Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+        Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
         AllCardCountPlusServerRpc(0,AcademyType.Null);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
+        Card.GetComponent<RectTransform>().position = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
@@ -88,7 +88,7 @@ public class DrawCardComponent :NetworkBehaviour
     {
         AcademyType currentAcedemy = player.currentGrid.academy;
         GridObject currentGridObject = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
-        Card = Instantiate(cardPrefab, GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+        Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         if (currentGridObject.isHasBuilding)
         {
             int randomIndex = Random.Range(0, 3);
@@ -110,17 +110,18 @@ public class DrawCardComponent :NetworkBehaviour
         //Card.UpdateCardData(PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy] -1]);
         Card.UpdateCardData(Card.cardSetting);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
+        Card.GetComponent<RectTransform>().position = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+        Debug.LogWarning(GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject));
         Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         Card.transform.DOScale(1, 0.4f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
     }
-    
 
     public Vector3 GetScreenPosition(GameObject target)
     {
         RectTransform canvasRtm = parentCanvas.GetComponent<RectTransform>();
-        float width = canvasRtm.sizeDelta.x; 
+        float width = canvasRtm.sizeDelta.x;
         float height = canvasRtm.sizeDelta.y;
         Vector3 pos = Camera.main.WorldToScreenPoint(target.transform.position);
         pos.x *= width / Screen.width;
@@ -131,6 +132,8 @@ public class DrawCardComponent :NetworkBehaviour
         pos.y += 450;
         return pos;
     }
+
+
     [ServerRpc(RequireOwnership = false)]
     public void AllCardCountPlusServerRpc(int i,AcademyType type)
     {
