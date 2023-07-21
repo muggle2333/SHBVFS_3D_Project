@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 36
   cardName: Moving Without Moving
-  description: If your final position is the same as your original position this
-    turn, you can transport youself to a land you want at the end of this turn
+  description: After attack stage, if your final position is the same as your original
+    position this turn, you can transport youself to a land you want
   headPicture: {fileID: 21300000, guid: 672f10b7325140141b992e87f36e0806, type: 3}
   academyType: 6
   cardCondition: {fileID: 0}

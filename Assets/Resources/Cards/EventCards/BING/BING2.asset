@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 23
   cardName: ' In-situ Attack'
-  description: If you don't move this turn, you will damage your opponent 1 point.
+  description: After move stage, If you don't move this turn, deal 1 damage to your
+    enemy
   headPicture: {fileID: 21300000, guid: 1d56a691a17a95d42806777d2b67790f, type: 3}
   academyType: 4
   cardCondition: {fileID: 0}

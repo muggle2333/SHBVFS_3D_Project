@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 27
   cardName: Killing Spree
-  description: You can use x cards to attack this turn(The original value of x is
-    2, every time you use this card in one round, x+1 )
+  description: After move stage, you can use x cards to attack this turn(The original
+    value of x is 2, every time you use this card in one round, x+1 )
   headPicture: {fileID: 21300000, guid: 55fad22b39138b547a30a75bda499655, type: 3}
   academyType: 4
   cardCondition: {fileID: 0}

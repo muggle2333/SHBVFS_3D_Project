@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: HP+1
-  description: HP+1
+  description: HP +1
   headPicture: {fileID: 21300000, guid: 5efd7fdfd1c90fa45ae6daceeded3618, type: 3}
   academyType: 0
   cardCondition: {fileID: 0}
