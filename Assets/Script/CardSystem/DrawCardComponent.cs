@@ -98,9 +98,9 @@ public class DrawCardComponent : NetworkBehaviour
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
         AllCardCountPlusServerRpc(0,AcademyType.Null);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
-        Card.GetComponent<RectTransform>().position = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+        Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-        Card.transform.DOScale(1, 0.4f);
+        Card.transform.DOScale(1, 0.5f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
     }
@@ -130,10 +130,11 @@ public class DrawCardComponent : NetworkBehaviour
         //Card.UpdateCardData(PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy] -1]);
         Card.UpdateCardData(Card.cardSetting);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
-        Card.GetComponent<RectTransform>().position = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+        Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+        Debug.LogWarning(Card.GetComponent<RectTransform>().position);
         Debug.LogWarning(GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject));
-        Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        Card.transform.DOScale(1, 0.4f);
+        Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        Card.transform.DOScale(1, 0.5f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
     }
@@ -148,11 +149,10 @@ public class DrawCardComponent : NetworkBehaviour
         pos.y *= height / Screen.height;
         pos.x -= width * 0.5f;
         pos.y -= height * 0.5f;
-        pos.x += 950;
-        pos.y += 450;
+        pos.x += 50;
+        pos.y += 100;
         return pos;
     }
-
 
     [ServerRpc(RequireOwnership = false)]
     public void AllCardCountPlusServerRpc(int i,AcademyType type)
