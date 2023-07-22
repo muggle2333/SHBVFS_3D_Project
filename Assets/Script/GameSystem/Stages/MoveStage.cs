@@ -77,6 +77,8 @@ public class MoveStage : NetworkBehaviour
                 }
             }
         }
+        FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(PlayerId.BluePlayer);
+        FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(PlayerId.RedPlayer);
         EndStage();
     }
 
