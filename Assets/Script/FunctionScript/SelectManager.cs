@@ -18,6 +18,8 @@ public class SelectManager : MonoBehaviour
     private GridObject currentSelected;
     private SpriteRenderer currentSelectVfx;
     private RaycastHit hitInfo;
+
+    private GridObject latestSelectedGrid;
     private void Awake()
     {
         Instance = this;
@@ -90,11 +92,13 @@ public class SelectManager : MonoBehaviour
         {
             Pool.Instance.SetObj("Vfx_SelectGrid", selectVfx);
             selectedDict.Remove(gridObjectXZ);
+            latestSelectedGrid = null;
+            if(currentSelectVfx!= null)
             currentSelectVfx.gameObject.SetActive(false);
             return;
         }
 
-        
+        latestSelectedGrid= gridObject;
         if (selectCount>selectedDict.Count)
         {
             selectVfx = Pool.Instance.GetObj("Vfx_SelectGrid");
@@ -124,4 +128,10 @@ public class SelectManager : MonoBehaviour
         }
         trans.position = GridManager.Instance.grid.GetWorldPositionCenter(gridObject.x, gridObject.z) + offset;
     }
+
+    public GridObject GetLatestGridObject()
+    {
+        return latestSelectedGrid;
+    }
+    
 }

@@ -16679,6 +16679,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: moveSpeed.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: moveSpeed.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: moveSpeed.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: rotateSpeed.x
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6283519236212957862, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: m_Cameras.Array.size
       value: 1

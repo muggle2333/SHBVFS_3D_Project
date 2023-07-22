@@ -173,7 +173,7 @@ public class PlayerInteractionComponent : MonoBehaviour
         Vector3 startPos = start.position + new Vector3(0, 3.1f, 0);
         Vector3 endPos = target.position + new Vector3(0, 3.1f, 0);
         float step = 1f / lineNum;
-        for(int i=0; i <= lineNum; i++)
+        for(int i=1; i <= lineNum; i++)
         {
             float  t = step* i;
             Vector3 position = CalculateParabola(startPos, endPos, t);
