@@ -144,8 +144,6 @@ public class DrawCardComponent : NetworkBehaviour
         Card.UpdateCardData(Card.cardSetting);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
         Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
-        Debug.LogWarning(Card.GetComponent<RectTransform>().position);
-        Debug.LogWarning(GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject));
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         Card.transform.DOScale(1, 0.5f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
