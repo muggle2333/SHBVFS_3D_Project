@@ -19,12 +19,26 @@ public class PlayedCardUI : MonoBehaviour
             if (GameplayManager.Instance.currentPlayer.Id == PlayerId.RedPlayer)
             {
                 SelfPlayedCard.text = CardManager.Instance.redPlayerPlayedCards.Count.ToString();
-                EnemyPlayedCard.text = CardManager.Instance.bluePlayerPlayedCards.Count.ToString();
+                if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
+                {
+                    EnemyPlayedCard.text = "--";
+                }
+                else
+                {
+                    EnemyPlayedCard.text = CardManager.Instance.bluePlayerPlayedCards.Count.ToString();
+                }
             }
             else
             {
                 SelfPlayedCard.text = CardManager.Instance.bluePlayerPlayedCards.Count.ToString();
-                EnemyPlayedCard.text = CardManager.Instance.redPlayerPlayedCards.Count.ToString();
+                if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
+                {
+                    EnemyPlayedCard.text = "--";
+                }
+                else
+                {
+                    EnemyPlayedCard.text = CardManager.Instance.redPlayerPlayedCards.Count.ToString();
+                }
             }
         }
     }

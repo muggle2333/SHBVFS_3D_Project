@@ -100,6 +100,7 @@ public class DiscardStage : NetworkBehaviour
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(0);
                 CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, 0);
             }
+            FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationClientRpc(player.Id, - GameplayManager.Instance.discardStage.discardCount[player]);
             foreach (var card in CardManager.Instance.playerHandCardDict[player])
             {
                 card.GetComponent<CardSelectComponent>().EndSelectDiscard();

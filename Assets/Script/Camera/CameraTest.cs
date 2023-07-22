@@ -64,7 +64,7 @@ public class CameraTest : MonoBehaviour
         position = new Vector3(Mathf.Clamp(position.x, CameraMin_X, CameraMax_X),
                                Mathf.Clamp(position.y, CameraMin_Y, CameraMax_Y),
                                Mathf.Clamp(position.z, CameraMin_Z, CameraMax_Z));
-        
+
         gameObject.transform.position = position;
     }
 
@@ -74,7 +74,7 @@ public class CameraTest : MonoBehaviour
         {
             if (target)
             {
-               UpdateRotate();
+                UpdateRotate();
             }
         }
     }
@@ -120,7 +120,7 @@ public class CameraTest : MonoBehaviour
 
     private void UpdateRotate()
     {
-        if(!isTargetMoving)
+        if (!isTargetMoving)
         {
             x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
             y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;

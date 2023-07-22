@@ -46,10 +46,6 @@ public class CardSelectManager : MonoBehaviour
         InitializeCardSelectManager();
     }
 
-    private void Update()
-    {
-        //Debug.Log(SelectCount[GameplayManager.Instance.currentPlayer]);
-    }
 
     public void InitializeCardSelectManager()
     {
@@ -72,6 +68,7 @@ public class CardSelectManager : MonoBehaviour
                 i--;
             }
         }
+        FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(player.Id, -GameplayManager.Instance.discardStage.discardCount[player]);
         UpdateCardPos(player);
         GameplayManager.Instance.discardStage.discardCount[player] = 0;
         maxSelected[player] = 1;
@@ -101,10 +98,10 @@ public class CardSelectManager : MonoBehaviour
                     CardManager.Instance.AddPlayedCardServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
                 }
-
                 CancelCards(player);
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);//?
+                FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(player.Id, -1);
                 i--;
             }
         }
@@ -139,7 +136,7 @@ public class CardSelectManager : MonoBehaviour
         Vector2 startPos = new Vector2(handX - count / 2.0f * offset + offset * 0.5f, handY);
         for (int i = 0; i < count; i++)
         {
-            CardManager.Instance.playerHandCardDict[player][i].GetComponent<RectTransform>().DOAnchorPos(startPos, 10f);
+            CardManager.Instance.playerHandCardDict[player][i].GetComponent<RectTransform>().DOAnchorPos(startPos, 0.5f);
             //CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectOther();
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
