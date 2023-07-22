@@ -74,23 +74,36 @@ public class DrawCardComponent : NetworkBehaviour
         }
     }
     [ServerRpc(RequireOwnership =false)]
-    public void PlayDrawCardAnimationServerRpc(PlayerId playerid,int drawCount)
+    public void PlayDrawCardAnimationServerRpc(PlayerId playerId,int drawCount)
     {
-        PlayDrawCardAnimationClientRpc(playerid, drawCount);
+        PlayDrawCardAnimationClientRpc(playerId, drawCount);
     }
     [ClientRpc]
     public void PlayDrawCardAnimationClientRpc(PlayerId playerId, int drawCount)
     {
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1 && GameplayManager.Instance.PlayerIdToPlayer(playerId) != GameplayManager.Instance.currentPlayer)
+        {
+            return;
+        }
         var player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
-        player.headCardText.text = "+" + drawCount;
+        if (drawCount > 0)
+        {
+            player.headCardText.text = "+" + drawCount;
+        }
+        else if(drawCount < 0)
+        {
+            player.headCardText.text = drawCount.ToString();
+        }
+        else if(drawCount == 0)
+        {
+            return;
+        }
         player.headCard.SetActive(true);
         player.headCard.transform.localPosition = new Vector3(0, 6.6f, 0);
         var seq = DOTween.Sequence();
         seq.Append(player.headCard.transform.DOLocalMoveY(8.5f, 1f));
         //seq.AppendInterval(0.8f);
         seq.AppendCallback(() => { player.headCard.SetActive(false); });
-
-
     }
     public void DrawBasicCard(Player player)
     {
@@ -131,8 +144,6 @@ public class DrawCardComponent : NetworkBehaviour
         Card.UpdateCardData(Card.cardSetting);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
         Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
-        Debug.LogWarning(Card.GetComponent<RectTransform>().position);
-        Debug.LogWarning(GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject));
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         Card.transform.DOScale(1, 0.5f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);

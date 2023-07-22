@@ -56,7 +56,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
-        Debug.LogWarning(Interactable);
         if (Interactable == false) return;
         if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
         {

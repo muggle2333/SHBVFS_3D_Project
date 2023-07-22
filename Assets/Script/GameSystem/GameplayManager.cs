@@ -105,7 +105,7 @@ public class GameplayManager : NetworkBehaviour
         }
         int currentPlayrId = (int)NetworkManager.Singleton.LocalClientId;
         currentPlayer = playerList[currentPlayrId];
-        FindObjectOfType<CameraTest>().FocusOnPlayer();
+        FindObjectOfType<CameraTest4>().FocusGrid();
         //GridObject currentGridObject = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[currentPlayrId].x, (int)playerStartPoint[currentPlayrId].y);
         //GridVfxManager.Instance.UpdateVfxAcademy(currentGridObject);
         UIManager.Instance.UpdatePlayerDataUI(currentPlayer);

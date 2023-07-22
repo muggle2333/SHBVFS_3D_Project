@@ -137,7 +137,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e365febf6740294aa211434d4726170, type: 2}
+  - {fileID: 2100000, guid: 1b4ceb8f39be64b4e8a613c9f0664382, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,7 +210,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 1
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -556,7 +556,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e365febf6740294aa211434d4726170, type: 2}
+  - {fileID: 2100000, guid: d0e9fb7b2170e1943b4e347d1454d649, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1616,6 +1616,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Craft
       objectReference: {fileID: 0}
+    - target: {fileID: 7086077638684164275, guid: a06e63f7c44276340971bb67285a9ae5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf6956e5886c82d48adde6777b23a92a, type: 2}
     - target: {fileID: 7919618188253017719, guid: a06e63f7c44276340971bb67285a9ae5, type: 3}
       propertyPath: m_RootOrder
       value: 12

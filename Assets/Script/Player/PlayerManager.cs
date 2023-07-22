@@ -189,6 +189,7 @@ public class PlayerManager : NetworkBehaviour
     {
         player.currentGrid = GridManager.Instance.ManageOwner(player.currentGrid, player, false);
         GridManager.Instance.DiscoverGridObject(player, player.currentGrid);
+        player.OccupyGrid(player.currentGrid);
         player.currentGrid = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
 
         //player.OccupyGrid(gridObject);
@@ -232,7 +233,7 @@ public class PlayerManager : NetworkBehaviour
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Occupy, player);
         if (!player.UseActionPoint(apCost)) return false;
         gridObject = GridManager.Instance.ManageOwner(gridObject, player,isControlStage);
-        player.OccupyGrid(gridObject);
+        if(isControlStage==false) player.OccupyGrid(gridObject);
         player.currentGrid= gridObject;
         GridVfxManager.Instance.UpdateVfxOwner(gridObject,isControlStage);
         if (!isControlStage)
