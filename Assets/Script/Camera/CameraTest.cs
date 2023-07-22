@@ -16,7 +16,7 @@ public class CameraTest : MonoBehaviour
     public float CameraMin_Z;
 
     public Vector2 rotationSpeed = new Vector2(250.0f, 120.0f);
-    public Vector3 moveSpeed = new Vector3(20f, 20f, 20f);
+    public Vector2 moveSpeed = new Vector2(20.0f, 20.0f);
 
     float yMinLimit = -20;
     float yMaxLimit = 80;
@@ -64,24 +64,27 @@ public class CameraTest : MonoBehaviour
         position = new Vector3(Mathf.Clamp(position.x, CameraMin_X, CameraMax_X),
                                Mathf.Clamp(position.y, CameraMin_Y, CameraMax_Y),
                                Mathf.Clamp(position.z, CameraMin_Z, CameraMax_Z));
-        
+
         gameObject.transform.position = position;
     }
 
     void DragRotation()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(2))
         {
             if (target)
             {
-               UpdateRotate();
+                UpdateRotate();
             }
         }
     }
 
     void DragMove()
     {
-        UpdateMove();
+        if (Input.GetMouseButton(1))
+        {
+            UpdateMove();
+        }
     }
 
     void Scale()
@@ -117,10 +120,10 @@ public class CameraTest : MonoBehaviour
 
     private void UpdateRotate()
     {
-        if(!isTargetMoving)
+        if (!isTargetMoving)
         {
             x += Input.GetAxis("Mouse X") * rotationSpeed.x * 0.02f;
-            //y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
+            y -= Input.GetAxis("Mouse Y") * rotationSpeed.y * 0.02f;
         }
 
         y = ClampAngle(y, yMinLimit, yMaxLimit);
@@ -134,12 +137,9 @@ public class CameraTest : MonoBehaviour
 
     private void UpdateMove()
     {
-        //float xx = -Input.GetAxis("Mouse X") * moveSpeed.x * 0.02f;
-        //float yy = -Input.GetAxis("Mouse Y") * moveSpeed.y * 0.02f;
-        float xx = Input.GetAxis("Horizontal") * moveSpeed.x * 0.02f;
-        float yy = Input.GetAxis("Vertical") * moveSpeed.y * 0.02f;
-        float zz = Input.GetAxis("Forward") * moveSpeed.z * 0.02f;
-        Vector3 pos = new Vector3(xx, yy, zz);
+        float xx = -Input.GetAxis("Mouse X") * moveSpeed.x * 0.02f;
+        float yy = -Input.GetAxis("Mouse Y") * moveSpeed.y * 0.02f;
+        Vector3 pos = new Vector3(xx, yy, 0.0f);
         transform.Translate(pos);
         target.transform.Translate(pos);
     }
