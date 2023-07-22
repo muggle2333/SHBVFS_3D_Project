@@ -107,6 +107,9 @@ public class GameManager : NetworkBehaviour
         if (wholeGameState.Value == WholeGameState.GameOver)
         {
             OnGameOver?.Invoke(this, EventArgs.Empty);
+        }else if(newValue == WholeGameState.CountdownToStart)
+        {
+            SoundManager.Instance.PlayCountDownClientRpc();
         }
     }
 

@@ -214,6 +214,23 @@ public class PlayerManager : NetworkBehaviour
         //player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
         player.GetComponent<PlayerInteractionComponent>().DeduceFirstPath();
         GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
+        
+        if(gridObject.landType==LandType.Mountain)
+        {
+            SoundManager.Instance.PlaySound(Sound.MoveToMountain);
+        }else if(gridObject.landType == LandType.Lake)
+        {
+            if(apCost==0)
+            {
+                SoundManager.Instance.PlaySound(Sound.MoveOnLake);
+            }else
+            {
+                SoundManager.Instance.PlaySound(Sound.MoveToLake);
+            }
+        }else
+        {
+            SoundManager.Instance.PlaySound(Sound.MoveToPlain);
+        }
         return true;
     }
     public void TryMove(Player player,GridObject gridObject)
@@ -233,7 +250,11 @@ public class PlayerManager : NetworkBehaviour
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Occupy, player);
         if (!player.UseActionPoint(apCost)) return false;
         gridObject = GridManager.Instance.ManageOwner(gridObject, player,isControlStage);
-        if(isControlStage==false) player.OccupyGrid(gridObject);
+        if (isControlStage == false)
+        {
+            player.OccupyGrid(gridObject);
+            SoundManager.Instance.PlaySound(Sound.Occupy);
+        }
         player.currentGrid= gridObject;
         GridVfxManager.Instance.UpdateVfxOwner(gridObject,isControlStage);
         if (!isControlStage)
@@ -268,6 +289,9 @@ public class PlayerManager : NetworkBehaviour
         if (isControlStage)
         {
             UpdateGridAuthorityData(player, gridObject);
+        }else
+        {
+            SoundManager.Instance.PlaySound(Sound.Build);
         }
         return true;
     }
@@ -290,6 +314,7 @@ public class PlayerManager : NetworkBehaviour
             GridManager.Instance.ManageKnowable(player, neighbour);
             GridVfxManager.Instance.UpdateVfxAcademy(neighbour);
         }
+        SoundManager.Instance.PlaySound(Sound.Search);
         return true;
     }
     public void TryGacha(Player player, GridObject gridObject)

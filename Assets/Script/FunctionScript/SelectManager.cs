@@ -25,6 +25,7 @@ public class SelectManager : MonoBehaviour
         Instance = this;
     }
 
+
     public void Update()
     { 
         //if(Input.GetMouseButtonDown(1))
@@ -32,37 +33,37 @@ public class SelectManager : MonoBehaviour
         //    Debug.Log(EventSystem.current.IsPointerOverGameObject());
         //    Debug.Log(EventSystem.current.currentSelectedGameObject);
         //}
-        if(Input.GetMouseButtonDown(0))
-        {
-            //Click UI
-            //if(EventSystem.current.IsPointerOverGameObject())
-            //{
-            //    //Debug.Log(EventSystem.current.currentSelectedGameObject);
-            //}
-            //else
-            //{
-                Ray currentRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Debug.DrawLine(currentRay.origin, hitInfo.point, Color.red, 2);
-                if(Physics.Raycast(currentRay,out hitInfo,100))
-                {
-                    if (hitInfo.collider.GetComponentInChildren<GridObjectComponent>() != null)
-                    {
-                        //点到格子上了
-                        //GameplayManager.Instance.ShowGirdObjectData(gameObject.transform);
-                    }
-                }
-                else
-                {
-                    //什么都没点到
-                    foreach (KeyValuePair<Vector2Int, GameObject> item in selectedDict)
-                    {
-                        Pool.Instance.SetObj("Vfx_SelectGrid", item.Value);
-                    }
-                    selectedDict.Clear();
-                    UIManager.Instance.ShowGridObjectUI(false,null);
-                }
-            //}
-        }
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //    //Click UI
+        //    //if(EventSystem.current.IsPointerOverGameObject())
+        //    //{
+        //    //    //Debug.Log(EventSystem.current.currentSelectedGameObject);
+        //    //}
+        //    //else
+        //    //{
+        //        Ray currentRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //        Debug.DrawLine(currentRay.origin, hitInfo.point, Color.red, 2);
+        //        if(Physics.Raycast(currentRay,out hitInfo,100))
+        //        {
+        //            if (hitInfo.collider.GetComponentInChildren<GridObjectComponent>() != null)
+        //            {
+        //                //点到格子上了
+        //                //GameplayManager.Instance.ShowGirdObjectData(gameObject.transform);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //什么都没点到
+        //            foreach (KeyValuePair<Vector2Int, GameObject> item in selectedDict)
+        //            {
+        //                Pool.Instance.SetObj("Vfx_SelectGrid", item.Value);
+        //            }
+        //            selectedDict.Clear();
+        //            UIManager.Instance.ShowGridObjectUI(false,null);
+        //        }
+        //    //}
+        //}
     }
     public void SetCurrentSelectObject(GridObject gridObject)
     {
@@ -70,7 +71,7 @@ public class SelectManager : MonoBehaviour
         if(currentSelectVfx == null)
         {
             currentSelectVfx = Pool.Instance.GetObj("Vfx_SelectGrid").GetComponentInChildren<SpriteRenderer>();
-            currentSelectVfx.gameObject.transform.SetParent(transform, false);
+            //currentSelectVfx.gameObject.transform.SetParent(transform, false);
         }
         currentSelected= gridObject;
         PlaceSelectVfx(currentSelectVfx.transform, gridObject);

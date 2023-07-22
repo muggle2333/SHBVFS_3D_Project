@@ -115,6 +115,7 @@ public class TurnbasedSystem : NetworkBehaviour
     IEnumerator TurnStart()
     {
         roundIndex.Value++;
+        //SoundManager.Instance.PlaySoundClientRpc(Sound.RoundStart);
         ControlPhase();
         UpdateTimer(S1PhaseTime);
         //yield return new WaitForSecondsRealtime(S1PhaseTime);
@@ -130,6 +131,7 @@ public class TurnbasedSystem : NetworkBehaviour
                 yield return null;
             }
         }
+        SoundManager.Instance.PlaySoundClientRpc(Sound.ControlEnd);
 
         DiscardPhase();
         yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value);
@@ -170,12 +172,14 @@ public class TurnbasedSystem : NetworkBehaviour
     //S1
     void ControlPhase()
     {
+        
         RefreshPlayerSkipDict();
+
         //Debug.Log("ControlPhase");
         CurrentGameStage.Value = GameStage.S1;
         CompleteGameStage.Value = GameStage.S4;
         GameplayManager.Instance.StartControlStage();
-
+        SoundManager.Instance.PlaySoundClientRpc(Sound.RoundStart);
         //UpdateTimer(S1PhaseTime);
     
     }

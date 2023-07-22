@@ -78,6 +78,7 @@ public class AttackStage : MonoBehaviour
                         {
                             playerList[i].AttackTarget = playerList[targetIndex];
                             playerList[i].Attack();
+                            SoundManager.Instance.PlaySound(Sound.Attack);
                             //Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
                         }
                         else
