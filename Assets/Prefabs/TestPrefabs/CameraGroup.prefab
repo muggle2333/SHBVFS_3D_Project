@@ -273,4 +273,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: {x: 10, y: 10, z: 10}
+  rotateSpeed: {x: 10, y: 10, z: 10}
   cam: {fileID: 339269489797836718}
