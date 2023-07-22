@@ -51,27 +51,32 @@ public class PlayerAcademyBuffcomponent : NetworkBehaviour
     public void UpdatePlayerAcademyBuffServerRpc(PlayerId playerId)
     {
         Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
-        for (int i=0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             player.totalAcademyOwnedPoint[i] = player.academyOwnedPoint[i] + player.cardAcademyEffectNum[i];
         }
-        
+        UpdatePlayerAcademyBuffClientRpc(playerId);
+        FindObjectOfType<Calculating>().AcademyBuffClientRpc(playerId);
+    }
+    [ClientRpc]
+    public void UpdatePlayerAcademyBuffClientRpc(PlayerId playerId)
+    {
+        Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
         for (int i = 0; i < (int)AcademyType.FA; i++)
         {
-            academyBuffDict.TryGetValue((AcademyType)(i+1), out academyBuffDataArr);
-            if (player.totalAcademyOwnedPoint[i] <= 4 && player.totalAcademyOwnedPoint[i] >=0)
+            academyBuffDict.TryGetValue((AcademyType)(i + 1), out academyBuffDataArr);
+            if (player.totalAcademyOwnedPoint[i] <= 4 && player.totalAcademyOwnedPoint[i] >= 0)
             {
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[player.totalAcademyOwnedPoint[i]];
             }
-            else if(player.totalAcademyOwnedPoint[i] >4)
+            else if (player.totalAcademyOwnedPoint[i] > 4)
             {
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[4];
             }
-            else if (player.totalAcademyOwnedPoint[i] <0)
+            else if (player.totalAcademyOwnedPoint[i] < 0)
             {
                 PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[0];
             }
         }
-        FindObjectOfType<Calculating>().AcademyBuffClientRpc(playerId);
     }
 }
