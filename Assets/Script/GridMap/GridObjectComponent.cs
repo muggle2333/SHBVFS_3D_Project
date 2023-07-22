@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GridObjectComponent : MonoBehaviour,IPointerClickHandler
+public class GridObjectComponent : MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
 {
     public GridObject gridObject;
     public void OnPointerClick(PointerEventData eventData)
@@ -15,20 +15,21 @@ public class GridObjectComponent : MonoBehaviour,IPointerClickHandler
 
     }
 
-    private void OnMouseEnter()
+    //private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         gridObject = GridManager.Instance.grid.GetGridObject(gameObject.transform.position);
         //Debug.Log(gridObject.x+"+"+gridObject.z);
         SelectManager.Instance.SetCurrentSelectObject(gridObject);
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
         SelectManager.Instance.RemoveCurrentSelectObject(gridObject);
     }
 
-    private void OnMouseDown()
-    {
-        SelectManager.Instance.SetSelectObject(gridObject);
-    }
+    //private void OnMouseDown()
+    //{
+    //    SelectManager.Instance.SetSelectObject(gridObject);
+    //}
 }
