@@ -11,8 +11,8 @@ public class GridObjectComponent : MonoBehaviour,IPointerClickHandler
         GameplayManager.Instance.ShowGirdObjectData(gameObject.transform);
 
         gridObject = GridManager.Instance.grid.GetGridObject(gameObject.transform.position);
+        SelectManager.Instance.SetSelectObject(gridObject);
 
-        
     }
 
     private void OnMouseEnter()
