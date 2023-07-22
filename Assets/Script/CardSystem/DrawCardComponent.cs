@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Unity.Netcode;
 
-public class DrawCardComponent :NetworkBehaviour
+public class DrawCardComponent : NetworkBehaviour
 {
     public Canvas parentCanvas;
     public PlayerDeck PlayerDeck;
@@ -28,7 +28,7 @@ public class DrawCardComponent :NetworkBehaviour
     }
     public void Start()
     {
-        if(NetworkManager.Singleton.IsServer)
+        if (NetworkManager.Singleton.IsServer)
         {
             for (int i = 0; i <= (int)AcademyType.FA; i++)
             {
@@ -65,22 +65,42 @@ public class DrawCardComponent :NetworkBehaviour
         {
             DrawBasicCard(player);
             DrawEventCard(player);
+            PlayDrawCardAnimationServerRpc(player.Id, 2);
         }
         else
         {
             DrawEventCard(player);
+            PlayDrawCardAnimationServerRpc(player.Id, 1);
         }
     }
+    [ServerRpc(RequireOwnership =false)]
+    public void PlayDrawCardAnimationServerRpc(PlayerId playerid,int drawCount)
+    {
+        PlayDrawCardAnimationClientRpc(playerid, drawCount);
+    }
+    [ClientRpc]
+    public void PlayDrawCardAnimationClientRpc(PlayerId playerId, int drawCount)
+    {
+        var player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
+        player.headCardText.text = "+" + drawCount;
+        player.headCard.SetActive(true);
+        player.headCard.transform.localPosition = new Vector3(0, 6.6f, 0);
+        var seq = DOTween.Sequence();
+        seq.Append(player.headCard.transform.DOLocalMoveY(8.5f, 1f));
+        //seq.AppendInterval(0.8f);
+        seq.AppendCallback(() => { player.headCard.SetActive(false); });
 
+
+    }
     public void DrawBasicCard(Player player)
     {
         Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
         AllCardCountPlusServerRpc(0,AcademyType.Null);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
-        Card.GetComponent<RectTransform>().position = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+        Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-        Card.transform.DOScale(1, 0.4f);
+        Card.transform.DOScale(1, 0.5f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
     }
@@ -110,10 +130,11 @@ public class DrawCardComponent :NetworkBehaviour
         //Card.UpdateCardData(PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy] -1]);
         Card.UpdateCardData(Card.cardSetting);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
-        Card.GetComponent<RectTransform>().position = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+        Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+        Debug.LogWarning(Card.GetComponent<RectTransform>().position);
         Debug.LogWarning(GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject));
-        Card.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        Card.transform.DOScale(1, 0.4f);
+        Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        Card.transform.DOScale(1, 0.5f);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
     }
@@ -128,11 +149,10 @@ public class DrawCardComponent :NetworkBehaviour
         pos.y *= height / Screen.height;
         pos.x -= width * 0.5f;
         pos.y -= height * 0.5f;
-        pos.x += 950;
-        pos.y += 450;
+        pos.x += 50;
+        pos.y += 100;
         return pos;
     }
-
 
     [ServerRpc(RequireOwnership = false)]
     public void AllCardCountPlusServerRpc(int i,AcademyType type)

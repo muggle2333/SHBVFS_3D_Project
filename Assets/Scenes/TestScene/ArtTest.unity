@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4152241, g: 0.38691315, b: 0.26835883, a: 1}
+  m_IndirectSpecularColor: {r: 0.4152592, g: 0.38693887, b: 0.26837263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9728,11 +9728,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6568540d0d0c57b41a68a9b8fcf1a06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   vfx_Player_Point: {fileID: 0}
   pathLine: {fileID: 0}
   attackLine: {fileID: 0}
   playerText: {fileID: 0}
   hpText: {fileID: 0}
+  craft: {fileID: 0}
+  meshRenderer: {fileID: 0}
 --- !u!1 &974317386
 GameObject:
   m_ObjectHideFlags: 0
