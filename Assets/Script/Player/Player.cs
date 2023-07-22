@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public enum PlayerId
 {
@@ -15,7 +17,8 @@ public enum PlayerId
 
 public class Player : Character
 {
-
+    public GameObject headCard;
+    public TMP_Text headCardText;
 
     public PlayerId Id;
     public NetworkVariable<int> playerIdNetwork;
@@ -135,6 +138,22 @@ public class Player : Character
         if(Defence < 0)
         {
             Defence = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (this == GameplayManager.Instance.currentPlayer)
+            {
+                List<int> a = new List<int>();
+                for(int i = 0; i < 6; i++)
+                {
+                    //a.Add(0);
+                    //a[i] = academyOwnedPoint[i];
+                    Debug.LogError(academyOwnedPoint[i]);
+                }
+                
+            }
+
+            
         }
     }
 

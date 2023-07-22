@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Unity.Netcode;
 
-public class DrawCardComponent :NetworkBehaviour
+public class DrawCardComponent : NetworkBehaviour
 {
     public Canvas parentCanvas;
     public PlayerDeck PlayerDeck;
@@ -28,7 +28,7 @@ public class DrawCardComponent :NetworkBehaviour
     }
     public void Start()
     {
-        if(NetworkManager.Singleton.IsServer)
+        if (NetworkManager.Singleton.IsServer)
         {
             for (int i = 0; i <= (int)AcademyType.FA; i++)
             {
@@ -65,13 +65,33 @@ public class DrawCardComponent :NetworkBehaviour
         {
             DrawBasicCard(player);
             DrawEventCard(player);
+            PlayDrawCardAnimationServerRpc(player.Id, 2);
         }
         else
         {
             DrawEventCard(player);
+            PlayDrawCardAnimationServerRpc(player.Id, 1);
         }
     }
+    [ServerRpc(RequireOwnership =false)]
+    public void PlayDrawCardAnimationServerRpc(PlayerId playerid,int drawCount)
+    {
+        PlayDrawCardAnimationClientRpc(playerid, drawCount);
+    }
+    [ClientRpc]
+    public void PlayDrawCardAnimationClientRpc(PlayerId playerId, int drawCount)
+    {
+        var player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
+        player.headCardText.text = "+" + drawCount;
+        player.headCard.SetActive(true);
+        player.headCard.transform.localPosition = new Vector3(0, 6.6f, 0);
+        var seq = DOTween.Sequence();
+        seq.Append(player.headCard.transform.DOLocalMoveY(8.5f, 1f));
+        //seq.AppendInterval(0.8f);
+        seq.AppendCallback(() => { player.headCard.SetActive(false); });
 
+
+    }
     public void DrawBasicCard(Player player)
     {
         Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardManager : NetworkBehaviour
 {
@@ -13,6 +15,9 @@ public class CardManager : NetworkBehaviour
     public NetworkList<int> bluePlayerPlayedCards;
     public GameObject CardPrefeb;
     public GameObject CardContent;
+    public GameObject smallCard;
+    public GameObject cardCemetery;
+    public List<SmallCard> smallCards;
     private Calculating calculating;
     private PlayerDeck playerDeck;
     private CardSelectManager cardSelectManager;
@@ -111,6 +116,26 @@ public class CardManager : NetworkBehaviour
         }
         return null;
     }
+    public void EffectedCards(PlayerId playerId,CardSetting card)
+    {
+        if (smallCards.Count == 5)
+        {
+            var Card = smallCards[0];
+            smallCards.RemoveAt(0);
+            Destroy(Card.gameObject);
+        }
+        var smallcard = Instantiate(smallCard, cardCemetery.transform).GetComponent<SmallCard>();
+        smallcard.cardSetting = card;
+        if(playerId == PlayerId.RedPlayer)
+        {
+            smallcard.gameObject.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            smallcard.gameObject.GetComponent<Image>().color = Color.blue;
+        }
+        smallCards.Add(smallcard);
+    }
     public void CardTakeEffect(Player player, CardSetting effectCard)
     {
         for (int j = 0; j < playedCardDict[player].Count; j++)
@@ -122,6 +147,7 @@ public class CardManager : NetworkBehaviour
                     var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
                     card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                     card.cardSetting = effectCard;
+                    EffectedCards(player.Id, effectCard);
                     card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
                     RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
                 }
@@ -130,6 +156,7 @@ public class CardManager : NetworkBehaviour
                     var card = Instantiate(CardPrefeb, new Vector3(800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
                     card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                     card.cardSetting = effectCard;
+                    EffectedCards(player.Id, effectCard);
                     card.gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
                     RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
                 }
