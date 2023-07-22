@@ -139,7 +139,7 @@ public class CardSelectManager : MonoBehaviour
         Vector2 startPos = new Vector2(handX - count / 2.0f * offset + offset * 0.5f, handY);
         for (int i = 0; i < count; i++)
         {
-            CardManager.Instance.playerHandCardDict[player][i].GetComponent<RectTransform>().DOAnchorPos(startPos, 10f);
+            CardManager.Instance.playerHandCardDict[player][i].GetComponent<RectTransform>().DOAnchorPos(startPos, 0.5f);
             //CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectOther();
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
