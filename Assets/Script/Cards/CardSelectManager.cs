@@ -68,6 +68,7 @@ public class CardSelectManager : MonoBehaviour
                 i--;
             }
         }
+        FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(player.Id, -GameplayManager.Instance.discardStage.discardCount[player]);
         UpdateCardPos(player);
         GameplayManager.Instance.discardStage.discardCount[player] = 0;
         maxSelected[player] = 1;
@@ -97,10 +98,10 @@ public class CardSelectManager : MonoBehaviour
                     CardManager.Instance.AddPlayedCardServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
                 }
-
                 CancelCards(player);
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);//?
+                FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(player.Id, -1);
                 i--;
             }
         }

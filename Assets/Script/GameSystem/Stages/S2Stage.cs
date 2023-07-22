@@ -71,6 +71,7 @@ public class S2Stage : MonoBehaviour
     }
     IEnumerator S2CardTakeEffect()
     {
+        FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(GameplayManager.Instance.GetEnemy(GameplayManager.Instance.currentPlayer.Id), CardManager.Instance.redPlayerPlayedCards.Count);
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
         while (playedCardDict.Count != 0)
         {
