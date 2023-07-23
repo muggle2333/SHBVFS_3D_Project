@@ -36,7 +36,7 @@ public enum Bgm
     NormalBGM,//19
     LobbyBGM,//20
     DyingBGM,//21
-    WinBgm,//22
+    WinBGM,//22
     LoseBGM,//23
 }
 [Serializable]
