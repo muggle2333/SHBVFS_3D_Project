@@ -350,4 +350,14 @@ public class GameplayManager : NetworkBehaviour
         Debug.LogError("PlayerId To Player Fail");
         return null;
     }
+
+    public Player GetCompetitive()
+    {
+        foreach(var player in playerList)
+        {
+            if(player.Id!=currentPlayer.Id)
+            { return player; }      
+        }
+        return null;
+    }
 }

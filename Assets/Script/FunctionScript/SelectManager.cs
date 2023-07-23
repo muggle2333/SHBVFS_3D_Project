@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.UI;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Progress;
 
+public enum SelectGridMode
+{
+    Default,
+    OneOccupyed,
+    TwoOccupyed,
+    OneRivalBuilded,
+    OneOccupyedNotBuilded,
+}
 public class SelectManager : MonoBehaviour
 {
     public static SelectManager Instance { get; private set; }

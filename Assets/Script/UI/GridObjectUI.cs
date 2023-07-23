@@ -105,7 +105,7 @@ public class GridObjectUI : MonoBehaviour
         //        ownerText.text = "N0 OWNER";
         //    }
         //}
-        //landBuffText.text = null;
+        //landBuffText.text = null;)
         if(gridObject.landType == LandType.Plain)
         {
             if(!authority.canKnow)
@@ -131,6 +131,7 @@ public class GridObjectUI : MonoBehaviour
                         academyText.text = "法";break;
                 }
             }
+            
         }
         else
         {

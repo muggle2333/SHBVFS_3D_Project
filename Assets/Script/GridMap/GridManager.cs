@@ -234,5 +234,78 @@ public class GridManager : NetworkBehaviour
     {
         return gridObject1.x == gridObject2.x && gridObject1.z == gridObject2.z;
     }
+
+    public void SwitchAcademy(GridObject gridObject1, GridObject gridObject2)
+    {
+        AcademyType academy = grid.gridArray[gridObject1.x, gridObject1.z].academy;
+        grid.gridArray[gridObject1.x, gridObject1.z].academy = grid.gridArray[gridObject2.x, gridObject2.z].academy;
+        grid.gridArray[gridObject2.x, gridObject2.z].academy = academy;
+
+        GridVfxManager.Instance.UpdateVfxAcademy(grid.gridArray[gridObject1.x, gridObject1.z]);
+        GridVfxManager.Instance.UpdateVfxAcademy(grid.gridArray[gridObject2.x, gridObject2.z]);
+    }
+
+    public List<Vector2Int> GetSelectableGridObject(SelectGridMode selectGridMode,Player player)
+    {
+        List<Vector2Int> gridXZList = new List<Vector2Int>();
+        switch (selectGridMode)
+        {
+            case SelectGridMode.Default:
+                {
+                    List<GridObject> neighbour = grid.GetNeighbour(player.currentGrid);
+                    gridXZList.Add(new Vector2Int(player.currentGrid.x, player.currentGrid.z));
+                    foreach(var gridObject in neighbour)
+                    {
+                        gridXZList.Add(new Vector2Int(gridObject.x, gridObject.z));
+                    }
+                    break;
+                }
+            case SelectGridMode.OneOccupyed:
+                {
+                    foreach(var gridObject in grid.gridArray)
+                    {
+                        if(gridObject.landType == LandType.Plain && gridObject.owner != null)
+                        {
+                            gridXZList.Add(new Vector2Int(gridObject.x, gridObject.z));
+                        }
+                    }
+                    break;
+                }
+            case SelectGridMode.TwoOccupyed:
+                {
+                    foreach (var gridObject in grid.gridArray)
+                    {
+                        if (gridObject.landType == LandType.Plain && gridObject.owner != null)
+                        {
+                            gridXZList.Add(new Vector2Int(gridObject.x, gridObject.z));
+                        }
+                    }
+                    break;
+                }
+            case SelectGridMode.OneRivalBuilded:
+                {
+                    foreach (var gridObject in grid.gridArray)
+                    {
+                        if (gridObject.isHasBuilding == true && gridObject.owner == GameplayManager.Instance.GetCompetitive())
+                        {
+                            gridXZList.Add(new Vector2Int(gridObject.x, gridObject.z));
+                        }
+                    }
+                    break;
+                }
+            case SelectGridMode.OneOccupyedNotBuilded:
+                {
+                    foreach (var gridObject in grid.gridArray)
+                    {
+                        if (gridObject.owner != null && gridObject.isHasBuilding == false)
+                        {
+                            gridXZList.Add(new Vector2Int(gridObject.x, gridObject.z));
+                        }
+                    }
+                    break;
+                }
+        }
+        return gridXZList;
+    }
 }
 
