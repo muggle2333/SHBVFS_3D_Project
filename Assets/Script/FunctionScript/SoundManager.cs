@@ -62,6 +62,7 @@ public class SoundManager : NetworkBehaviour
     [SerializeField] private AudioSource effectSource;
     [SerializeField] private AudioSource bgmSource;
 
+    private bool canCountdown = true;
     private void Awake()
     {
         Instance= this;
@@ -108,12 +109,31 @@ public class SoundManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void PlayCountDownClientRpc()
+    public void PlayCountDownClientRpc(int times)
     {
-        effectSource.clip = GetAudioClip(Sound.ControlEnd);
-        effectSource.Play();
-        effectSource.loop = true;
-        Invoke("StopLoopSound",3f);
+        if(canCountdown)
+        {
+            StartCoroutine(PlayCountDownScene(1.0f,times));
+        }
+        
+    }
+
+    [ClientRpc]
+    public void StopCountDownClientRpc()
+    {
+        StopAllCoroutines();
+        canCountdown = true;
+    }
+
+    IEnumerator PlayCountDownScene(float duration,int times)
+    {
+        canCountdown= false;
+        for(int i = 0;i<times;i++)
+        {
+            PlaySound(Sound.ControlEnd);
+            yield return new WaitForSeconds(duration);
+        }
+        canCountdown= true;
     }
     private void StopLoopSound()
     {
