@@ -8,35 +8,36 @@ using UnityEngine.SceneManagement;
 
 public enum Sound
 {
-    PlayCard,
-    UseCard,
-    DrawCard,
-    DiscardCard,
-    //
-    RoundStart,
-    ControlStart,
-    ControlEnd,
-    //
-    MoveToPlain,
-    MoveToMountain,
-    MoveToLake,
-    MoveOnLake,
-    //
-    Attack,
-    Build,
-    DestoryBuilding,
-    Occupy,
-    Search,
+    PlayCard,//0
+    CardTakeEffect,//1
+    DrawCard,//2
+    DiscardCard,//3
 
+    Attack,//4
+    Build,//5
+    DestoryBuilding,//6
+    Occupy,//7
+    Search,//8
+
+    MoveToPlain,//9
+    MoveToMountain,//10
+    MoveToLake,//11
+    MoveToForest,//12
+    MoveOnLake,//13
+
+    Button,//14
+    ControlInput,//15
+    CountDown,//16
+    ControlStart,//17
+    GameStart,//18
 }
 public enum Bgm
 {
-    GameplayNormalBgm,
-    MainMenuBgm,
-    DyingBgm,
-    ForestBgm,
-    SuccessBgm,
-    LossBgm,
+    NormalBGM,//19
+    LobbyBGM,//20
+    DyingBGM,//21
+    WinBGM,//22
+    LoseBGM,//23
 }
 [Serializable]
 public struct SoundAudioClip
@@ -62,6 +63,7 @@ public class SoundManager : NetworkBehaviour
     [SerializeField] private AudioSource effectSource;
     [SerializeField] private AudioSource bgmSource;
 
+    private bool canCountdown = true;
     private void Awake()
     {
         Instance= this;
@@ -76,7 +78,7 @@ public class SoundManager : NetworkBehaviour
             bgmSource.Stop();
         }else if(scene.name == Loader.Scene.MainMenuScene.ToString())
         {
-            PlayBgm(Bgm.MainMenuBgm);
+            PlayBgm(Bgm.LobbyBGM);
         }
     }
 
@@ -108,12 +110,31 @@ public class SoundManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void PlayCountDownClientRpc()
+    public void PlayCountDownClientRpc(int times)
     {
-        effectSource.clip = GetAudioClip(Sound.ControlEnd);
-        effectSource.Play();
-        effectSource.loop = true;
-        Invoke("StopLoopSound",3f);
+        if(canCountdown)
+        {
+            StartCoroutine(PlayCountDownScene(1.0f,times));
+        }
+        
+    }
+
+    [ClientRpc]
+    public void StopCountDownClientRpc()
+    {
+        StopAllCoroutines();
+        canCountdown = true;
+    }
+
+    IEnumerator PlayCountDownScene(float duration,int times)
+    {
+        canCountdown= false;
+        for(int i = 0;i<times;i++)
+        {
+            PlaySound(Sound.CountDown);
+            yield return new WaitForSeconds(duration);
+        }
+        canCountdown= true;
     }
     private void StopLoopSound()
     {
@@ -136,5 +157,4 @@ public class SoundManager : NetworkBehaviour
         bgmDicts.TryGetValue(bgm, out audioClip);
         return audioClip;
     }
-
 }

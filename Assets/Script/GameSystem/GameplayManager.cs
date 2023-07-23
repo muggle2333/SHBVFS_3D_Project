@@ -270,7 +270,31 @@ public class GameplayManager : NetworkBehaviour
             }
         }
     }
-
+    [ClientRpc]
+    public void AddPlayerHpClientRpc()
+    {
+        playerList[0].HP += playerList[0].HpPerRound;
+        if (playerList[0].HP > playerList[0].MaxHP)
+        {
+            playerList[0].HP = playerList[0].MaxHP;
+        }
+        playerList[1].HP += playerList[1].HpPerRound;
+        if (playerList[1].HP > playerList[1].MaxHP)
+        {
+            playerList[1].HP = playerList[1].MaxHP;
+        }
+    }
+    [ClientRpc]
+    public void DrawBasicCardPerRoundClientRpc()
+    {
+        var drawCardCompoent = FindObjectOfType<DrawCardComponent>();
+        for(int i = 0;i< currentPlayer.basicCardPerRound; i++)
+        {
+            drawCardCompoent.DrawBasicCard(currentPlayer);
+        }
+        
+        drawCardCompoent.PlayDrawCardAnimationServerRpc(currentPlayer.Id, currentPlayer.basicCardPerRound);
+    }
     public List<Player> GetDyingPlayer()
     {
         List<Player> dyingPlayers = new List<Player>();

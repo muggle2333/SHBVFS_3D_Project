@@ -9,11 +9,12 @@ using System;
 
 public class GridManager : NetworkBehaviour
 {
-    public int levelIndex =1;
+    public int levelIndex =3;
     public Grid<GridObject> grid;
     public GridObject[,] backupGrid = new GridObject[10,10];
     public GameObject gridUI;
     public float gridDistance;
+    private int[] academyNum = new int[6] { 6, 6, 6, 6, 6, 6 };
     public static GridManager Instance { get; private set; }
 
     public void Awake() 
@@ -86,17 +87,6 @@ public class GridManager : NetworkBehaviour
                 //Debug.Log(gridObjectList[x * gridSetting.length + z]);
                 gridArray[x, z] = gridObjectList[x * gridSetting.length + z];
                 gridArray[x, z].grid = grid;
-
-                //Initialize the Land AcademyType
-                //if (gridArray[x, z].landType == LandType.Plain)
-                //{
-                //    gridArray[x, z].academy = (AcademyType)UnityEngine.Random.Range(1, 6);
-                    
-                //}
-                //else
-                //{
-                //    gridArray[x, z].academy = AcademyType.Null;
-                //}
             }
         }
 
@@ -113,16 +103,37 @@ public class GridManager : NetworkBehaviour
                 //Initialize the Land AcademyType
                 if (grid.gridArray[x, z].landType == LandType.Plain)
                 {
-                    var academy = (AcademyType)UnityEngine.Random.Range(1, 7);
-                    SyncAcademyClientRpc(new Vector2Int(x, z), academy);
+                    int academy = 0;
+                    do
+                    {
+                        academy = RandomGetAcademy();
+                    } 
+                    while (!CheckIsEnough(academy));
+                    SyncAcademyClientRpc(new Vector2Int(x, z), (AcademyType)academy);
+                   
                 }
             }
         }
+    }
+    private int RandomGetAcademy()
+    {
+        var academy = UnityEngine.Random.Range(1, 7);
+        return academy;
+    }
+    private bool CheckIsEnough(int academy)
+    {
+        if (academyNum[academy-1]>0)
+        {
+            academyNum[academy-1]--;
+            return true;
+        }
+        return false;
     }
     [ClientRpc]
     public void SyncAcademyClientRpc(Vector2Int gridObjectXZ, AcademyType academyType)
     {
         grid.gridArray[gridObjectXZ.x, gridObjectXZ.y].academy = academyType;
+        //Debug.Log(academyType.ToString());
     }
 
     public GridObject GetSelectedGridObject(Vector3 pointPos)

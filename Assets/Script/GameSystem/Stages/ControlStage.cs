@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class ControlStage : MonoBehaviour
@@ -17,6 +18,7 @@ public class ControlStage : MonoBehaviour
         players[1].hasAttcaked = false;
         playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();
     }
+    
     public void AddPlayerInteract(Player player,PlayerInteract playerInteract)
     {
         List<PlayerInteract> list = null;

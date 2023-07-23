@@ -6,8 +6,6 @@ public class PlayerDataUI : MonoBehaviour
 {
     //[SerializeField] private TMP_Text playerNameText;
     [SerializeField] private TMP_Text hpText;
-    [SerializeField] private TMP_Text maxHpText;
-    [SerializeField] private TMP_Text maxApText;
     [SerializeField] private TMP_Text apText;
     [SerializeField] private TMP_Text defenceText;
     [SerializeField] private TMP_Text attackText;
@@ -21,11 +19,8 @@ public class PlayerDataUI : MonoBehaviour
     {
         if(player != null)
         {
-            hpText.text = player.HP.ToString();
-            maxHpText.text = "/"+ player.MaxHP.ToString();
-            apText.text = player.CurrentActionPoint.ToString();
-            maxApText.text = "/"+ player.MaxActionPoint.ToString();
-
+            hpText.text = player.HP.ToString() + " / " + player.MaxHP.ToString();
+            apText.text = player.CurrentActionPoint.ToString() + " / " + player.MaxActionPoint.ToString();
             defenceText.text = player.Defence.ToString();
             attackText.text = player.AttackDamage.ToString();
             rangeText.text = player.Range.ToString();
