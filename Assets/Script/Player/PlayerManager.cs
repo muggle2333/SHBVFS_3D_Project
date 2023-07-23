@@ -267,6 +267,7 @@ public class PlayerManager : NetworkBehaviour
             else
             {
                 drawCardComponent.DrawEventCard(player);
+                FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(player.Id, 1);
             }
         }
         else
@@ -330,6 +331,7 @@ public class PlayerManager : NetworkBehaviour
 
     public bool DrawCard(Player player, GridObject gridObject)
     {
+        if (!CheckGachable(player, gridObject)) return false;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Gacha, player);
         if (!player.UseActionPoint(apCost)) return false;
 

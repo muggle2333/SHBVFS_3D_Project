@@ -13,6 +13,7 @@ public static class Loader
         LoadingScene,
         LobbyScene,
         WaitRoomScene,
+        TutorialScene,
     }
 
     private static Scene targetScene;

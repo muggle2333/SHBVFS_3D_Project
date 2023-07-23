@@ -21,7 +21,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     [SerializeField] private float duration;
     public GameObject Info;
     public CardSelectManager cardSelectManager;
-    
     [SerializeField] private Material cardVFX;
     private float vfxFloat;
     void Start()
@@ -36,8 +35,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
-        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
 
         if (isSelected) return;
         transform.DOLocalMoveY((targetY - formerY) / 2 + formerY, duration);
@@ -45,8 +44,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerExit(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
-        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
 
         if (isSelected) return;
         transform.DOLocalMoveY(formerY, duration);

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -14,6 +14,7 @@ public class WaitRoomManager : NetworkBehaviour
     
 
     private Dictionary<ulong, bool> playerReadyDictionary;
+    private NetworkVariable<bool> isTutorial = new NetworkVariable<bool>(false);
 
     [SerializeField] private WaitRoomUI waitRoomUI;
 
@@ -29,11 +30,22 @@ public class WaitRoomManager : NetworkBehaviour
         waitRoomUI = FindObjectOfType<WaitRoomUI>();
         waitRoomUI.SetStartBtn(false);
 
+        isTutorial.OnValueChanged += WaitRoomManager_UpdateTutorial;
         if(NetworkManager.Singleton.IsHost)
         {
             //SetPlayerReady();
         }
     }
+
+    private void WaitRoomManager_UpdateTutorial(bool previousValue, bool newValue)
+    {
+        if(!NetworkManager.Singleton.IsHost)
+        {
+            waitRoomUI.SetToggle(newValue);
+        }
+        
+    }
+
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -85,6 +97,17 @@ public class WaitRoomManager : NetworkBehaviour
 
     public void StartGameplay()
     {
-        Loader.LoadNetwork(Loader.Scene.GameplayScene);
+        if(!isTutorial.Value)
+        {
+            Loader.LoadNetwork(Loader.Scene.GameplayScene);
+        }else
+        {
+            Loader.LoadNetwork(Loader.Scene.TutorialScene);
+        }
+    }
+
+    public void SetToggleTutorial(bool isToggle)
+    {
+        isTutorial.Value = isToggle;
     }
 }

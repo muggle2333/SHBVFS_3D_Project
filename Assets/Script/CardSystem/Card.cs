@@ -28,6 +28,8 @@ public class Card:MonoBehaviour
 
     public int Damage;
 
+    public int needSelectCount;
+
     public PlayerDataEffect playerDataEffect;
     public CardType cardType;
     public CardLevel cardLevel;
@@ -60,6 +62,7 @@ public class Card:MonoBehaviour
         cardLevel = cardSetting.cardLevel;
         CardBuff = cardSetting.CardBuff;
         cardFounction = cardSetting.cardFounction;
+        needSelectCount = cardSetting.needSelectCount;
     }
     public void ActivateCard()
     {

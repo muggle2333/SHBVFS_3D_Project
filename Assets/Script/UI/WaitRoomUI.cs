@@ -13,6 +13,7 @@ public class WaitRoomUI : MonoBehaviour
     [SerializeField] private Button startBtn;
     [SerializeField] private GameObject hostPanel;
     [SerializeField] private TMP_Text ipText;
+    [SerializeField] private Toggle tutorialToggle;
 
     public void Awake()
     {
@@ -24,10 +25,26 @@ public class WaitRoomUI : MonoBehaviour
         {
             WaitRoomManager.Instance.StartGameplay();
         });
+        tutorialToggle.onValueChanged.AddListener(delegate
+        {
+            if(tutorialToggle.isOn)
+            {
+                WaitRoomManager.Instance.SetToggleTutorial(true);
+            }
+            else
+            {
+                WaitRoomManager.Instance.SetToggleTutorial(false);
+            }
+        });
+
     }
     public void Start()
     {
         CheckPlayerIdentify(NetworkManager.Singleton.IsHost);
+        if(!NetworkManager.Singleton.IsHost)
+        {
+            tutorialToggle.interactable = false;
+        }
 
     }
     private void CheckPlayerIdentify(bool isHost)
@@ -64,8 +81,14 @@ public class WaitRoomUI : MonoBehaviour
         }
     }
 
+    public void SetToggle(bool isTrue)
+    {
+        tutorialToggle.isOn = isTrue;
+    }
     public void SetStartBtn(bool isStart)
     {
         startBtn.interactable= isStart;
     }
+
+
 }

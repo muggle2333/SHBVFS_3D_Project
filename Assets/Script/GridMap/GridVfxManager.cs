@@ -27,6 +27,7 @@ public class GridVfxManager : MonoBehaviour
 
     [SerializeField] private List<Sprite> academySprite = new List<Sprite>();
     [SerializeField] private List<Color> academyColor= new List<Color>();
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,6 +46,9 @@ public class GridVfxManager : MonoBehaviour
     public void CreateVfx()
     {
         GameObject vfxContainers = new GameObject("VfxConainers");
+        GameObject academyContainer = new GameObject("AcademyContainer");
+        academyContainer.transform.SetParent(vfxContainers.transform);
+
         Grid<GridObject> grid = GridManager.Instance.grid;
         vfxTransformArray = new VfxTransform[grid.width,grid.width];
         for (int x = 0; x < grid.width; x++)
@@ -59,7 +63,9 @@ public class GridVfxManager : MonoBehaviour
                 container.transform.SetParent(vfxContainers.transform);
                 container.transform.position = grid.GetWorldPositionCenter(x, z);
 
-                GameObject atmpVfx = Instantiate(vfxPrefabs.academyVfx.gameObject,container.transform);
+                GameObject atmpVfx = Instantiate(vfxPrefabs.academyVfx.gameObject,academyContainer.transform);
+                atmpVfx.transform.position = grid.GetWorldPositionCenter(x, z);
+
                 GameObject otmpVfx = Instantiate(vfxPrefabs.ownerVfx.gameObject, container.transform);
 
                 //GameObject btmpVfx = Instantiate(vfxPrefabs.buildingVfx.gameObject,  container.transform);
