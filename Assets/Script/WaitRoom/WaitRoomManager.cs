@@ -104,7 +104,6 @@ public class WaitRoomManager : NetworkBehaviour
         {
             Loader.LoadNetwork(Loader.Scene.TutorialScene);
         }
-        
     }
 
     public void SetToggleTutorial(bool isToggle)

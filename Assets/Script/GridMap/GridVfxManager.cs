@@ -27,6 +27,7 @@ public class GridVfxManager : MonoBehaviour
 
     [SerializeField] private List<Sprite> academySprite = new List<Sprite>();
     [SerializeField] private List<Color> academyColor= new List<Color>();
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
