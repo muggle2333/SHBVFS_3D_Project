@@ -12,6 +12,7 @@ public struct AcademyBuffData
     public int attackDamage;
     public int defense;
     public int APPerRound;
+    public int basicCardPerRound;
 }
 
 [CreateAssetMenu(fileName ="AcademyBuff",menuName ="AcademyBuff")]
