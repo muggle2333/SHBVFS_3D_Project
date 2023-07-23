@@ -284,6 +284,17 @@ public class GameplayManager : NetworkBehaviour
             playerList[1].HP = playerList[1].MaxHP;
         }
     }
+    [ClientRpc]
+    public void DrawBasicCardPerRoundClientRpc()
+    {
+        var drawCardCompoent = FindObjectOfType<DrawCardComponent>();
+        for(int i = 0;i< currentPlayer.basicCardPerRound; i++)
+        {
+            drawCardCompoent.DrawBasicCard(currentPlayer);
+        }
+        
+        drawCardCompoent.PlayDrawCardAnimationServerRpc(currentPlayer.Id, currentPlayer.basicCardPerRound);
+    }
     public List<Player> GetDyingPlayer()
     {
         List<Player> dyingPlayers = new List<Player>();

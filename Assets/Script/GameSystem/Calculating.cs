@@ -14,6 +14,7 @@ public class Calculating : NetworkBehaviour
     public int academyAttackDamage;
     public int academyDefense;
     public int academyAPPerRound;
+    public int academyBasicCardPerRound;
 
     public int totalAcademyMaxHP;
     public int totalAcademyHPPerRound;
@@ -21,6 +22,7 @@ public class Calculating : NetworkBehaviour
     public int totalAcademyAttackDamage;
     public int totalAcademyDefense;
     public int totalAcademyAPPerRound;
+    public int totalAcademyBasicCardPerRound;
 
     public int cardDamage;
     public int cardAP;
@@ -156,6 +158,7 @@ public class Calculating : NetworkBehaviour
             academyAttackDamage += AcademyBuffData.attackDamage;
             academyDefense += AcademyBuffData.defense;
             academyAPPerRound += AcademyBuffData.APPerRound;
+            academyBasicCardPerRound += AcademyBuffData.basicCardPerRound;
         }
 
         totalAcademyMaxHP = academyMaxHP;
@@ -164,6 +167,7 @@ public class Calculating : NetworkBehaviour
         totalAcademyAttackDamage = academyAttackDamage;
         totalAcademyDefense = academyDefense;
         totalAcademyAPPerRound = academyAPPerRound;
+        totalAcademyBasicCardPerRound = academyBasicCardPerRound;
 
         academyMaxHP = 0;
         academyHPPerRound = 0;
@@ -171,7 +175,7 @@ public class Calculating : NetworkBehaviour
         academyAttackDamage = 0;
         academyDefense = 0;
         academyAPPerRound = 0;
-
+        academyBasicCardPerRound = 0;
         CalculatPlayerBaseData(player);
     }
 
@@ -183,6 +187,7 @@ public class Calculating : NetworkBehaviour
         player.Range = player.baseRange + totalAcademyAttackRange + totalCardAttackRangeDic[player] + player.gridAR;
         player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefenseDic[player] + player.gridDF;
         player.ActionPointPerRound = player.baseActionPointPerRound + totalAcademyAPPerRound;
+        player.basicCardPerRound = totalAcademyBasicCardPerRound;
     }
 
     public void CalaulatPlayerData(Player player)

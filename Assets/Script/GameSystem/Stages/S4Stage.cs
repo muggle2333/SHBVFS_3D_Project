@@ -92,6 +92,8 @@ public class S4Stage : MonoBehaviour
                 }
             }
         }
+        GameplayManager.Instance.AddPlayerHpClientRpc();
+        GameplayManager.Instance.DrawBasicCardPerRoundClientRpc();
         Calculating.Instance.CardDataInitializeClientRpc(playerList[0].Id);
         Calculating.Instance.CardDataInitializeClientRpc(playerList[1].Id);
 
