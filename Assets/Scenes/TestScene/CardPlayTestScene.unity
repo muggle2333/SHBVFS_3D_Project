@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 718493220}
   - component: {fileID: 718493219}
   - component: {fileID: 718493218}
+  - component: {fileID: 718493221}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -796,13 +797,56 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718493217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.5}
+  m_LocalPosition: {x: 0, y: 0, z: -7.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &718493221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718493217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &853747608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1284545587}
   - component: {fileID: 1284545586}
+  - component: {fileID: 1284545588}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1262,6 +1307,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1284545588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284545585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1431412363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,7 +1466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ddde7583bfa83494cbbcde5089cda27e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1425,14 +1493,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1499336647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf6df17df8ace124f972b5ca858437fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 55cff88eb2ae5284fb5b966f3443483f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Interactable: 1
+  IsInOpreationStage: 0
   isSelected: 0
-  targetY: 30
+  isBurning: 0
+  targetY: 50
   formerY: 0
-  duration: 0.25
-  Info: {fileID: 2124493093}
+  duration: 1
+  Info: {fileID: 0}
+  cardSelectManager: {fileID: 0}
+  cardVFX: {fileID: 0}
 --- !u!1 &1508346328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,9 +1558,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a954cc7babd5747b047e9c6e51f5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ToDiscardText: {fileID: 0}
+  IsRetracted: 0
+  RetractOffset: 0
+  offset: 0
   handX: 50
   handY: 0
+  cardWidth: 0
   interval: 400
+  canvas: {fileID: 0}
+  upperY: 0
+  lowerY: 0
+  duration: 0
 --- !u!1 &1558599305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1632,7 @@ GameObject:
   - component: {fileID: 1714825194}
   - component: {fileID: 1714825197}
   - component: {fileID: 1714825196}
-  - component: {fileID: 1714825195}
+  - component: {fileID: 1714825198}
   m_Layer: 5
   m_Name: 2
   m_TagString: Untagged
@@ -1579,23 +1661,6 @@ RectTransform:
   m_AnchoredPosition: {x: 108.8, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1714825195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714825193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf6df17df8ace124f972b5ca858437fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSelected: 0
-  targetY: 30
-  formerY: 0
-  duration: 0.25
-  Info: {fileID: 1558599305}
 --- !u!114 &1714825196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1608,7 +1673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 611a86de392b94c4082c6ea5281cdb8d, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1616,7 +1681,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad11af91be7d7d349a227ee7848987b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1634,6 +1699,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714825193}
   m_CullTransparentMesh: 1
+--- !u!114 &1714825198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714825193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55cff88eb2ae5284fb5b966f3443483f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interactable: 1
+  IsInOpreationStage: 0
+  isSelected: 0
+  isBurning: 0
+  targetY: 50
+  formerY: 0
+  duration: 1
+  Info: {fileID: 0}
+  cardSelectManager: {fileID: 0}
+  cardVFX: {fileID: 0}
 --- !u!1 &1804696126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +1876,7 @@ GameObject:
   - component: {fileID: 1911119997}
   - component: {fileID: 1911120000}
   - component: {fileID: 1911119999}
-  - component: {fileID: 1911119998}
+  - component: {fileID: 1911120001}
   m_Layer: 5
   m_Name: 3
   m_TagString: Untagged
@@ -1818,23 +1905,6 @@ RectTransform:
   m_AnchoredPosition: {x: 208, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1911119998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1911119996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf6df17df8ace124f972b5ca858437fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSelected: 0
-  targetY: 30
-  formerY: 0
-  duration: 0.25
-  Info: {fileID: 2080140400}
 --- !u!114 &1911119999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1855,7 +1925,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ffd8cf9b6bedb09459be801299b54bfb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5efd7fdfd1c90fa45ae6daceeded3618, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1873,6 +1943,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911119996}
   m_CullTransparentMesh: 1
+--- !u!114 &1911120001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911119996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55cff88eb2ae5284fb5b966f3443483f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interactable: 1
+  IsInOpreationStage: 0
+  isSelected: 0
+  isBurning: 0
+  targetY: 50
+  formerY: 0
+  duration: 1
+  Info: {fileID: 0}
+  cardSelectManager: {fileID: 0}
+  cardVFX: {fileID: 0}
 --- !u!1 &2080140400
 GameObject:
   m_ObjectHideFlags: 0

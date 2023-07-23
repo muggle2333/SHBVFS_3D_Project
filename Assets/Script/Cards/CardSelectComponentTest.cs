@@ -6,14 +6,14 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 
-public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class CardSelectComponentTest : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private int index;
     public bool Interactable = true;
     public bool IsInOpreationStage;
     public bool isSelected;
     public bool isBurning;
-    public float targetY;
+    public float targetY; 
     public float formerY;
     //public DG.Tweening.Sequence CardDiscardAniamtion;
     //public DG.Tweening.Sequence CardTakeEffectAniamtion;
@@ -21,13 +21,14 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     [SerializeField] private float duration;
     public GameObject Info;
     public CardSelectManager cardSelectManager;
+    
     [SerializeField] private Material cardVFX;
     private float vfxFloat;
     void Start()
     {
         cardVFX.SetTexture("_MainText",gameObject.GetComponent<Card>().cardTexture);
         //Interactable = true;
-        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
+        transform.gameObject.GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
         cardSelectManager = PlayerManager.Instance.cardSelectManager;
         isSelected = false;
         duration = 0.25f;
@@ -35,8 +36,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
+        transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
+        transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
 
         if (isSelected) return;
         transform.DOLocalMoveY((targetY - formerY) / 2 + formerY, duration);
@@ -44,8 +45,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerExit(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        transform.gameObject.GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        transform.gameObject.GetComponent<Image>().material.SetFloat("_Edge", 0);
 
         if (isSelected) return;
         transform.DOLocalMoveY(formerY, duration);
