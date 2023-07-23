@@ -13,7 +13,11 @@ public class ControlStage : MonoBehaviour
     private List<Player> players;
     public void StartStage()
     {
+        
+        
         players = GameplayManager.Instance.GetPlayer();
+        Calculating.Instance.CardDataInitializeClientRpc(players[0].Id);
+        Calculating.Instance.CardDataInitializeClientRpc(players[1].Id);
         players[0].hasAttcaked = false;
         players[1].hasAttcaked = false;
         playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();

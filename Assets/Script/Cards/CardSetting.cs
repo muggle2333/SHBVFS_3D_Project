@@ -70,5 +70,6 @@ public class CardSetting : ScriptableObject
     public CardLevel cardLevel;
     public CardBuff CardBuff;
     public GameObject cardFounction;
+    public int needSelectCount;
 }
 
