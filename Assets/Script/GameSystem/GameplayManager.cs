@@ -270,7 +270,20 @@ public class GameplayManager : NetworkBehaviour
             }
         }
     }
-
+    [ClientRpc]
+    public void AddPlayerHpClientRpc()
+    {
+        playerList[0].HP += playerList[0].HpPerRound;
+        if (playerList[0].HP > playerList[0].MaxHP)
+        {
+            playerList[0].HP = playerList[0].MaxHP;
+        }
+        playerList[1].HP += playerList[1].HpPerRound;
+        if (playerList[1].HP > playerList[1].MaxHP)
+        {
+            playerList[1].HP = playerList[1].MaxHP;
+        }
+    }
     public List<Player> GetDyingPlayer()
     {
         List<Player> dyingPlayers = new List<Player>();

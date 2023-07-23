@@ -178,6 +178,7 @@ public class Calculating : NetworkBehaviour
     public void CalculatPlayerBaseData(Player player)
     {
         player.MaxHP = player.baseMaxHP + totalAcademyMaxHP;
+        player.HpPerRound = totalAcademyHPPerRound;
         player.AttackDamage = player.baseAttackDamage + totalAcademyAttackDamage + totalCardAttackDamageDic[player];
         player.Range = player.baseRange + totalAcademyAttackRange + totalCardAttackRangeDic[player] + player.gridAR;
         player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefenseDic[player] + player.gridDF;

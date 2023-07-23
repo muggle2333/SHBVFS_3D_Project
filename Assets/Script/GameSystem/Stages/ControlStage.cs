@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class ControlStage : MonoBehaviour
@@ -15,8 +16,11 @@ public class ControlStage : MonoBehaviour
         players = GameplayManager.Instance.GetPlayer();
         players[0].hasAttcaked = false;
         players[1].hasAttcaked = false;
+        GameplayManager.Instance.AddPlayerHpClientRpc();
+        
         playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();
     }
+    
     public void AddPlayerInteract(Player player,PlayerInteract playerInteract)
     {
         List<PlayerInteract> list = null;

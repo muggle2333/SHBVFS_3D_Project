@@ -16,7 +16,7 @@ public class Character : NetworkBehaviour
     //public NetworkVariable<int> DefenceNetwork = new NetworkVariable<int>(0);
     public int Range;
     //public NetworkVariable<int> RangeNetwork = new NetworkVariable<int>(0);
-
+    public int HpPerRound;
     public bool hasAttcaked;
 
 
