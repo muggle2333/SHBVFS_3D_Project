@@ -340,6 +340,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         Interactable = false;
         this.EndSelectOperation();
         this.transform.SetParent(cardSelectManager.canvas.transform);
+        SoundManager.Instance.PlaySound(Sound.PlayCard);
         var seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveY(0, 0.4f));
         seq.Join(transform.DOLocalMoveX(0, 0.4f));
@@ -356,6 +357,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         Interactable = false;
         this.EndSelectDiscard();
         this.transform.SetParent(cardSelectManager.canvas.transform);
+        SoundManager.Instance.PlaySound(Sound.DiscardCard);
         var seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveY(0, 0.4f));
         seq.AppendInterval(0.5f);
@@ -383,7 +385,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendCallback(() => { this.Info.SetActive(true); });
         seq.AppendInterval(1f);
         Invoke("AddMaterial", 1);
-        
+        SoundManager.Instance.PlaySound(Sound.CardTakeEffect);
         //burn function
         seq.AppendCallback(() => { DOTween.To(() => vfxFloat, x => vfxFloat = x, 0, 1f); });
         seq.AppendInterval(1f);
@@ -411,7 +413,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendCallback(() => { this.Info.SetActive(true); });
         seq.AppendInterval(1f);
         Invoke("AddMaterial", 1);
-
+        SoundManager.Instance.PlaySound(Sound.CardTakeEffect);
         //burn function
         seq.AppendCallback(() => { DOTween.To(() => vfxFloat, x => vfxFloat = x, 0, 1f); });
         seq.AppendInterval(1f);
