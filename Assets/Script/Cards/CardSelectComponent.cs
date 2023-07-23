@@ -58,8 +58,15 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         if (Interactable == false) return;
         if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
         {
-            if (isSelected) EndSelectOperation();
-            else OnSelectOperation();
+            if (isSelected)
+            {
+                EndSelectOperation();
+            }   
+            else
+            {
+                OnSelectOperation();
+            } 
+                
         }
         else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
         {
@@ -84,6 +91,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnSelectOperation()
     {
+        cardSelectManager.selectModeCount += gameObject.GetComponent<Card>().needSelectCount;
         Info.SetActive(true);
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
@@ -99,12 +107,21 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             }
         }//ensure current selected count
         //SecondarySelect
+        if(cardSelectManager.selectModeCount > 0)
+        {
+            FindObjectOfType<SelectMode>().EnterSelectMode(gameObject.GetComponent<Card>().needSelectCount);
+        }
+        else if(cardSelectManager.selectModeCount == 0)
+        {
+            FindObjectOfType<SelectMode>().ExitSelectMode();
+        }
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, true);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, true);
     }
 
     public void EndSelectOperation()
     {
+        cardSelectManager.selectModeCount -= gameObject.GetComponent<Card>().needSelectCount;
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
         transform.DOLocalMoveY(formerY, duration);
@@ -112,6 +129,10 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
+        if (cardSelectManager.selectModeCount == 0)
+        {
+            FindObjectOfType<SelectMode>().ExitSelectMode();
+        }
     }
 
     public void OnSelectDiscard()

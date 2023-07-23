@@ -188,8 +188,9 @@ public class TurnbasedSystem : NetworkBehaviour
         CompleteGameStage.Value = GameStage.S4;
         GameplayManager.Instance.StartControlStage();
         SoundManager.Instance.PlaySoundClientRpc(Sound.GameStart);
+        PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.currentPlayer);
         //UpdateTimer(S1PhaseTime);
-    
+
     }
 
     void DiscardPhase()

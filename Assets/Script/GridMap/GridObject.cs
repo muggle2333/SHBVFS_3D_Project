@@ -203,4 +203,14 @@ public class GridObject
     {
         this.playerKnowList = list;
     }
+
+    public void SwitchAcademy(GridObject gridObject1,GridObject gridObject2)
+    {
+        AcademyType academy = grid.gridArray[gridObject1.x, gridObject1.z].academy;
+        grid.gridArray[gridObject1.x, gridObject1.z].academy = grid.gridArray[gridObject2.x, gridObject2.z].academy;
+        grid.gridArray[gridObject2.x, gridObject2.z].academy = academy;
+
+        GridVfxManager.Instance.UpdateVfxAcademy(grid.gridArray[gridObject1.x, gridObject1.z]);
+        GridVfxManager.Instance.UpdateVfxAcademy(grid.gridArray[gridObject2.x, gridObject2.z]);
+    }
 }
