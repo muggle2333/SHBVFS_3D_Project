@@ -92,11 +92,12 @@ public class S4Stage : MonoBehaviour
                 }
             }
         }
+        yield return new WaitForSeconds(1);
         GameplayManager.Instance.AddPlayerHpClientRpc();
-        GameplayManager.Instance.DrawBasicCardPerRoundClientRpc();
-        Calculating.Instance.CardDataInitializeClientRpc(playerList[0].Id);
-        Calculating.Instance.CardDataInitializeClientRpc(playerList[1].Id);
-
+        GameplayManager.Instance.DrawBasicCardPerRoundClientRpc(0);
+        yield return new WaitForSeconds(1);
+        GameplayManager.Instance.DrawBasicCardPerRoundClientRpc(1);
+        yield return new WaitForSeconds(1);
         TurnbasedSystem.Instance.CompleteStage(GameStage.S4);
     }
 }

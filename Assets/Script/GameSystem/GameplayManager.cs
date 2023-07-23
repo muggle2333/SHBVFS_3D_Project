@@ -285,15 +285,17 @@ public class GameplayManager : NetworkBehaviour
         }
     }
     [ClientRpc]
-    public void DrawBasicCardPerRoundClientRpc()
+    public void DrawBasicCardPerRoundClientRpc(int j)
     {
         var drawCardCompoent = FindObjectOfType<DrawCardComponent>();
-        for(int i = 0;i< currentPlayer.basicCardPerRound; i++)
+        if (playerList[j] == currentPlayer)
         {
-            drawCardCompoent.DrawBasicCard(currentPlayer);
+            for (int i = 0; i < playerList[j].basicCardPerRound; i++)
+            {
+                drawCardCompoent.DrawBasicCard(playerList[j]);
+            }
+            drawCardCompoent.PlayDrawCardAnimationServerRpc(playerList[j].Id, playerList[j].basicCardPerRound);
         }
-        
-        drawCardCompoent.PlayDrawCardAnimationServerRpc(currentPlayer.Id, currentPlayer.basicCardPerRound);
     }
     public List<Player> GetDyingPlayer()
     {
