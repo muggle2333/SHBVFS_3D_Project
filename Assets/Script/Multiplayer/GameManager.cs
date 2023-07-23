@@ -30,7 +30,7 @@ public class GameManager : NetworkBehaviour
 
     //[SerializeField] private Transform playerPrefab;
     public NetworkVariable<WholeGameState> wholeGameState = new NetworkVariable<WholeGameState>(WholeGameState.WaitingToStart);
-    private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3.5f);
+    private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(4f);
     private NetworkVariable<bool> isGamePaused = new NetworkVariable<bool>(false);
     private bool isLocalPlayerReady = false;
     private bool isLocalPlayerPaused = false;
@@ -109,7 +109,7 @@ public class GameManager : NetworkBehaviour
             OnGameOver?.Invoke(this, EventArgs.Empty);
         }else if(newValue == WholeGameState.CountdownToStart)
         {
-            SoundManager.Instance.PlayCountDownClientRpc();
+            SoundManager.Instance.PlayCountDownClientRpc(4);
         }
     }
 

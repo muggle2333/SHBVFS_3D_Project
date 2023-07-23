@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
@@ -115,13 +116,20 @@ public class TurnbasedSystem : NetworkBehaviour
     IEnumerator TurnStart()
     {
         roundIndex.Value++;
-        //SoundManager.Instance.PlaySoundClientRpc(Sound.RoundStart);
+        //SoundManager.Instance.PlaySoundClientRpc(Sound.GameStart);
         ControlPhase();
         UpdateTimer(S1PhaseTime);
         //yield return new WaitForSecondsRealtime(S1PhaseTime);
         //加设跳过回合，不能用waitforsecondsRealtime
+        //var seq = DOTween.Sequence();
+        //seq.AppendInterval(S1PhaseTime-5);
+        //seq.AppendCallback(() => { SoundManager.Instance.PlayCountDownClientRpc(5); });
         while (timerValue.Value > 0)
         {
+            if(timerValue.Value < 5.1f&& timerValue.Value>=5f)
+            {
+                SoundManager.Instance.PlayCountDownClientRpc(5);
+            }
             if (isPlayerAllSkip)
             {
                 break;
@@ -131,7 +139,7 @@ public class TurnbasedSystem : NetworkBehaviour
                 yield return null;
             }
         }
-        SoundManager.Instance.PlaySoundClientRpc(Sound.ControlEnd);
+        //SoundManager.Instance.PlaySoundClientRpc(Sound.CountDown);
 
         DiscardPhase();
         yield return new WaitUntil(() => CurrentGameStage.Value == CompleteGameStage.Value);
@@ -179,14 +187,14 @@ public class TurnbasedSystem : NetworkBehaviour
         CurrentGameStage.Value = GameStage.S1;
         CompleteGameStage.Value = GameStage.S4;
         GameplayManager.Instance.StartControlStage();
-        SoundManager.Instance.PlaySoundClientRpc(Sound.RoundStart);
+        SoundManager.Instance.PlaySoundClientRpc(Sound.GameStart);
         //UpdateTimer(S1PhaseTime);
     
     }
 
     void DiscardPhase()
     {
-
+        SoundManager.Instance.StopCountDownClientRpc();
         CurrentGameStage.Value = GameStage.DiscardStage;
         CompleteGameStage.Value = CurrentGameStage.Value - 1;
         GameplayManager.Instance.StartDiscardStage();
@@ -285,4 +293,6 @@ public class TurnbasedSystem : NetworkBehaviour
         }
         return isAllSkip;
     }
+
+    
 }

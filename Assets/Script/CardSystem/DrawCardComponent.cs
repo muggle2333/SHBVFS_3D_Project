@@ -61,6 +61,7 @@ public class DrawCardComponent : NetworkBehaviour
     {
         this.player = player;
         GridObject gridObject = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
+        SoundManager.Instance.PlaySound(Sound.DrawCard);
         if (gridObject.isHasBuilding == true)
         {
             DrawBasicCard(player);
