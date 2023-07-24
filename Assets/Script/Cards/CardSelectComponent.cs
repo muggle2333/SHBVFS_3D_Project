@@ -27,7 +27,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         cardVFX.SetTexture("_MainText",gameObject.GetComponent<Card>().cardTexture);
         //Interactable = true;
-        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/outline"));
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/Outline"));
         cardSelectManager = PlayerManager.Instance.cardSelectManager;
         isSelected = false;
         duration = 0.25f;
@@ -35,8 +35,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
 
         if (isSelected) return;
         transform.DOLocalMoveY((targetY - formerY) / 2 + formerY, duration);
@@ -44,49 +42,37 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerExit(PointerEventData eventData)
     {
         if (Interactable == false) return;
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
-
         if (isSelected) return;
         transform.DOLocalMoveY(formerY, duration);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
-            return;
+        if (eventData.button == PointerEventData.InputButton.Right) return;
         if (Interactable == false) return;
         if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
         {
             if (isSelected)
             {
-                EndSelectOperation();
-            }   
-            else
-            {
-                OnSelectOperation();
-            } 
-                
+                cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
+            }
+            else OnSelectOperation();
         }
         else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
         {
-            if (isSelected) EndSelectDiscard();
+            if (isSelected) cardSelectManager.DiscardCards(GameplayManager.Instance.currentPlayer);
             else OnSelectDiscard();
         }
         else if (TurnbasedSystem.Instance.isDie.Value == true && GameplayManager.Instance.currentPlayer.HP <= 0)
         {
             if (this.gameObject.GetComponent<Card>().cardId != 0) return;
-            if (isSelected) EndSelectDying();
+            if (isSelected) cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
             else OnSelectDying();
         }
         else
         {
-            if (isSelected) EndSelectOther();
-            else OnSelectOther();
+            if (!isSelected) OnSelectOther();
         }
-
-        //if (isSelected) EndSelect();
-        //else OnSelect();
     }
 
     public void OnSelectOperation()
@@ -115,8 +101,10 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             FindObjectOfType<SelectMode>().ExitSelectMode();
         }
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, true);
+        //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, true);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, true);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
     }
 
     public void EndSelectOperation()
@@ -127,12 +115,14 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
+        //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
+        //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
         if (cardSelectManager.selectModeCount == 0)
         {
             FindObjectOfType<SelectMode>().ExitSelectMode();
         }
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
     }
 
     public void OnSelectDiscard()
@@ -173,7 +163,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
             cardSelectManager.ToDiscardText.color = Color.red;
         }
-
     }
 
     public void EndSelectDiscard()
@@ -192,8 +181,10 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
         {
             UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
-            UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, false);
+            //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, false);
         }
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
     }
 
     public void OnSelectDying()
@@ -206,7 +197,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
         foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
         {
-            if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] <= 1 - GameplayManager.Instance.currentPlayer.HP )
+            if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] <= 1 - GameplayManager.Instance.currentPlayer.HP)
                 break;
             if (this.gameObject == card.gameObject) continue;
             if (card.gameObject.GetComponent<CardSelectComponent>().isSelected)
@@ -221,10 +212,16 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }//turn off Info
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, true);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDying, true);
-        UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, false);
+        cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + (1 - GameplayManager.Instance.currentPlayer.HP);
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, true);
+            cardSelectManager.ToPlayHPText.color = Color.green;
+        }
+        else
+        {
+            UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, false);
+            cardSelectManager.ToPlayHPText.color = Color.red;
         }
     }
 
@@ -235,11 +232,18 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
+        cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + (1 - GameplayManager.Instance.currentPlayer.HP);
+        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < 1 - GameplayManager.Instance.currentPlayer.HP)
+        {
+            cardSelectManager.ToPlayHPText.color = Color.red;
+            UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, false);
+        }
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
         {
             UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, false);
-            UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDying, false);
         }
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
     }
 
     public void OnSelectOther()
@@ -269,6 +273,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
     }
 
     #region Cloud

@@ -7,12 +7,14 @@ using UnityEngine.EventSystems;
 using Unity.Netcode;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CardSelectManager : MonoBehaviour
 {
     public Dictionary<Player, int> SelectCount = new Dictionary<Player, int>();
     public Dictionary<Player, int> maxSelected = new Dictionary<Player, int>();
     public TMP_Text ToDiscardText;
+    public TMP_Text ToPlayHPText;
     public bool IsRetracted;
     public float RetractOffset;
     public float offset;
@@ -47,6 +49,13 @@ public class CardSelectManager : MonoBehaviour
         InitializeCardSelectManager();
     }
 
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(1))
+        {
+            CancelCards(GameplayManager.Instance.currentPlayer);
+        }
+    }
 
     public void InitializeCardSelectManager()
     {
@@ -116,16 +125,24 @@ public class CardSelectManager : MonoBehaviour
         {
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
-                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectOther();
-                i--;
+                if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
+                {
+                    CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectOperation();
+                }
+                else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
+                {
+                    CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectDiscard();
+                }
+                else if (TurnbasedSystem.Instance.isDie.Value == true && GameplayManager.Instance.currentPlayer.HP <= 0)
+                {
+                    CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectDying();
+                }
+                else
+                {
+                    CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectOther();
+                }
             }
         }
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDying, false);
     }
 
     public void UpdateCardPos(Player player)
