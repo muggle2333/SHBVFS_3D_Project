@@ -6,8 +6,10 @@ using UnityEngine;
 public class AcademyUI : MonoBehaviour
 {
     public List<TMP_Text> academies;
+    public List<TMP_Text> academiesBuff;
     public Player Player;
     public bool isUnlock;
+
 
     private void Start()
     {
