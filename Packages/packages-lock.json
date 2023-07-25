@@ -46,6 +46,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.cinemachine": {
+      "version": "2.9.4",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.collections": {
       "version": "1.2.4",
       "depth": 1,
@@ -63,6 +72,19 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.feature.cinematic": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.timeline": "1.7.2",
+        "com.unity.sequences": "2.0.1",
+        "com.unity.formats.fbx": "4.2.1",
+        "com.unity.formats.alembic": "2.3.0",
+        "com.unity.cinemachine": "2.9.4",
+        "com.unity.recorder": "4.0.0"
+      }
+    },
     "com.unity.feature.worldbuilding": {
       "version": "1.0.1",
       "depth": 0,
@@ -73,6 +95,17 @@
         "com.unity.formats.fbx": "4.2.1",
         "com.unity.terrain-tools": "5.0.1"
       }
+    },
+    "com.unity.formats.alembic": {
+      "version": "2.3.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0",
+        "com.unity.modules.unityanalytics": "1.0.0",
+        "com.unity.modules.cloth": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.formats.fbx": {
       "version": "4.2.1",
@@ -238,7 +271,7 @@
     },
     "com.unity.sequences": {
       "version": "2.0.1",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.timeline": "1.6.3",
@@ -310,7 +343,7 @@
     },
     "com.unity.settings-manager": {
       "version": "2.0.1",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
