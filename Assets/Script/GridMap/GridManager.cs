@@ -245,11 +245,14 @@ public class GridManager : NetworkBehaviour
         GridVfxManager.Instance.UpdateVfxAcademy(grid.gridArray[gridObject2.x, gridObject2.z]);
     }
 
-    public List<Vector2Int> GetSelectableGridObject(SelectGridMode selectGridMode,Player player)
+    public List<Vector2Int> GetSelectableGridObject(SelectGridMode selectGridMode)
     {
+        Player player = GameplayManager.Instance.currentPlayer;
         List<Vector2Int> gridXZList = new List<Vector2Int>();
         switch (selectGridMode)
         {
+            case SelectGridMode.None:
+                break;
             case SelectGridMode.Default:
                 {
                     List<GridObject> neighbour = grid.GetNeighbour(player.currentGrid);

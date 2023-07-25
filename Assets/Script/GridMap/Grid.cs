@@ -140,6 +140,19 @@ public class Grid<TGridObject>
         }
         return neighbourGridObjects;
     }
+    //public List<TGridObject> GetNeighbourInRange(GridObject gridObject,int range)
+    //{
+    //    if (range < 1) return null;
+    //    List<TGridObject> neighbourList = GetNeighbour(gridObject);
+    //    while (range>1)
+    //    {
+    //        range--;
+    //        foreach(var neighbour in neighbourList)
+    //        {
+    //            var tmpList = GetNeighbour((GridObject)neighbour);
+    //        }
+    //    }
+    //}
     public TextMesh CreateWorldText(string text, Transform parent, Vector3 localPosition, Vector2 indexXY)
     {
         string objectName = "World_Text" + indexXY.x + "_" + indexXY.y;

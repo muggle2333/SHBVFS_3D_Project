@@ -39,7 +39,7 @@ public class UIManager : NetworkBehaviour
         turnbaseUI = GetComponentInChildren<TurnbaseUI>();
         dyingUI= GetComponentInChildren<DyingUI>();
         discardUI= GetComponentInChildren<DiscardUI>();
-        enemyUI = gridObjectUI.enemyUI;
+        enemyUI = GetComponentInChildren<EnemyUI>();
     }
     public void UpdatePlayerDataUI(Player player)
     {
@@ -48,12 +48,25 @@ public class UIManager : NetworkBehaviour
     public void UpdateGridObjectUI(GridObject gridObject, PlayerInteractAuthority authority)
     {
         gridObjectUI.UpdateGridObjectUIData(gridObject, authority);
-        enemyUI.SetEnemyUI(gridObject);
+        //enemyUI.SetEnemyUI(gridObject);
     }
 
     public void ShowGridObjectUI(bool isShow,Transform gridPos)
     {
         gridObjectUI.ShowGridObjectUI(isShow,gridPos);
+        enemyUI.ShowEnemyUI(false);
+    }
+    public void ShowEnemyUI(bool isShow)
+    {
+        if(isShow)
+        {
+            enemyUI.ShowEnemyUI(true);
+            gridObjectUI.ShowGridObjectUI(false, null);
+        }else
+        {
+            enemyUI.ShowEnemyUI(false);
+        }
+        
     }
     [ClientRpc]
     public void StartTurnbaseUIClientRpc()

@@ -24,6 +24,13 @@ public class GridObjectUI : MonoBehaviour
 
     [SerializeField] private TMP_Text academyText;
     [SerializeField] private List<TMP_Text> apCostTextList;
+
+    [SerializeField] private Image backgroundImg;
+    [SerializeField] private List<Sprite> backgroundList;
+    
+    [SerializeField] private Image landImg;
+    [SerializeField] private List<Sprite> landIconList;
+
     public EnemyUI enemyUI;
     //[SerializeField] private TMP_Text ownerText;
     //[SerializeField] private TMP_Text landBuffText;
@@ -108,7 +115,9 @@ public class GridObjectUI : MonoBehaviour
         //landBuffText.text = null;)
         if(gridObject.landType == LandType.Plain)
         {
-            if(!authority.canKnow)
+            landImg.gameObject.SetActive(false);
+            academyText.gameObject.SetActive(true);
+            if (!authority.canKnow)
             {
                 academyText.text = "未知";
             }else
@@ -135,9 +144,20 @@ public class GridObjectUI : MonoBehaviour
         }
         else
         {
-            academyText.text = "无";
+            landImg.gameObject.SetActive(true);
+            academyText.gameObject.SetActive(false);
+            //academyText.text = "无";
+            landImg.sprite = landIconList[(int)gridObject.landType];
         }
-
+        if(gridObject.owner!= null)
+        {
+            backgroundImg.sprite = backgroundList[(int)gridObject.owner.Id];
+        }
+        else
+        {
+            backgroundImg.sprite = backgroundList[2];
+        }
+        
         //Set the interactive btn
         occupyBtn.interactable = authority.canOccupy;
         gachaBtn.interactable = authority.canGacha;

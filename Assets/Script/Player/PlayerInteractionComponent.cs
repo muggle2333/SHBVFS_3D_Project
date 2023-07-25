@@ -81,8 +81,22 @@ public class PlayerInteractionComponent : MonoBehaviour
         {
             HideVfxPlayer();
         }
+        if(GetComponent<Player>().Id == (PlayerId)NetworkManager.Singleton.LocalClientId)
+        {
+            if(GameManager.Instance.wholeGameState.Value != GameManager.WholeGameState.GamePlaying)
+            {
+                Invoke("UpdateSelectableGrid", 3f);
+            }else
+            {
+                UpdateSelectableGrid();
+            }
+        }
+        
     }
-
+    public void UpdateSelectableGrid()
+    {
+        SelectManager.Instance.UpdateSelectableGridObject();
+    }
     public void MoveVfxPlayer(GridObject gridObject)
     {
         if (playerVfx == null)
@@ -104,6 +118,18 @@ public class PlayerInteractionComponent : MonoBehaviour
         //}
         playerVfx.transform.position = dirPos;
         GetComponent<Player>().currentGrid = gridObject;
+
+        if (GetComponent<Player>().Id == (PlayerId)NetworkManager.Singleton.LocalClientId)
+        {
+            if (GameManager.Instance.wholeGameState.Value != GameManager.WholeGameState.GamePlaying)
+            {
+                Invoke("UpdateSelectableGrid", 3f);
+            }
+            else
+            {
+                UpdateSelectableGrid();
+            }
+        }
     }
 
     public void HideVfxPlayer()

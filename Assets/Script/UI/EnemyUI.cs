@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyUI : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class EnemyUI : MonoBehaviour
     [SerializeField] private TMP_Text cardADText;
     [SerializeField] private TMP_Text cardDFText;
 
+    [SerializeField] private Image backgroundImg;
+    [SerializeField] private List<Sprite> spriteList;
 
     private Player enemy;
     public void SetEnemyUI(GridObject gridObject)
@@ -27,11 +31,19 @@ public class EnemyUI : MonoBehaviour
         }
         if(enemy.currentGrid.x == gridObject.x && enemy.currentGrid.z == gridObject.z)
         {
-            ShowEnemyData();
+            ShowEnemyUI(true);
         }
         else
         {
             container.SetActive(false);
+        }
+    }
+
+    public void Update()
+    {
+        if(container.gameObject.activeSelf && enemy != null)
+        {
+            SetEnemyUIPosition();
         }
     }
     public void InitializeEnemy()
@@ -45,15 +57,23 @@ public class EnemyUI : MonoBehaviour
             }
         }
     }
-    public void ShowEnemyData()
+    public void ShowEnemyUI(bool isShow)
     {
+        if(isShow == false)
+        {
+            container.SetActive(false);
+            return;
+        }
         container.SetActive(true);
         if(enemy == null)
         {
             InitializeEnemy();
         }
+        SetEnemyUIPosition();
+
         playerName.text = enemy.Id == PlayerId.RedPlayer ? "RED" : "BLUE";
         playerName.color = colorList[(int)enemy.Id];
+        backgroundImg.sprite = spriteList[(int)enemy.Id];
 
         hpText.text = enemy.HP.ToString();
         maxHpText.text = "/" + enemy.MaxHP.ToString();
@@ -97,5 +117,12 @@ public class EnemyUI : MonoBehaviour
             cardADText.gameObject.SetActive(true);
             attackText.color = Color.green;
         }
+    }
+
+    private void SetEnemyUIPosition()
+    {
+        Vector3 pos = new Vector3();
+        pos = Camera.main.WorldToScreenPoint(enemy.transform.position) + new Vector3(GridObjectUI.GRIDOBJECTUI_OFFSET_X, GridObjectUI.GRIDOBJECTUI_OFFSET_Y, 0) * Mathf.Log(GridObjectUI.CAMERA_DEFAULT_FOV, Camera.main.fieldOfView);
+        container.transform.position = pos;
     }
 }
