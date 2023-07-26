@@ -181,10 +181,11 @@ MonoBehaviour:
   isBurning: 0
   targetY: 50
   formerY: -200
-  duration: 0.25
   Info: {fileID: 7741636536309583640}
   cardSelectManager: {fileID: 0}
   cardVFX: {fileID: 2100000, guid: a9f79e165b94a3646ad15fc34da076ee, type: 2}
+  duration: 0.25
+  outline: {fileID: 1855231835701977182}
 --- !u!222 &3639355071388892686
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -592,11 +593,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardOutLine
       objectReference: {fileID: 0}
+    - target: {fileID: 1666466317792815897, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
+--- !u!1 &1855231835701977182 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1666466317792815897, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
+  m_PrefabInstance: {fileID: 1053668379668417351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1855231835701977183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1666466317792815896, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}

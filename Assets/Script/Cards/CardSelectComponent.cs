@@ -18,16 +18,17 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     //public DG.Tweening.Sequence CardDiscardAniamtion;
     //public DG.Tweening.Sequence CardTakeEffectAniamtion;
     //public DG.Tweening.Sequence EnemyCardTakeEffectAniamtion;
-    [SerializeField] private float duration;
     public GameObject Info;
     public CardSelectManager cardSelectManager;
     [SerializeField] private Material cardVFX;
+    [SerializeField] private float duration;
+    [SerializeField] private GameObject outline;
     private float vfxFloat;
     void Start()
     {
         cardVFX.SetTexture("_MainText",gameObject.GetComponent<Card>().cardTexture);
         //Interactable = true;
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/Outline"));
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material = Instantiate(Resources.Load<Material>("CardEffects/Outline"));
         cardSelectManager = PlayerManager.Instance.cardSelectManager;
         isSelected = false;
         duration = 0.25f;
@@ -103,8 +104,9 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, true);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, true);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
+        outline.SetActive(true);
     }
 
     public void EndSelectOperation()
@@ -121,8 +123,9 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             FindObjectOfType<SelectMode>().ExitSelectMode();
         }
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        outline.SetActive(false);
     }
 
     public void OnSelectDiscard()
@@ -183,8 +186,9 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
             //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, false);
         }
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        outline.SetActive(false);
     }
 
     public void OnSelectDying()
@@ -242,8 +246,9 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, false);
         }
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        outline.SetActive(false);
     }
 
     public void OnSelectOther()
@@ -273,8 +278,9 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
-        transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
+        //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
+        outline.SetActive(false);
     }
 
     #region Cloud
