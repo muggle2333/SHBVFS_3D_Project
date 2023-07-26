@@ -183,5 +183,9 @@ public class MultiplayerManager : NetworkBehaviour
         Loader.LoadNetwork(Loader.Scene.GameplayScene);
     }
 
-
+    public void StartTutorial()
+    {
+        NetworkManager.Singleton.StartHost();
+        Loader.LoadNetwork(Loader.Scene.TutorialScene);
+    }
 }

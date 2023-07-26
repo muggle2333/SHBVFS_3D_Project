@@ -139,7 +139,7 @@ public class GameManager : NetworkBehaviour
 
     private void SceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        Debug.Log(sceneName);
+        Debug.LogWarning(sceneName);
          foreach(ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             string playerPath = clientId == 0 ? "PlayerPrefab_Red" : "PlayerPrefab_Blue";

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -108,9 +109,22 @@ public class GameplayManager : NetworkBehaviour
         FindObjectOfType<CameraTest4>().FocusGrid();
         //GridObject currentGridObject = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[currentPlayrId].x, (int)playerStartPoint[currentPlayrId].y);
         //GridVfxManager.Instance.UpdateVfxAcademy(currentGridObject);
-        UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
+        if(NetworkManager.Singleton.ConnectedClients.Count > 1)
+        {
+            UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
+        }else
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.AppendInterval(1f);
+            seq.AppendCallback(() =>
+            {
+                UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
+            }); 
+        }
+        
         
     }
+
     public void SetCurrentPlayer(Player player)
     {
         currentPlayer = player;

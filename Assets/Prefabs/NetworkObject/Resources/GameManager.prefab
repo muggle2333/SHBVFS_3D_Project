@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wholeGameState:
     m_InternalValue: 0
-  managerContainerPath: {fileID: 0}
+  managerContainerPath: {fileID: 115149969472261574, guid: 4bc9afb463f06a64da870ccd967e155d, type: 3}
 --- !u!114 &2521327370408840749
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -88,6 +88,7 @@ public class TurnbasedSystem : NetworkBehaviour
     [ClientRpc]
     public void SetPlayerSettingClientRpc()
     {
+        if (FindObjectOfType<TutorialManager>() != null) return;
         foreach(var player in GameplayManager.Instance.playerList)
         {
             PlayerManager.Instance.SetPlayerSetting(player);

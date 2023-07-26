@@ -49,7 +49,7 @@ public class MainMenuUI : MonoBehaviour
         });
         tutorialBtn.onClick.AddListener(() =>
         {
-            OpenTutorial();
+            MultiplayerManager.Instance.StartTutorial();
         });
     }
     public void Start()
@@ -136,10 +136,5 @@ public class MainMenuUI : MonoBehaviour
     private void MultiplayerManager_OnFailedToJoinGame(object sender, EventArgs e)
     {
         connectingPanel.SetActive(false);
-    }
-    private void OpenTutorial()
-    {
-        MultiplayerManager.Instance.StartHost();
-        Loader.Load(Loader.Scene.TutorialScene);
     }
 }
