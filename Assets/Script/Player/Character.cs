@@ -19,7 +19,7 @@ public class Character : NetworkBehaviour
     public int HpPerRound;
     public int basicCardPerRound;
     public bool hasAttcaked;
-
+    public int damageThisRound;
 
 
     public Character AttackTarget;
@@ -40,6 +40,7 @@ public class Character : NetworkBehaviour
         {
             Damage = 0;
         }
+        damageThisRound = Damage;
         AttackTarget.HP -= (Damage);
         hasAttcaked = true;
         AttackTarget = null;

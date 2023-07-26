@@ -106,6 +106,7 @@ public class S2Stage : MonoBehaviour
                         }
                         else
                         {
+                            TurnbasedSystem.Instance.isDie.Value = false;
                             GameplayManager.Instance.LeaveDyingStageClientRpc();
                         }
                     }
