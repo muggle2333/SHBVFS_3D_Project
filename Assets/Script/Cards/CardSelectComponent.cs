@@ -360,7 +360,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     //}
     #endregion
 
-
     public void CardPlayAniamtion()
     {
         Interactable = false;
@@ -389,6 +388,25 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
+    public void HPCardAnimation()
+    {
+        vfxFloat = 1;
+        isBurning = true;
+        Interactable = false;
+        this.EndSelectDying();
+        this.transform.SetParent(cardSelectManager.canvas.transform);
+        var seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveY(0, 0.4f));
+        seq.AppendInterval(0.5f);
+        Invoke("AddMaterial", 1);
+        SoundManager.Instance.PlaySound(Sound.CardTakeEffect);
+        //burn function
+        seq.AppendCallback(() => { DOTween.To(() => vfxFloat, x => vfxFloat = x, 0, 1f); });
+        seq.AppendInterval(1f);
+        seq.AppendCallback(() => { isBurning = false; });
+        seq.AppendCallback(() => { Destroy(this.gameObject); });
+    }
+
     private void Update()
     {
         if (isBurning)
@@ -400,7 +418,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         vfxFloat = 1;
         isBurning = true;
-        
         Interactable = false;
         this.transform.localPosition = new Vector3(-800, 500, transform.localPosition.z);
         //this.gameObject.SetActive(true);
@@ -449,4 +466,5 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendCallback(() => { isBurning = false; });
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
+
 }
