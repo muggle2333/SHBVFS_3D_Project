@@ -27,12 +27,11 @@ public class Calculating : NetworkBehaviour
     public int cardDamage;
     public int cardAP;
     public int cardHP;
-    public int cardFreeMoveNum;
-
     public int totalCardAttackDamage;
     public int totalCardDefense;
     public int totalCardAttackRange;
 
+    public Dictionary<Player, int> cardFreeMoveNumDic = new Dictionary<Player, int>();
     public Dictionary<Player, int> totalCardAttackDamageDic = new Dictionary<Player, int>();
     public Dictionary<Player, int> totalCardDefenseDic = new Dictionary<Player, int>();
     public Dictionary<Player, int> totalCardAttackRangeDic = new Dictionary<Player, int>();
@@ -62,12 +61,15 @@ public class Calculating : NetworkBehaviour
         totalCardAttackDamageDic.Clear();
         totalCardDefenseDic.Clear();
         totalCardAttackRangeDic.Clear();
+        cardFreeMoveNumDic.Clear();
         playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();
         Invoke("AddTotalAcademyEffectNum", 3);
         
     }
     public void AddTotalAcademyEffectNum()
     {
+        cardFreeMoveNumDic.Add(GameplayManager.Instance.playerList[0], 0);
+        cardFreeMoveNumDic.Add(GameplayManager.Instance.playerList[1], 0);
         totalCardAttackDamageDic.Add(GameplayManager.Instance.playerList[0], 0);
         totalCardAttackDamageDic.Add(GameplayManager.Instance.playerList[1], 0);
         totalCardDefenseDic.Add(GameplayManager.Instance.playerList[0], 0);
@@ -86,7 +88,7 @@ public class Calculating : NetworkBehaviour
         totalCardAttackRangeDic[player] += card.playerDataEffect.visionRange;
         totalCardDefenseDic[player] += card.playerDataEffect.defence;
         totalCardAttackDamageDic[player] += card.playerDataEffect.attack;
-
+        cardFreeMoveNumDic[player] = card.playerDataEffect.freeMoveNum;
         player.cardAD = totalCardAttackDamageDic[player];
         player.cardAR = totalCardAttackRangeDic[player];
         player.cardDF = totalCardDefenseDic[player];
@@ -105,14 +107,16 @@ public class Calculating : NetworkBehaviour
         cardHP = card.playerDataEffect.hp;
     }
 
-    [ClientRpc]    
+    [ClientRpc]
     public void CardDataInitializeClientRpc(PlayerId playerId)
     {
         Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
         cardDamage = 0;
         cardAP = 0;
         cardHP = 0;
-        cardFreeMoveNum = 0;
+        player.freeMoveCount = cardFreeMoveNumDic[player];
+        cardFreeMoveNumDic[player] = 0;
+        player.damageThisRound = 0;
         player.occuplyCount = 0;
         player.descoverLandCount = 0;
         player.moveCount = 0;
@@ -190,6 +194,7 @@ public class Calculating : NetworkBehaviour
         player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefenseDic[player] + player.gridDF;
         player.ActionPointPerRound = player.baseActionPointPerRound + totalAcademyAPPerRound;
         player.basicCardPerRound = totalAcademyBasicCardPerRound;
+        
     }
 
     public void CalaulatPlayerData(Player player)

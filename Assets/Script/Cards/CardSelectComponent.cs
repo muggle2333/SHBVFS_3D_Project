@@ -61,14 +61,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }
         else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
         {
-            if (isSelected) cardSelectManager.DiscardCards(GameplayManager.Instance.currentPlayer);
-            else OnSelectDiscard();
+            if (!isSelected) OnSelectDiscard();
         }
         else if (TurnbasedSystem.Instance.isDie.Value == true && GameplayManager.Instance.currentPlayer.HP <= 0)
         {
             if (this.gameObject.GetComponent<Card>().cardId != 0) return;
-            if (isSelected) cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
-            else OnSelectDying();
+            if (!isSelected) OnSelectDying();
         }
         else
         {
@@ -201,7 +199,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]++;
         foreach (var card in CardManager.Instance.playerHandCardDict[GameplayManager.Instance.currentPlayer])
         {
-            if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] <= 1 - GameplayManager.Instance.currentPlayer.HP)
+            if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] <= (0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1)
                 break;
             if (this.gameObject == card.gameObject) continue;
             if (card.gameObject.GetComponent<CardSelectComponent>().isSelected)
@@ -216,7 +214,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }//turn off Info
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, true);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDying, true);
-        cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + (1 - GameplayManager.Instance.currentPlayer.HP);
+        cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + (0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1;
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, true);
@@ -236,8 +234,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
-        cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + (1 - GameplayManager.Instance.currentPlayer.HP);
-        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < 1 - GameplayManager.Instance.currentPlayer.HP)
+        cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + ((0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1);
+        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < (0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1)
         {
             cardSelectManager.ToPlayHPText.color = Color.red;
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, false);

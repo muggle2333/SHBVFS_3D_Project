@@ -101,13 +101,14 @@ public class AttackStage : MonoBehaviour
                 TurnbasedSystem.Instance.isDie.Value = true;
                 GameplayManager.Instance.PlayerDyingStageClientRpc();
                 yield return new WaitForSeconds(GameplayManager.DYING_TIMER);
-
+                dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
                 if (dyingPlayers.Count > 0)
                 {
                     GameManager.Instance.SetGameOver();
                 }
                 else
                 {
+                    TurnbasedSystem.Instance.isDie.Value = false;
                     GameplayManager.Instance.LeaveDyingStageClientRpc();
                 }
             }

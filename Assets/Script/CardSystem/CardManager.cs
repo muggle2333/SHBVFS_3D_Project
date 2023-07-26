@@ -266,7 +266,6 @@ public class CardManager : NetworkBehaviour
         playedCardDict[GameplayManager.Instance.playerList[0]] = redPlayerPlayed;
         playedCardDict[GameplayManager.Instance.playerList[1]] = bluePlayerPlayed;
     }
-
     public int[] CheckDiscardNum()
     {
         int[] additionCardNum = new int[2];

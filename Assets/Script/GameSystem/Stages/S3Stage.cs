@@ -85,6 +85,7 @@ public class S3Stage : MonoBehaviour
                         }
                         else
                         {
+                            TurnbasedSystem.Instance.isDie.Value = false;
                             GameplayManager.Instance.LeaveDyingStageClientRpc();
                         }
                     }
