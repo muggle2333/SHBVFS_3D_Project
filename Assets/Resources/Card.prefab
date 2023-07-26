@@ -543,11 +543,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1666466317792815896, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10520.977
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1666466317792815896, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
       propertyPath: m_LocalScale.y
-      value: 24878.89
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1666466317792815896, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
       propertyPath: m_LocalPosition.x
@@ -592,6 +592,10 @@ PrefabInstance:
     - target: {fileID: 1666466317792815897, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
       propertyPath: m_Name
       value: CardOutLine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666466317792815897, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1666466317792815897, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
       propertyPath: m_IsActive
