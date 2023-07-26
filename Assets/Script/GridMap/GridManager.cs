@@ -321,5 +321,38 @@ public class GridManager : NetworkBehaviour
         }
         return gridXZList;
     }
+
+    public List<GridObject> GetNeighbourInRange(GridObject gridObject, int range)
+    {
+        var AllList = new List<GridObject>();
+        AllList.Add(gridObject);
+        var newList = new List<GridObject>();
+        newList.Add(gridObject);
+        do
+        {
+            var tmpList = new List<GridObject>();
+            foreach(var tmp in newList)
+            {
+                tmpList.Add(tmp);
+            }
+            newList.Clear();
+            foreach(var neighbour in tmpList)
+            {
+                var neighbours = grid.GetNeighbour(neighbour);
+                foreach(var tmp in neighbours)
+                {
+                    if (!newList.Contains(tmp) && !AllList.Contains(tmp))
+                    {
+                        newList.Add(tmp);
+                        AllList.Add(tmp);
+                    }
+                }
+                
+            }
+            range--;
+
+        } while (range > 0);
+        return AllList;
+    }
 }
 

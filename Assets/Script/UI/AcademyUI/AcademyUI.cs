@@ -25,6 +25,7 @@ public class AcademyUI : MonoBehaviour
     {
         if (isUnlock)
         {
+            if (Player.totalAcademyOwnedPoint.Count == 0) return;
             for (int i = 0; i < academies.Count; i++)
             {
                 academies[i].text = Player.totalAcademyOwnedPoint[i].ToString();

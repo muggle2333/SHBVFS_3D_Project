@@ -139,6 +139,7 @@ public class MainMenuUI : MonoBehaviour
     }
     private void OpenTutorial()
     {
+        MultiplayerManager.Instance.StartHost();
         Loader.Load(Loader.Scene.TutorialScene);
     }
 }

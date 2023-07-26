@@ -309,7 +309,8 @@ public class PlayerManager : NetworkBehaviour
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
         if (!player.UseActionPoint(apCost)) return false;
 
-        var neighbourList = GridManager.Instance.grid.GetNeighbour(player.currentGrid);
+        //var neighbourList = GridManager.Instance.grid.GetNeighbour(player.currentGrid);
+        var neighbourList = GridManager.Instance.GetNeighbourInRange(player.currentGrid,player.Range);
         neighbourList.Add(player.currentGrid);
         foreach(GridObject neighbour in neighbourList)
         {

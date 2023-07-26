@@ -62,7 +62,7 @@ public class SelectManager : MonoBehaviour
 
     public void Update()
     {
-
+        if (GameManager.Instance.wholeGameState.Value != GameManager.WholeGameState.GamePlaying) return;
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -80,15 +80,13 @@ public class SelectManager : MonoBehaviour
                     if (hitInfo.collider.GetComponentInChildren<GridObjectComponent>() != null)
                     {
                         //点到格子上了
-                        Debug.Log("Hit");
                         return;
                     }
                     else if(hitInfo.collider.GetComponentInParent<Player>()!=null)
                     {
                         Player player = hitInfo.collider.GetComponentInChildren<Player>();
-                        if(player != GameplayManager.Instance.currentPlayer)
+                        if(player.Id != GameplayManager.Instance.currentPlayer.Id)
                         {
-                            Debug.LogError("Enemy");
                             UIManager.Instance.ShowEnemyUI(true);
                             ClearSelection();
                             return;

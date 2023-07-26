@@ -140,19 +140,33 @@ public class Grid<TGridObject>
         }
         return neighbourGridObjects;
     }
-    //public List<TGridObject> GetNeighbourInRange(GridObject gridObject,int range)
-    //{
-    //    if (range < 1) return null;
-    //    List<TGridObject> neighbourList = GetNeighbour(gridObject);
-    //    while (range>1)
-    //    {
-    //        range--;
-    //        foreach(var neighbour in neighbourList)
-    //        {
-    //            var tmpList = GetNeighbour((GridObject)neighbour);
-    //        }
-    //    }
-    //}
+
+   
+    //Wrong
+    public List<TGridObject> GetNeighbourInRange(GridObject gridObject, int range)
+    {
+        int x = gridObject.x;
+        int z = gridObject.z;
+        Vector3Int roughXZ = new Vector3Int(x, 0, z);
+        bool oddRow = z % 2 == 1;
+        List<TGridObject> neighbourGridObjects = new List<TGridObject>();
+        for(int i= - range; i<=range; i++)
+        {
+            for(int j = Math.Max(-range,-i-range) ; j <= Math.Min(range, -i + range); j++)
+            {   
+                Vector3Int index = roughXZ + new Vector3Int(i, 0, j);
+                if(Math.Abs(i)==Math.Abs(j))
+                {
+                    index = roughXZ + new Vector3Int(oddRow ? +Math.Abs(i) : -Math.Abs(i), 0, j);
+                }
+                
+                var neighbourGridObject = GetGridObject(index.x, index.z);
+                if (neighbourGridObject == null && !neighbourGridObjects.Contains(neighbourGridObject)) continue;
+                neighbourGridObjects.Add(neighbourGridObject);
+            }
+        }
+        return neighbourGridObjects;
+    }
     public TextMesh CreateWorldText(string text, Transform parent, Vector3 localPosition, Vector2 indexXY)
     {
         string objectName = "World_Text" + indexXY.x + "_" + indexXY.y;
