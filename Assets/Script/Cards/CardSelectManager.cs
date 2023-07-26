@@ -103,8 +103,7 @@ public class CardSelectManager : MonoBehaviour
         UpdateCardPos(player);
         //GameplayManager.Instance.discardStage.discardCount[player] = 0;
         maxSelected[player] = 1;
-        player.HP = 1;//to fixed, client RPC
-        OnDiscardCard?.Invoke(this, EventArgs.Empty);//to fixed, enusre player has played HP
+        player.RecoverHpServerRpc( ((0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1) * 2 );
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, false);
     }
 
