@@ -86,7 +86,14 @@ public class GameManager : NetworkBehaviour
                 {
                     UIManager.Instance.HideMessageClientRpc();
                     wholeGameState.Value = WholeGameState.GamePlaying;
-                    TurnbasedSystem.Instance.StartTurnbaseSystem();
+                    if(NetworkManager.Singleton.ConnectedClients.Count>1) 
+                    {
+                        TurnbasedSystem.Instance.StartTurnbaseSystem();
+                    }else
+                    {
+                        TutorialManager.Instance.StartTutorial();
+                    }
+                    
                 }
                 break;
             case WholeGameState.GamePlaying:

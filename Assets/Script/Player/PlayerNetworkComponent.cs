@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerNetworkComponent : NetworkBehaviour
 {
+    [SerializeField] private bool isNPC = false;
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -14,6 +15,8 @@ public class PlayerNetworkComponent : NetworkBehaviour
         //    GameplayManager.Instance.SetCurrentPlayer(GetComponent<Player>());
         //}
         GetComponent<Player>().Id = (PlayerId)GetComponent<NetworkObject>().OwnerClientId;
+        if(isNPC)
+        GetComponent<Player>().Id = (PlayerId)1;
         //if(NetworkManager.Singleton.IsServer)
         //{
         //    NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnect;

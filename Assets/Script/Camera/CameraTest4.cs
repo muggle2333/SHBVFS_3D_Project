@@ -94,6 +94,13 @@ public class CameraTest4 : MonoBehaviour
         //seq.AppendCallback(() => { isMoving = false; });
     }
 
+    public void FocusEnemy()
+    {
+        var seq = DOTween.Sequence();
+        vec = GameplayManager.Instance.playerList[1].transform.position;
+        seq.Append(transform.DOMove(vec, 0.5f));
+        seq.Join(cam.DOLocalMove(pos, 0.5f));
+    }
     private void updateAcademyTextRotation()
     {
         int rotateY = (int)transform.localRotation.eulerAngles.y;
