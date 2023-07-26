@@ -38,6 +38,10 @@ public static class Loader
         NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
     }
     
+    public static void LoadGameplayScene(int levelIndex)
+    {
+        NetworkManager.Singleton.SceneManager.LoadScene("GameplayScene_" + (levelIndex+1), LoadSceneMode.Single);
+    }
     public static void LoaderCallback()
     {
         SceneManager.LoadScene(targetScene.ToString());
