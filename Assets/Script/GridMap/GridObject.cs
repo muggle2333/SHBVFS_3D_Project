@@ -180,6 +180,10 @@ public class GridObject
     public void DiscoverLand(Player player)
     {
         //isDiscovered = true;
+        if(!CheckKnowAuthority(player))
+        {
+            player.descoverLandCount++;
+        }
         SetKnowAuthority(player);
     }
 
