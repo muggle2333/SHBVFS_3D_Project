@@ -13,6 +13,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button quitBtn;
     [SerializeField] private Button tryEnterBtn;
     [SerializeField] private Button backBtn;
+    [SerializeField] private Button tutorialBtn;
 
     [SerializeField] private GameObject clientPanel;
     [SerializeField] private GameObject connectingPanel;
@@ -45,6 +46,10 @@ public class MainMenuUI : MonoBehaviour
         quitBtn.onClick.AddListener(() =>
         {
             QuitGame();
+        });
+        tutorialBtn.onClick.AddListener(() =>
+        {
+            OpenTutorial();
         });
     }
     public void Start()
@@ -131,5 +136,9 @@ public class MainMenuUI : MonoBehaviour
     private void MultiplayerManager_OnFailedToJoinGame(object sender, EventArgs e)
     {
         connectingPanel.SetActive(false);
+    }
+    private void OpenTutorial()
+    {
+        Loader.Load(Loader.Scene.TutorialScene);
     }
 }

@@ -93,7 +93,7 @@ public class CardSelectManager : MonoBehaviour
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
                 //Debug.Log("Card " + cardsList[i].name + " is played.");
-                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
+                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().HPCardAnimation();
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);
                 i--;

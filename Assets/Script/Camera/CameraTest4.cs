@@ -8,6 +8,7 @@ using System;
 
 public class CameraTest4 : MonoBehaviour
 {
+    [SerializeField] private AcademyLookAtComponent[] AcademyTextList;
     [SerializeField] private Vector3 moveSpeed = new Vector3(10f, 10f, 10f);
     [SerializeField] private Vector3 rotateSpeed = new Vector3(10f, 10f, 10f);
     [SerializeField] private Transform cam;
@@ -21,6 +22,7 @@ public class CameraTest4 : MonoBehaviour
         var angles = transform.eulerAngles;
         x = angles.y;
         vec = transform.position;
+        AcademyTextList = FindObjectsOfType<AcademyLookAtComponent>();
     }
     void Update()
     {
@@ -62,12 +64,12 @@ public class CameraTest4 : MonoBehaviour
 
     private void RotateCamera()
     {
-
         if (Input.GetMouseButton(2))
         {
             x += Input.GetAxis("Mouse X") * rotateSpeed.x * 0.05f;
             var rotation = Quaternion.Euler(0, x, 0);
             transform.rotation = rotation;
+            updateAcademyTextRotation();
         }
     }
 
@@ -90,5 +92,17 @@ public class CameraTest4 : MonoBehaviour
         seq.Join(cam.DOLocalMove(pos, 0.5f));
         //cam.DOMoveZ(-19, 1f);
         //seq.AppendCallback(() => { isMoving = false; });
+    }
+
+    private void updateAcademyTextRotation()
+    {
+        int rotateY = (int)transform.localRotation.eulerAngles.y;
+        rotateY = ((rotateY + 30) / 60) * 60;
+        //Debug.LogWarning(rotateY);
+        foreach (AcademyLookAtComponent text in AcademyTextList)
+        {
+            //text.transform.rotation.y = (float)rotateY;
+            text.transform.localRotation = Quaternion.Euler(0.0f, rotateY, 0.0f);
+        }
     }
 }

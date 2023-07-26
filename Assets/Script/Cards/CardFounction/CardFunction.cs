@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CardFunction : MonoBehaviour
 {
-
+    public Player player;
 }

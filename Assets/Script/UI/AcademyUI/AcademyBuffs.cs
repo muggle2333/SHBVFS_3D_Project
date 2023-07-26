@@ -53,8 +53,8 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 break;
             case AcademyType.FA:
                 AcademyUI.academiesBuff[2].text = "Ap/R+1";
-                AcademyUI.academiesBuff[3].text = "Ap/R+2";
-                AcademyUI.academiesBuff[4].text = "Ap/R+3";
+                AcademyUI.academiesBuff[3].text = "Ap/R+1";
+                AcademyUI.academiesBuff[4].text = "Ap/R+2";
                 break;
         }
         switch (AcademyCount.text)
