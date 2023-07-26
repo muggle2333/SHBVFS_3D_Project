@@ -85,6 +85,29 @@ public class CardSelectManager : MonoBehaviour
         OnDiscardCard?.Invoke(this,EventArgs.Empty);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
     }
+
+    public void PlayHPCards(Player player)
+    {
+        for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
+        {
+            if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
+            {
+                //Debug.Log("Card " + cardsList[i].name + " is played.");
+                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
+                CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
+                CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);
+                i--;
+            }
+        }
+        //FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(player.Id, -GameplayManager.Instance.discardStage.discardCount[player]);
+        UpdateCardPos(player);
+        //GameplayManager.Instance.discardStage.discardCount[player] = 0;
+        maxSelected[player] = 1;
+        player.HP = 1;//to fixed, client RPC
+        OnDiscardCard?.Invoke(this, EventArgs.Empty);//to fixed, enusre player has played HP
+        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, false);
+    }
+
     public void PlayCards(Player player)
     {
         for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)

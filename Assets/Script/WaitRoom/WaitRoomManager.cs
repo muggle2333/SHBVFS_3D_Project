@@ -97,6 +97,7 @@ public class WaitRoomManager : NetworkBehaviour
 
     public void StartGameplay()
     {
+        
         if(!isTutorial.Value)
         {
             Loader.LoadNetwork(Loader.Scene.GameplayScene);
@@ -109,5 +110,12 @@ public class WaitRoomManager : NetworkBehaviour
     public void SetToggleTutorial(bool isToggle)
     {
         isTutorial.Value = isToggle;
+    }
+
+    [ClientRpc]
+    public void SetLevelIndexClientRpc(int levelIndex)
+    {
+        if (NetworkManager.Singleton.IsHost) return;
+        waitRoomUI.SetLevelDropdown(levelIndex);
     }
 }

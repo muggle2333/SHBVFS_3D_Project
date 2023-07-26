@@ -126,6 +126,7 @@ public class CardManager : NetworkBehaviour
         }
         var smallcard = Instantiate(smallCard, cardCemetery.transform).GetComponent<SmallCard>();
         smallcard.cardSetting = card;
+        smallcard.transform.SetAsFirstSibling();
         if(playerId == PlayerId.RedPlayer)
         {
             smallcard.gameObject.GetComponent<Image>().color = Color.red;
