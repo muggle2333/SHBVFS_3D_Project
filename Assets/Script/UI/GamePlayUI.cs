@@ -45,14 +45,11 @@ public class GameplayUI : MonoBehaviour
         });
         playHP.onClick.AddListener(() =>
         {
-            PlayerManager.Instance.cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
+            PlayerManager.Instance.cardSelectManager.PlayHPCards(GameplayManager.Instance.currentPlayer);
         });
         cancelDying.onClick.AddListener(() =>
         {
             PlayerManager.Instance.cardSelectManager.CancelCards(GameplayManager.Instance.currentPlayer);
         });
-
-
     }
-
 }

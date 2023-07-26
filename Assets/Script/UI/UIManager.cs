@@ -54,7 +54,11 @@ public class UIManager : NetworkBehaviour
     public void ShowGridObjectUI(bool isShow,Transform gridPos)
     {
         gridObjectUI.ShowGridObjectUI(isShow,gridPos);
-        enemyUI.ShowEnemyUI(false);
+        if(isShow)
+        {
+            enemyUI.ShowEnemyUI(false);
+        }
+        
     }
     public void ShowEnemyUI(bool isShow)
     {

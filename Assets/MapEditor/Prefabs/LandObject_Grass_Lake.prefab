@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Land_GrassWater
       objectReference: {fileID: 0}
+    - target: {fileID: 3481596657972425955, guid: 193cbdd7cc5806c45bc1e787ec4cffde, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 24ae7ae9d09c5f1428a455d3939f4de1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

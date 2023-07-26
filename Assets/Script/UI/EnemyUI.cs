@@ -9,7 +9,6 @@ public class EnemyUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text playerName;
     [SerializeField] private TMP_Text hpText;
-    [SerializeField] private TMP_Text maxHpText;
     [SerializeField] private TMP_Text defenceText;
     [SerializeField] private TMP_Text attackText;
     [SerializeField] private TMP_Text rangeText;
@@ -75,8 +74,7 @@ public class EnemyUI : MonoBehaviour
         playerName.color = colorList[(int)enemy.Id];
         backgroundImg.sprite = spriteList[(int)enemy.Id];
 
-        hpText.text = enemy.HP.ToString();
-        maxHpText.text = "/" + enemy.MaxHP.ToString();
+        hpText.text = enemy.HP.ToString() + "/" + enemy.MaxHP.ToString();
         defenceText.text = enemy.Defence.ToString();
         attackText.text = enemy.AttackDamage.ToString();
         rangeText.text = enemy.Range.ToString();

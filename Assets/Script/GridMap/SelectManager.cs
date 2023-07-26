@@ -88,6 +88,7 @@ public class SelectManager : MonoBehaviour
                         Player player = hitInfo.collider.GetComponentInChildren<Player>();
                         if(player != GameplayManager.Instance.currentPlayer)
                         {
+                            Debug.LogError("Enemy");
                             UIManager.Instance.ShowEnemyUI(true);
                             ClearSelection();
                             return;
