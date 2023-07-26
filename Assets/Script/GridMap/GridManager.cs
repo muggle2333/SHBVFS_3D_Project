@@ -15,6 +15,7 @@ public class GridManager : NetworkBehaviour
     public GameObject gridUI;
     public float gridDistance;
     private int[] academyNum = new int[6] { 6, 6, 6, 6, 6, 6 };
+
     public static GridManager Instance { get; private set; }
 
     public void Awake() 
@@ -96,6 +97,7 @@ public class GridManager : NetworkBehaviour
     
     public void InitializeGridAcademy()
     {
+        int count = 0;
         for (int x = 0; x < grid.width; x++)
         {
             for (int z = 0; z < grid.length; z++)
@@ -104,11 +106,20 @@ public class GridManager : NetworkBehaviour
                 if (grid.gridArray[x, z].landType == LandType.Plain)
                 {
                     int academy = 0;
-                    do
+                    count++;
+                    if(count>36)
                     {
                         academy = RandomGetAcademy();
-                    } 
-                    while (!CheckIsEnough(academy));
+                    }
+                    else
+                    {
+                        do
+                        {
+                            academy = RandomGetAcademy();
+                        } 
+                        while (!CheckIsEnough(academy));
+                    }
+                    
                     SyncAcademyClientRpc(new Vector2Int(x, z), (AcademyType)academy);
                    
                 }

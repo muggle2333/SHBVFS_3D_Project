@@ -144,6 +144,7 @@ public class MapEditorWindow : EditorWindow
         GUILayout.EndHorizontal();
         GUILayout.Space(10);
 
+        
 
         //Grid Edit
         GUILayout.Label("GRID OPTION", EditorStyles.boldLabel);
