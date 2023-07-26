@@ -144455,6 +144455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardOutLine
       objectReference: {fileID: 0}
+    - target: {fileID: 1666466317792815897, guid: 3b47c37b8fdda054ab007a0aa2b69860, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
