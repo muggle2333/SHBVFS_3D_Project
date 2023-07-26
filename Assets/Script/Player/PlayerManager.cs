@@ -213,6 +213,7 @@ public class PlayerManager : NetworkBehaviour
         UpdateGridAuthorityData(player, gridObject);
         //player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
         player.GetComponent<PlayerInteractionComponent>().DeduceFirstPath();
+        player.moveCount++;
         GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
         
         if(gridObject.landType==LandType.Mountain)

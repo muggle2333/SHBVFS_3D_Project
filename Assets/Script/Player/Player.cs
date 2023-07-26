@@ -17,6 +17,7 @@ public enum PlayerId
 
 public class Player : Character
 {
+    public int moveCount;
     public GameObject headCard;
     public TMP_Text headCardText;
 
