@@ -15,7 +15,6 @@ public class WaitRoomUI : MonoBehaviour
     [SerializeField] private TMP_Text ipText;
     [SerializeField] private Toggle tutorialToggle;
     [SerializeField] private TMP_Dropdown levelDropdown;
-
     public void Awake()
     {
         readyBtn.onClick.AddListener(() =>

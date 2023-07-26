@@ -1124,6 +1124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaitRoomUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8228855075623888371, guid: 9706d3cfc5bb3cd44a97f9a4a3582b90, type: 3}
+      propertyPath: m_Value
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
