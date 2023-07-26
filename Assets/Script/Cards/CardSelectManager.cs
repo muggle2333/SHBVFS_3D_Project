@@ -186,7 +186,6 @@ public class CardSelectManager : MonoBehaviour
             startPos.x += offset;
         }
     }
-
     
     //public void Retract(Player player)
     //{

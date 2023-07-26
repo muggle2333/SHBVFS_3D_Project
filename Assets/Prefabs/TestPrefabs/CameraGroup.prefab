@@ -183,7 +183,7 @@ MonoBehaviour:
   CameraMax_Z: 100
   CameraMin_Z: -100
   rotationSpeed: {x: 250, y: 120}
-  moveSpeed: {x: 70, y: 70}
+  moveSpeed: {x: 90, y: 90}
 --- !u!114 &6283519236212957862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fb146ce75e4a9478338b292b4eaa84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AcademyTextList: []
   moveSpeed: {x: 10, y: 10, z: 10}
   rotateSpeed: {x: 10, y: 10, z: 10}
   cam: {fileID: 339269489797836718}
