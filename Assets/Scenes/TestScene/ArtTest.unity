@@ -17966,6 +17966,10 @@ MonoBehaviour:
   searchBtn: {fileID: 0}
   academyText: {fileID: 853051519}
   apCostTextList: []
+  backgroundImg: {fileID: 0}
+  backgroundList: []
+  landImg: {fileID: 0}
+  landIconList: []
   enemyUI: {fileID: 0}
 --- !u!1001 &344962179
 PrefabInstance:
