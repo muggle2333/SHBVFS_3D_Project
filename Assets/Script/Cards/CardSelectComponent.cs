@@ -61,7 +61,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }
         else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
         {
-            if (!isSelected) OnSelectDiscard();
+            if (isSelected) EndSelectDiscard();
+            else OnSelectDiscard();
         }
         else if (TurnbasedSystem.Instance.isDie.Value == true && GameplayManager.Instance.currentPlayer.HP <= 0)
         {
@@ -70,7 +71,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }
         else
         {
-            if (!isSelected) OnSelectOther();
+            if (isSelected) EndSelectOther();
+            else OnSelectOther();
         }
     }
 
