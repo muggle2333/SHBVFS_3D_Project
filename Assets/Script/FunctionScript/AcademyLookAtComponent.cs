@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 public class AcademyLookAtComponent : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //private Transform cameraRotation;
     void Start()
     {
-        
+        //cameraRotation = FindObjectOfType<CameraTest4>().gameObject.transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //transform.rotation = cameraRotation.rotation;
     }
+
 }

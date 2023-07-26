@@ -113,7 +113,9 @@ public class Calculating : NetworkBehaviour
         cardAP = 0;
         cardHP = 0;
         cardFreeMoveNum = 0;
-        
+        player.occuplyCount = 0;
+        player.descoverLandCount = 0;
+        player.moveCount = 0;
         player.cardAD = 0;
         player.cardAR = 0;
         player.cardDF = 0;

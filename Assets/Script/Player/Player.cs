@@ -18,6 +18,8 @@ public enum PlayerId
 public class Player : Character
 {
     public int moveCount;
+    public int descoverLandCount;
+    public int occuplyCount;
     public GameObject headCard;
     public TMP_Text headCardText;
 
@@ -65,17 +67,17 @@ public class Player : Character
     public NetworkList<int> cardAcademyEffectNum;
     public NetworkList<int> totalAcademyOwnedPoint;
     public Dictionary<AcademyType, List<GridObject>> OwnedLandDic = new Dictionary<AcademyType, List<GridObject>>()
-/*    {
-        { AcademyType.Null,null },
-        { AcademyType.YI,null },
-        { AcademyType.DAO,null },
-        { AcademyType.MO,null },
-        { AcademyType.BING,null },
-        { AcademyType.RU,null },
-    }*/;
+    /*    {
+            { AcademyType.Null,null },
+            { AcademyType.YI,null },
+            { AcademyType.DAO,null },
+            { AcademyType.MO,null },
+            { AcademyType.BING,null },
+            { AcademyType.RU,null },
+        }*/;
 
     //public int[] academyOwnedPoint = new int[6];
-    
+
     [System.Serializable]
     public class OwnedLandTest
     {
@@ -91,7 +93,7 @@ public class Player : Character
         academyOwnedPoint = new NetworkList<int>();
         cardAcademyEffectNum = new NetworkList<int>();
         totalAcademyOwnedPoint = new NetworkList<int>();
-        
+
     }
     void Start()
     {
@@ -104,12 +106,12 @@ public class Player : Character
         CurrentActionPoint = 0;
         TrueActionPoint = CurrentActionPoint;
         Invoke("PlayerAcademyDataServerRpc", 3);
-        
+
         List<GridObject> yiLand;
         OwnedLandDic.TryGetValue(AcademyType.YI, out yiLand);
         //Debug.Log(yiLand.Count);
     }
-    [ServerRpc(RequireOwnership =false)]
+    [ServerRpc(RequireOwnership = false)]
     public void PlayerAcademyDataServerRpc()
     {
         for (int i = 0; i < 6; i++)
@@ -121,22 +123,22 @@ public class Player : Character
     }
     void Update()
     {
-        if(currentGrid.landType == LandType.Mountain)
+        if (currentGrid.landType == LandType.Mountain)
         {
             gridAR = 1;
         }
-        else if(currentGrid.landType == LandType.Forest)
+        else if (currentGrid.landType == LandType.Forest)
         {
             gridDF = 1;
         }
-        else if(currentGrid.landType == LandType.Lake || currentGrid.landType == LandType.Plain)
+        else if (currentGrid.landType == LandType.Lake || currentGrid.landType == LandType.Plain)
         {
             gridAR = 0;
             gridDF = 0;
         }
         MaxActionPoint = ActionPointPerRound * 2;
         MaxCardCount = HP;
-        if(Defence < 0)
+        if (Defence < 0)
         {
             Defence = 0;
         }
@@ -145,29 +147,28 @@ public class Player : Character
             if (this == GameplayManager.Instance.currentPlayer)
             {
                 List<int> a = new List<int>();
-                for(int i = 0; i < 6; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     //a.Add(0);
                     //a[i] = academyOwnedPoint[i];
                     Debug.LogError(academyOwnedPoint[i]);
                 }
-                
-            }
 
-            
+            }
         }
     }
 
     public void UpdateDataPerTurn()
     {
-        CurrentActionPoint = CurrentActionPoint+ ActionPointPerRound>MaxActionPoint? MaxActionPoint: CurrentActionPoint + ActionPointPerRound;
+        CurrentActionPoint = CurrentActionPoint + ActionPointPerRound > MaxActionPoint ? MaxActionPoint : CurrentActionPoint + ActionPointPerRound;
         TrueActionPoint = CurrentActionPoint;
 
     }
     public bool OccupyGrid(GridObject gridObject)
     {
+        occuplyCount++;
         List<GridObject> gridList;
-        if(OwnedLandDic.TryGetValue(gridObject.academy,out gridList))
+        if (OwnedLandDic.TryGetValue(gridObject.academy, out gridList))
         {
             gridList.Add(gridObject);
             OwnedLandDic[gridObject.academy] = gridList;
@@ -179,14 +180,14 @@ public class Player : Character
             OwnedLandDic.Add(gridObject.academy, gridListNew);
         }
 
-        if(NetworkManager.Singleton.IsServer)
+        if (NetworkManager.Singleton.IsServer)
         {
             academyOwnedPoint[(int)gridObject.academy - 1]++;
         }
         return true;
     }
 
-    
+
     public int[] CountAcademyOwnedPoint()
     {
         int[] academyOwnedPoint = new int[6];
@@ -197,14 +198,14 @@ public class Player : Character
         //    academyOwnedPoint[i] = gridList.Count;
         //}
         var grid = GridManager.Instance.grid;
-        for(int x = 0;x< grid.width;x++)
+        for (int x = 0; x < grid.width; x++)
         {
-            for(int z = 0;z<grid.length;z++)
+            for (int z = 0; z < grid.length; z++)
             {
                 if (grid.gridArray[x, z].owner == this && grid.gridArray[x, z].academy != AcademyType.Null)
                 {
                     int academyIndex = (int)grid.gridArray[x, z].academy;
-                    academyOwnedPoint[academyIndex-1]++;
+                    academyOwnedPoint[academyIndex - 1]++;
                 }
             }
         }
@@ -215,9 +216,9 @@ public class Player : Character
         List<GridObject> gridList;
         if (OwnedLandDic.TryGetValue(gridObject.academy, out gridList))
         {
-            foreach(var tmpGridObject in gridList)
+            foreach (var tmpGridObject in gridList)
             {
-                if(GridManager.Instance.CheckGridObjectIsSame(gridObject,tmpGridObject))
+                if (GridManager.Instance.CheckGridObjectIsSame(gridObject, tmpGridObject))
                 {
                     gridList.Remove(tmpGridObject);
                     break;
@@ -230,7 +231,7 @@ public class Player : Character
             }
         }
     }
-    [ServerRpc(RequireOwnership =false)]
+    [ServerRpc(RequireOwnership = false)]
     public void RefreshAcademyOwnedPointServerRpc()
     {
         List<int> playeracademyOwnedPoint = CountAcademyOwnedPoint().ToList();
@@ -242,7 +243,7 @@ public class Player : Character
 
     public void ChangeAcademyOwnPoint(int[] academyPointEffect)
     {
-        for(int i=0;i< academyOwnedPoint.Count;i++)
+        for (int i = 0; i < academyOwnedPoint.Count; i++)
         {
             academyOwnedPoint[i] += academyPointEffect[i];
         }
@@ -290,6 +291,19 @@ public class Player : Character
     //    }
     //    lineRenderer.SetPosition(lineRenderer.positionCount -1, transform.position+offset);
     //}
-
-    
+    [ServerRpc(RequireOwnership =false)]
+    public void RecoverHpServerRpc(int hp)
+    {
+        RecoverHpClientRpc(hp);
+    }
+    [ClientRpc]
+    public void RecoverHpClientRpc(int hp)
+    {
+        Debug.LogError("addHp");
+        HP += hp;
+        if(HP > MaxHP)
+        {
+            HP = MaxHP;
+        }
+    }
 }
