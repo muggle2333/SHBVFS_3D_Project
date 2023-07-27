@@ -8,7 +8,7 @@
     SubShader
     {
         //贴图带透明通道 ，半透明效果设置如下：
-        tags{"Queue" = "Transparent" "RenderType" = "Transparent" "IgnoreProjector" = "True"}
+        tags{"Queue" = "Transparent" "RenderType" = "Transparent" "IgnoreProjector" = "False"}
         LOD 100
         Blend  SrcAlpha OneMinusSrcAlpha           //Blend选值为： SrcAlpha 和1-SrcAlpha  //也可测试为 DstColor SrcColor    //one one    
 
