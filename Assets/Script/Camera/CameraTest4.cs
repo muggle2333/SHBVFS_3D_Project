@@ -94,13 +94,7 @@ public class CameraTest4 : MonoBehaviour
         //seq.AppendCallback(() => { isMoving = false; });
     }
 
-    public void FocusEnemy()
-    {
-        var seq = DOTween.Sequence();
-        vec = GameplayManager.Instance.playerList[1].transform.position;
-        seq.Append(transform.DOMove(vec, 0.5f));
-        seq.Join(cam.DOLocalMove(pos, 0.5f));
-    }
+
     private void updateAcademyTextRotation()
     {
         int rotateY = (int)transform.localRotation.eulerAngles.y;
@@ -111,5 +105,20 @@ public class CameraTest4 : MonoBehaviour
             //text.transform.rotation.y = (float)rotateY;
             text.transform.localRotation = Quaternion.Euler(0.0f, rotateY, 0.0f);
         }
+    }
+  
+    public void FocusEnemy()
+    {
+        var seq = DOTween.Sequence();
+        vec = GameplayManager.Instance.playerList[1].transform.position;
+        seq.Append(transform.DOMove(vec, 0.5f));
+        seq.Join(cam.DOLocalMove(pos, 0.5f));
+    }
+    public void FocusPosition(Vector3 position,float zoomScale)
+    {
+        var seq = DOTween.Sequence();
+        vec = position;
+        seq.Append(transform.DOMove(vec, 0.5f));
+        seq.Join(cam.DOLocalMove(new Vector3(3, 13, -18)+cam.transform.forward*zoomScale, 0.5f));
     }
 }
