@@ -45,12 +45,14 @@ public class WaitRoomUI : MonoBehaviour
     }
     public void Start()
     {
+        startBtn.interactable = false;
         CheckPlayerIdentify(NetworkManager.Singleton.IsHost);
         if(!NetworkManager.Singleton.IsHost)
         {
             tutorialToggle.interactable = false;
             levelDropdown.interactable = false;
         }
+        
 
     }
     private void CheckPlayerIdentify(bool isHost)

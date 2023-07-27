@@ -109,7 +109,7 @@ public class GameplayManager : NetworkBehaviour
         FindObjectOfType<CameraTest4>().FocusGrid();
         //GridObject currentGridObject = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[currentPlayrId].x, (int)playerStartPoint[currentPlayrId].y);
         //GridVfxManager.Instance.UpdateVfxAcademy(currentGridObject);
-        if(NetworkManager.Singleton.ConnectedClients.Count > 1)
+        if(FindObjectOfType<TutorialManager>()== null)
         {
             UIManager.Instance.UpdatePlayerDataUI(currentPlayer);
         }else
