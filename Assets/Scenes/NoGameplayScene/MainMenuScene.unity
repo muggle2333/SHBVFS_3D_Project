@@ -3806,6 +3806,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: bgmClipList.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: aab76175dae47a047afbb7ee8ba883e9, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: bgmClipList.Array.data[3].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 297037a9eed08ea489d2306d9396b39b, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: bgmClipList.Array.data[4].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 67e40d459b547274facfa81e84fcdf89, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: audioClipList.Array.data[12].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9e8fe29086129494f888d48212f7af90, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: audioClipList.Array.data[13].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d89d52bb20ca1bf4c9fe1c25968491d9, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: audioClipList.Array.data[14].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 12d0f35bdd8bd794f926d5a73af3cb08, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: audioClipList.Array.data[17].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 587abf359e3918f44b58bb4dbdc3e2b1, type: 3}
     - target: {fileID: 8940633493863993155, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
       propertyPath: m_RootOrder
       value: 7

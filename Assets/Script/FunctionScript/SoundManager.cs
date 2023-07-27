@@ -30,6 +30,9 @@ public enum Sound
     CountDown,//16
     ControlStart,//17
     GameStart,//18
+
+    CardSelect,//24
+    CardCancel,//25
 }
 public enum Bgm
 {
