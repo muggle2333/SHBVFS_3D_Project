@@ -43,7 +43,7 @@ public class PlayerInteractionComponent : MonoBehaviour
         }
         if (isPlayingVfx)
         {
-            meshRenderer.materials[5].SetFloat("_Float", hitVfxFloat);
+            meshRenderer.materials[2].SetFloat("_Float", hitVfxFloat);
         }        
     }
     public void SetPlayerName(bool isSelf)
