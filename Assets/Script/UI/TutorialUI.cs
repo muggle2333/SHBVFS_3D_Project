@@ -9,6 +9,8 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private GameObject container;
     [SerializeField] private Button nextBtn;
+
+    [SerializeField] private GameObject tutorial_1;
     private void Start()
     {
         TutorialManager.Instance.OnStartSpecificTutorial += TutorialManager_OnStartSpecificTutorial;
@@ -33,4 +35,11 @@ public class TutorialUI : MonoBehaviour
         nextBtn.gameObject.SetActive(false);
         TutorialManager.Instance.CompleteSpecificTutorial();
     }
+
+    public void ShowSepecificMessage_Tutorial1()
+    {
+        container.SetActive(false);
+        tutorial_1.gameObject.SetActive(true);
+    }
+
 }

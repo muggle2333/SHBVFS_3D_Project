@@ -127,6 +127,7 @@ public class SelectManager : MonoBehaviour
     public void SetSelectObject(GridObject gridObject)
     {
         if (!CheckGridSelectable(gridObject)) return;
+        if(FindObjectOfType<TutorialManager>() != null ) { TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickGrid); }
         Vector2Int gridObjectXZ = new Vector2Int(gridObject.x, gridObject.z);
         GameObject selectVfx = null;
         //已选的取消

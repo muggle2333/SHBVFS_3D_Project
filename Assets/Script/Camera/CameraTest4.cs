@@ -17,6 +17,8 @@ public class CameraTest4 : MonoBehaviour
     private bool isMoving = false;
     private Vector3 vec = new Vector3();
     private Guid uid;
+
+    private bool isLocked = false;
     private void Start()
     {
         var angles = transform.eulerAngles;
@@ -26,6 +28,7 @@ public class CameraTest4 : MonoBehaviour
     }
     void Update()
     {
+        
         //if(isMoving && 
         //    (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)))
         //{
@@ -45,6 +48,7 @@ public class CameraTest4 : MonoBehaviour
 
     private void MoveCamera()
     {
+        if (isLocked) return;
         float x = Input.GetAxis("Horizontal") * 0.05f * moveSpeed.x;
         float z = Input.GetAxis("Forward") * 0.05f * moveSpeed.z;
         transform.Translate(new Vector3(x, 0, z));
@@ -52,6 +56,7 @@ public class CameraTest4 : MonoBehaviour
 
     private void ScaleCamera()
     {
+        if (isLocked) return;
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             cam.Translate(new Vector3(0, 0, 3));
@@ -64,6 +69,7 @@ public class CameraTest4 : MonoBehaviour
 
     private void RotateCamera()
     {
+        if (isLocked) return;
         if (Input.GetMouseButton(2))
         {
             x += Input.GetAxis("Mouse X") * rotateSpeed.x * 0.05f;
@@ -120,5 +126,10 @@ public class CameraTest4 : MonoBehaviour
         vec = position;
         seq.Append(transform.DOMove(vec, 0.5f));
         seq.Join(cam.DOLocalMove(new Vector3(3, 13, -18)+cam.transform.forward*zoomScale, 0.5f));
+    }
+
+    public void LockCamera(bool isLocked)
+    {
+        this.isLocked= isLocked;
     }
 }

@@ -325,6 +325,7 @@ MonoBehaviour:
   messageText: {fileID: 142037889050687411}
   container: {fileID: 142037890525722453}
   nextBtn: {fileID: 1779755643432701640}
+  tutorial_1: {fileID: 0}
 --- !u!1 &142037890525722453
 GameObject:
   m_ObjectHideFlags: 0

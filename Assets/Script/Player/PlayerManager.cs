@@ -116,15 +116,40 @@ public class PlayerManager : NetworkBehaviour
         switch (playerInteractType)
         {
             case PlayerInteractType.Move:
-                TryMove(player, gridObject); break;
+                TryMove(player, gridObject);
+                if (FindObjectOfType<TutorialManager>() != null)
+                {
+                    TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickMove);
+                }
+                break;
             case PlayerInteractType.Occupy:
-                Occupy(player, gridObject,true); break;
+                Occupy(player, gridObject,true);
+                if (FindObjectOfType<TutorialManager>() != null)
+                {
+                    TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickOccupy);
+                }
+                break;
             case PlayerInteractType.Build:
-                Build(player, gridObject, true); break;
+                Build(player, gridObject, true);
+                if (FindObjectOfType<TutorialManager>() != null)
+                {
+                    TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickBuild);
+                }
+                break;
             case PlayerInteractType.Gacha:
-                TryGacha(player, gridObject); break;
+                TryGacha(player, gridObject);
+                if (FindObjectOfType<TutorialManager>() != null)
+                {
+                    TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickDraw);
+                }
+                break;
             case PlayerInteractType.Search:
-                TrySearch(player);break;
+                TrySearch(player);
+                if (FindObjectOfType<TutorialManager>() != null)
+                {
+                    TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickSearch);
+                }
+                break;
         }
         if(FindObjectOfType<NetworkManager>())
         {
@@ -154,15 +179,15 @@ public class PlayerManager : NetworkBehaviour
         switch (playerInteract.PlayerInteractType)
         {
             case PlayerInteractType.Move:
-                MovePlayer(player, gridObject); break;
+                MovePlayer(player, gridObject);break;
             case PlayerInteractType.Occupy:
-                Occupy(player, gridObject,false); break;
+                Occupy(player, gridObject,false);break;
             case PlayerInteractType.Build:
-                Build(player, gridObject,false); break;
+                Build(player, gridObject,false);break;
             case PlayerInteractType.Gacha:
-                DrawCard(player, gridObject); break;
+                DrawCard(player, gridObject);break;
             case PlayerInteractType.Search:
-                Search(player); break;
+                Search(player);break;
         }
         //GridVfxManager.Instance.UpdateVfx(gridObject);
         foreach (var tmpPlayer in GameplayManager.Instance.playerList)

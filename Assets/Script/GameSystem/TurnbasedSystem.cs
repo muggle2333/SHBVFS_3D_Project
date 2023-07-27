@@ -81,14 +81,18 @@ public class TurnbasedSystem : NetworkBehaviour
         if (!NetworkManager.Singleton.IsHost) return;
         isStart.Value = true;
         UIManager.Instance.StartTurnbaseUIClientRpc();
-        SetPlayerSettingClientRpc();
         StartCoroutine("TurnStart");
+        if (FindObjectOfType<TutorialManager>() != null) return;
+        SetPlayerSettingClientRpc();
     }
 
     [ClientRpc]
     public void SetPlayerSettingClientRpc()
     {
-        if (FindObjectOfType<TutorialManager>() != null) return;
+        //if (FindObjectOfType<TutorialManager>() != null)
+        //{
+        //    TutorialManager.Instance.StartTurnbaseTutorial();
+        //}
         foreach(var player in GameplayManager.Instance.playerList)
         {
             PlayerManager.Instance.SetPlayerSetting(player);
