@@ -72804,7 +72804,7 @@ MonoBehaviour:
   playerText: {fileID: 0}
   hpText: {fileID: 0}
   craft: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  playerModel: {fileID: 0}
 --- !u!1 &962622037
 GameObject:
   m_ObjectHideFlags: 0
@@ -145001,8 +145001,16 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8489876199871823785, guid: b3161618f44d1c2439b76b2f5194dd7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489876199871823785, guid: b3161618f44d1c2439b76b2f5194dd7f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489876199871823785, guid: b3161618f44d1c2439b76b2f5194dd7f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.89
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 8489876199871823785, guid: b3161618f44d1c2439b76b2f5194dd7f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -145010,7 +145018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8489876199871823785, guid: b3161618f44d1c2439b76b2f5194dd7f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.99
+      value: 28.08
       objectReference: {fileID: 0}
     - target: {fileID: 8489876199871823785, guid: b3161618f44d1c2439b76b2f5194dd7f, type: 3}
       propertyPath: m_LocalRotation.w

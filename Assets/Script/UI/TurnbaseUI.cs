@@ -21,6 +21,10 @@ public class TurnbaseUI : MonoBehaviour
         {
             TurnbasedSystem.Instance.SkipControlStageServerRpc();
             skipBtn.gameObject.SetActive(false);
+            if(FindObjectOfType<TutorialManager>()!=null)
+            {
+                TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickSkip);
+            }
         });
         container.SetActive(false);
         //TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += UpdateTurnbaseUI;

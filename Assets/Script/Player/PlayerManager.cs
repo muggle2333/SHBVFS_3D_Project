@@ -326,6 +326,8 @@ public class PlayerManager : NetworkBehaviour
     {
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
         if (!player.UseActionPoint(apCost)) return;
+        Vector3 pos = GridManager.Instance.grid.GetWorldPositionCenter(player.currentGrid.x, player.currentGrid.z);
+        player.GetComponentInChildren<PlayerInteractionComponent>().PlayRangeVfx(pos);
     }
     public bool Search(Player player)
     {
@@ -334,6 +336,7 @@ public class PlayerManager : NetworkBehaviour
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Search, player);
         if (!player.UseActionPoint(apCost)) return false;
 
+        player.GetComponentInChildren<PlayerInteractionComponent>().PlayRangeVfx(player.transform.position);
         //var neighbourList = GridManager.Instance.grid.GetNeighbour(player.currentGrid);
         var neighbourList = GridManager.Instance.GetNeighbourInRange(player.currentGrid,player.Range);
         neighbourList.Add(player.currentGrid);

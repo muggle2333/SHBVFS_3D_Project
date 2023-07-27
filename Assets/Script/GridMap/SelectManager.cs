@@ -236,4 +236,17 @@ public class SelectManager : MonoBehaviour
         UIManager.Instance.ShowGridObjectUI(false, null);
     }
 
+    public void SetSpecificSelection(Vector2Int gridXZ)
+    {
+        foreach (var vfx in selectableVfxList)
+        {
+            Pool.Instance.SetObj("Vfx_SelectableGrid", vfx);
+        }
+        selectableVfxList.Clear();
+        selectableGridObjectList.Clear();
+        selectableGridObjectList.Add(gridXZ);
+        var selectableVfx = Pool.Instance.GetObj("Vfx_SelectableGrid");
+        var gridObject = GridManager.Instance.grid.GetGridObject(gridXZ.x, gridXZ.y);
+        PlaceSelectVfx(selectableVfx.transform, gridObject);
+    }
 }

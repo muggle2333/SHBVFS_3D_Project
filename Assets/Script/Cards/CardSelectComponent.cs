@@ -59,6 +59,10 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             if (isSelected)
             {
                 cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
+                if(FindObjectOfType<TutorialManager>()!=null)
+                {
+                    TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickPlayCard);
+                }
             }
             else OnSelectOperation();
         }

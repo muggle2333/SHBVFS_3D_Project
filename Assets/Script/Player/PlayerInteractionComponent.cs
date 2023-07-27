@@ -42,12 +42,12 @@ public class PlayerInteractionComponent : MonoBehaviour
         if(Input.GetMouseButton(0))
         {
             //StartCoroutine("PlayHitVfx");
-            PlayHitVfxRed();
+            //PlayHitVfxRed();
         }
-        if (isPlayingVfx)
-        {
-            meshRenderer.materials[1].SetFloat("_Float", hitVfxFloat);
-        }        
+        //if (isPlayingVfx)
+        //{
+        //    meshRenderer.materials[1].SetFloat("_Float", hitVfxFloat);
+        //}        
     }
     public void SetPlayerName(bool isSelf)
     {
@@ -111,6 +111,7 @@ public class PlayerInteractionComponent : MonoBehaviour
         playerVfx.SetActive(true);
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
         transform.LookAt(dirPos);
+        playerVfx.transform.LookAt(dirPos);
         if (gridObject.landType == LandType.Mountain)
         {
             dirPos += new Vector3(0, 1.7f, 0);
@@ -242,6 +243,16 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     }
 
+    public void PlayRangeVfx(Vector3 pos)
+    {
+        int range = GetComponentInChildren<Player>().Range;
+        GameObject visionVfx = Pool.Instance.GetObj("Vfx_VisionRange");
+        visionVfx.transform.position = pos;
+        visionVfx.transform.DOScale(new Vector3(3.2f*(range+1), 3.2f * (range + 1), 0.5f), 1f);
+        var sq = DOTween.Sequence();
+        sq.AppendInterval(1f);
+        sq.AppendCallback(() => { visionVfx.transform.localScale = new Vector3(3.2f,3.2f,0.5f); Pool.Instance.SetObj("Vfx_VisionRange", visionVfx); });
+    }
     private Vector3 CalculateParabola(Vector3 start, Vector3 end, float t)
     {
         Vector3 height = Vector3.up * (end - start).magnitude * 0.3f;

@@ -104,7 +104,9 @@ public class Player : Character
         Range = 1;
         ActionPointPerRound = 3;
         CurrentActionPoint = 0;
+        MaxActionPoint = 3;
         TrueActionPoint = CurrentActionPoint;
+        
         Invoke("PlayerAcademyDataServerRpc", 3);
 
         List<GridObject> yiLand;

@@ -21,6 +21,7 @@ public class PlayerDeck : NetworkBehaviour
     }
     public void InitializePlayerDeck()
     {
+        AllCardDeck.Clear();
         for (int i = 0; i <= (int)AcademyType.FA; i++)
         {
             cardDeck = null;

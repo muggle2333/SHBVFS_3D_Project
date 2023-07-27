@@ -63,11 +63,13 @@ public class AttackStage : MonoBehaviour
             int minDistance = 10;
             int targetIndex = i;
             //Find target in min distance
+            playerList[i].GetComponentInChildren<PlayerInteractionComponent>().PlayRangeVfx(playerList[i].transform.position);
             for (int j = 0; j < playerList.Count; j++)
             {
                 if (j == i) continue;
                 distance = PlayerManager.Instance.CheckDistance(playerList[i], playerList[j].currentGrid);
                 //Debug.LogError(playerList[i] + " distance " + distance);
+                
                 if (distance < minDistance && playerList[i].Range >= distance)
                 {
                     minDistance = distance;
@@ -78,6 +80,7 @@ public class AttackStage : MonoBehaviour
                         {
                             playerList[i].AttackTarget = playerList[targetIndex];
                             playerList[i].Attack();
+                            playerList[targetIndex].GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
                             SoundManager.Instance.PlaySound(Sound.Attack);
                             //Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
                         }

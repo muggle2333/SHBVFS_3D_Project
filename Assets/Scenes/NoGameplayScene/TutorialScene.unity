@@ -23301,7 +23301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5054783593724278040, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
       propertyPath: S1PhaseTime
-      value: 15
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5054783593724278041, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
       propertyPath: m_Name
