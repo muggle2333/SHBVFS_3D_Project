@@ -35,6 +35,16 @@ public class CardDataBase : MonoBehaviour
             AllTopCardListDic.Add((AcademyType)i, new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards/TopCards/" + ((AcademyType)i).ToString())));
         }
         AllCardList = new List<CardSetting>(Resources.LoadAll<CardSetting>("Cards"));
-        
+    }
+    public CardSetting CardIdToCardSetting(int id)
+    {
+        for(int i=0; i<AllCardList.Count;i++)
+        {
+            if(id!= AllCardList[i].cardId)
+                continue;
+            else 
+                return AllCardList[i];
+        }
+        return null;
     }
 }

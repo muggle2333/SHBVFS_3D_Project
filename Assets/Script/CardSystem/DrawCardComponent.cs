@@ -8,6 +8,7 @@ using Unity.Netcode;
 
 public class DrawCardComponent : NetworkBehaviour
 {
+    public static DrawCardComponent Instance;
     public Canvas parentCanvas;
     public PlayerDeck PlayerDeck;
     public GameObject cardPrefab;
@@ -25,6 +26,14 @@ public class DrawCardComponent : NetworkBehaviour
     private void Awake()
     {
         AllCardCount = new NetworkList<int>();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
     public void Start()
     {
