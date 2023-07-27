@@ -23,13 +23,15 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     [SerializeField] private GameObject craft;
 
-    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private GameObject playerModel;
+    private MeshRenderer meshRenderer;
     private bool isPlayingVfx = false;
     private float hitVfxFloat = -1f;
-    //private void Start()
-    //{
-    //    canvas= GetComponent<Canvas>();
-    //}
+    private void Start()
+    {
+        //canvas = GetComponent<Canvas>();
+        meshRenderer = playerModel.GetComponentInChildren<MeshRenderer>();
+    }
     private void Update()
     {
         hpText.text = GetComponentInParent<Player>().HP.ToString();
@@ -39,11 +41,12 @@ public class PlayerInteractionComponent : MonoBehaviour
         canvas.transform.LookAt(targetPos, targetOrientation);
         if(Input.GetMouseButton(0))
         {
-            StartCoroutine("PlayHitVfx");
+            //StartCoroutine("PlayHitVfx");
+            PlayHitVfxRed();
         }
         if (isPlayingVfx)
         {
-            meshRenderer.materials[2].SetFloat("_Float", hitVfxFloat);
+            meshRenderer.materials[1].SetFloat("_Float", hitVfxFloat);
         }        
     }
     public void SetPlayerName(bool isSelf)
@@ -218,12 +221,25 @@ public class PlayerInteractionComponent : MonoBehaviour
     {
         hitVfxFloat = -1;
         isPlayingVfx = true;
-        DOTween.To(() => this.hitVfxFloat, x => this.hitVfxFloat = x, 1, 1f);
-        yield return new WaitForSeconds(1f);
-        DOTween.To(() => this.hitVfxFloat, x => this.hitVfxFloat = x, -1, 1f);
-        yield return new WaitForSeconds(1f);
+        DOTween.To(() => this.hitVfxFloat, x => this.hitVfxFloat = x, 1, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        DOTween.To(() => this.hitVfxFloat, x => this.hitVfxFloat = x, -1, 0.2f);
+        yield return new WaitForSeconds(0.2f);
         isPlayingVfx= false;
         yield return null;
+    }
+
+    public void PlayHitVfxRed()
+    {
+        var seq = DOTween.Sequence();
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(1, 0.5f, 0.5f), 0.2f);});
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, Color.white, 0.2f); });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(1, 0.5f, 0.5f), 0.2f); });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, Color.white, 0.2f); });
+
     }
 
     private Vector3 CalculateParabola(Vector3 start, Vector3 end, float t)
