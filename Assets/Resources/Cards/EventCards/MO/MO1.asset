@@ -23,7 +23,7 @@ MonoBehaviour:
   cardTarget: 1
   cardTexture: {fileID: 2800000, guid: 5ee5540dccaed5c4c96be965a10a54eb, type: 3}
   effectTime: 0
-  academyEffectNum: 000000000000000000000000000000000000000000000000
+  academyEffectNum: 00000000000000009dffffff000000000000000000000000
   Damage: 0
   playerDataEffect:
     hp: 0
@@ -37,3 +37,4 @@ MonoBehaviour:
   cardLevel: 0
   CardBuff: {fileID: 0}
   cardFounction: {fileID: 0}
+  needSelectCount: 0
