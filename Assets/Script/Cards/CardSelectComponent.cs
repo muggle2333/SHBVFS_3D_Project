@@ -166,12 +166,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, true);
-            cardSelectManager.ToDiscardText.color = Color.green;
+            cardSelectManager.ToDiscardText.color = new Color32(255, 200, 71, 255);//green
         }
         else
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
-            cardSelectManager.ToDiscardText.color = Color.red;
+            cardSelectManager.ToDiscardText.color = new Color32(65, 16, 0, 255);//red
         }
     }
 
@@ -186,7 +186,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.discardCards, false);
-            cardSelectManager.ToDiscardText.color = Color.red;
+            cardSelectManager.ToDiscardText.color = new Color32(65, 16, 0, 255);//red
         }
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
         {
@@ -227,12 +227,12 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, true);
-            cardSelectManager.ToPlayHPText.color = Color.green;
+            cardSelectManager.ToPlayHPText.color = new Color32(255, 200, 71, 255);//green
         }
         else
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, false);
-            cardSelectManager.ToPlayHPText.color = Color.red;
+            cardSelectManager.ToPlayHPText.color = new Color32(65, 16, 0, 255);//red
         }
     }
 
@@ -246,7 +246,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + ((0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1);
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] < (0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1)
         {
-            cardSelectManager.ToPlayHPText.color = Color.red;
+            cardSelectManager.ToPlayHPText.color = new Color32(65, 16, 0, 255);//red
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, false);
         }
         if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == 0)
@@ -395,10 +395,11 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         Interactable = false;
         this.EndSelectDiscard();
         this.transform.SetParent(cardSelectManager.canvas.transform);
-        SoundManager.Instance.PlaySound(Sound.DiscardCard);
+        //SoundManager.Instance.PlaySound(Sound.DiscardCard);
         var seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveY(0, 0.4f));
         seq.AppendInterval(0.5f);
+        seq.Join(DOTween.To(() => this.gameObject.GetComponent<CanvasGroup>().alpha, x => this.gameObject.GetComponent<CanvasGroup>().alpha = x, 0, 0.5f));
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
     public void HPCardAnimation()
