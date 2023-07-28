@@ -199,6 +199,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => completeIndex == 19);
         Time.timeScale = 1f;
         tutorialUI.HideTutorial();
+        cameraComponent.LockCamera(false);
         yield return null;
     }
 
