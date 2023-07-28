@@ -55,17 +55,17 @@ public class S2Stage : MonoBehaviour
 
         if(redPlayerNeedsToEffect.Count > 0)
         {
-            Debug.LogError("S2 RED" + redPlayerNeedsToEffect.Count);
+            //Debug.LogError("S2 RED" + redPlayerNeedsToEffect.Count);
             playedCardDict.Add(GameplayManager.Instance.playerList[0], redPlayerNeedsToEffect);
         }
         if (bluePlayerNeedsToEffect.Count > 0)
         {
-            Debug.LogError("S2 BLUE" + bluePlayerNeedsToEffect.Count);
+            //Debug.LogError("S2 BLUE" + bluePlayerNeedsToEffect.Count);
             playedCardDict.Add(GameplayManager.Instance.playerList[1], bluePlayerNeedsToEffect);
         }
         playerList = new List<Player>();
         playerList = GameplayManager.Instance.GetPlayer();
-        Debug.LogError("Red has played " + playedCardListDict[GameplayManager.Instance.playerList[0]].Count + "cards");
+        //Debug.LogError("Red has played " + playedCardListDict[GameplayManager.Instance.playerList[0]].Count + "cards");
         StartCoroutine("S2CardTakeEffect");
 
     }

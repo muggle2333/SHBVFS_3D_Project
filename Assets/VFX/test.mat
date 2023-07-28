@@ -59,7 +59,7 @@ Material:
     - _DecalMeshDepthBias: 0
     - _DecalMeshViewBias: 0
     - _DrawOrder: 0
-    - _NoiseStrength: 0.00019615889
+    - _NoiseStrength: 0.2098726
     - _NoiseWidth: 0
     - _QueueControl: 0
     - _QueueOffset: 0

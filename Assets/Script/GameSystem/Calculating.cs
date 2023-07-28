@@ -81,10 +81,6 @@ public class Calculating : NetworkBehaviour
     }
     public void DelataCardData (CardSetting card,Player player)
     {
-        if (NetworkManager.Singleton.IsServer)
-        {
-            player.RefreshAcademyOwnedPointServerRpc();
-        }
         totalCardAttackRangeDic[player] += card.playerDataEffect.visionRange;
         totalCardDefenseDic[player] += card.playerDataEffect.defence;
         totalCardAttackDamageDic[player] += card.playerDataEffect.attack;
@@ -96,11 +92,23 @@ public class Calculating : NetworkBehaviour
         academyEffectNum = card.academyEffectNum;
         if (NetworkManager.Singleton.IsServer)
         {
-            for (int i = 0; i < 6; i++)
+            if (card.cardTarget == CardTarget.opponent)
             {
-                player.cardAcademyEffectNum[i] += academyEffectNum[i];
+                var enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
+                for (int i = 0; i < 6; i++)
+                {
+                    enemy.cardAcademyEffectNum[i] += academyEffectNum[i];
+                }
+                playerAcademyBuffcomponent.UpdatePlayerAcademyBuffServerRpc(enemy.Id);
             }
-            playerAcademyBuffcomponent.UpdatePlayerAcademyBuffServerRpc(player.Id);
+            else
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    player.cardAcademyEffectNum[i] += academyEffectNum[i];
+                }
+                playerAcademyBuffcomponent.UpdatePlayerAcademyBuffServerRpc(player.Id);
+            }
         }
         cardDamage = card.Damage;
         cardAP = card.playerDataEffect.actionPoint;
