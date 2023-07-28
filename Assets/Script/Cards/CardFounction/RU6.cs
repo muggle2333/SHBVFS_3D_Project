@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class RU6 : CardFunction
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        Function();
     }
-
-    // Update is called once per frame
-    void Update()
+    void Function()
     {
-        
+        Player enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
+        if (enemy.baseDefense > 0)
+        {
+            enemy.baseDefense -= 1;
+            player.baseDefense += 1;
+            Calculating.Instance.CalculatPlayerBaseData(enemy);
+            Calculating.Instance.CalculatPlayerBaseData(player);
+        }
+        Destroy(gameObject);
     }
 }

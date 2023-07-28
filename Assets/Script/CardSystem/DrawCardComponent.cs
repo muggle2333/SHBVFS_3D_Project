@@ -25,7 +25,7 @@ public class DrawCardComponent : NetworkBehaviour
 
     private void Awake()
     {
-        AllCardCount = new NetworkList<int>();
+        AllCardCount = new NetworkList<int>();      
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
