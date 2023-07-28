@@ -8,7 +8,8 @@ using UnityEngine;
 public class PlayerAcademyBuffcomponent : NetworkBehaviour
 {
     public Dictionary<AcademyType, AcademyBuffData[]> academyBuffDict = new Dictionary<AcademyType, AcademyBuffData[]>();
-    public Dictionary<AcademyType, AcademyBuffData> PlayerAcademyBuffDict = new Dictionary<AcademyType, AcademyBuffData>();
+    public Dictionary<AcademyType, AcademyBuffData> redPlayerAcademyBuffDict = new Dictionary<AcademyType, AcademyBuffData>();
+    public Dictionary<AcademyType, AcademyBuffData> bluePlayerAcademyBuffDict = new Dictionary<AcademyType, AcademyBuffData>();
     // Start is called before the first frame update
     //public int[][] academyBuff;
     public AcademyBuffData[] academyBuffDataArr;
@@ -26,7 +27,8 @@ public class PlayerAcademyBuffcomponent : NetworkBehaviour
 
         for (int i = 0; i < (int)AcademyType.FA; i++)
         {
-            PlayerAcademyBuffDict.Add((AcademyType)(i + 1), academyBuffData);
+            redPlayerAcademyBuffDict.Add((AcademyType)(i + 1), academyBuffData);
+            bluePlayerAcademyBuffDict.Add((AcademyType)(i + 1), academyBuffData);
         }
     }
 
@@ -65,17 +67,35 @@ public class PlayerAcademyBuffcomponent : NetworkBehaviour
         for (int i = 0; i < (int)AcademyType.FA; i++)
         {
             academyBuffDict.TryGetValue((AcademyType)(i + 1), out academyBuffDataArr);
-            if (player.totalAcademyOwnedPoint[i] <= 4 && player.totalAcademyOwnedPoint[i] >= 0)
+            if (player.Id == PlayerId.RedPlayer)
             {
-                PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[player.totalAcademyOwnedPoint[i]];
+                if (player.totalAcademyOwnedPoint[i] <= 4 && player.totalAcademyOwnedPoint[i] >= 0)
+                {
+                    redPlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[player.totalAcademyOwnedPoint[i]];
+                }
+                else if (player.totalAcademyOwnedPoint[i] > 4)
+                {
+                    redPlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[4];
+                }
+                else if (player.totalAcademyOwnedPoint[i] < 0)
+                {
+                    redPlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[0];
+                }
             }
-            else if (player.totalAcademyOwnedPoint[i] > 4)
+            else
             {
-                PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[4];
-            }
-            else if (player.totalAcademyOwnedPoint[i] < 0)
-            {
-                PlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[0];
+                if (player.totalAcademyOwnedPoint[i] <= 4 && player.totalAcademyOwnedPoint[i] >= 0)
+                {
+                    bluePlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[player.totalAcademyOwnedPoint[i]];
+                }
+                else if (player.totalAcademyOwnedPoint[i] > 4)
+                {
+                    bluePlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[4];
+                }
+                else if (player.totalAcademyOwnedPoint[i] < 0)
+                {
+                    bluePlayerAcademyBuffDict[(AcademyType)(i + 1)] = academyBuffDataArr[0];
+                }
             }
         }
     }

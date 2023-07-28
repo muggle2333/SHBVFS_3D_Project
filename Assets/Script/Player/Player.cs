@@ -144,20 +144,6 @@ public class Player : Character
         {
             Defence = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (this == GameplayManager.Instance.currentPlayer)
-            {
-                List<int> a = new List<int>();
-                for (int i = 0; i < 6; i++)
-                {
-                    //a.Add(0);
-                    //a[i] = academyOwnedPoint[i];
-                    Debug.LogError(academyOwnedPoint[i]);
-                }
-
-            }
-        }
     }
 
     public void UpdateDataPerTurn()

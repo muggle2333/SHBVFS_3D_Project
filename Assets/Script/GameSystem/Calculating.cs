@@ -16,13 +16,13 @@ public class Calculating : NetworkBehaviour
     public int academyAPPerRound;
     public int academyBasicCardPerRound;
 
-    public int totalAcademyMaxHP;
+    /*public int totalAcademyMaxHP;
     public int totalAcademyHPPerRound;
     public int totalAcademyAttackRange;
     public int totalAcademyAttackDamage;
     public int totalAcademyDefense;
     public int totalAcademyAPPerRound;
-    public int totalAcademyBasicCardPerRound;
+    public int totalAcademyBasicCardPerRound;*/
 
     public int cardDamage;
     public int cardAP;
@@ -36,9 +36,17 @@ public class Calculating : NetworkBehaviour
     public Dictionary<Player, int> totalCardDefenseDic = new Dictionary<Player, int>();
     public Dictionary<Player, int> totalCardAttackRangeDic = new Dictionary<Player, int>();
 
+    public Dictionary<Player, int> totalAcademyMaxHPDic = new Dictionary<Player, int>();
+    public Dictionary<Player, int> totalAcademyHPPerRoundDic = new Dictionary<Player, int>();
+    public Dictionary<Player, int> totalAcademyAttackRangeDic = new Dictionary<Player, int>();
+    public Dictionary<Player, int> totalAcademyAttackDamageDic = new Dictionary<Player, int>();
+    public Dictionary<Player, int> totalAcademyDefenseDic = new Dictionary<Player, int>();
+    public Dictionary<Player, int> totalAcademyAPPerRoundDic = new Dictionary<Player, int>();
+    public Dictionary<Player, int> totalAcademyBasicCardPerRoundDic = new Dictionary<Player, int>();
+    public Dictionary<Player, AcademyBuffData> AcademyBuffDataDict = new Dictionary<Player, AcademyBuffData>();
     public int[] academyEffectNum = new int[6];
     public Dictionary<Player, int[]> totalAcademyEffectNum = new Dictionary<Player, int[]>();
-    public AcademyBuffData AcademyBuffData;
+    //public AcademyBuffData AcademyBuffData;
     public Card CardData;
 
     public static Calculating Instance;
@@ -57,11 +65,19 @@ public class Calculating : NetworkBehaviour
     }
     void Start()
     {
+        totalAcademyMaxHPDic.Clear();
+        totalAcademyHPPerRoundDic.Clear();
+        totalAcademyAttackRangeDic.Clear();
+        totalAcademyAttackDamageDic.Clear();
+        totalAcademyDefenseDic.Clear();
+        totalAcademyAPPerRoundDic.Clear();
+        totalAcademyBasicCardPerRoundDic.Clear();
         totalAcademyEffectNum.Clear();
         totalCardAttackDamageDic.Clear();
         totalCardDefenseDic.Clear();
         totalCardAttackRangeDic.Clear();
         cardFreeMoveNumDic.Clear();
+        AcademyBuffDataDict.Clear();
         playerAcademyBuffcomponent = FindObjectOfType<PlayerAcademyBuffcomponent>();
         Invoke("AddTotalAcademyEffectNum", 3);
         
@@ -78,6 +94,22 @@ public class Calculating : NetworkBehaviour
         totalCardAttackRangeDic.Add(GameplayManager.Instance.playerList[1], 0);
         totalAcademyEffectNum.Add(GameplayManager.Instance.playerList[0], new int[6]);
         totalAcademyEffectNum.Add(GameplayManager.Instance.playerList[1], new int[6]);
+
+        totalAcademyMaxHPDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalAcademyHPPerRoundDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalAcademyAttackRangeDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalAcademyAttackDamageDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalAcademyDefenseDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalAcademyAPPerRoundDic.Add(GameplayManager.Instance.playerList[0], 0);
+        totalAcademyBasicCardPerRoundDic.Add(GameplayManager.Instance.playerList[0], 0);
+
+        totalAcademyMaxHPDic.Add(GameplayManager.Instance.playerList[1], 0);
+        totalAcademyHPPerRoundDic.Add(GameplayManager.Instance.playerList[1], 0);
+        totalAcademyAttackRangeDic.Add(GameplayManager.Instance.playerList[1], 0);
+        totalAcademyAttackDamageDic.Add(GameplayManager.Instance.playerList[1], 0);
+        totalAcademyDefenseDic.Add(GameplayManager.Instance.playerList[1], 0);
+        totalAcademyAPPerRoundDic.Add(GameplayManager.Instance.playerList[1], 0);
+        totalAcademyBasicCardPerRoundDic.Add(GameplayManager.Instance.playerList[1], 0);
     }
     public void DelataCardData (CardSetting card,Player player)
     {
@@ -134,10 +166,10 @@ public class Calculating : NetworkBehaviour
         for (int i = 0; i < 6 ; i++)
         {
             academyEffectNum[i] = 0;
-            totalCardAttackRangeDic[player] = 0;
-            totalCardDefenseDic[player] = 0;
-            totalCardAttackDamageDic[player] = 0;
         }
+        totalCardAttackRangeDic[player] = 0;
+        totalCardDefenseDic[player] = 0;
+        totalCardAttackDamageDic[player] = 0;
         if (NetworkManager.Singleton.IsServer)
         {
             CardAcademyEffectNumInitializeServerRpc(playerId);
@@ -165,23 +197,47 @@ public class Calculating : NetworkBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
-            playerAcademyBuffcomponent.PlayerAcademyBuffDict.TryGetValue((AcademyType)(i + 1), out AcademyBuffData);
-            academyMaxHP += AcademyBuffData.maxHp;
-            academyHPPerRound += AcademyBuffData.hpPreRound;
-            academyAttackRange += AcademyBuffData.attackRange;
-            academyAttackDamage += AcademyBuffData.attackDamage;
-            academyDefense += AcademyBuffData.defense;
-            academyAPPerRound += AcademyBuffData.APPerRound;
-            academyBasicCardPerRound += AcademyBuffData.basicCardPerRound;
+            if (player.Id == PlayerId.RedPlayer)
+            {
+                //playerAcademyBuffcomponent.redPlayerAcademyBuffDict.TryGetValue((AcademyType)(i + 1), out AcademyBuffDataDict[player]);
+                if (AcademyBuffDataDict.ContainsKey(player))
+                {
+                    AcademyBuffDataDict[player] = playerAcademyBuffcomponent.redPlayerAcademyBuffDict[(AcademyType)(i + 1)];
+                }
+                else
+                {
+                    AcademyBuffDataDict.Add(player, playerAcademyBuffcomponent.redPlayerAcademyBuffDict[(AcademyType)(i + 1)]);
+                }
+            }
+            else
+            {
+                //playerAcademyBuffcomponent.bluePlayerAcademyBuffDict.TryGetValue((AcademyType)(i + 1), out AcademyBuffData);
+                if (AcademyBuffDataDict.ContainsKey(player))
+                {
+                    AcademyBuffDataDict[player] = playerAcademyBuffcomponent.bluePlayerAcademyBuffDict[(AcademyType)(i + 1)];
+                }
+                else
+                {
+                    AcademyBuffDataDict.Add(player, playerAcademyBuffcomponent.bluePlayerAcademyBuffDict[(AcademyType)(i + 1)]);
+                }
+            }
+            
+            academyMaxHP += AcademyBuffDataDict[player].maxHp;
+            academyHPPerRound += AcademyBuffDataDict[player].hpPreRound;
+            academyAttackRange += AcademyBuffDataDict[player].attackRange;
+            academyAttackDamage += AcademyBuffDataDict[player].attackDamage;
+            academyDefense += AcademyBuffDataDict[player].defense;
+            academyAPPerRound += AcademyBuffDataDict[player].APPerRound;
+            academyBasicCardPerRound += AcademyBuffDataDict[player].basicCardPerRound;
         }
 
-        totalAcademyMaxHP = academyMaxHP;
-        totalAcademyHPPerRound = academyHPPerRound;
-        totalAcademyAttackRange = academyAttackRange;
-        totalAcademyAttackDamage = academyAttackDamage;
-        totalAcademyDefense = academyDefense;
-        totalAcademyAPPerRound = academyAPPerRound;
-        totalAcademyBasicCardPerRound = academyBasicCardPerRound;
+        totalAcademyMaxHPDic[player] = academyMaxHP;
+        totalAcademyHPPerRoundDic[player] = academyHPPerRound;
+        totalAcademyAttackRangeDic[player] = academyAttackRange;
+        totalAcademyAttackDamageDic[player] = academyAttackDamage;
+        totalAcademyDefenseDic[player] = academyDefense;
+        totalAcademyAPPerRoundDic[player] = academyAPPerRound;
+        totalAcademyBasicCardPerRoundDic[player] = academyBasicCardPerRound;
 
         academyMaxHP = 0;
         academyHPPerRound = 0;
@@ -195,13 +251,13 @@ public class Calculating : NetworkBehaviour
 
     public void CalculatPlayerBaseData(Player player)
     {
-        player.MaxHP = player.baseMaxHP + totalAcademyMaxHP;
-        player.HpPerRound = totalAcademyHPPerRound;
-        player.AttackDamage = player.baseAttackDamage + totalAcademyAttackDamage + totalCardAttackDamageDic[player];
-        player.Range = player.baseRange + totalAcademyAttackRange + totalCardAttackRangeDic[player] + player.gridAR;
-        player.Defence = player.baseDefense + totalAcademyDefense + totalCardDefenseDic[player] + player.gridDF;
-        player.ActionPointPerRound = player.baseActionPointPerRound + totalAcademyAPPerRound;
-        player.basicCardPerRound = totalAcademyBasicCardPerRound;
+        player.MaxHP = player.baseMaxHP + totalAcademyMaxHPDic[player];
+        player.HpPerRound = totalAcademyHPPerRoundDic[player];
+        player.AttackDamage = player.baseAttackDamage + totalAcademyAttackDamageDic[player] + totalCardAttackDamageDic[player];
+        player.Range = player.baseRange + totalAcademyAttackRangeDic[player] + totalCardAttackRangeDic[player] + player.gridAR;
+        player.Defence = player.baseDefense + totalAcademyDefenseDic[player] + totalCardDefenseDic[player] + player.gridDF;
+        player.ActionPointPerRound = player.baseActionPointPerRound + totalAcademyAPPerRoundDic[player];
+        player.basicCardPerRound = totalAcademyBasicCardPerRoundDic[player];
         
     }
 
@@ -231,7 +287,18 @@ public class Calculating : NetworkBehaviour
         {
             enemy.HP -= (cardDamage - enemy.Defence);
         }
-        player.CurrentActionPoint += cardAP;
+        if (cardAP < 0)
+        {
+            enemy.CurrentActionPoint += cardAP;
+            if (enemy.CurrentActionPoint < 0)
+            {
+                enemy.CurrentActionPoint = 0;
+            }
+        }
+        else
+        {
+            player.CurrentActionPoint += cardAP;
+        }
     }
 
     public int CalculateAPCost(PlayerInteractType playerInteractType,Player player)
