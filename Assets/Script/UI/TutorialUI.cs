@@ -9,15 +9,21 @@ public class TutorialUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private GameObject container;
-    [SerializeField] private Button nextBtn;
-
+    [SerializeField] public Button nextBtn;
+    [SerializeField] private GameObject Goal;
     [SerializeField] private GameObject tutorial_1;
+    [SerializeField] private GameObject WarningUI;
+    [SerializeField] private GameObject Frame;
+    [SerializeField] private List<GameObject> Icons = new List<GameObject>();
+    [SerializeField] private GameObject Skip;
+  
     private void Start()
     {
         TutorialManager.Instance.OnStartSpecificTutorial += TutorialManager_OnStartSpecificTutorial;
         nextBtn.onClick.AddListener(() =>
         {
-            GoNext();
+            //GoNext();
+            TutorialManager.Instance.CompleteSpecificTutorial();
         });
     }
 
@@ -32,15 +38,60 @@ public class TutorialUI : MonoBehaviour
         messageText.text = text;
     }
     
+    public void ShowGoal()
+    {
+        Goal.SetActive(true);
+    }
+
+    public void ShowFrame()
+    {
+        Frame.SetActive(true);
+    }
+    public void FrameDisappear()
+    {
+        Frame.SetActive(false);
+    }
+
+    public void ShowWarning()
+    {
+        WarningUI.SetActive(true);
+        Invoke("WarningDisappear", 1.5f);
+    }
+
+    public void WarningDisappear()
+    {
+        WarningUI.SetActive(false);
+    }
+
+    public void ShowIcons(int iconIndex)
+    {
+        Icons[iconIndex].SetActive(true);
+    }
+
+    public void IconsDiappear(int iconIndex)
+    {
+        Icons[iconIndex].SetActive(false);
+    }
+
+    public void SkipDiappear()
+    {
+        Skip.SetActive(false);
+    }
+    public void ShowSkip()
+    {
+        Skip.SetActive(true);
+    }
     public void HideTutorial()
     {
         container.SetActive(false);
     }
-    public void GoNext()
-    {
-        nextBtn.gameObject.SetActive(false);
-        TutorialManager.Instance.CompleteSpecificTutorial();
-    }
+    //public void GoNext()
+    //{
+    //    //nextBtn.gameObject.SetActive(false);
+    //    TutorialManager.Instance.CompleteSpecificTutorial();
+    //}
+
+   
 
     public void ShowSepecificMessage_Tutorial1()
     {
