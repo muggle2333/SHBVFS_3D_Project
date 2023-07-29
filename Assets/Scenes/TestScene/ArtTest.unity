@@ -97263,7 +97263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9071197710933516457, guid: 265d79fd6fdee794ba91ee8626d9be86, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.06
+      value: -5.91
       objectReference: {fileID: 0}
     - target: {fileID: 9071197711929901811, guid: 265d79fd6fdee794ba91ee8626d9be86, type: 3}
       propertyPath: m_RootOrder

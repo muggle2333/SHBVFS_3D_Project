@@ -7,16 +7,17 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class TutorialUI : MonoBehaviour
 {
+
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private GameObject container;
     [SerializeField] public Button nextBtn;
     [SerializeField] private GameObject Goal;
-    [SerializeField] private GameObject tutorial_1;
+   // [SerializeField] private GameObject tutorial_1;
     [SerializeField] private GameObject WarningUI;
     [SerializeField] private GameObject Frame;
     [SerializeField] private List<GameObject> Icons = new List<GameObject>();
     [SerializeField] private GameObject Skip;
-  
+    [SerializeField] private GameObject AcademyBUffsUI;
     private void Start()
     {
         TutorialManager.Instance.OnStartSpecificTutorial += TutorialManager_OnStartSpecificTutorial;
@@ -81,6 +82,16 @@ public class TutorialUI : MonoBehaviour
     {
         Skip.SetActive(true);
     }
+    
+    public void ShowAcademyBuff()
+    {
+        AcademyBUffsUI.SetActive(true);
+    }
+
+    public void AcademyBuffDisappear()
+    {
+        AcademyBUffsUI.SetActive(false);
+    }
     public void HideTutorial()
     {
         container.SetActive(false);
@@ -93,10 +104,10 @@ public class TutorialUI : MonoBehaviour
 
    
 
-    public void ShowSepecificMessage_Tutorial1()
-    {
-        container.SetActive(false);
-        tutorial_1.gameObject.SetActive(true);
-    }
+    //public void ShowSepecificMessage_Tutorial1()
+    //{
+    //    container.SetActive(false);
+    //    tutorial_1.gameObject.SetActive(true);
+    //}
 
 }
