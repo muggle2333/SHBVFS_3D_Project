@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 public class PlayerDataUI : MonoBehaviour
 {
     //[SerializeField] private TMP_Text playerNameText;
@@ -14,11 +16,14 @@ public class PlayerDataUI : MonoBehaviour
     [SerializeField] private TMP_Text cardADText;
     [SerializeField] private TMP_Text cardDFText;
 
+    [SerializeField] private Image playerImage;
+    [SerializeField] private List<Sprite> playerSprites;
     private Player player;
     private void Update()
     {
         if(player != null)
         {
+            playerImage.sprite = playerSprites[(int)player.Id];
             hpText.text = player.HP.ToString() + " / " + player.MaxHP.ToString();
             apText.text = player.CurrentActionPoint.ToString() + " / " + player.MaxActionPoint.ToString();
             defenceText.text = player.Defence.ToString();

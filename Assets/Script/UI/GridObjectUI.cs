@@ -31,7 +31,7 @@ public class GridObjectUI : MonoBehaviour
     [SerializeField] private Image landImg;
     [SerializeField] private List<Sprite> landIconList;
 
-    public EnemyUI enemyUI;
+    //public EnemyUI enemyUI;
     //[SerializeField] private TMP_Text ownerText;
     //[SerializeField] private TMP_Text landBuffText;
     //[SerializeField] private TMP_Text buildingText;

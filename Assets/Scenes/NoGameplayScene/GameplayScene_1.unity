@@ -113480,6 +113480,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurnbaseUI
       objectReference: {fileID: 0}
+    - target: {fileID: 345234220281352065, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650763772957295451, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -113662,9 +113670,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4245382592264618461, guid: d146f39f68358fa4c9af262633d6a4da, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4245382592679376478, guid: d146f39f68358fa4c9af262633d6a4da, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245382592696912382, guid: d146f39f68358fa4c9af262633d6a4da, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -113787,9 +113799,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2104841662}
     m_Modifications:
+    - target: {fileID: 3414766546213908376, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926071452224620612, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: playerImage
+      value: 
+      objectReference: {fileID: 4926071452412111453}
+    - target: {fileID: 4926071452224620612, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: playerSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926071452224620612, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: playerSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8a4e1cd9d74147d45beefbfcd8fef369, type: 3}
+    - target: {fileID: 4926071452224620612, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: playerSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 1bfbe874dd913614394149ffc60eed8a, type: 3}
     - target: {fileID: 4926071452224620618, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
       propertyPath: m_Name
       value: PlayerDataUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926071452224620618, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4926071452224620619, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
       propertyPath: m_Pivot.x
@@ -113880,6 +113916,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+--- !u!114 &4926071452412111453 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2472015898922433531, guid: fb7c09a96db20a1499eca2a1c24ee5a6, type: 3}
+  m_PrefabInstance: {fileID: 4926071452412111452}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5054783594197590997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114046,6 +114093,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2104841662}
     m_Modifications:
+    - target: {fileID: 8288920063325767175, guid: be98860c1352378468b4688117ddb0c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8288920063938633344, guid: be98860c1352378468b4688117ddb0c8, type: 3}
       propertyPath: m_Name
       value: GridObjectUI
@@ -114135,7 +114186,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 596740696630725278, guid: be98860c1352378468b4688117ddb0c8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be98860c1352378468b4688117ddb0c8, type: 3}
