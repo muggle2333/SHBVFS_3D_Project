@@ -36,11 +36,12 @@ public enum Sound
 }
 public enum Bgm
 {
-    NormalBGM,//19
+    LateBGM,//19
     LobbyBGM,//20
     DyingBGM,//21
     WinBGM,//22
     LoseBGM,//23
+    EarlyBGM//24
 }
 [Serializable]
 public struct SoundAudioClip
@@ -76,21 +77,20 @@ public class SoundManager : NetworkBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == Loader.Scene.GameplayScene.ToString())
+        if(scene.name == "TutorialScene" || scene.name.Contains("GameplayScene"))
         {
-            bgmSource.Stop();
-        }else if(scene.name == Loader.Scene.MainMenuScene.ToString())
+            PlayBgm(Bgm.EarlyBGM);
+        }
+        else if(scene.name == Loader.Scene.MainMenuScene.ToString())
         {
             PlayBgm(Bgm.LobbyBGM);
         }
-        bgmSource.Play();
     }
 
     public void Start()
     {
         effectDicts = new Dictionary<Sound, AudioClip>();
         bgmDicts = new Dictionary<Bgm, AudioClip>();
-
         foreach (var soundAudioClip in audioClipList)
         {
             effectDicts.Add(soundAudioClip.sound, soundAudioClip.audioClip);
@@ -99,6 +99,8 @@ public class SoundManager : NetworkBehaviour
         {
             bgmDicts.Add(bgmAudiClip.bgm, bgmAudiClip.audioClip);
         }
+
+        PlayBgm(Bgm.LobbyBGM);
     }
     public void PlaySound(Sound sound)
     {
@@ -146,8 +148,10 @@ public class SoundManager : NetworkBehaviour
     }
     public void PlayBgm(Bgm bgm)
     {
+        bgmSource.Stop();
         if (GetAudioClip(bgm) == null) return;
-        bgmSource.PlayOneShot(GetAudioClip(bgm));
+        bgmSource.clip = GetAudioClip(bgm);
+        bgmSource.Play();
     }
     private AudioClip GetAudioClip(Sound sound)
     {

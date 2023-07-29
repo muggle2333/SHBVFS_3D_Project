@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -36,6 +37,7 @@ public class TurnbasedSystem : NetworkBehaviour
 
     public bool IsBackAlive = false;
     public GameObject EndMenu;
+    public int switchBgmRoundIndex = 15;
 
     private TurnbaseUI turnbaseUI;
     public NetworkVariable<bool> isStart = new NetworkVariable<bool>(false);
@@ -70,38 +72,47 @@ public class TurnbasedSystem : NetworkBehaviour
     {
         playerSkipDict = new Dictionary<ulong, bool>() { { 0, false }, { 1, false } };
         turnbaseUI = FindObjectOfType<TurnbaseUI>();
+        roundIndex.OnValueChanged += TurnbasedSystem_RoundIndexChanged;
         //For test
         if (FindObjectOfType<NetworkManager>() != null) return;
         isStart.Value = true;
         UIManager.Instance.StartTurnbaseUIClientRpc();
         StartCoroutine("TurnStart");
     }
+
+
+
     public void StartTurnbaseSystem()
     {
         if (!NetworkManager.Singleton.IsHost) return;
         isStart.Value = true;
         UIManager.Instance.StartTurnbaseUIClientRpc();
+
+        if (FindObjectOfType<TutorialManager>() == null)
+        {
+            SetPlayerSettingClientRpc();
+        }
         StartCoroutine("TurnStart");
-        if (FindObjectOfType<TutorialManager>() != null) return;
-        SetPlayerSettingClientRpc();
     }
 
     [ClientRpc]
     public void SetPlayerSettingClientRpc()
     {
-        //if (FindObjectOfType<TutorialManager>() != null)
-        //{
-        //    TutorialManager.Instance.StartTurnbaseTutorial();
-        //}
         foreach(var player in GameplayManager.Instance.playerList)
         {
             PlayerManager.Instance.SetPlayerSetting(player);
         }
     }
+    private void TurnbasedSystem_RoundIndexChanged(int previousValue, int newValue)
+    {
+        if(newValue == switchBgmRoundIndex)
+        {
+            SoundManager.Instance.PlayBgm(Bgm.LateBGM);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        
         if (!isStart.Value) return;
 
         turnbaseUI.UpdateStageInfo(CurrentGameStage.Value, timerValue.Value, roundIndex.Value);

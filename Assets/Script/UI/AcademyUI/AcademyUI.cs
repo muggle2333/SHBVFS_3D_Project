@@ -23,8 +23,10 @@ public class AcademyUI : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.wholeGameState.Value == GameManager.WholeGameState.GameOver) return;
         if (isUnlock)
         {
+            if (Player == null) return;
             if (Player.totalAcademyOwnedPoint.Count == 0) return;
             for (int i = 0; i < academies.Count; i++)
             {
