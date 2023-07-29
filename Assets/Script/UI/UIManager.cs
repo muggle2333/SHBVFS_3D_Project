@@ -17,6 +17,7 @@ public class UIManager : NetworkBehaviour
     private DyingUI dyingUI;
     private EnemyUI enemyUI;
     private DiscardUI discardUI;
+    public WarningUI warningUI;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -40,6 +41,7 @@ public class UIManager : NetworkBehaviour
         dyingUI= GetComponentInChildren<DyingUI>();
         discardUI= GetComponentInChildren<DiscardUI>();
         enemyUI = GetComponentInChildren<EnemyUI>();
+        warningUI= GetComponentInChildren<WarningUI>();
     }
     public void UpdatePlayerDataUI(Player player)
     {
@@ -125,6 +127,15 @@ public class UIManager : NetworkBehaviour
                 gameplayUI.playHP.gameObject.GetComponent<Button>().interactable = isActive; break;
 
         }
+    }
+
+    public void ShowWarning(string warning)
+    {
+        warningUI.Show(warning);
+    }
+    public void HideWarning()
+    {
+        warningUI.Hide();
     }
 
 }

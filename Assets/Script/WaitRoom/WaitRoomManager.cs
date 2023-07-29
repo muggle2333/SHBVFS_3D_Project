@@ -16,7 +16,8 @@ public class WaitRoomManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerReadyDictionary;
     private NetworkVariable<bool> isTutorial = new NetworkVariable<bool>(false);
 
-    private int levelIndex = 0;
+
+    public NetworkVariable<int> levelIndex= new NetworkVariable<int>(0);
     [SerializeField] private WaitRoomUI waitRoomUI;
 
     private void Awake()
@@ -105,7 +106,7 @@ public class WaitRoomManager : NetworkBehaviour
         //{
         //    Loader.LoadNetwork(Loader.Scene.TutorialScene);
         //}
-        Loader.LoadGameplayScene(levelIndex);
+        Loader.LoadGameplayScene(levelIndex.Value);
     }
 
     public void SetToggleTutorial(bool isToggle)
@@ -116,8 +117,11 @@ public class WaitRoomManager : NetworkBehaviour
     [ClientRpc]
     public void SetLevelIndexClientRpc(int levelIndex)
     {
-        this.levelIndex = levelIndex;
-        if (NetworkManager.Singleton.IsHost) return;
+        if (NetworkManager.Singleton.IsHost)
+        {
+            this.levelIndex.Value = levelIndex;
+            return;
+        }
         waitRoomUI.SetLevelDropdown(levelIndex);
     }
 }

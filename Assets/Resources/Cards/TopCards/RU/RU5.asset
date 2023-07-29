@@ -27,7 +27,7 @@ MonoBehaviour:
   academyEffectNum: 000000000000000000000000000000000000000000000000
   Damage: 2
   playerDataEffect:
-    hp: 0
+    hp: -2
     actionPoint: 0
     defence: -2
     attack: 0
@@ -38,3 +38,5 @@ MonoBehaviour:
   cardLevel: 1
   CardBuff: {fileID: 0}
   cardFounction: {fileID: 0}
+  needSelectCount: 0
+  selectGridMode: 1

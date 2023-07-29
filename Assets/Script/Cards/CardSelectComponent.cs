@@ -58,7 +58,27 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             if (isSelected)
             {
-                cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
+                if(gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
+                {
+
+                    if(SelectManager.Instance.selectedDict.Count == gameObject.GetComponent<Card>().needSelectCount)
+                    {
+
+                        cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
+                        
+                        UIManager.Instance.HideWarning();
+                    }
+                    else
+                    {
+                        UIManager.Instance.warningUI.warningText.GetComponent<TextColorControl>().ColorBlink(new Color32(231, 42, 0, 255), 0.4f);
+                    }
+                }
+                else
+                {
+                    cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
+                    UIManager.Instance.HideWarning();
+                }
+
                 if(FindObjectOfType<TutorialManager>()!=null)
                 {
                     TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickPlayCard);
@@ -85,7 +105,20 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnSelectOperation()
     {
-        cardSelectManager.selectModeCount += gameObject.GetComponent<Card>().needSelectCount;
+        if(gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
+        {
+            SelectManager.Instance.ChangeSelectMode(gameObject.GetComponent<Card>().selectGridMode, gameObject.GetComponent<Card>().needSelectCount);
+            if (gameObject.GetComponent<Card>().needSelectCount == 2)
+            {
+                UIManager.Instance.ShowWarning("You need to select" + 2 + "Grids");
+            }
+            else if (gameObject.GetComponent<Card>().needSelectCount == 1)
+            {
+                UIManager.Instance.ShowWarning("You need to select" + 1 + "Grid");
+            }
+        }
+        
+
         Info.SetActive(true);
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
@@ -101,14 +134,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             }
         }//ensure current selected count
         //SecondarySelect
-        if(cardSelectManager.selectModeCount > 0)
-        {
-            FindObjectOfType<SelectMode>().EnterSelectMode(gameObject.GetComponent<Card>().needSelectCount);
-        }
-        else if(cardSelectManager.selectModeCount == 0)
-        {
-            FindObjectOfType<SelectMode>().ExitSelectMode();
-        }
+        
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, true);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, true);
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
@@ -118,7 +144,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void EndSelectOperation()
     {
-        cardSelectManager.selectModeCount -= gameObject.GetComponent<Card>().needSelectCount;
+        SelectManager.Instance.ChangeSelectMode(SelectGridMode.Default,1);
+        UIManager.Instance.HideWarning();
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
         transform.DOLocalMoveY(formerY, duration);
@@ -126,10 +153,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, false);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, false);
-        if (cardSelectManager.selectModeCount == 0)
-        {
-            FindObjectOfType<SelectMode>().ExitSelectMode();
-        }
+       
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0);
         outline.SetActive(false);
@@ -177,6 +201,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void EndSelectDiscard()
     {
+        SelectManager.Instance.ChangeSelectMode(SelectGridMode.Default, 1);
+        UIManager.Instance.HideWarning();
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
         transform.DOLocalMoveY(formerY, duration);
@@ -438,7 +464,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         var seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveX(0, 0.4f));
         seq.Join(transform.DOLocalMoveY(0, 0.4f));
-        seq.Join(transform.DOScale(1.5f, 0.4f));
+        seq.Join(transform.DOScale(1f, 0.4f));
         seq.AppendCallback(() => { this.Info.SetActive(true); });
         seq.AppendInterval(1f);
         Invoke("AddMaterial", 1);
@@ -466,7 +492,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         var seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveX(0, 0.4f));
         seq.Join(transform.DOLocalMoveY(0, 0.4f));
-        seq.Join(transform.DOScale(1.5f, 0.4f));
+        seq.Join(transform.DOScale(1f, 0.4f));
         seq.AppendCallback(() => { this.Info.SetActive(true); });
         seq.AppendInterval(1f);
         Invoke("AddMaterial", 1);

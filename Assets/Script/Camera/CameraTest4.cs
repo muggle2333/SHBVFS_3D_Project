@@ -52,6 +52,10 @@ public class CameraTest4 : MonoBehaviour
         float x = Input.GetAxis("Horizontal") * 0.05f * moveSpeed.x;
         float z = Input.GetAxis("Forward") * 0.05f * moveSpeed.z;
         transform.Translate(new Vector3(x, 0, z));
+        Vector3 newPos = transform.position;
+        newPos.x = Mathf.Clamp(transform.position.x, -5f, 65f);
+        newPos.z = Mathf.Clamp(transform.position.z, 20f, 72f);
+        transform.position = newPos;    
     }
 
     private void ScaleCamera()
@@ -59,11 +63,11 @@ public class CameraTest4 : MonoBehaviour
         if (isLocked) return;
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            if(cam.position.z < -14) cam.Translate(new Vector3(0, 0, 3));
+            if(cam.localPosition.z < -23) cam.Translate(new Vector3(0, 0, 3));
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            if(cam.position.z > -60) cam.Translate(new Vector3(0, 0, -3));
+            if(cam.localPosition.z > -60) cam.Translate(new Vector3(0, 0, -3));
         }
     }
 

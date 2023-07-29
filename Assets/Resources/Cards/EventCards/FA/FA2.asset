@@ -37,3 +37,5 @@ MonoBehaviour:
   cardLevel: 0
   CardBuff: {fileID: 0}
   cardFounction: {fileID: 0}
+  needSelectCount: 1
+  selectGridMode: 2

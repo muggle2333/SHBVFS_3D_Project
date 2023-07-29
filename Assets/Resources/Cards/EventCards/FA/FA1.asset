@@ -27,13 +27,15 @@ MonoBehaviour:
   Damage: 0
   playerDataEffect:
     hp: 0
-    actionPoint: 1
+    actionPoint: -1
     defence: 0
     attack: 0
     visionRange: 0
-    addBaseCardNum: 1
+    addBaseCardNum: 0
     freeMoveNum: 0
   cardType: 1
   cardLevel: 0
   CardBuff: {fileID: 0}
   cardFounction: {fileID: 0}
+  needSelectCount: 0
+  selectGridMode: 1

@@ -76,6 +76,7 @@ public class SoundManager : NetworkBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        bgmSource.Play();
         if(scene.name == Loader.Scene.GameplayScene.ToString())
         {
             bgmSource.Stop();

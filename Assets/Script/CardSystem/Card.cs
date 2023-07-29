@@ -35,6 +35,7 @@ public class Card:MonoBehaviour
     public CardLevel cardLevel;
     public CardBuff CardBuff;
     public GameObject cardFounction;
+    public SelectGridMode selectGridMode;
     void Start()
     {
         UpdateCardData(cardSetting);
@@ -63,6 +64,7 @@ public class Card:MonoBehaviour
         CardBuff = cardSetting.CardBuff;
         cardFounction = cardSetting.cardFounction;
         needSelectCount = cardSetting.needSelectCount;
+        selectGridMode = cardSetting.selectGridMode;
     }
     public void ActivateCard()
     {

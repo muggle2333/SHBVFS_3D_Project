@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class SelectMode : MonoBehaviour
 {
+    public static SelectMode Instance;
     public GameObject selectModeUI;
     public TMP_Text selectModeText;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update 
     void Start()
     {
@@ -28,5 +34,9 @@ public class SelectMode : MonoBehaviour
     {
         selectModeUI.SetActive(false);
         SelectManager.Instance.selectCount = 1;
+    }
+    public void saveSelectedGrid()
+    {
+
     }
 }

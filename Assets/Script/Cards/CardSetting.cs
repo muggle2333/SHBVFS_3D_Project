@@ -71,5 +71,6 @@ public class CardSetting : ScriptableObject
     public CardBuff CardBuff;
     public GameObject cardFounction;
     public int needSelectCount;
+    public SelectGridMode selectGridMode;
 }
 

@@ -13,6 +13,7 @@ public enum SelectGridMode
     TwoOccupyed,
     OneRivalBuilded,
     OneOccupyedNotBuilded,
+    Every,
 }
 public class SelectManager : MonoBehaviour
 {
@@ -84,7 +85,7 @@ public class SelectManager : MonoBehaviour
                     }
                     else if(hitInfo.collider.GetComponentInParent<Player>()!=null)
                     {
-                        Player player = hitInfo.collider.GetComponentInChildren<Player>();
+                        Player player = hitInfo.collider.GetComponentInParent<Player>();
                         if(player.Id != GameplayManager.Instance.currentPlayer.Id)
                         {
                             UIManager.Instance.ShowEnemyUI(true);
@@ -249,4 +250,16 @@ public class SelectManager : MonoBehaviour
         var gridObject = GridManager.Instance.grid.GetGridObject(gridXZ.x, gridXZ.y);
         PlaceSelectVfx(selectableVfx.transform, gridObject);
     }
+
+    public void ChangeSelectMode(SelectGridMode mode, int num)
+    {
+        selectGridMode = mode;
+        selectCount = num;
+        UpdateSelectableGridObject();
+        CleanSelectedGrid();
+    }
+
+    
+
+    
 }
