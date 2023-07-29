@@ -155,6 +155,7 @@ public class Player : Character
     }
     public bool OccupyGrid(GridObject gridObject)
     {
+        if(gridObject.landType != LandType.Plain) { return false; }
         occuplyCount++;
         List<GridObject> gridList;
         if (OwnedLandDic.TryGetValue(gridObject.academy, out gridList))

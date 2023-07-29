@@ -84,19 +84,19 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: d7b06f3a78d73d641aaf9336e8f021b1, type: 3}
   - sound: 17
     audioClip: {fileID: 0}
-  - sound: 18
-    audioClip: {fileID: 8300000, guid: faeab6ea6986c60438c445cae993cacd, type: 3}
   bgmClipList:
   - bgm: 0
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: aab76175dae47a047afbb7ee8ba883e9, type: 3}
   - bgm: 1
     audioClip: {fileID: 8300000, guid: 92d2f8afd46e40d499c45dab9af4bb6a, type: 3}
   - bgm: 2
     audioClip: {fileID: 0}
   - bgm: 3
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 297037a9eed08ea489d2306d9396b39b, type: 3}
   - bgm: 4
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 67e40d459b547274facfa81e84fcdf89, type: 3}
+  - bgm: 5
+    audioClip: {fileID: 8300000, guid: 417a00700286c054983e87e8845fd830, type: 3}
   effectSource: {fileID: 8940633494195709910}
   bgmSource: {fileID: 8940633495545940899}
 --- !u!114 &5147029086175098891

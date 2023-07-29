@@ -200,6 +200,7 @@ public class GridObjectUI : MonoBehaviour
     }
     public void ShowGridObjectUI(bool isShow,Transform gridTrans)
     {
+        if (isShow && SelectManager.Instance.selectGridMode != SelectGridMode.Default) return;
         container.SetActive(isShow);
         gridTransform = gridTrans;
         

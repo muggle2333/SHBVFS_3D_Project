@@ -168,6 +168,7 @@ public class GridManager : NetworkBehaviour
 
     public GridObject ManageOwner(GridObject gridObject ,Player player,bool isControlStage)
     {
+        if (gridObject.landType != LandType.Plain) return gridObject;
         gridObject = grid.GetGridObject(gridObject.x, gridObject.z);
         gridObject.SetOwner(player, isControlStage);
         return gridObject;

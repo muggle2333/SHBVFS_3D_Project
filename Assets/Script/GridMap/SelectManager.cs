@@ -73,9 +73,17 @@ public class SelectManager : MonoBehaviour
             {
                 if(EventSystem.current.currentSelectedGameObject != null)
                 {
-                    //点到ui
+                    //点到ui button等
                     return;
                 }
+
+                PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+                if (pointerEventData.pointerEnter != null && pointerEventData.pointerEnter.gameObject.GetComponentInParent<Card>()!=null)
+                {
+                    Debug.LogError("Press Card");
+                    return;
+                }
+
                 Ray currentRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Debug.DrawLine(currentRay.origin, hitInfo.point, Color.red, 2);
                 if (Physics.Raycast(currentRay, out hitInfo))

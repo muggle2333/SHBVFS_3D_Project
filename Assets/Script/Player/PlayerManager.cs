@@ -217,9 +217,8 @@ public class PlayerManager : NetworkBehaviour
         player.OccupyGrid(player.currentGrid);
         player.currentGrid = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
 
-        //player.OccupyGrid(gridObject);
         GridVfxManager.Instance.UpdateVfx(player.currentGrid);
-        if ((int)player.Id == (int)NetworkManager.Singleton.LocalClientId)
+        if ((int)player.Id == (int)NetworkManager.Singleton.LocalClientId && player.currentGrid.landType == LandType.Plain)
         {
             drawCardComponent.DrawCard(player);
         }
