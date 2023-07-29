@@ -45161,7 +45161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2519510587
+  GlobalObjectIdHash: 1110102299
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -83890,6 +83890,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 4164202119315470929, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4164202119315470930, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -110367,7 +110371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2104841662
 RectTransform:
   m_ObjectHideFlags: 0
@@ -110411,7 +110415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2035142523
+  GlobalObjectIdHash: 3687659489
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
