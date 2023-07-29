@@ -29,7 +29,7 @@ MonoBehaviour:
     hp: 0
     actionPoint: 0
     defence: 0
-    attack: 0
+    attack: 1
     visionRange: 0
     addBaseCardNum: 0
     freeMoveNum: 0
@@ -37,3 +37,5 @@ MonoBehaviour:
   cardLevel: 0
   CardBuff: {fileID: 0}
   cardFounction: {fileID: 0}
+  needSelectCount: 0
+  selectGridMode: 1

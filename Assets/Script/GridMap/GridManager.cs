@@ -318,6 +318,14 @@ public class GridManager : NetworkBehaviour
                     }
                     break;
                 }
+            case SelectGridMode.Every:
+                {
+                    foreach (var gridObject in grid.gridArray)
+                    {
+                        gridXZList.Add(new Vector2Int(gridObject.x, gridObject.z));
+                    }
+                    break;
+                }
         }
         return gridXZList;
     }
@@ -354,5 +362,29 @@ public class GridManager : NetworkBehaviour
         } while (range > 0);
         return AllList;
     }
+    [ServerRpc(RequireOwnership =false)]
+    public void ChangeAcademyServerRpc(Vector2Int gridObjectXZ, AcademyType academyType)
+    {
+        ChangeGridObjectAcademyClientRpc(gridObjectXZ, academyType);
+    }
+    [ClientRpc]
+    public void ChangeGridObjectAcademyClientRpc(Vector2Int gridObjectXZ, AcademyType academyType)
+    {
+        grid.gridArray[gridObjectXZ.x, gridObjectXZ.y].academy = academyType;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SwitchAcademyServerRpc(Vector2Int gridObject1XZ, Vector2Int gridObject2XZ)
+    {
+        SwitchGridObjectAcademyClientRpc(gridObject1XZ, gridObject2XZ);
+    }
+    [ClientRpc]
+    public void SwitchGridObjectAcademyClientRpc(Vector2Int gridObject1XZ, Vector2Int gridObject2XZ)
+    {
+        var academy = grid.gridArray[gridObject2XZ.x, gridObject2XZ.y].academy;
+        grid.gridArray[gridObject2XZ.x, gridObject2XZ.y].academy = grid.gridArray[gridObject1XZ.x, gridObject1XZ.y].academy;
+        grid.gridArray[gridObject1XZ.x, gridObject1XZ.y].academy = academy;
+    }
+
 }
 

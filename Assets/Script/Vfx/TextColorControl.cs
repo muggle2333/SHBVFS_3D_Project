@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +17,9 @@ public class TextColorControl : MonoBehaviour
 
     public void ColorBlink(Color32 targetcolor, float duration)
     {
-        Color32 formercolor = transform.GetComponent<Text>().color;
+        Color32 formercolor = transform.GetComponent<TMP_Text>().color;
         var seq = DOTween.Sequence();
-        seq.Append(DOTween.To(() => transform.GetComponent<Text>().color, x => transform.GetComponent<Text>().color = x, targetcolor, duration / 2));
-        seq.Append(DOTween.To(() => transform.GetComponent<Text>().color, x => transform.GetComponent<Text>().color = x, formercolor, duration / 2));
+        seq.Append(DOTween.To(() => transform.GetComponent<TMP_Text>().color, x => transform.GetComponent<TMP_Text>().color = x, targetcolor, duration / 2));
+        seq.Append(DOTween.To(() => transform.GetComponent<TMP_Text>().color, x => transform.GetComponent<TMP_Text>().color = x, formercolor, duration / 2));
     }
 }

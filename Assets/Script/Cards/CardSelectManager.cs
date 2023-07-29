@@ -22,7 +22,6 @@ public class CardSelectManager : MonoBehaviour
     public float handY = 0f;
     public float cardWidth;
     public float interval = 300f;
-    public int selectModeCount;
     //public GameObject UpBotton;
     //public GameObject DownBotton;
     //public GameObject SelectButton;
