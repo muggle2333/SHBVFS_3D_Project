@@ -167,6 +167,7 @@ public class CardManager : NetworkBehaviour
         {
             var function = Instantiate(effectCard.cardFounction).GetComponent<CardFunction>();
             function.player = player;
+            function.cardSetting = effectCard;
         }
         calculating.DelataCardData(effectCard, player);
         calculating.CalculatPlayerBaseData(player);

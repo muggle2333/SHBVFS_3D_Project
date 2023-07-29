@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class DAO4 : CardFunction
 {
-    // Start is called before the first frame update
     void Start()
     {
-        //for(int i = 0; i < gameObject.GetComponents<Card>().; i++)
+        //for(int i = 0; i < ; i++)
 
         Function();
     }
