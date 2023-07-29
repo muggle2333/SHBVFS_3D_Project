@@ -46,6 +46,7 @@ public class WaitRoomUI : MonoBehaviour
     public void Start()
     {
         startBtn.interactable = false;
+        levelDropdown.value = WaitRoomManager.Instance.levelIndex.Value;
         CheckPlayerIdentify(NetworkManager.Singleton.IsHost);
         if(!NetworkManager.Singleton.IsHost)
         {
