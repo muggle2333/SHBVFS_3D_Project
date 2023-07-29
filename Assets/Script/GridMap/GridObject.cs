@@ -174,6 +174,12 @@ public class GridObject
         grid.TriggerGridObjectChanged(x, z);
         //GridVfxManager.Instance.UpdateVfxBuilding(this,isControlStage);
     }
+
+    public void DestoryBuilding()
+    {
+        isHasBuilding = false;
+        grid.TriggerGridObjectChanged(x, z);
+    }
     //被走到过，及全员都知道属性 ->走过的才知道
     public void DiscoverLand(Player player)
     {

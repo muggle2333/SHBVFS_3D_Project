@@ -362,6 +362,10 @@ public class GridManager : NetworkBehaviour
         } while (range > 0);
         return AllList;
     }
+    public GridObject GetGridObject(Vector2Int gridObjectXZ)
+    {
+        return grid.gridArray[gridObjectXZ.x, gridObjectXZ.y];
+    }
     [ServerRpc(RequireOwnership =false)]
     public void ChangeAcademyServerRpc(Vector2Int gridObjectXZ, AcademyType academyType)
     {
@@ -386,5 +390,18 @@ public class GridManager : NetworkBehaviour
         grid.gridArray[gridObject1XZ.x, gridObject1XZ.y].academy = academy;
     }
 
+    public void SetBuilding(Vector2Int gridObjectXZ,bool isDestory)
+    {
+        GridObject gridObject = grid.gridArray[gridObjectXZ.x, gridObjectXZ.y];
+        if (isDestory)
+        {
+            gridObject.DestoryBuilding();
+        }
+        else
+        {
+            gridObject.SetBuilding(true,false);
+        }
+        GridVfxManager.Instance.UpdateVfxBuilding(gridObject, false);
+    }
 }
 

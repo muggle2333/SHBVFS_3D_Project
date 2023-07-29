@@ -259,6 +259,35 @@ public class PlayerManager : NetworkBehaviour
         }
         return true;
     }
+    public void MovePlayerNoAP(Player player, GridObject gridObject)
+    {
+        player.targetGrid = gridObject;
+        player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
+        GridManager.Instance.DiscoverGridObject(player, gridObject);
+        UpdateGridAuthorityData(player, gridObject);
+        player.GetComponent<PlayerInteractionComponent>().DeduceFirstPath();
+        GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
+
+        if (gridObject.landType == LandType.Mountain)
+        {
+            SoundManager.Instance.PlaySound(Sound.MoveToMountain);
+        }
+        else if (gridObject.landType == LandType.Lake)
+        {
+            if (player.currentGrid.landType == LandType.Lake)
+            {
+                SoundManager.Instance.PlaySound(Sound.MoveOnLake);
+            }
+            else
+            {
+                SoundManager.Instance.PlaySound(Sound.MoveToLake);
+            }
+        }
+        else
+        {
+            SoundManager.Instance.PlaySound(Sound.MoveToPlain);
+        }
+    }
     public void TryMove(Player player,GridObject gridObject)
     {
         player.targetGrid = gridObject;

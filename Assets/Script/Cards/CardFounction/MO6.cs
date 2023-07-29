@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MO6 : CardFunction
 {
-    // Start is called before the first frame update
+    public Vector2Int grid;
     void Start()
     {
-        
+        grid = SelectMode.Instance.selectedGridDic[cardSetting.cardId][0];
+        SelectMode.Instance.selectedGridDic[cardSetting.cardId].RemoveAt(0);
+        Function();
     }
-
-    // Update is called once per frame
-    void Update()
+    void Function()
     {
-        
+        GridManager.Instance.SetBuilding(grid, true);
     }
 }
