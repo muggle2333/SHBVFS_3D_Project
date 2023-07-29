@@ -26,6 +26,8 @@ public static class Loader
             MainMenuCleanUp.Instance.CleanUp();
         }
         SceneManager.LoadScene(scene.ToString());
+        //var activeScene = SceneManager.GetSceneByName(scene.ToString());
+        //SceneManager.SetActiveScene(activeScene);
     }
 
     public static void LoadNetwork(Scene scene)
@@ -35,6 +37,7 @@ public static class Loader
         {
             MainMenuCleanUp.Instance.CleanUp();
         }
+        var activeScene = SceneManager.GetSceneByName(targetScene.ToString());
         NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
     }
     

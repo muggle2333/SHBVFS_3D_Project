@@ -15,10 +15,10 @@ EditorBuildSettings:
     path: Assets/Scenes/NoGameplayScene/TutorialScene.unity
     guid: 6aa249d5d8b11454e82df44781f45986
   - enabled: 1
-    path: Assets/Scenes/NoGameplayScene/GameplayScene_1.unity
+    path: Assets/Scenes/NoGameplayScene/GameplayScene_2.unity
     guid: 16eddc4ec59359549818b6abe43aa7a6
   - enabled: 1
-    path: Assets/Scenes/NoGameplayScene/GameplayScene_2.unity
+    path: Assets/Scenes/NoGameplayScene/GameplayScene_1.unity
     guid: a29615f640661c8459d81d9e177f95cd
   - enabled: 1
     path: Assets/Scenes/NoGameplayScene/GameplayScene_3.unity

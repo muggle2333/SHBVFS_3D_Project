@@ -137,5 +137,9 @@ public class UIManager : NetworkBehaviour
     {
         warningUI.Hide();
     }
-
+    [ClientRpc]
+    public void ShowWarningTimerClientRpc(string warning,float time)
+    {
+        warningUI.ShowWarningTimer(warning,time);
+    }
 }

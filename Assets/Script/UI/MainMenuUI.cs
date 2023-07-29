@@ -106,6 +106,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void ExitPanel()
     {
+        if (currentPanel == null) return;
         currentPanel.SetActive(false);
     }
 

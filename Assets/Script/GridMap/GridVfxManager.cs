@@ -65,6 +65,7 @@ public class GridVfxManager : MonoBehaviour
 
                 GameObject atmpVfx = Instantiate(vfxPrefabs.academyVfx.gameObject,academyContainer.transform);
                 atmpVfx.transform.position = grid.GetWorldPositionCenter(x, z);
+                
 
                 GameObject otmpVfx = Instantiate(vfxPrefabs.ownerVfx.gameObject, container.transform);
 

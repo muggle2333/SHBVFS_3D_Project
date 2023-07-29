@@ -18,4 +18,11 @@ public class WarningUI : MonoBehaviour
     {
         container.SetActive(false);
     }
+
+    public void ShowWarningTimer(string message,float time)
+    {
+        container.SetActive(true);
+        warningText.text = message;
+        Invoke("Hide", time);
+    }
 }

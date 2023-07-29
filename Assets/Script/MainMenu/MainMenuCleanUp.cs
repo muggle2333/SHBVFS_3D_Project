@@ -29,11 +29,11 @@ public class MainMenuCleanUp : MonoBehaviour
         {
             Destroy(MultiplayerManager.Instance.gameObject);
         }
-        if(FindObjectOfType<NotificationUI>().gameObject!=null)
-        {
-            Destroy(FindObjectOfType<NotificationUI>().gameObject);
-        }
-        if(FindObjectOfType<SoundManager>().gameObject!=null)
+        //if(FindObjectOfType<NotificationUI>().gameObject!=null)
+        //{
+        //    Destroy(FindObjectOfType<NotificationUI>().gameObject);
+        //}
+        if (FindObjectOfType<SoundManager>().gameObject != null)
         {
             Destroy(FindObjectOfType<SoundManager>().gameObject);
         }

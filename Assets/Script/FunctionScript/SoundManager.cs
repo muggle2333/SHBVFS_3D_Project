@@ -70,18 +70,26 @@ public class SoundManager : NetworkBehaviour
     private bool canCountdown = true;
     private void Awake()
     {
-        Instance= this;
+        if(Instance !=null &&Instance!=this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
         DontDestroyOnLoad(this);
         SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "TutorialScene" || scene.name.Contains("GameplayScene"))
+        if (scene.name == "TutorialScene" || scene.name.Contains("GameplayScene"))
         {
             PlayBgm(Bgm.EarlyBGM);
         }
-        else if(scene.name == Loader.Scene.MainMenuScene.ToString())
+        else if (scene.name == Loader.Scene.MainMenuScene.ToString()|| scene.name == Loader.Scene.WaitRoomScene.ToString())
         {
             PlayBgm(Bgm.LobbyBGM);
         }
@@ -148,6 +156,7 @@ public class SoundManager : NetworkBehaviour
     }
     public void PlayBgm(Bgm bgm)
     {
+        if (Instance == null) return;
         bgmSource.Stop();
         if (GetAudioClip(bgm) == null) return;
         bgmSource.clip = GetAudioClip(bgm);
@@ -164,5 +173,9 @@ public class SoundManager : NetworkBehaviour
         AudioClip audioClip = null;
         bgmDicts.TryGetValue(bgm, out audioClip);
         return audioClip;
+    }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
