@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -60,12 +61,17 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             {
                 if(gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
                 {
-
                     if(SelectManager.Instance.selectedDict.Count == gameObject.GetComponent<Card>().needSelectCount)
                     {
-
                         cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
-                        
+                        if (!SelectMode.Instance.selectedGridDic.ContainsKey(gameObject.GetComponent<Card>().cardId))
+                        {
+                            SelectMode.Instance.selectedGridDic.Add(gameObject.GetComponent<Card>().cardId, null);
+                        }
+                        for (int i = 0; i < SelectManager.Instance.selectedDict.Count; i++)
+                        {
+                            SelectMode.Instance.selectedGridDic[gameObject.GetComponent<Card>().cardId].Add(SelectManager.Instance.selectedDict.ElementAt(i).Key);
+                        }
                         UIManager.Instance.HideWarning();
                     }
                     else
@@ -201,7 +207,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void EndSelectDiscard()
     {
-        SelectManager.Instance.ChangeSelectMode(SelectGridMode.Default, 1);
+        SelectManager.Instance.ChangeSelectMode(SelectGridMode.None, 1);
         UIManager.Instance.HideWarning();
         Info.SetActive(false);
         transform.SetSiblingIndex(index);

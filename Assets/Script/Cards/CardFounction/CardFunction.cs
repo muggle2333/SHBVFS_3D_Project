@@ -5,5 +5,6 @@ using UnityEngine;
 
 public class CardFunction : NetworkBehaviour
 {
+    public int cardId;
     public Player player;
 }

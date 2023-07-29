@@ -8,10 +8,18 @@ public class SelectMode : MonoBehaviour
     public static SelectMode Instance;
     public GameObject selectModeUI;
     public TMP_Text selectModeText;
+    public Dictionary<int,List<Vector2Int>> selectedGridDic = new Dictionary<int, List<Vector2Int>>();
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
     // Start is called before the first frame update 
     void Start()
