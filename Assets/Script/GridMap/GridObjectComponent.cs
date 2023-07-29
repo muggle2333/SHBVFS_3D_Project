@@ -32,7 +32,7 @@ public class GridObjectComponent : MonoBehaviour,IPointerClickHandler,IPointerEn
 
     public void OnPointerExit(PointerEventData eventData)
     { 
-        SelectManager.Instance.RemoveCurrentSelectObject(gridObject);
+        SelectManager.Instance.RemoveCurrentTargetObject(gridObject);
     }
 
     //private void OnMouseDown()

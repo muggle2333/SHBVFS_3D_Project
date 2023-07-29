@@ -4835,7 +4835,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7624db777bc6bff4aa7bb49559ba9b55, type: 2}
+  - {fileID: 2100000, guid: 082e45e3cba8f604a8eb7311c5120386, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4897,7 +4897,7 @@ GameObject:
   - component: {fileID: 9071197711929901811}
   - component: {fileID: 571733447027975714}
   m_Layer: 0
-  m_Name: Vfx_SelectedGrid
+  m_Name: Vfx_TargetGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
