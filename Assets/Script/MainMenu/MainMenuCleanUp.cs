@@ -33,5 +33,9 @@ public class MainMenuCleanUp : MonoBehaviour
         {
             Destroy(FindObjectOfType<NotificationUI>().gameObject);
         }
+        if(FindObjectOfType<SoundManager>().gameObject!=null)
+        {
+            Destroy(FindObjectOfType<SoundManager>().gameObject);
+        }
     }
 }
