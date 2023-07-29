@@ -8,6 +8,8 @@ using System;
 
 public class CameraTest4 : MonoBehaviour
 {
+    [SerializeField] private Vector2 boundaryX = new Vector2(-100, 100);
+    [SerializeField] private Vector2 boundaryZ = new Vector2(-100, 100);
     [SerializeField] private AcademyLookAtComponent[] AcademyTextList;
     [SerializeField] private Vector3 moveSpeed = new Vector3(10f, 10f, 10f);
     [SerializeField] private Vector3 rotateSpeed = new Vector3(10f, 10f, 10f);
@@ -53,8 +55,8 @@ public class CameraTest4 : MonoBehaviour
         float z = Input.GetAxis("Forward") * 0.05f * moveSpeed.z;
         transform.Translate(new Vector3(x, 0, z));
         Vector3 newPos = transform.position;
-        newPos.x = Mathf.Clamp(transform.position.x, -5f, 65f);
-        newPos.z = Mathf.Clamp(transform.position.z, 20f, 72f);
+        newPos.x = Mathf.Clamp(transform.position.x, boundaryX.x, boundaryX.y);
+        newPos.z = Mathf.Clamp(transform.position.z, boundaryZ.x, boundaryZ.y);
         transform.position = newPos;    
     }
 
@@ -63,11 +65,11 @@ public class CameraTest4 : MonoBehaviour
         if (isLocked) return;
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            if(cam.localPosition.z < -23) cam.Translate(new Vector3(0, 0, 3));
+            if(cam.localPosition.z < -10) cam.Translate(new Vector3(0, 0, 3));
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            if(cam.localPosition.z > -60) cam.Translate(new Vector3(0, 0, -3));
+            if(cam.localPosition.z > -50) cam.Translate(new Vector3(0, 0, -3));
         }
     }
 

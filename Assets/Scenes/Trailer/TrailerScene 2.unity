@@ -47071,15 +47071,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 339269489216589206, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 339269489216589206, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 339269489216589206, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 339269489216589206, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -47113,9 +47113,73 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 339269489797836718, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269489797836718, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269489797836718, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269489797836718, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9322375
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269489797836718, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.36184704
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269489797836718, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 42.427
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269490835202872, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269490835202872, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269490835202872, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269490835202872, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269490835202872, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 339269490835202872, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: trans
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: boundaryX.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: boundaryX.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: boundaryZ.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: boundaryZ.y
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: moveSpeed.x
@@ -110431,6 +110495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929aec3d3bcc64441bbcc83eba7daf28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warningUI: {fileID: 0}
 --- !u!114 &2104841665
 MonoBehaviour:
   m_ObjectHideFlags: 0
