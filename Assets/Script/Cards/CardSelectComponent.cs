@@ -111,20 +111,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnSelectOperation()
     {
-        if(gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
-        {
-            SelectManager.Instance.ChangeSelectMode(gameObject.GetComponent<Card>().selectGridMode, gameObject.GetComponent<Card>().needSelectCount);
-            if (gameObject.GetComponent<Card>().needSelectCount == 2)
-            {
-                UIManager.Instance.ShowWarning("You need to select" + 2 + "Grids");
-            }
-            else if (gameObject.GetComponent<Card>().needSelectCount == 1)
-            {
-                UIManager.Instance.ShowWarning("You need to select" + 1 + "Grid");
-            }
-        }
-        
-
         Info.SetActive(true);
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
@@ -139,13 +125,24 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
                 card.gameObject.GetComponent<CardSelectComponent>().EndSelectOperation();
             }
         }//ensure current selected count
-        //SecondarySelect
         
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playCard, true);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelControl, true);
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.yellow);
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetFloat("_Edge", 0.03f);
         outline.SetActive(true);
+        if (gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
+        {
+            SelectManager.Instance.ChangeSelectMode(gameObject.GetComponent<Card>().selectGridMode, gameObject.GetComponent<Card>().needSelectCount);
+            if (gameObject.GetComponent<Card>().needSelectCount == 2)
+            {
+                UIManager.Instance.ShowWarning("You need to select" + 2 + "Grids");
+            }
+            else if (gameObject.GetComponent<Card>().needSelectCount == 1)
+            {
+                UIManager.Instance.ShowWarning("You need to select" + 1 + "Grid");
+            }
+        }
     }
 
     public void EndSelectOperation()

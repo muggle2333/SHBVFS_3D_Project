@@ -26,7 +26,7 @@ public class SelectManager : MonoBehaviour
     private bool isShowGridInfo = false;
     
     private GridObject currentTargetGridObject;
-    private GameObject currentTargetVfx;
+    public GameObject currentTargetVfx;
 
     private List<GameObject> selectableVfxList = new List<GameObject>();
     private List<Vector2Int> selectableGridObjectList = new List<Vector2Int>();
@@ -55,10 +55,13 @@ public class SelectManager : MonoBehaviour
         else
         {
             selectGridMode = SelectGridMode.None;
-            ClearSelection();
+            //ClearSelection();
 
         }
         UpdateSelectableGridObject();
+        ClearSelection();
+        UIManager.Instance.ShowGridObjectUI(false, null);
+        UIManager.Instance.ShowEnemyUI(false);
     }
 
     public void Update()
@@ -90,17 +93,20 @@ public class SelectManager : MonoBehaviour
                         {
                             UIManager.Instance.ShowEnemyUI(true);
                             ClearSelection();
+                            UIManager.Instance.ShowGridObjectUI(false, null);
                             return;
                         }
                     }
                 }
             }
             ClearSelection();
+            UIManager.Instance.ShowGridObjectUI(false, null);
             UIManager.Instance.ShowEnemyUI(false);
         }
         if(Input.GetMouseButtonDown(1))
         {
             ClearSelection();
+            UIManager.Instance.ShowGridObjectUI(false, null);
             UIManager.Instance.ShowEnemyUI(false);
         }
     }
@@ -109,22 +115,23 @@ public class SelectManager : MonoBehaviour
         if(!CheckGridSelectable(gridObject)) return;
         if(currentTargetVfx == null)
         {
-            currentTargetVfx = Pool.Instance.GetObj("Vfx_SelectedGrid");
+            currentTargetVfx = Pool.Instance.GetObj("Vfx_TargetGrid");
             //currentTargetVfx.gameObject.transform.SetParent(transform, false);
         }
-        currentTargetGridObject= gridObject;
+        currentTargetVfx.gameObject.SetActive(true);
+        currentTargetGridObject = gridObject;
         PlaceSelectVfx(currentTargetVfx.transform, gridObject);
         
     }
-    public void RemoveCurrentSelectObject(GridObject gridObject)
+    public void RemoveCurrentTargetObject(GridObject gridObject)
     {
         if(currentTargetGridObject == null) return;
         if(GridManager.Instance.CheckGridObjectIsSame(gridObject,currentTargetGridObject))
         {
-            currentTargetGridObject= null;
-            currentTargetVfx.gameObject.SetActive(false);
+            RemoveCurrentTargetGrid();
         }
     }
+
     public void SetSelectObject(GridObject gridObject)
     {
         if (!CheckGridSelectable(gridObject)) return;
@@ -137,8 +144,7 @@ public class SelectManager : MonoBehaviour
             Pool.Instance.SetObj("Vfx_SelectedGrid", selectVfx);
             selectedDict.Remove(gridObjectXZ);
             latestSelectedGrid = null;
-            if(currentTargetVfx!= null)
-            currentTargetVfx.gameObject.SetActive(false);
+            RemoveCurrentTargetGrid();
             return;
         }
 
@@ -153,12 +159,15 @@ public class SelectManager : MonoBehaviour
         else
         {
             //超出了清空
-            CleanSelectedGrid();
+            ClearSelection();
             //新增选项
             selectVfx = Pool.Instance.GetObj("Vfx_SelectedGrid");
             selectedDict.Add(gridObjectXZ, selectVfx);
         }
         PlaceSelectVfx(selectVfx.transform,gridObject);
+        RemoveCurrentTargetGrid();
+
+
     }
 
 
@@ -225,7 +234,8 @@ public class SelectManager : MonoBehaviour
         currentTargetGridObject = null;
         if(currentTargetVfx != null)
         {
-            Pool.Instance.SetObj("Vfx_SelectedGrid", currentTargetVfx);
+            //Pool.Instance.SetObj("Vfx_SelectedGrid", currentTargetVfx);
+            currentTargetVfx.gameObject.SetActive(false);
         }
     }
 
@@ -234,7 +244,7 @@ public class SelectManager : MonoBehaviour
         CleanSelectedGrid();
         RemoveCurrentTargetGrid();
         latestSelectedGrid = null;
-        UIManager.Instance.ShowGridObjectUI(false, null);
+        //UIManager.Instance.ShowGridObjectUI(false, null);
     }
 
     public void SetSpecificSelection(Vector2Int gridXZ)
