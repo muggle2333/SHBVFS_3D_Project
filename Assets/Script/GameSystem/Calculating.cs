@@ -163,6 +163,8 @@ public class Calculating : NetworkBehaviour
         player.cardAD = 0;
         player.cardAR = 0;
         player.cardDF = 0;
+        player.canCost1APInEnemy = false;
+        player.canAttack = true;
         for (int i = 0; i < 6 ; i++)
         {
             academyEffectNum[i] = 0;

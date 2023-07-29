@@ -37,6 +37,6 @@ MonoBehaviour:
   cardType: 2
   cardLevel: 1
   CardBuff: {fileID: 0}
-  cardFounction: {fileID: 0}
+  cardFounction: {fileID: 6896789876836155389, guid: b05c4ca2d238670418b1a8ec52ad0ad9, type: 3}
   needSelectCount: 0
   selectGridMode: 1

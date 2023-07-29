@@ -53,39 +53,6 @@ public class PlayerDeck : NetworkBehaviour
             ShuffleServerRpc((AcademyType)i);
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ShuffleServerRpc(AcademyType.FA);
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            for(int i = 0; i <= cardDeck.Count; i++)
-            {
-                Debug.Log(cardDeck[i]);
-            }
-        }
-    }
-
-
-    /*public void Shuffle(academyType academyType)
-    {
-        List<CardSetting> cardDeck = null;
-        AllCardDeck.TryGetValue(academyType, out cardDeck);
-
-
-        for (int i = 0; i< cardDeck.Count; i++)
-        {
-            CardContainer[0] = cardDeck[i];
-            int randomIndex = Random.Range(0, cardDeck.Count);
-            cardDeck[i] = cardDeck[randomIndex];
-            cardDeck[randomIndex] = CardContainer[0];
-        }
-        AllCardDeck[academyType] = cardDeck;
-    }*/
-
     [ServerRpc(RequireOwnership =false)]
     public void ShuffleServerRpc(AcademyType academyType)
     {

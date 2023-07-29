@@ -22,14 +22,6 @@ public class CardManager : NetworkBehaviour
     private PlayerDeck playerDeck;
     private CardSelectManager cardSelectManager;
 
-    public int red;
-    public int blue;
-    public int redPlayed;
-    private void Update()
-    {
-        red = redPlayerPlayedCards.Count;
-        blue = bluePlayerPlayedCards.Count;
-    }
     public void Awake()
     {
         playerHandCardDict.Clear();

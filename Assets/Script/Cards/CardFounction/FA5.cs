@@ -26,6 +26,6 @@ public class FA5 : CardFunction
         {
             DrawCardComponent.Instance.PlayDrawCardAnimationServerRpc(player.Id, 1);
         }
-
+        Destroy(gameObject);
     }
 }

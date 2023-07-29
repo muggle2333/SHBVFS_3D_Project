@@ -134,13 +134,17 @@ public class DrawCardComponent : NetworkBehaviour
         Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         if (currentGridObject.isHasBuilding)
         {
-            int randomIndex = Random.Range(0, 3);
+            int randomIndex = Random.Range(0, 1000);
             int randomIndex_ = Random.Range(0, 2);
-            if (randomIndex == 0)
+            if (randomIndex <= 99)
+            {
+
+            }
+            else if(randomIndex <= 299)
             {
                 Card.cardSetting = CardDataBase.Instance.AllTopCardListDic[currentAcedemy][randomIndex_];
             }
-            else
+            else if(randomIndex <= 999)
             {
                 Card.cardSetting = PlayerDeck.AllCardDeck[currentAcedemy][AllCardCount[(int)currentAcedemy]];
             }

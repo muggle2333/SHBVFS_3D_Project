@@ -31,11 +31,11 @@ MonoBehaviour:
     defence: 0
     attack: 0
     visionRange: 0
-    addBaseCardNum: -1
+    addBaseCardNum: 0
     freeMoveNum: 0
   cardType: 1
   cardLevel: 0
   CardBuff: {fileID: 0}
-  cardFounction: {fileID: 0}
+  cardFounction: {fileID: 6896789876836155389, guid: 8243b667c244ad946a5e867ca3bfbc8c, type: 3}
   needSelectCount: 0
   selectGridMode: 1
