@@ -25,7 +25,7 @@ public class DrawCardComponent : NetworkBehaviour
 
     private void Awake()
     {
-        AllCardCount = new NetworkList<int>();      
+        AllCardCount = new NetworkList<int>();
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
@@ -73,7 +73,7 @@ public class DrawCardComponent : NetworkBehaviour
         SoundManager.Instance.PlaySound(Sound.DrawCard);
         if (gridObject.isHasBuilding == true)
         {
-            DrawBasicCard(player);
+            DrawEventCard(player);
             DrawEventCard(player);
             PlayDrawCardAnimationServerRpc(player.Id, 2);
         }
@@ -138,7 +138,7 @@ public class DrawCardComponent : NetworkBehaviour
             int randomIndex_ = Random.Range(0, 2);
             if (randomIndex <= 99)
             {
-
+                DrawBasicCard(player);
             }
             else if(randomIndex <= 299)
             {
