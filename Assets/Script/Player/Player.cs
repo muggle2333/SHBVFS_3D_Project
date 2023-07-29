@@ -17,6 +17,7 @@ public enum PlayerId
 
 public class Player : Character
 {
+    public GridObject startGrid;
     public int moveCount;
     public int descoverLandCount;
     public int occuplyCount;

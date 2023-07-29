@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class FA2 : CardFunction
 {
-    // Start is called before the first frame update
+    public Vector2Int grid;
     void Start()
     {
-        
+        grid = SelectMode.Instance.selectedGridDic[cardSetting.cardId][0];
+        SelectMode.Instance.selectedGridDic[cardSetting.cardId].RemoveAt(0);
+        Function();
     }
-
-    // Update is called once per frame
-    void Update()
+    void Function()
     {
-        
+        if (NetworkManager.Singleton.IsServer)
+        {
+            GridManager.Instance.ChangeAcademyServerRpc(grid, AcademyType.FA);
+        }
+        Destroy(gameObject);
     }
 }
