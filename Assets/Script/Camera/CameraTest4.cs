@@ -65,11 +65,11 @@ public class CameraTest4 : MonoBehaviour
         if (isLocked) return;
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            if(cam.localPosition.z < -23) cam.Translate(new Vector3(0, 0, 3));
+            if(cam.localPosition.z < -10) cam.Translate(new Vector3(0, 0, 3));
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            if(cam.localPosition.z > -60) cam.Translate(new Vector3(0, 0, -3));
+            if(cam.localPosition.z > -50) cam.Translate(new Vector3(0, 0, -3));
         }
     }
 
