@@ -5809,6 +5809,10 @@ MonoBehaviour:
   cardARText: {fileID: 7723421895403077009}
   cardADText: {fileID: 8256435581051467183}
   cardDFText: {fileID: 980327505594281859}
+  playerImage: {fileID: 2472015898922433531}
+  playerSprites:
+  - {fileID: 21300000, guid: 8a4e1cd9d74147d45beefbfcd8fef369, type: 3}
+  - {fileID: 21300000, guid: 1bfbe874dd913614394149ffc60eed8a, type: 3}
 --- !u!1 &4926071452529981943
 GameObject:
   m_ObjectHideFlags: 0
