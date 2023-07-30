@@ -38,7 +38,7 @@ public class Card:MonoBehaviour
     public SelectGridMode selectGridMode;
     void Start()
     {
-        UpdateCardData(cardSetting);
+        //UpdateCardData(cardSetting);
     }
 
     public void UpdateCardData(CardSetting cardSetting)

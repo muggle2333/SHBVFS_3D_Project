@@ -93,6 +93,10 @@ public class GameplayManager : NetworkBehaviour
     [ClientRpc]
     private void InitializePlayerClientRpc(ClientRpcParams clientRpcParams = default)
     {
+        if(FindObjectOfType<TutorialManager>()!=null)
+        {
+            playerStartPoint[1] = new Vector2Int(9,0);
+        }
         playerList =FindObjectsOfType<Player>().ToList<Player>();
         playerList = playerList.OrderBy(a=>a.Id).ToList();
         for (int i = 0; i < playerList.Count; i++)

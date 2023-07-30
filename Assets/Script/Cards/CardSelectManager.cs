@@ -113,7 +113,7 @@ public class CardSelectManager : MonoBehaviour
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
                 //Debug.Log("Card " + cardsList[i].name + " is played.");
-                if (CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.Every)
+                /*if (CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.Every)
                 {
                     CardManager.Instance.ImmediateCardTakeEffectServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
@@ -122,13 +122,10 @@ public class CardSelectManager : MonoBehaviour
                 {
                     CardManager.Instance.S1CardTakeEffectServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
-                }
-                else if(CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S2 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S3 || CardManager.Instance.playerHandCardDict[player][i].effectStage == EffectStage.S4)
-                {
-                    //CardManager.Instance.playedCardDict[player].Add(CardManager.Instance.playerHandCardDict[player][i]);
-                    CardManager.Instance.AddPlayedCardServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
-                    CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
-                }
+                }*/
+                //CardManager.Instance.playedCardDict[player].Add(CardManager.Instance.playerHandCardDict[player][i]);
+                CardManager.Instance.AddPlayedCardServerRpc(player.Id, CardManager.Instance.playerHandCardDict[player][i].cardId);
+                CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().CardPlayAniamtion();
                 CancelCards(player);
                 CardManager.Instance.playerHandCardDict[player].RemoveAt(i);
                 CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, i);//?

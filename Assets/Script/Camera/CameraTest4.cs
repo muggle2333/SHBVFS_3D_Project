@@ -126,6 +126,7 @@ public class CameraTest4 : MonoBehaviour
         seq.Append(transform.DOMove(vec, 0.5f));
         seq.Join(cam.DOLocalMove(pos, 0.5f));
     }
+
     public void FocusPosition(Vector3 position,float zoomScale)
     {
         var seq = DOTween.Sequence();
@@ -136,6 +137,6 @@ public class CameraTest4 : MonoBehaviour
 
     public void LockCamera(bool isLocked)
     {
-        this.isLocked= isLocked;
+        this.isLocked = isLocked;
     }
 }

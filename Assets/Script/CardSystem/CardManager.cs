@@ -64,7 +64,7 @@ public class CardManager : NetworkBehaviour
         playerDeck = GetComponentInChildren<PlayerDeck>();
         playerDeck.InitializePlayerDeck();
     }
-    [ServerRpc(RequireOwnership = false)]
+    /*[ServerRpc(RequireOwnership = false)]
     public void ImmediateCardTakeEffectServerRpc(PlayerId playerId, int cardId)
     {
         CalculateClientRpc(playerId, cardId);
@@ -87,11 +87,10 @@ public class CardManager : NetworkBehaviour
                     Instantiate(CardDataBase.Instance.AllCardList[i].cardFounction);
                 }
                 calculating.DelataCardData(CardDataBase.Instance.AllCardList[i], GameplayManager.Instance.playerList[(int)playerId]);
-                calculating.CalculatPlayerBaseData(GameplayManager.Instance.playerList[(int)playerId]);
                 calculating.CalaulatPlayerData(GameplayManager.Instance.playerList[(int)playerId]);
             }
         }
-    }
+    }*/
     [ClientRpc]
     public void CardTakeEffectClientRpc(PlayerId playerId,int cardId)
     {
@@ -141,6 +140,7 @@ public class CardManager : NetworkBehaviour
                     var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
                     card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                     card.cardSetting = effectCard;
+                    card.UpdateCardData(card.cardSetting);
                     EffectedCards(player.Id, effectCard);
                     card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
                     RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
@@ -150,6 +150,7 @@ public class CardManager : NetworkBehaviour
                     var card = Instantiate(CardPrefeb, new Vector3(800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
                     card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                     card.cardSetting = effectCard;
+                    card.UpdateCardData(card.cardSetting);
                     EffectedCards(player.Id, effectCard);
                     card.gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
                     RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
@@ -163,7 +164,6 @@ public class CardManager : NetworkBehaviour
             function.cardSetting = effectCard;
         }
         calculating.DelataCardData(effectCard, player);
-        calculating.CalculatPlayerBaseData(player);
         calculating.CalaulatPlayerData(player);
     }
     [ServerRpc(RequireOwnership = false)]

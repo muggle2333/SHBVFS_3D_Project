@@ -205,6 +205,9 @@ public class GridObjectUI : MonoBehaviour
             if (SelectManager.Instance.selectGridMode != SelectGridMode.Default && SelectManager.Instance.selectGridMode != SelectGridMode.Specific)
             {
                 return;
+            }else if(SelectManager.Instance.isClickingCard==true)
+            {
+                return;
             }
         }
 

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FA1
   m_EditorClassIdentifier: 
   cardId: 34
-  cardName: Up One's Sleeve
-  description: Get 1 basic card immediately and 1 action point this turn
+  cardName: Imprison
+  description: your opponent's action point-1
   headPicture: {fileID: 21300000, guid: 672f10b7325140141b992e87f36e0806, type: 3}
   academyType: 6
   cardCondition: {fileID: 0}

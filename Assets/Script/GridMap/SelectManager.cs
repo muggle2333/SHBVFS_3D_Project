@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public enum SelectGridMode
 {
@@ -36,6 +37,8 @@ public class SelectManager : MonoBehaviour
     private GridObject latestSelectedGrid; //For camera focus
     
     private RaycastHit hitInfo;
+
+    public bool isClickingCard = false;
     private void Awake()
     {
         Instance = this;
@@ -69,7 +72,7 @@ public class SelectManager : MonoBehaviour
     {
         if (GameManager.Instance.wholeGameState.Value != GameManager.WholeGameState.GamePlaying) return;
         if (Input.GetMouseButtonDown(0))
-        {
+        {            
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 if(EventSystem.current.currentSelectedGameObject != null)
@@ -77,18 +80,16 @@ public class SelectManager : MonoBehaviour
                     //点到ui button等             
                     return;
                 }
-
-                PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-                if (pointerEventData.pointerEnter != null && pointerEventData.pointerEnter.gameObject.GetComponentInParent<Card>()!=null)
+                if(isClickingCard)
                 {
-                    Debug.LogError("Press Card");
+                    //Debug.LogError("Click Card");
                     return;
                 }
-
                 Ray currentRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Debug.DrawLine(currentRay.origin, hitInfo.point, Color.red, 2);
+                //Debug.DrawLine(currentRay.origin, hitInfo.point, Color.red, 2);
                 if (Physics.Raycast(currentRay, out hitInfo))
                 {
+
                     //点到格子上
                     if (hitInfo.collider.GetComponentInChildren<GridObjectComponent>() != null)
                     {
@@ -103,18 +104,19 @@ public class SelectManager : MonoBehaviour
                             UIManager.Instance.ShowEnemyUI(true);
                             ClearSelection();
                             UIManager.Instance.ShowGridObjectUI(false, null);
+                            CardManager.Instance.DeselectCard();
                             return;
                         }
                     }
-                    //取消选择卡牌
-                    //CardManager.Instance.DeselectCard();
+
                 }
+
             }
             ClearSelection();
             UIManager.Instance.ShowGridObjectUI(false, null);
             UIManager.Instance.ShowEnemyUI(false);
             //取消选择卡牌
-            //CardManager.Instance.DeselectCard();
+            CardManager.Instance.DeselectCard();
         }
         if(Input.GetMouseButtonDown(1))
         {

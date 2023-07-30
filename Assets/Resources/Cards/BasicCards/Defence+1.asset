@@ -28,7 +28,7 @@ MonoBehaviour:
   playerDataEffect:
     hp: 0
     actionPoint: 0
-    defence: 1
+    defence: 0
     attack: 0
     visionRange: 0
     addBaseCardNum: 0

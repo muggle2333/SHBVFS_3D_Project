@@ -73,8 +73,10 @@ public class DrawCardComponent : NetworkBehaviour
         SoundManager.Instance.PlaySound(Sound.DrawCard);
         if (gridObject.isHasBuilding == true)
         {
-            DrawEventCard(player);
-            DrawEventCard(player);
+            var seq = DOTween.Sequence();
+            seq.AppendCallback(() => { DrawEventCard(player); });
+            seq.AppendInterval(0.1f);
+            seq.AppendCallback(() => { DrawEventCard(player); });
             PlayDrawCardAnimationServerRpc(player.Id, 2);
         }
         else
@@ -139,6 +141,7 @@ public class DrawCardComponent : NetworkBehaviour
             if (randomIndex <= 99)
             {
                 DrawBasicCard(player);
+                return;
             }
             else if(randomIndex <= 299)
             {
