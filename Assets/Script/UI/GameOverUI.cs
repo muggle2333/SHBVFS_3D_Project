@@ -36,16 +36,19 @@ public class GameOverUI : MonoBehaviour
         if (winnerId == 2)
         {
             gameOverText.text = "YOU BOTH WIN";
+            SoundManager.Instance.PlayBgm(Bgm.WinBGM);
         }
         else
         {
             if (winnerId == (int)NetworkManager.Singleton.LocalClientId)
             {
                 gameOverText.text = "YOU WIN";
+                SoundManager.Instance.PlayBgm(Bgm.WinBGM);
             }
             else
             {
                 gameOverText.text = "YOU LOSE";
+                SoundManager.Instance.PlayBgm(Bgm.LoseBGM);
             }
         }
     }

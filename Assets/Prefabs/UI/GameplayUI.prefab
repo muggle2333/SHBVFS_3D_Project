@@ -277,7 +277,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4685671406550503245}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9078384686206041390}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4291567308650085747
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +546,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1430715567122453267}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9078384686206041390}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6211582647373577082
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +976,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1157733778828439802}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9078384686206041390}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6998884363635786788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1111,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6909944297456819706}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9078384686206041390}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7458967916855140395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1325,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7458967917365370523}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9078384686206041390}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7458967917661586628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,7 +1459,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7458967917661586625}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9078384686206041390}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7458967917720580476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,6 +1482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7458967917720580479}
   - component: {fileID: 4092491997667424746}
+  - component: {fileID: 9078384686206041390}
   m_Layer: 5
   m_Name: GameplayUI
   m_TagString: Untagged
@@ -1458,6 +1531,18 @@ MonoBehaviour:
   cancelDiscard: {fileID: 5722464321665605251}
   playHP: {fileID: 4425685645554919538}
   cancelDying: {fileID: 2195906385654753587}
+--- !u!114 &9078384686206041390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7458967917720580476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90faea00e2ddaec43be0615ae9a6fd13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7458967918485311228
 GameObject:
   m_ObjectHideFlags: 0

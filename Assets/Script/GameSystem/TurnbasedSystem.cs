@@ -132,7 +132,7 @@ public class TurnbasedSystem : NetworkBehaviour
     IEnumerator TurnStart()
     {
         roundIndex.Value++;
-        //SoundManager.Instance.PlaySoundClientRpc(Sound.GameStart);
+        SoundManager.Instance.PlaySoundClientRpc(Sound.ControlStart);
         UIManager.Instance.ShowWarningTimerClientRpc("Round Start",1f);
         ControlPhase();
         UpdateTimer(S1PhaseTime);

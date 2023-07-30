@@ -178,4 +178,31 @@ public class SoundManager : NetworkBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+    public void PlayMoveSound(GridObject start,GridObject end)
+    {
+        if (end.landType == LandType.Mountain)
+        {
+            PlaySound(Sound.MoveToMountain);
+        }
+        else if (end.landType == LandType.Lake)
+        {
+            if (start.landType == LandType.Lake)
+            {
+                PlaySound(Sound.MoveOnLake);
+            }
+            else
+            {
+                PlaySound(Sound.MoveToLake);
+            }
+        }
+        else if ( end.landType == LandType.Forest)
+        {
+            PlaySound(Sound.MoveToForest);
+        }
+        else
+        {
+            PlaySound(Sound.MoveToPlain);
+        }
+    }
 }

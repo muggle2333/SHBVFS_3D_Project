@@ -281,6 +281,7 @@ public class GameplayManager : NetworkBehaviour
             if (player.HP <= 0 && player == currentPlayer)
             {
                 OnPlayerSelfDying?.Invoke(this, EventArgs.Empty);
+                SoundManager.Instance.PlayBgm(Bgm.DyingBGM);
             }
         }
     }
@@ -329,6 +330,7 @@ public class GameplayManager : NetworkBehaviour
     public void LeaveDyingStageClientRpc()
     {
         OnLeaveDyingStage.Invoke(this, EventArgs.Empty);
+        SoundManager.Instance.PlayBgm(Bgm.EarlyBGM);
     }
     public PlayerId GetEnemy(PlayerId playerId)
     {

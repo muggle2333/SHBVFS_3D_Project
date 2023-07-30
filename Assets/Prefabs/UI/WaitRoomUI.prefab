@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6926980431396470719}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2388876406537923774}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6533945043419638411
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8228855075008296209}
   - component: {fileID: 8228855075008296208}
+  - component: {fileID: 2388876406537923774}
   m_Layer: 5
   m_Name: WaitRoomUI
   m_TagString: Untagged
@@ -732,6 +745,18 @@ MonoBehaviour:
   ipText: {fileID: 8228855074818631370}
   tutorialToggle: {fileID: 8228855075955557415}
   levelDropdown: {fileID: 8228855075623888371}
+--- !u!114 &2388876406537923774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228855075008296302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90faea00e2ddaec43be0615ae9a6fd13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8228855075228200740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,7 +1790,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8228855075650651985}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2388876406537923774}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8228855075719610528
 GameObject:
   m_ObjectHideFlags: 0

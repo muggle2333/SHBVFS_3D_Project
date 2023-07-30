@@ -397,6 +397,7 @@ public class GridManager : NetworkBehaviour
         if (isDestory)
         {
             gridObject.DestoryBuilding();
+            SoundManager.Instance.PlaySound(Sound.DestoryBuilding);
         }
         else
         {
