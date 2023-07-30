@@ -4724,6 +4724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MessageUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4245382592264618461, guid: d146f39f68358fa4c9af262633d6a4da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64245,6 +64249,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2104841662}
     m_Modifications:
+    - target: {fileID: 6998884363635786788, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458967917365370526, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7458967917720580476, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
       propertyPath: m_Name
       value: GameplayUI
@@ -115733,10 +115745,6 @@ PrefabInstance:
     - target: {fileID: 345234220281352065, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
       propertyPath: m_Name
       value: TurnbaseUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 650763772957295451, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
