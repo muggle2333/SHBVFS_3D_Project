@@ -11,7 +11,7 @@ public class APUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        APPerRound.text = GameplayManager.Instance.currentPlayer.ActionPointPerRound.ToString() + " / R";
+        APPerRound.text = GameplayManager.Instance.currentPlayer.ActionPointPerRound.ToString() + " / Round";
         Object.SetActive(true);
     }
     public void OnPointerExit(PointerEventData eventData)

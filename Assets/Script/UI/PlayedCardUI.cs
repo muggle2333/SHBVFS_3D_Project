@@ -2,14 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayedCardUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text SelfPlayedCard;
     [SerializeField] private TMP_Text EnemyPlayedCard;
+    [SerializeField] private Image selfTitle;
+    [SerializeField] private Image enemyTitle;
+    [SerializeField] private Sprite blueTitleSprite;
+    [SerializeField] private Sprite redTitleSprite;
     private bool canStart=false;
     private void Start()
     {
+        if (GameplayManager.Instance.currentPlayer.Id == PlayerId.RedPlayer)
+        {
+            selfTitle.sprite = redTitleSprite;
+            enemyTitle.sprite = blueTitleSprite;
+        }
+        else
+        {
+            selfTitle.sprite = blueTitleSprite;
+            enemyTitle.sprite = redTitleSprite;
+        }
         Invoke("UnLock", 3);
     }
     private void Update()
@@ -45,5 +60,6 @@ public class PlayedCardUI : MonoBehaviour
     private void UnLock()
     {
         canStart = true;
+        
     }
 }
