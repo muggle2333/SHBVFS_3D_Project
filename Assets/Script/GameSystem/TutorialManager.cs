@@ -77,7 +77,7 @@ public class TutorialManager : MonoBehaviour
     {
         if(completeIndex < 21)
         TurnbasedSystem.Instance.timerValue.Value = 60f;
-
+       // Debug.Log(isActionCompleted);
         switch (completeIndex)
         {
             case 0: 
@@ -91,9 +91,9 @@ public class TutorialManager : MonoBehaviour
             case 13:
             CardPlayedJudge();
                 Debug.Log(PlayerManager.Instance.redPlayerHandCardsList.Count);
-                Debug.Log(isActionCompleted);
+            
             break;
-
+            
         }
 
         if(completeIndex > 0)
