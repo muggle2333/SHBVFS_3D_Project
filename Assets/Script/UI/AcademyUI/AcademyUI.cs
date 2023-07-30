@@ -13,7 +13,7 @@ public class AcademyUI : MonoBehaviour
 
     private void Start()
     {
-        Invoke("GetCurrentPlayer", 10);
+        Invoke("GetCurrentPlayer", 3);
     }
     public void GetCurrentPlayer()
     {
@@ -30,7 +30,18 @@ public class AcademyUI : MonoBehaviour
             if (Player.totalAcademyOwnedPoint.Count == 0) return;
             for (int i = 0; i < academies.Count; i++)
             {
-                academies[i].text = Player.totalAcademyOwnedPoint[i].ToString();
+                if (Player.totalAcademyOwnedPoint[i] < 0)
+                {
+                    academies[i].text = "0";
+                }
+                else if(Player.totalAcademyOwnedPoint[i] > 4)
+                {
+                    academies[i].text = "4";
+                }
+                else if(Player.totalAcademyOwnedPoint[i]>=0 && Player.totalAcademyOwnedPoint[i] <= 4)
+                {
+                    academies[i].text = Player.totalAcademyOwnedPoint[i].ToString();
+                }
             }
         }
     }

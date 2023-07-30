@@ -61,7 +61,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             {
                 if(gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
                 {
-                    if(SelectManager.Instance.selectedDict.Count == gameObject.GetComponent<Card>().needSelectCount)
+                    if (SelectManager.Instance.selectedDict.Count == gameObject.GetComponent<Card>().needSelectCount)
                     {
                         cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
                         if (!SelectMode.Instance.selectedGridDic.ContainsKey(gameObject.GetComponent<Card>().cardId))
@@ -76,7 +76,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
                     }
                     else
                     {
-                        UIManager.Instance.warningUI.warningText.GetComponent<TextColorControl>().ColorBlink(new Color32(234, 201, 121, 255), new Color32(231, 42, 0, 255), 0.4f);
+                        UIManager.Instance.BlinkWarning();
                     }
                 }
                 else
