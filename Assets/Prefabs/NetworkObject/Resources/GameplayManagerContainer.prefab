@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStartPoint:
   - {x: 0, y: 0}
-  - {x: 7, y: 0}
+  - {x: 9, y: 9}
   playerList: []
   currentPlayer: {fileID: 0}
   gameplayUI: {fileID: 0}
@@ -102,6 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ee76abc97e9f442abf526191ab4c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerValue:
+    m_InternalValue: 0
 --- !u!114 &6936664478954252184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,11 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe564b87c9a65e43a174ae8b659de0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dyingPlayerUI: {fileID: 0}
-  alivePlayerUI: {fileID: 0}
-  winUI: {fileID: 0}
-  loseUI: {fileID: 0}
-  drawUI: {fileID: 0}
   player0LandCount: 0
   player1LandCount: 0
   dyingTimer: 10

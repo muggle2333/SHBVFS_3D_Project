@@ -15,13 +15,13 @@ MonoBehaviour:
   cardId: 0
   cardName: 
   description: HP +1
-  headPicture: {fileID: 21300000, guid: 5efd7fdfd1c90fa45ae6daceeded3618, type: 3}
+  headPicture: {fileID: 21300000, guid: 583692206bb32e840917d3ef4e16be4e, type: 3}
   academyType: 0
   cardCondition: {fileID: 0}
   effectStage: 2
   effectDuration: 0
   cardTarget: 0
-  cardTexture: {fileID: 2800000, guid: 5efd7fdfd1c90fa45ae6daceeded3618, type: 3}
+  cardTexture: {fileID: 2800000, guid: 583692206bb32e840917d3ef4e16be4e, type: 3}
   effectTime: 0
   academyEffectNum: 000000000000000000000000000000000000000000000000
   Damage: 0
