@@ -26,13 +26,16 @@ public class TurnbaseUI : MonoBehaviour
                 TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickSkip);
             }
         });
-        container.SetActive(false);
         //TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += UpdateTurnbaseUI;
     }
-
+    public void Start()
+    {
+        container.SetActive(false);
+    }
     public void StartTurnbaseUI()
     {
         container.SetActive(true);
+        GetComponentInChildren<PlayedCardUI>().InitializePlayedCardUI();
         TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += UpdateTurnbaseUI;
     }
     private void UpdateTurnbaseUI(GameStage previousValue, GameStage newValue)

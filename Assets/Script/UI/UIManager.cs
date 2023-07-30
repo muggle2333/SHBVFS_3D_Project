@@ -28,11 +28,11 @@ public class UIManager : NetworkBehaviour
         {
             Instance = this;
         }
-
+        playerDataUI = GetComponentInChildren<PlayerDataUI>();
     }
     public void Start()
     {
-        playerDataUI= GetComponentInChildren<PlayerDataUI>();
+        //playerDataUI= GetComponentInChildren<PlayerDataUI>();
         gridObjectUI= GetComponentInChildren<GridObjectUI>();
         messageUI= GetComponentInChildren<MessageUI>();
         gameplayUI= GetComponentInChildren<GameplayUI>();

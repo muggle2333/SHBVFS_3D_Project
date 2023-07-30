@@ -15,7 +15,7 @@ public class DyingUI : MonoBehaviour
     public void InitializeDyingUI()
     {
         GameplayManager.Instance.OnPlayerDying += GameplayManager_OnPlayerDying;
-        GameplayManager.Instance.OnPlayerSelfDying += GameplayManager_OnPlayerSelfDying;
+        //GameplayManager.Instance.OnPlayerSelfDying += GameplayManager_OnPlayerSelfDying;
         GameplayManager.Instance.OnLeaveDyingStage += GameplayManager_OnLeaveDyingStage;
     }
     public void Update()
@@ -40,11 +40,11 @@ public class DyingUI : MonoBehaviour
         {
             if(GameplayManager.Instance.currentPlayer.HP<=0)
             {
-                dyingTitle.text = " YOU ARE DYING";
+                dyingTitle.text = "</nobr>YOU ARE DYING </nobr> PLAY CARD TO HEAL";
             }
             else
             {
-                dyingTitle.text = " COMPETITIVE IS DYING, WAIT HIM TO HEAL";
+                dyingTitle.text = " ENEMY IS DYING";
             }
         }
         //else if(GameplayManager.Instance.GetDyingPlayer().Count == 2)
@@ -59,14 +59,14 @@ public class DyingUI : MonoBehaviour
     }
     private void GameplayManager_OnLeaveDyingStage(object sender, EventArgs e)
     {
-        selfDyingNotice.SetActive(false);
+        //selfDyingNotice.SetActive(false);
         container.SetActive(false);
     }
 
     private void OnDestroy()
     {
         GameplayManager.Instance.OnPlayerDying -= GameplayManager_OnPlayerDying;
-        GameplayManager.Instance.OnPlayerSelfDying -= GameplayManager_OnPlayerSelfDying;
+        //GameplayManager.Instance.OnPlayerSelfDying -= GameplayManager_OnPlayerSelfDying;
         GameplayManager.Instance.OnLeaveDyingStage -= GameplayManager_OnLeaveDyingStage;
     }
 }

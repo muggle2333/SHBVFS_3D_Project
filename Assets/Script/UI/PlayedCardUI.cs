@@ -13,7 +13,7 @@ public class PlayedCardUI : MonoBehaviour
     [SerializeField] private Sprite blueTitleSprite;
     [SerializeField] private Sprite redTitleSprite;
     private bool canStart=false;
-    private void Start()
+    public void InitializePlayedCardUI()
     {
         if (GameplayManager.Instance.currentPlayer.Id == PlayerId.RedPlayer)
         {
@@ -25,7 +25,8 @@ public class PlayedCardUI : MonoBehaviour
             selfTitle.sprite = blueTitleSprite;
             enemyTitle.sprite = redTitleSprite;
         }
-        Invoke("UnLock", 3);
+        //Invoke("UnLock", 3);
+        UnLock();
     }
     private void Update()
     {

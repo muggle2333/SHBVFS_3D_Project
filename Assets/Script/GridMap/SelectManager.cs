@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,13 +29,13 @@ public class SelectManager : MonoBehaviour
     private bool isShowGridInfo = false;
     
     private GridObject currentTargetGridObject;
-    public GameObject currentTargetVfx;
+    private GameObject currentTargetVfx;
 
     private List<GameObject> selectableVfxList = new List<GameObject>();
     private List<Vector2Int> selectableGridObjectList = new List<Vector2Int>();
 
 
-    private GridObject latestSelectedGrid; //For camera focus
+    private GridObject latestSelectedGrid = null; //For camera focus
     
     private RaycastHit hitInfo;
 
@@ -164,7 +165,6 @@ public class SelectManager : MonoBehaviour
         }
 
         //更新
-        latestSelectedGrid= gridObject;
         if (selectCount>selectedDict.Count)
         {
             //没超出数量
@@ -181,7 +181,7 @@ public class SelectManager : MonoBehaviour
         }
         PlaceSelectVfx(selectVfx.transform,gridObject);
         RemoveCurrentTargetGrid();
-
+        latestSelectedGrid = gridObject;
 
     }
 

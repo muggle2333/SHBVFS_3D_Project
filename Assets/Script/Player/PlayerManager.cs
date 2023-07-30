@@ -289,6 +289,7 @@ public class PlayerManager : NetworkBehaviour
         player.GetComponent<PlayerInteractionComponent>().MoveVfxPlayer(gridObject);
         UpdateGridAuthorityData(player, gridObject);
         player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
+        FindObjectOfType<CameraTest4>().FocusGridCenter(player.trueGrid, gridObject);
     }
 
     public bool Occupy(Player player,GridObject gridObject,bool isControlStage)

@@ -8,6 +8,7 @@ public class GridObjectComponent : MonoBehaviour,IPointerClickHandler,IPointerEn
     public GridObject gridObject;
     private void Start()
     {
+        if(GridManager.Instance != null)
         gridObject = GridManager.Instance.grid.GetGridObject(gameObject.transform.position);
     }
     public void OnPointerClick(PointerEventData eventData)

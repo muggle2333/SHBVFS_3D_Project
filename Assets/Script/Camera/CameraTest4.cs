@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System;
+using static UIPopupList;
 
 public class CameraTest4 : MonoBehaviour
 {
@@ -102,6 +103,7 @@ public class CameraTest4 : MonoBehaviour
         //seq.id = uid;
         seq.Append(transform.DOMove(vec, 0.5f));
         seq.Join(cam.DOLocalMove(pos, 0.5f));
+        CheckShouldTurnCamera(vec);
         //cam.DOMoveZ(-19, 1f);
         //seq.AppendCallback(() => { isMoving = false; });
     }
@@ -133,10 +135,30 @@ public class CameraTest4 : MonoBehaviour
         vec = position;
         seq.Append(transform.DOMove(vec, 0.5f));
         seq.Join(cam.DOLocalMove(new Vector3(3, 13, -18)+cam.transform.forward*zoomScale, 0.5f));
+        CheckShouldTurnCamera(vec);
+    }
+
+    public void FocusGridCenter(GridObject gridObject1,GridObject gridObject2)
+    {
+        var seq = DOTween.Sequence();
+        vec = (GridManager.Instance.grid.GetWorldPositionCenter(gridObject1.x, gridObject1.z) + GridManager.Instance.grid.GetWorldPositionCenter(gridObject2.x, gridObject2.z)) / 2;
+        seq.Append(transform.DOMove(vec, 0.5f));
+        seq.Join(cam.DOLocalMove(pos, 0.5f));
+        CheckShouldTurnCamera(vec);
     }
 
     public void LockCamera(bool isLocked)
     {
         this.isLocked = isLocked;
+    }
+
+    private void CheckShouldTurnCamera(Vector3 pos)
+    {
+        if(pos.x>GridManager.Instance.gridDistance*5 && pos.z> GridManager.Instance.gridDistance * 5)
+        {
+            var rotation = Quaternion.Euler(0, 180, 0);
+            transform.rotation = rotation;
+            updateAcademyTextRotation();
+        }
     }
 }
