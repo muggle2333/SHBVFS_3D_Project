@@ -46,6 +46,7 @@ public class GridVfxManager : MonoBehaviour
     public void CreateVfx()
     {
         GameObject vfxContainers = new GameObject("VfxConainers");
+        vfxContainers.transform.position += new Vector3(0, 0.2f, 0);
         GameObject academyContainer = new GameObject("AcademyContainer");
         academyContainer.transform.SetParent(vfxContainers.transform);
 

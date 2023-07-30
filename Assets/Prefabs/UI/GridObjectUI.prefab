@@ -1214,7 +1214,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8288920063413413192}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2297656214665538679}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8288920063424976743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,6 +1372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8288920063938633345}
   - component: {fileID: 8288920063938633350}
+  - component: {fileID: 2297656214665538679}
   m_Layer: 5
   m_Name: GridObjectUI
   m_TagString: Untagged
@@ -1424,6 +1437,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 635ed041ab65bb54e82b3a9acda85da1, type: 3}
   - {fileID: 21300000, guid: a0ff69c7966725b478bda67862c42e9a, type: 3}
   - {fileID: 21300000, guid: 41c433fed9cb5df48b887412fac24852, type: 3}
+--- !u!114 &2297656214665538679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288920063938633344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90faea00e2ddaec43be0615ae9a6fd13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8288920064469798891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,7 +1706,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8288920064551592905}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2297656214665538679}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8288920064963465368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,7 +1841,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8288920064963465375}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2297656214665538679}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8288920064974789957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,7 +1976,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8288920064974789960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2297656214665538679}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8288920065113971001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,7 +2246,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8288920065133673464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2297656214665538679}
+        m_TargetAssemblyTypeName: ButtonClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8288920065219498690
 GameObject:
   m_ObjectHideFlags: 0

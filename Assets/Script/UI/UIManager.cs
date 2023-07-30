@@ -17,7 +17,7 @@ public class UIManager : NetworkBehaviour
     private DyingUI dyingUI;
     private EnemyUI enemyUI;
     private DiscardUI discardUI;
-    public WarningUI warningUI;
+    private WarningUI warningUI;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -141,5 +141,9 @@ public class UIManager : NetworkBehaviour
     public void ShowWarningTimerClientRpc(string warning,float time)
     {
         warningUI.ShowWarningTimer(warning,time);
+    }
+    public void BlinkWarning()
+    {
+        warningUI.warningText.GetComponent<TextColorControl>().ColorBlink(new Color32(234, 201, 121, 255), new Color32(231, 42, 0, 255), 0.4f);
     }
 }

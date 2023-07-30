@@ -74,7 +74,7 @@ public class SelectManager : MonoBehaviour
             {
                 if(EventSystem.current.currentSelectedGameObject != null)
                 {
-                    //点到ui button等
+                    //点到ui button等             
                     return;
                 }
 
@@ -106,11 +106,15 @@ public class SelectManager : MonoBehaviour
                             return;
                         }
                     }
+                    //取消选择卡牌
+                    CardManager.Instance.DeselectCard();
                 }
             }
             ClearSelection();
             UIManager.Instance.ShowGridObjectUI(false, null);
             UIManager.Instance.ShowEnemyUI(false);
+            //取消选择卡牌
+            CardManager.Instance.DeselectCard();
         }
         if(Input.GetMouseButtonDown(1))
         {

@@ -41,19 +41,11 @@ public struct PlayerInteract : INetworkSerializable
 
 public class PlayerManager : NetworkBehaviour
 {
-    //public GameObject dyingPlayerUI;
-    //public GameObject alivePlayerUI;
-    //public GameObject winUI;
-    //public GameObject loseUI;
-    //public GameObject drawUI;
-
     public NetworkList<int> redPlayerHandCardsList;
     public NetworkList<int> bluePlayerHandCardsList;
 
     public int player0LandCount;
     public int player1LandCount;
-
-    public float dyingTimer = 10;
 
     public static PlayerManager Instance;
     public CardSelectManager cardSelectManager;
@@ -63,8 +55,6 @@ public class PlayerManager : NetworkBehaviour
 
     public void Awake()
     {
-        redPlayerHandCardsList = new NetworkList<int>();
-        bluePlayerHandCardsList = new NetworkList<int>();
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
@@ -73,22 +63,12 @@ public class PlayerManager : NetworkBehaviour
         {
             Instance = this;
         }
-    }
-    public void Update()
-    {
-        if (TurnbasedSystem.Instance.isDie.Value == true)
-        {
-            dyingTimer -= Time.deltaTime;
-        }
-        //if (dyingTimerValue <= 0)
-        //{
-        //    alivePlayerUI.SetActive(false);
-        //    dyingPlayerUI.SetActive(false);
-        //    GameOver();
-        //}
+        redPlayerHandCardsList = new NetworkList<int>();
+        bluePlayerHandCardsList = new NetworkList<int>();
     }
     public void Start()
     {
+        
         cardSelectManager = FindObjectOfType<CardSelectManager>();
         drawCardComponent = FindObjectOfType<DrawCardComponent>();
         controlStage = FindObjectOfType<ControlStage>();
@@ -164,6 +144,7 @@ public class PlayerManager : NetworkBehaviour
                 }
                 break;
         }
+        SoundManager.Instance.PlaySound(Sound.ControlInput);
         if(FindObjectOfType<NetworkManager>())
         {
             SaveInteractServerRpc(playerInteractType, player.Id, new Vector2(gridObject.x, gridObject.z));
@@ -326,6 +307,7 @@ public class PlayerManager : NetworkBehaviour
         GridVfxManager.Instance.UpdateVfxOwner(gridObject,isControlStage);
         if (!isControlStage)
         {
+            SoundManager.Instance.PlaySound(Sound.Occupy);
             GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
             if (player != GameplayManager.Instance.currentPlayer)
             {
@@ -516,32 +498,6 @@ public class PlayerManager : NetworkBehaviour
         cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
     }
 
-    //public void PlayerDying(List<Player> dyingPlayerList, List<Player> alivePlayerList)
-    //{
-
-    //    if (alivePlayerList != null)
-    //    {
-    //        if (alivePlayerList[0] == GameplayManager.Instance.player)
-    //        {
-    //            alivePlayerUI.SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            dyingPlayerUI.SetActive(true);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        for(int i = 0; i < dyingPlayerList.Count; i++)
-    //        {
-    //            dyingPlayerList[i].isDying.Value = true;
-    //            if (dyingPlayerList[i] == GameplayManager.Instance.player)
-    //            {
-    //                dyingPlayerUI.SetActive(true);
-    //            }
-    //        }
-    //    }
-    //}
     [ClientRpc]
     public void SetAttackClientRpc(PlayerId attackPlayerId, PlayerId attackTargetId, ClientRpcParams clientRpcParams = default)
     {
@@ -559,85 +515,5 @@ public class PlayerManager : NetworkBehaviour
         bluePlayerHandCardsList.OnListChanged -= UpdatePlayerBlueCard;
     }
 
-    //public void GameOver()
-    //{
-    //    List<Player> dyingPlayers = new List<Player>();
-    //    for (int i = 0;i < GameplayManager.Instance.playerList.Count; i++)
-    //    {
-    //        if(GameplayManager.Instance.playerList[i].isDying.Value)
-    //        {
-    //            dyingPlayers.Add(GameplayManager.Instance.playerList[i]);
-    //        }
-    //    }
-    //    if(dyingPlayers.Count == 1)
-    //    {
-    //        if(dyingPlayers[0] == GameplayManager.Instance.player)
-    //        {
-    //            loseUI.SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            winUI.SetActive(true);
-    //        }
-    //    }
-    //    else if(dyingPlayers.Count == 2)
-    //    {
-    //        if (dyingPlayers[0].HP > dyingPlayers[1].HP)
-    //        {
-    //            if (dyingPlayers[0] == GameplayManager.Instance.player)
-    //            {
-    //                winUI.SetActive(true);
-    //            }
-    //            else
-    //            {
-    //                loseUI.SetActive(true);
-    //            }
-    //        }
-    //        else if(dyingPlayers[0].HP < dyingPlayers[1].HP)
-    //        {
-    //            if (dyingPlayers[0] == GameplayManager.Instance.player)
-    //            {
-    //                loseUI.SetActive(true);
-    //            }
-    //            else
-    //            {
-    //                winUI.SetActive(true);
-    //            }
-    //        }
-    //        else if (dyingPlayers[0].HP == dyingPlayers[1].HP)
-    //        {
-    //            for(AcademyType i = AcademyType.YI; i < AcademyType.FA; i++)
-    //            {
-    //                player0LandCount += dyingPlayers[0].OwnedLandDic[i].Count;
-    //                player1LandCount += dyingPlayers[1].OwnedLandDic[i].Count;
-    //            }
-    //            if(player0LandCount > player1LandCount)
-    //            {
-    //                if(dyingPlayers[0] == GameplayManager.Instance.player)
-    //                {
-    //                    winUI.SetActive(true);
-    //                }
-    //                else
-    //                {
-    //                    loseUI.SetActive(true);
-    //                }
-    //            }
-    //            else if(player0LandCount < player1LandCount)
-    //            {
-    //                if (dyingPlayers[0] == GameplayManager.Instance.player)
-    //                {
-    //                    loseUI.SetActive(true);
-    //                }
-    //                else
-    //                {
-    //                    winUI.SetActive(true);
-    //                }
-    //            }
-    //            else if(player0LandCount == player1LandCount)
-    //            {
-    //                drawUI.SetActive(true);
-    //            }
-    //        }
-    //    }
-    //}
+    
 }

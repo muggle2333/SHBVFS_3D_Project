@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class CardManager : NetworkBehaviour
@@ -265,5 +266,15 @@ public class CardManager : NetworkBehaviour
         additionCardNum[0]= PlayerManager.Instance.redPlayerHandCardsList.Count - GameplayManager.Instance.playerList[0].HP;
         additionCardNum[1]= PlayerManager.Instance.bluePlayerHandCardsList.Count - GameplayManager.Instance.playerList[1].HP;
         return additionCardNum;
+    }
+
+    [ClientRpc]
+    public void DeselectCardClientRpc()
+    {
+        DeselectCard();
+    }
+    public void DeselectCard()
+    {
+        cardSelectManager.CancelCards(GameplayManager.Instance.currentPlayer);
     }
 }

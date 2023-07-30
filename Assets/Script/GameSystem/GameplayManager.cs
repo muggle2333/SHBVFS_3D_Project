@@ -281,6 +281,7 @@ public class GameplayManager : NetworkBehaviour
             if (player.HP <= 0 && player == currentPlayer)
             {
                 OnPlayerSelfDying?.Invoke(this, EventArgs.Empty);
+                SoundManager.Instance.PlayBgm(Bgm.DyingBGM);
             }
         }
     }
@@ -329,6 +330,7 @@ public class GameplayManager : NetworkBehaviour
     public void LeaveDyingStageClientRpc()
     {
         OnLeaveDyingStage.Invoke(this, EventArgs.Empty);
+        SoundManager.Instance.PlayBgm(Bgm.EarlyBGM);
     }
     public PlayerId GetEnemy(PlayerId playerId)
     {
@@ -374,4 +376,20 @@ public class GameplayManager : NetworkBehaviour
         }
         return null;
     }
+
+    [ClientRpc]
+    public void SetCameraOverviewClientRpc()
+    {
+        CameraTest4 camera = FindObjectOfType<CameraTest4>();
+        Vector3 pos = (playerList[0].transform.position + playerList[1].transform.position) / 2;
+        camera.FocusPosition(pos, -30f);
+    }
+    [ClientRpc]
+    public void SetCameraFocusSelfClientRpc()
+    {
+        CameraTest4 camera = FindObjectOfType<CameraTest4>();
+        camera.FocusGrid();
+    }
+
+
 }

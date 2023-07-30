@@ -95103,6 +95103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarningUI
       objectReference: {fileID: 0}
+    - target: {fileID: 89152319122243695, guid: 9132fd89be25e3d4c92f5f6b2c422794, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
