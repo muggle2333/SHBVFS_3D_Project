@@ -457,13 +457,6 @@ MonoBehaviour:
   academyDefense: 0
   academyAPPerRound: 0
   academyBasicCardPerRound: 0
-  totalAcademyMaxHP: 0
-  totalAcademyHPPerRound: 0
-  totalAcademyAttackRange: 0
-  totalAcademyAttackDamage: 0
-  totalAcademyDefense: 0
-  totalAcademyAPPerRound: 0
-  totalAcademyBasicCardPerRound: 0
   cardDamage: 0
   cardAP: 0
   cardHP: 0
@@ -471,14 +464,6 @@ MonoBehaviour:
   totalCardDefense: 0
   totalCardAttackRange: 0
   academyEffectNum: 000000000000000000000000000000000000000000000000
-  AcademyBuffData:
-    maxHp: 0
-    hpPreRound: 0
-    attackRange: 0
-    attackDamage: 0
-    defense: 0
-    APPerRound: 0
-    basicCardPerRound: 0
   CardData: {fileID: 0}
   playerAcademyBuffcomponent: {fileID: 0}
 --- !u!1 &3413944631105312176
@@ -870,7 +855,6 @@ MonoBehaviour:
   handY: 0
   cardWidth: 205
   interval: 500
-  selectModeCount: 0
   canvas: {fileID: 4164202118832277108}
   upperY: 160
   lowerY: -60
@@ -886,7 +870,6 @@ GameObject:
   - component: {fileID: 4164202119315470930}
   - component: {fileID: 4525186938329760962}
   - component: {fileID: 552847490979672559}
-  - component: {fileID: 1578779543}
   m_Layer: 0
   m_Name: CardSystem
   m_TagString: Untagged
@@ -948,23 +931,6 @@ MonoBehaviour:
   smallCard: {fileID: 6039204384176142411, guid: 94e182bc541a21e49aa61a29ab8e1205, type: 3}
   cardCemetery: {fileID: 1595778268}
   smallCards: []
-  red: 0
-  blue: 0
-  redPlayed: 0
---- !u!114 &1578779543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4164202119315470929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e5a18040e13ed4ba5d06ddc7d664fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectModeUI: {fileID: 0}
-  selectModeText: {fileID: 0}
 --- !u!1 &4164202119351235551
 GameObject:
   m_ObjectHideFlags: 0

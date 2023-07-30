@@ -5,29 +5,29 @@ using UnityEngine;
 
 public class FA4 : CardFunction
 {
-    // Start is called before the first frame update
     void Start()
     {
         Function();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void Function()
     {
-        int randomInt = Random.Range(0, CardManager.Instance.playerHandCardDict[player].Count + 1);
-
-        CardManager.Instance.playerHandCardDict[player][randomInt].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
-        CardManager.Instance.playerHandCardDict[player].RemoveAt(randomInt);
-        if (NetworkManager.Singleton.IsServer)
+        Player enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
+        if (CardManager.Instance.playerHandCardDict[enemy].Count > 0)
         {
-            CardManager.Instance.RemoveCardFromPlayerHandServerRpc(player.Id, randomInt);
-            FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(player.Id, GameplayManager.Instance.discardStage.discardCount[player]);
+            if(enemy.Id == GameplayManager.Instance.currentPlayer.Id)
+            {
+                int randomInt = Random.Range(0, CardManager.Instance.playerHandCardDict[enemy].Count + 1);
+                CardManager.Instance.playerHandCardDict[enemy][randomInt].gameObject.GetComponent<CardSelectComponent>().CardDiscardAnimation();
+                CardManager.Instance.playerHandCardDict[enemy].RemoveAt(randomInt);
+                if (NetworkManager.Singleton.IsServer)
+                {
+                    CardManager.Instance.RemoveCardFromPlayerHandServerRpc(enemy.Id, randomInt);
+                    FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(enemy.Id, -1);
+                }
+                FindObjectOfType<CardSelectManager>().UpdateCardPos(enemy);
+            }
         }
-        FindObjectOfType<CardSelectManager>().UpdateCardPos(player);
+        
         Destroy(gameObject);
     }
 }

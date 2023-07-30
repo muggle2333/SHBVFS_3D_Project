@@ -9,6 +9,8 @@ public class SmallCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public CardSetting cardSetting;
     public Text description;
     public GameObject info;
+    public Sprite redCard;
+    public Sprite blueCard;
     private void Start()
     {
         UpdateCardData(cardSetting);
