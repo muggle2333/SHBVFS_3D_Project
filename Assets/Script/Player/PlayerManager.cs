@@ -55,8 +55,6 @@ public class PlayerManager : NetworkBehaviour
 
     public void Awake()
     {
-        redPlayerHandCardsList = new NetworkList<int>();
-        bluePlayerHandCardsList = new NetworkList<int>();
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
@@ -65,9 +63,12 @@ public class PlayerManager : NetworkBehaviour
         {
             Instance = this;
         }
+        redPlayerHandCardsList = new NetworkList<int>();
+        bluePlayerHandCardsList = new NetworkList<int>();
     }
     public void Start()
     {
+        
         cardSelectManager = FindObjectOfType<CardSelectManager>();
         drawCardComponent = FindObjectOfType<DrawCardComponent>();
         controlStage = FindObjectOfType<ControlStage>();

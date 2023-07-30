@@ -376,4 +376,20 @@ public class GameplayManager : NetworkBehaviour
         }
         return null;
     }
+
+    [ClientRpc]
+    public void SetCameraOverviewClientRpc()
+    {
+        CameraTest4 camera = FindObjectOfType<CameraTest4>();
+        Vector3 pos = (playerList[0].transform.position + playerList[1].transform.position) / 2;
+        camera.FocusPosition(pos, -30f);
+    }
+    [ClientRpc]
+    public void SetCameraFocusSelfClientRpc()
+    {
+        CameraTest4 camera = FindObjectOfType<CameraTest4>();
+        camera.FocusGrid();
+    }
+
+
 }
