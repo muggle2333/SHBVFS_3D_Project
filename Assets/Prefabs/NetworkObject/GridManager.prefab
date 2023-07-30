@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5704261030465529034
 MonoBehaviour:
@@ -98,12 +98,12 @@ MonoBehaviour:
   - {fileID: -325773366, guid: 064c860cc1ba034429bc38812e7af82e, type: 3}
   - {fileID: -1894579071, guid: 064c860cc1ba034429bc38812e7af82e, type: 3}
   academyColor:
-  - {r: 0.13265285, g: 0.4056604, b: 0, a: 1}
-  - {r: 0, g: 0.08752705, b: 0.49056602, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0.4811321, g: 0.18633437, b: 0, a: 1}
-  - {r: 0.4010784, g: 0, b: 0.5849056, a: 1}
-  - {r: 1, g: 0.6316455, b: 0, a: 1}
+  - {r: 0.10196079, g: 0.85098046, b: 0.17254902, a: 1}
+  - {r: 0.40784317, g: 0.6901961, b: 0.8431373, a: 1}
+  - {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
+  - {r: 0.8470589, g: 0.32941177, b: 0.28627452, a: 1}
+  - {r: 0.8000001, g: 0.6431373, b: 0.89019614, a: 1}
+  - {r: 0.8627451, g: 0.61960787, b: 0, a: 1}
 --- !u!114 &6084720043181725972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,19 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a03446963d7b24ba76482d6300a459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedList: []
   selectCount: 1
-  currentSelect:
-    landType: 0
-    academy: 1
-    meshType: 0
-    owner: {fileID: 0}
-    isHasBuilding: 0
-    canBuild: 1
-    canBeOccupied: 1
-    grid:
-      width: 0
-      length: 0
-    x: 0
-    z: 0
-    isDiscovered: 0
+  selectGridMode: 1
+  currentTargetVfx: {fileID: 0}
