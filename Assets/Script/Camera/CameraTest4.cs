@@ -103,7 +103,6 @@ public class CameraTest4 : MonoBehaviour
         //seq.id = uid;
         seq.Append(transform.DOMove(vec, 0.5f));
         seq.Join(cam.DOLocalMove(pos, 0.5f));
-        CheckShouldTurnCamera(vec);
         //cam.DOMoveZ(-19, 1f);
         //seq.AppendCallback(() => { isMoving = false; });
     }
@@ -134,17 +133,18 @@ public class CameraTest4 : MonoBehaviour
         var seq = DOTween.Sequence();
         vec = position;
         seq.Append(transform.DOMove(vec, 0.5f));
-        seq.Join(cam.DOLocalMove(new Vector3(3, 13, -18)+cam.transform.forward*zoomScale, 0.5f));
-        CheckShouldTurnCamera(vec);
+        seq.Join(cam.DOLocalMove(pos + cam.transform.forward * zoomScale, 0.5f));
+
     }
 
     public void FocusGridCenter(GridObject gridObject1,GridObject gridObject2)
     {
+        var dis = cam.transform.localPosition;
         var seq = DOTween.Sequence();
         vec = (GridManager.Instance.grid.GetWorldPositionCenter(gridObject1.x, gridObject1.z) + GridManager.Instance.grid.GetWorldPositionCenter(gridObject2.x, gridObject2.z)) / 2;
         seq.Append(transform.DOMove(vec, 0.5f));
-        seq.Join(cam.DOLocalMove(pos, 0.5f));
-        CheckShouldTurnCamera(vec);
+        seq.Join(cam.DOLocalMove(dis, 0.5f));
+        //CheckShouldTurnCamera(vec);
     }
 
     public void LockCamera(bool isLocked)
@@ -152,13 +152,15 @@ public class CameraTest4 : MonoBehaviour
         this.isLocked = isLocked;
     }
 
-    private void CheckShouldTurnCamera(Vector3 pos)
-    {
-        if(pos.x>GridManager.Instance.gridDistance*5 && pos.z> GridManager.Instance.gridDistance * 5)
-        {
-            var rotation = Quaternion.Euler(0, 180, 0);
-            transform.rotation = rotation;
-            updateAcademyTextRotation();
-        }
-    }
+    //private bool CheckShouldTurnCamera(Vector3 pos)
+    //{
+    //    if(pos.x>GridManager.Instance.gridDistance*5 && pos.z> GridManager.Instance.gridDistance * 5)
+    //    {
+    //        var rotation = Quaternion.Euler(0, 180, 0);
+    //        transform.rotation = rotation;
+    //        updateAcademyTextRotation();
+    //        return true;
+    //    }
+    //    return false;
+    //}
 }
