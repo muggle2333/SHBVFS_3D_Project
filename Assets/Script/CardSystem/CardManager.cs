@@ -140,6 +140,7 @@ public class CardManager : NetworkBehaviour
                     var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
                     card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                     card.cardSetting = effectCard;
+                    card.UpdateCardData(card.cardSetting);
                     EffectedCards(player.Id, effectCard);
                     card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
                     RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
@@ -149,6 +150,7 @@ public class CardManager : NetworkBehaviour
                     var card = Instantiate(CardPrefeb, new Vector3(800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
                     card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
                     card.cardSetting = effectCard;
+                    card.UpdateCardData(card.cardSetting);
                     EffectedCards(player.Id, effectCard);
                     card.gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
                     RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
