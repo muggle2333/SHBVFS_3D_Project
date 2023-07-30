@@ -515,6 +515,7 @@ public class PlayerManager : NetworkBehaviour
         bluePlayerHandCardsList.OnListChanged -= UpdatePlayerBlueCard;
         redPlayerHandCardsList.Dispose();
         bluePlayerHandCardsList.Dispose();
+        Pool.Instance.Clear();
     }
 
     

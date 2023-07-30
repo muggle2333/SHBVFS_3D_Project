@@ -116,11 +116,13 @@ public class Calculating : NetworkBehaviour
         totalCardAttackRangeDic[player] += card.playerDataEffect.visionRange;
         totalCardDefenseDic[player] += card.playerDataEffect.defence;
         totalCardAttackDamageDic[player] += card.playerDataEffect.attack;
-        cardFreeMoveNumDic[player] = card.playerDataEffect.freeMoveNum;
+        cardFreeMoveNumDic[player] += card.playerDataEffect.freeMoveNum;
         player.cardAD = totalCardAttackDamageDic[player];
         player.cardAR = totalCardAttackRangeDic[player];
         player.cardDF = totalCardDefenseDic[player];
-
+        cardDamage = card.Damage;
+        cardAP = card.playerDataEffect.actionPoint;
+        cardHP = card.playerDataEffect.hp;
         academyEffectNum = card.academyEffectNum;
         if (NetworkManager.Singleton.IsServer)
         {
@@ -142,18 +144,13 @@ public class Calculating : NetworkBehaviour
                 playerAcademyBuffcomponent.UpdatePlayerAcademyBuffServerRpc(player.Id);
             }
         }
-        cardDamage = card.Damage;
-        cardAP = card.playerDataEffect.actionPoint;
-        cardHP = card.playerDataEffect.hp;
+        
     }
 
     [ClientRpc]
     public void CardDataInitializeClientRpc(PlayerId playerId)
     {
         Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
-        cardDamage = 0;
-        cardAP = 0;
-        cardHP = 0;
         player.freeMoveCount = cardFreeMoveNumDic[player];
         cardFreeMoveNumDic[player] = 0;
         player.damageThisRound = 0;
@@ -301,6 +298,10 @@ public class Calculating : NetworkBehaviour
         {
             player.CurrentActionPoint += cardAP;
         }
+
+        /*cardAP = 0;
+        cardHP = 0;
+        cardDamage = 0;*/
     }
 
     public int CalculateAPCost(PlayerInteractType playerInteractType,Player player)

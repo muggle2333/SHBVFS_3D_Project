@@ -38,6 +38,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
+        SelectManager.Instance.isClickingCard = true;
+        UIManager.Instance.ShowGridObjectUI(false, null);
         if (Interactable == false) return;
 
         if (isSelected) return;
@@ -45,6 +47,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+        SelectManager.Instance.isClickingCard = false;
         if (Interactable == false) return;
         if (isSelected) return;
         transform.DOLocalMoveY(formerY, duration);

@@ -19,7 +19,6 @@ public class MO3 : CardFunction
             DrawCardComponent.Instance.PlayDrawCardAnimationServerRpc(player.Id, 2);
         }
         Function();
-        Function();
     }
     private void Update()
     {
@@ -42,9 +41,18 @@ public class MO3 : CardFunction
         player.canAttack = false;
         if (player.Id == GameplayManager.Instance.currentPlayer.Id)
         {
-            int randomIndex_ = Random.Range(0, 2);
             Card card = Instantiate(cardPrefeb, new Vector3(0, 0, 0), Quaternion.identity, cardContent.transform).GetComponent<Card>();
-            card.cardSetting = CardDataBase.Instance.AllTopCardListDic[AcademyType.MO][randomIndex_];
+            card.cardSetting = CardDataBase.Instance.AllTopCardListDic[AcademyType.MO][0];
+            DrawCardComponent.Instance.AllCardCountPlusServerRpc((int)AcademyType.MO, AcademyType.MO);
+            card.UpdateCardData(card.cardSetting);
+            CardManager.Instance.playerHandCardDict[player].Add(card);
+            card.GetComponent<RectTransform>().localPosition = DrawCardComponent.Instance.GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+            card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            card.transform.DOScale(1, 0.5f);
+            PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
+            CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, card.cardId);
+
+            card.cardSetting = CardDataBase.Instance.AllTopCardListDic[AcademyType.MO][1];
             DrawCardComponent.Instance.AllCardCountPlusServerRpc((int)AcademyType.MO, AcademyType.MO);
             card.UpdateCardData(card.cardSetting);
             CardManager.Instance.playerHandCardDict[player].Add(card);
