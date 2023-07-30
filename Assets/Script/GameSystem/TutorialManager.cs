@@ -88,8 +88,10 @@ public class TutorialManager : MonoBehaviour
             CameraFocusJudge();
             break;
 
-            case 17:
+            case 13:
             CardPlayedJudge();
+                Debug.Log(PlayerManager.Instance.redPlayerHandCardsList.Count);
+                Debug.Log(isActionCompleted);
             break;
 
         }
@@ -101,8 +103,8 @@ public class TutorialManager : MonoBehaviour
             DrawCardJudge();
             //ActionPointCheck();
         }
+      
 
-       
 
     }
     IEnumerator Tutorial()
@@ -185,7 +187,7 @@ public class TutorialManager : MonoBehaviour
 
         tutorialUI.IconsDiappear(4);
         TurnbasedSystem.Instance.StartTurnbaseSystem();
-        tutorialUI.SkipDiappear();
+        
         //Time.timeScale = 0.01f;
         isActionCompleted = true;                                 // No judge button, have to reset
         cameraComponent.LockCamera(true);
@@ -196,6 +198,7 @@ public class TutorialManager : MonoBehaviour
 
 
         TurnbasedSystem.Instance.StartTurnbaseSystem();
+        tutorialUI.SkipDiappear();
         //Time.timeScale = 0.01f;
         isActionCompleted = true;                                 // No judge button, have to reset
         cameraComponent.LockCamera(true);
@@ -274,10 +277,25 @@ public class TutorialManager : MonoBehaviour
             completeIndex++;
             FindObjectOfType<TutorialUI>().nextBtn.gameObject.SetActive(false);
             isActionCompleted = false;
+
+            if (((searchTimes == 1) || (buildTimes == 1) || (drawTimes == 1)) && !isPlayCardCorotine)
+            {
+                tutorialUI.ShowMessageText("Now, you can give further orders to this grid");
+                completeIndex--;
+            }
+
+            if ((buildTimes >= 1) && (searchTimes >= 1) && (drawTimes >= 1) && firstPartTutorialOver && !isPlayCardCorotine)
+            {
+                isPlayCardCorotine = true;
+                OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
+                tutorialUI.ShowMessageText("Now, you can play cards");
+                StartCoroutine("PlayCard");
+                completeIndex--;
+            }
         }
         else
         {
-            tutorialUI.ShowWarning();
+            //tutorialUI.ShowWarning();
         }
 
         //if(completeIndex==16)
@@ -286,20 +304,7 @@ public class TutorialManager : MonoBehaviour
         //    firstPartTutorialOver = true;
         //}
 
-        if(((searchTimes==1)||(buildTimes==1)||(drawTimes==1))&&!isPlayCardCorotine)
-        {
-            tutorialUI.ShowMessageText("Now, you can give further orders to this grid");
-            completeIndex--;
-        }
-
-        if ((buildTimes >= 1) && (searchTimes >= 1) && (drawTimes >= 1) && firstPartTutorialOver && !isPlayCardCorotine)
-        {
-            isPlayCardCorotine = true;
-            OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-            tutorialUI.ShowMessageText("Now, you can play cards");
-            StartCoroutine("PlayCard");
-            completeIndex--;
-        }
+        
     }
 
     public void CameraMoveJudge()                                            
@@ -354,7 +359,7 @@ public class TutorialManager : MonoBehaviour
 
     public void CardPlayedJudge()
     {
-        if (CardManager.Instance.playedCardDict[GameplayManager.Instance.playerList[0]].Count>0)
+        if (PlayerManager.Instance.redPlayerHandCardsList.Count > 0)
         {
             isActionCompleted = true;
             
