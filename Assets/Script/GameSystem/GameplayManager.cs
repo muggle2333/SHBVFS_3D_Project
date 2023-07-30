@@ -386,7 +386,7 @@ public class GameplayManager : NetworkBehaviour
     {
         CameraTest4 camera = FindObjectOfType<CameraTest4>();
         Vector3 pos = (playerList[0].transform.position + playerList[1].transform.position) / 2;
-        camera.FocusPosition(pos, -30f);
+        camera.FocusPosition(pos, -35f);
     }
     [ClientRpc]
     public void SetCameraFocusSelfClientRpc()
