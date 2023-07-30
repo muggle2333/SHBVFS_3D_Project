@@ -18,6 +18,8 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private List<GameObject> Icons = new List<GameObject>();
     [SerializeField] private GameObject Skip;
     [SerializeField] private GameObject AcademyBUffsUI;
+    [SerializeField] private GameObject TopLeftFrame;
+    [SerializeField] private GameObject LeftFrame;
     private void Start()
     {
         TutorialManager.Instance.OnStartSpecificTutorial += TutorialManager_OnStartSpecificTutorial;
@@ -95,6 +97,16 @@ public class TutorialUI : MonoBehaviour
     public void HideTutorial()
     {
         container.SetActive(false);
+    }
+
+    public void ShowTopLeft(bool isActive)
+    {
+        TopLeftFrame.SetActive(isActive);
+    }
+
+    public void ShowLeft(bool isActive)
+    {
+        LeftFrame.SetActive(isActive);
     }
     //public void GoNext()
     //{

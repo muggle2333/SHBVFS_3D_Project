@@ -2319,7 +2319,7 @@ static public class NGUIText
 	/// <summary>
 	/// Print character positions and indices into the specified buffer.
 	/// This function's data is meant to be used for precise character selection, such as clicking on a link.
-	/// There are 2 vertices for every index: Bottom Left + Top Right.
+	/// There are 2 vertices for every index: Bottom LeftFrame + Top Right.
 	/// </summary>
 
 	static public void PrintExactCharacterPositions (string text, List<Vector3> verts, List<int> indices)

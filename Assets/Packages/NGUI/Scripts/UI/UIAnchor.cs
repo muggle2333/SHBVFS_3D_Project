@@ -52,7 +52,7 @@ public class UIAnchor : MonoBehaviour
 	public bool runOnlyOnce = true;
 
 	/// <summary>
-	/// Relative offset value, if any. For example "0.25" with 'side' set to Left, means 25% from the left side.
+	/// Relative offset value, if any. For example "0.25" with 'side' set to LeftFrame, means 25% from the left side.
 	/// </summary>
 
 	public Vector2 relativeOffset = Vector2.zero;

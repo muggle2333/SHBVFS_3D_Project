@@ -166,7 +166,7 @@ public class UIWidget : UIRect
 
 	/// <summary>
 	/// Draw region alters how the widget looks without modifying the widget's rectangle.
-	/// A region is made up of 4 relative values (0-1 range). The order is Left (X), Bottom (Y), Right (Z) and Top (W).
+	/// A region is made up of 4 relative values (0-1 range). The order is LeftFrame (X), Bottom (Y), Right (Z) and Top (W).
 	/// To have a widget's left edge be 30% from the left side, set X to 0.3. To have the widget's right edge be 30%
 	/// from the right hand side, set Z to 0.7.
 	/// </summary>
@@ -1159,7 +1159,7 @@ public class UIWidget : UIRect
 		{
 			mIsInFront = true;
 
-			// Left anchor point
+			// LeftFrame anchor point
 			if (leftAnchor.target)
 			{
 				Vector3[] sides = leftAnchor.GetSides(parent);

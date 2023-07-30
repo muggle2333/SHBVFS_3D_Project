@@ -47,7 +47,7 @@ public class UIKeyNavigation : MonoBehaviour
 	public GameObject onDown;
 
 	/// <summary>
-	/// Which object will be selected when the Left button is pressed.
+	/// Which object will be selected when the LeftFrame button is pressed.
 	/// </summary>
 
 	public GameObject onLeft;

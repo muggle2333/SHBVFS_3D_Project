@@ -972,7 +972,7 @@ public abstract class UIBasicSprite : UIWidget
 							mTempUVs[y].y, mTempUVs[y2].y, c);
 					}
 				}
-				else if (y == 1) // Left or right
+				else if (y == 1) // LeftFrame or right
 				{
 					if ((x == 0 && leftType == AdvancedType.Tiled) || (x == 2 && rightType == AdvancedType.Tiled))
 					{

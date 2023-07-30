@@ -131,7 +131,7 @@ public abstract class UIRect : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Left side anchor.
+	/// LeftFrame side anchor.
 	/// </summary>
 
 	public AnchorPoint leftAnchor = new AnchorPoint();

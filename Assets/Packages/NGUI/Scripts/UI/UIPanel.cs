@@ -1205,7 +1205,7 @@ public class UIPanel : UIRect
 		}
 		else
 		{
-			// Left anchor point
+			// LeftFrame anchor point
 			if (leftAnchor.target)
 			{
 				Vector3[] sides = leftAnchor.GetSides(parent);
