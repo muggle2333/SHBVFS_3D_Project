@@ -107,14 +107,14 @@ public class SelectManager : MonoBehaviour
                         }
                     }
                     //取消选择卡牌
-                    CardManager.Instance.DeselectCard();
+                    //CardManager.Instance.DeselectCard();
                 }
             }
             ClearSelection();
             UIManager.Instance.ShowGridObjectUI(false, null);
             UIManager.Instance.ShowEnemyUI(false);
             //取消选择卡牌
-            CardManager.Instance.DeselectCard();
+            //CardManager.Instance.DeselectCard();
         }
         if(Input.GetMouseButtonDown(1))
         {

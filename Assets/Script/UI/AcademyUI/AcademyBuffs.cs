@@ -10,26 +10,15 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public AcademyType academyType;
     public TMP_Text AcademyCount;
     public AcademyUI AcademyUI;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         info.SetActive(true);
         switch (academyType)
         {
             case AcademyType.YI:
-                AcademyUI.academiesBuff[2].text = "Hp+1";
-                AcademyUI.academiesBuff[3].text = "Hp+2";
-                AcademyUI.academiesBuff[4].text = "Hp+2 , Hp/R+1";
+                AcademyUI.academiesBuff[2].text = "MAXHp+1";
+                AcademyUI.academiesBuff[3].text = "MAXHp+2";
+                AcademyUI.academiesBuff[4].text = "MAXHp+2 , Hp/Round+1";
                 break;
             case AcademyType.DAO:
                 AcademyUI.academiesBuff[2].text = "Range+1";
@@ -52,35 +41,60 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 AcademyUI.academiesBuff[4].text = "Defense+2";
                 break;
             case AcademyType.FA:
-                AcademyUI.academiesBuff[2].text = "Ap/R+1";
-                AcademyUI.academiesBuff[3].text = "Ap/R+1";
-                AcademyUI.academiesBuff[4].text = "Ap/R+2";
+                AcademyUI.academiesBuff[2].text = "Ap/Round+1";
+                AcademyUI.academiesBuff[3].text = "Ap/Round+1";
+                AcademyUI.academiesBuff[4].text = "Ap/Round+2";
                 break;
         }
-        switch (AcademyCount.text)
+        if (GameplayManager.Instance.currentPlayer.Id == PlayerId.RedPlayer)
         {
-            case "0":
-                AcademyUI.academiesBuff[0].color = Color.yellow;
-                break;
-            case "1":
-                AcademyUI.academiesBuff[1].color = Color.yellow;
-                break;
-            case "2":
-                AcademyUI.academiesBuff[2].color = Color.yellow;
-                break;
-            case "3":
-                AcademyUI.academiesBuff[3].color = Color.yellow;
-                break;
-            case "4":
-                AcademyUI.academiesBuff[4].color = Color.yellow;
-                break;
+            switch (AcademyCount.text)
+            {
+                case "0":
+                    AcademyUI.academiesBuff[0].color = new Color32(255, 119, 100, 255);
+                    break;
+                case "1":
+                    AcademyUI.academiesBuff[1].color = new Color32(255, 119, 100, 255);
+                    break;
+                case "2":
+                    AcademyUI.academiesBuff[2].color = new Color32(255, 119, 100, 255);
+                    break;
+                case "3":
+                    AcademyUI.academiesBuff[3].color = new Color32(255, 119, 100, 255);
+                    break;
+                case "4":
+                    AcademyUI.academiesBuff[4].color = new Color32(255, 119, 100, 255);
+                    break;
+            }
         }
+        else
+        {
+            switch (AcademyCount.text)
+            {
+                case "0":
+                    AcademyUI.academiesBuff[0].color = new Color32(78, 156, 168, 255);
+                    break;
+                case "1":
+                    AcademyUI.academiesBuff[1].color = new Color32(78, 156, 168, 255);
+                    break;
+                case "2":
+                    AcademyUI.academiesBuff[2].color = new Color32(78, 156, 168, 255);
+                    break;
+                case "3":
+                    AcademyUI.academiesBuff[3].color = new Color32(78, 156, 168, 255);
+                    break;
+                case "4":
+                    AcademyUI.academiesBuff[4].color = new Color32(78, 156, 168, 255);
+                    break;
+            }
+        }
+        
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         for(int i = 0; i < 5; i++)
         {
-            AcademyUI.academiesBuff[i].color = Color.white;
+            AcademyUI.academiesBuff[i].color = new Color32(237, 203, 121, 255);
         }
         info.SetActive(false);
     }
