@@ -92,7 +92,20 @@ public class PlayerManager : NetworkBehaviour
         cardSelectManager = FindObjectOfType<CardSelectManager>();
         drawCardComponent = FindObjectOfType<DrawCardComponent>();
         controlStage = FindObjectOfType<ControlStage>();
+        redPlayerHandCardsList.OnListChanged += UpdatePlayerRedCard;
+        bluePlayerHandCardsList.OnListChanged += UpdatePlayerBlueCard;
     }
+
+    private void UpdatePlayerRedCard(NetworkListEvent<int> changeEvent)
+    {
+        GameplayManager.Instance.playerList[0].GetComponentInChildren<PlayerInteractionComponent>().UpdateCardNum(redPlayerHandCardsList.Count);
+    }
+
+    private void UpdatePlayerBlueCard(NetworkListEvent<int> changeEvent)
+    {
+        GameplayManager.Instance.playerList[1].GetComponentInChildren<PlayerInteractionComponent>().UpdateCardNum(redPlayerHandCardsList.Count);
+    }
+
     public void ResetPlayerDateAfterControlStage(Player player)
     {
         //player.GetComponent<PlayerInteractionComponent>().HideVfxPlayer();
@@ -538,6 +551,12 @@ public class PlayerManager : NetworkBehaviour
         attackPlayer.Attack();
         attackPlayer.GetComponent<PlayerInteractionComponent>().SetAttackPath(attackPlayer.transform,attackTarget.transform);
         //VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
+    }
+
+    public void OnDestroy()
+    {
+        redPlayerHandCardsList.OnListChanged -= UpdatePlayerRedCard;
+        bluePlayerHandCardsList.OnListChanged -= UpdatePlayerBlueCard;
     }
 
     //public void GameOver()

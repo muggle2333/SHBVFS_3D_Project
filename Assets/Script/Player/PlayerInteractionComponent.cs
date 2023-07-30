@@ -36,7 +36,7 @@ public class PlayerInteractionComponent : MonoBehaviour
     private void Update()
     {
         hpText.text = GetComponentInParent<Player>().HP.ToString();
-        cardText.text = CardManager.Instance.playerHandCardDict[GetComponentInParent<Player>()].Count.ToString();
+        //cardText.text = CardManager.Instance.playerHandCardDict[GetComponentInParent<Player>()].Count.ToString();
         //Canvas follow camera
         Vector3 targetPos = canvas.transform.position + Camera.main.transform.rotation * Vector3.forward;
         Vector3 targetOrientation = Camera.main.transform.rotation * Vector3.up;
@@ -50,6 +50,11 @@ public class PlayerInteractionComponent : MonoBehaviour
         //{
         //    meshRenderer.materials[1].SetFloat("_Float", hitVfxFloat);
         //}        
+    }
+
+    public void UpdateCardNum(int num)
+    {
+        cardText.text = num.ToString();
     }
     public void SetPlayerName(bool isSelf)
     {

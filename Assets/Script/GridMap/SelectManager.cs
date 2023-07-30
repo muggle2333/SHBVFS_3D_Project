@@ -14,6 +14,7 @@ public enum SelectGridMode
     OneRivalBuilded,
     OneOccupyedNotBuilded,
     Every,
+    Specific,
 }
 public class SelectManager : MonoBehaviour
 {
@@ -264,6 +265,7 @@ public class SelectManager : MonoBehaviour
         selectableVfxList.Clear();
         selectableGridObjectList.Clear();
         selectableGridObjectList.Add(gridXZ);
+        selectGridMode = SelectGridMode.Specific;
         var selectableVfx = Pool.Instance.GetObj("Vfx_SelectableGrid");
         var gridObject = GridManager.Instance.grid.GetGridObject(gridXZ.x, gridXZ.y);
         PlaceSelectVfx(selectableVfx.transform, gridObject);
