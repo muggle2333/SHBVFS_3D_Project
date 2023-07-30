@@ -18,7 +18,7 @@ public class FA5 : CardFunction
     }
     void Function()
     {
-        if (GameplayManager.Instance.currentPlayer == player)
+        if (GameplayManager.Instance.currentPlayer.Id == player.Id)
         {
             DrawCardComponent.Instance.DrawBasicCard(player);
         }

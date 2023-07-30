@@ -121,11 +121,11 @@ public class CardManager : NetworkBehaviour
         smallcard.transform.SetAsFirstSibling();
         if(playerId == PlayerId.RedPlayer)
         {
-            smallcard.gameObject.GetComponent<Image>().color = Color.red;
+            smallcard.gameObject.GetComponent<Image>().sprite = smallcard.gameObject.GetComponent<SmallCard>().redCard;
         }
         else
         {
-            smallcard.gameObject.GetComponent<Image>().color = Color.blue;
+            smallcard.gameObject.GetComponent<Image>().sprite = smallcard.gameObject.GetComponent<SmallCard>().blueCard;
         }
         smallCards.Add(smallcard);
     }
