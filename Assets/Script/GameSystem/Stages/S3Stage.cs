@@ -16,8 +16,6 @@ public class S3Stage : MonoBehaviour
     }
     public void StartStage(Dictionary<Player, List<CardSetting>> playedCardListDict)
     {
-        
-        Debug.LogError("S3");
         for (int i = 0; i < playedCardListDict[GameplayManager.Instance.playerList[0]].Count; i++)
         {
             if (playedCardListDict[GameplayManager.Instance.playerList[0]][i].effectStage == EffectStage.S3)

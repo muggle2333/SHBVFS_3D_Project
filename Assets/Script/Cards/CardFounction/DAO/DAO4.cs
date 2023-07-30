@@ -9,8 +9,16 @@ public class DAO4 : CardFunction
     public Vector2Int grid;
     void Start()
     {
-        grid = SelectMode.Instance.selectedGridDic[cardSetting.cardId][0];
-        SelectMode.Instance.selectedGridDic[cardSetting.cardId].RemoveAt(0);
+        if (player.Id == PlayerId.RedPlayer)
+        {
+            grid = SelectMode.Instance.redPlayerSelectedGridDic[cardSetting.cardId][0];
+            SelectMode.Instance.redPlayerSelectedGridDic[cardSetting.cardId].RemoveAt(0);
+        }
+        else
+        {
+            grid = SelectMode.Instance.bluePlayerSelectedGridDic[cardSetting.cardId][0];
+            SelectMode.Instance.bluePlayerSelectedGridDic[cardSetting.cardId].RemoveAt(0);
+        }
         Function();
     }
 

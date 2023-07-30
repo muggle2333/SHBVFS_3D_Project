@@ -66,15 +66,15 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
                 {
                     if (SelectManager.Instance.selectedDict.Count == gameObject.GetComponent<Card>().needSelectCount)
                     {
+                        if (gameObject.GetComponent<Card>().needSelectCount == 1)
+                        {
+                            SelectMode.Instance.saveSelectedGridServerRpc(GameplayManager.Instance.currentPlayer.Id, gameObject.GetComponent<Card>().cardId, gameObject.GetComponent<Card>().needSelectCount, SelectManager.Instance.selectedDict.ElementAt(0).Key, SelectManager.Instance.selectedDict.ElementAt(0).Key);
+                        }
+                        else
+                        {
+                            SelectMode.Instance.saveSelectedGridServerRpc(GameplayManager.Instance.currentPlayer.Id, gameObject.GetComponent<Card>().cardId, gameObject.GetComponent<Card>().needSelectCount, SelectManager.Instance.selectedDict.ElementAt(0).Key, SelectManager.Instance.selectedDict.ElementAt(1).Key);
+                        }
                         cardSelectManager.PlayCards(GameplayManager.Instance.currentPlayer);
-                        if (!SelectMode.Instance.selectedGridDic.ContainsKey(gameObject.GetComponent<Card>().cardId))
-                        {
-                            SelectMode.Instance.selectedGridDic.Add(gameObject.GetComponent<Card>().cardId, null);
-                        }
-                        for (int i = 0; i < SelectManager.Instance.selectedDict.Count; i++)
-                        {
-                            SelectMode.Instance.selectedGridDic[gameObject.GetComponent<Card>().cardId].Add(SelectManager.Instance.selectedDict.ElementAt(i).Key);
-                        }
                         UIManager.Instance.HideWarning();
                     }
                     else

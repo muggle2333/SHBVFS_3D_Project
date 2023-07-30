@@ -121,6 +121,7 @@ public class DrawCardComponent : NetworkBehaviour
     {
         Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
+        Card.UpdateCardData(Card.cardSetting);
         AllCardCountPlusServerRpc(0,AcademyType.Null);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
         Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
@@ -145,7 +146,7 @@ public class DrawCardComponent : NetworkBehaviour
             }
             else if(randomIndex <= 299)
             {
-                Card.cardSetting = CardDataBase.Instance.AllTopCardListDic[currentAcedemy][randomIndex_];
+                Card.cardSetting = CardDataBase.Instance.AllTopCardListDic[currentAcedemy][1];
             }
             else if(randomIndex <= 999)
             {
