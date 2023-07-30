@@ -24,7 +24,7 @@ public class AcademyButton : MonoBehaviour
         if (isOpen == false)
         {
             var seq = DOTween.Sequence();
-            seq.Append(academyBuffs.transform.DOLocalMoveX(-55, 0.3f));
+            seq.Append(academyBuffs.transform.DOLocalMoveX(-90, 0.3f));
             isOpen = true;
         }
         else
