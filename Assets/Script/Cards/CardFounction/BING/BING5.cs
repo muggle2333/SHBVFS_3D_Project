@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class BING5 : CardFunction
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        Function();
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
+        {
+            Function();
+            Destroy(gameObject);
+        }
     }
-
     void Function()
     {
         player.canCost1APInEnemy = true;

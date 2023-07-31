@@ -16,6 +16,7 @@ public class MAXHP : CardFunction
         if(TurnbasedSystem.Instance.isDie.Value == false)
         {
             player.baseMaxHP += 1;
+            player.HP += 1;
             Calculating.Instance.CalculatPlayerBaseData(player);
         }
         else

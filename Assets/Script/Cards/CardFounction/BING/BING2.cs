@@ -17,6 +17,7 @@ public class BING2 : CardFunction
     }
     void Function()
     {
+
         if(player.moveCount == 0)
         {
             Player enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));

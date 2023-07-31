@@ -92,12 +92,14 @@ public class PlayerManager : NetworkBehaviour
         //player.GetComponent<PlayerInteractionComponent>().ResetGachaVfx();
         //player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
         player.CurrentActionPoint = player.TrueActionPoint;
+        player.freeMoveCount = player.trueFreeMoveCount;
     }
 
     public void BackupPlayerData(Player player)
     {
         player.trueGrid= player.currentGrid;
         player.TrueActionPoint = player.CurrentActionPoint;
+        player.trueFreeMoveCount = player.freeMoveCount;
     }
 
     public void ResetPlayerData(Player player)
@@ -227,6 +229,10 @@ public class PlayerManager : NetworkBehaviour
         player.targetGrid = gridObject;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         if (!player.UseActionPoint(apCost)) return false;
+        if (player.freeMoveCount > 0)
+        {
+            player.freeMoveCount--;
+        }
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
         GridManager.Instance.DiscoverGridObject(player,gridObject);
         UpdateGridAuthorityData(player, gridObject);
@@ -287,6 +293,10 @@ public class PlayerManager : NetworkBehaviour
         player.targetGrid = gridObject;
         int apCost = Calculating.Instance.CalculateAPCost(PlayerInteractType.Move, player);
         if (!player.UseActionPoint(apCost)) return;
+        if(player.freeMoveCount > 0)
+        {
+            player.freeMoveCount--;
+        }
         player.GetComponent<PlayerInteractionComponent>().MoveVfxPlayer(gridObject);
         UpdateGridAuthorityData(player, gridObject);
         player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);

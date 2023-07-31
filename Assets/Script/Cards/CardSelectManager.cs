@@ -108,6 +108,7 @@ public class CardSelectManager : MonoBehaviour
 
     public void PlayCards(Player player)
     {
+        GameplayManager.Instance.currentPlayer.playedCardCount++;
         for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
         {
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)

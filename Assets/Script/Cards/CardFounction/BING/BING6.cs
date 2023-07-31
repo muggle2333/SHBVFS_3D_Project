@@ -4,40 +4,27 @@ using UnityEngine;
 
 public class BING6 : CardFunction
 {
-    private List<Player> players;
+    public int playedCardCount;
+    public int costCount;
     private int distance;
-    private Player thisPlayer;
-    private Player otherPlayer;
-    // Start is called before the first frame update
     void Start()
     {
-        players = GameplayManager.Instance.GetPlayer();
-        Function(GameplayManager.Instance.currentPlayer);
+        playedCardCount = player.playedCardCount;
+        costCount = 2;
+        Function();
     }
-
-    // Update is called once per frame
-    void Update()
+    void Function()
     {
-        
-    }
-    void Function(Player player)
-    {
-        thisPlayer = player;
-        if (players[0] == player)
+        Player enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
+        distance = PlayerManager.Instance.CheckDistance(player, enemy.currentGrid);
+        if(player.Range >= distance)
         {
-            otherPlayer = players[1];
-        }
-        else
-        {
-            otherPlayer = players[0];
-        }
-        distance = PlayerManager.Instance.CheckDistance(thisPlayer, otherPlayer.currentGrid);
-        if(thisPlayer.Range >= distance)
-        {
-            for (int i = 0; i < Mathf.FloorToInt(CardManager.Instance.playedCardDict[player].Count / 3); i++)
+            while(playedCardCount>= costCount)
             {
-                thisPlayer.AttackTarget = otherPlayer;
+                player.AttackTarget = enemy;
                 player.Attack();
+                playedCardCount -= costCount;
+                costCount++;
             }
         }
         Destroy(gameObject);

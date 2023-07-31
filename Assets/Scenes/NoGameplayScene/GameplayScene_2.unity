@@ -114883,7 +114883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929aec3d3bcc64441bbcc83eba7daf28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDataUI: {fileID: 345234221466777172}
 --- !u!114 &2104841665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117942,17 +117941,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
---- !u!114 &345234221466777172 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2576808503813231257, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
-  m_PrefabInstance: {fileID: 345234221466777171}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a800aafbd4f5ac45955acb9901e9367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2521327372234254911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118271,25 +118259,13 @@ PrefabInstance:
       propertyPath: Rounds
       value: 
       objectReference: {fileID: 669527815}
-    - target: {fileID: 5054783593724278040, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
-      propertyPath: EndMenu
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5054783593724278040, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
-      propertyPath: S1PhaseTime
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 5054783593724278041, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
       propertyPath: m_Name
       value: Turnbased System
       objectReference: {fileID: 0}
-    - target: {fileID: 5054783593724278041, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5054783593724278042, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3366995015
+      value: 4043595944
       objectReference: {fileID: 0}
     - target: {fileID: 5054783593724278043, guid: ea3d12ae6f9f6ca4f95c6d194ef636d7, type: 3}
       propertyPath: m_RootOrder

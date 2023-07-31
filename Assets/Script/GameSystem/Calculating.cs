@@ -151,7 +151,8 @@ public class Calculating : NetworkBehaviour
     public void CardDataInitializeClientRpc(PlayerId playerId)
     {
         Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
-        player.freeMoveCount = cardFreeMoveNumDic[player];
+        player.freeMoveCount += cardFreeMoveNumDic[player];
+        player.trueFreeMoveCount += cardFreeMoveNumDic[player];
         cardFreeMoveNumDic[player] = 0;
         player.damageThisRound = 0;
         player.occuplyCount = 0;
@@ -162,6 +163,7 @@ public class Calculating : NetworkBehaviour
         player.cardDF = 0;
         player.canCost1APInEnemy = false;
         player.canAttack = true;
+        player.playedCardCount = 0;
         for (int i = 0; i < 6 ; i++)
         {
             academyEffectNum[i] = 0;
@@ -299,9 +301,9 @@ public class Calculating : NetworkBehaviour
             player.CurrentActionPoint += cardAP;
         }
 
-        /*cardAP = 0;
+        cardAP = 0;
         cardHP = 0;
-        cardDamage = 0;*/
+        cardDamage = 0;
     }
 
     public int CalculateAPCost(PlayerInteractType playerInteractType,Player player)
@@ -338,7 +340,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Lake:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -348,7 +350,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Forest:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -358,7 +360,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Mountain:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -368,7 +370,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Plain:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -407,7 +409,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Forest:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -417,7 +419,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Mountain:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -427,7 +429,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Plain:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -464,7 +466,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Lake:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -474,7 +476,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Forest:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -484,7 +486,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Mountain:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -494,7 +496,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Plain:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -531,7 +533,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Lake:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -541,7 +543,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Forest:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -551,7 +553,7 @@ public class Calculating : NetworkBehaviour
                     case LandType.Mountain:
                         if (player.freeMoveCount > 0)
                         {
-                            player.freeMoveCount--;
+                            //player.freeMoveCount--;
                             return 0;
                         }
                         else
@@ -567,7 +569,7 @@ public class Calculating : NetworkBehaviour
                             }
                             else
                             {
-                                player.freeMoveCount--;
+                                //player.freeMoveCount--;
                                 return 0;
                             }
                         }

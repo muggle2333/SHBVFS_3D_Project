@@ -17,6 +17,7 @@ public enum PlayerId
 
 public class Player : Character
 {
+    public int playedCardCount;
     public bool canAttack = true;
     public GridObject startGrid;
     public int moveCount;
@@ -37,6 +38,7 @@ public class Player : Character
     public int MaxActionPoint;
     public int MaxCardCount;
     public int freeMoveCount;
+    public int trueFreeMoveCount;
 
     public int gridAR;
     public int gridDF;

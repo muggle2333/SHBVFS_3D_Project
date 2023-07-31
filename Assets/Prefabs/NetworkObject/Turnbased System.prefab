@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5054783593724278040
 MonoBehaviour:
@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be669c933734f4a448b1a8d398ce2a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentGameStage: 0
-  CompleteGameStage: 0
-  roundIndex: 0
-  S1PhaseTime: 500
+  CurrentGameStage:
+    m_InternalValue: 6
+  CompleteGameStage:
+    m_InternalValue: 6
+  S1PhaseTime: 60
   DiscardPhaseTime: 5
   S2PhaseTime: 5
   MovePhaseTime: 5
@@ -57,7 +58,15 @@ MonoBehaviour:
   S4PhaseTime: 5
   IsBackAlive: 0
   EndMenu: {fileID: 0}
-  timerValue: 0
+  switchBgmRoundIndex: 15
+  isStart:
+    m_InternalValue: 0
+  isDie:
+    m_InternalValue: 0
+  roundIndex:
+    m_InternalValue: 0
+  timerValue:
+    m_InternalValue: 0
   Timer: {fileID: 0}
   Rounds: {fileID: 0}
 --- !u!114 &5054783593724278042

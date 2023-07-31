@@ -146,7 +146,7 @@ public class DrawCardComponent : NetworkBehaviour
             }
             else if(randomIndex <= 299)
             {
-                Card.cardSetting = CardDataBase.Instance.AllTopCardListDic[currentAcedemy][1];
+                Card.cardSetting = CardDataBase.Instance.AllTopCardListDic[currentAcedemy][randomIndex_];
             }
             else if(randomIndex <= 999)
             {
