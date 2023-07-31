@@ -83,6 +83,7 @@ public class CardSelectManager : MonoBehaviour
         maxSelected[player] = 1;
         OnDiscardCard?.Invoke(this,EventArgs.Empty);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
+        SoundManager.Instance.PlaySound(Sound.DiscardCard);
     }
 
     public void PlayHPCards(Player player)
@@ -162,6 +163,7 @@ public class CardSelectManager : MonoBehaviour
                 }
             }
         }
+        SoundManager.Instance.PlaySound(Sound.CardCancel);
     }
 
     public void UpdateCardPos(Player player)

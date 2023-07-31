@@ -109,7 +109,8 @@ public class DiscardStage : NetworkBehaviour
             PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         }
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
-        UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, false);
+        //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDiscard, false);
+        SoundManager.Instance.PlaySound(Sound.DiscardCard);
     }
 
     [ClientRpc]

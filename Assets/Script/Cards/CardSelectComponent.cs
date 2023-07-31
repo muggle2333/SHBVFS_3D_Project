@@ -62,7 +62,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             if (isSelected)
             {
-                if(gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
+                if (gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
                 {
                     if (SelectManager.Instance.selectedDict.Count == gameObject.GetComponent<Card>().needSelectCount)
                     {
@@ -88,27 +88,56 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
                     UIManager.Instance.HideWarning();
                 }
 
-                if(FindObjectOfType<TutorialManager>()!=null)
+                if (FindObjectOfType<TutorialManager>() != null)
                 {
                     TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickPlayCard);
                 }
             }
-            else OnSelectOperation();
+            else
+            {
+                OnSelectOperation();
+                SoundManager.Instance.PlaySound(Sound.CardSelect);
+            }
         }
         else if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.DiscardStage)
         {
-            if (isSelected) EndSelectDiscard();
-            else OnSelectDiscard();
+            if (isSelected)
+            {
+                EndSelectDiscard();
+                SoundManager.Instance.PlaySound(Sound.CardCancel);
+            }
+            else
+            {
+                OnSelectDiscard();
+                SoundManager.Instance.PlaySound(Sound.CardSelect);
+            }
         }
         else if (TurnbasedSystem.Instance.isDie.Value == true && GameplayManager.Instance.currentPlayer.HP <= 0)
         {
             if (this.gameObject.GetComponent<Card>().cardId != 0) return;
-            if (!isSelected) OnSelectDying();
+            if (isSelected)
+            {
+                EndSelectDying();
+                SoundManager.Instance.PlaySound(Sound.CardCancel);
+            }
+            else
+            {
+                OnSelectDying();
+                SoundManager.Instance.PlaySound(Sound.CardSelect);
+            }
         }
         else
         {
-            if (isSelected) EndSelectOther();
-            else OnSelectOther();
+            if (isSelected)
+            {
+                EndSelectOther();
+                SoundManager.Instance.PlaySound(Sound.CardCancel);
+            }
+            else
+            {
+                OnSelectOther();
+                SoundManager.Instance.PlaySound(Sound.CardSelect);
+            }
         }
     }
 
@@ -416,6 +445,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.Join(transform.DOLocalMoveX(0, 0.4f));
         //seq.Join(transform.DOScale(1.5f, 0.4f));
         seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => { SoundManager.Instance.PlaySound(Sound.PlayCard); });
         seq.Append(transform.DOLocalMoveX(-800, 0.5f));
         seq.Join(transform.DOLocalMoveY(500, 0.5f));
         seq.Join(transform.DOScale(0.05f, 0.5f));
@@ -476,6 +506,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         Invoke("AddMaterial", 1);
         SoundManager.Instance.PlaySound(Sound.CardTakeEffect);
         //burn function
+        seq.AppendCallback(() => { SoundManager.Instance.PlaySound(Sound.CardTakeEffect); });
         seq.AppendCallback(() => { DOTween.To(() => vfxFloat, x => vfxFloat = x, 0, 1f); });
         seq.AppendInterval(1f);
         //seq.Append(transform.DOLocalMoveX(-200, 0.4f));
@@ -504,6 +535,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         Invoke("AddMaterial", 1);
         SoundManager.Instance.PlaySound(Sound.CardTakeEffect);
         //burn function
+        seq.AppendCallback(() => { SoundManager.Instance.PlaySound(Sound.CardTakeEffect); });
         seq.AppendCallback(() => { DOTween.To(() => vfxFloat, x => vfxFloat = x, 0, 1f); });
         seq.AppendInterval(1f);
         //seq.Append(transform.DOLocalMoveX(-200, 0.4f));
@@ -512,5 +544,4 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendCallback(() => { isBurning = false; });
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
-
 }
