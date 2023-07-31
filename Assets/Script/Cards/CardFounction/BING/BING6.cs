@@ -27,6 +27,7 @@ public class BING6 : CardFunction
                 costCount++;
             }
         }
+        player.canAttack = true;
         Destroy(gameObject);
     }
 }

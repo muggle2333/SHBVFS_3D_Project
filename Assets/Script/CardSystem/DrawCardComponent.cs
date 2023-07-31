@@ -8,6 +8,7 @@ using Unity.Netcode;
 
 public class DrawCardComponent : NetworkBehaviour
 {
+    public int cardId;
     public static DrawCardComponent Instance;
     public Canvas parentCanvas;
     public PlayerDeck PlayerDeck;
@@ -44,8 +45,8 @@ public class DrawCardComponent : NetworkBehaviour
                 AllCardCount.Add(0);
             }
         }
-
     }
+    
     /*[ServerRpc(RequireOwnership = false)]
     public void DrawCardServerRpc(PlayerId playerId)
     {
@@ -123,6 +124,25 @@ public class DrawCardComponent : NetworkBehaviour
         Card.cardSetting = PlayerDeck.AllCardDeck[AcademyType.Null][AllCardCount[0]];
         Card.UpdateCardData(Card.cardSetting);
         AllCardCountPlusServerRpc(0,AcademyType.Null);
+        CardManager.Instance.playerHandCardDict[player].Add(Card);
+        Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
+        Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        Card.transform.DOScale(1, 0.5f);
+        PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
+        CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DrawEventCardForTest();
+        }
+    }
+    public void DrawEventCardForTest()
+    {
+        Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+        Card.cardSetting = CardManager.Instance.CardIdToCardSetting(cardId);
+        Card.UpdateCardData(Card.cardSetting);
         CardManager.Instance.playerHandCardDict[player].Add(Card);
         Card.GetComponent<RectTransform>().localPosition = GetScreenPosition(GameplayManager.Instance.currentPlayer.gameObject);
         Card.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
