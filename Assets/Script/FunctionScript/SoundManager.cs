@@ -26,22 +26,23 @@ public enum Sound
     MoveOnLake,//13
 
     Button,//14
-    ControlInput,//15
+    ControlInput,//15, no need
     CountDown,//16
     ControlStart,//17
-    GameStart,//18
+    GameStart,//18, no need
 
-    CardSelect,//24
-    CardCancel,//25
+    CardSelect,//19
+    CardCancel,//20
+    CardSelectFailed//21
 }
 public enum Bgm
 {
-    LateBGM,//19
-    LobbyBGM,//20
-    DyingBGM,//21
-    WinBGM,//22
-    LoseBGM,//23
-    EarlyBGM//24
+    LateBGM,//22
+    LobbyBGM,//23
+    DyingBGM,//24, no need
+    WinBGM,//25
+    LoseBGM,//26
+    EarlyBGM//27
 }
 [Serializable]
 public struct SoundAudioClip

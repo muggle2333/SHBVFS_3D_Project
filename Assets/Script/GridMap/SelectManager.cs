@@ -96,6 +96,7 @@ public class SelectManager : MonoBehaviour
                     if (hitInfo.collider.GetComponentInChildren<GridObjectComponent>() != null)
                     {
                         //点到格子上了
+                        SoundManager.Instance.PlaySound(Sound.Button);
                         return;
                     }
                     else if(hitInfo.collider.GetComponentInParent<Player>()!=null)
@@ -103,6 +104,7 @@ public class SelectManager : MonoBehaviour
                         Player player = hitInfo.collider.GetComponentInParent<Player>();
                         if(player.Id != GameplayManager.Instance.currentPlayer.Id)
                         {
+                            SoundManager.Instance.PlaySound(Sound.Button);
                             UIManager.Instance.ShowEnemyUI(true);
                             ClearSelection();
                             UIManager.Instance.ShowGridObjectUI(false, null);
@@ -114,6 +116,7 @@ public class SelectManager : MonoBehaviour
                 }
 
             }
+            //SoundManager.Instance.PlaySound(Sound.Button);
             ClearSelection();
             UIManager.Instance.ShowGridObjectUI(false, null);
             UIManager.Instance.ShowEnemyUI(false);

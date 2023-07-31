@@ -83,6 +83,7 @@ public class CardSelectManager : MonoBehaviour
         maxSelected[player] = 1;
         OnDiscardCard?.Invoke(this,EventArgs.Empty);
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.discardCards, false);
+        SoundManager.Instance.PlaySound(Sound.DiscardCard);
     }
 
     public void PlayHPCards(Player player)
@@ -140,10 +141,12 @@ public class CardSelectManager : MonoBehaviour
 
     public void CancelCards(Player player)
     {
+        bool hasCanceled = false;
         for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
         {
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
             {
+                hasCanceled = true;
                 if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
                 {
                     CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().EndSelectOperation();
@@ -162,6 +165,7 @@ public class CardSelectManager : MonoBehaviour
                 }
             }
         }
+        if(hasCanceled) SoundManager.Instance.PlaySound(Sound.CardCancel);
     }
 
     public void UpdateCardPos(Player player)
