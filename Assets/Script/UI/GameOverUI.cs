@@ -52,4 +52,10 @@ public class GameOverUI : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnPlayerDisconnect -= GameManager_OnPlayerDisconnect;
+        GameManager.Instance.OnGameOver -= GameManager_OnGameOver;
+    }
 }

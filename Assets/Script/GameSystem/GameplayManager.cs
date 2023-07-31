@@ -235,17 +235,10 @@ public class GameplayManager : NetworkBehaviour
 
     public int GetWinner()
     {
-        List<Player> dyingPlayers = new List<Player>();
-        for (int i = 0; i < playerList.Count; i++)
-        {
-            if (playerList[i].isDying.Value)
-            {
-                dyingPlayers.Add(playerList[i]);
-            }
-        }
+        List<Player> dyingPlayers = GetDyingPlayer();
         if (dyingPlayers.Count == 1)
         {
-            return dyingPlayers[0].Id == PlayerId.RedPlayer ? 0 : 1;
+            return dyingPlayers[0].Id == PlayerId.RedPlayer ? 1 : 0;
         }
         else if (dyingPlayers.Count == 2)
         {
@@ -258,24 +251,23 @@ public class GameplayManager : NetworkBehaviour
                 int player0LandCount=0;
                 int player1LandCount=0;
                 int[] player0LandArray = dyingPlayers[0].CountAcademyOwnedPoint();
-                int[] player1LandArray = dyingPlayers[0].CountAcademyOwnedPoint();
-                for (AcademyType i = AcademyType.YI; i < AcademyType.FA; i++)
+                int[] player1LandArray = dyingPlayers[1].CountAcademyOwnedPoint();
+                for (int i = 0; i < 6; i++)
                 {
-                    //player0LandCount += dyingPlayers[0].OwnedLandDic[i].Count;
-                    //player1LandCount += dyingPlayers[1].OwnedLandDic[i].Count;
-                    player0LandCount += player0LandArray[(int)i];
-                    player1LandCount += player1LandArray[(int)i];
+                    player0LandCount += player0LandArray[i];
+                    player1LandCount += player1LandArray[i];
                 }
                 if (player0LandCount == player1LandCount)
                 {
                     return 2;
-                }else
+                }
+                else
                 {
-                    return player0LandCount > player1LandCount ? 1 : 0;
+                    return player0LandCount > player1LandCount ? 0 : 1;
                 }
             }
         }
-        return 0;
+        return 2;
     }
     [ClientRpc]
     public void PlayerDyingStageClientRpc()
@@ -332,6 +324,11 @@ public class GameplayManager : NetworkBehaviour
             }
         }
         return dyingPlayers;
+    }
+
+    public void CheckDyingStage()
+    {
+
     }
 
     [ClientRpc]

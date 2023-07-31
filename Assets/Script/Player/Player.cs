@@ -299,4 +299,10 @@ public class Player : Character
             HP = MaxHP;
         }
     }
+    public void UpdatePlayerOwnedLandAcademyBuff(AcademyType preAcademy, AcademyType newAcademy)
+    {
+        academyOwnedPoint[(int)preAcademy - 1]--;
+        academyOwnedPoint[(int)newAcademy - 1]++;
+
+    }
 }

@@ -1,11 +1,8 @@
 ﻿using LitJson;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using Unity.Netcode;
-using TMPro;
-using System;
+using UnityEngine;
 
 public class GridManager : NetworkBehaviour
 {
@@ -15,6 +12,9 @@ public class GridManager : NetworkBehaviour
     public GameObject gridUI;
     public float gridDistance;
     private int[] academyNum = new int[6] { 6, 6, 6, 6, 6, 6 };
+    private int[] backupNum = new int[6] { 1, 1, 1, 1, 1, 1 };
+    private int landCount = 0;
+    private int average = 0;
 
     public static GridManager Instance { get; private set; }
 
@@ -31,7 +31,6 @@ public class GridManager : NetworkBehaviour
 
         grid = LoadGridData(levelIndex);
         gridDistance = grid.GetGridDistance();
-        
         //GridVfxManager.Instance.CreateVfx();
     }
     public void Start()
@@ -39,10 +38,11 @@ public class GridManager : NetworkBehaviour
         if (FindObjectOfType<NetworkManager>() != null && NetworkManager.Singleton.IsHost)
         {
             InitializeGridAcademy();
+            //InitializeGridAcademyAverage();
         }
         else
         {
-            //InitializeGridAcademy();
+            //InitializeGridAcademyAverage();
         }
         //GridVfxManager.Instance.CreateVfx();
     }
@@ -88,16 +88,45 @@ public class GridManager : NetworkBehaviour
                 //Debug.Log(gridObjectList[x * gridSetting.length + z]);
                 gridArray[x, z] = gridObjectList[x * gridSetting.length + z];
                 gridArray[x, z].grid = grid;
+                if (gridArray[x,z].landType == LandType.Plain)
+                {
+                    landCount++;
+                }
             }
         }
+        
 
         grid.gridArray = gridArray;
         return grid;
     }
-    
+
     public void InitializeGridAcademy()
     {
+        List<int> landIndex = new List<int> { 1, 2, 3, 4, 5, 6};
+        for (int z = 0; z < grid.length; z++)
+        {
+            for (int x = 0; x < grid.width; x++)
+            {
+                //Initialize the Land AcademyType
+                if (grid.gridArray[x, z].landType == LandType.Plain)
+                {
+                    if(landIndex.Count== 0)
+                    { 
+                        landIndex = new List<int> { 1, 2, 3, 4, 5, 6 };
+                    }
+                    int index = Random.Range(0, landIndex.Count);
+                    SyncAcademyClientRpc(new Vector2Int(x, z), (AcademyType)landIndex[index]);
+                    landIndex.RemoveAt(index);
+                }
+            }
+        }
+    }
+    public void InitializeGridAcademyAverage()
+    {
+        average = landCount / 6;
+        academyNum = new int[6] { average, average, average, average, average, average };
         int count = 0;
+        int temp = 0;
         for (int x = 0; x < grid.width; x++)
         {
             for (int z = 0; z < grid.length; z++)
@@ -107,39 +136,55 @@ public class GridManager : NetworkBehaviour
                 {
                     int academy = 0;
                     count++;
-                    if(count>36)
+                    if(count>average*6)
                     {
-                        academy = RandomGetAcademy();
+                        do
+                        {
+                            academy = RandomGetAcademy(temp);
+                        }
+                        while (!CheckIsEnough(academy,backupNum));
                     }
                     else
                     {
                         do
                         {
-                            academy = RandomGetAcademy();
+                            academy = RandomGetAcademy(temp);
                         } 
-                        while (!CheckIsEnough(academy));
+                        while (!CheckIsEnough(academy,academyNum));
                     }
-                    
+                    temp = academy;
                     SyncAcademyClientRpc(new Vector2Int(x, z), (AcademyType)academy);
                    
                 }
             }
         }
     }
-    private int RandomGetAcademy()
+    private int RandomGetAcademy(int pre)
     {
-        var academy = UnityEngine.Random.Range(1, 7);
+        var academy = pre;
+        var count = 0;
+        do
+        {
+            academy = UnityEngine.Random.Range(1, 7);
+            count++;
+            if(count>3)
+            {
+                break;
+            }
+        } 
+        while (academy == pre);
         return academy;
     }
-    private bool CheckIsEnough(int academy)
+    private bool CheckIsEnough(int academy, int[] academyDict)
     {
-        if (academyNum[academy-1]>0)
+        if (academyDict[academy-1]>0)
         {
             academyNum[academy-1]--;
             return true;
         }
         return false;
     }
+    
     [ClientRpc]
     public void SyncAcademyClientRpc(Vector2Int gridObjectXZ, AcademyType academyType)
     {
@@ -386,9 +431,15 @@ public class GridManager : NetworkBehaviour
     [ClientRpc]
     public void SwitchGridObjectAcademyClientRpc(Vector2Int gridObject1XZ, Vector2Int gridObject2XZ)
     {
-        var academy = grid.gridArray[gridObject2XZ.x, gridObject2XZ.y].academy;
-        grid.gridArray[gridObject2XZ.x, gridObject2XZ.y].academy = grid.gridArray[gridObject1XZ.x, gridObject1XZ.y].academy;
-        grid.gridArray[gridObject1XZ.x, gridObject1XZ.y].academy = academy;
+        var gridObject1 = grid.gridArray[gridObject1XZ.x, gridObject1XZ.y];
+        var gridObject2 = grid.gridArray[gridObject2XZ.x, gridObject2XZ.y];
+        gridObject1.owner.UpdatePlayerOwnedLandAcademyBuff(gridObject1.academy, gridObject2.academy);
+        gridObject2.owner.UpdatePlayerOwnedLandAcademyBuff(gridObject2.academy, gridObject1.academy);
+        var academy2 = gridObject2.academy;
+        gridObject2.academy = gridObject1.academy;
+        gridObject1.academy = academy2;
+        
+
     }
 
     public void SetBuilding(Vector2Int gridObjectXZ,bool isDestory)

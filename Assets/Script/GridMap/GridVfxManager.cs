@@ -42,11 +42,12 @@ public class GridVfxManager : MonoBehaviour
     public void Start()
     {
         CreateVfx();
+
+        Invoke("GetAllVfxAcademy", 3f);
     }
     public void CreateVfx()
     {
         GameObject vfxContainers = new GameObject("VfxConainers");
-        vfxContainers.transform.position += new Vector3(0, 0.2f, 0);
         GameObject academyContainer = new GameObject("AcademyContainer");
         academyContainer.transform.SetParent(vfxContainers.transform);
 
@@ -65,8 +66,7 @@ public class GridVfxManager : MonoBehaviour
                 container.transform.position = grid.GetWorldPositionCenter(x, z);
 
                 GameObject atmpVfx = Instantiate(vfxPrefabs.academyVfx.gameObject,academyContainer.transform);
-                atmpVfx.transform.position = grid.GetWorldPositionCenter(x, z);
-                
+                atmpVfx.transform.position = grid.GetWorldPositionCenter(x, z) + new Vector3(0, 0.1f, 0);
 
                 GameObject otmpVfx = Instantiate(vfxPrefabs.ownerVfx.gameObject, container.transform);
 
@@ -167,6 +167,20 @@ public class GridVfxManager : MonoBehaviour
         }
     }
 
+    private void GetAllVfxAcademy()
+    {
+        for (int x = 0; x < GridManager.Instance.grid.width; x++)
+        {
+            for (int z = 0; z < GridManager.Instance.grid.length; z++)
+            {
+                var gridObject = GridManager.Instance.grid.gridArray[x,z];
+                if (gridObject.landType != LandType.Plain) continue;
+                Transform academyVfx = vfxTransformArray[gridObject.x, gridObject.z].academyVfx;
+                academyVfx.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = academySprite[(int)gridObject.academy - 1];
+                academyVfx.gameObject.GetComponentInChildren<SpriteRenderer>().color = academyColor[(int)gridObject.academy - 1];
+            }
+        }
+    }
     public void UpdateVfxGacha(GridObject gridObject,bool isControlStage)
     {
         if (gridObject.landType != LandType.Plain) return;
