@@ -52,6 +52,7 @@ public class MO3 : CardFunction
             PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
             CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, card.cardId);
 
+            card = Instantiate(cardPrefeb, new Vector3(0, 0, 0), Quaternion.identity, cardContent.transform).GetComponent<Card>();
             card.cardSetting = CardDataBase.Instance.AllTopCardListDic[AcademyType.MO][1];
             DrawCardComponent.Instance.AllCardCountPlusServerRpc((int)AcademyType.MO, AcademyType.MO);
             card.UpdateCardData(card.cardSetting);

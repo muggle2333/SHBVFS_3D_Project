@@ -18,6 +18,7 @@ public class MO2 : CardFunction
     void Function()
     {
         player.freeMoveCount += player.moveCount;
+        player.trueFreeMoveCount += player.moveCount;
         Destroy(gameObject);
     }
 }
