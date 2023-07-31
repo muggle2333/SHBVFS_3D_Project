@@ -135,10 +135,10 @@ public class DrawCardComponent : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            DrawEventCardForTest();
+            DrawEventCardForTest(cardId);
         }
     }
-    public void DrawEventCardForTest()
+    public void DrawEventCardForTest(int cardId)
     {
         Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         Card.cardSetting = CardManager.Instance.CardIdToCardSetting(cardId);
