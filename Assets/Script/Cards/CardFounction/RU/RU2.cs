@@ -9,7 +9,7 @@ public class RU2 : CardFunction
     // Start is called before the first frame update
     void Start()
     {
-        Function(GameplayManager.Instance.currentPlayer);
+        Function();
     }
 
     // Update is called once per frame
@@ -17,18 +17,20 @@ public class RU2 : CardFunction
     {
         if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1 && hasAdded == false && CanAdd == true)
         {
-            GameplayManager.Instance.currentPlayer.baseDefense += 2;
+            player.baseDefense += 2;
+            player.cardDF += 2;
             Calculating.Instance.CalculatPlayerBaseData(GameplayManager.Instance.currentPlayer);
             hasAdded = true;
         }
         if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S4 && hasAdded == true)
         {
-            GameplayManager.Instance.currentPlayer.baseDefense -= 2;
+            player.baseDefense -= 2;
+            player.cardDF -= 2;
             Calculating.Instance.CalculatPlayerBaseData(GameplayManager.Instance.currentPlayer);
             Destroy(gameObject);
         }
     }
-    void Function(Player player)
+    void Function()
     {
         if (player.hasAttcaked == false)
         {

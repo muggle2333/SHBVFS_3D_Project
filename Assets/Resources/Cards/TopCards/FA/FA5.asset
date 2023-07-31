@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 38
   cardName: Invulnerable
-  description: You can automatically defense any cards from you opponent whose target
-    is you
+  description: Get 1 basic card and -1 HP
   headPicture: {fileID: 21300000, guid: 13eecf6179a690d4793a71b7ff88907b, type: 3}
   academyType: 6
   cardCondition: {fileID: 0}

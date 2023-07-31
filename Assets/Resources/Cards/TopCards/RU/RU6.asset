@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 33
   cardName: Reserved Territory
-  description: You can choose one land and make it can only be conquered by you,
-    lasting 3 turns
+  description: This round, you gain the same amount of defense as the opponent's
+    defense, and the opponent's defense is reduced to 0
   headPicture: {fileID: 21300000, guid: 3bac3e8ba45c27848ab09fa013eace5a, type: 3}
   academyType: 5
   cardCondition: {fileID: 0}
-  effectStage: 2
+  effectStage: 3
   effectDuration: 0
   cardTarget: 3
   cardTexture: {fileID: 2800000, guid: 3bac3e8ba45c27848ab09fa013eace5a, type: 3}
