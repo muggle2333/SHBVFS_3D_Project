@@ -27,14 +27,16 @@ public class MoveStage : NetworkBehaviour
             playerList.Add(playerInteractDict.ElementAt(i).Key);
         }
         List<Player> priorityList = null;
-        //if (TurnbasedSystem.Instance.roundIndex.Value %2 != 0)
-        //{
-            priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
-        //}
-        //else
-        //{
-        //    priorityList = playerList.OrderBy(x => x.Priority).ToList();
-        //}
+
+        priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
+        if(priorityList.Count >0 )
+        {
+            UIManager.Instance.ShowWarningTimerClientRpc(priorityList[0].Id.ToString() + " move first ", 1f);
+        }
+        else
+        {
+            UIManager.Instance.ShowWarningTimerClientRpc(" Nobody Act ", 1f);
+        }
 
         while(playerInteractDict.Count!=0)
         {

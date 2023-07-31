@@ -202,6 +202,7 @@ public class PlayerManager : NetworkBehaviour
         player.transform.LookAt(direction);
         GridManager.Instance.DiscoverGridObject(player, gridObject);
         player.GetComponent<PlayerInteractionComponent>().RefreshLinePath();
+        SelectManager.Instance.ChangeSelectMode(SelectGridMode.None, 0);
 
     }
     public void SetPlayerSetting(Player player)

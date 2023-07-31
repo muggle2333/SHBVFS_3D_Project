@@ -23,7 +23,7 @@ public enum GameStage
 public class TurnbasedSystem : NetworkBehaviour
 {
     public static TurnbasedSystem Instance { get; private set; }
-    public NetworkVariable<GameStage> CurrentGameStage = new NetworkVariable<GameStage>(GameStage.S1);
+    public NetworkVariable<GameStage> CurrentGameStage = new NetworkVariable<GameStage>(GameStage.S4);
     public NetworkVariable<GameStage> CompleteGameStage = new NetworkVariable<GameStage>(GameStage.S4);
 
 
@@ -132,8 +132,6 @@ public class TurnbasedSystem : NetworkBehaviour
     IEnumerator TurnStart()
     {
         roundIndex.Value++;
-        SoundManager.Instance.PlaySoundClientRpc(Sound.ControlStart);
-        UIManager.Instance.ShowWarningTimerClientRpc("Round Start",1f);
         ControlPhase();
         UpdateTimer(S1PhaseTime);
         //yield return new WaitForSecondsRealtime(S1PhaseTime);
@@ -197,16 +195,16 @@ public class TurnbasedSystem : NetworkBehaviour
     //S1
     void ControlPhase()
     {
-        
         RefreshPlayerSkipDict();
-
-        //Debug.Log("ControlPhase");
         CurrentGameStage.Value = GameStage.S1;
         CompleteGameStage.Value = GameStage.S4;
         GameplayManager.Instance.StartControlStage();
         GameplayManager.Instance.SetCameraFocusSelfClientRpc();
-        SoundManager.Instance.PlaySoundClientRpc(Sound.GameStart);
+        //SoundManager.Instance.PlaySoundClientRpc(Sound.GameStart);
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(GameplayManager.Instance.currentPlayer);
+
+        SoundManager.Instance.PlaySoundClientRpc(Sound.ControlStart);
+        UIManager.Instance.ShowWarningTimerClientRpc("Round Start", 1f);
         //UpdateTimer(S1PhaseTime);
 
     }

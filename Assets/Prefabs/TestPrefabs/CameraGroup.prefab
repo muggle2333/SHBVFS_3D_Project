@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 339269490835202872}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &339269489797836712
 GameObject:
@@ -158,7 +158,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 0}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -230,9 +231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fb146ce75e4a9478338b292b4eaa84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundaryX: {x: -100, y: 100}
-  boundaryZ: {x: -100, y: 100}
+  boundaryX: {x: -5, y: 70}
+  boundaryZ: {x: 0, y: 60}
   AcademyTextList: []
-  moveSpeed: {x: 10, y: 10, z: 10}
-  rotateSpeed: {x: 10, y: 10, z: 10}
+  moveSpeed: {x: 5, y: 5, z: 5}
+  rotateSpeed: {x: 100, y: 10, z: 10}
   cam: {fileID: 339269489797836718}
+  offset: {x: 0.52, y: 0, z: 0.2}

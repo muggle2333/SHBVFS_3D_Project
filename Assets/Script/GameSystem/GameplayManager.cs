@@ -33,7 +33,7 @@ public class GameplayManager : NetworkBehaviour
     public event EventHandler OnPlayerSelfDying;
     public event EventHandler OnLeaveDyingStage;
 
-
+    public bool isBluePlayer = false;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -109,6 +109,10 @@ public class GameplayManager : NetworkBehaviour
 
         }
         int currentPlayrId = (int)NetworkManager.Singleton.LocalClientId;
+        if(currentPlayrId == 1)
+        {
+            isBluePlayer= true;
+        }
         currentPlayer = playerList[currentPlayrId];
         FindObjectOfType<CameraTest4>().FocusGrid();
         //GridObject currentGridObject = GridManager.Instance.grid.GetGridObject((int)playerStartPoint[currentPlayrId].x, (int)playerStartPoint[currentPlayrId].y);

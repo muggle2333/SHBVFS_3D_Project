@@ -53,15 +53,16 @@ public class SelectManager : MonoBehaviour
 
     private void TurnbaseSystem_GameStageChanged(GameStage previousValue, GameStage newValue)
     {
+        Debug.LogError(newValue); ;
         if(newValue == GameStage.S1)
         {
             selectGridMode = SelectGridMode.Default;
+            selectCount = 1;
         }
         else
         {
             selectGridMode = SelectGridMode.None;
-            //ClearSelection();
-
+            selectCount = 1;
         }
         UpdateSelectableGridObject();
         ClearSelection();
@@ -283,5 +284,10 @@ public class SelectManager : MonoBehaviour
         selectCount = num;
         UpdateSelectableGridObject();
         CleanSelectedGrid();
+    }
+
+    private void OnDestroy()
+    {
+        TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += TurnbaseSystem_GameStageChanged;
     }
 }
