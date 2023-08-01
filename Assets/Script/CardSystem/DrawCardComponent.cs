@@ -18,6 +18,7 @@ public class DrawCardComponent : NetworkBehaviour
     public Card Card;
     public int basicCardCount;
     public Camera cam;
+    private bool goldenfinger;
     //public int EventCardCount;
     //public Dictionary<AcademyType, int> AllCardCount = new Dictionary<AcademyType, int>();
 
@@ -133,7 +134,31 @@ public class DrawCardComponent : NetworkBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            goldenfinger = true;
+        }
+
+
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            cardId = 3;
+        }
+        if(Input.GetKeyDown(KeyCode.F2))
+        {
+            cardId = 0;
+        }
+        if(Input.GetKeyDown(KeyCode.F3))
+        {
+            cardId = 1;
+        }
+        if(Input.GetKeyDown(KeyCode.F4))
+        {
+            cardId = 4;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.B)&&goldenfinger)
         {
             DrawEventCardForTest(cardId);
         }
