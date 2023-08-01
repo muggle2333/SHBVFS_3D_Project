@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 22
   cardName: First Strike
-  description: All players get 1 damage
+  description: Both players deal damage equals to their own attack to each other
   headPicture: {fileID: 21300000, guid: 1d56a691a17a95d42806777d2b67790f, type: 3}
   academyType: 4
   cardCondition: {fileID: 0}

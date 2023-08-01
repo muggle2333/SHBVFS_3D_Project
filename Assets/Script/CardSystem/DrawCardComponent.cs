@@ -8,7 +8,7 @@ using Unity.Netcode;
 
 public class DrawCardComponent : NetworkBehaviour
 {
-    public int cardId;
+    public int cardId = 0;
     public static DrawCardComponent Instance;
     public Canvas parentCanvas;
     public PlayerDeck PlayerDeck;
@@ -24,7 +24,7 @@ public class DrawCardComponent : NetworkBehaviour
 
     public NetworkList<int> AllCardCount;
     public Player player;
-
+    public GameObject SB;
     private void Awake()
     {
         AllCardCount = new NetworkList<int>();
@@ -132,13 +132,23 @@ public class DrawCardComponent : NetworkBehaviour
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
     }
+
+    void ShowSB()
+    {
+        SB.SetActive(true);
+        Invoke("DisappearSB",0.5f);
+    }
+
+    void DisappearSB()
+    {
+        SB.SetActive(false);
+    }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            goldenfinger = true;
-        }
-
+        //if(Input.GetKeyDown(KeyCode.G))
+        //{
+        //    goldenfinger = true;
+        //}
 
         if(Input.GetKeyDown(KeyCode.F1))
         {
@@ -154,11 +164,15 @@ public class DrawCardComponent : NetworkBehaviour
         }
         if(Input.GetKeyDown(KeyCode.F4))
         {
-            cardId = 4;
+            cardId = 2;
         }
 
+        //if(!goldenfinger&&Input.GetKeyDown(KeyCode.B))
+        //{
+        //    ShowSB();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.B)&&goldenfinger)
+        if (Input.GetKeyDown(KeyCode.B))
         {
             DrawEventCardForTest(cardId);
         }
