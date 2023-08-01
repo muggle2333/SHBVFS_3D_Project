@@ -150,8 +150,8 @@ public class TutorialManager : MonoBehaviour
 
 
         //tutorialUI.ShowGoal();
-        tutorialUI.ShowMessageText("Press WASD to move the camera" +
-            "Scroll MOUSE WEHEL to zoom in and out" +
+        tutorialUI.ShowMessageText("Press WASD to move the camera  " +
+            "Scroll MOUSE WEHEL to zoom in and out  " +
             "Press MOUSE WHEEL to rotate");
         cameraComponent.LockCamera(false);
         OnStartSpecificTutorial?.Invoke(this,EventArgs.Empty);
@@ -175,7 +175,7 @@ public class TutorialManager : MonoBehaviour
 
         isActionCompleted = true;                                 // No judge button, have to reset
         tutorialUI.ShowIcons(0);
-        tutorialUI.ShowMessageText("             " + "is your action point, which you spend in every turn");
+        tutorialUI.ShowMessageText("             " + "     is your action point, which you spend in every turn");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 2);
 
@@ -184,7 +184,7 @@ public class TutorialManager : MonoBehaviour
         isActionCompleted = true;                                 // No judge button, have to reset
         tutorialUI.IconsDiappear(0);
         tutorialUI.ShowIcons(1);
-        tutorialUI.ShowMessageText("      " + "is your health, you will die if it comes to 0");
+        tutorialUI.ShowMessageText("      " + "       is your health, you will die if it comes to 0");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 3);
 
@@ -193,7 +193,7 @@ public class TutorialManager : MonoBehaviour
         isActionCompleted = true;                                 // No judge button, have to reset
         tutorialUI.IconsDiappear(1);
         tutorialUI.ShowIcons(2);
-        tutorialUI.ShowMessageText("             " + "is your attack damage");
+        tutorialUI.ShowMessageText("             " + "        is your attack damage");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 4);
 
@@ -202,7 +202,7 @@ public class TutorialManager : MonoBehaviour
         isActionCompleted = true;                                 // No judge button, have to reset
         tutorialUI.IconsDiappear(2);
         tutorialUI.ShowIcons(3);
-        tutorialUI.ShowMessageText("      " + "is your defense, which can resist some damage for you");
+        tutorialUI.ShowMessageText("      " + "       is your defense, which can resist some damage for you");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 5);
 
@@ -211,7 +211,7 @@ public class TutorialManager : MonoBehaviour
         isActionCompleted = true;                                 // No judge button, have to reset
         tutorialUI.IconsDiappear(3);
         tutorialUI.ShowIcons(4);
-        tutorialUI.ShowMessageText("      " + "is your range");
+        tutorialUI.ShowMessageText("      " + "        is your range");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 6);
 
