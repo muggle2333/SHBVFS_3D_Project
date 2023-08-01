@@ -24,7 +24,7 @@ public class DrawCardComponent : NetworkBehaviour
 
     public NetworkList<int> AllCardCount;
     public Player player;
-
+    public GameObject SB;
     private void Awake()
     {
         AllCardCount = new NetworkList<int>();
@@ -132,6 +132,17 @@ public class DrawCardComponent : NetworkBehaviour
         PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
         CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, Card.cardId);
     }
+
+    void ShowSB()
+    {
+        SB.SetActive(true);
+        Invoke("DisappearSB",0.5f);
+    }
+
+    void DisappearSB()
+    {
+        SB.SetActive(false);
+    }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.G))
@@ -154,9 +165,13 @@ public class DrawCardComponent : NetworkBehaviour
         }
         if(Input.GetKeyDown(KeyCode.F4))
         {
-            cardId = 4;
+            cardId = 2;
         }
 
+        if(!goldenfinger&&Input.GetKeyDown(KeyCode.B))
+        {
+            ShowSB();
+        }
 
         if (Input.GetKeyDown(KeyCode.B)&&goldenfinger)
         {
