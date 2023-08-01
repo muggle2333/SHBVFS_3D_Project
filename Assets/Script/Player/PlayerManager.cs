@@ -233,12 +233,16 @@ public class PlayerManager : NetworkBehaviour
         {
             player.freeMoveCount--;
         }
+        else
+        {
+            player.moveCount++;
+        }
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
         GridManager.Instance.DiscoverGridObject(player,gridObject);
         UpdateGridAuthorityData(player, gridObject);
         //player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
         player.GetComponent<PlayerInteractionComponent>().DeduceFirstPath();
-        player.moveCount++;
+        
         GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
         
         if(gridObject.landType==LandType.Mountain)

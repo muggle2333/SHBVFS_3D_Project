@@ -53,7 +53,7 @@ public class SelectManager : MonoBehaviour
 
     private void TurnbaseSystem_GameStageChanged(GameStage previousValue, GameStage newValue)
     {
-        Debug.LogError(newValue); ;
+        //Debug.LogError(newValue); ;
         if(newValue == GameStage.S1)
         {
             selectGridMode = SelectGridMode.Default;

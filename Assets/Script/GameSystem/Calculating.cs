@@ -44,7 +44,7 @@ public class Calculating : NetworkBehaviour
     public Dictionary<Player, int> totalAcademyAPPerRoundDic = new Dictionary<Player, int>();
     public Dictionary<Player, int> totalAcademyBasicCardPerRoundDic = new Dictionary<Player, int>();
     public Dictionary<Player, AcademyBuffData> AcademyBuffDataDict = new Dictionary<Player, AcademyBuffData>();
-    public int[] academyEffectNum = new int[6];
+    public int[] AcademyEffectNum = new int[6];
     public Dictionary<Player, int[]> totalAcademyEffectNum = new Dictionary<Player, int[]>();
     //public AcademyBuffData AcademyBuffData;
     public Card CardData;
@@ -123,7 +123,11 @@ public class Calculating : NetworkBehaviour
         cardDamage = card.Damage;
         cardAP = card.playerDataEffect.actionPoint;
         cardHP = card.playerDataEffect.hp;
-        academyEffectNum = card.academyEffectNum;
+        for(int i=0;i< card.academyEffectNum.Length; i++)
+        {
+            AcademyEffectNum[i] = card.academyEffectNum[i];
+        }
+        
         if (NetworkManager.Singleton.IsServer)
         {
             if (card.cardTarget == CardTarget.opponent)
@@ -131,7 +135,7 @@ public class Calculating : NetworkBehaviour
                 var enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
                 for (int i = 0; i < 6; i++)
                 {
-                    enemy.cardAcademyEffectNum[i] += academyEffectNum[i];
+                    enemy.cardAcademyEffectNum[i] += AcademyEffectNum[i];
                 }
                 playerAcademyBuffcomponent.UpdatePlayerAcademyBuffServerRpc(enemy.Id);
             }
@@ -139,7 +143,7 @@ public class Calculating : NetworkBehaviour
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    player.cardAcademyEffectNum[i] += academyEffectNum[i];
+                    player.cardAcademyEffectNum[i] += AcademyEffectNum[i];
                 }
                 playerAcademyBuffcomponent.UpdatePlayerAcademyBuffServerRpc(player.Id);
             }
@@ -162,11 +166,10 @@ public class Calculating : NetworkBehaviour
         player.cardAR = 0;
         player.cardDF = 0;
         player.canCost1APInEnemy = false;
-        player.canAttack = true;
         player.playedCardCount = 0;
         for (int i = 0; i < 6 ; i++)
         {
-            academyEffectNum[i] = 0;
+            AcademyEffectNum[i] -= 0;
         }
         totalCardAttackRangeDic[player] = 0;
         totalCardDefenseDic[player] = 0;
@@ -271,7 +274,7 @@ public class Calculating : NetworkBehaviour
         }
         else
         {
-            enemy.HP -= cardHP;
+            enemy.HP += cardHP;
         }
 
         if (player.HP > player.MaxHP)

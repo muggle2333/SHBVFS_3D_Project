@@ -133,7 +133,7 @@ public class DrawCardComponent : NetworkBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             DrawEventCardForTest(cardId);
         }
