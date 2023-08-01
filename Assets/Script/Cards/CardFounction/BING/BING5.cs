@@ -8,12 +8,12 @@ public class BING5 : CardFunction
     {
         if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
         {
-            Function();
-            Destroy(gameObject);
+            Invoke("Function", 0.3f);
         }
     }
     void Function()
     {
         player.canCost1APInEnemy = true;
+        Destroy(gameObject);
     }
 }
