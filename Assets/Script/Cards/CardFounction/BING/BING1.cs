@@ -13,12 +13,13 @@ public class BING1 : CardFunction
     // Update is called once per frame
     void Function()
     {
-        for(int i = 0; i < 2; i++)
+        if(GameplayManager.Instance.playerList[0].Defence< GameplayManager.Instance.playerList[1].AttackDamage)
         {
-            if(GameplayManager.Instance.playerList[i].Defence == 0)
-            {
-                GameplayManager.Instance.playerList[i].HP --;
-            }
+            GameplayManager.Instance.playerList[0].HP -= GameplayManager.Instance.playerList[1].AttackDamage - GameplayManager.Instance.playerList[0].Defence;
+        }
+        if (GameplayManager.Instance.playerList[1].Defence < GameplayManager.Instance.playerList[0].AttackDamage)
+        {
+            GameplayManager.Instance.playerList[1].HP -= GameplayManager.Instance.playerList[0].AttackDamage - GameplayManager.Instance.playerList[1].Defence;
         }
         Destroy(gameObject);
     }
