@@ -284,8 +284,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         }//turn off Info
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, true);
         //UIManager.Instance.SetGameplayPlayUI(GameplayUIType.cancelDying, true);
-        cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + (0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1;
-        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == cardSelectManager.maxSelected[GameplayManager.Instance.currentPlayer])
+        cardSelectManager.ToPlayHPText.text = cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] + " / " + ((0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1);
+        if (cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer] == ((0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1))
         {
             UIManager.Instance.SetGameplayPlayUIInteractable(GameplayUIType.playHP, true);
             cardSelectManager.ToPlayHPText.color = new Color32(255, 200, 71, 255);//green
