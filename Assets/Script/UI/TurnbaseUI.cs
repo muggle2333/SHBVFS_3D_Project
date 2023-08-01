@@ -64,15 +64,15 @@ public class TurnbaseUI : MonoBehaviour
             case GameStage.DiscardStage:
                 stageText.text = "Discard Stage";break;
             case GameStage.S2:
-                stageText.text = "Discard Stage"; break;
+                stageText.text = "Calculating"; break;
             case GameStage.MoveStage:
                 stageText.text = "Move Stage";break;
             case GameStage.S3:
-                stageText.text = "Move Stage"; break;
+                stageText.text = "Calculating"; break;
             case GameStage.AttackStage:
                 stageText.text = "Attack Stage";break;
             case GameStage.S4:
-                stageText.text = "Attack Stage";break;
+                stageText.text = "Calculating"; break;
             
         }
         if (timer <= 0) timer = 0;

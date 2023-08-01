@@ -43,7 +43,7 @@ public class GridVfxManager : MonoBehaviour
     {
         CreateVfx();
 
-        Invoke("GetAllVfxAcademy", 3f);
+        //Invoke("GetAllVfxAcademy", 3f);
     }
     public void CreateVfx()
     {
