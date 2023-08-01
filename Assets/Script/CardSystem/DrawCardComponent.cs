@@ -8,7 +8,7 @@ using Unity.Netcode;
 
 public class DrawCardComponent : NetworkBehaviour
 {
-    public int cardId;
+    public int cardId = 0;
     public static DrawCardComponent Instance;
     public Canvas parentCanvas;
     public PlayerDeck PlayerDeck;
@@ -145,11 +145,10 @@ public class DrawCardComponent : NetworkBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            goldenfinger = true;
-        }
-
+        //if(Input.GetKeyDown(KeyCode.G))
+        //{
+        //    goldenfinger = true;
+        //}
 
         if(Input.GetKeyDown(KeyCode.F1))
         {
@@ -168,12 +167,12 @@ public class DrawCardComponent : NetworkBehaviour
             cardId = 2;
         }
 
-        if(!goldenfinger&&Input.GetKeyDown(KeyCode.B))
-        {
-            ShowSB();
-        }
+        //if(!goldenfinger&&Input.GetKeyDown(KeyCode.B))
+        //{
+        //    ShowSB();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.B)&&goldenfinger)
+        if (Input.GetKeyDown(KeyCode.B))
         {
             DrawEventCardForTest(cardId);
         }
