@@ -83,7 +83,7 @@ public class PlayerManager : NetworkBehaviour
 
     private void UpdatePlayerBlueCard(NetworkListEvent<int> changeEvent)
     {
-        GameplayManager.Instance.playerList[1].GetComponentInChildren<PlayerInteractionComponent>().UpdateCardNum(redPlayerHandCardsList.Count);
+        GameplayManager.Instance.playerList[1].GetComponentInChildren<PlayerInteractionComponent>().UpdateCardNum(bluePlayerHandCardsList.Count);
     }
 
     public void ResetPlayerDateAfterControlStage(Player player)

@@ -29,10 +29,15 @@ public class MO3 : CardFunction
             if(count == 3)
             {
                 player.canAttack = true;
+                Destroy(gameObject);
             }
         }
         if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1 && hasAdd == true)
         {
+            if(count != 3)
+            {
+                player.canAttack = false;
+            }
             hasAdd = false;
         }
     }
@@ -63,10 +68,7 @@ public class MO3 : CardFunction
             PlayerManager.Instance.cardSelectManager.UpdateCardPos(player);
             CardManager.Instance.AddCardToPlayerHandServerRpc(player.Id, card.cardId);
         }
-        if(count == 2)
-        {
-            Destroy(gameObject);
-        }
+        
 
     }
 }

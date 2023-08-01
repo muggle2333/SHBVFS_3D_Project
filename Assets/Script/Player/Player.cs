@@ -80,6 +80,7 @@ public class Player : Character
             { AcademyType.RU,null },
         }*/;
 
+
     //public int[] academyOwnedPoint = new int[6];
 
     [System.Serializable]
@@ -99,6 +100,8 @@ public class Player : Character
         totalAcademyOwnedPoint = new NetworkList<int>();
 
     }
+
+
     void Start()
     {
         MaxHP = 3;
@@ -301,8 +304,9 @@ public class Player : Character
     }
     public void UpdatePlayerOwnedLandAcademyBuff(AcademyType preAcademy, AcademyType newAcademy)
     {
+        if (!NetworkManager.Singleton.IsHost) return;
         academyOwnedPoint[(int)preAcademy - 1]--;
         academyOwnedPoint[(int)newAcademy - 1]++;
-
+        FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(Id);
     }
 }

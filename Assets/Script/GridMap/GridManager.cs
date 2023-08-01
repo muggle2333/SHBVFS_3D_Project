@@ -420,7 +420,9 @@ public class GridManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeGridObjectAcademyClientRpc(Vector2Int gridObjectXZ, AcademyType academyType)
     {
-        grid.gridArray[gridObjectXZ.x, gridObjectXZ.y].academy = academyType;
+        var gridObject = grid.gridArray[gridObjectXZ.x, gridObjectXZ.y];
+        gridObject.owner.UpdatePlayerOwnedLandAcademyBuff(gridObject.academy, academyType);
+        gridObject.academy = academyType;
     }
 
     [ServerRpc(RequireOwnership = false)]

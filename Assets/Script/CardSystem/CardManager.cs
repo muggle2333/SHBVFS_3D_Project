@@ -43,6 +43,13 @@ public class CardManager : NetworkBehaviour
         if (FindObjectOfType<NetworkManager>()) return;
         InitializeCardManager();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Debug.LogError(playerHandCardDict[GameplayManager.Instance.playerList[1]].Count);
+        }
+    }
     public void InitializeCardManager()
     {
         List<Player> playerList = new List<Player>();

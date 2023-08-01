@@ -464,6 +464,18 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.Join(DOTween.To(() => this.gameObject.GetComponent<CanvasGroup>().alpha, x => this.gameObject.GetComponent<CanvasGroup>().alpha = x, 0, 0.5f));
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
+    public void CardDiscardAnimation_FA4()
+    {
+        Interactable = false;
+        //this.EndSelectDiscard();
+        this.transform.SetParent(cardSelectManager.canvas.transform);
+        //SoundManager.Instance.PlaySound(Sound.DiscardCard);
+        var seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveY(0, 0.4f));
+        seq.AppendInterval(0.5f);
+        seq.Join(DOTween.To(() => this.gameObject.GetComponent<CanvasGroup>().alpha, x => this.gameObject.GetComponent<CanvasGroup>().alpha = x, 0, 0.5f));
+        seq.AppendCallback(() => { Destroy(this.gameObject); });
+    }
     public void HPCardAnimation()
     {
         vfxFloat = 1;
