@@ -33,6 +33,7 @@ public class CardSelectManager : MonoBehaviour
     [SerializeField] private float duration;
 
     public event EventHandler OnDiscardCard;
+    public event EventHandler OnPlayHpCard;
 
     //public CardSelectComponent[] cardsArray;
     //public List<CardSelectComponent> cardsList;
@@ -105,6 +106,7 @@ public class CardSelectManager : MonoBehaviour
         maxSelected[player] = 1;
         player.RecoverHpServerRpc( ((0 - GameplayManager.Instance.currentPlayer.HP) / 2 + 1) * 2 );
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, false);
+        OnPlayHpCard?.Invoke(this, EventArgs.Empty);
     }
 
     public void PlayCards(Player player)

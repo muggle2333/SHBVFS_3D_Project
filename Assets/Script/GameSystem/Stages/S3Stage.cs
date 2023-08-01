@@ -66,7 +66,7 @@ public class S3Stage : MonoBehaviour
                     playedCardDict[priorityList[i]].RemoveAt(0);
 
                     //Check dying
-                    List<Player> dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
+                    /*List<Player> dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
                     if (dyingPlayers.Count == 0)
                     {
                         TurnbasedSystem.Instance.isDie.Value = false;
@@ -86,7 +86,12 @@ public class S3Stage : MonoBehaviour
                             TurnbasedSystem.Instance.isDie.Value = false;
                             GameplayManager.Instance.LeaveDyingStageClientRpc();
                         }
+                        DyingManager.Instance.StartDyingStage();
                     }
+                    yield return new WaitUntil(() => TurnbasedSystem.Instance.isDie.Value == false);*/
+                    DyingManager.Instance.CheckIsDying();
+                    yield return new WaitForSecondsRealtime(0.2f);
+                    yield return new WaitUntil(() => TurnbasedSystem.Instance.isDie.Value == false);
                 }
             }
         }

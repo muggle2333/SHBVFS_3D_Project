@@ -66,28 +66,9 @@ public class S4Stage : MonoBehaviour
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
                     playedCardDict[priorityList[i]].RemoveAt(0);
                     //Check dying
-                    List<Player> dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
-                    if (dyingPlayers.Count == 0)
-                    {
-                        TurnbasedSystem.Instance.isDie.Value = false;
-                    }
-                    else
-                    {
-                        TurnbasedSystem.Instance.isDie.Value = true;
-                        GameplayManager.Instance.PlayerDyingStageClientRpc();
-                        yield return new WaitForSeconds(GameplayManager.DYING_TIMER);
-                        //Recheck is Dying
-                        dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
-                        if (dyingPlayers.Count > 0)
-                        {
-                            GameManager.Instance.SetGameOver();
-                        }
-                        else
-                        {
-                            TurnbasedSystem.Instance.isDie.Value = false;
-                            GameplayManager.Instance.LeaveDyingStageClientRpc();
-                        }
-                    }
+                    DyingManager.Instance.CheckIsDying();
+                    yield return new WaitForSecondsRealtime(0.2f);
+                    yield return new WaitUntil(() => TurnbasedSystem.Instance.isDie.Value == false);
                 }
             }
         }

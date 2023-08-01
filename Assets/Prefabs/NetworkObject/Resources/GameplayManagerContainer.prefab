@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6936664478954252187}
   - component: {fileID: 6936664478954252188}
   - component: {fileID: 6936664478954252189}
+  - component: {fileID: 5149030413953117376}
   m_Layer: 0
   m_Name: GameplayManagerContainer
   m_TagString: Untagged
@@ -76,6 +77,7 @@ MonoBehaviour:
   currentPlayer: {fileID: 0}
   gameplayUI: {fileID: 0}
   discardStage: {fileID: 0}
+  isBluePlayer: 0
 --- !u!114 &6936664478954252166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,5 +186,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player0LandCount: 0
   player1LandCount: 0
-  dyingTimer: 10
   cardSelectManager: {fileID: 0}
+--- !u!114 &5149030413953117376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115149969472261574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceeb26907ad557e45b2011ce1f115677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

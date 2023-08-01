@@ -17,6 +17,7 @@ public class DyingUI : MonoBehaviour
         GameplayManager.Instance.OnPlayerDying += GameplayManager_OnPlayerDying;
         //GameplayManager.Instance.OnPlayerSelfDying += GameplayManager_OnPlayerSelfDying;
         GameplayManager.Instance.OnLeaveDyingStage += GameplayManager_OnLeaveDyingStage;
+        FindObjectOfType<CardSelectManager>().OnPlayHpCard += CardSelectManager_OnPlayHpCard;
     }
     public void Update()
     {
@@ -40,11 +41,11 @@ public class DyingUI : MonoBehaviour
         {
             if(GameplayManager.Instance.currentPlayer.HP<=0)
             {
-                dyingTitle.text = "</nobr>YOU ARE DYING </nobr> PLAY CARD TO HEAL";
+                dyingTitle.text = "</nobr>YOU ARE DYING </nobr>  PLAY CARD TO HEAL";
             }
             else
             {
-                dyingTitle.text = " ENEMY IS DYING";
+                dyingTitle.text = " ENEMY IS DYING ";
             }
         }
         //else if(GameplayManager.Instance.GetDyingPlayer().Count == 2)
@@ -62,11 +63,16 @@ public class DyingUI : MonoBehaviour
         //selfDyingNotice.SetActive(false);
         container.SetActive(false);
     }
+    private void CardSelectManager_OnPlayHpCard(object sender, EventArgs e)
+    {
+        dyingTitle.text = " ENEMY IS DYING ";
+    }
 
     private void OnDestroy()
     {
         GameplayManager.Instance.OnPlayerDying -= GameplayManager_OnPlayerDying;
         //GameplayManager.Instance.OnPlayerSelfDying -= GameplayManager_OnPlayerSelfDying;
         GameplayManager.Instance.OnLeaveDyingStage -= GameplayManager_OnLeaveDyingStage;
+        FindObjectOfType<CardSelectManager>().OnPlayHpCard -= CardSelectManager_OnPlayHpCard;
     }
 }
