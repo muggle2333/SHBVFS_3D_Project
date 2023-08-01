@@ -148,7 +148,15 @@ public class DrawCardComponent : NetworkBehaviour
         {
             cardId = 0;
         }
-        
+        if(Input.GetKeyDown(KeyCode.F3))
+        {
+            cardId = 1;
+        }
+        if(Input.GetKeyDown(KeyCode.F4))
+        {
+            cardId = 4;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.B)&&goldenfinger)
         {
