@@ -108,7 +108,7 @@ public class Player : Character
         HP = MaxHP;
         AttackDamage = 1;
         Defence = 0;
-        Range = 1;
+        Range = 20;
         ActionPointPerRound = 3;
         CurrentActionPoint = 0;
         MaxActionPoint = 3;

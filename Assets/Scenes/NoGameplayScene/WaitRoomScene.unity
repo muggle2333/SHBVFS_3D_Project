@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 949485469}
-  m_IndirectSpecularColor: {r: 0.5618844, g: 0.44064933, b: 0.34642553, a: 1}
+  m_IndirectSpecularColor: {r: 0.56188446, g: 0.4406493, b: 0.34642553, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: ffb3728d34ee338479f13d5663359e5c, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 531730cf9d466eb44971b4a9839c465a, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6653,6 +6653,10 @@ PrefabInstance:
     - target: {fileID: 8228855075008296302, guid: 9706d3cfc5bb3cd44a97f9a4a3582b90, type: 3}
       propertyPath: m_Name
       value: WaitRoomUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228855075623888371, guid: 9706d3cfc5bb3cd44a97f9a4a3582b90, type: 3}
+      propertyPath: m_Options.m_Options.Array.size
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

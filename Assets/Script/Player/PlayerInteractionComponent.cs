@@ -54,11 +54,16 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void UpdateCardNum(int num)
     {
+        if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1 && playerText.text== "ENEMY")
+        {
+            cardText.text = "--";
+            return;
+        }
         cardText.text = num.ToString();
     }
     public void SetPlayerName(bool isSelf)
     {
-        playerText.text = isSelf ? "SELF" : "RIVAL";
+        playerText.text = isSelf ? "SELF" : "ENEMY";
 
     }
     public void Move(GridObject gridObject)
@@ -239,6 +244,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void PlayHitVfxRed()
     {
+        Debug.LogError(this.gameObject + "Hited");
         var seq = DOTween.Sequence();
         seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(1, 0.5f, 0.5f), 0.2f);});
         seq.AppendInterval(0.2f);

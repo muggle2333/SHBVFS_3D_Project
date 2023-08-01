@@ -320,7 +320,6 @@ public class GameplayManager : NetworkBehaviour
             if (playerList[i].HP <= 0)
             {
                 dyingPlayers.Add(playerList[i]);
-                Debug.LogError(playerList[i].Id);
             }
         }
         return dyingPlayers;

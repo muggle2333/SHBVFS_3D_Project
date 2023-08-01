@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridManager : NetworkBehaviour
@@ -457,6 +458,20 @@ public class GridManager : NetworkBehaviour
             gridObject.SetBuilding(true,false);
         }
         GridVfxManager.Instance.UpdateVfxBuilding(gridObject, false);
+    }
+
+    public int GetGridDistance(GridObject start,GridObject dest)
+    {
+        //int xsteps = Mathf.Abs(gridObject2.x-gridObject1.x);
+        //int zsteps = Mathf.Abs(gridObject2.z-gridObject1.z);
+        //return Mathf.Max(xsteps, zsteps) + Mathf.Abs(xsteps - zsteps);
+        int test1 = Mathf.Abs(dest.z - start.z);
+        int test2 = (int)Mathf.Abs(Mathf.Ceil(dest.z / -2) + dest.x - Mathf.Ceil(start.z / -2) - start.x);
+        int test3 = (int)Mathf.Abs(-dest.z - Mathf.Ceil(dest.z / -2) - dest.x + start.z + Mathf.Ceil(start.z / -2) + start.x);
+
+
+        int distance = Mathf.Max(test1,test2,test3);
+        return distance;
     }
 }
 

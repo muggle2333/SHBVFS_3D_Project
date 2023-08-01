@@ -462,6 +462,7 @@ public class PlayerManager : NetworkBehaviour
         return (int)Math.Ceiling(Vector3.Distance(startPos, dirPos) / GridManager.Instance.gridDistance);
         
     }
+    
  
     public bool CheckOccupiable(Player player, GridObject gridObject)
     {
