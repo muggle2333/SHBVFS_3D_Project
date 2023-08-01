@@ -27,7 +27,6 @@ public class FA4 : CardFunction
                 FindObjectOfType<CardSelectManager>().UpdateCardPos(enemy);
             }
         }
-        
         Destroy(gameObject);
     }
 }

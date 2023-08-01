@@ -10,12 +10,6 @@ public class FA5 : CardFunction
     {
         Function();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void Function()
     {
         if (GameplayManager.Instance.currentPlayer.Id == player.Id)
