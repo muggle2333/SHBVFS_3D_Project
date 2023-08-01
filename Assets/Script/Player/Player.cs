@@ -98,10 +98,7 @@ public class Player : Character
         academyOwnedPoint = new NetworkList<int>();
         cardAcademyEffectNum = new NetworkList<int>();
         totalAcademyOwnedPoint = new NetworkList<int>();
-
     }
-
-
     void Start()
     {
         MaxHP = 3;
@@ -152,7 +149,6 @@ public class Player : Character
             Defence = 0;
         }
     }
-
     public void UpdateDataPerTurn()
     {
         CurrentActionPoint = CurrentActionPoint + ActionPointPerRound > MaxActionPoint ? MaxActionPoint : CurrentActionPoint + ActionPointPerRound;

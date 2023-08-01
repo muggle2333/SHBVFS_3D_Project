@@ -61,8 +61,7 @@ public class S2Stage : MonoBehaviour
         }
         playerList = new List<Player>();
         playerList = GameplayManager.Instance.GetPlayer();
-        playerList[0].startGrid = playerList[0].currentGrid;
-        playerList[1].startGrid = playerList[1].currentGrid;
+        PlayerManager.Instance.SavePlayerStartGricClientRpc();
         //Debug.LogError("Red has played " + playedCardListDict[GameplayManager.Instance.playerList[0]].Count + "cards");
         StartCoroutine("S2CardTakeEffect");
 

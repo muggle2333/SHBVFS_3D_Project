@@ -534,6 +534,11 @@ public class PlayerManager : NetworkBehaviour
         bluePlayerHandCardsList.Dispose();
         Pool.Instance.Clear();
     }
-
+    [ClientRpc]
+    public void SavePlayerStartGricClientRpc()
+    {
+        GameplayManager.Instance.playerList[0].startGrid = GameplayManager.Instance.playerList[0].currentGrid;
+        GameplayManager.Instance.playerList[1].startGrid = GameplayManager.Instance.playerList[1].currentGrid;
+    }
     
 }

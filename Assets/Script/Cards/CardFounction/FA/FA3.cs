@@ -28,7 +28,7 @@ public class FA3 : CardFunction
     }
     void Function()
     {
-        if(player.startGrid == player.currentGrid)
+        if(GridManager.Instance.CheckGridObjectIsSame(player.startGrid, player.currentGrid))
         {
             PlayerManager.Instance.MovePlayerNoAP(player, GridManager.Instance.GetGridObject(grid));
         }
