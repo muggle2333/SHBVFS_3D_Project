@@ -49,14 +49,7 @@ public class AttackStage : MonoBehaviour
     IEnumerator StartAttack()
     {
         List<Player> playerList = GameplayManager.Instance.GetPlayer();
-        //if (TurnbasedSystem.Instance.roundIndex.Value % 2 != 0)
-        //{
-        //    playerList = playerList.OrderBy(x => x.Priority).ToList();
-        //}
-        //else
-        //{
-            playerList = playerList.OrderByDescending(x => x.Priority).ToList();
-        //}
+        playerList = playerList.OrderByDescending(x => x.Priority).ToList();
         //Attack per Player
         for (int i = 0; i < playerList.Count; i++)
         {
@@ -68,28 +61,31 @@ public class AttackStage : MonoBehaviour
             for (int j = 0; j < playerList.Count; j++)
             {
                 if (j == i) continue;
-                distance = PlayerManager.Instance.CheckDistance(playerList[i], playerList[j].currentGrid);
+                //distance = PlayerManager.Instance.CheckDistance(playerList[i], playerList[j].currentGrid);
+                distance = GridManager.Instance.GetGridDistance(playerList[i].currentGrid, playerList[j].currentGrid);
+                Debug.LogError(distance);
                 //Debug.LogError(playerList[i] + " distance " + distance);
                 
-                if (distance < minDistance && playerList[i].Range >= distance)
+                //if (distance < minDistance && playerList[i].Range >= distance)
+                if (playerList[i].Range >= distance)
                 {
-                    minDistance = distance;
-                    targetIndex = j;
-                    if (targetIndex != i)
+                minDistance = distance;
+                targetIndex = j;
+                if (targetIndex != i)
+                {
+                    if (FindObjectOfType<NetworkManager>() == null)
                     {
-                        if (FindObjectOfType<NetworkManager>() == null)
-                        {
-                            playerList[i].AttackTarget = playerList[targetIndex];
-                            playerList[i].Attack();
-                            playerList[targetIndex].GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
-                            SoundManager.Instance.PlaySound(Sound.Attack);
-                            //Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
-                        }
-                        else
-                        {
-                            PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
-                        }
+                        playerList[i].AttackTarget = playerList[targetIndex];
+                        playerList[i].Attack();
+                        playerList[targetIndex].GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
+                        SoundManager.Instance.PlaySound(Sound.Attack);
+                        //Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
                     }
+                    else
+                    {
+                        PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
+                    }
+                }
                 }
 
             }

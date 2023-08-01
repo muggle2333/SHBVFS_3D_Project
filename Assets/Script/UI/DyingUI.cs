@@ -73,6 +73,10 @@ public class DyingUI : MonoBehaviour
         GameplayManager.Instance.OnPlayerDying -= GameplayManager_OnPlayerDying;
         //GameplayManager.Instance.OnPlayerSelfDying -= GameplayManager_OnPlayerSelfDying;
         GameplayManager.Instance.OnLeaveDyingStage -= GameplayManager_OnLeaveDyingStage;
-        FindObjectOfType<CardSelectManager>().OnPlayHpCard -= CardSelectManager_OnPlayHpCard;
+        //FindObjectOfType<CardSelectManager>().OnPlayHpCard -= CardSelectManager_OnPlayHpCard;
+        if(FindObjectOfType<CardSelectManager>()!=null)
+        {
+            FindObjectOfType<CardSelectManager>().OnPlayHpCard -= CardSelectManager_OnPlayHpCard;
+        }
     }
 }
