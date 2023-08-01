@@ -36,6 +36,9 @@ public class TutorialManager : MonoBehaviour
     private bool firstPartTutorialOver = false;
     private bool isPlayCardCorotine=false;
     private bool isCardPlayed = false;
+    public bool waterTrigger;
+    private int enterWaterTimes=0;
+    private bool IsGreat;
    
     private void Awake()
     {
@@ -48,13 +51,14 @@ public class TutorialManager : MonoBehaviour
             playerTransform.GetComponent<Player>().Id = (PlayerId)clientId;
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
         }
-
         enemy.GetComponent<Player>().Id = (PlayerId)1;
 
+      
     }
 
     public void Start()
     {
+        
         tutorialUI.AcademyBuffDisappear();
         Player player = GameplayManager.Instance.currentPlayer;
         player.CurrentActionPoint = player.MaxActionPoint;
@@ -77,9 +81,12 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        if(completeIndex < 14)
-        TurnbasedSystem.Instance.timerValue.Value = 60f;
-       // Debug.Log(isActionCompleted);
+
+        if (completeIndex < 14)
+        {
+            TurnbasedSystem.Instance.timerValue.Value = 60f;
+        }
+
         switch (completeIndex)
         {
             case -2: 
@@ -113,13 +120,17 @@ public class TutorialManager : MonoBehaviour
             DrawCardJudge();
         }
         
-        Debug.Log(completeIndex);
-        Debug.Log(isActionCompleted);
+        if(waterTrigger&&(enterWaterTimes<1))
+        {
+            StartCoroutine("WaterLand");
+            enterWaterTimes++;
+        }
        
 
     }
     IEnumerator Tutorial()
     {
+        //SelectManager.Instance.selectGridMode = SelectGridMode.None;
         tutorialUI.ShowMessageText("Welcome! General");
         cameraComponent.LockCamera(true);
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
@@ -144,6 +155,8 @@ public class TutorialManager : MonoBehaviour
             "Press MOUSE WHEEL to rotate");
         cameraComponent.LockCamera(false);
         OnStartSpecificTutorial?.Invoke(this,EventArgs.Empty);
+        //Debug.Log(isActionCompleted);
+        //Debug.Log(completeIndex);
         yield return new WaitUntil(() => completeIndex==-1);
 
 
@@ -154,6 +167,7 @@ public class TutorialManager : MonoBehaviour
 
         isActionCompleted = true;                                 // No judge button, have to reset
         tutorialUI.ShowMessageText("LeftFrame-down corn is your information");
+        tutorialUI.ShowPlayerData(true);
         tutorialUI.ShowFrame();
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 1);
@@ -166,12 +180,14 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => completeIndex == 2);
 
 
+
         isActionCompleted = true;                                 // No judge button, have to reset
         tutorialUI.IconsDiappear(0);
         tutorialUI.ShowIcons(1);
         tutorialUI.ShowMessageText("      " + "is your health, you will die if it comes to 0");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 3);
+
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
@@ -182,12 +198,14 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => completeIndex == 4);
 
 
+
         isActionCompleted = true;                                 // No judge button, have to reset
         tutorialUI.IconsDiappear(2);
         tutorialUI.ShowIcons(3);
         tutorialUI.ShowMessageText("      " + "is your defense, which can resist some damage for you");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 5);
+
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
@@ -289,32 +307,13 @@ public class TutorialManager : MonoBehaviour
         
     }
 
-    //IEnumerator PlayCard()
-    //{
-    //    // OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-    //    tutorialUI.ShowMessageText("Now, you can play cards");
-    //    yield return new WaitForSecondsRealtime(1f);
-
-    //    tutorialUI.ShowMessageText("LeftFrame Click the card to choose, Right Click to cancel, Double Click the card to play");
-    //    FindObjectOfType<CardSelectComponent>().isLocked = false;
-    //    OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-    //    yield return new WaitUntil(() => completeIndex == 14);
-
-
-    //    isActionCompleted = true;
-    //    tutorialUI.ShowMessageText("Now, you can press Skip to skip order phase or spend rest action point");
-    //    tutorialUI.ShowSkip();
-    //    OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-    //    yield return new WaitUntil(() => completeIndex == 15);
-
-    //    StopCoroutine("PlayCard");
-    //}
+ 
 
     IEnumerator WaterLand()
     {
         tutorialUI.ShowMessageText("It will cause 2 action points if you step into water. But you can move without actionpoint in water. And it will only cause 1 action point to step out water.");
+        isActionCompleted = true;
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-
         yield return null;
     }
     public void CompleteSpecificTutorial()
@@ -324,22 +323,27 @@ public class TutorialManager : MonoBehaviour
             completeIndex++;
             FindObjectOfType<TutorialUI>().nextBtn.gameObject.SetActive(false);
             isActionCompleted = false;
-
-            if (((searchTimes == 1) || (buildTimes == 1) || (drawTimes == 1)))
+            tutorialUI.HideTutorial();
+            
+            if (((searchTimes == 1) || (buildTimes == 1) || (drawTimes == 1))&&!IsGreat)
             {
                 //tutorialUI.ShowMessageText("Now, you can give further orders to this grid");
                 //completeIndex--;
                 tutorialUI.ShowMessageText("Great,now you can choose to coninue ordering or skip");
+                isActionCompleted=true;
+                SelectManager.Instance.selectGridMode = SelectGridMode.Default;
+                SelectManager.Instance.UpdateSelectableGridObject();
+                OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
                 tutorialUI.ShowSkip();
-                
+                IsGreat = true;
                 completeIndex--;
             }
+            //else
+            //{
+            //    IsGreat = true;
+            //}
+            
 
-            if ((buildTimes >= 1) && (searchTimes >= 1) && (drawTimes >= 1) && firstPartTutorialOver)
-            {
-                
-                
-            }
         }
         else
         {
@@ -357,8 +361,10 @@ public class TutorialManager : MonoBehaviour
 
     public void CameraMoveJudge()                                            
     {
+    
         if(Input.GetKeyDown(KeyCode.W)|| Input.GetKeyDown(KeyCode.A)|| Input.GetKeyDown(KeyCode.S)|| Input.GetKeyDown(KeyCode.D))
         {
+          
             isActionCompleted = true;
         }
     }
@@ -407,7 +413,9 @@ public class TutorialManager : MonoBehaviour
 
     public void CardPlayedJudge()
     {
-        Debug.Log(isActionCompleted);
+        SelectManager.Instance.selectGridMode = SelectGridMode.None;
+        SelectManager.Instance.UpdateSelectableGridObject();
+
         if (PlayerManager.Instance.redPlayerHandCardsList.Count < 1)
         {
             completeIndex++;

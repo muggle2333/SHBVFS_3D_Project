@@ -20,6 +20,7 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private GameObject AcademyBUffsUI;
     [SerializeField] private GameObject TopLeftFrame;
     [SerializeField] private GameObject LeftFrame;
+    [SerializeField] private GameObject PlayerDataUI;
     private void Start()
     {
         TutorialManager.Instance.OnStartSpecificTutorial += TutorialManager_OnStartSpecificTutorial;
@@ -108,6 +109,11 @@ public class TutorialUI : MonoBehaviour
     {
         LeftFrame.SetActive(isActive);
     }
+
+    public void ShowPlayerData(bool isActive)
+    {
+        PlayerDataUI.SetActive(isActive);
+    }    
     //public void GoNext()
     //{
     //    //nextBtn.gameObject.SetActive(false);
