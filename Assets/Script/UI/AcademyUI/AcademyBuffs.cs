@@ -18,7 +18,7 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             case AcademyType.YI:
                 AcademyUI.academiesBuff[2].text = "+1 Max HP";
                 AcademyUI.academiesBuff[3].text = "+2 Max HP";
-                AcademyUI.academiesBuff[4].text = "+2 Max HP, Recover 1 HP/Round";
+                AcademyUI.academiesBuff[4].text = "+2 MaxHP,\n+1 HP/r";
                 break;
             case AcademyType.DAO:
                 AcademyUI.academiesBuff[2].text = "+1 Range";
@@ -26,9 +26,9 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 AcademyUI.academiesBuff[4].text = "+3 Range";
                 break;
             case AcademyType.MO:
-                AcademyUI.academiesBuff[2].text = "Draw 1 basic card/R";
-                AcademyUI.academiesBuff[3].text = "Draw 2 basic card/R";
-                AcademyUI.academiesBuff[4].text = "Draw 3 basic card/R";
+                AcademyUI.academiesBuff[2].text = "+1 random card/r";
+                AcademyUI.academiesBuff[3].text = "+2 random card/r";
+                AcademyUI.academiesBuff[4].text = "+3 random card/r";
                 break;
             case AcademyType.BING:
                 AcademyUI.academiesBuff[2].text = "+1 Attack";
@@ -41,9 +41,9 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 AcademyUI.academiesBuff[4].text = "+2 Defense";
                 break;
             case AcademyType.FA:
-                AcademyUI.academiesBuff[2].text = "+1 AP/Round";
-                AcademyUI.academiesBuff[3].text = "+1 AP/Round";
-                AcademyUI.academiesBuff[4].text = "+2 AP/Round";
+                AcademyUI.academiesBuff[2].text = "+1 AP/r";
+                AcademyUI.academiesBuff[3].text = "+1 AP/r";
+                AcademyUI.academiesBuff[4].text = "+2 AP/r";
                 break;
         }
         if (GameplayManager.Instance.currentPlayer.Id == PlayerId.RedPlayer)
