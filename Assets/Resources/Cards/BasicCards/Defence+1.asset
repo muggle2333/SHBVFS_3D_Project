@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 2
   cardName: 
-  description: Defense +1, till this turn end
+  description: Defense +1 forever
   headPicture: {fileID: 21300000, guid: 01ec4fd10765aa14595b09c38fcc46ab, type: 3}
   academyType: 0
   cardCondition: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 1
   cardName: 
-  description: Range +1, till this turn end
+  description: Range +1 forever
   headPicture: {fileID: 21300000, guid: f1bea8b47eec6fa4ea4cf09355e5e5a5, type: 3}
   academyType: 0
   cardCondition: {fileID: 0}
