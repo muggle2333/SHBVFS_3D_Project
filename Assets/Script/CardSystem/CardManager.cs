@@ -138,31 +138,25 @@ public class CardManager : NetworkBehaviour
     }
     public void CardTakeEffect(Player player, CardSetting effectCard)
     {
-        for (int j = 0; j < playedCardDict[player].Count; j++)
+        var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
+        card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
+        card.cardSetting = effectCard;
+        card.UpdateCardData(card.cardSetting);
+        EffectedCards(player.Id, effectCard);
+        if (player == GameplayManager.Instance.currentPlayer)
         {
-            if (playedCardDict[player][j].cardId == effectCard.cardId)
-            {
-                if (player == GameplayManager.Instance.currentPlayer)
-                {
-                    var card = Instantiate(CardPrefeb, new Vector3(-800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-                    card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
-                    card.cardSetting = effectCard;
-                    card.UpdateCardData(card.cardSetting);
-                    EffectedCards(player.Id, effectCard);
-                    card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
-                    RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
-                }
-                else
-                {
-                    var card = Instantiate(CardPrefeb, new Vector3(800, 500, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
-                    card.gameObject.GetComponent<CardSelectComponent>().Interactable = false;
-                    card.cardSetting = effectCard;
-                    card.UpdateCardData(card.cardSetting);
-                    EffectedCards(player.Id, effectCard);
-                    card.gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
-                    RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
-                }
-            }
+            card.transform.position = new Vector3(-800, 500, 0);
+            card.gameObject.GetComponent<CardSelectComponent>().CardTakeEffectAnimation();
+            
+        }
+        else
+        {
+            card.transform.position = new Vector3(800, 500, 0);
+            card.gameObject.GetComponent<CardSelectComponent>().EnemyCardTakeEffectAnimation();
+        }
+        if (NetworkManager.Singleton.IsServer)
+        {
+            RemovePlayedCardServerRpc(player.Id, effectCard.cardId);
         }
         if (effectCard.cardFounction != null)
         {
@@ -221,6 +215,7 @@ public class CardManager : NetworkBehaviour
                 if (redPlayerPlayedCards[i] == cardId)
                 {
                     redPlayerPlayedCards.RemoveAt(i);
+                    break;
                 }
             }
             Invoke("RefreshPlayedCardDictClientRpc", 1);
@@ -232,6 +227,7 @@ public class CardManager : NetworkBehaviour
                 if (bluePlayerPlayedCards[i] == cardId)
                 {
                     bluePlayerPlayedCards.RemoveAt(i);
+                    break;
                 }
             }
             Invoke("RefreshPlayedCardDictClientRpc", 1);

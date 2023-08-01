@@ -190,7 +190,7 @@ public class GameplayManager : NetworkBehaviour
     }
     public void StartS2Stage()
     {
-        s2Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
+        s2Stage.StartStage(CardManager.Instance.playedCardDict);
     }
 
     public void StartMoveStage()
@@ -219,7 +219,7 @@ public class GameplayManager : NetworkBehaviour
     public void StartS3Stage()
     {
         RefreshAfterMoveStageClientRpc();
-        s3Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
+        s3Stage.StartStage(CardManager.Instance.playedCardDict);
     }
     
 
@@ -230,7 +230,7 @@ public class GameplayManager : NetworkBehaviour
 
     public void StartS4Stage()
     {
-        s4Stage.StartStage(FindObjectOfType<CardManager>().playedCardDict);
+        s4Stage.StartStage(CardManager.Instance.playedCardDict);
     }
 
     public int GetWinner()
