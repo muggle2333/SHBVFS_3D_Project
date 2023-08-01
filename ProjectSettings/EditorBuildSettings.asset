@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NoGameplayScene/WaitRoomScene.unity
     guid: 5e73bb67be4bedb478517bec8970e545
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/NoGameplayScene/TutorialScene.unity
     guid: 6aa249d5d8b11454e82df44781f45986
   - enabled: 1
