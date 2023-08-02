@@ -4724,10 +4724,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MessageUI
       objectReference: {fileID: 0}
-    - target: {fileID: 4245382592264618461, guid: d146f39f68358fa4c9af262633d6a4da, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64181,14 +64177,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2104841662}
     m_Modifications:
-    - target: {fileID: 6998884363635786788, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7458967917365370526, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7458967917720580476, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
       propertyPath: m_Name
       value: GameplayUI
@@ -82826,10 +82814,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2963298693153514800, guid: 01f87fe97c240304ab7705e23d5d6097, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -87097,10 +87081,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1463780222}
     - target: {fileID: 4164202119042685852, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: cardWidth
-      value: 205
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164202119042685852, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: ToPlayHPText
       value: 
       objectReference: {fileID: 1174562877}
@@ -87164,13 +87144,8 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 667871860
       objectReference: {fileID: 0}
-    - target: {fileID: 7121592784755625266, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
-      propertyPath: selectModeUI
-      value: 
-      objectReference: {fileID: 48151496}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1595778268, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
@@ -115682,10 +115657,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurnbaseUI
       objectReference: {fileID: 0}
-    - target: {fileID: 924095634604532817, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -115743,13 +115714,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2521327370408840748, guid: 4af5af1a9d206b54f9e97fb0cfbeadb5, type: 3}
-      propertyPath: managerContainerPath
-      value: 
-      objectReference: {fileID: 115149969472261574, guid: 4bc9afb463f06a64da870ccd967e155d, type: 3}
     - target: {fileID: 2521327370408840749, guid: 4af5af1a9d206b54f9e97fb0cfbeadb5, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4206758311
+      value: 2355893571
       objectReference: {fileID: 0}
     - target: {fileID: 2521327370408840750, guid: 4af5af1a9d206b54f9e97fb0cfbeadb5, type: 3}
       propertyPath: m_Name

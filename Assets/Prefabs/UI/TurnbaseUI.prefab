@@ -228,7 +228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1394604061525371347
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1519,7 +1519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4689654112702572160
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1680,7 +1680,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 133, y: 390}
+  m_AnchoredPosition: {x: -146, y: 390}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1105344322481397832
@@ -1775,7 +1775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7604999497024274273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1908,7 +1908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4321948018246439744
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2421,7 +2421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2240489570684269422
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3460,7 +3460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4219627756160717134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4090,8 +4090,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 924095634604532817}
   academyType: 6
-  AcademyCount: {fileID: 9181701740314859031}
+  redAcademyCount: {fileID: 9181701740314859031}
+  blueAcademyCount: {fileID: 4369994440319783071}
   AcademyUI: {fileID: 1105344322481397832}
+  bluePoints:
+  - {fileID: 8856229035728821781}
+  - {fileID: 5225195580680148124}
+  - {fileID: 3756406828425307378}
+  - {fileID: 8805890671238353914}
+  - {fileID: 8522155631304634254}
+  redPoints:
+  - {fileID: 4936902104915476898}
+  - {fileID: 5216385621993737919}
+  - {fileID: 1518094361538819530}
+  - {fileID: 5494004399493398005}
+  - {fileID: 9205239278403841002}
 --- !u!1 &3490419436891740291
 GameObject:
   m_ObjectHideFlags: 0
@@ -4299,8 +4312,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 924095634604532817}
   academyType: 1
-  AcademyCount: {fileID: 2406469992876712228}
+  redAcademyCount: {fileID: 2406469992876712228}
+  blueAcademyCount: {fileID: 7593302692388134083}
   AcademyUI: {fileID: 1105344322481397832}
+  bluePoints:
+  - {fileID: 8856229035728821781}
+  - {fileID: 5225195580680148124}
+  - {fileID: 3756406828425307378}
+  - {fileID: 8805890671238353914}
+  - {fileID: 8522155631304634254}
+  redPoints:
+  - {fileID: 4936902104915476898}
+  - {fileID: 5216385621993737919}
+  - {fileID: 1518094361538819530}
+  - {fileID: 5494004399493398005}
+  - {fileID: 9205239278403841002}
 --- !u!1 &3642287087011066138
 GameObject:
   m_ObjectHideFlags: 0
@@ -4432,8 +4458,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 924095634604532817}
   academyType: 5
-  AcademyCount: {fileID: 6657285295885660551}
+  redAcademyCount: {fileID: 6657285295885660551}
+  blueAcademyCount: {fileID: 8261288271299152543}
   AcademyUI: {fileID: 1105344322481397832}
+  bluePoints:
+  - {fileID: 8856229035728821781}
+  - {fileID: 5225195580680148124}
+  - {fileID: 3756406828425307378}
+  - {fileID: 8805890671238353914}
+  - {fileID: 8522155631304634254}
+  redPoints:
+  - {fileID: 4936902104915476898}
+  - {fileID: 5216385621993737919}
+  - {fileID: 1518094361538819530}
+  - {fileID: 5494004399493398005}
+  - {fileID: 9205239278403841002}
 --- !u!1 &3985509428581699345
 GameObject:
   m_ObjectHideFlags: 0
@@ -4527,7 +4566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1720008944203424551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5105,8 +5144,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 924095634604532817}
   academyType: 4
-  AcademyCount: {fileID: 6777731205600658758}
+  redAcademyCount: {fileID: 6777731205600658758}
+  blueAcademyCount: {fileID: 5371351293443764389}
   AcademyUI: {fileID: 1105344322481397832}
+  bluePoints:
+  - {fileID: 8856229035728821781}
+  - {fileID: 5225195580680148124}
+  - {fileID: 3756406828425307378}
+  - {fileID: 8805890671238353914}
+  - {fileID: 8522155631304634254}
+  redPoints:
+  - {fileID: 4936902104915476898}
+  - {fileID: 5216385621993737919}
+  - {fileID: 1518094361538819530}
+  - {fileID: 5494004399493398005}
+  - {fileID: 9205239278403841002}
 --- !u!1 &4534343132476379461
 GameObject:
   m_ObjectHideFlags: 0
@@ -5124,7 +5176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3208231451554299633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6009,7 +6061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3262918285539885299
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6296,7 +6348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2018598027670021296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6469,8 +6521,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 924095634604532817}
   academyType: 3
-  AcademyCount: {fileID: 1309996642430336162}
+  redAcademyCount: {fileID: 1309996642430336162}
+  blueAcademyCount: {fileID: 1040519741724437813}
   AcademyUI: {fileID: 1105344322481397832}
+  bluePoints:
+  - {fileID: 8856229035728821781}
+  - {fileID: 5225195580680148124}
+  - {fileID: 3756406828425307378}
+  - {fileID: 8805890671238353914}
+  - {fileID: 8522155631304634254}
+  redPoints:
+  - {fileID: 4936902104915476898}
+  - {fileID: 5216385621993737919}
+  - {fileID: 1518094361538819530}
+  - {fileID: 5494004399493398005}
+  - {fileID: 9205239278403841002}
 --- !u!1 &6471933250511158229
 GameObject:
   m_ObjectHideFlags: 0
@@ -7339,7 +7404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2141430867879820498
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7958,8 +8023,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 924095634604532817}
   academyType: 2
-  AcademyCount: {fileID: 5924732277935902245}
+  redAcademyCount: {fileID: 5924732277935902245}
+  blueAcademyCount: {fileID: 3793453868082813130}
   AcademyUI: {fileID: 1105344322481397832}
+  bluePoints:
+  - {fileID: 8856229035728821781}
+  - {fileID: 5225195580680148124}
+  - {fileID: 3756406828425307378}
+  - {fileID: 8805890671238353914}
+  - {fileID: 8522155631304634254}
+  redPoints:
+  - {fileID: 4936902104915476898}
+  - {fileID: 5216385621993737919}
+  - {fileID: 1518094361538819530}
+  - {fileID: 5494004399493398005}
+  - {fileID: 9205239278403841002}
 --- !u!1 &8508943874421313861
 GameObject:
   m_ObjectHideFlags: 0

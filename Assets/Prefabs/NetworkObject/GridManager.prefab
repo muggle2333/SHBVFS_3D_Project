@@ -118,4 +118,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectCount: 1
   selectGridMode: 1
-  currentTargetVfx: {fileID: 0}
+  isClickingCard: 0
