@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 30
   cardName: CounterAttack
-  description: After move stage, first damage you dealt this turn +1, but -1 defense
-    till the end of this turn
+  description: You can transform 1 point armor into 1 point to your first damage
+    this turn
   headPicture: {fileID: 21300000, guid: cf6f4058c6aab154395a7682f1227aa4, type: 3}
   academyType: 5
   cardCondition: {fileID: 0}
