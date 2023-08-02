@@ -109,12 +109,17 @@ public class CameraTest4 : MonoBehaviour
 
         if(GameplayManager.Instance.isBluePlayer)
         {
-            var rotation = Quaternion.Euler(0, 180, 0);
-            transform.rotation = rotation;
-            updateAcademyTextRotation();
+            x = 180f;
         }
+        else
+        {
+            x = 0f;
+        }
+        var rotation = Quaternion.Euler(0, x, 0);
+        //transform.rotation = rotation;
+        seq.Join(transform.DORotateQuaternion(rotation, 0.5f));
+        updateAcademyTextRotation();
     }
-
 
     private void updateAcademyTextRotation()
     {
@@ -151,8 +156,6 @@ public class CameraTest4 : MonoBehaviour
             Vector3 forward = new Vector3(cam.transform.forward.x + offset.x, cam.transform.forward.y +offset.y, cam.transform.forward.z + +offset.z);
             seq.Join(cam.DOLocalMove(pos + forward * zoomScale, 0.5f));
         }
-        
-
     }
 
     public void FocusGridCenter(GridObject gridObject1,GridObject gridObject2)
