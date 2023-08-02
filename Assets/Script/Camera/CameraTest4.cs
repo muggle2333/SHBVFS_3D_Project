@@ -20,8 +20,7 @@ public class CameraTest4 : MonoBehaviour
     private bool isMoving = false;
     private Vector3 vec = new Vector3();
     private Guid uid;
-
-    [SerializeField] private Vector3 offset = new Vector3(0.52f,0f, 0.2f);
+    private Vector3 offset = new Vector3(0.2f, 0f, 0.2f);
     private bool isLocked = false;
     private void Start()
     {
@@ -153,7 +152,7 @@ public class CameraTest4 : MonoBehaviour
         }
         else
         {
-            Vector3 forward = new Vector3(cam.transform.forward.x + offset.x, cam.transform.forward.y +offset.y, cam.transform.forward.z + +offset.z);
+            Vector3 forward = new Vector3(cam.transform.forward.x + offset.x, cam.transform.forward.y +offset.y, cam.transform.forward.z + offset.z);
             seq.Join(cam.DOLocalMove(pos + forward * zoomScale, 0.5f));
         }
     }
