@@ -191,8 +191,8 @@ public class DrawCardComponent : NetworkBehaviour
     }
     public void DrawEventCard(Player player)
     {
-        AcademyType currentAcedemy = player.currentGrid.academy;
         GridObject currentGridObject = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
+        AcademyType currentAcedemy = currentGridObject.academy;
         Card = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, CardContent.transform).GetComponent<Card>();
         if (currentGridObject.isHasBuilding)
         {
