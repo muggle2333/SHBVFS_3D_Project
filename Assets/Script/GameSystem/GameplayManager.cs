@@ -196,6 +196,7 @@ public class GameplayManager : NetworkBehaviour
     public void StartMoveStage()
     {
         RefreshDataClientRpc();
+        Debug.LogError("MoveStage");
         moveStage.StartStage(controlStage.playerInteractDict);
     }
 

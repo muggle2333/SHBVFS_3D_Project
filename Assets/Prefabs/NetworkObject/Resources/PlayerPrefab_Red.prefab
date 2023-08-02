@@ -405,11 +405,12 @@ MonoBehaviour:
   Defence: 3
   Range: 1
   HpPerRound: 0
-  basicCardPerRound: 0
+  eventCardPerRound: 0
   hasAttcaked: 0
   damageThisRound: 0
   AttackTarget: {fileID: 0}
   hasMoved: 0
+  playedCardCount: 0
   canAttack: 1
   startGrid:
     landType: 0
@@ -441,6 +442,7 @@ MonoBehaviour:
   MaxActionPoint: 3
   MaxCardCount: 10
   freeMoveCount: 0
+  trueFreeMoveCount: 0
   gridAR: 0
   gridDF: 0
   cardAR: 0
@@ -835,7 +837,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.09431572, y: 5.69}
-  m_SizeDelta: {x: 3, y: 2}
+  m_SizeDelta: {x: 3.2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5323745679965835634
 Canvas:
