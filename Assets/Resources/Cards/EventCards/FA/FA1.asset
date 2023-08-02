@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 34
   cardName: Imprison
-  description: your opponent's action point-1
+  description: After control stage, -1 AP of your enemy
   headPicture: {fileID: 21300000, guid: 672f10b7325140141b992e87f36e0806, type: 3}
   academyType: 6
   cardCondition: {fileID: 0}

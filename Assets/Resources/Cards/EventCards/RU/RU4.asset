@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 31
   cardName: Disarm
-  description: After move stage, forbid your opponent attack this turn
+  description: After move stage, prohibit enemy from attacking this round
   headPicture: {fileID: 21300000, guid: cf6f4058c6aab154395a7682f1227aa4, type: 3}
   academyType: 5
   cardCondition: {fileID: 0}

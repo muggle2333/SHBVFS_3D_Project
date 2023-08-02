@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 14
   cardName: First Move
-  description: After control stage, your enemy will move after you finishing movment
-    this turn
+  description: After control stage, you will move first
   headPicture: {fileID: 21300000, guid: c89217310d0364041929e3ed8702bce1, type: 3}
   academyType: 2
   cardCondition: {fileID: 0}

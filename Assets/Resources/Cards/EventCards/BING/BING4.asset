@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 25
   cardName: Energy Storage
-  description: After control stage, your next damage +1 point this turn
+  description: After control stage, +1 temporary attack this turn
   headPicture: {fileID: 21300000, guid: 1d56a691a17a95d42806777d2b67790f, type: 3}
   academyType: 4
   cardCondition: {fileID: 0}

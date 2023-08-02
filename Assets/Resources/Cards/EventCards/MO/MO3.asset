@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 18
   cardName: Be Discreet
-  description: After control stage, explore automatically and freely this turn
+  description: After control stage, draw 2 top MO Cards and you can't attack 3 round
   headPicture: {fileID: 21300000, guid: 5ee5540dccaed5c4c96be965a10a54eb, type: 3}
   academyType: 3
   cardCondition: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 32
   cardName: Change From Defensive To The Offensive
-  description: You damage 2 points to your opponent, your armor -2 this turn
+  description: After move stage, -2 defense and make your enemy lose 2 HP
   headPicture: {fileID: 21300000, guid: 3bac3e8ba45c27848ab09fa013eace5a, type: 3}
   academyType: 5
   cardCondition: {fileID: 0}
