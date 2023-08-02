@@ -8,6 +8,7 @@ public class YI5 : CardFunction
     private void Start()
     {
         player.CurrentActionPoint -= 1;
+        player.TrueActionPoint -= 1;
     }
     void Update()
     {
@@ -20,6 +21,7 @@ public class YI5 : CardFunction
     public void Function()
     {
         player.CurrentActionPoint += 3;
+        player.TrueActionPoint += 3;
         Destroy(this.gameObject);
     }
 }
