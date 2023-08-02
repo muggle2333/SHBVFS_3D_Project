@@ -175,7 +175,7 @@ public class GridObject
         //GridVfxManager.Instance.UpdateVfxBuilding(this,isControlStage);
     }
 
-    public void DestoryBuilding()
+    public void DestroyBuilding()
     {
         isHasBuilding = false;
         grid.TriggerGridObjectChanged(x, z);

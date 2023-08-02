@@ -445,12 +445,12 @@ public class GridManager : NetworkBehaviour
 
     }
 
-    public void SetBuilding(Vector2Int gridObjectXZ,bool isDestory)
+    public void SetBuildingDestroy(Vector2Int gridObjectXZ,bool isDestory)
     {
         GridObject gridObject = grid.gridArray[gridObjectXZ.x, gridObjectXZ.y];
         if (isDestory)
         {
-            gridObject.DestoryBuilding();
+            gridObject.DestroyBuilding();
             SoundManager.Instance.PlaySound(Sound.DestoryBuilding);
         }
         else

@@ -334,6 +334,8 @@ public class Calculating : NetworkBehaviour
     public int CalculateMoveAPCost(Player player)
     {
         player.currentGrid = GridManager.Instance.GetCurrentGridObject(player.currentGrid);
+        player.targetGrid = GridManager.Instance.GetCurrentGridObject(player.targetGrid);
+        
         if (player.targetGrid.owner == player && player.targetGrid.isHasBuilding)
         {
             return 0;
