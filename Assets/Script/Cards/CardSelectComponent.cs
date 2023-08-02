@@ -141,7 +141,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
                 SoundManager.Instance.PlaySound(Sound.CardSelect);
             }
         }
-        SelectManager.Instance.isClickingCard = false;
+        //SelectManager.Instance.isClickingCard = false;
     }
 
     public void OnSelectOperation()

@@ -18,6 +18,7 @@ public class UIManager : NetworkBehaviour
     private EnemyUI enemyUI;
     private DiscardUI discardUI;
     private WarningUI warningUI;
+    [SerializeField] private AcademyButton academyBuffUI;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -73,6 +74,10 @@ public class UIManager : NetworkBehaviour
             enemyUI.ShowEnemyUI(false);
         }
         
+    }
+    public void ShowAcademyUI(bool isShow)
+    {
+        academyBuffUI.SetAcademyBuffUI(isShow);
     }
     [ClientRpc]
     public void StartTurnbaseUIClientRpc()

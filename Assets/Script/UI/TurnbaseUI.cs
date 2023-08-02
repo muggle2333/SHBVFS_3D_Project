@@ -21,6 +21,7 @@ public class TurnbaseUI : MonoBehaviour
         {
             TurnbasedSystem.Instance.SkipControlStageServerRpc();
             skipBtn.gameObject.SetActive(false);
+            SelectManager.Instance.CloseSelectionUI();
             if(FindObjectOfType<TutorialManager>()!=null)
             {
                 TutorialManager.Instance.CompleteTutorialAction(TutorialAction.ClickSkip);
