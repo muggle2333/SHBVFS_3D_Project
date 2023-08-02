@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 27
   cardName: Killing Spree
-  description: Every x cards you use, deal an extra attack at attack stage (x is
+  description: At attack stage, every x cards you use, deal an extra attack (x is
     initially 2, each time it takes effect x+1)
   headPicture: {fileID: 21300000, guid: 55fad22b39138b547a30a75bda499655, type: 3}
   academyType: 4

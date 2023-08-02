@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 8
   cardName: Wait At One's Ease For The Fatigued
-  description: If you skip your turn immediately, you will recover full Hp and get
-    1 action point next turn
+  description: If you skip your turn immediately, recover full Hp after control stage
+    and get 1 action point next turn
   headPicture: {fileID: 21300000, guid: 7e0eb7abda823514f9ff0b2f52ccf16e, type: 3}
   academyType: 1
   cardCondition: {fileID: 0}

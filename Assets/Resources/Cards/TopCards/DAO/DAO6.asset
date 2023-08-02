@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 15
   cardName: Academy Communication
-  description: You can choose 2 academies on the land you know and exchange their
-    position
+  description: After control stage, exchange the positions of two occupied academies
   headPicture: {fileID: 21300000, guid: c89217310d0364041929e3ed8702bce1, type: 3}
   academyType: 2
   cardCondition: {fileID: 0}
