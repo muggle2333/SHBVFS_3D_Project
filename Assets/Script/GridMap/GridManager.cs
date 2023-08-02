@@ -424,6 +424,7 @@ public class GridManager : NetworkBehaviour
         var gridObject = grid.gridArray[gridObjectXZ.x, gridObjectXZ.y];
         gridObject.owner.UpdatePlayerOwnedLandAcademyBuff(gridObject.academy, academyType);
         gridObject.academy = academyType;
+        GridVfxManager.Instance.UpdateVfxAcademy(gridObject);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -441,7 +442,9 @@ public class GridManager : NetworkBehaviour
         var academy2 = gridObject2.academy;
         gridObject2.academy = gridObject1.academy;
         gridObject1.academy = academy2;
-        
+        GridVfxManager.Instance.UpdateVfxAcademy(gridObject1);
+        GridVfxManager.Instance.UpdateVfxAcademy(gridObject2);
+
 
     }
 
