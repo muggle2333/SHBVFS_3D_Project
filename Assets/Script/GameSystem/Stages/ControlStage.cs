@@ -21,6 +21,8 @@ public class ControlStage : MonoBehaviour
         players[0].hasAttcaked = false;
         players[1].hasAttcaked = false;
         playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();
+        RedPlayerInteractList.Clear();
+        BluePlayerInteractList.Clear();
     }
     
     public void AddPlayerInteract(Player player,PlayerInteract playerInteract)

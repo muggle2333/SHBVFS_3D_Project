@@ -70,7 +70,7 @@ public class PlayerInteractionComponent : MonoBehaviour
     {
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
         transform.LookAt(dirPos);
-
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
         if (gridObject.landType==LandType.Mountain)
         {
             dirPos += new Vector3(0, 1.7f, 0);
@@ -124,6 +124,8 @@ public class PlayerInteractionComponent : MonoBehaviour
         Vector3 dirPos = GridManager.Instance.grid.GetWorldPositionCenter((int)gridObject.x, (int)gridObject.z);
         transform.LookAt(dirPos);
         playerVfx.transform.LookAt(dirPos);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
+        playerVfx.transform.localEulerAngles = new Vector3(0, playerVfx.transform.localEulerAngles.y, playerVfx.transform.localEulerAngles.z);
         if (gridObject.landType == LandType.Mountain)
         {
             dirPos += new Vector3(0, 1.7f, 0);
@@ -261,7 +263,7 @@ public class PlayerInteractionComponent : MonoBehaviour
         int range = GetComponentInChildren<Player>().Range;
         GameObject visionVfx = Pool.Instance.GetObj("Vfx_VisionRange");
         visionVfx.transform.position = pos;
-        visionVfx.transform.DOScale(new Vector3(3.2f*(range+1), 3.2f * (range + 1), 0.5f), 1f);
+        visionVfx.transform.DOScale(new Vector3(3.2f*range*2, 3.2f *  range * 2, 0.5f), 1f);
         var sq = DOTween.Sequence();
         sq.AppendInterval(1f);
         sq.AppendCallback(() => { visionVfx.transform.localScale = new Vector3(3.2f,3.2f,0.5f); Pool.Instance.SetObj("Vfx_VisionRange", visionVfx); });
