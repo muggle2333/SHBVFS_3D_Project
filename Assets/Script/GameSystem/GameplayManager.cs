@@ -300,16 +300,18 @@ public class GameplayManager : NetworkBehaviour
         }
     }
     [ClientRpc]
-    public void DrawBasicCardPerRoundClientRpc(int j)
+    public void DrawEventCardPerRoundClientRpc(int j)
     {
         var drawCardCompoent = FindObjectOfType<DrawCardComponent>();
+        
         if (playerList[j] == currentPlayer)
         {
-            for (int i = 0; i < playerList[j].basicCardPerRound; i++)
+            for (int i = 0; i < playerList[j].eventCardPerRound; i++)
             {
-                drawCardCompoent.DrawBasicCard(playerList[j]);
+                int randIndex = UnityEngine.Random.Range(0, 40);
+                drawCardCompoent.DrawEventCardForTest(randIndex);
             }
-            drawCardCompoent.PlayDrawCardAnimationServerRpc(playerList[j].Id, playerList[j].basicCardPerRound);
+            drawCardCompoent.PlayDrawCardAnimationServerRpc(playerList[j].Id, playerList[j].eventCardPerRound);
         }
     }
     public List<Player> GetDyingPlayer()

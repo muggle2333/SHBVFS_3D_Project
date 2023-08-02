@@ -17,7 +17,7 @@ public class Character : NetworkBehaviour
     public int Range;
     //public NetworkVariable<int> RangeNetwork = new NetworkVariable<int>(0);
     public int HpPerRound;
-    public int basicCardPerRound;
+    public int eventCardPerRound;
     public bool hasAttcaked;
     public int damageThisRound;
 

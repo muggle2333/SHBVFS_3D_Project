@@ -261,7 +261,7 @@ public class Calculating : NetworkBehaviour
         player.Range = player.baseRange + totalAcademyAttackRangeDic[player] + totalCardAttackRangeDic[player] + player.gridAR;
         player.Defence = player.baseDefense + totalAcademyDefenseDic[player] + totalCardDefenseDic[player] + player.gridDF;
         player.ActionPointPerRound = player.baseActionPointPerRound + totalAcademyAPPerRoundDic[player];
-        player.basicCardPerRound = totalAcademyBasicCardPerRoundDic[player];
+        player.eventCardPerRound = totalAcademyBasicCardPerRoundDic[player];
         
     }
 
