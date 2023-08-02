@@ -80,6 +80,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
                     else
                     {
                         UIManager.Instance.BlinkWarning();
+                        SoundManager.Instance.PlaySound(Sound.CardSelectFailed);
                     }
                 }
                 else
