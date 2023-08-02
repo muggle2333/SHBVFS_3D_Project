@@ -68,6 +68,7 @@ public class S2Stage : MonoBehaviour
     }
     IEnumerator S2CardTakeEffect()
     {
+        yield return new WaitForSeconds(1f);
         FindObjectOfType<DrawCardComponent>().PlayDrawCardAnimationServerRpc(GameplayManager.Instance.GetEnemy(GameplayManager.Instance.currentPlayer.Id), CardManager.Instance.redPlayerPlayedCards.Count);
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
         while (playedCardDict.Count != 0)
@@ -83,11 +84,12 @@ public class S2Stage : MonoBehaviour
                     }
                     //Use card
                     
-                    yield return new WaitForSeconds(3);
+                    
                     Debug.LogError("Id:" + priorityList[i].Id + "Card Id:" + playedCardDict[priorityList[i]][0]);
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
-
+                    yield return new WaitForSeconds(3);
                     playedCardDict[priorityList[i]].RemoveAt(0);
+
                     //Check dying
                     DyingManager.Instance.CheckIsDying();
                     yield return new WaitForSecondsRealtime(0.2f);

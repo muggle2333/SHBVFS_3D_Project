@@ -166,6 +166,7 @@ public class GameplayManager : NetworkBehaviour
     public void BackUpControlStageClientRpc()
     {
         GridManager.Instance.BackupGrid();
+        SelectManager.Instance.isClickingCard = false;
         foreach (var player in playerList)
         {
             PlayerManager.Instance.BackupPlayerData(player);

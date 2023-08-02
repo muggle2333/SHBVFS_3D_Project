@@ -49,6 +49,7 @@ public class S3Stage : MonoBehaviour
     }
     IEnumerator S3CardTakeEffect()
     {
+        yield return new WaitForSeconds(1);
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
         while (playedCardDict.Count != 0)
         {
@@ -61,10 +62,10 @@ public class S3Stage : MonoBehaviour
                         playedCardDict.Remove(priorityList[i]);
                         break;
                     }
-                    yield return new WaitForSeconds(3);
+                    
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
                     playedCardDict[priorityList[i]].RemoveAt(0);
-
+                    yield return new WaitForSeconds(3);
                     //Check dying
                     /*List<Player> dyingPlayers = GameplayManager.Instance.GetDyingPlayer();
                     if (dyingPlayers.Count == 0)

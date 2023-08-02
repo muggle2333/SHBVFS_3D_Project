@@ -63,7 +63,7 @@ public class GridVfxManager : MonoBehaviour
                 List<Transform> listTrans = new List<Transform>();
                 GameObject container = new GameObject("vfxConainer" + x + "_" + z);
                 container.transform.SetParent(vfxContainers.transform);
-                container.transform.position = grid.GetWorldPositionCenter(x, z);
+                container.transform.position = grid.GetWorldPositionCenter(x, z) + new Vector3(0, 0.1f, 0);
 
                 GameObject atmpVfx = Instantiate(vfxPrefabs.academyVfx.gameObject,academyContainer.transform);
                 atmpVfx.transform.position = grid.GetWorldPositionCenter(x, z) + new Vector3(0, 0.1f, 0);

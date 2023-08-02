@@ -48,6 +48,7 @@ public class AttackStage : MonoBehaviour
 
     IEnumerator StartAttack()
     {
+        yield return new WaitForSeconds(1);
         List<Player> playerList = GameplayManager.Instance.GetPlayer();
         playerList = playerList.OrderByDescending(x => x.Priority).ToList();
         //Attack per Player

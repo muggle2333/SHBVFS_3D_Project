@@ -50,6 +50,7 @@ public class S4Stage : MonoBehaviour
     }
     IEnumerator S4CardTakeEffect()
     {
+        yield return new WaitForSeconds(1);
         List<Player> priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
         while (playedCardDict.Count != 0)
         {
@@ -62,10 +63,11 @@ public class S4Stage : MonoBehaviour
                         playedCardDict.Remove(priorityList[i]);
                         break;
                     }
-                    yield return new WaitForSeconds(3);
+                    
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
                     playedCardDict[priorityList[i]].RemoveAt(0);
                     //Check dying
+                    yield return new WaitForSeconds(3);
                     DyingManager.Instance.CheckIsDying();
                     yield return new WaitForSecondsRealtime(0.2f);
                     yield return new WaitUntil(() => TurnbasedSystem.Instance.isDie.Value == false);
