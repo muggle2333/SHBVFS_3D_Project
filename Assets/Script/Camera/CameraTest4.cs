@@ -20,7 +20,7 @@ public class CameraTest4 : MonoBehaviour
     private bool isMoving = false;
     private Vector3 vec = new Vector3();
     private Guid uid;
-    private Vector3 offset = new Vector3(0.2f, 0f, 0.2f);
+    private Vector3 offset = new Vector3(0.15f, 0.15f, 0.2f);
     private bool isLocked = false;
     private void Start()
     {
