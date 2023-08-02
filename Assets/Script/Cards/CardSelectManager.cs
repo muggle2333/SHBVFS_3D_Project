@@ -108,10 +108,20 @@ public class CardSelectManager : MonoBehaviour
         UIManager.Instance.SetGameplayPlayUI(GameplayUIType.playHP, false);
         OnPlayHpCard?.Invoke(this, EventArgs.Empty);
     }
-
+    [ServerRpc(RequireOwnership =false)]
+    public void AddPlayerCardCountServerRpc(PlayerId playerId)
+    {
+        AddPlayerCardCountClientRpc(playerId);
+    }
+    [ClientRpc]
+    public void AddPlayerCardCountClientRpc(PlayerId playerId)
+    {
+        Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);
+        player.playedCardCount++;
+    }
     public void PlayCards(Player player)
     {
-        GameplayManager.Instance.currentPlayer.playedCardCount++;
+        AddPlayerCardCountServerRpc(GameplayManager.Instance.currentPlayer.Id);
         for (int i = 0; i < CardManager.Instance.playerHandCardDict[player].Count; i++)
         {
             if (CardManager.Instance.playerHandCardDict[player][i].gameObject.GetComponent<CardSelectComponent>().isSelected)
