@@ -7,11 +7,14 @@ using UnityEngine;
 public class WaterTriggerVolume : MonoBehaviour
 {
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
+
+        Debug.Log("enterred");
         var tutorialManager = FindObjectOfType<TutorialManager>();
-        if (collision.gameObject == GetComponent<PlayerInteractionComponent>())
+        if (collision.gameObject.GetComponent<PlayerInteractionComponent>()!=null)
         {
+            Debug.Log("enterred");
             tutorialManager.waterTrigger = true;
         }
     }
