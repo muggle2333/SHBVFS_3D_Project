@@ -60146,6 +60146,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5836311698752990593, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998884363635786788, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7458967917720580476, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
       propertyPath: m_Name
       value: GameplayUI

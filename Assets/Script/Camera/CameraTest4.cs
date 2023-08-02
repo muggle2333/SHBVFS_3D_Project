@@ -117,7 +117,7 @@ public class CameraTest4 : MonoBehaviour
         var rotation = Quaternion.Euler(0, x, 0);
         //transform.rotation = rotation;
         seq.Join(transform.DORotateQuaternion(rotation, 0.5f));
-        updateAcademyTextRotation();
+        seq.AppendCallback(() => updateAcademyTextRotation());
     }
 
     private void updateAcademyTextRotation()
