@@ -29,9 +29,10 @@ public class DAO4 : CardFunction
     }
     void Function()
     {
+        int randomIndex =  Random.Range(1, 7);
         if (NetworkManager.Singleton.IsServer)
         {
-            GridManager.Instance.ChangeAcademyServerRpc(grid, AcademyType.DAO);
+            GridManager.Instance.ChangeAcademyServerRpc(grid, (AcademyType) randomIndex);
         }
         Destroy(gameObject);
     }
