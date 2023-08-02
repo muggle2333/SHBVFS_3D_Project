@@ -31,6 +31,7 @@ public class GameOverUI : MonoBehaviour
 
     private void GameManager_OnGameOver(object sender, System.EventArgs e)
     {
+        Time.timeScale = 0;
         content.SetActive(true);
         int winnerId = GameplayManager.Instance.GetWinner();
         if (winnerId == 2)

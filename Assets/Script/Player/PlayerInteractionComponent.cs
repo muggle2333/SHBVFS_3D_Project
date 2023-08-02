@@ -222,7 +222,7 @@ public class PlayerInteractionComponent : MonoBehaviour
             attackLine.SetPosition(i-1, position);
         }
         
-        Invoke("HideAttackPath", 1f);
+        Invoke("HideAttackPath", 2f);
     }
 
     public void HideAttackPath()
@@ -244,7 +244,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void PlayHitVfxRed()
     {
-        Debug.LogError(this.gameObject + "Hited");
+        //Debug.LogError(this.gameObject + "Hited");
         var seq = DOTween.Sequence();
         seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(1, 0.5f, 0.5f), 0.2f);});
         seq.AppendInterval(0.2f);

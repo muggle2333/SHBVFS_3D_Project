@@ -69,27 +69,27 @@ public class AttackStage : MonoBehaviour
                 //if (distance < minDistance && playerList[i].Range >= distance)
                 if (playerList[i].Range >= distance)
                 {
-                minDistance = distance;
-                targetIndex = j;
-                if (targetIndex != i)
-                {
-                    if (FindObjectOfType<NetworkManager>() == null)
+                    minDistance = distance;
+                    targetIndex = j;
+                    if (targetIndex != i)
                     {
-                        playerList[i].AttackTarget = playerList[targetIndex];
-                        playerList[i].Attack();
-                        playerList[targetIndex].GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
-                        SoundManager.Instance.PlaySound(Sound.Attack);
-                        //Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
+                        if (FindObjectOfType<NetworkManager>() == null)
+                        {
+                            playerList[i].AttackTarget = playerList[targetIndex];
+                            playerList[i].Attack();
+                            playerList[targetIndex].GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
+                            SoundManager.Instance.PlaySound(Sound.Attack);
+                            //Debug.LogError(playerList[i] + " attack " + playerList[targetIndex]);
+                        }
+                        else
+                        {
+                            PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
+                        }
                     }
-                    else
-                    {
-                        PlayerManager.Instance.SetAttackClientRpc(playerList[i].Id, playerList[targetIndex].Id);
-                    }
-                }
                 }
 
             }
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(2f);
             //Check dying
             //TurnbasedSystem.Instance.isDie.Value = true;
             DyingManager.Instance.CheckIsDying();

@@ -5,7 +5,6 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//Move 和 Attack 的优先级是轮次的
 public class MoveStage : NetworkBehaviour
 {
     private Dictionary<Player, List<PlayerInteract>> playerInteractDict = new Dictionary<Player, List<PlayerInteract>>();

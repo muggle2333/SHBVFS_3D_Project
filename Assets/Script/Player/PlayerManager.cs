@@ -523,6 +523,11 @@ public class PlayerManager : NetworkBehaviour
         attackPlayer.AttackTarget = attackTarget;
         attackPlayer.Attack();
         attackPlayer.GetComponent<PlayerInteractionComponent>().SetAttackPath(attackPlayer.transform,attackTarget.transform);
+        attackTarget.GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
+
+        string name = attackPlayer == GameplayManager.Instance.currentPlayer ? "YOU" : "ENEMY";
+        UIManager.Instance.ShowWarningTimer(name + " ATTACK",2f);
+        SoundManager.Instance.PlaySound(Sound.Attack);
         //VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
     }
 
