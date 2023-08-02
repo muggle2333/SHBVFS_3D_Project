@@ -21,6 +21,6 @@ public class MO6 : CardFunction
     }
     void Function()
     {
-        GridManager.Instance.SetBuilding(grid, true);
+        GridManager.Instance.SetBuildingDestroy(grid, true);
     }
 }

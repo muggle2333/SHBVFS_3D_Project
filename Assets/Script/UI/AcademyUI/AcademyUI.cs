@@ -5,19 +5,20 @@ using UnityEngine;
 
 public class AcademyUI : MonoBehaviour
 {
-    public List<TMP_Text> academies;
+    public List<TMP_Text> redAcademies;
+    public List<TMP_Text> blueAcademies;
     public List<TMP_Text> academiesBuff;
-    public Player Player;
+    public List<Player> players;
     public bool isUnlock;
 
 
     private void Start()
     {
-        Invoke("GetCurrentPlayer", 3);
+        Invoke("GetPlayers", 3);
     }
-    public void GetCurrentPlayer()
+    public void GetPlayers()
     {
-        Player = GameplayManager.Instance.currentPlayer;
+        players = GameplayManager.Instance.GetPlayer();
         isUnlock = true;
     }
 
@@ -26,21 +27,31 @@ public class AcademyUI : MonoBehaviour
         if (GameManager.Instance.wholeGameState.Value == GameManager.WholeGameState.GameOver) return;
         if (isUnlock)
         {
-            if (Player == null) return;
-            if (Player.totalAcademyOwnedPoint.Count == 0) return;
-            for (int i = 0; i < academies.Count; i++)
+            if (players[0] == null) return;
+            if (players[0].totalAcademyOwnedPoint.Count == 0) return;
+            for (int i = 0; i < 6; i++)
             {
-                if (Player.totalAcademyOwnedPoint[i] < 0)
+                if (players[0].totalAcademyOwnedPoint[i] < 0)
                 {
-                    academies[i].text = "0";
+                    redAcademies[i].text = "0";
                 }
-                else if(Player.totalAcademyOwnedPoint[i] > 4)
+                else
                 {
-                    academies[i].text = "4";
+                    redAcademies[i].text = players[0].totalAcademyOwnedPoint[i].ToString();
                 }
-                else if(Player.totalAcademyOwnedPoint[i]>=0 && Player.totalAcademyOwnedPoint[i] <= 4)
+            }
+
+            if(players[1] == null) return;
+            if(players[1].totalAcademyOwnedPoint.Count == 0) return;
+            for(int i = 0; i < 6; i++)
+            {
+                if (players[1].totalAcademyOwnedPoint[i] < 0)
                 {
-                    academies[i].text = Player.totalAcademyOwnedPoint[i].ToString();
+                    blueAcademies[i].text = "0";
+                }
+                else
+                {
+                    blueAcademies[i].text = players[1].totalAcademyOwnedPoint [i].ToString();
                 }
             }
         }

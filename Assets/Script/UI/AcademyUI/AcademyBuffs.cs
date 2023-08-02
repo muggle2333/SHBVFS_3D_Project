@@ -8,8 +8,11 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     public GameObject info;
     public AcademyType academyType;
-    public TMP_Text AcademyCount;
+    public TMP_Text redAcademyCount;
+    public TMP_Text blueAcademyCount;
     public AcademyUI AcademyUI;
+    public List<TMP_Text> bluePoints;
+    public List<TMP_Text> redPoints;
     public void OnPointerEnter(PointerEventData eventData)
     {
         info.SetActive(true);
@@ -18,7 +21,7 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             case AcademyType.YI:
                 AcademyUI.academiesBuff[2].text = "+1 Max HP";
                 AcademyUI.academiesBuff[3].text = "+2 Max HP";
-                AcademyUI.academiesBuff[4].text = "+2 MaxHP,\n+1 HP/r";
+                AcademyUI.academiesBuff[4].text = "+2 Max HP,\n+1 HP/round";
                 break;
             case AcademyType.DAO:
                 AcademyUI.academiesBuff[2].text = "+1 Range";
@@ -46,55 +49,61 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 AcademyUI.academiesBuff[4].text = "+2 AP/r";
                 break;
         }
-        if (GameplayManager.Instance.currentPlayer.Id == PlayerId.RedPlayer)
+        switch (redAcademyCount.text)
         {
-            switch (AcademyCount.text)
-            {
-                case "0":
-                    AcademyUI.academiesBuff[0].color = new Color32(255, 119, 100, 255);
-                    break;
-                case "1":
-                    AcademyUI.academiesBuff[1].color = new Color32(255, 119, 100, 255);
-                    break;
-                case "2":
-                    AcademyUI.academiesBuff[2].color = new Color32(255, 119, 100, 255);
-                    break;
-                case "3":
-                    AcademyUI.academiesBuff[3].color = new Color32(255, 119, 100, 255);
-                    break;
-                case "4":
-                    AcademyUI.academiesBuff[4].color = new Color32(255, 119, 100, 255);
-                    break;
-            }
+            case "0":
+                //AcademyUI.academiesBuff[0].color = new Color32(255, 119, 100, 255);
+                redPoints[0].gameObject.SetActive(true);
+                break;
+            case "1":
+                //AcademyUI.academiesBuff[1].color = new Color32(255, 119, 100, 255);
+                redPoints[1].gameObject.SetActive(true);
+                break;
+            case "2":
+                //AcademyUI.academiesBuff[2].color = new Color32(255, 119, 100, 255);
+                redPoints[2].gameObject.SetActive(true);
+                break;
+            case "3":
+                //AcademyUI.academiesBuff[3].color = new Color32(255, 119, 100, 255);
+                redPoints[3].gameObject.SetActive(true);
+                break;
+            case "4":
+                //AcademyUI.academiesBuff[4].color = new Color32(255, 119, 100, 255);
+                redPoints[4].gameObject.SetActive(true);
+                break;
         }
-        else
+
+        switch (blueAcademyCount.text)
         {
-            switch (AcademyCount.text)
-            {
-                case "0":
-                    AcademyUI.academiesBuff[0].color = new Color32(78, 156, 168, 255);
-                    break;
-                case "1":
-                    AcademyUI.academiesBuff[1].color = new Color32(78, 156, 168, 255);
-                    break;
-                case "2":
-                    AcademyUI.academiesBuff[2].color = new Color32(78, 156, 168, 255);
-                    break;
-                case "3":
-                    AcademyUI.academiesBuff[3].color = new Color32(78, 156, 168, 255);
-                    break;
-                case "4":
-                    AcademyUI.academiesBuff[4].color = new Color32(78, 156, 168, 255);
-                    break;
-            }
+            case "0":
+                //AcademyUI.academiesBuff[0].color = new Color32(78, 156, 168, 255);
+                bluePoints[0].gameObject.SetActive(true);
+                break;
+            case "1":
+                //AcademyUI.academiesBuff[1].color = new Color32(78, 156, 168, 255);
+                bluePoints[1].gameObject.SetActive(true);
+                break;
+            case "2":
+                //AcademyUI.academiesBuff[2].color = new Color32(78, 156, 168, 255);
+                bluePoints[2].gameObject.SetActive(true);
+                break;
+            case "3":
+                //AcademyUI.academiesBuff[3].color = new Color32(78, 156, 168, 255);
+                bluePoints[3].gameObject.SetActive(true);
+                break;
+            case "4":
+                //AcademyUI.academiesBuff[4].color = new Color32(78, 156, 168, 255);
+                bluePoints[4].gameObject.SetActive(true);
+                break;
         }
-        
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         for(int i = 0; i < 5; i++)
         {
-            AcademyUI.academiesBuff[i].color = new Color32(237, 203, 121, 255);
+            //AcademyUI.academiesBuff[i].color = new Color32(237, 203, 121, 255);
+            bluePoints[i].gameObject.SetActive(false);
+            redPoints[i].gameObject.SetActive(false);
         }
         info.SetActive(false);
     }

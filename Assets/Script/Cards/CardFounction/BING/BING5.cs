@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BING5 : CardFunction
 {
+    private void Start()
+    {
+        player.canCost1APInEnemy = true;
+    }
     private void Update()
     {
         if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)

@@ -24,13 +24,13 @@ public class AcademyButton : MonoBehaviour
         if (isOpen == false)
         {
             var seq = DOTween.Sequence();
-            seq.Append(academyBuffs.transform.DOLocalMoveX(-90, 0.3f));
+            seq.Append(academyBuffs.transform.DOLocalMoveX(-146, 0.3f));
             isOpen = true;
         }
         else
         {
             var seq = DOTween.Sequence();
-            seq.Append(academyBuffs.transform.DOLocalMoveX(140, 0.3f));
+            seq.Append(academyBuffs.transform.DOLocalMoveX(133, 0.3f));
             isOpen = false;
         }
     }
