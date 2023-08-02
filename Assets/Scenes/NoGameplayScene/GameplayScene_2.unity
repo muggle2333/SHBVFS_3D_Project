@@ -83905,6 +83905,14 @@ PrefabInstance:
       propertyPath: selectModeText
       value: 
       objectReference: {fileID: 1909140421}
+    - target: {fileID: 552847490979672559, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+      propertyPath: cardCemetery
+      value: 
+      objectReference: {fileID: 345234221466777172}
+    - target: {fileID: 552847490979672559, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+      propertyPath: playedCardUI
+      value: 
+      objectReference: {fileID: 345234221466777173}
     - target: {fileID: 4164202118832277108, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: m_Camera
       value: 
@@ -113621,11 +113629,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurnbaseUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1379923879981454770, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+--- !u!1 &345234221466777172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8603034927862326483, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+  m_PrefabInstance: {fileID: 345234221466777171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &345234221466777173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 735467448254398798, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+  m_PrefabInstance: {fileID: 345234221466777171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d7b8757bff71f4cba266cdb21e78b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2521327372234254911
 PrefabInstance:
   m_ObjectHideFlags: 0
