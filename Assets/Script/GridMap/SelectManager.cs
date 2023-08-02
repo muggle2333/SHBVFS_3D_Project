@@ -65,9 +65,7 @@ public class SelectManager : MonoBehaviour
             selectCount = 1;
         }
         UpdateSelectableGridObject();
-        ClearSelection();
-        UIManager.Instance.ShowGridObjectUI(false, null);
-        UIManager.Instance.ShowEnemyUI(false);
+        CloseSelectionUI();
     }
 
     public void Update()
@@ -292,5 +290,13 @@ public class SelectManager : MonoBehaviour
     private void OnDestroy()
     {
         TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += TurnbaseSystem_GameStageChanged;
+    }
+
+    public void CloseSelectionUI()
+    {
+        ClearSelection();
+        UIManager.Instance.ShowGridObjectUI(false, null);
+        UIManager.Instance.ShowEnemyUI(false);
+        UIManager.Instance.ShowAcademyUI(false);
     }
 }

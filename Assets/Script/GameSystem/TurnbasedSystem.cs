@@ -81,7 +81,6 @@ public class TurnbasedSystem : NetworkBehaviour
     }
 
 
-
     public void StartTurnbaseSystem()
     {
         if (!NetworkManager.Singleton.IsHost) return;
