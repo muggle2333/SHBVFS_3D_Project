@@ -55,7 +55,8 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(isLocked) return;
+        
+        if (isLocked) return;
         if (eventData.button == PointerEventData.InputButton.Right) return;
         if (Interactable == false) return;
         if (TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1)
@@ -140,6 +141,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
                 SoundManager.Instance.PlaySound(Sound.CardSelect);
             }
         }
+        SelectManager.Instance.isClickingCard = false;
     }
 
     public void OnSelectOperation()
