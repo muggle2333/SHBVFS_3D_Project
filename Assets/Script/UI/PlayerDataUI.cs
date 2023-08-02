@@ -29,20 +29,46 @@ public class PlayerDataUI : MonoBehaviour
             defenceText.text = player.Defence.ToString();
             attackText.text = player.AttackDamage.ToString();
             rangeText.text = player.Range.ToString();
-
-            cardARText.text = "(" + (player.Range - player.cardAR).ToString() + "+" + player.cardAR.ToString()+")";
-            cardADText.text = "(" + (player.AttackDamage - player.cardAD).ToString() + "+" + player.cardAD.ToString() + ")";
-            cardDFText.text = "(" + (player.Defence - player.cardDF).ToString() + "+" + player.cardDF.ToString() + ")";
+            if (player.cardAR >= 0)
+            {
+                cardARText.text = "(" + (player.Range - player.cardAR).ToString() + "+" + player.cardAR.ToString() + ")";
+            }
+            else
+            {
+                cardARText.text = "(" + (player.Range - player.cardAR).ToString() + player.cardAR.ToString() + ")";
+            }
+            if(player.cardAD >= 0)
+            {
+                cardADText.text = "(" + (player.AttackDamage - player.cardAD).ToString() + "+" + player.cardAD.ToString() + ")";
+            }
+            else
+            {
+                cardADText.text = "(" + (player.AttackDamage - player.cardAD).ToString() + player.cardAD.ToString() + ")";
+            }
+            if(player.cardDF >= 0)
+            {
+                cardDFText.text = "(" + (player.Defence - player.cardDF).ToString() + "+" + player.cardDF.ToString() + ")";
+            }
+            else
+            {
+                cardDFText.text = "(" + (player.Defence - player.cardDF).ToString() + player.cardDF.ToString() + ")";
+            }
+            
 
             if (player.cardAR == 0)
             {
                 cardARText.gameObject.SetActive(false);
                 rangeText.color = Color.white;
             }
-            else
+            else if(player.cardAR > 0)
             {
                 cardARText.gameObject.SetActive(true);
-                rangeText.color = Color.green;
+                rangeText.color = new Color32(119,184,116,255);
+            }
+            else if(player.cardAR < 0)
+            {
+                cardARText.gameObject.SetActive(true);
+                rangeText.color = new Color32(228, 52, 3, 255);
             }
 
             if(player.cardDF == 0)
@@ -50,10 +76,15 @@ public class PlayerDataUI : MonoBehaviour
                 cardDFText.gameObject.SetActive(false);
                 defenceText.color = Color.white;
             }
-            else
+            else if(player.cardDF > 0)
             {
                 cardDFText.gameObject.SetActive(true);
-                defenceText.color = Color.green;
+                defenceText.color = new Color32(119, 184, 116, 255);
+            }
+            else if(player.cardDF < 0)
+            {
+                cardDFText.gameObject.SetActive(true);
+                defenceText.color = new Color32(228, 52, 3, 255);
             }
 
             if(player.cardAD == 0)
@@ -61,10 +92,15 @@ public class PlayerDataUI : MonoBehaviour
                 cardADText.gameObject.SetActive(false);
                 attackText.color = Color.white;
             }
-            else
+            else if(player.cardAD > 0)
             {
                 cardADText.gameObject.SetActive(true);
-                attackText.color = Color.green;
+                attackText.color = new Color32(119, 184, 116, 255);
+            }
+            else if(player.cardAD < 0)
+            {
+                cardADText.gameObject.SetActive(true);
+                attackText.color = new Color32(228, 52, 3, 255);
             }
         }
     }
