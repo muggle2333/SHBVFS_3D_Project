@@ -43,6 +43,7 @@ public class CardManager : NetworkBehaviour
         if (FindObjectOfType<NetworkManager>()) return;
         InitializeCardManager();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))

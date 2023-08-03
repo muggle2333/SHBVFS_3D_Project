@@ -22,7 +22,7 @@ public class TutorialManager : MonoBehaviour
 
     public event EventHandler OnStartSpecificTutorial;
 
-    private int completeIndex = -4;   //-4
+    private int completeIndex = -5;   //-4
     private TutorialAction action = TutorialAction.ClickSkip;
     private bool isActionCompleted=false;
 
@@ -42,6 +42,8 @@ public class TutorialManager : MonoBehaviour
     private int landlake=0;
     private int landforest = 0;
     private int landmountain = 0;
+    private int MovestageTimes = 0;
+    private int AttackStageTimes = 0;
     private void Awake()
     {
         Instance= this;
@@ -60,14 +62,40 @@ public class TutorialManager : MonoBehaviour
 
     public void Start()
     {
-        
+        SetGridAcadmy();
         tutorialUI.AcademyBuffDisappear();
         Player player = GameplayManager.Instance.currentPlayer;
         player.CurrentActionPoint = player.MaxActionPoint;
         player.TrueActionPoint = player.MaxActionPoint;
-
+        tutorialUI.ShowPlayerData(false);
         SelectManager.Instance.selectGridMode = SelectGridMode.None;
         SelectManager.Instance.UpdateSelectableGridObject();
+        TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged += TurnbasedSystem_CurrentGameStage;
+    }
+
+    private void TurnbasedSystem_CurrentGameStage(GameStage previousValue, GameStage newValue)
+    {
+        if(newValue == GameStage.MoveStage && (MovestageTimes < 1))
+        {
+            Time.timeScale = 0;
+            MovestageTimes++;
+            isActionCompleted = true;
+            tutorialUI.ShowMessageText("At move stage, soldier will actually act as what you orderred in orderring phase, if your action is interrupted by enemy, your action will be canceled but your will get action point feedback");
+            OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
+        }
+        else if(newValue == GameStage.AttackStage && (AttackStageTimes < 1))
+        {
+            Time.timeScale = 0;
+            AttackStageTimes++;
+            isActionCompleted = true;
+            tutorialUI.ShowMessageText("At attack stage, you'll automatically attack the enemy in your range. You can't actively attack others in other stages unless using special cards");
+            OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    private void SetGridAcadmy()
+    {
+        GridManager.Instance.grid.gridArray[0, 0].academy = AcademyType.BING;
     }
     public void StartTutorial()
     {
@@ -91,11 +119,11 @@ public class TutorialManager : MonoBehaviour
 
         switch (completeIndex)
         {
-            case -2: 
+            case -3: 
             CameraMoveJudge();
             break;
 
-            case -1:
+            case -2:
             CameraFocusJudge();
             break;
 
@@ -127,7 +155,9 @@ public class TutorialManager : MonoBehaviour
             StartCoroutine("WaterLand");
             enterWaterTimes++;
         }
-       
+
+
+        if (SelectManager.Instance.GetLatestGridObject() == null) return;
         if((SelectManager.Instance.GetLatestGridObject().landType==LandType.Lake)&&(landlake<1))
         {
             landlake++;
@@ -146,23 +176,26 @@ public class TutorialManager : MonoBehaviour
 
         if ((SelectManager.Instance.GetLatestGridObject().landType == LandType.Mountain) && (landmountain < 1))
         {
+            Time.timeScale = 0;
             landmountain++;
             isActionCompleted = true;
             tutorialUI.ShowMessageText("It will cause 2 action points climbing mountain. But your range will +1 when you are on the mountain and when you. And it'll only cause 1 action point moving from mountain to mountain");
             OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         }
+
+        
     }
     IEnumerator Tutorial()
     {
         isActionCompleted = true;
         //SelectManager.Instance.selectGridMode = SelectGridMode.None;
-        tutorialUI.ShowMessageText("Welcome! General");
+        tutorialUI.ShowMessageText("        Welcome! General");
         cameraComponent.LockCamera(true);
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-        yield return new WaitUntil(() => completeIndex == -3);
+        yield return new WaitUntil(() => completeIndex == -4);
 
 
-        tutorialUI.ShowMessageText("This is your RIVAL");
+        tutorialUI.ShowMessageText("      This is your ENEMY");
         cameraComponent.FocusEnemy();
         yield return new WaitForSecondsRealtime(1f);
 
@@ -171,89 +204,99 @@ public class TutorialManager : MonoBehaviour
         tutorialUI.ShowMessageText("Your OBJECTIVE is to defeat him");
         cameraComponent.FocusPosition((GameplayManager.Instance.currentPlayer.transform.position + GameplayManager.Instance.playerList[1].transform.position) / 2, -15f);
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-        yield return new WaitUntil(() => completeIndex == -2);
+        yield return new WaitUntil(() => completeIndex == -3);
 
 
         //tutorialUI.ShowGoal();
         tutorialUI.ShowMessageText("Press WASD to move the camera  \n" +
-            "Scroll MOUSE WEHEL to zoom in and out  \n" +
+            "Scroll MOUSE WEHEL to zoom in\n" +
             "Press MOUSE WHEEL to rotate");
         cameraComponent.LockCamera(false);
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         //Debug.Log(isActionCompleted);
         //Debug.Log(completeIndex);
-        yield return new WaitUntil(() => completeIndex == -1);
+        yield return new WaitUntil(() => completeIndex == -2);
 
 
         tutorialUI.ShowMessageText("Press F to focus on yourself / the grid selected");
+        OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
+        yield return new WaitUntil(() => completeIndex == -1);
+
+
+        isActionCompleted = true;                                 // No judge button, have to reset
+        tutorialUI.ShowMessageText("Left lower corner is your information");
+        tutorialUI.ShowPlayerData(true);
+        tutorialUI.ShowFrame();
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 0);
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
-        tutorialUI.ShowMessageText("LeftFrame-down corn is your information");
-        tutorialUI.ShowPlayerData(true);
-        tutorialUI.ShowFrame();
+        tutorialUI.FrameDisappear();
+        tutorialUI.ShowIcons(0);
+        tutorialUI.ShowIconFrames(0, true);
+        tutorialUI.ShowMessageText("      is your action point, which you spend in every turn");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 1);
 
 
+
         isActionCompleted = true;                                 // No judge button, have to reset
-        tutorialUI.ShowIcons(0);
-        tutorialUI.ShowMessageText("      is your action point, which you spend in every turn");
+        tutorialUI.IconsDisappear(0);
+        tutorialUI.ShowIconFrames(0, false);
+        tutorialUI.ShowIcons(1);
+        tutorialUI.ShowIconFrames(1, true);
+        tutorialUI.ShowMessageText("       is your health, you will die if it comes to 0");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 2);
 
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
-        tutorialUI.IconsDiappear(0);
-        tutorialUI.ShowIcons(1);
-        tutorialUI.ShowMessageText("       is your health, you will die if it comes to 0");
+        tutorialUI.IconsDisappear(1);
+        tutorialUI.ShowIconFrames(1, false);
+        tutorialUI.ShowIcons(2);
+        tutorialUI.ShowIconFrames(2, true);
+        tutorialUI.ShowMessageText("         is your attack damage");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 3);
 
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
-        tutorialUI.IconsDiappear(1);
-        tutorialUI.ShowIcons(2);
-        tutorialUI.ShowMessageText("        is your attack damage");
+        tutorialUI.IconsDisappear(2);
+        tutorialUI.ShowIconFrames(2, false);
+        tutorialUI.ShowIcons(3);
+        tutorialUI.ShowIconFrames(3, true);
+        tutorialUI.ShowMessageText("       is your defense, which can resist some damage for you");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 4);
 
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
-        tutorialUI.IconsDiappear(2);
-        tutorialUI.ShowIcons(3);
-        tutorialUI.ShowMessageText("       is your defense, which can resist some damage for you");
+        tutorialUI.IconsDisappear(3);
+        tutorialUI.ShowIconFrames(3, false);
+        tutorialUI.ShowIcons(4);
+        tutorialUI.ShowIconFrames(4, true);
+        tutorialUI.ShowMessageText("             is your range");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 5);
 
 
-
-        isActionCompleted = true;                                 // No judge button, have to reset
-        tutorialUI.IconsDiappear(3);
-        tutorialUI.ShowIcons(4);
-        tutorialUI.ShowMessageText("        is your range");
-        OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-        yield return new WaitUntil(() => completeIndex == 6);
-
-
-        tutorialUI.IconsDiappear(4);
+        tutorialUI.IconsDisappear(4);
         TurnbasedSystem.Instance.StartTurnbaseSystem();
-     
+        tutorialUI.ShowIconFrames(4, false);
         Debug.Log(completeIndex);
         //Time.timeScale = 0.01f;
         isActionCompleted = true;                                 // No judge button, have to reset
         cameraComponent.LockCamera(true);
         SelectManager.Instance.selectGridMode = SelectGridMode.None;
         SelectManager.Instance.UpdateSelectableGridObject();
-        tutorialUI.ShowMessageText("Now,the turn begins");
+        tutorialUI.ShowMessageText("      Now,the turn begins");
         //start SFX
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-        yield return new WaitUntil(() => completeIndex == 7);
+        yield return new WaitUntil(() => completeIndex == 6);
 
 
         TurnbasedSystem.Instance.StartTurnbaseSystem();
@@ -265,7 +308,7 @@ public class TutorialManager : MonoBehaviour
         cameraComponent.LockCamera(true);
         tutorialUI.ShowMessageText("In Control Phase, you should give orders in limited time");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-        yield return new WaitUntil(() => completeIndex == 8);
+        yield return new WaitUntil(() => completeIndex == 7);
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
@@ -274,22 +317,29 @@ public class TutorialManager : MonoBehaviour
         FindObjectOfType<CardSelectComponent>().isLocked = true;
         tutorialUI.ShowMessageText("You'll automatically occupy the land you steps on without actionpoint, when the game begins");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-        yield return new WaitUntil(() => completeIndex == 9);
-
+        yield return new WaitUntil(() => completeIndex == 8);
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
-        tutorialUI.ShowMessageText("You will get 1 card after you occupy the land");
+        FindObjectOfType<CardSelectComponent>().isLocked = true;
+        tutorialUI.ShowAcademyBuff();
+        tutorialUI.ShowMessageText("You'll get academies buff after you occupy the land. You can see your buff at right bar\n"+"Click to unfold or fold");
+        OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
+        yield return new WaitUntil(() => completeIndex == 9);
+
+
+        isActionCompleted = true;                                 // No judge button, have to reset
+        tutorialUI.ShowMessageText("You will get 1 card after you occupy the land,card academy is decided by the land");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 10);
 
 
         
-        tutorialUI.ShowMessageText("Now, you can play cards");
-        yield return new WaitForSecondsRealtime(1f);
+        //tutorialUI.ShowMessageText("   Now, you can play cards");
+        //yield return new WaitForSecondsRealtime(1f);
 
 
-        tutorialUI.ShowMessageText("Left Click the card to choose, Right Click to cancel, Double Click the card to play");
+        tutorialUI.ShowMessageText("Now, you can play cards\nLeft Click the card to choose\nRight Click to cancel\nDouble Click the card to play");
         FindObjectOfType<CardSelectComponent>().isLocked = false;
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 11);
@@ -312,6 +362,7 @@ public class TutorialManager : MonoBehaviour
 
 
         isActionCompleted = true;                                 // No judge button, have to reset
+        tutorialUI.ShowLeft(false);
         SelectManager.Instance.SetSpecificSelection(new Vector2Int(1, 0));
         //Time.timeScale = 0.01f;
         tutorialUI.ShowMessageText("Now choose the glowing land and click MOVE button,which spend 1 action point");
@@ -323,7 +374,7 @@ public class TutorialManager : MonoBehaviour
         
         isActionCompleted = true;                                 // No judge button, have to reset
         SelectManager.Instance.SetSpecificSelection(new Vector2Int(1, 0));
-        tutorialUI.ShowMessageText("Click OCCUPY button");
+        tutorialUI.ShowMessageText("      Click OCCUPY button");
         //completeIndex++;                        //15
         yield return new WaitUntil(() => action == TutorialAction.ClickOccupy);
        
@@ -373,7 +424,10 @@ public class TutorialManager : MonoBehaviour
             //{
             //    IsGreat = true;
             //}
-          
+            if((MovestageTimes>=1)||(AttackStageTimes>=1))
+            {
+                Time.timeScale = 1;
+            }
 
         }
         else
@@ -423,7 +477,7 @@ public class TutorialManager : MonoBehaviour
         
         if ((action == TutorialAction.ClickBuild)&&(buildTimes<1))
         {
-            tutorialUI.ShowMessageText("A key decision! Building a city can enable you draw 2 cards on this land.");
+            tutorialUI.ShowMessageText("A key decision! Building a city can enable you draw 2 cards on this land. And you'll have chance to get stronger card");
             buildTimes++;
             isActionCompleted = true;
             OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
