@@ -9,22 +9,21 @@ public class BING2 : CardFunction
     {
         Function();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void Function()
     {
-
-        if(player.moveCount == 0)
+        //Old Bing2
+        /*if(player.moveCount == 0)
         {
             Player enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
             if (enemy.Defence==0)
             {
                 enemy.HP -= 1;
             }
+        }*/
+        Player enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
+        if(GridManager.Instance.GetGridDistance(player.currentGrid, enemy.currentGrid) <= player.Range)
+        {
+            enemy.isBleeding = true;
         }
         Destroy(gameObject);
     }

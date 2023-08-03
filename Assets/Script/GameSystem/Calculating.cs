@@ -167,6 +167,8 @@ public class Calculating : NetworkBehaviour
         player.cardDF = 0;
         player.canCost1APInEnemy = false;
         player.playedCardCount = 0;
+        player.moveCountForFreeMove = 0;
+        player.isBleeding = false;
         for (int i = 0; i < 6 ; i++)
         {
             AcademyEffectNum[i] -= 0;

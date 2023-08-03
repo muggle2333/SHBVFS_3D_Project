@@ -235,7 +235,12 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
-            player.moveCount++;
+            player.moveCountForFreeMove++;
+        }
+        player.moveCount++;
+        if (player.isBleeding)
+        {
+            player.HP--;
         }
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
         GridManager.Instance.DiscoverGridObject(player,gridObject);

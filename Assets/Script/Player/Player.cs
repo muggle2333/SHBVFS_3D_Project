@@ -22,6 +22,7 @@ public class Player : Character
     public bool canAttack = true;
     public GridObject startGrid;
     public int moveCount;
+    public int moveCountForFreeMove;
     public int descoverLandCount;
     public int occuplyCount;
     public GameObject headCard;
