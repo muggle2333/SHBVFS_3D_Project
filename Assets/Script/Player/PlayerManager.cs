@@ -522,8 +522,10 @@ public class PlayerManager : NetworkBehaviour
         Player attackTarget = GameplayManager.Instance.playerList[(int)attackTargetId];
         attackPlayer.AttackTarget = attackTarget;
         attackPlayer.Attack();
+        FindObjectOfType<CameraTest4>().FocusPosition(attackPlayer.transform.position,0);
         attackPlayer.GetComponent<PlayerInteractionComponent>().SetAttackPath(attackPlayer.transform,attackTarget.transform);
         attackTarget.GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
+        FindObjectOfType<CameraTest4>().FocusPosition(attackTarget.transform.position, 0);
 
         string name = attackPlayer == GameplayManager.Instance.currentPlayer ? "YOU" : "ENEMY";
         UIManager.Instance.ShowWarningTimer(name + " ATTACK",2f);

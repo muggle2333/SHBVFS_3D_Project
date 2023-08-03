@@ -255,6 +255,9 @@ public class PlayerInteractionComponent : MonoBehaviour
         seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(1, 0.5f, 0.5f), 0.2f); });
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, Color.white, 0.2f); });
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(1, 0.5f, 0.5f), 0.2f); });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, Color.white, 0.2f); });
 
     }
 
