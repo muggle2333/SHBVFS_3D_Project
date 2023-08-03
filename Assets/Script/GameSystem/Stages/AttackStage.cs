@@ -51,6 +51,8 @@ public class AttackStage : MonoBehaviour
         yield return new WaitForSeconds(1);
         List<Player> playerList = GameplayManager.Instance.GetPlayer();
         playerList = playerList.OrderByDescending(x => x.Priority).ToList();
+
+        PlayerManager.Instance.SetPlayerLookEachOtherClientRpc();
         //Attack per Player
         for (int i = 0; i < playerList.Count; i++)
         {

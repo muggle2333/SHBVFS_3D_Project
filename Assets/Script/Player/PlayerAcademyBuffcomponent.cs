@@ -49,7 +49,7 @@ public class PlayerAcademyBuffcomponent : NetworkBehaviour
             UpdatePlayerAcademyBuffServerRpc(player);
         }
     }*/
-    [ServerRpc]
+    [ServerRpc(RequireOwnership =false)]
     public void UpdatePlayerAcademyBuffServerRpc(PlayerId playerId)
     {
         Player player = GameplayManager.Instance.PlayerIdToPlayer(playerId);

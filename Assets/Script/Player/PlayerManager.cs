@@ -523,6 +523,7 @@ public class PlayerManager : NetworkBehaviour
         Player attackPlayer = GameplayManager.Instance.playerList[(int)attackPlayerId];
         Player attackTarget = GameplayManager.Instance.playerList[(int)attackTargetId];
         attackPlayer.AttackTarget = attackTarget;
+        
         attackPlayer.Attack();
         attackPlayer.GetComponent<PlayerInteractionComponent>().SetAttackPath(attackPlayer.transform,attackTarget.transform);
         attackTarget.GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
@@ -531,6 +532,15 @@ public class PlayerManager : NetworkBehaviour
         UIManager.Instance.ShowWarningToPlayerTimer(attackPlayerId , "ATTACK", 2f);
         SoundManager.Instance.PlaySound(Sound.Attack);
         //VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
+    }
+    [ClientRpc]
+    public void SetPlayerLookEachOtherClientRpc()
+    {
+        var playerList = GameplayManager.Instance.playerList;
+        playerList[0].transform.LookAt(playerList[1].transform.position);
+        playerList[0].transform.localEulerAngles = new Vector3(0, playerList[0].transform.localEulerAngles.y, playerList[0].transform.localEulerAngles.z);
+        playerList[1].transform.LookAt(playerList[0].transform.position);
+        playerList[1].transform.localEulerAngles = new Vector3(0, playerList[1].transform.localEulerAngles.y, playerList[1].transform.localEulerAngles.z);
     }
 
     public void OnDestroy()
