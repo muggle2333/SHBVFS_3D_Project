@@ -157,11 +157,19 @@ public class UIManager : NetworkBehaviour
         warningUI.ShowWarningTimer(warning, time);
     }
 
-    public void ShowWarningToPlayerTimer(PlayerId playerId,string warning, float time)
+    [ClientRpc]
+    public void ShowWarningToPlayerTimerClientRpc(PlayerId playerId,string warning, float time)
     {
-        string str = (playerId == GameplayManager.Instance.currentPlayer.Id) ? "YOU" : "Enemy";
-        warning = str + " " + warning;
-        warningUI.ShowWarningTimer(warning, time);
+        string str = "";
+        if(warning =="ACT")
+        {
+            str = (playerId == GameplayManager.Instance.currentPlayer.Id) ? "YOU ACT FIRST" : "ENEMY ACTS FIRST";
+        }
+        else if(warning =="ATTACK")
+        {
+            str = (playerId == GameplayManager.Instance.currentPlayer.Id) ? "YOU ATTACK" : "ENEMY ATTACKS";
+        }
+        warningUI.ShowWarningTimer(str, time);
     }
     public void BlinkAcademyBuffCount(PlayerId playerId, int AcademyInt)
     {

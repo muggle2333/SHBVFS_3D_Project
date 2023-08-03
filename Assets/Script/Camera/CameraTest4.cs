@@ -20,7 +20,7 @@ public class CameraTest4 : MonoBehaviour
     private bool isMoving = false;
     private Vector3 vec = new Vector3();
     private Guid uid;
-    private Vector3 offset = new Vector3(0.15f, 0.15f, 0.2f);
+    private Vector3 offset = new Vector3(0.2f, 0.15f, 0.2f);
     private bool isLocked = false;
     private void Start()
     {
@@ -167,6 +167,27 @@ public class CameraTest4 : MonoBehaviour
         //CheckShouldTurnCamera(vec);
     }
 
+    public void FocusGirdCenterZoom(GridObject gridObject1, GridObject gridObject2)
+    {
+        var dis = cam.transform.localPosition;
+        var seq = DOTween.Sequence();
+        var length = Vector3.Distance(GridManager.Instance.grid.GetWorldPositionCenter(gridObject1.x, gridObject1.z), GridManager.Instance.grid.GetWorldPositionCenter(gridObject2.x, gridObject2.z));
+        
+        float zoomScale = -1 * length / 2.5f;
+        vec = (GridManager.Instance.grid.GetWorldPositionCenter(gridObject1.x, gridObject1.z) + GridManager.Instance.grid.GetWorldPositionCenter(gridObject2.x, gridObject2.z)) / 2;
+        
+        seq.Append(transform.DOMove(vec, 0.5f));
+        if (GameplayManager.Instance.isBluePlayer)
+        {
+            Vector3 backward = new Vector3(-cam.transform.forward.x + offset.x, cam.transform.forward.y + offset.y, -cam.transform.forward.z + offset.z);
+            seq.Join(cam.DOLocalMove(pos + backward * zoomScale, 0.5f));
+        }
+        else
+        {
+            Vector3 forward = new Vector3(cam.transform.forward.x + offset.x, cam.transform.forward.y + offset.y, cam.transform.forward.z + offset.z);
+            seq.Join(cam.DOLocalMove(pos + forward * zoomScale, 0.5f));
+        }
+    }
     public void LockCamera(bool isLocked)
     {
         this.isLocked = isLocked;

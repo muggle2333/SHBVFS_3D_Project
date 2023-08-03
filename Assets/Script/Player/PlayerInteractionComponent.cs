@@ -193,7 +193,10 @@ public class PlayerInteractionComponent : MonoBehaviour
         //pathLine.transform.rotation = Quaternion.LookRotation(new Vector3(0, -0.5f, 0), pathLine.transform.up);
         pathLine.positionCount = 1;
         pathLine.SetPosition(0, transform.position + new Vector3(0, 0.1f, 0));
-
+        if(playerVfx!= null)
+        {
+            playerVfx.SetActive(false);
+        }
     }
 
     public void DeduceFirstPath()

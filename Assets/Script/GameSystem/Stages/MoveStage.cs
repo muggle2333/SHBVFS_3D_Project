@@ -30,11 +30,11 @@ public class MoveStage : NetworkBehaviour
         priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
         if(priorityList.Count >0 )
         {
-            UIManager.Instance.ShowWarningToPlayerTimer(priorityList[0].Id, "Act first", 1f);
+            UIManager.Instance.ShowWarningToPlayerTimerClientRpc(priorityList[0].Id, "ACT", 2f);
         }
         else
         {
-            UIManager.Instance.ShowWarningTimerClientRpc("Nobody Acts", 1f);
+            UIManager.Instance.ShowWarningTimerClientRpc("NOBODY ACTS", 2f);
         }
 
         while(playerInteractDict.Count!=0)

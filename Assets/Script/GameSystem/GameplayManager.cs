@@ -171,7 +171,9 @@ public class GameplayManager : NetworkBehaviour
         {
             PlayerManager.Instance.BackupPlayerData(player);
             player.UpdateDataPerTurn();
+            player.GetComponentInChildren<PlayerInteractionComponent>().RefreshLinePath();
         }
+
     }
     public void StartDiscardStage()
     {
@@ -394,8 +396,9 @@ public class GameplayManager : NetworkBehaviour
     public void SetCameraOverviewClientRpc()
     {
         CameraTest4 camera = FindObjectOfType<CameraTest4>();
-        Vector3 pos = (playerList[0].transform.position + playerList[1].transform.position) / 2;
-        camera.FocusPosition(pos, -35f);
+        //Vector3 pos = (playerList[0].transform.position + playerList[1].transform.position) / 2;
+        //camera.FocusPosition(pos, -35f);
+        camera.FocusGirdCenterZoom(playerList[0].currentGrid, playerList[1].currentGrid);
     }
     [ClientRpc]
     public void SetCameraFocusSelfClientRpc()

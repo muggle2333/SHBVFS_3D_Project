@@ -311,7 +311,8 @@ public class PlayerManager : NetworkBehaviour
         player.GetComponent<PlayerInteractionComponent>().MoveVfxPlayer(gridObject);
         UpdateGridAuthorityData(player, gridObject);
         player.GetComponent<PlayerInteractionComponent>().UpdateLinePath(gridObject.landType);
-        FindObjectOfType<CameraTest4>().FocusGridCenter(player.trueGrid, gridObject);
+        //FindObjectOfType<CameraTest4>().FocusGridCenter(player.trueGrid, gridObject);
+        FindObjectOfType<CameraTest4>().FocusGirdCenterZoom(player.trueGrid, gridObject);
     }
 
     public bool Occupy(Player player,GridObject gridObject,bool isControlStage)
@@ -532,9 +533,9 @@ public class PlayerManager : NetworkBehaviour
         attackPlayer.Attack();
         attackPlayer.GetComponent<PlayerInteractionComponent>().SetAttackPath(attackPlayer.transform,attackTarget.transform);
         attackTarget.GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
-        FindObjectOfType<CameraTest4>().FocusPosition(attackTarget.transform.position, 0);
+        //FindObjectOfType<CameraTest4>().FocusPosition(attackTarget.transform.position, 0);
 
-        UIManager.Instance.ShowWarningToPlayerTimer(attackPlayerId , "ATTACK", 2f);
+        UIManager.Instance.ShowWarningToPlayerTimerClientRpc(attackPlayerId , "ATTACK", 2f);
         SoundManager.Instance.PlaySound(Sound.Attack);
         //VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
     }
