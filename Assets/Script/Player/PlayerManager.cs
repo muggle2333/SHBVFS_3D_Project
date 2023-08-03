@@ -261,6 +261,8 @@ public class PlayerManager : NetworkBehaviour
         {
             SoundManager.Instance.PlaySound(Sound.MoveToPlain);
         }
+        player.UpdateGridBuff();
+        Calculating.Instance.CalculatPlayerBaseData(player);
         return true;
     }
     public void MovePlayerNoAP(Player player, GridObject gridObject)

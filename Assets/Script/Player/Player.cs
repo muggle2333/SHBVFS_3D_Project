@@ -138,24 +138,30 @@ public class Player : Character
     }
     void Update()
     {
-        if (currentGrid.landType == LandType.Mountain)
-        {
-            gridAR = 1;
-        }
-        else if (currentGrid.landType == LandType.Forest)
-        {
-            gridDF = 1;
-        }
-        else if (currentGrid.landType == LandType.Lake || currentGrid.landType == LandType.Plain)
-        {
-            gridAR = 0;
-            gridDF = 0;
-        }
+        
         MaxActionPoint = ActionPointPerRound * 2;
         MaxCardCount = HP;
         if (Defence < 0)
         {
             Defence = 0;
+        }
+    }
+    public void UpdateGridBuff()
+    {
+        if (GridManager.Instance.GetGridObject(new Vector2Int(currentGrid.x, currentGrid.z)).landType == LandType.Mountain)
+        {
+            gridAR = 1;
+            gridDF = 0;
+        }
+        else if (GridManager.Instance.GetGridObject(new Vector2Int(currentGrid.x, currentGrid.z)).landType == LandType.Forest)
+        {
+            gridDF = 1;
+            gridAR = 0;
+        }
+        else if (GridManager.Instance.GetGridObject(new Vector2Int(currentGrid.x, currentGrid.z)).landType == LandType.Lake || GridManager.Instance.GetGridObject(new Vector2Int(currentGrid.x, currentGrid.z)).landType == LandType.Plain)
+        {
+            gridAR = 0;
+            gridDF = 0;
         }
     }
     public void UpdateDataPerTurn()
