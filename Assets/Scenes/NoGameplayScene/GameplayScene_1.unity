@@ -87076,6 +87076,10 @@ PrefabInstance:
       propertyPath: cardCemetery
       value: 
       objectReference: {fileID: 48151496}
+    - target: {fileID: 552847490979672559, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
+      propertyPath: playedCardUI
+      value: 
+      objectReference: {fileID: 345234221466777174}
     - target: {fileID: 4164202118832277108, guid: e8a38de83b177e84092a45a31fb8dcc7, type: 3}
       propertyPath: m_Camera
       value: 
@@ -114318,6 +114322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929aec3d3bcc64441bbcc83eba7daf28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  academyUI: {fileID: 345234221466777173}
   academyBuffUI: {fileID: 345234221466777172}
 --- !u!114 &2104841665
 MonoBehaviour:
@@ -115672,6 +115677,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3c4d293ec56ac641a7b605d345eff53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &345234221466777173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1105344322481397832, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+  m_PrefabInstance: {fileID: 345234221466777171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7f2f3a3431c9e48aeefc1ca84bd17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &345234221466777174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 735467448254398798, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+  m_PrefabInstance: {fileID: 345234221466777171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d7b8757bff71f4cba266cdb21e78b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2521327372234254911

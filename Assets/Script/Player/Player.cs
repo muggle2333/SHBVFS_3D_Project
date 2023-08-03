@@ -110,13 +110,22 @@ public class Player : Character
         CurrentActionPoint = 0;
         MaxActionPoint = 3;
         TrueActionPoint = CurrentActionPoint;
-        
-        Invoke("PlayerAcademyDataServerRpc", 3);
-
+        PlayerAcademyDataServerRpc();
+        //Invoke("PlayerAcademyDataServerRpc", 3);
+        totalAcademyOwnedPoint.OnListChanged += TotalAcademyOwnedPoint_OnListChanged;
         List<GridObject> yiLand;
         OwnedLandDic.TryGetValue(AcademyType.YI, out yiLand);
         //Debug.Log(yiLand.Count);
     }
+
+    private void TotalAcademyOwnedPoint_OnListChanged(NetworkListEvent<int> changeEvent)
+    {
+        if (changeEvent.PreviousValue - changeEvent.Value != 0)
+        {
+            UIManager.Instance.BlinkAcademyBuffCount(Id, changeEvent.Index);
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void PlayerAcademyDataServerRpc()
     {

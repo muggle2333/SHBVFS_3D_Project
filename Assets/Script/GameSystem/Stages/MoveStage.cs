@@ -73,14 +73,14 @@ public class MoveStage : NetworkBehaviour
                     {
                         PlayerManager.Instance.Interact(priorityList[i], playerInteract[0]);
                     }
-
+                    FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(PlayerId.BluePlayer);
+                    FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(PlayerId.RedPlayer);
                     playerInteract.RemoveAt(0);
                     playerInteractDict[priorityList[i]] = playerInteract;
                 }
             }
         }
-        FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(PlayerId.BluePlayer);
-        FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(PlayerId.RedPlayer);
+        
         EndStage();
     }
 

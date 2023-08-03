@@ -21,7 +21,17 @@ public class AcademyUI : MonoBehaviour
         players = GameplayManager.Instance.GetPlayer();
         isUnlock = true;
     }
-
+    public void Blink(PlayerId playerId,int AcademyInt)
+    {
+        if (playerId == PlayerId.RedPlayer)
+        {
+            redAcademies[AcademyInt].GetComponent<TextColorControl>().ColorDoubleBlink(new Color32(228, 52, 3, 255), new Color32(224, 221, 79, 255), 0.4f);
+        }
+        else
+        {
+            blueAcademies[AcademyInt].GetComponent<TextColorControl>().ColorDoubleBlink(new Color32(66, 158, 171, 255), new Color32(224, 221, 79, 255), 0.4f);
+        }
+    }
     private void Update()
     {
         if (GameManager.Instance.wholeGameState.Value == GameManager.WholeGameState.GameOver) return;

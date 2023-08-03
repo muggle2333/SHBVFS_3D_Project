@@ -295,8 +295,8 @@ public class SelectManager : MonoBehaviour
     public void CloseSelectionUI()
     {
         ClearSelection();
-        //UIManager.Instance.ShowGridObjectUI(false, null);
+        UIManager.Instance.ShowGridObjectUI(false, null);
         UIManager.Instance.ShowEnemyUI(false);
-        UIManager.Instance.ShowAcademyUI(false);
+        //UIManager.Instance.ShowAcademyUI(false);
     }
 }

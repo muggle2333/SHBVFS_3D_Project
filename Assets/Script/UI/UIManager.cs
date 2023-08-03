@@ -18,6 +18,7 @@ public class UIManager : NetworkBehaviour
     private EnemyUI enemyUI;
     private DiscardUI discardUI;
     private WarningUI warningUI;
+    public AcademyUI academyUI;
     [SerializeField] private AcademyButton academyBuffUI;
     public void Awake()
     {
@@ -130,7 +131,6 @@ public class UIManager : NetworkBehaviour
                 gameplayUI.discardCards.gameObject.GetComponent<Button>().interactable = isActive; break;
             case GameplayUIType.playHP:
                 gameplayUI.playHP.gameObject.GetComponent<Button>().interactable = isActive; break;
-
         }
     }
 
@@ -155,5 +155,10 @@ public class UIManager : NetworkBehaviour
     public void ShowWarningTimer(string warning,float time)
     {
         warningUI.ShowWarningTimer(warning, time);
+    }
+
+    public void BlinkAcademyBuffCount(PlayerId playerId, int AcademyInt)
+    {
+        academyUI.Blink(playerId, AcademyInt);
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 10
   cardName: Assist in reconnaissance
-  description: +1 range this turn
+  description: After control stage, +1 temporary range this turn
   headPicture: {fileID: 21300000, guid: 061238a1215a06a43a9d69645db61f74, type: 3}
   academyType: 2
   cardCondition: {fileID: 0}
