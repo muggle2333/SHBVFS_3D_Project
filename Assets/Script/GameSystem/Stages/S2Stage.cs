@@ -51,7 +51,7 @@ public class S2Stage : MonoBehaviour
 
         if(redPlayerNeedsToEffect.Count > 0)
         {
-            //Debug.LogError("S2 RED" + redPlayerNeedsToEffect.Count);
+            Debug.LogError("S2 RED" + redPlayerNeedsToEffect.Count);
             playedCardDict.Add(GameplayManager.Instance.playerList[0], redPlayerNeedsToEffect);
         }
         if (bluePlayerNeedsToEffect.Count > 0)

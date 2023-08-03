@@ -102,7 +102,7 @@ public class TutorialManager : MonoBehaviour
     {
         SetGridAcadmy();
         Debug.LogError("Start Tutorial");
-        FindObjectOfType<PlayerDeck>().InitializePlayerDeck();
+        //FindObjectOfType<PlayerDeck>().InitializePlayerDeck();
         Player player = GameplayManager.Instance.currentPlayer;
         player.CurrentActionPoint = player.MaxActionPoint;
         player.TrueActionPoint = player.MaxActionPoint;
@@ -287,6 +287,7 @@ public class TutorialManager : MonoBehaviour
 
 
         tutorialUI.IconsDisappear(4);
+        TurnbasedSystem.Instance.SetPlayerSettingClientRpc();
         TurnbasedSystem.Instance.StartTurnbaseSystem();
         tutorialUI.ShowIconFrames(4, false);
         Debug.Log(completeIndex);
@@ -295,6 +296,7 @@ public class TutorialManager : MonoBehaviour
         cameraComponent.LockCamera(true);
         SelectManager.Instance.selectGridMode = SelectGridMode.None;
         SelectManager.Instance.UpdateSelectableGridObject();
+        FindObjectOfType<CardSelectComponent>().isLocked = true;
         tutorialUI.ShowMessageText("      Now,the turn begins.");
         //start SFX
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
@@ -302,6 +304,7 @@ public class TutorialManager : MonoBehaviour
 
 
         TurnbasedSystem.Instance.StartTurnbaseSystem();
+        //TurnbasedSystem.Instance.SetPlayerSettingClientRpc();
         SelectManager.Instance.selectGridMode = SelectGridMode.None;
         SelectManager.Instance.UpdateSelectableGridObject();
         tutorialUI.SkipDiappear();
@@ -315,7 +318,7 @@ public class TutorialManager : MonoBehaviour
 
         isActionCompleted = true;                                 // No judge button, have to reset
         Time.timeScale = 1f;
-        TurnbasedSystem.Instance.SetPlayerSettingClientRpc();
+        //TurnbasedSystem.Instance.SetPlayerSettingClientRpc();
         FindObjectOfType<CardSelectComponent>().isLocked = true;
         tutorialUI.ShowMessageText("When game begins, you'll automatically occupy your first land without action point.");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);

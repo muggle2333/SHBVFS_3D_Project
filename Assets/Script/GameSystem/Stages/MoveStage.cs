@@ -65,8 +65,11 @@ public class MoveStage : NetworkBehaviour
                                 TargetClientIds = new ulong[] { (ulong)priorityList[i].Id }
                             }
                         });*/
-
-                        PlayerManager.Instance.InteractClientRpc(priorityList[i].Id, playerInteract[0]);
+                        if(playerInteract.Count>0)
+                        {
+                            PlayerManager.Instance.InteractClientRpc(priorityList[i].Id, playerInteract[0]);
+                        }
+                        
                     }
                     else
                     {
