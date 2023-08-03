@@ -16,6 +16,7 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private GameObject WarningUI;
     [SerializeField] private GameObject Frame;
     [SerializeField] private List<GameObject> Icons = new List<GameObject>();
+    [SerializeField] private List<GameObject> IconFrame = new List<GameObject>();
     [SerializeField] private GameObject Skip;
     [SerializeField] private GameObject AcademyBUffsUI;
     [SerializeField] private GameObject TopLeftFrame;
@@ -72,9 +73,14 @@ public class TutorialUI : MonoBehaviour
         Icons[iconIndex].SetActive(true);
     }
 
-    public void IconsDiappear(int iconIndex)
+    public void IconsDisappear(int iconIndex)
     {
         Icons[iconIndex].SetActive(false);
+    }
+
+    public void ShowIconFrames(int iconIndex, bool isactive)
+    {
+        IconFrame[iconIndex].SetActive(isactive);
     }
 
     public void SkipDiappear()
