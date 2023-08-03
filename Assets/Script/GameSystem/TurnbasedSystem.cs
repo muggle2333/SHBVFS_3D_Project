@@ -101,6 +101,7 @@ public class TurnbasedSystem : NetworkBehaviour
         {
             PlayerManager.Instance.SetPlayerSetting(player);
         }
+        FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(PlayerId.RedPlayer);
     }
     private void TurnbasedSystem_RoundIndexChanged(int previousValue, int newValue)
     {
