@@ -513,7 +513,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         this.transform.localPosition = new Vector3(-800, 500, transform.localPosition.z);
         //this.gameObject.SetActive(true);
         var seq = DOTween.Sequence();
-        seq.Append(transform.DOLocalMoveX(0, 0.4f));
+        seq.Append(transform.DOLocalMoveX(-200f, 0.4f));
         seq.Join(transform.DOLocalMoveY(0, 0.4f));
         seq.Join(transform.DOScale(1f, 0.4f));
         seq.AppendCallback(() => { this.Info.SetActive(true); });
@@ -542,7 +542,7 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         this.transform.localPosition = new Vector3(800, 500, transform.localPosition.z);
         //this.gameObject.SetActive(true);
         var seq = DOTween.Sequence();
-        seq.Append(transform.DOLocalMoveX(0, 0.4f));
+        seq.Append(transform.DOLocalMoveX(200, 0.4f));
         seq.Join(transform.DOLocalMoveY(0, 0.4f));
         seq.Join(transform.DOScale(1f, 0.4f));
         seq.AppendCallback(() => { this.Info.SetActive(true); });
