@@ -353,6 +353,11 @@ public class GameplayManager : NetworkBehaviour
         Debug.LogError("Get Enemy Fail");
         return playerId;
     }
+    [ServerRpc]
+    public void ChangePlayerPriorityServerRpc()
+    {
+        ChangePlayerPriorityClientRpc();
+    }
     [ClientRpc]
     public void ChangePlayerPriorityClientRpc()
     {

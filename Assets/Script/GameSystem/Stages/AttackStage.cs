@@ -64,7 +64,7 @@ public class AttackStage : MonoBehaviour
                 if (j == i) continue;
                 //distance = PlayerManager.Instance.CheckDistance(playerList[i], playerList[j].currentGrid);
                 distance = GridManager.Instance.GetGridDistance(playerList[i].currentGrid, playerList[j].currentGrid);
-                Debug.LogError(distance);
+                //Debug.LogError(distance);
                 //Debug.LogError(playerList[i] + " distance " + distance);
                 
                 //if (distance < minDistance && playerList[i].Range >= distance)
