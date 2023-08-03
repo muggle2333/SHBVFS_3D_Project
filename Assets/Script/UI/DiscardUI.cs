@@ -33,7 +33,7 @@ public class DiscardUI : MonoBehaviour
     private void DiscardStage_OnStartDiscardStage(object sender, EventArgs e)
     {
         container.SetActive(true);
-        discardText.text = "Competitor is discarding";
+        discardText.text = "Enemy is discarding";
     }
     
     private void DiscardStage_OnStartSelfDiscardStage(object sender, EventArgs e)
@@ -51,6 +51,6 @@ public class DiscardUI : MonoBehaviour
     private void DiscardStage_OnSelectDiscard(object sender, EventArgs e)
     {
         timerText.gameObject.SetActive(false);
-        discardText.text = "Competitor is discarding";
+        discardText.text = "Enemy is discarding";
     }
 }
