@@ -61,3 +61,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a4ac4808bc78841b9aac9047fda642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardSetting: {fileID: 0}
+  player: {fileID: 0}

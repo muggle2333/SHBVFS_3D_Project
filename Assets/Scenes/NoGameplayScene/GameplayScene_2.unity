@@ -113638,9 +113638,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurnbaseUI
       objectReference: {fileID: 0}
+    - target: {fileID: 924095634604532817, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1379923879981454770, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799003734917101670, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

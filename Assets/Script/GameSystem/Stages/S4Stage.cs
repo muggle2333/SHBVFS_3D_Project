@@ -74,6 +74,7 @@ public class S4Stage : MonoBehaviour
                 }
             }
         }
+        GameplayManager.Instance.ChangePlayerPriorityClientRpc();
         yield return new WaitForSeconds(0.2f);
         GameplayManager.Instance.AddPlayerHpClientRpc();
         GameplayManager.Instance.DrawEventCardPerRoundClientRpc(0);

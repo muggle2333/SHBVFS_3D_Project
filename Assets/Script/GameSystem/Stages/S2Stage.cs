@@ -85,7 +85,7 @@ public class S2Stage : MonoBehaviour
                     //Use card
                     
                     
-                    Debug.LogError("Id:" + priorityList[i].Id + "Card Id:" + playedCardDict[priorityList[i]][0]);
+                    //Debug.LogError("Id:" + priorityList[i].Id + "Card Id:" + playedCardDict[priorityList[i]][0]);
                     CardManager.Instance.CardTakeEffectClientRpc(priorityList[i].Id, playedCardDict[priorityList[i]][0]);
                     yield return new WaitForSeconds(3);
                     playedCardDict[priorityList[i]].RemoveAt(0);
