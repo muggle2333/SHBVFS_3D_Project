@@ -403,6 +403,11 @@ public class GameplayManager : NetworkBehaviour
         CameraTest4 camera = FindObjectOfType<CameraTest4>();
         camera.FocusGrid();
     }
-
+    [ClientRpc]
+    public void SetCameraFocusPlayerClientRpc(Player player)
+    {
+        CameraTest4 camera = FindObjectOfType<CameraTest4>();
+        camera.FocusPosition(player.transform.position, 0);
+    }
 
 }

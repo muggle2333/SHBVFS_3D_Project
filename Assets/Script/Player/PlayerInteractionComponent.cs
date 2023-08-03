@@ -25,13 +25,16 @@ public class PlayerInteractionComponent : MonoBehaviour
     [SerializeField] private GameObject craft;
 
     [SerializeField] private GameObject playerModel;
+
     private MeshRenderer meshRenderer;
+    private Animator animator;
     private bool isPlayingVfx = false;
     private float hitVfxFloat = -1f;
     private void Start()
     {
         //canvas = GetComponent<Canvas>();
         meshRenderer = playerModel.GetComponentInChildren<MeshRenderer>();
+        animator = GetComponentInChildren<Animator>();
     }
     private void Update()
     {
@@ -209,6 +212,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void SetAttackPath(Transform start,Transform target)
     {
+        animator.SetTrigger("Attack");
         //attackLine.positionCount = 2;
         //attackLine.SetPosition(0,start.position + new Vector3(0, 0.1f, 0));
         //attackLine.SetPosition(1,target.position + new Vector3(0, 0.1f, 0));
@@ -246,6 +250,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void PlayHitVfxRed()
     {
+        animator.SetTrigger("Hurt");
         //Debug.LogError(this.gameObject + "Hited");
         var seq = DOTween.Sequence();
         seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(1, 0.5f, 0.5f), 0.2f);});

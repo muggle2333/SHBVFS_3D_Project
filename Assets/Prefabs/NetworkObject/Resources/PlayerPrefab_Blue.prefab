@@ -78,6 +78,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 65370586997314704, guid: cf986b0b44e960b488fbfef41fa5ac09, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a779d8833f0b334683e596bc002eb4c, type: 2}
+    - target: {fileID: 107442850216048547, guid: cf986b0b44e960b488fbfef41fa5ac09, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b31d122031424c41a64666d2b7bf4d7, type: 2}
     - target: {fileID: 499257089889080854, guid: cf986b0b44e960b488fbfef41fa5ac09, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334
@@ -390,6 +398,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 80df0edbeca37e84e85375fb8b291e35, type: 3}
       propertyPath: m_Name
       value: M_Player_Blue_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80df0edbeca37e84e85375fb8b291e35, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
