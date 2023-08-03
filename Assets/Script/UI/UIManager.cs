@@ -157,6 +157,12 @@ public class UIManager : NetworkBehaviour
         warningUI.ShowWarningTimer(warning, time);
     }
 
+    public void ShowWarningToPlayerTimer(PlayerId playerId,string warning, float time)
+    {
+        string str = (playerId == GameplayManager.Instance.currentPlayer.Id) ? "YOU" : "Enemy";
+        warning = str + " " + warning;
+        warningUI.ShowWarningTimer(warning, time);
+    }
     public void BlinkAcademyBuffCount(PlayerId playerId, int AcademyInt)
     {
         academyUI.Blink(playerId, AcademyInt);

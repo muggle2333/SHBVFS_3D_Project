@@ -30,8 +30,7 @@ public class MoveStage : NetworkBehaviour
         priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
         if(priorityList.Count >0 )
         {
-            string name = priorityList[0].Id == GameplayManager.Instance.currentPlayer.Id ? "YOU Act first" : "ENEMY Acts first";
-            UIManager.Instance.ShowWarningTimerClientRpc(name, 1f);
+            UIManager.Instance.ShowWarningToPlayerTimer(priorityList[0].Id, "Act first", 1f);
         }
         else
         {

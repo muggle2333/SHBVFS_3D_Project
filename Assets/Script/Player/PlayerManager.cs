@@ -526,8 +526,7 @@ public class PlayerManager : NetworkBehaviour
         attackTarget.GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
         FindObjectOfType<CameraTest4>().FocusPosition(attackTarget.transform.position, 0);
 
-        string name = attackPlayer == GameplayManager.Instance.currentPlayer ? "YOU" : "ENEMY";
-        UIManager.Instance.ShowWarningTimer(name + " ATTACK",2f);
+        UIManager.Instance.ShowWarningToPlayerTimer(attackPlayerId , "ATTACK", 2f);
         SoundManager.Instance.PlaySound(Sound.Attack);
         //VfxManager.Instance.PlayAttackVfx(attackPlayer.transform, attackTarget.transform);
     }
