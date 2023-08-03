@@ -17,6 +17,7 @@ public enum PlayerId
 
 public class Player : Character
 {
+    public bool isBleeding;
     public int playedCardCount;
     public bool canAttack = true;
     public GridObject startGrid;
