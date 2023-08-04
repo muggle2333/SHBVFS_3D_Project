@@ -297,11 +297,6 @@ public class Calculating : NetworkBehaviour
         {
             enemy.CurrentActionPoint += cardAP;
             enemy.TrueActionPoint += cardAP;
-            if (enemy.CurrentActionPoint < 0)
-            {
-                enemy.CurrentActionPoint = 0;
-                enemy.TrueActionPoint = 0;
-            }
         }
         else
         {
