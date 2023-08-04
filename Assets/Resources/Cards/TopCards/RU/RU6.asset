@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RU6
   m_EditorClassIdentifier: 
   cardId: 33
-  cardName: Reserved Territory
+  cardName: Steal Armor
   description: At this round, you gain the same amount of defense as the opponent's
     defense, and the opponent's defense is reduced to 0
   headPicture: {fileID: 21300000, guid: 3bac3e8ba45c27848ab09fa013eace5a, type: 3}
