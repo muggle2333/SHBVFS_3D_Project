@@ -115,8 +115,8 @@ public class Player : Character
         PlayerAcademyDataServerRpc();
         //Invoke("PlayerAcademyDataServerRpc", 3);
         totalAcademyOwnedPoint.OnListChanged += TotalAcademyOwnedPoint_OnListChanged;
-        List<GridObject> yiLand;
-        OwnedLandDic.TryGetValue(AcademyType.YI, out yiLand);
+        //List<GridObject> yiLand;
+        //OwnedLandDic.TryGetValue(AcademyType.YI, out yiLand);
         //Debug.Log(yiLand.Count);
     }
 
@@ -175,19 +175,20 @@ public class Player : Character
     public bool OccupyGrid(GridObject gridObject)
     {
         if(gridObject.landType != LandType.Plain) { return false; }
+        gridObject = GridManager.Instance.GetCurrentGridObject(gridObject);
         occuplyCount++;
-        List<GridObject> gridList;
-        if (OwnedLandDic.TryGetValue(gridObject.academy, out gridList))
-        {
-            gridList.Add(gridObject);
-            OwnedLandDic[gridObject.academy] = gridList;
-        }
-        else
-        {
-            List<GridObject> gridListNew = new List<GridObject>();
-            gridListNew.Add(gridObject);
-            OwnedLandDic.Add(gridObject.academy, gridListNew);
-        }
+        //List<GridObject> gridList;
+        //if (OwnedLandDic.TryGetValue(gridObject.academy, out gridList))
+        //{
+        //    gridList.Add(gridObject);
+        //    OwnedLandDic[gridObject.academy] = gridList;
+        //}
+        //else
+        //{
+        //    List<GridObject> gridListNew = new List<GridObject>();
+        //    gridListNew.Add(gridObject);
+        //    OwnedLandDic.Add(gridObject.academy, gridListNew);
+        //}
 
         if (NetworkManager.Singleton.IsServer)
         {
@@ -222,22 +223,26 @@ public class Player : Character
     }
     public void RemoveOwnedLand(GridObject gridObject)
     {
-        List<GridObject> gridList;
-        if (OwnedLandDic.TryGetValue(gridObject.academy, out gridList))
+        //List<GridObject> gridList;
+        //if (OwnedLandDic.TryGetValue(gridObject.academy, out gridList))
+        //{
+        //    foreach (var tmpGridObject in gridList)
+        //    {
+        //        if (GridManager.Instance.CheckGridObjectIsSame(gridObject, tmpGridObject))
+        //        {
+        //            gridList.Remove(tmpGridObject);
+        //            break;
+        //        }
+        //    }
+        //    OwnedLandDic[gridObject.academy] = gridList;
+        //    if (NetworkManager.Singleton.IsServer)
+        //    {
+        //        academyOwnedPoint[(int)gridObject.academy - 1]--;
+        //    }
+        //}
+        if (NetworkManager.Singleton.IsServer)
         {
-            foreach (var tmpGridObject in gridList)
-            {
-                if (GridManager.Instance.CheckGridObjectIsSame(gridObject, tmpGridObject))
-                {
-                    gridList.Remove(tmpGridObject);
-                    break;
-                }
-            }
-            OwnedLandDic[gridObject.academy] = gridList;
-            if (NetworkManager.Singleton.IsServer)
-            {
-                academyOwnedPoint[(int)gridObject.academy - 1]--;
-            }
+            academyOwnedPoint[(int)gridObject.academy - 1]--;
         }
     }
     [ServerRpc(RequireOwnership = false)]

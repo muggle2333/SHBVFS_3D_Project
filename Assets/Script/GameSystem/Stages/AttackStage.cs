@@ -62,7 +62,7 @@ public class AttackStage : MonoBehaviour
             //GameplayManager.Instance.SetCameraFocusPlayerClientRpc(playerList[i].transform.position);
             GameplayManager.Instance.SetCameraOverviewClientRpc();
             //Find target in min distance
-            playerList[i].GetComponentInChildren<PlayerInteractionComponent>().PlayRangeVfx(playerList[i].transform.position);
+            PlayerManager.Instance.SetPlayerTryAttackClientRpc((PlayerId)i);
             for (int j = 0; j < playerList.Count; j++)
             {
                 if (j == i) continue;

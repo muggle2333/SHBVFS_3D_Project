@@ -158,7 +158,7 @@ public class GridObject
     }
     public void SetOwner(Player player,bool isControlStage)
     {
-        if (owner!=null && owner != player)
+        if (owner != null && owner != player && TurnbasedSystem.Instance.CurrentGameStage.Value != GameStage.S1)
         {
             owner.RemoveOwnedLand(this);
         }

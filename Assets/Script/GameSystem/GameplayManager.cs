@@ -7,6 +7,7 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameplayManager : NetworkBehaviour
 {
@@ -96,6 +97,10 @@ public class GameplayManager : NetworkBehaviour
         if(FindObjectOfType<TutorialManager>()!=null)
         {
             playerStartPoint[1] = new Vector2Int(9,0);
+        }else if(SceneManager.GetActiveScene().name== "GameplayScene_3")
+        {
+            playerStartPoint[0] = new Vector2Int(1, 0);
+            playerStartPoint[1] = new Vector2Int(1, 2);
         }
         playerList =FindObjectsOfType<Player>().ToList<Player>();
         playerList = playerList.OrderBy(a=>a.Id).ToList();

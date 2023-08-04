@@ -60138,22 +60138,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2104841662}
     m_Modifications:
-    - target: {fileID: 1050284724079573909, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366271963285188947, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5836311698752990593, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6998884363635786788, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7458967917720580476, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
       propertyPath: m_Name
       value: GameplayUI
@@ -60240,10 +60224,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7458967917720580479, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8626451558892146898, guid: 626b93ecaf9f7f644b90f73e88b8c030, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

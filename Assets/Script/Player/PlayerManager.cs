@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -562,6 +563,13 @@ public class PlayerManager : NetworkBehaviour
     {
         GameplayManager.Instance.playerList[0].startGrid = GameplayManager.Instance.playerList[0].currentGrid;
         GameplayManager.Instance.playerList[1].startGrid = GameplayManager.Instance.playerList[1].currentGrid;
+    }
+
+    [ClientRpc]
+    public void SetPlayerTryAttackClientRpc(PlayerId playerId)
+    {
+        var player = GameplayManager.Instance.playerList[(int)playerId];
+        player.GetComponentInChildren<PlayerInteractionComponent>().PlayRangeVfx(player.transform.position);
     }
     
 }
