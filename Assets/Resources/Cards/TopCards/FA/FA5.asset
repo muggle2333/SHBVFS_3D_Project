@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FA5
   m_EditorClassIdentifier: 
   cardId: 38
-  cardName: Invulnerable
+  cardName: Sacrifice
   description: After control stage, draw 1 legend card and -1 HP
   headPicture: {fileID: 21300000, guid: 13eecf6179a690d4793a71b7ff88907b, type: 3}
   academyType: 6

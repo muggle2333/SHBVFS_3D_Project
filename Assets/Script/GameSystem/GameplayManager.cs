@@ -193,6 +193,7 @@ public class GameplayManager : NetworkBehaviour
         {
             //PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
             PlayerManager.Instance.ResetPlayerData(player);
+            PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
         }
         UIManager.Instance.ShowGridObjectUI(false, null);
     }
@@ -213,7 +214,7 @@ public class GameplayManager : NetworkBehaviour
     {
         foreach (var player in playerList)
         {
-            PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
+            //PlayerManager.Instance.ResetPlayerDateAfterControlStage(player);
         }
     }
     [ClientRpc]

@@ -33,6 +33,12 @@ public class GameOverUI : MonoBehaviour
     {
         Time.timeScale = 0;
         content.SetActive(true);
+        if(FindObjectOfType<TutorialManager>()!=null)
+        {
+            gameOverText.text = "TUTORIAL OVER";
+            SoundManager.Instance.PlayBgm(Bgm.WinBGM);
+            return;
+        }
         int winnerId = GameplayManager.Instance.GetWinner();
         if (winnerId == 2)
         {

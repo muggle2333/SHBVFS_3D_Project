@@ -46,6 +46,7 @@ public class TurnbasedSystem : NetworkBehaviour
 
     private Dictionary<ulong, bool> playerSkipDict = new Dictionary<ulong, bool>() { { 0, false }, { 1, false } };
     private bool isPlayerAllSkip = false;
+    public bool isLocalPlayerSkip = false;
     private void Awake()
     {
         if(Instance!=null&&Instance!=this)
@@ -296,6 +297,7 @@ public class TurnbasedSystem : NetworkBehaviour
     {
         playerSkipDict[serverRpcParams.Receive.SenderClientId] = true;
         isPlayerAllSkip = CheckIsAllSkip();
+        isLocalPlayerSkip = true;
     }
 
     public bool CheckIsAllSkip()

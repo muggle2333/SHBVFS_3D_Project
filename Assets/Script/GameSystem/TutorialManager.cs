@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -45,6 +46,8 @@ public class TutorialManager : MonoBehaviour
     private int MovestageTimes = 0;
     private int AttackStageTimes = 0;
     private int actionpointChecktimes = 0;
+    private int endtimes = 0;
+    private bool isend= false;
     private void Awake()
     {
         Instance= this;
@@ -63,7 +66,7 @@ public class TutorialManager : MonoBehaviour
 
     public void Start()
     {
-        
+        endtimes = 0;
         tutorialUI.AcademyBuffDisappear();
         Player player = GameplayManager.Instance.currentPlayer;
         player.CurrentActionPoint = player.MaxActionPoint;
@@ -118,6 +121,25 @@ public class TutorialManager : MonoBehaviour
             TurnbasedSystem.Instance.timerValue.Value = 60f;
         }
 
+        if(((TurnbasedSystem.Instance.timerValue.Value==0)||(TurnbasedSystem.Instance.isLocalPlayerSkip))&&(endtimes<1))
+        {
+            isActionCompleted=true;
+            endtimes++;
+            Time.timeScale = 0;
+            tutorialUI.ShowMessageText("Now,the Orderring Phase is over. In Move Phase, your soldier will act as what you orderred in Orderring Phase\n" +
+                                        "And in Attack Phase, your soldier will attack enemy in the range.");
+            OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
+
+        }
+
+        if(isend&&(endtimes==1))
+        {
+            endtimes++;
+            isActionCompleted = true;
+            tutorialUI.ShowMessageText("Now, the tutorial is over. You can practice with your friends in waiting room's tutorial level");
+            OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
+        }
+
         switch (completeIndex)
         {
             case -3: 
@@ -149,12 +171,6 @@ public class TutorialManager : MonoBehaviour
         if(drawTimes<1)
         {
             DrawCardJudge();
-        }
-        
-        if(waterTrigger&&(enterWaterTimes<1))
-        {
-            StartCoroutine("WaterLand");
-            enterWaterTimes++;
         }
 
         if(completeIndex>10)ActionPointCheck();
@@ -396,16 +412,6 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => action == TutorialAction.ClickBuild);
         
     }
-
- 
-
-    //IEnumerator WaterLand()
-    //{
-    //    tutorialUI.ShowMessageText("It will cause 2 action points if you step into water. But you can move without actionpoint in water. And it will only cause 1 action point to step out water.");
-    //    isActionCompleted = true;
-    //    OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
-    //    yield return null;
-    //}
     public void CompleteSpecificTutorial()
     {
         if(isActionCompleted)                                       
@@ -414,7 +420,16 @@ public class TutorialManager : MonoBehaviour
             FindObjectOfType<TutorialUI>().nextBtn.gameObject.SetActive(false);
             isActionCompleted = false;
             tutorialUI.HideTutorial();
-            
+            if(endtimes==1)
+            {
+                isend = true;
+            }
+
+            if(endtimes==2)
+            {
+                GameManager.Instance.SetGameOver();
+            }
+
             if (((searchTimes == 1) || (buildTimes == 1) || (drawTimes == 1))&&!IsGreat)
             {
                 //tutorialUI.ShowMessageText("Now, you can give further orders to this grid");
@@ -539,7 +554,10 @@ public class TutorialManager : MonoBehaviour
         this.action = action;
     }
 
-
+    private void OnDestroy()
+    {
+        TurnbasedSystem.Instance.CurrentGameStage.OnValueChanged -= TurnbasedSystem_CurrentGameStage;
+    }
 
 
 }
