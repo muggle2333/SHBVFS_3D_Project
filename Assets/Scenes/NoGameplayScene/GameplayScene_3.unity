@@ -6170,6 +6170,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: boundaryX.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898362079515081807, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
+      propertyPath: boundaryX.y
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6283519236212957862, guid: 5d3486fd7d566ef4b95c46533e39d6cc, type: 3}
       propertyPath: m_Cameras.Array.data[0]
       value: 
