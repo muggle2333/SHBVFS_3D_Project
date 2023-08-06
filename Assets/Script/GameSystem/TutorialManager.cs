@@ -227,7 +227,7 @@ public class TutorialManager : MonoBehaviour
 
         //tutorialUI.ShowGoal();
         tutorialUI.ShowMessageText("Press WASD to move the camera,\n" +
-                                   "Scroll MOUSE WEHEL to zoom in,\n" +
+                                   "Scroll MOUSE WHEEL to zoom in,\n" +
                                    "Press MOUSE WHEEL to rotate.");
         cameraComponent.LockCamera(false);
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
@@ -253,7 +253,7 @@ public class TutorialManager : MonoBehaviour
         tutorialUI.FrameDisappear();
         tutorialUI.ShowIcons(0);
         tutorialUI.ShowIconFrames(0, true);
-        tutorialUI.ShowMessageText("      is your action point, which you spend in each round.");
+        tutorialUI.ShowMessageText("      is your action point, you use it when you take actions on grids.");
         OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
         yield return new WaitUntil(() => completeIndex == 1);
 

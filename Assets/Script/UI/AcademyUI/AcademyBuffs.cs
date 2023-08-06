@@ -21,7 +21,7 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             case AcademyType.YI:
                 AcademyUI.academiesBuff[2].text = "+1 Max HP";
                 AcademyUI.academiesBuff[3].text = "+2 Max HP";
-                AcademyUI.academiesBuff[4].text = "+2 Max HP,\n+1 HP/round";
+                AcademyUI.academiesBuff[4].text = "+2 Max HP,\n+1 HP/r";
                 break;
             case AcademyType.DAO:
                 AcademyUI.academiesBuff[2].text = "+1 Range";
@@ -29,9 +29,9 @@ public class AcademyBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 AcademyUI.academiesBuff[4].text = "+3 Range";
                 break;
             case AcademyType.MO:
-                AcademyUI.academiesBuff[2].text = "+1 random card/r";
-                AcademyUI.academiesBuff[3].text = "+2 random card/r";
-                AcademyUI.academiesBuff[4].text = "+3 random card/r";
+                AcademyUI.academiesBuff[2].text = "+1 Random Card/r";
+                AcademyUI.academiesBuff[3].text = "+2 Random Card/r";
+                AcademyUI.academiesBuff[4].text = "+3 Random Card/r";
                 break;
             case AcademyType.BING:
                 AcademyUI.academiesBuff[2].text = "+1 Attack";
