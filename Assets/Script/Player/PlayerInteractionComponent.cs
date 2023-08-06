@@ -30,6 +30,7 @@ public class PlayerInteractionComponent : MonoBehaviour
     private Animator animator;
     private bool isPlayingVfx = false;
     private float hitVfxFloat = -1f;
+    private bool isPlayerSelf = false;
     private void Start()
     {
         //canvas = GetComponent<Canvas>();
@@ -59,7 +60,7 @@ public class PlayerInteractionComponent : MonoBehaviour
     {
         if(TurnbasedSystem.Instance.CurrentGameStage.Value == GameStage.S1 && playerText.text== "ENEMY")
         {
-            cardText.text = "--";
+            cardText.text = "-";
             return;
         }
         cardText.text = num.ToString();
@@ -67,7 +68,7 @@ public class PlayerInteractionComponent : MonoBehaviour
     public void SetPlayerName(bool isSelf)
     {
         playerText.text = isSelf ? "SELF" : "ENEMY";
-
+        isPlayerSelf = isSelf;
     }
     public void Move(GridObject gridObject)
     {
@@ -253,6 +254,10 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void PlayHitVfxRed()
     {
+        if(isPlayerSelf)
+        {
+            GameplayManager.Instance.SetCameraShake();
+        }
         animator.SetTrigger("Hurt");
         //Debug.LogError(this.gameObject + "Hited");
         var seq = DOTween.Sequence();
@@ -268,7 +273,25 @@ public class PlayerInteractionComponent : MonoBehaviour
         seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, Color.white, 0.2f); });
 
     }
-
+    public void PlayDefendVfx()
+    {
+        animator.SetTrigger("Block");
+    }
+    public void PlayRecoverVfx()
+    {
+        animator.SetTrigger("Recover");
+        var seq = DOTween.Sequence();
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(0.5f, 0.7f, 0.4f), 0.2f); });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, Color.white, 0.2f); });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(0.5f, 0.7f, 0.4f), 0.2f); });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, Color.white, 0.2f); });
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(0.5f, 0.7f, 0.4f), 0.2f); });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, Color.white, 0.2f); });
+    }
     public void PlayRangeVfx(Vector3 pos)
     {
         int range = GetComponentInChildren<Player>().Range;

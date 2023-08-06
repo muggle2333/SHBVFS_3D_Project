@@ -13,5 +13,6 @@ public class YI3 : CardFunction
     {
         var enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
         enemy.HP -= player.occuplyCount/2;
+        enemy.ChangeHP(-player.occuplyCount/2);
     }
 }

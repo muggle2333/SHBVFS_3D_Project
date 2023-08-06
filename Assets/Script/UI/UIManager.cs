@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -142,6 +143,10 @@ public class UIManager : NetworkBehaviour
     {
         warningUI.Hide();
     }
+    [ClientRpc] public void HideWarningClientRpc()
+    {
+        warningUI.Hide();
+    }
     [ClientRpc]
     public void ShowWarningTimerClientRpc(string warning,float time)
     {
@@ -174,5 +179,26 @@ public class UIManager : NetworkBehaviour
     public void BlinkAcademyBuffCount(PlayerId playerId, int AcademyInt)
     {
         academyUI.Blink(playerId, AcademyInt);
+    }
+    [ClientRpc]
+    public void ShowWaringToPlayerTimerS1ClientRpc(float time)
+    {
+        StartCoroutine(ShowPriority(time));
+
+    }
+    IEnumerator ShowPriority(float time)
+    {
+        yield return new WaitForSeconds(1.2f);
+        List<Player> playerList = GameplayManager.Instance.playerList;
+        var priorityList = playerList.OrderByDescending(x => x.Priority).ToList();
+        if (priorityList[0].Id == GameplayManager.Instance.currentPlayer.Id)
+        {
+            warningUI.ShowWarningTimer("YOU ACT FIRST", time);
+        }
+        else
+        {
+            warningUI.ShowWarningTimer("ENEMY ACTS FIRST", time);
+        }
+        yield return null;
     }
 }

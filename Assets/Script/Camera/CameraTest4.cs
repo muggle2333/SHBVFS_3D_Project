@@ -15,6 +15,7 @@ public class CameraTest4 : MonoBehaviour
     [SerializeField] private Vector3 moveSpeed = new Vector3(10f, 10f, 10f);
     [SerializeField] private Vector3 rotateSpeed = new Vector3(10f, 10f, 10f);
     [SerializeField] private Transform cam;
+    [SerializeField] private Vector3 shakeOffset = new Vector3(2, 2, 0);
     private Vector3 pos = new Vector3(3, 13, -18);
     private float x = 0f;
     private bool isMoving = false;
@@ -46,6 +47,11 @@ public class CameraTest4 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             FocusGrid();
+        }
+
+        if(Input.GetKeyUp(KeyCode.R))
+        {
+            CameraShake();
         }
     }
 
@@ -204,4 +210,52 @@ public class CameraTest4 : MonoBehaviour
     //    }
     //    return false;
     //}
+
+    public void CameraShake()
+    {
+        StartCoroutine(Shake(0.3f, 0.1f));
+    }
+    public IEnumerator Shake(float duration, float magnitude)
+    {
+        Vector3 orignalPosition = cam.transform.position;
+        float elapsed = 0f;
+        while (elapsed < duration/4)
+        {
+            float x = 1 * magnitude;
+            float y = -1 * magnitude;
+            cam.transform.position += new Vector3(x, y, 0);
+            elapsed += Time.deltaTime;
+            yield return 0;
+
+        }
+        while (elapsed < duration/2)
+        {
+            float x = -1 * magnitude;
+            float y = 1 * magnitude;
+            cam.transform.position += new Vector3(x, y, 0);
+            elapsed += Time.deltaTime;
+            yield return 0;
+
+        }
+        while (elapsed < duration *0.75)
+        {
+            float x = -1 * magnitude;
+            float y = 1 * magnitude;
+            cam.transform.position += new Vector3(x, y, 0);
+            elapsed += Time.deltaTime;
+            yield return 0;
+
+        }
+        while (elapsed < duration)
+        {
+            float x = 1 * magnitude;
+            float y = -1 * magnitude;
+            cam.transform.position += new Vector3(x, y, 0);
+            elapsed += Time.deltaTime;
+            yield return 0;
+
+        }
+        cam.transform.position = orignalPosition;
+    }
+
 }

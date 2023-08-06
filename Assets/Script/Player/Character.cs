@@ -36,13 +36,32 @@ public class Character : NetworkBehaviour
     {
         int Damage;
         Damage = AttackDamage - AttackTarget.Defence;
-        if (Damage < 0)
+        if (Damage <= 0)
         {
             Damage = 0;
         }
         damageThisRound = Damage;
         AttackTarget.HP -= (Damage);
+        AttackTarget.ChangeHP(-Damage);
         hasAttcaked = true;
         AttackTarget = null;
+    }
+
+    public void ChangeHP(int hpTmp)
+    {
+        if(hpTmp>0)
+        {
+            GetComponentInChildren<PlayerInteractionComponent>().PlayRecoverVfx();
+        }
+        else if(hpTmp<0)
+        {
+            GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
+        }
+        else
+        {
+            GetComponentInChildren<PlayerInteractionComponent>().PlayDefendVfx();
+        }
+
+        //HP += hpTmp;
     }
 }

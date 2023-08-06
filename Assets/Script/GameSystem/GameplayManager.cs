@@ -299,11 +299,22 @@ public class GameplayManager : NetworkBehaviour
     public void AddPlayerHpClientRpc()
     {
         playerList[0].HP += playerList[0].HpPerRound;
+        if(playerList[0].HpPerRound!=0)
+        {
+            playerList[0].ChangeHP(playerList[0].HpPerRound);
+        }
+
         if (playerList[0].HP > playerList[0].MaxHP)
         {
             playerList[0].HP = playerList[0].MaxHP;
         }
+
         playerList[1].HP += playerList[1].HpPerRound;
+        if (playerList[1].HpPerRound != 0)
+        {
+            playerList[1].ChangeHP(playerList[0].HpPerRound);
+        }
+
         if (playerList[1].HP > playerList[1].MaxHP)
         {
             playerList[1].HP = playerList[1].MaxHP;
@@ -419,4 +430,9 @@ public class GameplayManager : NetworkBehaviour
         camera.FocusPosition(pos, 0);
     }
 
+    public void SetCameraShake()
+    {
+        CameraTest4 camera = FindObjectOfType<CameraTest4>();
+        camera.CameraShake();
+    }
 }

@@ -315,6 +315,7 @@ public class Player : Character
     {
         Debug.LogError("addHp");
         HP += hp;
+        ChangeHP(hp);
         if(HP > MaxHP)
         {
             HP = MaxHP;

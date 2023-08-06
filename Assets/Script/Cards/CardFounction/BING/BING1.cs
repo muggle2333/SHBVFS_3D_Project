@@ -16,10 +16,12 @@ public class BING1 : CardFunction
         if(GameplayManager.Instance.playerList[0].Defence< GameplayManager.Instance.playerList[1].AttackDamage)
         {
             GameplayManager.Instance.playerList[0].HP -= GameplayManager.Instance.playerList[1].AttackDamage - GameplayManager.Instance.playerList[0].Defence;
+            GameplayManager.Instance.playerList[0].ChangeHP(-GameplayManager.Instance.playerList[1].AttackDamage + GameplayManager.Instance.playerList[0].Defence);
         }
         if (GameplayManager.Instance.playerList[1].Defence < GameplayManager.Instance.playerList[0].AttackDamage)
         {
             GameplayManager.Instance.playerList[1].HP -= GameplayManager.Instance.playerList[0].AttackDamage - GameplayManager.Instance.playerList[1].Defence;
+            GameplayManager.Instance.playerList[1].ChangeHP(-GameplayManager.Instance.playerList[0].AttackDamage + GameplayManager.Instance.playerList[0].Defence);
         }
         Destroy(gameObject);
     }

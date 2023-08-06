@@ -17,6 +17,7 @@ public class FA5 : CardFunction
             DrawCardComponent.Instance.DrawBasicCard(player);
         }
         player.HP--;
+        player.ChangeHP(-1);
         if (NetworkManager.Singleton.IsServer)
         {
             DrawCardComponent.Instance.PlayDrawCardAnimationServerRpc(player.Id, 1);

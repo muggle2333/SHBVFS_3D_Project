@@ -273,10 +273,19 @@ public class Calculating : NetworkBehaviour
         if (cardHP >= 0)
         {
             player.HP += cardHP;
+            if(cardHP!=0)
+            {
+                player.ChangeHP(cardHP);
+            }
+            
         }
         else
         {
             enemy.HP += cardHP;
+            if (cardHP != 0)
+            {
+                enemy.ChangeHP(cardHP);
+            }
         }
 
         if (player.HP > player.MaxHP)
@@ -292,6 +301,7 @@ public class Calculating : NetworkBehaviour
         if (cardDamage > enemy.Defence)
         {
             enemy.HP -= (cardDamage - enemy.Defence);
+            enemy.ChangeHP(-cardDamage + enemy.Defence);
         }
         if (cardAP < 0)
         {

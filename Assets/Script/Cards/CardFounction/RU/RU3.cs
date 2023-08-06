@@ -13,6 +13,14 @@ public class RU3 : CardFunction
     {
         Player enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
         enemy.HP -= enemy.damageThisRound;
+        if(enemy.damageThisRound<0)
+        {
+            enemy.ChangeHP(0);
+        }
+        else
+        {
+            enemy.ChangeHP(-enemy.damageThisRound);
+        }
         Destroy(gameObject);
     }
 }

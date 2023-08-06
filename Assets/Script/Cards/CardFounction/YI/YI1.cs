@@ -13,6 +13,7 @@ public class YI1 : CardFunction
         if(player.moveCount == 0)
         {
             player.HP += 2;
+            player.ChangeHP(2);
             if(player.HP > player.MaxHP)
             {
                 player.HP = player.MaxHP;

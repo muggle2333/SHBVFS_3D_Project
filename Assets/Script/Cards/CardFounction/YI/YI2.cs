@@ -12,6 +12,7 @@ public class YI2 : CardFunction
     public void Function()
     {
         player.HP += player.descoverLandCount/2;
+        player.ChangeHP(player.descoverLandCount / 2);
         if(player.HP > player.MaxHP)
         {
             player.HP = player.MaxHP;

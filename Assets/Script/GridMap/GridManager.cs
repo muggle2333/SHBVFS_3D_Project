@@ -4,6 +4,7 @@ using System.IO;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GridManager : NetworkBehaviour
 {
@@ -38,6 +39,11 @@ public class GridManager : NetworkBehaviour
     {
         if (FindObjectOfType<NetworkManager>() != null && NetworkManager.Singleton.IsHost)
         {
+            if(SceneManager.GetActiveScene().name == "GameplayScene_3")
+            {
+                SetTutorialAcademyClientRpc();
+                return;
+            }
             InitializeGridAcademy();
             //InitializeGridAcademyAverage();
         }
@@ -121,6 +127,13 @@ public class GridManager : NetworkBehaviour
                 }
             }
         }
+    }
+    [ClientRpc]
+    private void SetTutorialAcademyClientRpc()
+    {
+        grid.gridArray[1, 2].academy = AcademyType.BING;
+        grid.gridArray[1, 0].academy = AcademyType.BING;
+        grid.gridArray[0, 1].academy = AcademyType.FA;
     }
     public void InitializeGridAcademyAverage()
     {

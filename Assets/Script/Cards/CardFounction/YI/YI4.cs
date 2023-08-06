@@ -12,6 +12,7 @@ public class YI4 : CardFunction
     public void Function()
     {
         player.HP += player.damageThisRound;
+        player.ChangeHP(player.damageThisRound);
         Destroy(gameObject);
     }
 }

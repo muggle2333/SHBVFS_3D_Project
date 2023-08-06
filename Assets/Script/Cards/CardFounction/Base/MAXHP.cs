@@ -17,11 +17,13 @@ public class MAXHP : CardFunction
         {
             player.baseMaxHP += 1;
             player.HP += 1;
+            player.ChangeHP(1);
             Calculating.Instance.CalculatPlayerBaseData(player);
         }
         else
         {
             player.HP += 2;
+            player.ChangeHP(2);
         }
         Destroy(gameObject);
     }

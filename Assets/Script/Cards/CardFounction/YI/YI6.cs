@@ -16,7 +16,8 @@ public class YI6 : CardFunction
         for (int i = 0; i < 2; i++)
         {
             GameplayManager.Instance.playerList[i].HP++;
-            if(GameplayManager.Instance.playerList[i].HP > GameplayManager.Instance.playerList[i].MaxHP)
+            GameplayManager.Instance.playerList[i].ChangeHP(1);
+            if (GameplayManager.Instance.playerList[i].HP > GameplayManager.Instance.playerList[i].MaxHP)
             {
                 GameplayManager.Instance.playerList[i].HP = GameplayManager.Instance.playerList[i].MaxHP;
             }

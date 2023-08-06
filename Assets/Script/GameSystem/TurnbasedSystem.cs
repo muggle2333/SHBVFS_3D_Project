@@ -206,11 +206,12 @@ public class TurnbasedSystem : NetworkBehaviour
         SoundManager.Instance.PlaySoundClientRpc(Sound.ControlStart);
         UIManager.Instance.ShowWarningTimerClientRpc("Round Start", 1f);
         //UpdateTimer(S1PhaseTime);
-
+        UIManager.Instance.ShowWaringToPlayerTimerS1ClientRpc(2f);
     }
 
     void DiscardPhase()
     {
+        UIManager.Instance.HideWarningClientRpc();
         CardManager.Instance.DeselectCardClientRpc();
         SoundManager.Instance.StopCountDownClientRpc();
         CurrentGameStage.Value = GameStage.DiscardStage;

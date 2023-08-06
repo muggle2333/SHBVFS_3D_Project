@@ -14,6 +14,7 @@ public class RU5 : CardFunction
         player.baseDefense -= 2;
         player.cardDF -= 2;
         enemy.HP -= 2;
+        enemy.ChangeHP(-2);
         Calculating.Instance.CalculatPlayerBaseData(player);
         Destroy(gameObject);
     }

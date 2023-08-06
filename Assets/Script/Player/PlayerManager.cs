@@ -242,6 +242,7 @@ public class PlayerManager : NetworkBehaviour
         if (player.isBleeding)
         {
             player.HP--;
+            player.ChangeHP(-1);
         }
         player.GetComponent<PlayerInteractionComponent>().Move(gridObject);
         GridManager.Instance.DiscoverGridObject(player,gridObject);
@@ -533,7 +534,7 @@ public class PlayerManager : NetworkBehaviour
         
         attackPlayer.Attack();
         attackPlayer.GetComponent<PlayerInteractionComponent>().SetAttackPath(attackPlayer.transform,attackTarget.transform);
-        attackTarget.GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
+        //attackTarget.GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
         //FindObjectOfType<CameraTest4>().FocusPosition(attackTarget.transform.position, 0);
 
         UIManager.Instance.ShowWarningToPlayerTimerClientRpc(attackPlayerId , "ATTACK", 2f);
