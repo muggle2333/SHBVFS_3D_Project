@@ -7,6 +7,7 @@ using System.Threading;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public struct PlayerInteractAuthority
 {
@@ -300,6 +301,10 @@ public class PlayerManager : NetworkBehaviour
         {
             SoundManager.Instance.PlaySound(Sound.MoveToPlain);
         }
+
+        CameraTest4 camera = FindObjectOfType<CameraTest4>();
+        camera.FocusGridKeepZoom(gridObject);
+
     }
     public void TryMove(Player player,GridObject gridObject)
     {

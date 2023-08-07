@@ -162,7 +162,14 @@ public class CameraTest4 : MonoBehaviour
             seq.Join(cam.DOLocalMove(pos + forward * zoomScale, 0.5f));
         }
     }
-
+    public void FocusGridKeepZoom(GridObject gridObject)
+    {
+        var dis = cam.transform.localPosition;
+        var seq = DOTween.Sequence();
+        vec = GridManager.Instance.grid.GetWorldPositionCenter(gridObject.x, gridObject.z);
+        seq.Append(transform.DOMove(vec, 0.5f));
+        seq.Join(cam.DOLocalMove(dis, 0.5f));
+    }
     public void FocusGridCenter(GridObject gridObject1,GridObject gridObject2)
     {
         var dis = cam.transform.localPosition;
