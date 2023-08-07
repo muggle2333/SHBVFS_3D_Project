@@ -277,9 +277,12 @@ public class PlayerInteractionComponent : MonoBehaviour
     {
         animator.SetTrigger("Block");
     }
+    public void PlayOrderVfx()
+    {
+        animator.SetTrigger("Order");
+    }
     public void PlayRecoverVfx()
     {
-        Debug.LogError("Recover");
         animator.SetTrigger("Recover");
         var seq = DOTween.Sequence();
         seq.AppendCallback(() => { DOTween.To(() => meshRenderer.material.color, x => meshRenderer.material.color = x, new Color(0.5f, 0.7f, 0.4f), 0.2f); });

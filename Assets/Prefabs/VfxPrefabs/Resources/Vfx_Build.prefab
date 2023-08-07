@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 591553894045149527, guid: f627fc9b2ba5fb74c829cb1f646a0332, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 591553894045149527, guid: f627fc9b2ba5fb74c829cb1f646a0332, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 592456708581946485, guid: f627fc9b2ba5fb74c829cb1f646a0332, type: 3}
       propertyPath: m_Name
-      value: DustExplosion
+      value: Vfx_Build
       objectReference: {fileID: 0}
     - target: {fileID: 790721551279612143, guid: f627fc9b2ba5fb74c829cb1f646a0332, type: 3}
       propertyPath: UVModule.flipU
@@ -63,6 +63,10 @@ PrefabInstance:
     - target: {fileID: 790721551279612143, guid: f627fc9b2ba5fb74c829cb1f646a0332, type: 3}
       propertyPath: UVModule.flipV
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363835465331341437, guid: f627fc9b2ba5fb74c829cb1f646a0332, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

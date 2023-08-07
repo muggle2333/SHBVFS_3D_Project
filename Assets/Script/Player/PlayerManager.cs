@@ -7,7 +7,6 @@ using System.Threading;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public struct PlayerInteractAuthority
 {
@@ -156,7 +155,7 @@ public class PlayerManager : NetworkBehaviour
         {
             SaveInteract(playerInteractType, player,new Vector2(gridObject.x, gridObject.z));
         }
-        
+        player.GetComponent<PlayerInteractionComponent>().PlayOrderVfx();
     }
 
     [ServerRpc(RequireOwnership =false)]

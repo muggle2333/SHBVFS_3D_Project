@@ -35,4 +35,16 @@ public class VfxManager : MonoBehaviour
             
         }
     }
+
+    public void PlayBuildingVfx(Vector3 pos)
+    {
+        GameObject vfxBuilding = Pool.Instance.GetObj("Vfx_Build");
+        vfxBuilding.transform.position = pos;
+        Invoke("DestoryBuildingVfx", 1.5f);
+    }
+
+    private void DestoryBuildingVfx(GameObject buildingVfx)
+    {
+        Pool.Instance.SetObj("Vfx_Build", buildingVfx);
+    }
 }
