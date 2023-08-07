@@ -146,6 +146,10 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnSelectOperation()
     {
+        //var seq = DOTween.Sequence();
+        //seq.AppendCallback(()=> { Interactable = false; });
+        //seq.Append(transform.DOLocalMoveY(targetY, duration));
+        //seq.AppendCallback(() => { Interactable = true; });
         Info.SetActive(true);
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
@@ -350,9 +354,13 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void EndSelectOther()
     {
+        var seq = DOTween.Sequence();
+        seq.AppendCallback(() => { Interactable = false; });
+        seq.Append(transform.DOLocalMoveY(formerY, duration));
+        seq.AppendCallback(() => { Interactable = true; });
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
-        transform.DOLocalMoveY(formerY, duration);
+        //transform.DOLocalMoveY(formerY, duration);
         isSelected = false;
         cardSelectManager.SelectCount[GameplayManager.Instance.currentPlayer]--;
         //transform.gameObject.GetComponentInChildren<CardBackGroundComponent>().GetComponent<Image>().material.SetColor("_EdgeColor", Color.white);
