@@ -33,7 +33,10 @@ public enum Sound
 
     CardSelect,//19
     CardCancel,//20
-    CardSelectFailed//21
+    CardSelectFailed,//21
+
+    AcademyAdd,
+    AcademyRemove,
 }
 public enum Bgm
 {

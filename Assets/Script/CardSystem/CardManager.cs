@@ -161,7 +161,7 @@ public class CardManager : NetworkBehaviour
         }
         if (effectCard.cardFounction != null)
         {
-            var function = Instantiate(effectCard.cardFounction).GetComponent<CardFunction>();
+            var function = Instantiate(effectCard.cardFounction,new Vector3(9999,9999,9999), Quaternion.identity).GetComponent<CardFunction>();
             function.player = player;
             function.cardSetting = effectCard;
         }

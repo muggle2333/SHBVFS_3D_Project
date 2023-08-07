@@ -182,7 +182,10 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void EndSelectOperation()
     {
-        SelectManager.Instance.ChangeSelectMode(SelectGridMode.Default,1);
+        if (gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
+        {
+            SelectManager.Instance.ChangeSelectMode(SelectGridMode.Default, 1);
+        }
         UIManager.Instance.HideWarning();
         Info.SetActive(false);
         transform.SetSiblingIndex(index);
@@ -239,7 +242,10 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void EndSelectDiscard()
     {
-        SelectManager.Instance.ChangeSelectMode(SelectGridMode.None, 1);
+        if (gameObject.GetComponent<Card>().selectGridMode != SelectGridMode.Default)
+        {
+            SelectManager.Instance.ChangeSelectMode(SelectGridMode.None, 1);
+        }
         UIManager.Instance.HideWarning();
         Info.SetActive(false);
         transform.SetSiblingIndex(index);

@@ -11192,7 +11192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
       propertyPath: audioClipList.Array.size
-      value: 22
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
       propertyPath: audioClipList.Array.data[18].sound
@@ -11209,6 +11209,14 @@ PrefabInstance:
     - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
       propertyPath: audioClipList.Array.data[21].sound
       value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: audioClipList.Array.data[22].sound
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: audioClipList.Array.data[23].sound
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
       propertyPath: bgmClipList.Array.data[0].audioClip
@@ -11286,6 +11294,14 @@ PrefabInstance:
       propertyPath: audioClipList.Array.data[21].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 414445b86e352884fae0104f58396976, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: audioClipList.Array.data[22].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ac3a656410e85e84e87035ace21d771a, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: audioClipList.Array.data[23].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a1fb583f5baae424a939b88d8d14b9f4, type: 3}
     - target: {fileID: 8940633493863993155, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
       propertyPath: m_RootOrder
       value: 7

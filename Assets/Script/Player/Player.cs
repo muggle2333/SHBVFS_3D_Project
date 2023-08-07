@@ -125,6 +125,17 @@ public class Player : Character
         if (changeEvent.PreviousValue - changeEvent.Value != 0)
         {
             UIManager.Instance.BlinkAcademyBuffCount(Id, changeEvent.Index);
+            if (Id == GameplayManager.Instance.currentPlayer.Id)
+            {
+                if(changeEvent.PreviousValue - changeEvent.Value > 0)
+                {
+                    SoundManager.Instance.PlaySound(Sound.AcademyRemove);
+                }
+                else
+                {
+                    SoundManager.Instance.PlaySound(Sound.AcademyAdd);
+                }
+            }
         }
     }
 
