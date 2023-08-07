@@ -15,6 +15,7 @@ public class RU1 : CardFunction
         {
             player.baseAttackDamage--;
             player.baseDefense++;
+            player.ChangeVfx(VfxType.Defence, 1);
             Calculating.Instance.CalculatPlayerBaseData(player);
         }
         Destroy(gameObject);

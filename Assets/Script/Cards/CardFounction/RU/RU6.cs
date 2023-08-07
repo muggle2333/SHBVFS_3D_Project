@@ -19,6 +19,7 @@ public class RU6 : CardFunction
         {
             enemy.baseDefense += functionDefence;
             enemy.cardDF += functionDefence;
+            enemy.ChangeVfx(VfxType.Defence, 1);
             player.baseDefense -= functionDefence;
             player.cardDF -= functionDefence;
             Calculating.Instance.CalculatPlayerBaseData(enemy);
@@ -34,6 +35,7 @@ public class RU6 : CardFunction
             enemy.cardDF -= defence;
             player.baseDefense += defence;
             player.cardDF += defence;
+            player.ChangeVfx(VfxType.Defence, 1);
             Calculating.Instance.CalculatPlayerBaseData(enemy);
             Calculating.Instance.CalculatPlayerBaseData(player);
         }

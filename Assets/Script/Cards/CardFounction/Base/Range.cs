@@ -14,6 +14,7 @@ public class Range : CardFunction
     void Function()
     {
         player.baseRange += 1;
+        player.ChangeVfx(VfxType.Range, 1);
         Calculating.Instance.CalculatPlayerBaseData(player);
         Destroy(gameObject);
     }

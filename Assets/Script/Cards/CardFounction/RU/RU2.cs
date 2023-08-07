@@ -19,6 +19,7 @@ public class RU2 : CardFunction
         {
             player.baseDefense += 2;
             player.cardDF += 2;
+            player.ChangeVfx(VfxType.Defence, 2);
             Calculating.Instance.CalculatPlayerBaseData(GameplayManager.Instance.currentPlayer);
             hasAdded = true;
         }

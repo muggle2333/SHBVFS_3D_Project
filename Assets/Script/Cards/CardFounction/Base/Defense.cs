@@ -13,6 +13,7 @@ public class Defense : CardFunction
     void Function()
     {
         player.baseDefense += 1;
+        player.ChangeVfx(VfxType.Defence, 1);
         Calculating.Instance.CalculatPlayerBaseData(player);
         Destroy(gameObject);
     }

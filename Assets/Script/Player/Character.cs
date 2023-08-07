@@ -66,4 +66,46 @@ public class Character : NetworkBehaviour
 
         //HP += hpTmp;
     }
+    public void ChangeVfx(VfxType vfxType,int changeCount)
+    {
+        switch (vfxType)
+        {
+            case VfxType.Damage:
+                if (changeCount > 0)
+                {
+                    VfxManager.Instance.PlayVfx(transform.position, VfxType.Damage);
+                }
+                return;
+            case VfxType.Defence:
+                if (changeCount > 0)
+                {
+                    VfxManager.Instance.PlayVfx(transform.position, VfxType.Defence);
+                }
+                return;
+            case VfxType.Range:
+                if (changeCount > 0)
+                {
+                    VfxManager.Instance.PlayVfx(transform.position, VfxType.Range);
+                }
+                return;
+            case VfxType.AP:
+                if (changeCount > 0)
+                {
+                    VfxManager.Instance.PlayVfx(transform.position, VfxType.AP);
+                }
+                return;
+            case VfxType.AcademyAdd:
+                if (changeCount > 0)
+                {
+                    VfxManager.Instance.PlayVfx(transform.position, VfxType.AcademyAdd);
+                }
+                return;
+            case VfxType.AcademyDeduce:
+                if (changeCount < 0)
+                {
+                    VfxManager.Instance.PlayVfx(transform.position, VfxType.AcademyDeduce);
+                }
+                return;
+        }
+    }
 }

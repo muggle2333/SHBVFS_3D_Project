@@ -14,6 +14,7 @@ public class Attack : CardFunction
     void Function()
     {
         player.baseAttackDamage += 1;
+        player.ChangeVfx(VfxType.Damage, 1);
         Calculating.Instance.CalculatPlayerBaseData(player);
         Destroy(gameObject);
     }

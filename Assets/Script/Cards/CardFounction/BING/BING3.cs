@@ -21,6 +21,7 @@ public class BING3 : CardFunction
             if (NetworkManager.Singleton.IsServer)
             {
                 player.cardAcademyEffectNum[3] += 2;
+                player.ChangeVfx(VfxType.AcademyAdd, 2);
                 FindObjectOfType<PlayerAcademyBuffcomponent>().UpdatePlayerAcademyBuffServerRpc(player.Id);
             }
             Destroy(gameObject);

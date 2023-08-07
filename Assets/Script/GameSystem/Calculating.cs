@@ -127,7 +127,10 @@ public class Calculating : NetworkBehaviour
         {
             AcademyEffectNum[i] = card.academyEffectNum[i];
         }
-        
+        player.ChangeVfx(VfxType.Damage, card.playerDataEffect.attack);
+        player.ChangeVfx(VfxType.AP, card.playerDataEffect.actionPoint);
+        player.ChangeVfx(VfxType.Defence, card.playerDataEffect.defence);
+        player.ChangeVfx(VfxType.Range, card.playerDataEffect.visionRange);
         if (NetworkManager.Singleton.IsServer)
         {
             if (card.cardTarget == CardTarget.opponent)
@@ -148,7 +151,27 @@ public class Calculating : NetworkBehaviour
                 playerAcademyBuffcomponent.UpdatePlayerAcademyBuffServerRpc(player.Id);
             }
         }
-        
+        if (card.cardTarget == CardTarget.opponent)
+        {
+            var enemy = GameplayManager.Instance.PlayerIdToPlayer(GameplayManager.Instance.GetEnemy(player.Id));
+            for(int i = 0; i < 6; i++)
+            {
+                if (AcademyEffectNum[i] < 0)
+                {
+                    enemy.ChangeVfx(VfxType.AcademyDeduce, AcademyEffectNum[i]);
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (AcademyEffectNum[i] > 0)
+                {
+                    player.ChangeVfx(VfxType.AcademyAdd, AcademyEffectNum[i]);
+                }
+            }
+        }
     }
 
     [ClientRpc]
