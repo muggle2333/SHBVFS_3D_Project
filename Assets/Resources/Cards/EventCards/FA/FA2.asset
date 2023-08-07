@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FA2
   m_EditorClassIdentifier: 
   cardId: 35
-  cardName: Assitance From FA
+  cardName: FA Assitance
   description: After attack stage, change an occupied academy to FA
   headPicture: {fileID: 21300000, guid: 672f10b7325140141b992e87f36e0806, type: 3}
   academyType: 6

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: YI6
   m_EditorClassIdentifier: 
   cardId: 9
-  cardName: Co advance and retreat
+  cardName: Peace
   description: After control stage, all players heal 1 HP
   headPicture: {fileID: 21300000, guid: 7e0eb7abda823514f9ff0b2f52ccf16e, type: 3}
   academyType: 1
