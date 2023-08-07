@@ -335,6 +335,7 @@ public class PlayerManager : NetworkBehaviour
         }
         player.currentGrid= gridObject;
         GridVfxManager.Instance.UpdateVfxOwner(gridObject,isControlStage);
+        GridVfxManager.Instance.UpdateVfxBuilding(gridObject,isControlStage);
         if (!isControlStage)
         {
             SoundManager.Instance.PlaySound(Sound.Occupy);
