@@ -144,6 +144,7 @@ public class CardManager : NetworkBehaviour
         card.cardSetting = effectCard;
         card.UpdateCardData(card.cardSetting);
         EffectedCards(player.Id, effectCard);
+        SoundManager.Instance.PlayCardSound(effectCard.cardId);
         if (player == GameplayManager.Instance.currentPlayer)
         {
             card.transform.position = new Vector3(-800, 500, 0);

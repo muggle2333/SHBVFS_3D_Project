@@ -65,11 +65,13 @@ public class SoundManager : NetworkBehaviour
 
     [SerializeField] private List<SoundAudioClip> audioClipList;
     [SerializeField] private List<BgmAudioClip> bgmClipList;
+    [SerializeField] private List<AudioClip> cardClipList;
 
     private Dictionary<Sound, AudioClip> effectDicts= new Dictionary<Sound, AudioClip>();
     private Dictionary<Bgm, AudioClip> bgmDicts= new Dictionary<Bgm, AudioClip>();
     [SerializeField] private AudioSource effectSource;
     [SerializeField] private AudioSource bgmSource;
+    [SerializeField] private AudioSource cardSource;
 
     private bool canCountdown = true;
     private void Awake()
@@ -113,6 +115,11 @@ public class SoundManager : NetworkBehaviour
         }
 
         PlayBgm(Bgm.LobbyBGM);
+    }
+    public void PlayCardSound(int cardId)
+    {
+        if(cardClipList[cardId]==null) return;
+        cardSource.PlayOneShot(cardClipList[cardId]);
     }
     public void PlaySound(Sound sound)
     {

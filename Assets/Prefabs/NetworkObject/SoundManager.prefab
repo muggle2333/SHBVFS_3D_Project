@@ -1,5 +1,133 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1901203681756579291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9145511170396601697}
+  - component: {fileID: 5856139495249740534}
+  m_Layer: 0
+  m_Name: CardSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9145511170396601697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901203681756579291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8940633493863993155}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5856139495249740534
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901203681756579291}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8940633493863993153
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,8 +160,9 @@ Transform:
   m_Children:
   - {fileID: 8940633494195709909}
   - {fileID: 8940633495545940898}
+  - {fileID: 9145511170396601697}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8940633493863993154
 MonoBehaviour:
@@ -49,13 +178,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClipList:
   - sound: 0
-    audioClip: {fileID: 8300000, guid: 4915a14fbb991054eb577523a99e2d8b, type: 3}
+    audioClip: {fileID: 8300000, guid: 2ca025e6ed6d705489d1fae62c2416d4, type: 3}
   - sound: 1
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 409421ac8081daa439b180c2d2dab243, type: 3}
   - sound: 2
-    audioClip: {fileID: 8300000, guid: 139ab6cf9efb1a848975bb3f6fe134c9, type: 3}
+    audioClip: {fileID: 8300000, guid: 92e8deb0d32250a428022ddf53cd46a1, type: 3}
   - sound: 3
-    audioClip: {fileID: 8300000, guid: f0922556109486242a4de23137dfd159, type: 3}
+    audioClip: {fileID: 8300000, guid: b9eeea8ff01073344837b094adb22509, type: 3}
   - sound: 4
     audioClip: {fileID: 8300000, guid: e3f6067d3f219a14aad22dba9f8bf9d6, type: 3}
   - sound: 5
@@ -63,9 +192,9 @@ MonoBehaviour:
   - sound: 6
     audioClip: {fileID: 8300000, guid: dc18cc25c44cbb84f9466ba553893c14, type: 3}
   - sound: 7
-    audioClip: {fileID: 8300000, guid: ffa1579275884fb44b5fb874e25704c0, type: 3}
+    audioClip: {fileID: 8300000, guid: 5e47505c7b53c4a499c2081baa99fc8e, type: 3}
   - sound: 8
-    audioClip: {fileID: 8300000, guid: 0b170e16fcc534b46beecdf402898525, type: 3}
+    audioClip: {fileID: 8300000, guid: 71ceacf5c62d2a54c8cfe8b750c12cd7, type: 3}
   - sound: 9
     audioClip: {fileID: 8300000, guid: b5b2736261707954f98f76ee005b1117, type: 3}
   - sound: 10
@@ -73,32 +202,86 @@ MonoBehaviour:
   - sound: 11
     audioClip: {fileID: 8300000, guid: 5e11f4b9a31143c4cb2d3ed5a30d950e, type: 3}
   - sound: 12
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 9e8fe29086129494f888d48212f7af90, type: 3}
   - sound: 13
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: d89d52bb20ca1bf4c9fe1c25968491d9, type: 3}
   - sound: 14
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 12d0f35bdd8bd794f926d5a73af3cb08, type: 3}
   - sound: 15
     audioClip: {fileID: 0}
   - sound: 16
     audioClip: {fileID: 8300000, guid: d7b06f3a78d73d641aaf9336e8f021b1, type: 3}
   - sound: 17
+    audioClip: {fileID: 8300000, guid: 587abf359e3918f44b58bb4dbdc3e2b1, type: 3}
+  - sound: 18
     audioClip: {fileID: 0}
+  - sound: 19
+    audioClip: {fileID: 8300000, guid: 30ee72d991e2b704491b84457b37a113, type: 3}
+  - sound: 20
+    audioClip: {fileID: 8300000, guid: 813300daf17305743a22db99bc6f5a7d, type: 3}
+  - sound: 21
+    audioClip: {fileID: 8300000, guid: 414445b86e352884fae0104f58396976, type: 3}
+  - sound: 22
+    audioClip: {fileID: 8300000, guid: ac3a656410e85e84e87035ace21d771a, type: 3}
+  - sound: 23
+    audioClip: {fileID: 8300000, guid: a1fb583f5baae424a939b88d8d14b9f4, type: 3}
   bgmClipList:
   - bgm: 0
-    audioClip: {fileID: 8300000, guid: aab76175dae47a047afbb7ee8ba883e9, type: 3}
+    audioClip: {fileID: 8300000, guid: e38e56382093e2247b83988c0f1d5d1e, type: 3}
   - bgm: 1
-    audioClip: {fileID: 8300000, guid: 92d2f8afd46e40d499c45dab9af4bb6a, type: 3}
+    audioClip: {fileID: 8300000, guid: e5f0b03f64cc53a4e8b7480a9a9778ea, type: 3}
   - bgm: 2
     audioClip: {fileID: 0}
   - bgm: 3
-    audioClip: {fileID: 8300000, guid: 297037a9eed08ea489d2306d9396b39b, type: 3}
+    audioClip: {fileID: 8300000, guid: 8f84ea7eba7c1724e8600453971163c0, type: 3}
   - bgm: 4
-    audioClip: {fileID: 8300000, guid: 67e40d459b547274facfa81e84fcdf89, type: 3}
+    audioClip: {fileID: 8300000, guid: 5612c9a5a9187cf4bb0711da31c1662b, type: 3}
   - bgm: 5
-    audioClip: {fileID: 8300000, guid: 417a00700286c054983e87e8845fd830, type: 3}
+    audioClip: {fileID: 8300000, guid: 8a5e64ff6c08ad24ca455bd7c642729b, type: 3}
+  cardClipList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: e8e7ebf4cc9a10944acc7a66f788a4e4, type: 3}
+  - {fileID: 8300000, guid: fe5f78069f340b54e961d73c51ba655d, type: 3}
+  - {fileID: 8300000, guid: 8b64675d80dea0e4d950362e7b1ed395, type: 3}
+  - {fileID: 8300000, guid: cc3134c129331274281de6bbbad86203, type: 3}
+  - {fileID: 8300000, guid: 9f8a37e3753ff36408f1b2251d93969a, type: 3}
+  - {fileID: 8300000, guid: 415e0f6c784e4d84188d755cc55cd26b, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   effectSource: {fileID: 8940633494195709910}
   bgmSource: {fileID: 8940633495545940899}
+  cardSource: {fileID: 5856139495249740534}
 --- !u!114 &5147029086175098891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +472,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
