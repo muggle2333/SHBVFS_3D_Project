@@ -130,10 +130,12 @@ public class Player : Character
                 if(changeEvent.PreviousValue - changeEvent.Value > 0)
                 {
                     SoundManager.Instance.PlaySound(Sound.AcademyRemove);
+                    ChangeVfx(VfxType.AcademyDeduce, -1);
                 }
                 else
                 {
                     SoundManager.Instance.PlaySound(Sound.AcademyAdd);
+                    ChangeVfx(VfxType.AcademyAdd, 1);
                 }
             }
         }
