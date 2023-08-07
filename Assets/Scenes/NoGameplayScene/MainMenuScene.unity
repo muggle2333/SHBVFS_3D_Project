@@ -11237,6 +11237,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: cardClipList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3f83ee6df5e57814da9f4e5517e91ac5, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: cardClipList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0676a7b35d0d5a247bfd0ca87b514b30, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: cardClipList.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 05084b1c9ed1acb428c98df15882c09e, type: 3}
+    - target: {fileID: 8940633493863993154, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
+      propertyPath: cardClipList.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 79838cccfd539f040bb279b9fa859f71, type: 3}
     - target: {fileID: 8940633493863993155, guid: 4d44bd2c3a064134abb1a977a33ad66b, type: 3}
       propertyPath: m_RootOrder
       value: 7
