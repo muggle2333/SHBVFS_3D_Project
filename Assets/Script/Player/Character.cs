@@ -52,10 +52,12 @@ public class Character : NetworkBehaviour
         if(hpTmp>0)
         {
             GetComponentInChildren<PlayerInteractionComponent>().PlayRecoverVfx();
+            VfxManager.Instance.PlayVfx(transform.position, VfxType.HpAdd);
         }
         else if(hpTmp<0)
         {
             GetComponentInChildren<PlayerInteractionComponent>().PlayHitVfxRed();
+            VfxManager.Instance.PlayVfx(transform.position, VfxType.HpDeduce);
         }
         else
         {

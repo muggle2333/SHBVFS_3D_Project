@@ -171,7 +171,10 @@ public class GridObject
     public void SetBuilding(bool isHasBuilding,bool isControlStage)
     {
         this.isHasBuilding = isHasBuilding;
-        VfxManager.Instance.PlayBuildingVfx(grid.GetWorldPositionCenter(x, z));
+        if(!isControlStage) 
+        {
+            VfxManager.Instance.PlayBuildingVfx(grid.GetWorldPositionCenter(x, z), true);
+        }
         grid.TriggerGridObjectChanged(x, z);
         //GridVfxManager.Instance.UpdateVfxBuilding(this,isControlStage);
     }
@@ -179,7 +182,7 @@ public class GridObject
     public void DestroyBuilding()
     {
         isHasBuilding = false;
-        VfxManager.Instance.PlayBuildingVfx(grid.GetWorldPositionCenter(x,z));
+        VfxManager.Instance.PlayBuildingVfx(grid.GetWorldPositionCenter(x,z),false);
         grid.TriggerGridObjectChanged(x, z);
     }
     //被走到过，及全员都知道属性 ->走过的才知道

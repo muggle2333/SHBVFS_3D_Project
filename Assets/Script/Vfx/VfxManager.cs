@@ -2,12 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-
+using static UnityEditor.PlayerSettings;
+public enum VfxType
+{
+    HpAdd,
+    HpDeduce,
+    Defence,
+    Damage,
+    Range,
+    AP,
+    AcademyAdd,
+    AcademyDeduce,
+}
 public class VfxManager : MonoBehaviour
 {
     public static VfxManager Instance { get; private set; }
 
     private GameObject vfxPlayerPoint;
+    [SerializeField] public List<GameObject> vfxBuffList;
 
     public void Awake()
     {
@@ -36,15 +48,42 @@ public class VfxManager : MonoBehaviour
         }
     }
 
-    public void PlayBuildingVfx(Vector3 pos)
+    public void PlayBuildingVfx(Vector3 pos,bool isCreate)
     {
-        GameObject vfxBuilding = Pool.Instance.GetObj("Vfx_Build");
-        vfxBuilding.transform.position = pos;
-        Invoke("DestoryBuildingVfx", 1.5f);
+        StartCoroutine(PlayBuildVfx(pos,isCreate));
     }
-
-    private void DestoryBuildingVfx(GameObject buildingVfx)
+    IEnumerator PlayBuildVfx(Vector3 pos, bool isCreate)
     {
-        Pool.Instance.SetObj("Vfx_Build", buildingVfx);
+        var name = "";
+        if(isCreate)
+        {
+            name = "Vfx_Building_Create";
+        }else
+        {
+            name = "Vfx_Building_Destroy";
+        }
+        GameObject vfxBuilding = Pool.Instance.GetObj(name);
+        vfxBuilding.transform.position = pos;
+        yield return new WaitForSeconds(1.5f);
+        if(vfxBuffList!=null)
+        {
+            Pool.Instance.SetObj(name, vfxBuilding);
+        }
+    }
+    public void PlayVfx(Vector3 pos, VfxType vfxType)
+    {
+        StartCoroutine(PlaySpecificVfx(pos, vfxType));
+    }
+    IEnumerator PlaySpecificVfx(Vector3 pos, VfxType vfxType)
+    {
+        var name = vfxBuffList[(int)vfxType].name;
+        GameObject vfxTmp = Pool.Instance.GetObj(name);
+        vfxTmp.transform.position = pos;
+        yield return new WaitForSeconds(1.5f);
+        if (vfxTmp != null)
+        {
+            Pool.Instance.SetObj(name, vfxTmp);
+        }
+        
     }
 }

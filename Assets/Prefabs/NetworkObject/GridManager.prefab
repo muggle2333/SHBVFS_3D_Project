@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5704261030465529032}
   - component: {fileID: 5704261030465529031}
   - component: {fileID: 6084720043181725972}
+  - component: {fileID: 6846327443735416087}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5704261030465529034
 MonoBehaviour:
@@ -119,3 +120,24 @@ MonoBehaviour:
   selectCount: 1
   selectGridMode: 1
   isClickingCard: 0
+--- !u!114 &6846327443735416087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704261030465529035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa2bb341972e84408e5725ce29f3741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxBuffList:
+  - {fileID: 6331275906715107345, guid: fcd979fe3ac745d4da406bee11598045, type: 3}
+  - {fileID: 6331275906715107345, guid: b60e6715f3a80d946b6c8322ca9a6380, type: 3}
+  - {fileID: 6331275906715107345, guid: a4db4429cf5a7634f852b1089873ee8f, type: 3}
+  - {fileID: 6331275906715107345, guid: c9bd7da45b0046540998d3b98acbc5b8, type: 3}
+  - {fileID: 6331275906715107345, guid: 733b7ef612a54314bb11c47194218acd, type: 3}
+  - {fileID: 6331275906715107345, guid: 2127ed3979bf582499c391e35ec5f97d, type: 3}
+  - {fileID: 2018283147486090043, guid: c803a72891f04184ca3fdacfc009c092, type: 3}
+  - {fileID: 2018283147486090043, guid: a7925cd399b63f84a8cf2517415bee35, type: 3}

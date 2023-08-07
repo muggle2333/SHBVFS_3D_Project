@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CloudAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: e3490dff72e0f8045804bad673a84dfe, type: 3}
+    - {fileID: 21300000, guid: 0603e73d3b3bb68439b183e742a61f47, type: 3}
+    - {fileID: 21300000, guid: 2bc003507c905984bb367deea395b30a, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 2bc003507c905984bb367deea395b30a: 21300000
+    - 0603e73d3b3bb68439b183e742a61f47: 21300000
+    - e3490dff72e0f8045804bad673a84dfe: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 2bc003507c905984bb367deea395b30a, type: 3}
+  - {fileID: 21300000, guid: 0603e73d3b3bb68439b183e742a61f47, type: 3}
+  - {fileID: 21300000, guid: e3490dff72e0f8045804bad673a84dfe, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Happy Cloud 3
+  - Happy Cloud 2
+  - Happy Cloud 1
+  m_RenderDataMap: {}
+  m_Tag: CloudAtlas
+  m_IsVariant: 0
