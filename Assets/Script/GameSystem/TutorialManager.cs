@@ -126,7 +126,7 @@ public class TutorialManager : MonoBehaviour
             isActionCompleted=true;
             endtimes++;
             Time.timeScale = 0;
-            tutorialUI.ShowMessageText("Now,the Orderring Phase is over. In Move Phase, your soldier will act as what you orderred in Orderring Phase\n" +
+            tutorialUI.ShowMessageText("Now,the Control Phase is over. In Move Phase, your soldier will act as what you orderred in Control Phase\n" +
                                         "And in Attack Phase, your soldier will attack enemy in the range.");
             OnStartSpecificTutorial?.Invoke(this, EventArgs.Empty);
 

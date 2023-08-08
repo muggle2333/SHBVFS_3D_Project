@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 4
   cardName: Camping
-  description: After attack stage, if you don't move this turn, recover 2 HP
+  description: After attack phase, if you don't move this turn, recover 2 HP
   headPicture: {fileID: 21300000, guid: 67b9ba3d51cd17c4581e969af228981d, type: 3}
   academyType: 1
   cardCondition: {fileID: 0}

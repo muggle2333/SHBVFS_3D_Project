@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 35
   cardName: FA Assitance
-  description: After attack stage, change an occupied academy to FA
+  description: After attack phase, change an occupied academy to FA
   headPicture: {fileID: 21300000, guid: 672f10b7325140141b992e87f36e0806, type: 3}
   academyType: 6
   cardCondition: {fileID: 0}

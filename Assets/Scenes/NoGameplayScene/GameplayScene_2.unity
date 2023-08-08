@@ -113724,6 +113724,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurnbaseUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7309636219513347752, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+      propertyPath: m_Spacing.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309636219513347752, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+      propertyPath: m_CellSize.x
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309636219513347752, guid: 3bb41ca4daab6a543b134fadac82d5d1, type: 3}
+      propertyPath: m_CellSize.y
+      value: 42
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

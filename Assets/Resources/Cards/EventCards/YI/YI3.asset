@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 6
   cardName: Rapid Expansion
-  description: After move stage, every 2 academies you occupy, make enemy lose 1
+  description: After move phase, every 2 academies you occupy, make enemy lose 1
     HP
   headPicture: {fileID: 21300000, guid: 67b9ba3d51cd17c4581e969af228981d, type: 3}
   academyType: 1

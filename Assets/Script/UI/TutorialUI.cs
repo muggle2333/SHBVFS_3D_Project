@@ -24,6 +24,7 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private GameObject PlayerDataUI;
     private void Start()
     {
+        if (FindObjectOfType<TutorialManager>() == null) return;
         TutorialManager.Instance.OnStartSpecificTutorial += TutorialManager_OnStartSpecificTutorial;
         nextBtn.onClick.AddListener(() =>
         {
