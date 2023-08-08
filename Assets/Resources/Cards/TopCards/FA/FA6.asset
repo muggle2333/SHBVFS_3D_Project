@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 39
   cardName: Expert Guidance
-  description: +1 AP
+  description: After control phase, AP+1
   headPicture: {fileID: 21300000, guid: 13eecf6179a690d4793a71b7ff88907b, type: 3}
   academyType: 6
   cardCondition: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 8
   cardName: Waiting for weaknesses
-  description: After control stage, -1 AP this turn and +3 AP next turn
+  description: After control phase, -1 AP this turn and +3 AP next turn
   headPicture: {fileID: 21300000, guid: 7e0eb7abda823514f9ff0b2f52ccf16e, type: 3}
   academyType: 1
   cardCondition: {fileID: 0}

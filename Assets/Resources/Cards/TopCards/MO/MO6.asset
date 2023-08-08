@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 21
   cardName: 'Looting '
-  description: After attack stage, destroy a city of enemy
+  description: After attack phase, destroy a city of enemy
   headPicture: {fileID: 21300000, guid: d76b57532850fdc4d9749036cc711a79, type: 3}
   academyType: 3
   cardCondition: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 26
   cardName: Active Attack
-  description: After control stage, moving to enemy's lands only costs 1 AP till
+  description: After control phase, moving to enemy's lands only costs 1 AP till
     end of next round
   headPicture: {fileID: 21300000, guid: 55fad22b39138b547a30a75bda499655, type: 3}
   academyType: 4
