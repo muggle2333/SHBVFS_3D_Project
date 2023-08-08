@@ -301,7 +301,7 @@ public class PlayerInteractionComponent : MonoBehaviour
         int range = GetComponentInChildren<Player>().Range;
         GameObject visionVfx = Pool.Instance.GetObj("Vfx_VisionRange");
         visionVfx.transform.position = pos;
-        visionVfx.transform.DOScale(new Vector3(3.2f*(range+0.5f)*2, 3.2f * (range + 0.5f) * 2, 0.5f), 1f);
+        visionVfx.transform.DOScale(new Vector3(3.2f*(range+0.2f)*2, 3.2f * (range + 0.2f) * 2, 0.5f), 1f);
         var sq = DOTween.Sequence();
         sq.AppendInterval(1f);
         sq.AppendCallback(() => { visionVfx.transform.localScale = new Vector3(3.2f,3.2f,0.5f); Pool.Instance.SetObj("Vfx_VisionRange", visionVfx); });
