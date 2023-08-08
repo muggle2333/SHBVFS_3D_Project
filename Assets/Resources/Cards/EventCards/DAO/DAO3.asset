@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 12
   cardName: Transition
-  description: After control stage, exchange your cards with your opponent
+  description: After control phase, exchange your cards with your opponent
   headPicture: {fileID: 21300000, guid: 061238a1215a06a43a9d69645db61f74, type: 3}
   academyType: 2
   cardCondition: {fileID: 0}

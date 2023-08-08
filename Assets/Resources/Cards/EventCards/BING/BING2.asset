@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 23
   cardName: Ambush
-  description: After control stage, you make enemy with in your range bleed (every
+  description: After control phase, you make enemy with in your range bleed (every
     movement in move stage lose 1 hp) this turn
   headPicture: {fileID: 21300000, guid: 1d56a691a17a95d42806777d2b67790f, type: 3}
   academyType: 4

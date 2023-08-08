@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 11
   cardName: Free Move
-  description: You will have once free movment next turn.
+  description: Next turn, you will have one free movment.
   headPicture: {fileID: 21300000, guid: 061238a1215a06a43a9d69645db61f74, type: 3}
   academyType: 2
   cardCondition: {fileID: 0}

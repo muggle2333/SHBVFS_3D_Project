@@ -118,7 +118,7 @@ public class CardManager : NetworkBehaviour
     }
     public void EffectedCards(PlayerId playerId,CardSetting card)
     {
-        if (smallCards.Count == 9)
+        if (smallCards.Count == 10)
         {
             var Card = smallCards[0];
             smallCards.RemoveAt(0);

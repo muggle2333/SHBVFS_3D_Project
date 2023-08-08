@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 30
   cardName: CounterAttack
-  description: After attack stage, the last time you lose HP, make your enemy lose
+  description: After attack phase, the last time you lose HP, make your enemy lose
     the same
   headPicture: {fileID: 21300000, guid: cf6f4058c6aab154395a7682f1227aa4, type: 3}
   academyType: 5
