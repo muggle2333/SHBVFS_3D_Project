@@ -175,11 +175,11 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
             SelectManager.Instance.ChangeSelectMode(gameObject.GetComponent<Card>().selectGridMode, gameObject.GetComponent<Card>().needSelectCount);
             if (gameObject.GetComponent<Card>().needSelectCount == 2)
             {
-                UIManager.Instance.ShowWarning("You need to select" + 2 + "Grids");
+                UIManager.Instance.ShowWarning("Please select" + 2 + "Grids");
             }
             else if (gameObject.GetComponent<Card>().needSelectCount == 1)
             {
-                UIManager.Instance.ShowWarning("You need to select" + 1 + "Grid");
+                UIManager.Instance.ShowWarning("Please select" + 1 + "Grid");
             }
         }
     }

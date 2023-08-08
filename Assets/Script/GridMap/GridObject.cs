@@ -163,7 +163,10 @@ public class GridObject
             owner.RemoveOwnedLand(this);
         }
         owner = player;
-        playerKnowList = new bool[] { true , true };
+        if(!isControlStage)
+        {
+            playerKnowList = new bool[] { true, true };
+        }
         grid.TriggerGridObjectChanged(x, z);
         //GridVfxManager.Instance.UpdateVfxOwner(this,isControlStage);
     }
