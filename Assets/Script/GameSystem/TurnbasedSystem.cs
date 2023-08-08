@@ -37,7 +37,7 @@ public class TurnbasedSystem : NetworkBehaviour
 
     public bool IsBackAlive = false;
     public GameObject EndMenu;
-    public int switchBgmRoundIndex = 15;
+    public int switchBgmRoundIndex = 10;
 
     private TurnbaseUI turnbaseUI;
     public NetworkVariable<bool> isStart = new NetworkVariable<bool>(false);
@@ -107,7 +107,8 @@ public class TurnbasedSystem : NetworkBehaviour
     {
         if(newValue == switchBgmRoundIndex)
         {
-            SoundManager.Instance.PlayBgm(Bgm.LateBGM);
+            //SoundManager.Instance.PlayBgm(Bgm.LateBGM);
+            SoundManager.Instance.PlayBgmClientRpc(Bgm.LateBGM);
         }
     }
     // Update is called once per frame

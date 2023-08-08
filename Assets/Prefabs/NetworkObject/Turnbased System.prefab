@@ -58,13 +58,14 @@ MonoBehaviour:
   S4PhaseTime: 5
   IsBackAlive: 0
   EndMenu: {fileID: 0}
-  switchBgmRoundIndex: 15
+  switchBgmRoundIndex: 10
   isStart:
     m_InternalValue: 0
   isDie:
     m_InternalValue: 0
   roundIndex:
     m_InternalValue: 0
+  isLocalPlayerSkip: 0
   timerValue:
     m_InternalValue: 0
   Timer: {fileID: 0}

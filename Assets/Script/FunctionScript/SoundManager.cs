@@ -133,6 +133,11 @@ public class SoundManager : NetworkBehaviour
         if (GetAudioClip(sound) == null) return;
         effectSource.PlayOneShot(GetAudioClip(sound));
     }
+    [ClientRpc]
+    public void PlayBgmClientRpc(Bgm bgm)
+    {
+        PlayBgm(bgm);
+    }
 
     [ClientRpc]
     public void PlayCountDownClientRpc(int times)
