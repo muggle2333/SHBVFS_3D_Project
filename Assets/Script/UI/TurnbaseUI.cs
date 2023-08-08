@@ -62,17 +62,17 @@ public class TurnbaseUI : MonoBehaviour
         switch(stage)
         {
             case GameStage.S1:
-                stageText.text = "Control Stage";break;
+                stageText.text = "Control Phase";break;
             case GameStage.DiscardStage:
-                stageText.text = "Discard Stage";break;
+                stageText.text = "Discard Phase"; break;
             case GameStage.S2:
                 stageText.text = "Calculating"; break;
             case GameStage.MoveStage:
-                stageText.text = "Move Stage";break;
+                stageText.text = "Move Phase"; break;
             case GameStage.S3:
                 stageText.text = "Calculating"; break;
             case GameStage.AttackStage:
-                stageText.text = "Attack Stage";break;
+                stageText.text = "Attack Phase"; break;
             case GameStage.S4:
                 stageText.text = "Calculating"; break;
             
