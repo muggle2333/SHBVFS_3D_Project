@@ -493,6 +493,13 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.Join(DOTween.To(() => this.gameObject.GetComponent<CanvasGroup>().alpha, x => this.gameObject.GetComponent<CanvasGroup>().alpha = x, 0, 0.5f));
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
+    private void Update()
+    {
+        if (isBurning)
+        {
+            cardVFX.SetFloat("_NoiseStrength", vfxFloat);
+        }
+    }
     public void HPCardAnimation()
     {
         vfxFloat = 1;
@@ -512,13 +519,6 @@ public class CardSelectComponent : MonoBehaviour, IPointerEnterHandler, IPointer
         seq.AppendCallback(() => { Destroy(this.gameObject); });
     }
 
-    private void Update()
-    {
-        if (isBurning)
-        {
-            cardVFX.SetFloat("_NoiseStrength", vfxFloat);
-        }
-    }
     public void CardTakeEffectAnimation()
     {
         vfxFloat = 1;
