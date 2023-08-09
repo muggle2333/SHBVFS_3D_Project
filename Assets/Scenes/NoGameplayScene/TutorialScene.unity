@@ -18681,7 +18681,7 @@ RectTransform:
   m_GameObject: {fileID: 1867745317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.8133683, y: 2.889313, z: 2.3333626}
+  m_LocalScale: {x: 4.81036, y: 2.9615457, z: 2.3333626}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2104841662}
@@ -18689,7 +18689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 241.4, y: 144.3}
+  m_AnchoredPosition: {x: 241.7, y: 142.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1873475563
@@ -20533,7 +20533,7 @@ RectTransform:
   m_GameObject: {fileID: 1956382292}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5823126, y: 0.6031095, z: 1.1091669}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2104841662}
@@ -20541,8 +20541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 29, y: 106.4}
-  m_SizeDelta: {x: 103.2, y: 775.99097}
+  m_AnchoredPosition: {x: 29, y: 119.8}
+  m_SizeDelta: {x: 58, y: 471}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1956382294
 Animator:
@@ -22481,6 +22481,22 @@ PrefabInstance:
     - target: {fileID: 142037889152310941, guid: e7e440c2cb879144e8dd03c7684bb724, type: 3}
       propertyPath: m_Name
       value: TutorialUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 142037890525722453, guid: e7e440c2cb879144e8dd03c7684bb724, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 473420509088723613, guid: e7e440c2cb879144e8dd03c7684bb724, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096636939573394282, guid: e7e440c2cb879144e8dd03c7684bb724, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1177
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096636939573394282, guid: e7e440c2cb879144e8dd03c7684bb724, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -905
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
